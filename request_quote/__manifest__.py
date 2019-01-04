@@ -25,7 +25,7 @@
     'data': [
         'security/ir.model.access.csv',
         # 'views/templates.xml',
-        'views/quote_view.xml',
+        # 'views/quote_view.xml',
     ],
 
     "installable": True,
