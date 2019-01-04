@@ -176,7 +176,7 @@ class RequestOrderLine(models.Model):
     price_subtotal = fields.Monetary(
         compute='_compute_amount', string='Subtotal', readonly=True, store=True)
     price_tax = fields.Monetary(
-        compute='_compute_amount', string='Taxes', readonly=True, store=True)
+        compute='_compute_amount', string='Taxes1', readonly=True, store=True)
     price_total = fields.Monetary(
         compute='_compute_amount', string='Total', readonly=True, store=True)
     tax_id = fields.Many2many('account.tax', string='Taxes', domain=[
