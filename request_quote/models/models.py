@@ -168,7 +168,7 @@ class RequestOrderLine(models.Model):
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision(
         'Product Unit of Measure'), required=True, default=1.0)
     product_uom = fields.Many2one(
-        'product.uom', string='Unit of Measure', required=True)
+        'uom.uom', string='Unit of Measure', required=True)
     discount = fields.Float(string='Discount (%)',
                             digits=dp.get_precision('Discount'), default=0.0)
     price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision(
