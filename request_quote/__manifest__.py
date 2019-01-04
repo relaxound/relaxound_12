@@ -19,7 +19,7 @@
     'category': 'Sale/Crm',
     'version': '1.1',
 
-    'depends': ['base','crm', 'sale', 'sale_management', 'sale_crm', 'website_sale','website_form'],
+    'depends': ['base','crm', 'sale', 'sale_management', 'sale_crm', 'website_sale','website_form','stock'],
 
 
     'data': [
