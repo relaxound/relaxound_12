@@ -47,7 +47,7 @@ class Quote_Lead(models.Model):
     date_order = fields.Datetime(string='Order Date', required=True, readonly=True, index=True, states={
         'draft': [('readonly', False)], 'sent': [('readonly', False)]}, copy=False, default=fields.Datetime.now)
     currency_id = fields.Many2one(
-        "res.currency", related='pricelist_id.currency_id', string="Currency", readonly=True, required=True)
+        "res.currency", related='pricelist_id.currency_id', string="Currency1", readonly=True, required=True)
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist',
                                    required=False, readonly=True, help="Pricelist for current sales order.")
     amount_untaxed = fields.Monetary(string='Untaxed Amount', store=True,
