@@ -1,0 +1,29 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="order_form_inherit">
+        <field name="name">custom.sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- <field name="payment_term_id" position="after">
+                <field name="is_note" invisible="1"/>
+                <p attrs="{'invisible': [('is_note', '=', False)]}" style="color:Blue"><b>Please Check Notes</b></p>
+            </field> -->
+            <xpath expr="//field[@name='payment_term_id']" position="after" >
+                <field name="is_note"/>
+             </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>
+
+
+<!-- <record model="ir.ui.view" id="coupa_config_vendor_view">
+        <field name="name">vendor.changes</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='category_id']" position="after" >
+                <field name='x_studio_field_Ykatq'/>
+             </xpath>
+        </field> -->
