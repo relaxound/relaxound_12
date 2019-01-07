@@ -13,7 +13,7 @@
     'currency': 'EUR',
     'category': 'Product',
     'version': '0.1',
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'sale'],
     'data': [
         'views/views.xml',
     ],
