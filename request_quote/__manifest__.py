@@ -19,13 +19,13 @@
     'category': 'Sale/Crm',
     'version': '1.1',
 
-    'depends': ['base','crm', 'sale', 'sale_management', 'sale_crm', 'website_sale','website_form','uom'],
+    'depends': [ 'crm', 'sale_crm', 'website_sale','website_form','uom'],
 
 
     'data': [
         'security/ir.model.access.csv',
         'views/templates.xml',
-        # 'views/quote_view.xml',
+        'views/quote_view.xml',
     ],
 
     "installable": True,
