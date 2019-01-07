@@ -10,7 +10,7 @@
                 <p attrs="{'invisible': [('is_note', '=', False)]}" style="color:Blue"><b>Please Check Notes</b></p>
             </field> -->
             <xpath expr="//field[@name='payment_term_id']" position="after" >
-                <field name="is_note"/>
+                <field name="is_note" invisible="1"/>
                 <p attrs="{'invisible': [('is_note', '=', False)]}" style="color:Blue"><b>Please Check Notes</b></p>
              </xpath>
         </field>
