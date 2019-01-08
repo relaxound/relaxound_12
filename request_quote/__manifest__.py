@@ -23,7 +23,7 @@
 
 
     'data': [
-        'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
         'views/templates.xml',
         'views/quote_view.xml',
     ],
