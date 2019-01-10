@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="website_multiple_image_product_slider" inherit_id="website_sale.product" name="Website Multi-Image Product" customize_show="True">
+		<xpath expr="//section[@id='product_detail']//div[@itemprop='image']"
+				position="replace">
+			<span itemprop="image">
+				<div class="image_bigsize">
+					<div id="main_image">
+						<a t-att-href="'/web/image/product.product/%s/image' %(product.id)"
+								class="link_detail">
+							<img t-att-src="website.image_url(product, 'image')"
+									class="product_detail_img img_set img img-responsive" />
+						</a>
+					</div>
+				</div>
+					
+				<t t-if="website.get_multiple_images(product.id) and product.multi_image">
+					<div class="owl-carousel owl-theme mt32" id="thumb-slider">
+						<div class="item">
+							<span itemprop="image">
+								<img t-att-src="website.image_url(product, 'image')" class="product_main_multi_img"
+										t-att-alt="product.name" t-att-title="product.name" />
+							</span>
+						</div>
+						<t t-foreach="website.get_multiple_images(product.id)" t-as="im">
+							<div class="item">
+								<span itemprop="image">
+									<img t-att-src="website.image_url(im, 'image')" class="product_multi_img"
+											t-att-alt="im.name" t-att-title="im.name" />
+								</span>
+							</div>
+						</t>
+					</div>
+				</t>
+			</span>
+		</xpath>
+	</template>
+</odoo>
