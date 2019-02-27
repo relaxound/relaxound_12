@@ -12,7 +12,7 @@ class ResCompany(models.Model):
         'res.city',
         compute='_compute_address',
         inverse='_inverse_city_id',
-        string="City"
+        string="City1"
     )
     zip_id = fields.Many2one(
         'res.better.zip',

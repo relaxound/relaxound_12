@@ -18,7 +18,7 @@ class BetterZip(models.Model):
         size=64,
         help="The official code for the city"
     )
-    city = fields.Char('City', required=True)
+    city = fields.Char('City1', required=True)
     city_id = fields.Many2one(
         'res.city',
         'City',
