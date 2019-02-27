@@ -33,7 +33,7 @@ Italian provinces
     'website': 'http://www.agilebg.com',
     'depends': ['base_location_geonames_import'],
     'test': [
-        'test/import.yml',
+        # 'test/import.yml',
         ],
     'installable': True,
 }
