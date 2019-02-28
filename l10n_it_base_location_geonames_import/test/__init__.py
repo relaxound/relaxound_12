@@ -1,1 +1,1 @@
-# from . import test_base_location_geonames_impor
+from .import test_base_location_geonames_import
