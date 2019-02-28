@@ -31,4 +31,3 @@ class BetterZipGeonamesImport(models.TransientModel):
     ):
         return super(BetterZipGeonamesImport, self).select_or_create_state(
             row, country_id, code_row_index=6, name_row_index=5)
-
