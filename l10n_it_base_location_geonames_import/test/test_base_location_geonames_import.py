@@ -10,7 +10,7 @@ class TestBaseLocationGeonamesImport(common.TransactionCase):
         })
 
     def test_import_country(self):
-        self.wizard.with_context().run_import()
+        self.wizard.with_context(max_import=10).run_import()
         state_domain = [
             ('code', '=', '01'),
             ('country_id', '=', self.country.id)
@@ -26,7 +26,7 @@ class TestBaseLocationGeonamesImport(common.TransactionCase):
         zips = self.env['res.better.zip'].search(zip_domain)
         self.assertEqual(len(zips), 1)
         # Reimport again to see that there's no duplicates
-        self.wizard.with_context().run_import()
+        self.wizard.with_context(max_import=10).run_import()
         states = self.env['res.country.state'].search(state_domain)
         self.assertEqual(len(states), 1)
         zips = self.env['res.better.zip'].search(zip_domain)
