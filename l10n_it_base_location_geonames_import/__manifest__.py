@@ -32,8 +32,5 @@ Italian provinces
     'author': "Agile Business Group,Odoo Community Association (OCA)",
     'website': 'http://www.agilebg.com',
     'depends': ['base_location_geonames_import'],
-    'test': [
-        # 'test/import.yml',
-        ],
     'installable': True,
 }
