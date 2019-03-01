@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_banking_mandate_group_user,account.banking.mandate.user,model_account_banking_mandate,base.group_user,1,1,1,0
