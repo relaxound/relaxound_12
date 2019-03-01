@@ -1,7 +1,13 @@
+from _weakref import ref
+
 from odoo.tests import common
 
 
 class TestBaseLocationGeonamesImport(common.TransactionCase):
+    # def __init__(self):
+    #     self.wizard = self.browse(ref('import_wizard_1'))
+    # #     self.wizard.run_import()
+
     def setUp(self):
         super(TestBaseLocationGeonamesImport, self).setUp()
         self.country = self.env.ref('base.mc')
@@ -10,7 +16,9 @@ class TestBaseLocationGeonamesImport(common.TransactionCase):
         })
 
     def test_import_country(self):
-        self.wizard.with_context(max_import=10).run_import()
+        # self.wizard.with_context().run_import()
+        self.wizard = self.browse(ref('import_wizard_1'))
+        self.wizard.run_import()
         state_domain = [
             ('code', '=', '01'),
             ('country_id', '=', self.country.id)
@@ -26,7 +34,9 @@ class TestBaseLocationGeonamesImport(common.TransactionCase):
         zips = self.env['res.better.zip'].search(zip_domain)
         self.assertEqual(len(zips), 1)
         # Reimport again to see that there's no duplicates
-        self.wizard.with_context(max_import=10).run_import()
+        # self.wizard.with_context(max_import=10).run_import()
+        # self.wizard = self.browse(ref('import_wizard_1'))
+        self.wizard.run_import()
         states = self.env['res.country.state'].search(state_domain)
         self.assertEqual(len(states), 1)
         zips = self.env['res.better.zip'].search(zip_domain)
@@ -37,5 +47,6 @@ class TestBaseLocationGeonamesImport(common.TransactionCase):
             'city': 'Test city',
             'country_id': self.country.id,
         })
+        # self.wizard.run_import()
         self.wizard.run_import()
         self.assertFalse(zip_entry.exists())
