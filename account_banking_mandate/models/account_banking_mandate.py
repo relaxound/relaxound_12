@@ -155,25 +155,12 @@ class AccountBankingMandate(models.Model):
                     self.unique_mandate_reference)
 
     @api.model
-    def create(self, vals=None):
-        import pdb
-        pdb.set_trace()
-       
+    def create(self, vals=None):       
         if vals.get('unique_mandate_reference', '/') == '/':
             vals['unique_mandate_reference'] = \
                 self.env['ir.sequence'].next_by_code('account.banking.mandate') or '/'
         return super(AccountBankingMandate, self).create(vals)
 
-    # @api.model
-    # def create(self, vals=None):
-    #     import pdb;pdb.set_trace()
-    #     res = super(AccountBankingMandate, self).create(vals)
-
-    #     if not vals.get('unique_mandate_reference', '/') == '/':
-    #         vals['unique_mandate_reference'] =self.env['ir.sequence'].next_by_code('account.banking.mandate')
-    
-
-    #     return res
 
     
     @api.onchange('partner_bank_id')
