@@ -26,18 +26,34 @@ class ResPartnerBank(models.Model):
     mandates_count = fields.Integer(string='# of Mandates', compute='_get_mandates', readonly=True)
 
     @api.multi
-    def _get_mandates(self):
+    def _compute_mandate_count(self):
+        mandate_data = self.env['account.banking.mandate'].read_group(
+            [('partner_id', 'in', self.ids)], ['partner_id'], ['partner_id'])
+        mapped_data = dict([
+            (mandate['partner_id'][0], mandate['partner_id_count'])
+            for mandate in mandate_data])
         for partner in self:
-            partner.mandates_count = len(set(partner.mandate_ids))
+            partner.mandate_count = mapped_data.get(partner.id, 0)
 
+    @api.multi
+    def _compute_mandate_ids(self):
+        # Dict for reducing the duplicated searches on parent/child partners
+        company_id = self.env.context.get('force_company', False)
+        if company_id:
+            company = self.env['res.company'].browse(company_id)
+        else:
+            company = self.env['res.company']._company_default_get(
+                'account.banking.mandate')
 
-    @api.constrains('company_id')
-    def _company_constrains(self):
-        for rpb in self:
-            if self.env['account.banking.mandate'].sudo().search(
-                    [('partner_bank_id', '=', rpb.id),
-                     ('company_id', '!=', rpb.company_id.id)], limit=1):
-                raise ValidationError(
-                    _("You cannot change the company of Partner Bank %s, "
-                      "as there exists mandates referencing it that "
-                      "belong to another company.") % (rpb.display_name,))
+        mandates_dic = {}
+        for partner in self:
+            commercial_partner_id = partner.commercial_partner_id.id
+            if commercial_partner_id in mandates_dic:
+                partner.mandate_ids = mandates_dic[commercial_partner_id]
+            else:
+                mandates = partner.commercial_partner_id.bank_ids.mapped(
+                    'mandate_ids').filtered(
+                    lambda x: x.state == 'valid' and x.company_id == company)
+                first_mandate_ids = mandates[:1].id
+                partner.mandate_ids = first_mandate_ids
+                mandates_dic[commercial_partner_id] = first_mandate_ids

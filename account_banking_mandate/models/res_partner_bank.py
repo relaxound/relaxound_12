@@ -24,4 +24,5 @@ class ResPartnerBank(models.Model):
              'account owner gives to a company for a specific operation')
 
 
+
    

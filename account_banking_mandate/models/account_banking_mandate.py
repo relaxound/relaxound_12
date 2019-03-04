@@ -25,17 +25,17 @@ class AccountBankingMandate(models.Model):
     _rec_name = 'unique_mandate_reference'
     _inherit = ['mail.thread']
     _order = 'signature_date desc'
-    _track = {
-        'state': {
-            'account_banking_mandate.mandate_valid': (
-                lambda self, cr, uid, obj, ctx=None: obj['state'] == 'valid'),
-            'account_banking_mandate.mandate_expired': (
-                lambda self, cr, uid, obj, ctx=None:
-                obj['state'] == 'expired'),
-            'account_banking_mandate.mandate_cancel': (
-                lambda self, cr, uid, obj, ctx=None: obj['state'] == 'cancel'),
-        },
-    }
+    # _track = {
+    #     'state': {
+    #         'account_banking_mandate.mandate_valid': (
+    #             lambda self, cr, uid, obj, ctx=None: obj['state'] == 'valid'),
+    #         'account_banking_mandate.mandate_expired': (
+    #             lambda self, cr, uid, obj, ctx=None:
+    #             obj['state'] == 'expired'),
+    #         'account_banking_mandate.mandate_cancel': (
+    #             lambda self, cr, uid, obj, ctx=None: obj['state'] == 'cancel'),
+    #     },
+    # }
 
     def _get_states(self):
         return [('draft', 'Draft'),
@@ -129,39 +129,42 @@ class AccountBankingMandate(models.Model):
     @api.multi
     @api.constrains('signature_date', 'last_debit_date')
     def _check_dates(self):
-        if (self.signature_date and
-                self.signature_date > fields.Date.context_today(self)):
-            raise ValidationError(
-                _("The date of signature of mandate '%s' is in the future !")
-                % self.unique_mandate_reference)
-        if (self.signature_date and self.last_debit_date and
-                self.signature_date > self.last_debit_date):
-            raise ValidationError(
-                _("The mandate '%s' can't have a date of last debit before "
-                  "the date of signature.") % self.unique_mandate_reference)
+        for mandate in self:
+            if (mandate.signature_date and
+                    mandate.signature_date > fields.Date.context_today(
+                        mandate)):
+                raise ValidationError(
+                    _("The date of signature of mandate '%s' "
+                      "is in the future!")
+                    % mandate.unique_mandate_reference)
+            if (mandate.signature_date and mandate.last_debit_date and
+                    mandate.signature_date > mandate.last_debit_date):
+                raise ValidationError(
+                    _("The mandate '%s' can't have a date of last debit "
+                      "before the date of signature."
+                      ) % mandate.unique_mandate_reference)
 
     @api.multi
-    @api.constrains('state', 'partner_bank_id')
+    @api.constrains('state', 'partner_bank_id', 'signature_date')
     def _check_valid_state(self):
-        if self.state == 'valid':
-            if not self.signature_date:
-                raise ValidationError(
-                    _("Cannot validate the mandate '%s' without a date of "
-                      "signature.") % self.unique_mandate_reference)
-            if not self.partner_bank_id:
-                raise ValidationError(
-                    _("Cannot validate the mandate '%s' because it is not "
-                      "attached to a bank account.") %
-                    self.unique_mandate_reference)
+        for mandate in self:
+            if mandate.state == 'valid':
+                if not mandate.signature_date:
+                    raise ValidationError(
+                        _("Cannot validate the mandate '%s' without a date of "
+                          "signature.") % mandate.unique_mandate_reference)
+                if not mandate.partner_bank_id:
+                    raise ValidationError(
+                        _("Cannot validate the mandate '%s' because it is not "
+                          "attached to a bank account.") %
+                        mandate.unique_mandate_reference)
 
     @api.model
-    def create(self, vals=None):       
+    def create(self, vals=None):
         if vals.get('unique_mandate_reference', '/') == '/':
             vals['unique_mandate_reference'] = \
                 self.env['ir.sequence'].next_by_code('account.banking.mandate') or '/'
         return super(AccountBankingMandate, self).create(vals)
-
-
     
     @api.onchange('partner_bank_id')
     def mandate_partner_bank_change(self):
@@ -171,8 +174,8 @@ class AccountBankingMandate(models.Model):
     def validate(self):
         for mandate in self:
             if mandate.state != 'draft':
-                raise ValidationError(
-                    _('Mandate should be in draft state'))
+                raise UserError(
+                    _('Mandate should be in draft state.'))
         self.write({'state': 'valid'})
         return True
 
@@ -180,8 +183,8 @@ class AccountBankingMandate(models.Model):
     def cancel(self):
         for mandate in self:
             if mandate.state not in ('draft', 'valid'):
-                raise ValidationError(
-                    _('Mandate should be in draft or valid state'))
+                raise UserError(
+                    _('Mandate should be in draft or valid state.'))
         self.write({'state': 'cancel'})
         return True
 
@@ -192,7 +195,7 @@ class AccountBankingMandate(models.Model):
         """
         for mandate in self:
             if mandate.state != 'cancel':
-                raise ValidationError(
-                    _('Mandate should be in cancel state'))
+                raise UserError(
+                    _('Mandate should be in cancel state.'))
         self.write({'state': 'draft'})
         return True
