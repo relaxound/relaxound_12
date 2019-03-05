@@ -129,7 +129,7 @@ class AccountBankingMandate(models.Model):
     @api.one
     @api.constrains('signature_date', 'last_debit_date')
     def _check_dates(self):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         for mandate in self:
             if (mandate.signature_date and
                     mandate.signature_date > fields.Date.context_today(
@@ -148,7 +148,7 @@ class AccountBankingMandate(models.Model):
     @api.one
     @api.constrains('state', 'partner_bank_id', 'signature_date')
     def _check_valid_state(self):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         for mandate in self:
             if mandate.state == 'valid':
                 if not mandate.signature_date:
@@ -171,12 +171,12 @@ class AccountBankingMandate(models.Model):
     
     @api.onchange('partner_bank_id')
     def mandate_partner_bank_change(self):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         self.partner_id = self.partner_bank_id.partner_id
 
     @api.multi
     def validate(self):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         for mandate in self:
             if mandate.state != 'draft':
                 raise UserError(
@@ -186,7 +186,7 @@ class AccountBankingMandate(models.Model):
 
     @api.multi
     def cancel(self):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         for mandate in self:
             if mandate.state not in ('draft', 'valid'):
                 raise UserError(
@@ -196,7 +196,7 @@ class AccountBankingMandate(models.Model):
 
     @api.multi
     def back2draft(self):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         """Allows to set the mandate back to the draft state.
         This is for mandates cancelled by mistake.
         """
