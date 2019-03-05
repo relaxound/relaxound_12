@@ -37,11 +37,11 @@ class AccountBankingMandate(models.Model):
     #     },
     # }
 
-    def _get_states(self):
-        return [('draft', 'Draft'),
-                ('valid', 'Valid'),
-                ('expired', 'Expired'),
-                ('cancel', 'Cancelled')]
+    # def _get_states(self):
+    #     return [('draft', 'Draft'),
+    #             ('valid', 'Valid'),
+    #             ('expired', 'Expired'),
+    #             ('cancel', 'Cancelled')]
 
     partner_bank_id = fields.Many2one(
         comodel_name='res.partner.bank', string='Bank Account',
