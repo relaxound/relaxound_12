@@ -126,9 +126,10 @@ class AccountBankingMandate(models.Model):
         'unique(unique_mandate_reference, company_id)',
         'A Mandate with the same reference already exists for this company !')]
 
-    @api.multi
+    @api.one
     @api.constrains('signature_date', 'last_debit_date')
     def _check_dates(self):
+        import pdb;pdb.set_trace()
         for mandate in self:
             if (mandate.signature_date and
                     mandate.signature_date > fields.Date.context_today(
@@ -144,9 +145,10 @@ class AccountBankingMandate(models.Model):
                       "before the date of signature."
                       ) % mandate.unique_mandate_reference)
 
-    @api.multi
+    @api.one
     @api.constrains('state', 'partner_bank_id', 'signature_date')
     def _check_valid_state(self):
+        import pdb;pdb.set_trace()
         for mandate in self:
             if mandate.state == 'valid':
                 if not mandate.signature_date:
@@ -161,6 +163,7 @@ class AccountBankingMandate(models.Model):
 
     @api.model
     def create(self, vals=None):
+        # import pdb;pdb.set_trace()
         if vals.get('unique_mandate_reference', '/') == '/':
             vals['unique_mandate_reference'] = \
                 self.env['ir.sequence'].next_by_code('account.banking.mandate') or '/'
@@ -168,10 +171,12 @@ class AccountBankingMandate(models.Model):
     
     @api.onchange('partner_bank_id')
     def mandate_partner_bank_change(self):
+        import pdb;pdb.set_trace()
         self.partner_id = self.partner_bank_id.partner_id
 
     @api.multi
     def validate(self):
+        import pdb;pdb.set_trace()
         for mandate in self:
             if mandate.state != 'draft':
                 raise UserError(
@@ -181,6 +186,7 @@ class AccountBankingMandate(models.Model):
 
     @api.multi
     def cancel(self):
+        import pdb;pdb.set_trace()
         for mandate in self:
             if mandate.state not in ('draft', 'valid'):
                 raise UserError(
@@ -190,6 +196,7 @@ class AccountBankingMandate(models.Model):
 
     @api.multi
     def back2draft(self):
+        import pdb;pdb.set_trace()
         """Allows to set the mandate back to the draft state.
         This is for mandates cancelled by mistake.
         """

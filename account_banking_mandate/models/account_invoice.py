@@ -20,4 +20,4 @@ class AccountInvoice(models.Model):
     mandate_id = fields.Many2one(
         'account.banking.mandate', string='Direct Debit Mandate',
         domain=[('state', '=', 'valid')], readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)], 'proforma': [('readonly', False)], 'proforma2': [('readonly', False)]})
+        states={'draft': [('readonly', False)], 'open': [('readonly', False)], 'in_payment': [('readonly', False)]})
