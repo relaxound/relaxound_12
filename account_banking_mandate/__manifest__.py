@@ -17,7 +17,7 @@
     'author': "Openfellas",
     'category': 'Accounting &amp; Finance',
     'version': '1.0',
-    'depends': ['account'],
+    'depends': ['account', 'account_bank_statement_import'],
     'data': [
         'views/account_banking_mandate_view.xml',
         'views/account_invoice_view.xml',
