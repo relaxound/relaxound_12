@@ -11,7 +11,7 @@
 #
 ##############################################################################
 
-# from . import account_banking_mandate
+from . import account_banking_mandate
 from . import account_invoice
 # from . import res_partner_bank
 # from . import res_partner
