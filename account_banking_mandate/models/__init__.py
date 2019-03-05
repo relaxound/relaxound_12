@@ -13,12 +13,7 @@
 
 from . import account_banking_mandate
 from . import account_invoice
-<<<<<<< HEAD
 # from . import res_partner_bank
 # from . import res_partner
-=======
-from . import res_partner_bank
-from . import res_partner
->>>>>>> 350fe5acd9bdaa6785d6bf273ca6f6055c24b8ad
 # from . import payment_line
 # from . import account_move_line
