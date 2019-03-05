@@ -18,7 +18,7 @@
     <data>
 
         <template id="account_banking_mandate_document">
-            <xpath expr="//div[@class='header']" position="replace">
+            <xpath expr="//div[hasclass='header']" position="replace">
                 <div class="header" style="margin-left: 1cm; margin-right: 1cm;">
                     <div class="row">
                         <div class="col-xs-12">
@@ -52,7 +52,7 @@
             </xpath>
 
             <div class="page" style="margin-top:16px">
-                <xpath expr="//div[@class='page']" position="attributes">
+                <xpath expr="//div[hasclass='page']" position="attributes">
                 <attribute name="style"> </attribute>
             </xpath>
             <br/>
@@ -188,7 +188,7 @@
                 </div>
             </div>
             </div>
-            <xpath expr="//div[@class='footer']" position="replace">
+            <xpath expr="//div[hasclass='footer']" position="replace">
                 <div class="footer" style="font-size:9px; margin-left: 0.5cm">
                     <div class="row">
                         <div class="col-xs-8">

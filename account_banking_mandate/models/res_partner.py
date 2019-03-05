@@ -29,15 +29,3 @@ class ResPartnerBank(models.Model):
     def _get_mandates(self):
         for partner in self:
             partner.mandates_count = len(set(partner.mandate_ids))
-
-
-    @api.constrains('company_id')
-    def _company_constrains(self):
-        for rpb in self:
-            if self.env['account.banking.mandate'].sudo().search(
-                    [('partner_bank_id', '=', rpb.id),
-                     ('company_id', '!=', rpb.company_id.id)], limit=1):
-                raise ValidationError(
-                    _("You cannot change the company of Partner Bank %s, "
-                      "as there exists mandates referencing it that "
-                      "belong to another company.") % (rpb.display_name,))
