@@ -16,7 +16,7 @@
     'images': [
         'static/description/website_product_multi_image.jpg',
     ],
-    'depends': ['website_sale'],
+    'depends': [],
     'price': 30,
     'license': 'OEEL-1',
     'currency': 'EUR',
