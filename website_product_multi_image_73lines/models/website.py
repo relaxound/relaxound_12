@@ -9,7 +9,7 @@ class website(models.Model):
     _inherit = 'website'
 
     def get_multiple_images(self, product_id=None):
-        import pdb
+        # import pdb
         #pdb.set_trace()
         data = []
         uid = self._uid
