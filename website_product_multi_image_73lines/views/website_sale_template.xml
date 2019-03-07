@@ -17,14 +17,14 @@
 				<t t-if="website.get_multiple_images(product.id) and product.multi_image">
 					<div class="owl-carousel owl-theme mt32" id="thumb-slider">
 						<div class="item">
-							<span itemprop="image">
+							<span itemprop="image1">
 								<img t-att-src="website.image_url(product, 'image')" class="product_main_multi_img"
 										t-att-alt="product.name" t-att-title="product.name" />
 							</span>
 						</div>
 						<t t-foreach="website.get_multiple_images(product.id)" t-as="im">
 							<div class="item">
-								<span itemprop="image">
+								<span itemprop="image2">
 									<img t-att-src="website.image_url(im, 'image')" class="product_multi_img"
 											t-att-alt="im.name" t-att-title="im.name" />
 								</span>
