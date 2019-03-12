@@ -11,7 +11,7 @@ class product_images(models.Model):
 
     sequence = fields.Integer('Sort Order')
     name = fields.Char('Image Label', translate=True)
-    image = fields.Binary('Image1')
+    image = fields.Binary('Image')
     product_tmpl_id = fields.Many2one('product.template', 'Product')
 
 
@@ -20,5 +20,5 @@ class product_template(models.Model):
     _description = "Multiple Images"
 
     images = fields.One2many('product.images', 'product_tmpl_id',
-                             string='Images1')
+                             string='Images')
     multi_image = fields.Boolean("Multiple Images?")

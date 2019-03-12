@@ -9,8 +9,7 @@ class website(models.Model):
     _inherit = 'website'
 
     def get_multiple_images(self, product_id=None):
-        # import pdb
-        #pdb.set_trace()
+
         data = []
         uid = self._uid
         ids = self.ids
@@ -18,8 +17,7 @@ class website(models.Model):
 
         if product_id:
             pi_pool = self.env['product.images']
-            product_ids = pi_pool.search([('product_tmpl_id', '=', product_id)],
-                order="sequence asc")
+            product_ids = pi_pool.search([('product_tmpl_id', '=', product_id)],order="sequence asc")
             if product_ids:
                 for image in product_ids:
                     product_img_data = self.env['product.images'].browse(image.id)
