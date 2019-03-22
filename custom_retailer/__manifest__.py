@@ -5,8 +5,6 @@
 {
     'name': 'Custom Retailer',
     'version': '12.0',
-    'category': 'Tools',
-    'license': 'AGPL-3',
     'author': "Techspawn",
     'website': 'http://www.Techspawn.com/',
     'depends': ['purchase'],
