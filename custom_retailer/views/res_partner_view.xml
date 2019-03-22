@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!--  CRM Res Partner Overdue Payment -->
+    <data>
+
+        <record id="view_overdue_payment_form" model="ir.ui.view">
+            <field name="name">custom.retailer.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[1]/field[@name='vat']" position="after">
+                    <separator string="Invoice Service"/>
+                    <field name="by_email"   string="By Email Service"/>
+                    <field name="by_postal" string="By Postal Service"/>
+                </xpath>
+                
+            </field>
+        </record>
+    </data>      
+</odoo>
