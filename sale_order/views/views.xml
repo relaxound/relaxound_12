@@ -1,9 +1,6 @@
 <odoo>
   <data>
     <template id="report_saleorder_document-1" inherit_id="sale.report_saleorder_document">
-            <!--<xpath expr="//div[@class='page']" position="attributes">-->
-                <!--<attribute name="style">margin-right:3cm; margin-left:2cm</attribute>-->
-            <!--</xpath>-->
         <xpath expr="//h2" position="replace">
                 <br/>
                 <br/>
@@ -25,7 +22,8 @@
                 </div>
         </xpath>
         <xpath expr="//div[@class='row mt32 mb32']" position="replace">
-            <div class="col-auto mw-100 mb-2">
+            <div class="row">
+                <div class="col-auto mw-100 mb-2">
                         <style>
                             #order_data td{
                             padding:3px 10px 3px 0px
@@ -75,6 +73,7 @@
                             </t>
                         </table>
                     </div>
+                </div>
             </xpath>
     </template>
   </data>
