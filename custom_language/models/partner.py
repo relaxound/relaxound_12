@@ -25,3 +25,24 @@ class ResPartner(models.Model):
 		return res
 
 
+
+	@api.multi
+	def write(self, vals):
+		if 'country_id' in vals.keys():
+			pro=self.env['res.country'].search([('id','=',vals['country_id'])])
+
+			if pro.code=='DE' or pro.code=='AT' or pro.code=='CH':
+				abc=self.env['res.lang'].search([])
+				for item in abc:
+					if item.code=='de_CH' :
+						vals['lang']=item.code
+
+			else:
+				vals['lang']='en_US'
+
+					
+		return super(ResPartner,self).write(vals)
+	
+	
+
+
