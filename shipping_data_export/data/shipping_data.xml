@@ -6,7 +6,7 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="model_id" ref="model_account_invoice"></field>
-            <!-- <field name="model">account.invoice</field> -->
+             <field name="model">account.invoice</field>
             <!-- <field name="state">code</field> -->
             <!-- <field name="function">_export_shipping_data()</field> -->
             <field name="function">_export_shipping_data</field>
@@ -17,7 +17,7 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="model_id" ref="model_stock_picking"/>
-            <!-- <field name="model">stock.picking</field> -->
+             <field name="model">stock.picking</field>
             <!-- <field name="state">code</field>
             <field name="code">model._import_tracking_num()</field> -->
             <field name="function">_import_tracking_num</field>

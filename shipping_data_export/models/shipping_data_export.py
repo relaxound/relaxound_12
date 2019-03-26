@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from keyrings.alt import file
 
 from odoo import models, fields, api, _, exceptions, tools
 from datetime import datetime
@@ -8,13 +9,13 @@ from datetime import date
 # from ftplib import FTP
 import logging
 _logger = logging.getLogger(__name__)
-# try:
-#     import openpyxl
-# except ImportError:
-#     _logger.debug('Can not import openpyxl`.')
+try:
+    import openpyxl
+except ImportError:
+    _logger.debug('Can not import openpyxl`.')
 
 
-class SaleOrder(models.Model):    
+class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     imported_to_lido = fields.Boolean('Imported to Lido')
@@ -24,10 +25,7 @@ class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     @api.model
-    def _export_shipping_data(self): 
-        # ftp = FTP("62.214.48.227")
-        # ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
-        # ftp.cwd('/ORDERS')
+    def _export_shipping_data(self):
         orders = self.env['sale.order'].search([('imported_to_lido', '=', False),('invoice_status', '=', 'invoiced'),('warehouse_id.name', '=', 'LIMAL')])
         if not orders:
             return 1
@@ -71,7 +69,7 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     @api.model
-    def _import_tracking_num(self):
+    def _import_tracking_num(self, ftp=None):
         filename = 'TRACKING.csv'
         localfile = open('/export/TRACKING/'+'TRACKING.csv', 'wb')
         # ftp = FTP("62.214.48.227")
@@ -87,7 +85,7 @@ class StockPicking(models.Model):
         new_name = 'TRACKING_old_' + current_date.replace(":", ".", 3) +'.csv'
         print('new name ==============>', new_name)
         try:
-            file = open('/export/TRACKING/TRACKING.csv')
+            # file = open('/export/TRACKING/TRACKING.csv')
             print('file ===================>', file)
             for line in file.readlines()[1:]:
                 data = line.split(';')
