@@ -10,9 +10,17 @@ class BusinessSector(models.Model):
 
 
 	business_sec = fields.Selection([
-        ('sec1', 'Sector1'),
-        ('sec2', 'Sector2'), 
-        ('sec3', 'Sector3')], string='Business Sector:')
+        ('sec1', 'Beauty / Wellness'),
+        ('sec2', 'Books'), 
+        ('sec3', 'Gardening'),
+        ('sec4', 'Gastronomy'),
+        ('sec5', 'Presents / Gifts'),
+        ('sec6', 'Art / Culture')
+        ('sec7', 'Home Living')
+        ('sec8', 'Misc')], string='Business Sector:')
+
+
+
 
 
 
