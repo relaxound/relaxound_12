@@ -11,8 +11,6 @@ class ResPartner(models.Model):
 
 	@api.model
 	def create(self, vals):
-		import pdb
-		pdb.set_trace()
 		res=super(ResPartner,self).create(vals)
 
 		pro=self.env['res.country'].search([('id','=',res.country_id.id)])
