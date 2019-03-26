@@ -25,8 +25,6 @@ class AccountInvoice(models.Model):
 
     @api.model
     def _export_shipping_data(self): 
-        # import pdb;
-        # pdb.set_trace()
         # ftp = FTP("62.214.48.227")
         # ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
         # ftp.cwd('/ORDERS')
@@ -74,35 +72,35 @@ class StockPicking(models.Model):
 
     @api.model
     def _import_tracking_num(self):
-        # filename = 'TRACKING.csv'
-        # localfile = open('/export/TRACKING/'+'TRACKING.csv', 'wb')
+        filename = 'TRACKING.csv'
+        localfile = open('/export/TRACKING/'+'TRACKING.csv', 'wb')
         # ftp = FTP("62.214.48.227")
         # ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
         # ftp.cwd('/TRACKING')
         # ftp.retrbinary('RETR ' + filename, localfile.write, 1024)
         # # ftp.close()
-        # localfile.close()
+        localfile.close()
 
         # os.rename('/home/ghandi/Documents/'+ filename,
         #           '/home/ghandi/Documents/TRACKING.csv')
         current_date = fields.Datetime.now()
-        # new_name = 'TRACKING_old_' + current_date.replace(":", ".", 3) +'.csv'
-        # print('new name ==============>', new_name)
-        # try:
-        #     # file = open('/export/TRACKING/TRACKING.csv')
-            # print('file ===================>', file)
-            # for line in file.readlines()[1:]:
-            #     data = line.split(';')
-            #     print('line, data --------------------->', line, data[0].replace('"', ''), data[1].replace('"', ''))
-            #     delivery = self.env['stock.picking'].search([('origin', '=', data[0].replace('"', ''))])
-            #     print('delivery ====================>', delivery)
-            #     if delivery:
-            #         delivery[0].write({'carrier_tracking_ref': data[1].replace('"', '')})
-            # file.close()
-            # os.rename('/export/TRACKING/TRACKING.csv',
-                      # '/export/TRACKING/' + new_name)
-            # ftp.rename('TRACKING.csv', new_name)
-            # ftp.close()
-        # except Exception as e:
-        #     _logger.warning('invalid custom view(s) for: %s', tools.ustr(e))
-        #     pass
+        new_name = 'TRACKING_old_' + current_date.replace(":", ".", 3) +'.csv'
+        print('new name ==============>', new_name)
+        try:
+            file = open('/export/TRACKING/TRACKING.csv')
+            print('file ===================>', file)
+            for line in file.readlines()[1:]:
+                data = line.split(';')
+                print('line, data --------------------->', line, data[0].replace('"', ''), data[1].replace('"', ''))
+                delivery = self.env['stock.picking'].search([('origin', '=', data[0].replace('"', ''))])
+                print('delivery ====================>', delivery)
+                if delivery:
+                    delivery[0].write({'carrier_tracking_ref': data[1].replace('"', '')})
+            file.close()
+            os.rename('/export/TRACKING/TRACKING.csv',
+                      '/export/TRACKING/' + new_name)
+            ftp.rename('TRACKING.csv', new_name)
+            ftp.close()
+        except Exception as e:
+            _logger.warning('invalid custom view(s) for: %s', tools.ustr(e))
+            pass
