@@ -23,7 +23,7 @@ import time
 import tempfile
 import binascii
 import xlrd
-from AptUrl.Helpers import _
+# from AptUrl.Helpers import _
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 from datetime import date, datetime
 from odoo.exceptions import Warning
@@ -57,6 +57,7 @@ class purchase_order(models.Model):
 
 class gen_purchase(models.TransientModel):
     _name = "gen.purchase"
+    _description="Gen_purchase"
 
     file = fields.Binary('File')
     sequence_opt = fields.Selection([('custom', 'Use Excel/CSV Sequence Number'), ('system', 'Use System Default Sequence Number')], string='Sequence Option',default='custom')
