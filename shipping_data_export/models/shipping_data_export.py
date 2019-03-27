@@ -6,7 +6,7 @@ from odoo import models, fields, api, _, exceptions, tools
 from datetime import datetime
 import os
 from datetime import date
-# from ftplib import FTP
+from ftplib import FTP
 import logging
 _logger = logging.getLogger(__name__)
 try:
@@ -85,7 +85,7 @@ class StockPicking(models.Model):
         new_name = 'TRACKING_old_' + current_date.replace(":", ".", 3) +'.csv'
         print('new name ==============>', new_name)
         try:
-            # file = open('/export/TRACKING/TRACKING.csv')
+            file = open('/export/TRACKING/TRACKING.csv')
             print('file ===================>', file)
             for line in file.readlines()[1:]:
                 data = line.split(';')
