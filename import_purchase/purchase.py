@@ -99,7 +99,7 @@ class gen_purchase(models.TransientModel):
             else:
                 account_search = self.env['ir.property'].search([('name', '=', 'property_account_expense_categ_id')])
                 account_id = account_search.value_reference
-                # account_id = account_id.split(",")[1]
+                account_id = account_id.split(",")[1]
                 account_id = self.env['account.account'].browse(account_id)
             pur_id = purchase_obj.create({
                 'account_id' : account_id.id,
@@ -166,7 +166,7 @@ class gen_purchase(models.TransientModel):
         else:
             account_search = self.env['ir.property'].search([('name', '=', 'property_account_expense_categ_id')])
             account = account_search.value_reference
-            # account = account.split(",")[1]
+            account = account.split(",")[1]
             account = self.env['account.account'].browse(account)
         dict = {
             'product_id' : product_id.id,
@@ -226,7 +226,7 @@ class gen_purchase(models.TransientModel):
                 raise exceptions.Warning(_("Invalid file!"))
             values = {}
             for i in range(len(file_reader)):
-                field = map(str, file_reader[i])
+                field = list(map(str, file_reader[i]))
                 values = dict(zip(keys, field))
                 if values:
                     if i == 0:
