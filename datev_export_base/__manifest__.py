@@ -13,30 +13,25 @@
 
 
 {
-    'name': 'Invoices Export to Datev',
+    'name': 'Export to Datev - Base',
     'version': '1.0 (9.0)',
     'category': 'Accounting & Finance',
     'complexity': 'normal',
     'description': """
-     This module allows DATEV export
+     This module provides base settings for DATEV export moudules
 
      Format: DATEV XML Interface Online 3.0
-     As an accountant you can export customer and supplier invoices and 
-     refunds in DATEV XML Online Format. The document package includes
-     the original electronical invoice from odoo as .pdf attachment 
-     and the account move. 
 
      DATEV is the leading accounting software in germany used by many
      tax advisors.
     
     """,
-    'author': 'Grzegorz Grzelak / Thorsten Vocks for openbig.org',
-    'website': 'http://www.openbig.org',
-    'depends': ['base', 'datev_export_base', 'account', 'sale'],
+    'author': 'openfellas',
+    'depends': ['base', 'account'],
     "data": [
-                'data/data.xml',
-                'wizard/datev_export_view.xml',
-                'account/views/account_invoice_view.xml'
+        'company_view.xml',
+        'res_partner_view.xml',
+        'account/views/account_view.xml',
     ],
     'demo_xml': [],
     'installable': True,

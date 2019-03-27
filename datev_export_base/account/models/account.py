@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -12,16 +10,14 @@
 # guarantees and support are strongly advised to contract support@openfellas.com
 #
 ##############################################################################
--->
 
-<odoo>
-    <data noupdate="1">
+from odoo import models, fields, api, _
 
-        <record id="account_banking_mandate_rule" model="ir.rule">
-            <field name="name">Banking Mandate multi-company</field>
-            <field name="model_id" ref="model_account_banking_mandate"/>
-            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'child_of', [user.company_id.id])]</field>
-        </record>
 
-    </data>
-</odoo>
+class AccountTax(models.Model):
+    _inherit = 'account.tax'
+
+    tax_code = fields.Char('BU Code for tax', default='0')
+
+    code_for_refunds = fields.Char('BU Code for refunds', default='')
+

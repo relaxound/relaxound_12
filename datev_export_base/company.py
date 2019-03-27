@@ -11,7 +11,11 @@
 #
 ##############################################################################
 
-from . import account_banking_mandate
-from . import account_invoice
-from . import res_partner_bank
-from . import res_partner
+from odoo import models, fields, api, _
+
+
+class ResCompany(models.Model):
+    _inherit = "res.company"
+
+    consultant_number = fields.Char(string='Beraternummer', size=32, help="Number from 1000 to 9999999")
+    client_number = fields.Char(string='Mandantennummer', size=32, help="Number from 0 to 99999")

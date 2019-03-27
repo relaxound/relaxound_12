@@ -11,7 +11,15 @@
 #
 ##############################################################################
 
-from . import datev_export
-# from . import acb
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+from odoo import models, fields, api, _
 
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    @api.model
+    def _get_default_country(self):
+        german_country_id = self.env['ir.model.data'].get_object_reference('base', 'de')[1]
+        return german_country_id
+
+    country_id = fields.Many2one('res.country', 'Country', ondelete='restrict', default=_get_default_country)

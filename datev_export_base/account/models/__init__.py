@@ -11,13 +11,4 @@
 #
 ##############################################################################
 
-from odoo import models, fields
-
-
-class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
-
-    mandate_id = fields.Many2one(
-        'account.banking.mandate', string='Direct Debit Mandate',
-        domain=[('state', '=', 'valid')], readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)], 'in_payment': [('readonly', False)]})
+from . import account
