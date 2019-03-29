@@ -47,7 +47,7 @@ class Quote_Lead(models.Model):
     date_order = fields.Datetime(string='Order Date', required=True, readonly=True, index=True, states={
         'draft': [('readonly', False)], 'sent': [('readonly', False)]}, copy=False, default=fields.Datetime.now)
     currency_id = fields.Many2one(
-        "res.currency", related='pricelist_id.currency_id', string="Currency", readonly=True, required=True)
+        "res.currency", related='pricelist_id.currency_id', string="currency", readonly=True, required=True)
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist',
                                    required=False, readonly=True, help="Pricelist for current sales order.")
     amount_untaxed = fields.Monetary(string='Untaxed Amount', store=True,
@@ -168,7 +168,7 @@ class RequestOrderLine(models.Model):
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision(
         'Product Unit of Measure'), required=True, default=1.0)
     product_uom = fields.Many2one(
-        'product.uom', string='Unit of Measure', required=True)
+        'uom.uom', string='Unit of Measure', required=True)
     discount = fields.Float(string='Discount (%)',
                             digits=dp.get_precision('Discount'), default=0.0)
     price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision(
@@ -176,13 +176,13 @@ class RequestOrderLine(models.Model):
     price_subtotal = fields.Monetary(
         compute='_compute_amount', string='Subtotal', readonly=True, store=True)
     price_tax = fields.Monetary(
-        compute='_compute_amount', string='Taxes', readonly=True, store=True)
+        compute='_compute_amount', string='Tax', readonly=True, store=True)
     price_total = fields.Monetary(
         compute='_compute_amount', string='Total', readonly=True, store=True)
     tax_id = fields.Many2many('account.tax', string='Taxes', domain=[
         '|', ('active', '=', False), ('active', '=', True)])
     currency_id = fields.Many2one(
-        related='order_id.currency_id', store=True, string='Currency', readonly=True)
+        related='order_id.currency_id', store=True, string='currency', readonly=True)
     company_id = fields.Many2one(
         related='order_id.company_id', string='Company', store=True, readonly=True)
 
