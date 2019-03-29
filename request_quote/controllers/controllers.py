@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from odoo import http
-from odoo.http import request
+from odoo import fields, http, _
 from odoo.addons.website.controllers.backend import WebsiteBackend
+from odoo.http import request
 
 
 class kitepages(http.Controller):

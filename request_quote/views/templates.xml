@@ -2,7 +2,7 @@
 <odoo>
     <template id="request_quote_button" inherit_id="website_sale.product" name="Quote Button On Product"
               customize_show="True">
-        <xpath expr="//div[@id='product_details']" position="inside">
+        <xpath expr="//div[@id='product_details']" position="after">
             <div id="custom_product_details">
                 <form action="/quotation" method="POST">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
