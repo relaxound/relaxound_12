@@ -23,7 +23,8 @@ class AccountInvoice(models.Model):
     delivery_date_start = fields.Date(string='Delivery Start Date', track_visibility='onchange')
     delivery_date_end = fields.Date(string='Delivery End Date', track_visibility='onchange')
 
-    @api.one
+    @api.multi
+    @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
         rec = super(AccountInvoice, self).copy(default)
         rec.write({'exported_to_datev': False})

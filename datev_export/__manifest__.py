@@ -35,6 +35,7 @@
     'depends': ['base', 'datev_export_base', 'account', 'sale'],
     "data": [
                 'data/data.xml',
+                'wizard/datev_export_view.xml',
                 'account/views/account_invoice_view.xml'
     ],
     'demo_xml': [],
