@@ -87,13 +87,13 @@ class DatevExportOptions(models.TransientModel):
         else:
             raise ValidationError(_('Please select at least Start Date'))
         logging.getLogger('DATEV EXPORT').warn("Invoices "+str(invoice_ids._ids))
-        # zip_file, res_msg = self.env['datev.export'].generate_zip(invoice_ids._ids)
+        zip_file, res_msg = self.env['datev.export'].generate_zip(invoice_ids._ids)
         ret= {
-            # 'company_id': self.env['res.users'].browse(self._uid).company_id.id,
-            # 'datev_file': zip_file,
+            'company_id': self.env['res.users'].browse(self._uid).company_id.id,
+            'datev_file': zip_file,
             'datev_filename': time.strftime('%Y_%m_%d_%H_%M')+'_xml.zip',
             'state': 'get',
-            # 'response_message': res_msg,
+            'response_message': res_msg,
             }
 
         res = self.write(ret)
