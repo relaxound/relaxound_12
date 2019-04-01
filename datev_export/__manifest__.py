@@ -32,7 +32,7 @@
     """,
     'author': 'Grzegorz Grzelak / Thorsten Vocks for openbig.org',
     'website': 'http://www.openbig.org',
-    'depends': ['base', 'datev_export_base', 'account', 'sale'],
+    'depends': ['base', 'datev_export_base', 'account'],
     "data": [
                 'data/data.xml',
                 'wizard/datev_export_view.xml',
