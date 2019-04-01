@@ -131,6 +131,7 @@ class DatevExportOptionsautomate(models.TransientModel):
 
 class DatevExportautomate(models.TransientModel):
     _name = "datev.export.automate"
+    _description = "datev export automate"
 
     @api.model
     def do_export_file(self):
