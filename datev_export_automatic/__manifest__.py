@@ -34,7 +34,7 @@
     'depends': ['base', 'datev_export'],
     "data": [
         'data/config_data.xml',
-        # 'data/datev_export_cron.xml',
+        'data/datev_export_cron.xml',
         'company_view.xml',
     ],
     'demo_xml': [],

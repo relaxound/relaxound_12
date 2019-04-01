@@ -23,7 +23,7 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="active" eval="True"/>
-            <field name="model_id" ref="datav_export.datev_export_options"/>
+            <field name="model_id" ref="model_datev_export_options_automate"/>
             <field name="function" eval="'do_export_file_cron'"/>
             <field name="args" eval="'(True, True, False, False)'"/>
         </record>
@@ -34,12 +34,12 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="active" eval="True"/>
-            <field name="doall" eval="False"/>
-            <field name="model" eval="'datev_export'"/>
-            <field name="model_id" ref="datev_export_automatic_datev_export"/>
+            <!-- <field name="doall" eval="False"/> -->
+            <!-- <field name="model" eval="'datev_export'"/> -->
+            <field name="model_id" ref="model_datev_export_options_automate"/>
             <field name="function" eval="'do_export_file_cron'"/>
             <field name="args" eval="'(False, False, True, True)'"/>
-            <field name="code">model.do_export_file_cron()</field>
+            <!-- <field name="code">model.do_export_file_cron()</field> -->
             <field name="state">code</field>
         </record>
 
