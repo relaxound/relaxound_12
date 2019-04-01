@@ -16,6 +16,7 @@ from odoo import models, fields,api, _
 
 class ResCompany(models.Model):
     _inherit = "res.company"
+    _description ="ResCompany"
 
     last_successfull_datev_export_in = fields.Date(string='Last export Date of Incoming Invoices/Refunds', help="Date of last sucessfully autmatically exported for DATEV Invoice/Refunds.")
     last_successfull_datev_export_out = fields.Date(string='Last export Date of Outgoing Invoices/Refunds', help="Date of last sucessfully autmatically exported for DATEV Invoice/Refunds.")
