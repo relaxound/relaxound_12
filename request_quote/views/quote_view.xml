@@ -16,7 +16,7 @@
                                 <field name="company_name" />
                                 <field name="question"/>
                             </group>
-                        </form>   
+                        </form>
                     </page>
                 </xpath>
             </field>
@@ -36,7 +36,7 @@
                                         <field name="name"/>
                                         <field name="product_uom_qty"/>
                                         <field name="price_unit"/>
-                                        <field name="tax_id" widget="many2many_tags"/>
+                                        <field name="taxes_id" widget="many2many_tags"/>
                                         <label for="discount" groups="sale.group_discount_per_so_line"/>
                                         <div name="discount" groups="sale.group_discount_per_so_line">
                                             <field name="discount" class="oe_inline"/>
@@ -52,7 +52,7 @@
                                 <field name="name"/>
                                 <field name="product_uom_qty"/>
                                 <field name="price_unit"/>
-                                <field name="tax_id" widget="many2many_tags"/>
+                                <field name="taxes_id" widget="many2many_tags"/>
                                 <field name="discount" groups="sale.group_discount_per_so_line"/>
                                 <field name="price_subtotal"/>
                             </tree>

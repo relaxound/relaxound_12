@@ -25,7 +25,7 @@ class Quote_Lead(models.Model):
                 if order.company_id.tax_calculation_rounding_method == 'round_globally':
                     price = line.price_unit * \
                             (1 - (line.discount or 0.0) / 100.0)
-                    taxes = line.tax_id.compute_all(
+                    taxes = line.taxes_id.compute_all(
                         price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id,
                         partner=line.order_id.partner_id)
                     amount_tax += sum(t.get('amount', 0.0)
@@ -103,8 +103,7 @@ class Quote_Lead(models.Model):
                 partner = res_partner_obj.create(partner_data)
                 values['partner_id'] = partner.id
 
-        line = super(Quote_Lead, self).create(values)
-        return line
+        return super(Quote_Lead, self).create(values)
 
     @api.multi
     def create_quotation(self):
@@ -117,7 +116,7 @@ class Quote_Lead(models.Model):
                                        'name': order_line.name,
                                        'product_uom_qty': order_line.product_uom_qty,
                                        'price_unit': order_line.price_unit,
-                                       'tax_id': [(6, 0, order_line.tax_id.ids)],
+                                       'taxes_id': [(6, 0, order_line.taxes_id.ids)],
                                        'price_subtotal': order_line.price_subtotal,
                                        }])
 
@@ -143,21 +142,37 @@ class RequestOrderLine(models.Model):
     _name = 'request.order.line'
     _description = 'Request Order Line'
 
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'taxes_id')
     def _compute_amount(self):
-        """
-        Compute the amounts of the SO line.
-        """
         for line in self:
-            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
-            taxes = line.tax_id.compute_all(
-                price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id,
-                partner=line.order_id.partner_id)
+            vals = line._prepare_compute_all_values()
+            taxes = line.taxes_id.compute_all(
+                vals['price_unit'],
+                vals['currency_id'],
+                vals['product_uom_qty'],
+                vals['product'],
+                vals['partner'])
             line.update({
-                'price_tax': taxes['total_included'] - taxes['total_excluded'],
+                'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
                 'price_total': taxes['total_included'],
                 'price_subtotal': taxes['total_excluded'],
             })
+
+    # @api.depends('product_uom_qty', 'discount', 'price_unit', 'taxes_id')
+    # def _compute_amount(self):
+    #     """
+    #     Compute the amounts of the SO line.
+    #     """
+    #     for line in self:
+    #         price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+    #         taxes = line.taxes_id.compute_all(
+    #             price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id,
+    #             partner=line.order_id.partner_id)
+    #         line.update({
+    #             'price_tax': taxes['total_included'] - taxes['total_excluded'],
+    #             'price_total': taxes['total_included'],
+    #             'price_subtotal': taxes['total_excluded'],
+    #         })
 
     sequence = fields.Integer(string='Sequence', default=10)
     order_id = fields.Many2one('crm.lead', string='Request Reference',
@@ -179,12 +194,27 @@ class RequestOrderLine(models.Model):
         compute='_compute_amount', string='Taxes', readonly=True, store=True)
     price_total = fields.Monetary(
         compute='_compute_amount', string='Total', readonly=True, store=True)
-    tax_id = fields.Many2many('account.tax', string='Tax', domain=[
+    taxes_id = fields.Many2many('account.tax', string='Tax', domain=[
         '|', ('active', '=', False), ('active', '=', True)])
     currency_id = fields.Many2one(
         related='order_id.currency_id', store=True, string='Currency', readonly=True)
     company_id = fields.Many2one(
         related='order_id.company_id', string='Company', store=True, readonly=True)
+
+    def _prepare_compute_all_values(self):
+        # Hook method to returns the different argument values for the
+        # compute_all method, due to the fact that discounts mechanism
+        # is not implemented yet on the purchase orders.
+        # This method should disappear as soon as this feature is
+        # also introduced like in the sales module.
+        self.ensure_one()
+        return {
+            'price_unit': self.price_unit,
+            'currency_id': self.order_id.currency_id,
+            'product_uom_qty': self.product_uom_qty,
+            'product': self.product_id,
+            'partner': self.order_id.partner_id,
+        }
 
     @api.multi
     @api.onchange('product_id')
@@ -218,15 +248,13 @@ class RequestOrderLine(models.Model):
             price_unit = product.list_price
         vals['price_unit'] = price_unit
 
-        self._compute_tax_id()
+        self._compute_taxes_id()
 
         if self.order_id.pricelist_id and self.order_id.partner_id:
             vals['price_unit'] = self.env['account.tax']._fix_tax_included_price(
-                self._get_display_price(product), product.taxes_id, self.tax_id)
+                self._get_display_price(product), product.taxes_id, self.taxes_id)
         self.update(vals)
 
-        title = False
-        message = False
         warning = {}
         if product.sale_line_warn != 'no-message':
             title = _("Warning for %s") % product.name
@@ -239,18 +267,18 @@ class RequestOrderLine(models.Model):
         return {'domain': domain}
 
     @api.multi
-    def _compute_tax_id(self):
+    def _compute_taxes_id(self):
         for line in self:
             fpos = line.order_id.fiscal_position_id or line.order_id.partner_id.property_account_position_id
             taxes = line.product_id.taxes_id.filtered(
                 lambda r: not line.company_id or r.company_id == line.company_id)
-            line.tax_id = fpos.map_tax(
+            line.taxes_id = fpos.map_tax(
                 taxes, line.product_id, line.order_id.partner_id) if fpos else taxes
 
     @api.model
     def create(self, values):
         onchange_fields = ['name', 'price_unit',
-                           'product_uom', 'product_uom_qty', 'tax_id']
+                           'product_uom', 'product_uom_qty', 'taxes_id']
         if values.get('order_id') and values.get('product_id') and any(f not in values for f in onchange_fields):
             line = self.new(values)
             line.product_id_change()
