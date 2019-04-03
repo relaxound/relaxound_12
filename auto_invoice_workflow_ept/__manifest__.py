@@ -12,7 +12,7 @@
     'maintainer': 'Emipro Technologies Pvt. Ltd.',
     
     # Dependencies
-    'depends': ['sale_management','account','stock'], 
+    'depends': ['sale','account','stock'], 
     
 	#View
 	'init_xml': [],
