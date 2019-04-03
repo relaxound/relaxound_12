@@ -37,8 +37,6 @@ def _reopen(self, res_id, model, view_id=None):
             'res_model': self._name,
             'view_id': self.env.ref(view_id).id,
             'target': 'new',
-            # save original model in context, because selecting the list of available
-            # templates requires a model in context
             'context': {
                 'default_model': model,
             },
@@ -289,13 +287,7 @@ class DatevExportCash(models.TransientModel):
             document = doc.createElement("document")
             content.appendChild(document)
 
-            # doctype = "2"
-            # ok = False
-            # ok, fname, inv_pic = self.get_attachment(invoice)
-            # if ok:
-            #     fname = inv_number+"_"+fname
-            #     self.add_to_zip(fname, inv_pic, zip)
-
+            
             self.createTextElement(doc, document, "description", bank_statement.name)
 
             self.createTextElement(doc, document, "keywords", bank_statement.name)

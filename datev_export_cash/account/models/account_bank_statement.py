@@ -31,12 +31,4 @@ class AccountBankStatementLine(models.Model):
 
     bu_code_b = fields.Char('BU Code (B)', default='0')
     bu_code_u = fields.Char('BU Code (U)', default='0')
-    # bu_code_u = fields.Char(string='BU Code (U)', compute='_calculate_bu_code_u', readonly=True)
-
-    # @api.one
-    # @api.depends("invoice_line_tax_ids")
-    # def _calculate_bu_code_u(self):
-    #     for line in self:
-    #         line.bu_code_u = '0'
-    #         if line.invoice_line_tax_ids and line.invoice_line_tax_ids[0]:
-    #             line.bu_code_u =  line.invoice_line_tax_ids[0].bu_code_u
+    
