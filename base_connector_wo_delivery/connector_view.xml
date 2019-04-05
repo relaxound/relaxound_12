@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-	<data>
-		<!-- übergeordneter Menüpunkt für Connectoreinstellungen -->
-		<menuitem id="connectors_menu" name="Connectors"
-	    	parent="base.menu_administration" sequence="2"/>
-	</data>
-</odoo>
