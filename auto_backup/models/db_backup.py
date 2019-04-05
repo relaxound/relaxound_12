@@ -38,7 +38,8 @@ def execute(connector, method, *args):
 
 
 class db_backup(models.Model):
-    _name = 'db.backup'
+    _name = "db.backup"
+    _description = "auto_backup"
 
     @api.multi
     def get_db_list(self, host, port, context={}):
