@@ -1,7 +1,7 @@
 {
     "name": "Base Connector (No Delivery)",
     "version": "1.0",
-    "depends": ["base","product","sale","stock"],
+    "depends": ["base","product","sale","stock","sale_management"],
     "author": "Level9",
     "category": "Custom Development",
     "description": """    
