@@ -11,7 +11,7 @@
     'website': 'http://www.gotodoo.com/',
     'currency': 'EUR',
     'price': 19.00,
-    'depends': ["base", "stock", "sale_stock"],
+    'depends': ["base", "stock", "sale_stock","sale_management","sale"],
 
     'images': ['images/main_screenshot.png'],
     'data': [
