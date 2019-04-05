@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+"access_ir_sale_import_error_all","ir_sale_import_error all","model_sale_import_error",,1,1,1,1
+
+
+

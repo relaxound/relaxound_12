@@ -1,0 +1,120 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* base_connector
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e-20160201\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-26 08:38+0000\n"
+"PO-Revision-Date: 2016-02-26 08:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_connector
+#: model:ir.ui.menu,name:base_connector.connectors_menu
+#: model:ir.ui.view,arch_db:base_connector.base_connector_product_form_view
+#: model:ir.ui.view,arch_db:base_connector.base_connector_product_form_view_p
+msgid "Connectors"
+msgstr "Connectors"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_create_uid
+msgid "Created by"
+msgstr "Angelegt von"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_create_date
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_display_name
+msgid "Display Name"
+msgstr "Angezeigter Name"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_done
+msgid "Done"
+msgstr "Erledigt"
+
+#. module: base_connector
+#: model:ir.ui.view,arch_db:base_connector.sale_import_error_search_view
+#: model:ir.ui.view,arch_db:base_connector.sale_import_error_tree_view
+msgid "Error"
+msgstr "Fehler"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_description
+msgid "Error Description"
+msgstr "Fehlerbeschreibung"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_source
+msgid "Error Source"
+msgstr "Fehlerquelle"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_connector
+#: model:ir.actions.act_window,name:base_connector.import_error_action
+msgid "Import Error"
+msgstr "Importfehler"
+
+#. module: base_connector
+#: model:ir.ui.menu,name:base_connector.import_error_menu
+msgid "Import Errors"
+msgstr "Importfehler"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: base_connector
+#: model:ir.ui.view,arch_db:base_connector.sale_import_error_search_view
+msgid "Not Done"
+msgstr "Nicht erledigt"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_sale_import_error_ordernumber
+msgid "Ordernumber"
+msgstr "Bestellnummer"
+
+#. module: base_connector
+#: model:ir.model.fields,field_description:base_connector.field_stock_picking_tracking_send
+msgid "Tracking send"
+msgstr "Versand bestätigt"
+
+#. module: base_connector
+#: model:ir.model,name:base_connector.model_stock_picking
+msgid "Transfer"
+msgstr "Umlagerung"
+
+#. module: base_connector
+#: model:ir.ui.view,arch_db:base_connector.sale_import_error_form_view
+msgid "Type"
+msgstr "Typ"
+
+#. module: base_connector
+#: model:ir.model,name:base_connector.model_sale_import_error
+msgid "sale.import.error"
+msgstr "sale.import.error"
+
