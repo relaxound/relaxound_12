@@ -1,6 +1,6 @@
 {
     "name": "Product Color Field",
-    "version": "12.0",
+    "version": "12.0.1",
     "depends": ["base", "product", "sale", "account", "sale_management"],
     "author": "Level9",
     "category": "Custom Development",
