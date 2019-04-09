@@ -19,10 +19,10 @@
 #
 ##############################################################################
 import time
-from . import tempfile
-from . import binascii
-from . import xlrd
-from . import logging
+import tempfile
+import binascii
+import xlrd
+import logging
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 from datetime import date, datetime
 from odoo.exceptions import Warning
