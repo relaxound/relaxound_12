@@ -102,7 +102,6 @@
         <xpath expr="//div/div[@id='total']" position="replace">
 <!--            <xpath expr="//div[@class='clearfix']" position="replace">-->
                 <div id="total" class="row">
-<!--                    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">-->
                    <div class="col-6">
                             <br/>
                             <table>
@@ -342,7 +341,7 @@
                       </div>
                     </t>
                     -->
-                    <t t-if="o.payment_method_id.name!='payment_term'">
+<!--                    <t t-if="o.payment_method_id.name!='payment_term'">-->
                         <div class="col-xs-12">
                             <br/>
                             <br/>
@@ -355,7 +354,7 @@
                                 </b>
                             </span>
                         </div>
-                    </t>
+<!--                    </t>-->
                     <!--</t>-->
                     <!--
                     <t t-if="o.partner_id.company_type=='company'">
