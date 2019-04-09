@@ -17,9 +17,9 @@
     'images': ['static/description/main.jpg'],
     'license':'OPL-1',
     'category': 'Sale/Crm',
-    'version': '1.1',
+    'version': '12.0',
 
-    'depends': ['base','crm', 'sale', 'sale_management', 'sale_crm', 'website_sale'],
+    'depends': ['base','crm', 'sale', 'sale_management', 'sale_crm', 'website_sale','website'],
 
 
     'data': [
