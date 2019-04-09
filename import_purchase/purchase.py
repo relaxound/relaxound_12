@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
 ##############################################################################
-from . import time
+import time
 from . import tempfile
 from . import binascii
 from . import xlrd
