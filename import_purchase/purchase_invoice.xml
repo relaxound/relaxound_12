@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
+<odoo>
     <data>
 
     <record id="bi_import_purchase_order_inherit_form" model="ir.ui.view">
@@ -21,7 +21,7 @@
         <field name="arch" type="xml">
             <form string="Import Purchase">
              
-   <group>
+                    <group>
                         <group>
                             <field name="import_option" widget='radio' />
                         </group>
@@ -56,5 +56,5 @@
      parent="purchase.menu_procurement_management" />
 
   </data>
-</openerp>
+</odoo>
  

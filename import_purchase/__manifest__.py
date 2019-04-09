@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Import Purchase order from Excel or CSV File',
-    'version': '12.0',
+    'version': '1.0',
     'sequence': 4,
     'summary': '',
     "price": 25,

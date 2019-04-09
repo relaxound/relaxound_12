@@ -18,11 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
 ##############################################################################
+import io
 import time
 import tempfile
 import binascii
 import xlrd
-import logging
+# from AptUrl.Helpers import _
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 from datetime import date, datetime
 from odoo.exceptions import Warning
@@ -56,7 +57,7 @@ class purchase_order(models.Model):
 
 class gen_purchase(models.TransientModel):
     _name = "gen.purchase"
-    _description = "Gen Purchase"
+    _description="Gen_purchase"
 
     file = fields.Binary('File')
     sequence_opt = fields.Selection([('custom', 'Use Excel/CSV Sequence Number'), ('system', 'Use System Default Sequence Number')], string='Sequence Option',default='custom')
@@ -67,13 +68,14 @@ class gen_purchase(models.TransientModel):
 
     @api.multi
     def make_purchase(self, values):
+
         purchase_obj = self.env['purchase.order']
         pur_search = purchase_obj.search([
             ('name', '=', values.get('purchase_no')),
         ])
         if pur_search:
-            if pur_search.partner_id.name.encode('utf-8') == values.get('vendor'):
-                if  pur_search.currency_id.name.encode('utf-8') == values.get('currency'):
+            if pur_search.partner_id.name == values.get('vendor'):
+                if pur_search.currency_id.name == values.get('currency'):
                     self.make_purchase_line(values, pur_search)
                     return pur_search
                 else:
@@ -86,7 +88,6 @@ class gen_purchase(models.TransientModel):
             elif values.get('seq_opt') == 'custom':
                 name = values.get('purchase_no')
             partner_id = self.find_partner(values.get('vendor'))
-            print('values ----------------->', values)
             currency_id = self.find_currency(values.get('currency'))
             if values.get('date'):
                 pur_date = self.make_purchase_date(values.get('date'))
@@ -112,8 +113,6 @@ class gen_purchase(models.TransientModel):
         self.make_purchase_line(values, pur_id)
         return pur_id
 
-
-
     @api.multi
     def make_purchase_date(self, date):
         DATETIME_FORMAT = "%Y-%m-%d"
@@ -127,7 +126,7 @@ class gen_purchase(models.TransientModel):
         account = False
         invoice_line_obj = self.env['purchase.order.line']
         product_search = product_obj.search([('default_code', '=', values.get('product'))])
-        product_uom = self.env['product.uom'].search([('name', '=', values.get('uom'))])
+        product_uom = self.env['uom.uom'].search([('name', '=', values.get('uom'))])
         tax_ids = []
         if values.get('tax'):
             if ';' in  values.get('tax'):
@@ -147,6 +146,7 @@ class gen_purchase(models.TransientModel):
                     tax_ids.append(tax.id)
             else:
                 pass
+        print("Got purchase line ids")
         if product_search:
             product_id = product_search
         else:
@@ -216,29 +216,29 @@ class gen_purchase(models.TransientModel):
         if self.import_option == 'csv':
             keys = ['purchase_no', 'vendor', 'currency', 'product', 'quantity', 'uom', 'description', 'price','tax','date']
             csv_data = base64.b64decode(self.file)
-            data_file = cStringIO.StringIO(csv_data)
+            data_file = io.StringIO(csv_data.decode("utf-8"))
             data_file.seek(0)
             file_reader = []
-            csv_reader = csv.reader(data_file, delimiter=';')
+            csv_reader = csv.reader(data_file, delimiter=',')
             try:
                 file_reader.extend(csv_reader)
             except Exception:
                 raise exceptions.Warning(_("Invalid file!"))
             values = {}
             for i in range(len(file_reader)):
-                field = map(str, file_reader[i])
+                field = list(map(str, file_reader[i]))
                 values = dict(zip(keys, field))
                 if values:
                     if i == 0:
                         continue
                     else:
-                        values.update({'seq_opt':self.sequence_opt})
+                        values.update({'seq_opt': self.sequence_opt})
                         res = self.make_purchase(values)
                         if self.stage == 'confirm':
                             if res.state in ['draft', 'sent']:
                                 res.button_confirm()
         else:
-            fp = tempfile.NamedTemporaryFile(delete=False,suffix=".xlsx")
+            fp = tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx")
             fp.write(binascii.a2b_base64(self.file))
             fp.seek(0)
             values = {}
@@ -250,9 +250,9 @@ class gen_purchase(models.TransientModel):
                 val = {}
                 tax_line = ''
                 if row_no <= 0:
-                    fields = map(lambda row:row.value.encode('utf-8'), sheet.row(row_no))
+                    fields = list(map(lambda row:row.value, sheet.row(row_no)))
                 else:
-                    line = (map(lambda row:isinstance(row.value, unicode) and row.value.encode('utf-8') or str(row.value), sheet.row(row_no)))
+                    line = list(map(lambda row: isinstance(row.value,str) and row.value or str(row.value), sheet.row(row_no)))
                     if line[9] != '':
                         a1 = int(float(line[9]))
                         a1_as_datetime = datetime(*xlrd.xldate_as_tuple(a1, workbook.datemode))
@@ -268,7 +268,6 @@ class gen_purchase(models.TransientModel):
                                    'tax': line[8],
                                    'date': date_string,
                                    'seq_opt':self.sequence_opt
-
                                    })
                     res = self.make_purchase(values)
                     if self.stage == 'confirm':
