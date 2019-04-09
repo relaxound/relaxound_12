@@ -174,7 +174,7 @@ class TestMultiCompany(TransactionCase):
     def create_auto_wkf_order(self, company, customer, product, qty):
         SaleOrder = self.env['sale.order']
 
-        self.product_uom_unit = self.env.ref('product.product_uom_unit')
+        self.product_uom_unit = self.env.ref('uom.product_uom_unit')
 
         order = SaleOrder.create({
             'partner_id': customer.id,
