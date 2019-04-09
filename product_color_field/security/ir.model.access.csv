@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-"access_ir_product_color_all","ir_product_color all","model_product_color",,1,1,1,1
