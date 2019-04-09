@@ -14,10 +14,10 @@ class StockPicking(models.Model):
         string='Sale Workflow Process'
     )
 
-    @api.multi
-    def validate_picking(self):
-        for picking in self:
-            picking.force_assign()
-            self.env['stock.immediate.transfer'].create(
-                {'pick_ids': [(4, picking.id)]}).process()
-        return True
+    # @api.multi
+    # def validate_picking(self):
+    #     for picking in self:
+    #         picking.force_assign()
+    #         self.env['stock.immediate.transfer'].create(
+    #             {'pick_ids': [(4, picking.id)]}).process()
+    #     return True

@@ -46,9 +46,7 @@ class TestAutomaticWorkflow(TestAutomaticWorkflowBase):
         last_week_time = datetime.now() - timedelta(days=7)
         last_week_time = fields.Datetime.to_string(last_week_time)
         last_week_date = last_week_time[:10]
-        override = {
-            'date_order': last_week_time,
-        }
+        override = {'date_order': last_week_time}
         sale = self.create_sale_order(workflow, override=override)
         sale._onchange_workflow_process_id()
         self.assertEqual(sale.date_order, last_week_time)
@@ -61,7 +59,7 @@ class TestAutomaticWorkflow(TestAutomaticWorkflowBase):
     def test_invoice_from_picking_with_service_product(self):
         workflow = self.create_full_automatic()
         product_service = self.env.ref('product.service_order_01')
-        product_uom_hour = self.env.ref('product.product_uom_hour')
+        product_uom_hour = self.env.ref('uom.product_uom_hour')
         override = {
             'order_line': [(0, 0, {
                 'name': 'Prepaid Consulting',
