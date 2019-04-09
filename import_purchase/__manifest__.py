@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Import Purchase order from Excel or CSV File',
-    'version': '1.0',
+    'version': '12.0',
     'sequence': 4,
     'summary': '',
     "price": 25,
@@ -28,13 +28,9 @@
     """,
     'author': 'BrowseInfo',
     'website': '',
-    'depends': ['base','purchase','account_accountant','account','stock'],
+    'depends': ['base','purchase','account','stock'],
     'data': ["purchase_invoice.xml"
              ],
-	'qweb': [
-		],
-    'demo': [],
-    'test': [],
     'installable': True,
     'auto_install': False,
 "images":['static/description/Banner.png'],
