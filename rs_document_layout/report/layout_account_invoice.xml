@@ -372,9 +372,6 @@
             <!--<xpath expr="//div[@t-if='o.tax_line_ids']" position="replace"/>-->
 
             <xpath expr="//p[@t-if='o.comment']" position="replace"/>
-
-            <xpath expr="//p[@t-if='o.payment_term_id']" position="replace"/>
-
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
         <template id="report_invoice_document_1" inherit_id="l10n_in.l10n_in_report_invoice_document_inherit">
