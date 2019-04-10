@@ -305,7 +305,7 @@
             <!--<xpath expr="//p[@t-if='not doc.payment_term_id and doc.partner_id.property_payment_term_id']"-->
                    <!--position="replace">-->
             <!--</xpath>-->
-            <xpath expr="//p[@t-if='doc.fiscal_position_id and doc.fiscal_position_id.note']" position="replace">
+             <xpath expr="//p[@id='fiscal_position_remark']" position="replace">
             </xpath>
         </template>
     </data>
