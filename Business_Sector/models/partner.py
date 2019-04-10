@@ -8,7 +8,7 @@ from odoo import models, fields, api, _
 class BusinessSector(models.Model):
 	_inherit = 'res.partner'
 
-
+        # Added one field Business sector with dropdown
 	business_sec = fields.Selection([
         ('sec1', 'Beauty / Wellness'),
         ('sec2', 'Books'), 
