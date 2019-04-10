@@ -318,6 +318,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
+<!--            <xpath expr="//p[@t-if='o.payment_term_id']" position="replace">-->
                 <div class="row">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
@@ -355,7 +356,7 @@
                             </span>
                         </div>
 <!--                    </t>-->
-                    <!--</t>-->
+<!--                    </t>-->
                     <!--
                     <t t-if="o.partner_id.company_type=='company'">
                         <div class="col-xs-12">
