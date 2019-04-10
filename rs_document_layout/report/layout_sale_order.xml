@@ -108,7 +108,7 @@
                 <attribute name="style">display:none</attribute>
             </xpath>
 
-            <xpath expr="//div/table[@class='table table-sm o_main_table']" position="replace">
+            <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <table class="table table-condensed" style="margin-top:10px" id="items">
                     <style>
                         #items td{
