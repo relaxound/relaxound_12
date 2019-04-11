@@ -233,9 +233,9 @@
                         </table>
                     </div>
                 </div>
-<!--            </xpath>-->
+            </xpath>
 
-<!--             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">-->
+             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
                 <div class="text-right" t-if="doc.payment_method_id">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
