@@ -233,9 +233,9 @@
                         </table>
                     </div>
                 </div>
-            </xpath>
+<!--            </xpath>-->
 
-             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
+<!--             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">-->
                 <div class="text-right" t-if="doc.payment_method_id">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
@@ -274,9 +274,9 @@
 
             <xpath expr="//p[@t-field='doc.note']" position="replace">
             </xpath>
-            <xpath expr="//p[@t-if='not doc.payment_term_id and doc.partner_id.property_payment_term_id']"
-                   position="replace">
-            </xpath>
+            <!--<xpath expr="//p[@t-if='not doc.payment_term_id and doc.partner_id.property_payment_term_id']"-->
+                   <!--position="replace">-->
+            <!--</xpath>-->
             <xpath expr="//p[@id='fiscal_position_remark']" position="replace">
             </xpath>
         </template>
