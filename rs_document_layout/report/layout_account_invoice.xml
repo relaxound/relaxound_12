@@ -373,7 +373,7 @@
 
             <xpath expr="//p[@t-if='o.comment']" position="replace"/>
 
-<!--          <xpath expr="//p[@t-if='o.payment_term_id']" position="replace"/>&ndash;&gt;-->
+          <xpath expr="//p[@t-if='o.payment_term_id']" position="replace"/>
 
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
