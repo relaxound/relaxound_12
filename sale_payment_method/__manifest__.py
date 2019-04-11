@@ -20,7 +20,7 @@
 
 {
     'name': 'Sale Payment Method',
-    'version': '8.0.0.2.1',
+    'version': '12.0.1',
     'category': 'Generic Modules/Others',
     'description': """
 

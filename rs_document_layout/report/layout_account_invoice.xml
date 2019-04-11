@@ -377,9 +377,9 @@
 
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
-        <template id="report_invoice_document_1" inherit_id="l10n_in.l10n_in_report_invoice_document_inherit">
+        <!-- <template id="report_invoice_document_1" inherit_id="l10n_in.l10n_in_report_invoice_document_inherit">
             <xpath expr="//p[@id='total_in_words']" position="replace"/>
-        </template>
+        </template> -->
 
     </data>
 </odoo>

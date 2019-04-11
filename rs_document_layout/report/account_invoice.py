@@ -6,7 +6,7 @@ from odoo import models, api
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    @api.model
+    # @api.model
     # def _get_shipping_address(self):
     #     # shipping = self.env['res.partner'].search([('parent_id', '=', self.partner_id.id), ('type', '=', 'delivery')])
     #     shipping = self.env['stock.picking'].search([('origin', '=', self.origin), ('state', '!=', 'cancel')])
