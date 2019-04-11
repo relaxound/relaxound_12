@@ -9,7 +9,7 @@
     'sequence': 150,
     "init_xml": [],
     'data': [
-            "data/data.xml",
+            # "data/data.xml",
             #"report/inherited_layouts.xml",
             # "report/layout_account_invoice.xml",
             # "report/layout_sale_order.xml",
