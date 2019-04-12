@@ -36,9 +36,9 @@
                     </div>
                 </div>
             </xpath>
-<!--        </template>-->
+        </template>
          <!--Footer -->
-<!--        <template id="external_layout_footer" inherit_id="web.external_layout_standard">-->
+        <template id="external_layout_footer" inherit_id="web.external_layout_standard">
             <xpath expr="//div[3]" position="replace">
                 <div class="footer " style="font-size:9px; margin-left: 0.5cm">
                     <div class="text-center row">

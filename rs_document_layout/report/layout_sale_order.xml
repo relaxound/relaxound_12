@@ -38,15 +38,10 @@
             </xpath>
             <xpath expr="//h2" position="replace">
                 <br/>
-                <br/>
-                <br/>
                 <div class="row">
                     <h2>
                         <div class="col-auto mw-100 mb-2">
-
                             ZWITSCHERBOX
-
-
                         </div>
                         <div class="col-auto mw-100 mb-2">
                             <span t-if="doc.state not in ['draft','sent']">Order</span>
