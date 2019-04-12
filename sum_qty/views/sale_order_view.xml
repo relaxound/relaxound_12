@@ -46,8 +46,8 @@
             <field name="model_id" ref="sale.model_sale_order" />
             <field name="name">Modify Dispatched</field>
 <!--            <field name="key2">client_action_multi</field>-->
-            <field name="value" eval="'ir.actions.act_window,' + str(ref('sale.action_orders'))" />
-            <field eval="'ir.actions.server,%d'%sale_action_modify_checkbox" name="value"/>
+          <!--   <field name="value" eval="'ir.actions.act_window,' + str(ref('sale.action_orders'))" />
+            <field eval="'ir.actions.server,%d'%sale_action_modify_checkbox" name="value"/> -->
 <!--            <field name="key">action</field>-->
 <!--            <field name="model">sale.order</field>-->
         </record>
