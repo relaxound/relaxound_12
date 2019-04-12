@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_sale_sum_qty_form">
+            <field name="name">view.sale.sum.qty.inherit</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="sum">Ordered Qty</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='qty_delivered']" position="attributes">
+                    <attribute name="sum">Delivered Qty</attribute>
+                </xpath>
+                <xpath expr="//tree/field[@name='qty_invoiced']" position="attributes">
+                    <attribute name="sum">Invoiced Qty</attribute>
+                </xpath>
+                <xpath expr="//field[@name='client_order_ref']" position="after">
+                    <field name="is_dispatched"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sale_checkbox_tree">
+            <field name="name">view.sale.checkbox.inherit</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="is_dispatched"/>
+                    <button name="modify_is_dispatched" string="Modify" type="object" icon="fa-pencil"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_action_modify_checkbox" model="ir.actions.server">
+            <field name="name">Modify Dispatched</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">object.mass_modify_is_dispatched(context.get('active_ids', []))</field>
+        </record>
+
+        <record model="ir.actions.server" id="sale_modify_checkbox_values">
+            <field name="model_id" ref="sale.model_sale_order" />
+            <field name="name">Modify Dispatched</field>
+<!--            <field name="key2">client_action_multi</field>-->
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('sale.action_orders'))" />
+            <field eval="'ir.actions.server,%d'%sale_action_modify_checkbox" name="value"/>
+<!--            <field name="key">action</field>-->
+<!--            <field name="model">sale.order</field>-->
+        </record>
+
+    </data>
+</odoo>
+
