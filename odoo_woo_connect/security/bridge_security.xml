@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <data noupdate="1">
 	<record model="ir.module.category" id="module_wp_odoo_bridge_category">
@@ -24,3 +24,4 @@
     </record>
 </data>
 </odoo>
+ -->

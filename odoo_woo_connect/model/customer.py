@@ -62,7 +62,7 @@ class Customer(models.Model):
                                       readonly=False,
                                       required=False,
                                       )
-    # email = fields.Char(related='partner_id.email', inherited=True)
+    email = fields.Char(related='partner_id.email', inherited=True)
 
     @api.model
     def create(self, vals):
