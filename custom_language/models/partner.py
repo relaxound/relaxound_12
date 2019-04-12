@@ -18,7 +18,7 @@ class ResPartner(models.Model):
 		if pro.code=='DE' or pro.code=='AT' or pro.code=='CH':
 			abc=self.env['res.lang'].search([])
 			for item in abc:
-				if item.code=='de_CH':
+				if item.code=='de_DE':
 					 res.lang=item.code
 
 
@@ -34,7 +34,7 @@ class ResPartner(models.Model):
 			if pro.code=='DE' or pro.code=='AT' or pro.code=='CH':
 				abc=self.env['res.lang'].search([])
 				for item in abc:
-					if item.code=='de_CH' :
+					if item.code=='de_DE' :
 						vals['lang']=item.code
 
 			else:
