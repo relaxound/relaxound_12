@@ -1,4 +1,4 @@
-access_wordpress_odoo_account_invoice,access_wordpress_odoo_account_invoice,model_wordpress_odoo_account_invoice,group_wp_odoo_user,1,0,0,0
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_wordpress_odoo_tax,access_wordpress_odoo_tax,model_wordpress_odoo_tax,group_wp_odoo_user,1,0,0,0
 access_wordpress_configure,access_wordpress_configure,model_wordpress_configure,group_wp_odoo_user,1,0,0,0
 access_res_partner,access_res_partner,model_res_partner,group_wp_odoo_user,1,0,0,0
@@ -20,8 +20,6 @@ access_product_category,access_product_category,model_product_category,group_wp_
 access_wordpress_odoo_category,access_wordpress_odoo_category,model_wordpress_odoo_category,group_wp_odoo_user,1,0,0,0
 access_res_partner_shipping_address,access_res_partner_shipping_address,model_res_partner_shipping_address,group_wp_odoo_user,1,0,0,0
 
-
-access_wordpress_odoo_account_invoice,access_wordpress_odoo_account_invoice,model_wordpress_odoo_account_invoice,group_wp_odoo,1,1,1,1
 access_wordpress_odoo_tax,access_wordpress_odoo_tax,model_wordpress_odoo_tax,group_wp_odoo,1,1,1,1
 access_wordpress_configure,access_wordpress_configure,model_wordpress_configure,group_wp_odoo,1,1,1,1
 access_res_partner,access_res_partner,model_res_partner,group_wp_odoo,1,1,1,1
