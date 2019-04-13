@@ -96,29 +96,29 @@ class SalesOrder(models.Model):
         return invoice_id
 
 
-class SalesOrderMapping(models.Model):
+# class SalesOrderMapping(models.Model):
 
-    """ Model to store woocommerce id for particular Sale Order"""
-    _name = 'wordpress.odoo.sale.order'
-    _description = 'wordpress.odoo.sale.order'
+#     """ Model to store woocommerce id for particular Sale Order"""
+#     _name = 'wordpress.odoo.sale.order'
+#     _description = 'wordpress.odoo.sale.order'
 
-    order_id = fields.Many2one(comodel_name='sale.order',
-                               string='Sale Order',
-                               ondelete='cascade',
-                               readonly=False,
-                               required=True,
-                               )
+#     order_id = fields.Many2one(comodel_name='sale.order',
+#                                string='Sale Order',
+#                                ondelete='cascade',
+#                                readonly=False,
+#                                required=True,
+#                                )
 
-    backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Backend',
-                                 ondelete='set null',
-                                 store=True,
-                                 readonly=False,
-                                 required=False,
-                                 )
-    woo_id = fields.Char(string='woo_id')
+#     backend_id = fields.Many2one(comodel_name='wordpress.configure',
+#                                  string='Backend',
+#                                  ondelete='set null',
+#                                  store=True,
+#                                  readonly=False,
+#                                  required=False,
+#                                  )
+#     woo_id = fields.Char(string='woo_id')
 
 
-def import_record(cr, uid, ids, context=None):
-    """ Import a record from woocommerce """
-    importer.run(woo_id)
+# def import_record(cr, uid, ids, context=None):
+#     """ Import a record from woocommerce """
+#     importer.run(woo_id)
