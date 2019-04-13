@@ -24,11 +24,11 @@ All files in current directory imported here
 """
 from . import backend
 from . import product
-from . import customer
-from . import shipping_address
-from . import product_category
-from . import product_attribute
+# from . import customer
+# from . import shipping_address
+# from . import product_category
+# from . import product_attribute
 from . import sale_order
-from . import refund
+# from . import refund
 from . import sales_adv_invoice
-from . import tax
+# from . import tax
