@@ -48,13 +48,13 @@ class SalesOrder(models.Model):
                                       required=False,
                                       )
 
-    # @api.model
-    # def create(self, vals):
-    #     """ Override create method to export"""
-    #     if 'partner_id' in vals.keys():
-    #         vals['partner_id'] = int(vals['partner_id'])
-    #     sales_order_id = super(SalesOrder, self).create(vals)
-    #     return sales_order_id
+    @api.model
+    def create(self, vals):
+        """ Override create method to export"""
+        if 'partner_id' in vals.keys():
+            vals['partner_id'] = int(vals['partner_id'])
+        sales_order_id = super(SalesOrder, self).create(vals)
+        return sales_order_id
 
     # @api.multi
     # def write(self, vals):
