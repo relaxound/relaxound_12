@@ -88,12 +88,12 @@ class SalesOrder(models.Model):
     #         self.backend_mapping.create(
     #             {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
 
-    # @api.multi
-    # def _prepare_invoice(self):
-    #     invoice_id = super(SalesOrder, self)._prepare_invoice()
-    #     invoice_id['backend_id'] = [[6, 0, self.backend_id.ids]]
-    #     invoice_id['sale_order_id'] = self.id
-    #     return invoice_id
+    @api.multi
+    def _prepare_invoice(self):
+        invoice_id = super(SalesOrder, self)._prepare_invoice()
+        invoice_id['backend_id'] = [[6, 0, self.backend_id.ids]]
+        invoice_id['sale_order_id'] = self.id
+        return invoice_id
 
 
 class SalesOrderMapping(models.Model):
@@ -119,6 +119,6 @@ class SalesOrderMapping(models.Model):
     woo_id = fields.Char(string='woo_id')
 
 
-def import_record(cr, uid, ids, context=None):
-    """ Import a record from woocommerce """
-    importer.run(woo_id)
+# def import_record(cr, uid, ids, context=None):
+#     """ Import a record from woocommerce """
+#     importer.run(woo_id)
