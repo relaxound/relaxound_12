@@ -48,13 +48,13 @@ class SalesOrder(models.Model):
                                       required=False,
                                       )
 
-    @api.model
-    def create(self, vals):
-        """ Override create method to export"""
-        if 'partner_id' in vals.keys():
-            vals['partner_id'] = int(vals['partner_id'])
-        sales_order_id = super(SalesOrder, self).create(vals)
-        return sales_order_id
+    # @api.model
+    # def create(self, vals):
+    #     """ Override create method to export"""
+    #     if 'partner_id' in vals.keys():
+    #         vals['partner_id'] = int(vals['partner_id'])
+    #     sales_order_id = super(SalesOrder, self).create(vals)
+    #     return sales_order_id
 
     # @api.multi
     # def write(self, vals):
@@ -72,21 +72,21 @@ class SalesOrder(models.Model):
     #     res = self.write({'order_line': [[0, 0, vals]]})
     #     return
 
-    # @api.multi
-    # def export_sales_order(self, backend):
-    #     """ export and create or update backend mapper """
-    #     mapper = self.backend_mapping.search(
-    #         [('backend_id', '=', backend.id), ('order_id', '=', self.id)])
-    #     method = 'sales_order'
-    #     arguments = [mapper.woo_id or None, self]
-    #     export = WpSaleOrderExport(backend)
-    #     res = export.export_sales_order(method, arguments)
-    #     if mapper and (res['status'] == 200 or res['status'] == 201):
-    #         mapper.write(
-    #             {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
-    #     elif (res['status'] == 200 or res['status'] == 201):
-    #         self.backend_mapping.create(
-    #             {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
+    @api.multi
+    def export_sales_order(self, backend):
+        """ export and create or update backend mapper """
+        mapper = self.backend_mapping.search(
+            [('backend_id', '=', backend.id), ('order_id', '=', self.id)])
+        method = 'sales_order'
+        arguments = [mapper.woo_id or None, self]
+        export = WpSaleOrderExport(backend)
+        res = export.export_sales_order(method, arguments)
+        if mapper and (res['status'] == 200 or res['status'] == 201):
+            mapper.write(
+                {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
+        elif (res['status'] == 200 or res['status'] == 201):
+            self.backend_mapping.create(
+                {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
 
     @api.multi
     def _prepare_invoice(self):
