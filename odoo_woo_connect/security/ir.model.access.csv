@@ -10,7 +10,6 @@ user_product_template,WP Product Template user,model_product_template,group_wp_o
 user_wordpress_odoo_product_template,WP Product Mapping user,model_wordpress_odoo_product_template,group_wp_odoo_user,1,0,0,0
 user_product_product,WP ProductProduct user,model_product_product,group_wp_odoo_user,1,0,0,0
 user_wordpress_odoo_product_product,WP ProductProduct Mapping user,model_wordpress_odoo_product_product,group_wp_odoo_user,1,0,0,0
-user_stock_change_product_qty,WP Stock Inventory user,model_stock_change_product_qty,group_wp_odoo_user,1,0,0,0
 user_product_attribute,WP Product Attribute user,model_product_attribute,group_wp_odoo_user,1,0,0,0
 user_wordpress_odoo_attribute,WP Product Attribute Mapping user,model_wordpress_odoo_attribute,group_wp_odoo_user,1,0,0,0
 user_product_attribute_value,WP Product Attribut Value user,model_product_attribute_value,group_wp_odoo_user,1,0,0,0
@@ -31,7 +30,7 @@ manager_product_template,WP Product Template manager,model_product_template,grou
 manager_wordpress_odoo_product_template,WP Product Mapping manager,model_wordpress_odoo_product_template,group_wp_odoo,1,1,1,1
 manager_product_product,WP ProductProduct manager,model_product_product,group_wp_odoo,1,1,1,1
 manager_wordpress_odoo_product_product,WP ProductProduct Mapping manager,model_wordpress_odoo_product_product,group_wp_odoo,1,1,1,1
-manager_stock_change_product_qty,WP Stock Inventory manager,model_stock_change_product_qty,group_wp_odoo,1,1,1,1
+
 manager_product_attribute,WP Product Attribute manager,model_product_attribute,group_wp_odoo,1,1,1,1
 manager_wordpress_odoo_attribute,WP Product Attribute Mapping manager,model_wordpress_odoo_attribute,group_wp_odoo,1,1,1,1
 manager_product_attribute_value,WP Product Attribut Value manager,model_product_attribute_value,group_wp_odoo,1,1,1,1
@@ -55,7 +54,7 @@ access_product_template,access_product_template,model_product_template,base.grou
 access_wordpress_odoo_product_template,access_wordpress_odoo_product_template,model_wordpress_odoo_product_template,base.group_user,1,1,1,1
 access_product_product,access_product_product,model_product_product,base.group_user,1,1,1,1
 access_wordpress_odoo_product_product,access_wordpress_odoo_product_productr,model_wordpress_odoo_product_product,base.group_user,1,1,1,1
-access_stock_change_product_qty,access_stock_change_product_qty,model_stock_change_product_qty,base.group_user,1,1,1,1
+
 access_product_attribute,access_product_attribute,model_product_attribute,base.group_user,1,1,1,1
 access_wordpress_odoo_attribute,access_wordpress_odoo_attribute,model_wordpress_odoo_attribute,base.group_user,1,1,1,1
 access_product_attribute_value,access_product_attribute_value,model_product_attribute_value,base.group_user,1,1,1,1
