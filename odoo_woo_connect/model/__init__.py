@@ -31,4 +31,4 @@ from . import product
 # from . import sale_order
 # from . import refund
 # from . import sales_adv_invoice
-# from . import tax
+from . import tax
