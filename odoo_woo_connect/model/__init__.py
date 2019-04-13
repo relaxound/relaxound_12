@@ -29,6 +29,6 @@ from . import product
 # from . import product_category
 # from . import product_attribute
 from . import sale_order
-# from . import refund
+from . import refund
 from . import sales_adv_invoice
 # from . import tax
