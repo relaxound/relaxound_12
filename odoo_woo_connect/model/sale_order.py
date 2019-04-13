@@ -61,16 +61,16 @@ class SalesOrder(models.Model):
     #     """ Override write method to export when any details is changed """
     #     return super(SalesOrder, self).write(vals)
 
-    # @api.multi
-    # def sync_sale_order(self):
-    #     for backend in self.backend_id:
-    #         self.export_sales_order(backend)
-    #     return
+    @api.multi
+    def sync_sale_order(self):
+        for backend in self.backend_id:
+            self.export_sales_order(backend)
+        return
 
-    # @api.multi
-    # def sales_line(self, vals):
-    #     res = self.write({'order_line': [[0, 0, vals]]})
-    #     return
+    @api.multi
+    def sales_line(self, vals):
+        res = self.write({'order_line': [[0, 0, vals]]})
+        return
 
     @api.multi
     def export_sales_order(self, backend):
