@@ -20,7 +20,7 @@
 All files in current directory imported here
 """
 from . import backend
-from . import product
+# from . import product
 # from . import coupon
 from . import customer
 from . import shipping_address

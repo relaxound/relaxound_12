@@ -72,19 +72,19 @@ class wp_configure(models.Model):
             product.write({'backend_id': [[6, False, backends]]})
         return True
 
-    @api.multi
-    def map_product_tags(self):
-        """ Assign backend to all the products tag """
-        all_tags = self.env['product.product.tag'].search(
-            [('backend_id', '!=', self.id)])
-        for tag in all_tags:
-            backends = []
-            for backend_id in tag.backend_id:
-                backends.append(backend_id.id)
-            if not self.id in backends:
-                backends.append(self.id)
-            tag.write({'backend_id': [[6, False, backends]]})
-        return True
+    # @api.multi
+    # def map_product_tags(self):
+    #     """ Assign backend to all the products tag """
+    #     all_tags = self.env['product.product.tag'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for tag in all_tags:
+    #         backends = []
+    #         for backend_id in tag.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         tag.write({'backend_id': [[6, False, backends]]})
+    #     return True
 
     # @api.multi
     # def map_product_coupons(self):
@@ -308,18 +308,18 @@ class wp_configure(models.Model):
             product.write({'backend_id': [[6, False, backends]]})
         return True
 
-    @api.multi
-    def unmap_product_tags(self):
-        """ Remove particular backend from all the product tags """
-        all_tags = self.env['product.product.tag'].search(
-            [('backend_id', '=', self.id)])
-        for tag in all_tags:
-            backends = []
-            for backend_id in tag.backend_id:
-                if self.id != backend_id.id:
-                    backends.append(backend_id.id)
-            tag.write({'backend_id': [[6, False, backends]]})
-        return True
+    # @api.multi
+    # def unmap_product_tags(self):
+    #     """ Remove particular backend from all the product tags """
+    #     all_tags = self.env['product.product.tag'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for tag in all_tags:
+    #         backends = []
+    #         for backend_id in tag.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         tag.write({'backend_id': [[6, False, backends]]})
+    #     return True
 
     # @api.multi
     # def unmap_product_coupons(self):
@@ -489,17 +489,17 @@ class wp_configure(models.Model):
             all_taxes[offset:offset+99].with_delay().export(self, 'standard')
         return True
 
-    @api.multi
-    def export_product_tags(self):
-        """ Export all the products of particular backend """
-        all_product_tags = self.env['product.product.tag'].search(
-            [('backend_id', '=', self.id)])
-        export = WpImportExport(self)
-        count = (len(all_product_tags)/100)+1
-        for offset in xrange(0, int(count)):
-            offset = offset*100
-            all_product_tags[offset:offset+99].with_delay().export(self)
-        return True
+    # @api.multi
+    # def export_product_tags(self):
+    #     """ Export all the products of particular backend """
+    #     all_product_tags = self.env['product.product.tag'].search(
+    #         [('backend_id', '=', self.id)])
+    #     export = WpImportExport(self)
+    #     count = (len(all_product_tags)/100)+1
+    #     for offset in xrange(0, int(count)):
+    #         offset = offset*100
+    #         all_product_tags[offset:offset+99].with_delay().export(self)
+    #     return True
 
     @api.multi
     def export_categories(self):
