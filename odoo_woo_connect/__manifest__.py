@@ -57,7 +57,7 @@ This module works very well with latest version of Wordpress v4.4 or later and W
 
     'data': [
               'security/bridge_security.xml',
-              # 'security/ir.model.access.csv',
+              'security/ir.model.access.csv',
               'views/wp_bridge_view.xml',
               # 'views/product.xml',
               # 'views/stock_ware.xml',

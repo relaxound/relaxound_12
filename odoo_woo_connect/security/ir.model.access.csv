@@ -1,61 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-user_wordpress_configure,WP Configure user,model_wordpress_configure,group_wp_odoo_user,1,0,0,0
-user_res_partner,WP Customer user,model_res_partner,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_res_partner,WP Customer Mapping user,model_wordpress_odoo_res_partner,group_wp_odoo_user,1,0,0,0
-user_product_product_tag,WP Produt Tags user,model_product_product_tag,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_product_tag,WP Product Tag Mapping user,model_wordpress_odoo_product_tag,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_majorunit,WP Major Unit Mapping user,model_wordpress_odoo_majorunit,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_service_repair_order,WP Repair Order Mapping user,model_wordpress_odoo_service_repair_order,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_service_standard_job,WP Standard Job Mapping user,model_wordpress_odoo_service_standard_job,group_wp_odoo_user,1,0,0,0
-user_product_image,WP Product Multi Image user,model_product_image,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_product_image,WP odoo Image user,model_wordpress_odoo_product_image,group_wp_odoo_user,1,0,0,0
-user_product_template,WP Product Template user,model_product_template,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_product_template,WP Product Mapping user,model_wordpress_odoo_product_template,group_wp_odoo_user,1,0,0,0
-user_product_product,WP ProductProduct user,model_product_product,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_product_product,WP ProductProduct Mapping user,model_wordpress_odoo_product_product,group_wp_odoo_user,1,0,0,0
-user_product_attribute,WP Product Attribute user,model_product_attribute,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_attribute,WP Product Attribute Mapping user,model_wordpress_odoo_attribute,group_wp_odoo_user,1,0,0,0
-user_product_attribute_value,WP Product Attribut Value user,model_product_attribute_value,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_attribute_value,WP Product Attribute Value Mapping user,model_wordpress_odoo_attribute_value,group_wp_odoo_user,1,0,0,0
-user_product_category,WP Product Category user,model_product_category,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_category,WP Product Category Mapping user,model_wordpress_odoo_category,group_wp_odoo_user,1,0,0,0
-user_sale_order,WP Sales Order user,model_sale_order,group_wp_odoo_user,1,0,0,0
-user_wordpress_odoo_sale_order,WP Sales Order Mapping user,model_wordpress_odoo_sale_order,group_wp_odoo_user,1,0,0,0
+
 user_res_partner_shipping_address,WP Shipping Address Mapping user,model_res_partner_shipping_address,group_wp_odoo_user,1,0,0,0
-,,,,,,,
-manager_wordpress_configure,WP Configure manager,model_wordpress_configure,group_wp_odoo,1,1,1,1
-manager_res_partner,WP Customer manager,model_res_partner,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_res_partner,WP Customer Mapping manager,model_wordpress_odoo_res_partner,group_wp_odoo,1,1,1,1
-manager_product_product_tag,WP Produt Tags manager,model_product_product_tag,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_product_tag,WP Product Tag Mapping manager,model_wordpress_odoo_product_tag,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_majorunit,WP Major Unit Mapping manager,model_wordpress_odoo_majorunit,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_service_repair_order,WP Repair Order Mapping manager,model_wordpress_odoo_service_repair_order,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_service_standard_job,WP Standard Job Mapping manager,model_wordpress_odoo_service_standard_job,group_wp_odoo,1,1,1,1
-manager_product_image,WP Product Multi Image manager,model_product_image,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_product_image,WP odoo Image user,model_wordpress_odoo_product_image,group_wp_odoo,1,1,1,1
-manager_product_template,WP Product Template manager,model_product_template,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_product_template,WP Product Mapping manager,model_wordpress_odoo_product_template,group_wp_odoo,1,1,1,1
-manager_product_product,WP ProductProduct manager,model_product_product,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_product_product,WP ProductProduct Mapping manager,model_wordpress_odoo_product_product,group_wp_odoo,1,1,1,1
-manager_product_attribute,WP Product Attribute manager,model_product_attribute,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_attribute,WP Product Attribute Mapping manager,model_wordpress_odoo_attribute,group_wp_odoo,1,1,1,1
-manager_product_attribute_value,WP Product Attribut Value manager,model_product_attribute_value,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_attribute_value,WP Product Attribute Value Mapping manager,model_wordpress_odoo_attribute_value,group_wp_odoo,1,1,1,1
-manager_product_category,WP Product Category manager,model_product_category,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_category,WP Product Category Mapping manager,model_wordpress_odoo_category,group_wp_odoo,1,1,1,1
-manager_sale_order,WP Sales Order manager,model_sale_order,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_sale_order,WP Sales Order Mapping manager,model_wordpress_odoo_sale_order,group_wp_odoo,1,1,1,1
+user_wordpress_odoo_res_partner,WP Customer Mapping user,model_wordpress_odoo_res_partner,group_wp_odoo_user,1,0,0,0
+user_wordpress_configure,WP Configure user,model_wordpress_configure,group_wp_odoo_user,1,0,0,0
+
 manager_res_partner_shipping_address,WP Shipping Address Mapping manager,model_res_partner_shipping_address,group_wp_odoo,1,1,1,1
-manager_wordpress_jobs,WP import export manager,model_wordpress_jobs,group_wp_odoo,1,1,1,1
-manager_wordpress_odoo_account_invoice,WP invoice manager,model_wordpress_odoo_account_invoice,group_wp_odoo,1,1,1,1
-manager_product_videos,product.videos,odoo_woo_connect.model_product_videos,sales_team.group_sale_manager,1,1,1,1
-manager_product_videos,wordpress.odoo.tax,odoo_woo_connect.model_wordpress_odoo_tax,sales_team.group_sale_manager,1,1,1,1
-manager_major_unit_manufacturer,major_unit.manufacturer,odoo_woo_connect.model_major_unit_manufacturer,sales_team.group_sale_manager,1,1,1,1
-user_all_major_unit_manufacturer,major_unit.manufacturer,odoo_woo_connect.model_major_unit_manufacturer,sales_team.group_sale_salesman_all_leads,1,1,1,0
-user_major_unit_manufacturer,major_unit.manufacturer,odoo_woo_connect.model_major_unit_manufacturer,sales_team.group_sale_salesman,1,1,0,0
+manager_wordpress_odoo_res_partner,WP Customer Mapping manager,model_wordpress_odoo_res_partner,group_wp_odoo,1,1,1,1
+manager_wordpress_configure,WP Configure manager,model_wordpress_configure,group_wp_odoo,1,1,1,1
 
-manager_major_unit_finance,major_unit.finance,odoo_woo_connect.model_major_unit_finance,sales_team.group_sale_manager,1,1,1,1
-user_all_major_unit_finance,major_unit.finance,odoo_woo_connect.model_major_unit_finance,sales_team.group_sale_salesman_all_leads,1,1,1,0
-user_major_unit_finance,major_unit.finance,odoo_woo_connect.model_major_unit_finance,sales_team.group_sale_salesman,1,1,0,0
-
-user_wordpress_odoo_account_invoice,WP invoice manager,model_wordpress_odoo_account_invoice,group_wp_odoo_user,1,1,1,0
+access_wordpress_configure,access_wordpress_configure,model_wordpress_configure,base.group_user,1,1,1,1
+access_wordpress_odoo_res_partner,access_wordpress_odoo_res_partner,model_wordpress_odoo_res_partner,base.group_user,1,1,1,1
+access_res_partner_shipping_address,access_res_partner_shipping_address,model_res_partner_shipping_address,base.group_user,1,1,1,1

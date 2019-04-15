@@ -72,7 +72,7 @@ class Customer(models.Model):
         return self.env['wordpress.configure'].search([]).ids
 
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='website',
                                   store=True,
                                   readonly=False,
                                   required=True,
@@ -85,16 +85,16 @@ class Customer(models.Model):
                                       readonly=False,
                                       required=False,
                                       )
-    prefer_email = fields.Char('Email')
+    prefer_email = fields.Char('email')
     in_store_deals = fields.Boolean('In-Store Deals')
     alerts = fields.Boolean('Alerts')
     latest_news = fields.Boolean('Latest news')
     events = fields.Boolean('Events')
     do_not_send_mail = fields.Boolean('Do Not Send Email')
 
-    phone_notification = fields.Char('Phone')
-    phone_in_store_deals = fields.Boolean('In-Store Deals')
-    phone_alerts = fields.Boolean('Alerts')
+    phone_notification = fields.Char('phone')
+    phone_in_store_deals = fields.Boolean('In-Store Deals1')
+    phone_alerts = fields.Boolean('alerts')
     phone_latest_news = fields.Boolean('Latest News')
     phone_events = fields.Boolean('Event')
     phone_do_not_send_mail = fields.Boolean('Do not Send Email')
@@ -227,6 +227,7 @@ class CustomerMapping(models.Model):
 
     """ Model to store woocommerce id for particular customer"""
     _name = 'wordpress.odoo.res.partner'
+    _description="wordpress.odoo.res.partner"
 
     customer_id = fields.Many2one(
         comodel_name='res.partner',
