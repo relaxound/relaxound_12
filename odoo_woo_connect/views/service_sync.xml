@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="wp_service_view" model="ir.ui.view">
+            <field name="name">service.repair_order.wp.form</field>
+            <field name="model">service.repair_order</field>
+            <field name="inherit_id" ref="service.view_service_form"/>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button class="oe_highlight" name="sync_service_rides" string="Sync" type="object"/>
+                    </header>
+                </xpath>
+<!--                 <xpath expr="//button[@name='action_check_available']" position="after">
+                    <button name="import_service_rides" string="Import" type="object" class="oe_highlight"/>
+                </xpath> -->
+                <xpath expr="//field[@name='warranty']" position="after">
+                    <field name="backend_id" widget="many2many_tags"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

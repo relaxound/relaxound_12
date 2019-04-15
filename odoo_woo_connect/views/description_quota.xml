@@ -1,0 +1,18 @@
+<odoo>
+	<data>
+		<record id="view_product_supplier_inherit" model="ir.ui.view">
+            <field name="name">product.template.supplier.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+            	<field name="description_sale" position="after">
+                    <separator string="Description for Quotation" colspan="4"/>
+                    <field name="description_quotation" nolabel="1"
+                        placeholder="This note will be displayed on quotation." colspan="4"/>
+                    <separator string="Description for Pickings" colspan="4"/>
+                    <field name="description_pickings" placeholder="Description for Pickings (Rack, Row and Case Information)" nolabel="1" colspan="4"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+		<record id="view_wp_odoo_standard_job_tree" model="ir.ui.view">
+			<field name="name">wordpress.odoo.service.standard_job.tree</field>
+			<field name="model">wordpress.odoo.service.standard_job</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree string="standard_job_mapping" >
+					<field name="standard_job_id" />
+					<field name="backend_id" />
+					<field name="woo_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="service_standard_job_form_view_custom" model="ir.ui.view">
+	        <field name="name">service.standard_job.form.custom</field>
+	        <field name="model">service.standard_job</field>
+	        <field name="inherit_id" ref="major_unit.service_standard_job_form_view"/>
+	        <field name="arch" type="xml">
+	             <xpath expr="//form/sheet/notebook/page[2]/field[@name='product_ids']/tree" position="attributes">
+	                <attribute name="editable">bottom</attribute>
+	            </xpath>
+	           	<xpath expr="//form/sheet/notebook/page[1]" position="attributes">
+	           		<attribute name="attrs"></attribute>
+	           	</xpath>
+	        </field>
+		</record>
+
+		<record id="view_wp_odoo_standard_job_form" model="ir.ui.view">
+			<field name="name">wordpress.odoo.service.standard_job.form</field>
+			<field name="model">wordpress.odoo.service.standard_job</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<form string="standard_job_mapping">
+					<h1>
+						<field name="standard_job_id" />
+					</h1>
+					<group col="4" >
+						<group string="Mapping" name="Mapping">
+							<field name="backend_id" />
+							<field name="woo_id" />
+						</group>
+						<group>
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wp_odoo_standard_job_search">
+            <field name="name">wordpress.odoo.service.standard_job.search</field>
+            <field name="model">wordpress.odoo.service.standard_job</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="backend_id"/>
+                    <field name="standard_job_id"/>
+                    <filter string="standard_job" name="standard_job_id" domain="[]"/>
+                    <filter string="Backend" name="backend_id" domain="[]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="wp_odoo_standard_job_action">
+			<field name="name">Standard Job Mapping</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">wordpress.odoo.service.standard_job</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="context">{}</field>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="wp_odoo_standard_job_action_form">
+			<field name="act_window_id" ref="wp_odoo_standard_job_action" />
+			<field name="sequence" eval="20" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_wp_odoo_standard_job_form" />
+		</record>
+
+		<record model="ir.actions.act_window.view" id="wp_odoo_standard_job_action_tree">
+			<field name="act_window_id" ref="wp_odoo_standard_job_action" />
+			<field name="sequence" eval="10" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_wp_odoo_standard_job_tree" />
+		</record>
+
+		<menuitem  id="wp_odoo_standard_job_id" name="Standard Job Mapping" parent="menu_wp_odoo_mapping_id" action="wp_odoo_standard_job_action"/>
+
+	</data>
+</odoo>
+
