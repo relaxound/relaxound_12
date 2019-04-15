@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!--  CRM Res Partner Overdue Payment -->
+
+
+        <record id="view_overdue_payment_form" model="ir.ui.view">
+            <field name="name">partner.overdue.payment.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <!-- <group name="acc_sale" position="inside">
+                    <field name="customer_credit"/>
+                </group> -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Overdue Payments" name="ovedue_payment">
+                        <separator string="Moves"/>
+                        <button name="action_due_sent" type="object" string="Send by Email"/>
+                        <field name="customer_moves"/>
+                        <separator string="Invoices"/>
+                        <button name="action_overdue_sent" type="object" string="Send by Email"/>
+                        <field name="customer_invoices" context="{'tree_view_ref': 'account.invoice_tree'}"/>
+                    </page>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+        <record id="view_account_form" model="ir.ui.view">
+            <field name="name">accounting.overdue.payment.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+              
+                <xpath expr="//notebook" position="inside">
+                    <page string="Accounting" name="accounting_page">
+                        <div class="row">
+                            <div class="col-6">
+                                <separator string="Sale"/>
+                                <label for="property_payment_term_id" string="Customer Payment Terms"/>
+                                <!-- <label for="Customer Payment Terms"/> -->
+                                <field name="property_payment_term_id"/>
+                            </div>
+                        
+                            <div class="col-6">
+
+                                <separator string="Purchase"/>
+                                <label for="property_supplier_payment_term_id" string="Vendor Payment Terms"/>
+                                <field name="property_supplier_payment_term_id"/>
+                                
+                            
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="credit" string="Total Receivable"/>
+                                <field name="credit"/>
+                            </div>
+                            <div class="col-6">
+
+                                <label for="debit" string="Total Payable"/>
+                                <field name="debit"/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                    <label for="customer_credit" string="Customer Credit"/>
+                                    <field name="customer_credit"/>
+                            </div>
+                        </div>
+                        
+                        
+                        <separator string="Fiscal Information"/>
+                        <label for="property_account_position_id" string="Fiscal Position"/>
+                        <field name="property_account_position_id"/>
+                        
+                    </page>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="overdue_res_partner_tree">
+            <field name="name">Res Partner Tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="display_name" position="after">
+                    <field name="credit"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- <record model="ir.ui.view" id="overdue_res_partner_kanban">
+            <field name="name">Res Partner Kanban</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <field name="display_name" position="after">
+                    <field name="credit"/>
+                </field>
+                name="credit"/></li>-->
+                <!-- <xpath expr="//div[@hasclass='oe_kanban_partner_links']" position="inside">
+                    <span t-if="record.credit.value!=0" class="badge"><i/><t t-esc="record.credit.value"/></span>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_quotation_tree_custom111">
+            <field name="name">account.banking.mandate.new</field>
+            <field name="model">account.banking.mandate</field>
+            <field name="inherit_id" ref="account_banking_mandate.view_mandate_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="new_credit1"/>
+                </field>
+            </field>
+        </record> --> 
+
+<!--         <record model="ir.ui.view" id="overdue_res_partner_tree11">
+            <field name="name">Res Partner Tree1</field>
+            <field name="model">account.banking.mandate</field>
+            <field name="inherit_id" ref="account_banking_mandate.view_mandate_tree"/>
+            <field name="arch" type="xml">
+                <field name="signature_date" position="after">
+                    <field name="credit"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="overdue_res_partner_kanban11">
+            <field name="name">Res Partner Kanban1</field>
+            <field name="model">account.banking.mandate</field>
+            <field name="inherit_id" ref="account_banking_mandate.view_mandate_tree"/>
+            <field name="arch" type="xml">
+                <field name="signature_date" position="after">
+                    <field name="credit"/>
+                </field>
+                <xpath expr="//div[@class='oe_kanban_partner_links']" position="inside">
+                    <span t-if="record.credit.value!=0" class="badge"><i/><t t-esc="record.credit.value"/></span>
+                </xpath>
+            </field>
+        </record> -->
+
+
+</odoo>
