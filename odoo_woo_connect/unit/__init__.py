@@ -21,12 +21,12 @@
 """ 
 All files in current directory imported here
 """
-from . import backend_adapter
-from . import customer_exporter
-from . import product_attribute_exporter
-from . import product_category_exporter
-from . import product_exporter
-from . import product_tag_exporter
-from . import sale_order_exporter
-from . import tax_exporter
-from . import product_variation_exporter
+# from . import backend_adapter
+# from . import customer_exporter
+# from . import product_attribute_exporter
+# from . import product_category_exporter
+# from . import product_exporter
+# from . import product_tag_exporter
+# from . import sale_order_exporter
+# from . import tax_exporter
+# from . import product_variation_exporter
