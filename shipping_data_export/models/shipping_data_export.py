@@ -27,12 +27,13 @@ class AccountInvoice(models.Model):
         # ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
         # ftp.cwd('/ORDERS')
         orders = self.env['sale.order'].search([('imported_to_lido', '=', False), (
-            'invoice_status', '=', 'invoiced'), ('warehouse_id.name', '=', 'YourCompany')])
+            'invoice_status', '=', 'invoiced'), ('warehouse_id.name', '=', 'LIMAL')])
         if not orders:
             return 1
         _logger.debug("1 ---------------------> %s" % orders)
         current_date = fields.Datetime.now()
-        with open(os.path.join("/home/mac37/Desktop/odoo12/odoo/odoo-server/export", "YourCompany", 'shipping_data_%s.csv' % (current_date)), 'wb') as shipping_data:
+        with open(os.path.join("/export", "LIMAR", 'shipping_data_%s.csv'%(current_date)), 'wb') as shipping_data:
+        # with open(os.path.join("/home/mac37/Desktop/odoo12/odoo/odoo-server/export", "YourCompany", 'shipping_data_%s.csv' % (current_date)), 'wb') as shipping_data:
             shipping_data.write(b'ship_name1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;item_line_number;item_name;item_description;item_quantity;item_price\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
