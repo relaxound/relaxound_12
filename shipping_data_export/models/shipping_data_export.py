@@ -26,7 +26,6 @@ class AccountInvoice(models.Model):
         # ftp = FTP("62.214.48.227")
         # ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
         # ftp.cwd('/ORDERS')
-        # import pdb;pdb.set_trace()
         orders = self.env['sale.order'].search([('imported_to_lido', '=', False), (
             'invoice_status', '=', 'invoiced'), ('warehouse_id.name', '=', 'YourCompany')])
         if not orders:
