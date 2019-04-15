@@ -177,26 +177,26 @@ class WpCustomerExport(WpImportExport):
                 #     })
                     # return billing
 
-    def get_wishlist(self, wishlist):
-        wishlists = []
-        if wishlist:
-            for wishlist_id in wishlist:
-                if wishlist_id.details_model == 'nadanew.vehicle.product':
-                    mapper = wishlist_id.backend_mapping.search(
-                        [('backend_id', '=', self.backend.id), ('product_id', '=', wishlist_id.id)])
-                    if mapper.woo_id:
-                        wishlists.append(mapper.woo_id)
-        return wishlists
+    # def get_wishlist(self, wishlist):
+    #     wishlists = []
+    #     if wishlist:
+    #         for wishlist_id in wishlist:
+    #             if wishlist_id.details_model == 'nadanew.vehicle.product':
+    #                 mapper = wishlist_id.backend_mapping.search(
+    #                     [('backend_id', '=', self.backend.id), ('product_id', '=', wishlist_id.id)])
+    #                 if mapper.woo_id:
+    #                     wishlists.append(mapper.woo_id)
+    #     return wishlists
 
-    def get_my_rides_service(self, my_rides_ids):
-        ride_service = []
-        if my_rides_ids:
-            for ride_id in my_rides_ids:
-                mapper = ride_id.backend_mapping.search(
-                    [('backend_id', '=', self.backend.id), ('service_rides_id', '=', ride_id.id)])
-                if mapper.woo_id:
-                    ride_service.append(mapper.woo_id)
-        return ride_service
+    # def get_my_rides_service(self, my_rides_ids):
+    #     ride_service = []
+    #     if my_rides_ids:
+    #         for ride_id in my_rides_ids:
+    #             mapper = ride_id.backend_mapping.search(
+    #                 [('backend_id', '=', self.backend.id), ('service_rides_id', '=', ride_id.id)])
+    #             if mapper.woo_id:
+    #                 ride_service.append(mapper.woo_id)
+    #     return ride_service
 
     # def get_service_history(self, service_history_ids):
     #     service_history = []
@@ -210,13 +210,13 @@ class WpCustomerExport(WpImportExport):
     def export_customer(self, method, arguments):
         """ Export customer data"""
         _logger.debug("Start calling Woocommerce api %s", method)
-        vehicle_woo_ids = []
-        if arguments[1].customer_vehicles:
-            for ride_id in arguments[1].customer_vehicles:
-                mapper = ride_id.backend_mapping.search(
-                    [('backend_id', '=', self.backend.id), ('majorunit_id', '=', ride_id.id)])
-                if mapper.woo_id:
-                    vehicle_woo_ids.append(mapper.woo_id)
+        # vehicle_woo_ids = []
+        # if arguments[1].customer_vehicles:
+        #     for ride_id in arguments[1].customer_vehicles:
+        #         mapper = ride_id.backend_mapping.search(
+        #             [('backend_id', '=', self.backend.id), ('majorunit_id', '=', ride_id.id)])
+        #         if mapper.woo_id:
+        #             vehicle_woo_ids.append(mapper.woo_id)
 
         if arguments[1].company_type == 'company':
             company = arguments[1].name
@@ -252,7 +252,7 @@ class WpCustomerExport(WpImportExport):
             "first_name": arguments[1].first_name or arguments[1].name or '',
             "last_name": arguments[1].last_name or '',
             "username": arguments[1].username or arguments[1].name or None,
-            "birthdate": arguments[1].birthdate or '',
+            # "birthdate": arguments[1].birthdate or '',
             "company": company or '',
             "billing": def_bill or None,
             "shipping": def_ship or None,
@@ -269,19 +269,19 @@ class WpCustomerExport(WpImportExport):
             #             "phone": arguments[1].phone or '',
             #             },
             # "service_history": self.get_service_history(arguments[1].customer_ride_service),
-            "my_rides": vehicle_woo_ids or None,
-            "my_service": self.get_my_rides_service(arguments[1].customer_ride_service),
-            "wishlist_id": self.get_wishlist(arguments[1].wishlist_ids),
-            "helmet": arguments[1].helmet or None,
-            "jacket": arguments[1].jacket or None,
-            "pants": arguments[1].pants or None,
-            "gloves": arguments[1].gloves or None,
-            "license_number": arguments[1].licence_no or None,
+            # "my_rides": vehicle_woo_ids or None,
+            # "my_service": self.get_my_rides_service(arguments[1].customer_ride_service),
+            # "wishlist_id": self.get_wishlist(arguments[1].wishlist_ids),
+            # "helmet": arguments[1].helmet or None,
+            # "jacket": arguments[1].jacket or None,
+            # "pants": arguments[1].pants or None,
+            # "gloves": arguments[1].gloves or None,
+            # "license_number": arguments[1].licence_no or None,
             "multi_address": multi_data or None,
 
             # "rewards": arguments[1].rewards or None,
             # "total_rewards": arguments[1].total_rewards or None,
-            "redeemable_amount": arguments[1].redeemable_amount or None,
+            # "redeemable_amount": arguments[1].redeemable_amount or None,
 
         }
 

@@ -74,45 +74,45 @@ class WpCustomerImport(WpImportExport):
 			bill_country_id = mapper.env['res.partner'].country_id.search([('code','=',shipping['country'])]) 
 			bill_state_id =	mapper.env['res.partner'].state_id.search([('code','=',shipping['state']),('country_id','=',bill_country_id.id)])		
 
-			if(status == True):
-				ride_details = res['data']['my_rides']
-				rides_list = []
-				ride_id = None
-				for ride in ride_details:
-					ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
-					if ride_id:
-						rides_list.append([6,0,ride_id.ids])
-					else:
-						major_unit = mapper.env['major_unit.major_unit']
-						major_unit.single_importer(backend,ride)
-						ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
-						rides_list.append([6,0,ride_id.ids])
+			# if(status == True):
+			# 	ride_details = res['data']['my_rides']
+			# 	rides_list = []
+			# 	ride_id = None
+			# 	for ride in ride_details:
+			# 		ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
+			# 		if ride_id:
+			# 			rides_list.append([6,0,ride_id.ids])
+			# 		else:
+			# 			major_unit = mapper.env['major_unit.major_unit']
+			# 			major_unit.single_importer(backend,ride)
+			# 			ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
+			# 			rides_list.append([6,0,ride_id.ids])
 
-				service_rides = res['data']['my_services']
-				service_list = []
-				repair_order = None
-				for order in service_rides:
-					repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
-					if repair_order:
-						service_list.append([6,0,repair_order.ids])
-					else:
-						repair_order_id = mapper.env['service.repair_order']
-						repair_order_id.single_importer(backend,order)
-						repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
-						service_list.append([6,0,repair_order.ids])
+			# 	service_rides = res['data']['my_services']
+			# 	service_list = []
+			# 	repair_order = None
+			# 	for order in service_rides:
+			# 		repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
+			# 		if repair_order:
+			# 			service_list.append([6,0,repair_order.ids])
+			# 		else:
+			# 			repair_order_id = mapper.env['service.repair_order']
+			# 			repair_order_id.single_importer(backend,order)
+			# 			repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
+			# 			service_list.append([6,0,repair_order.ids])
 
-				sale_orders = res['data']['order_ids']
-				sales_list = []
-				sale_id = None
-				for sale in sale_orders:
+			sale_orders = res['data']['order_ids']
+			sales_list = []
+			sale_id = None
+			for sale in sale_orders:
+				sale_id = mapper.env['wordpress.odoo.sale.order'].search([('backend_id','=',backend.id),('woo_id','=',sale)]).order_id
+				if sale_id:
+					sales_list.append([6,0,sale_id.ids])
+				else:
+					sale_order = mapper.env['sale.order']
+					sale_order.single_importer(backend,sale)
 					sale_id = mapper.env['wordpress.odoo.sale.order'].search([('backend_id','=',backend.id),('woo_id','=',sale)]).order_id
-					if sale_id:
-						sales_list.append([6,0,sale_id.ids])
-					else:
-						sale_order = mapper.env['sale.order']
-						sale_order.single_importer(backend,sale)
-						sale_id = mapper.env['wordpress.odoo.sale.order'].search([('backend_id','=',backend.id),('woo_id','=',sale)]).order_id
-						sales_list.append([6,0,sale_id.ids])
+					sales_list.append([6,0,sale_id.ids])
 
 			for addr in metadata:
 				if isinstance(addr['value'], list):
@@ -222,20 +222,20 @@ class WpCustomerImport(WpImportExport):
 			'child_ids' : wp_child_ids or None,
 			# 'child_ids' : [[0,0,shipping_details]] or None,
 			'phone' : contact['phone'] or None,
-			'jacket' : res['data']['jacket'] or None,
-			'helmet' : res['data']['helmet'] or None,
-			'pants' : res['data']['pants'] or None,
-			'gloves' : res['data']['gloves'] or None,
-			'rewards' : res['data']['rewards'] or None,
-			'licence_no' : res['data']['license_number'] or None,
+			# 'jacket' : res['data']['jacket'] or None,
+			# 'helmet' : res['data']['helmet'] or None,
+			# 'pants' : res['data']['pants'] or None,
+			# 'gloves' : res['data']['gloves'] or None,
+			# 'rewards' : res['data']['rewards'] or None,
+			# 'licence_no' : res['data']['license_number'] or None,
 			}
-			if(status==True) and (sale_id or repair_order or ride_id):
-				if sale_id:
-					return sale_id.partner_id
-				elif repair_order:
-					return repair_order.partner_id
-				elif ride_id:
-					return ride_id.partner_id
+			# if(status==True) and (sale_id or repair_order or ride_id):
+			# 	if sale_id:
+			# 		return sale_id.partner_id
+			# 	elif repair_order:
+			# 		return repair_order.partner_id
+			# 	elif ride_id:
+			# 		return ride_id.partner_id
 			res_partner = mapper.customer_id.create(vals)
 			return res_partner
 
@@ -252,31 +252,31 @@ class WpCustomerImport(WpImportExport):
 		bill_country_id = mapper.env['res.partner'].country_id.search([('code','=',shipping['country'])]) 
 		bill_state_id =	mapper.env['res.partner'].state_id.search([('code','=',shipping['state']),('country_id','=',bill_country_id.id)])		
 
-		ride_details = res['data']['my_rides']
-		rides_list = []
-		ride_id = None
-		for ride in ride_details:
-			ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
-			if ride_id:
-				pass
-			else:
-				major_unit = mapper.env['major_unit.major_unit']
-				major_unit.single_importer(backend,ride)
-				ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
-				rides_list.append([6,0,ride_id.ids])
+		# ride_details = res['data']['my_rides']
+		# rides_list = []
+		# ride_id = None
+		# for ride in ride_details:
+		# 	ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
+		# 	if ride_id:
+		# 		pass
+		# 	else:
+		# 		major_unit = mapper.env['major_unit.major_unit']
+		# 		major_unit.single_importer(backend,ride)
+		# 		ride_id = mapper.env['wordpress.odoo.majorunit'].search([('backend_id','=',backend.id),('woo_id','=',ride)]).majorunit_id
+		# 		rides_list.append([6,0,ride_id.ids])
 
-		service_rides = res['data']['my_services']
-		service_list = []
-		repair_order = None
-		for order in service_rides:
-			repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
-			if repair_order:
-				pass
-			else:
-				repair_order_id = mapper.env['service.repair_order']
-				repair_order_id.single_importer(backend,order)
-				repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
-				service_list.append([6,0,repair_order.ids])
+		# service_rides = res['data']['my_services']
+		# service_list = []
+		# repair_order = None
+		# for order in service_rides:
+		# 	repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
+		# 	if repair_order:
+		# 		pass
+		# 	else:
+		# 		repair_order_id = mapper.env['service.repair_order']
+		# 		repair_order_id.single_importer(backend,order)
+		# 		repair_order = mapper.env['wordpress.odoo.service.repair_order'].search([('backend_id','=',backend.id),('woo_id','=',order)]).service_rides_id
+		# 		service_list.append([6,0,repair_order.ids])
 
 		sale_orders = res['data']['order_ids']
 		sales_list = []
@@ -338,14 +338,14 @@ class WpCustomerImport(WpImportExport):
 		'child_ids' : [[6,0,mapper.customer_id.child_ids.ids]] or None,
 		# 'child_ids' : wp_child_ids or None,
 		'phone' : contact['phone'] or None,
-		'jacket' : res['data']['jacket'] or None,
-		'helmet' : res['data']['helmet'] or None,
-		'pants' : res['data']['pants'] or None,
-		'gloves' : res['data']['gloves'] or None,
-		'licence_no' : res['data']['license_number'] or None,
-		'customer_vehicles' : [[6,0,mapper.customer_id.customer_vehicles.ids]],
-		'customer_ride_service' : [[6,0,mapper.customer_id.customer_ride_service.ids]],
-		'customer_product_ids' : [[6,0,mapper.customer_id.customer_product_ids.ids]]
+		# 'jacket' : res['data']['jacket'] or None,
+		# 'helmet' : res['data']['helmet'] or None,
+		# 'pants' : res['data']['pants'] or None,
+		# 'gloves' : res['data']['gloves'] or None,
+		# 'licence_no' : res['data']['license_number'] or None,
+		# 'customer_vehicles' : [[6,0,mapper.customer_id.customer_vehicles.ids]],
+		# 'customer_ride_service' : [[6,0,mapper.customer_id.customer_ride_service.ids]],
+		# 'customer_product_ids' : [[6,0,mapper.customer_id.customer_product_ids.ids]]
 		}
 
 		mapper.customer_id.write(vals) 

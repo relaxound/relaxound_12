@@ -20,7 +20,7 @@ import logging
 
 # import xmlrpclib
 from collections import defaultdict
-from odoo.addons.queue_job.job import job
+# from odoo.addons.queue_job.job import job
 import base64
 from odoo import models, fields, api, _
 from ..unit.customer_exporter import WpCustomerExport
@@ -123,16 +123,19 @@ class Customer(models.Model):
     @api.multi
     def sync_customer(self):
         for backend in self.backend_id:
-            self.with_delay().export(backend)
+            # self.with_delay().export(backend)
+            self.export(backend)
+
         return
 
     @api.multi
-    @job
+    # @job
     def importer(self, backend):
         """ import and create or update backend mapper """
         if len(self.ids)>1:
             for obj in self:
-                obj.with_delay().single_importer(backend)
+                # obj.with_delay().single_importer(backend)
+                obj.single_importer(backend)
             return
 
         method = 'customer_import'
@@ -150,7 +153,8 @@ class Customer(models.Model):
             data = False
           count += 1
         for customer_id in customer_ids:
-          self.with_delay().single_importer(backend, customer_id)
+          # self.with_delay().single_importer(backend, customer_id)
+          self.single_importer(backend, customer_id)
 
         # res = importer.import_customer(method, arguments)
         # if (res['status'] == 200 or res['status'] == 201):
@@ -159,7 +163,7 @@ class Customer(models.Model):
         #             self.with_delay().single_importer(backend,customer_id)
 
     @api.multi
-    @job
+    # @job
     def single_importer(self,backend,customer_id,status=True,woo_id=None):
         method = 'customer_import'
         mapper = self.backend_mapping.search(
@@ -192,12 +196,15 @@ class Customer(models.Model):
             self.backend_mapping.create(vals)
 
     @api.multi
-    @job
+    # @job
     def export(self, backend):
         """ export customer details, save username and create or update backend mapper """
         if len(self.ids)>1:
             for obj in self:
-                obj.with_delay().export(backend)
+                # obj.with_delay().export(backend)
+                obj.export(backend)
+
+
             return
         if not self.customer:
             return

@@ -60,14 +60,14 @@ class WpImportExport(object):
             status = 'failed'
         else:
             status = 'done'
-        arguments[1].env['wordpress.jobs'].create({'api_data': str(self.get_api_method(method, arguments, count, date)),
-                                                   'name': 'Import ' + method,
-                                                   'request': '',
-                                                   'response': res.text,
-                                                   'module': str(arguments[1].__class__)[17:-2],
-                                                   'module_object_id': '',
-                                                   'backend_id': self.backend.id,
-                                                   'state': status})
+        # arguments[1].env['wordpress.jobs'].create({'api_data': str(self.get_api_method(method, arguments, count, date)),
+        #                                            'name': 'Import ' + method,
+        #                                            'request': '',
+        #                                            'response': res.text,
+        #                                            'module': str(arguments[1].__class__)[17:-2],
+        #                                            'module_object_id': '',
+        #                                            'backend_id': self.backend.id,
+        #                                            'state': status})
         arguments[1].env.cr.commit()
         _logger.info(
             "Import to api %s, status : %s res : %s", self.get_api_method(method, arguments, count, date), res.status_code, res.text)
@@ -87,14 +87,14 @@ class WpImportExport(object):
             status = 'failed'
         else:
             status = 'done'
-        arguments[1].env['wordpress.jobs'].create({'api_data': str(self.get_api_method(method, arguments)),
-                                                   'name': 'Export ' + arguments[1].name,
-                                                   'request': str(result_dict),
-                                                   'response': res.text,
-                                                   'module': str(arguments[1].__class__)[17:-2],
-                                                   'module_object_id': arguments[1].ids[0],
-                                                   'backend_id': self.backend.id,
-                                                   'state': status})
+        # arguments[1].env['wordpress.jobs'].create({'api_data': str(self.get_api_method(method, arguments)),
+        #                                            'name': 'Export ' + arguments[1].name,
+        #                                            'request': str(result_dict),
+        #                                            'response': res.text,
+        #                                            'module': str(arguments[1].__class__)[17:-2],
+        #                                            'module_object_id': arguments[1].ids[0],
+        #                                            'backend_id': self.backend.id,
+        #                                            'state': status})
         arguments[1].env.cr.commit()
         _logger.info(
             "Export to api %s, status : %s res : %s", self.get_api_method(method, arguments), res.status_code, res.text)

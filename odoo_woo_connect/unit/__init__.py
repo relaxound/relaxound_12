@@ -18,7 +18,7 @@
 """
 All files in current directory imported here
 """
-# from . import backend_adapter
+from . import backend_adapter
 from . import customer_exporter
 from . import customer_importer
 # from . import product_attribute_exporter
