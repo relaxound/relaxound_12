@@ -12,13 +12,16 @@
                         <button name="sync_tax" string="Sync" type="object" class="oe_highlight"/>
                     </header>
                 </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="tax_class" required="True" />
+                </xpath>
 				<xpath expr="//notebook" position="inside">
                     <page string="Wordpress" attrs="{'invisible':[('amount_type','=','group')]}">
                         <group>
                             <group>
                                 <field name="backend_id" widget="many2many_tags"/>
                                 <field name="state_id"/>
-                                <field name="country_id"/>
+                                <field name="country_id" required='True'/>
                                 <field name="postcode"/>
                                 <field name="city"/>
                             </group>

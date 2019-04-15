@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="wp_standard_job_view" model="ir.ui.view">
+            <field name="name">service.standard_job.wp.form</field>
+            <field name="model">service.standard_job</field>
+            <field name="inherit_id" ref="major_unit.service_standard_job_form_view"/>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button class="oe_highlight" name="sync_standard_job" string="Sync" type="object"/>
+                        <button class="oe_highlight" name="build_product" string="Make Product" type="object"/>
+                    </header>
+                </xpath>
+                <xpath expr="//notebook" position="before">
+                    <group>
+                        <group>
+                            <field name="loc" invisible="1"/>
+                            <field name="store_location" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('attribute_id', '=', loc)]"/>
+                            <field name="warehouse" widget="many2many_tags"/>
+                            <field name="part_number"/>
+                            <field name="backend_id" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

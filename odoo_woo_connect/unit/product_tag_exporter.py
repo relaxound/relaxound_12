@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-#
-#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -18,12 +15,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-
+import requests
 import logging
 from ..model.api import API
 from datetime import datetime
 from datetime import timedelta
-from . backend_adapter import WpImportExport
+from ..unit.backend_adapter import WpImportExport
 _logger = logging.getLogger(__name__)
 
 
@@ -46,6 +43,10 @@ class WpProductTagExport(WpImportExport):
         result_dict = {"name": arguments[1].name or None,
                        "slug": arguments[1].slug or None,
                        "description": arguments[1].desc or None,
-                       }
-        r = self.export(method, result_dict, arguments)
-        return {'status': r.status_code, 'data': r.json()}
+                    }
+        res = self.export(method, result_dict, arguments)
+        if res:
+            res_dict = res.json()
+        else:
+            res_dict = res.json()
+        return {'status': res.status_code, 'data': res_dict or {}}

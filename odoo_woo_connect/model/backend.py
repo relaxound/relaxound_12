@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-#
-#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -20,11 +17,10 @@
 #
 
 from odoo import models, api, fields, _
-from . api import API
+from ..model.api import API
 from odoo.exceptions import Warning
 
 from ..unit.backend_adapter import WpImportExport
-
 
 
 class wp_configure(models.Model):
@@ -35,10 +31,10 @@ class wp_configure(models.Model):
 
     name = fields.Char(string='name')
     location = fields.Char("Url")
-
+    wp_api = fields.Boolean(string="WP API", default=True)
     consumer_key = fields.Char("Consumer key")
     consumer_secret = fields.Char("Consumer Secret")
-    version = fields.Selection([('v1', 'v1'),('v2', 'v2')], 'Version')
+    version = fields.Selection([('wc/v2', 'v2')], 'Version')
     verify_ssl = fields.Boolean("Verify SSL")
 
     @api.multi
@@ -47,9 +43,9 @@ class wp_configure(models.Model):
         location = self.location
         cons_key = self.consumer_key
         sec_key = self.consumer_secret
-        version = "wc/v2"
+        version = self.version
         wcapi = API(url=location, consumer_key=cons_key,
-                    consumer_secret=sec_key, version=version, wp_api=True)
+                    consumer_secret=sec_key, version=version, wp_api=True, timeout=1000)
         r = wcapi.get("products")
         if r.status_code == 404:
             raise Warning(_("Enter Valid url"))
@@ -78,7 +74,7 @@ class wp_configure(models.Model):
 
     @api.multi
     def map_product_tags(self):
-        """ Assign backend to all the products categories """
+        """ Assign backend to all the products tag """
         all_tags = self.env['product.product.tag'].search(
             [('backend_id', '!=', self.id)])
         for tag in all_tags:
@@ -89,6 +85,20 @@ class wp_configure(models.Model):
                 backends.append(self.id)
             tag.write({'backend_id': [[6, False, backends]]})
         return True
+
+    # @api.multi
+    # def map_product_coupons(self):
+    #     """ Assign backend to all the products coupon """
+    #     all_coupons = self.env['product.coupon'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for coupon in all_coupons:
+    #         backends = []
+    #         for backend_id in coupon.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         coupon.write({'backend_id': [[6, False, backends]]})
+    #     return True
 
     @api.multi
     def map_taxes(self):
@@ -175,6 +185,116 @@ class wp_configure(models.Model):
             sale_order.write({'backend_id': [[6, False, backends]]})
         return True
 
+    # @api.multi
+    # def map_major_unit(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_major_unit = self.env['major_unit.major_unit'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for major_unit in all_major_unit:
+    #         backends = []
+    #         for backend_id in major_unit.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         major_unit.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def map_service_order(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_service_order = self.env['service.repair_order'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for service_order in all_service_order:
+    #         backends = []
+    #         for backend_id in service_order.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         service_order.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def map_pickup_order(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_pickup_order = self.env['drm.pickup'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for pickup_order in all_pickup_order:
+    #         backends = []
+    #         for backend_id in pickup_order.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         pickup_order.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def map_standard_job(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_standard_job = self.env['service.standard_job'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for standard_job in all_standard_job:
+    #         backends = []
+    #         for backend_id in standard_job.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         standard_job.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def map_product_deal(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_product_deal = self.env['product.deals'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for product_deal in all_product_deal:
+    #         backends = []
+    #         for backend_id in product_deal.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         product_deal.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def map_service_messanger(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_service_message = self.env['service.messanger'].search(
+    #         [('backend_id', '!=', self.id)])
+    #     for service_message in all_service_message:
+    #         backends = []
+    #         for backend_id in service_message.backend_id:
+    #             backends.append(backend_id.id)
+    #         if not self.id in backends:
+    #             backends.append(self.id)
+    #         service_message.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def unmap_service_messanger(self):
+    #     """ Remove particular backend from all the products """
+    #     all_service_message = self.env['service.messanger'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for service_message in all_service_message:
+    #         backends = []
+    #         for backend_id in service_message.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         service_message.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def unmap_product_deal(self):
+    #     """ Remove particular backend from all the products """
+    #     all_product_deal = self.env['product.deals'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for product_deal in all_product_deal:
+    #         backends = []
+    #         for backend_id in product_deal.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         product_deal.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
     @api.multi
     def unmap_products(self):
         """ Remove particular backend from all the products """
@@ -200,6 +320,19 @@ class wp_configure(models.Model):
                     backends.append(backend_id.id)
             tag.write({'backend_id': [[6, False, backends]]})
         return True
+
+    # @api.multi
+    # def unmap_product_coupons(self):
+    #     """ Remove particular backend from all the product coupons """
+    #     all_coupons = self.env['product.coupon'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for coupon in all_coupons:
+    #         backends = []
+    #         for backend_id in coupon.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         coupon.write({'backend_id': [[6, False, backends]]})
+    #     return True
 
     @api.multi
     def unmap_taxes(self):
@@ -280,37 +413,92 @@ class wp_configure(models.Model):
             sale_order.write({'backend_id': [[6, False, backends]]})
         return True
 
+    # @api.multi
+    # def unmap_major_unit(self):
+    #     """ Remove particular backend from all the sales orders """
+    #     all_major_unit = self.env['major_unit.major_unit'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for major_unit in all_major_unit:
+    #         backends = []
+    #         for backend_id in major_unit.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         major_unit.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def unmap_service_order(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_service_order = self.env['service.repair_order'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for service_order in all_service_order:
+    #         backends = []
+    #         for backend_id in service_order.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         service_order.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def unmap_pickup_order(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_pickup_order = self.env['drm.pickup'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for pickup_order in all_pickup_order:
+    #         backends = []
+    #         for backend_id in pickup_order.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         pickup_order.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
+    # @api.multi
+    # def unmap_standard_job(self):
+    #     """ Assign backend to all the sales orders """
+    #     all_standard_job = self.env['service.standard_job'].search(
+    #         [('backend_id', '=', self.id)])
+    #     for standard_job in all_standard_job:
+    #         backends = []
+    #         for backend_id in standard_job.backend_id:
+    #             if self.id != backend_id.id:
+    #                 backends.append(backend_id.id)
+    #         standard_job.write({'backend_id': [[6, False, backends]]})
+    #     return True
+
     @api.multi
     def export_products(self):
         """ Export all the products of particular backend """
-
         all_products = self.env['product.template'].search(
             [('backend_id', '=', self.id)])
         export = WpImportExport(self)
-        for product in all_products:
-            product.export_product(self)
+        count = (len(all_products)/100)+1
+        for offset in xrange(0, int(count)):
+            offset = offset*100
+            all_products[offset:offset+99].with_delay().export(self)
         return True
 
     @api.multi
     def export_taxes(self):
         """ Export all the products of particular backend """
-
         all_taxes = self.env['account.tax'].search(
             [('backend_id', '=', self.id)])
         export = WpImportExport(self)
-        for tag in all_taxes:
-            tag.export_tax(self, 'standard')
+        count = (len(all_taxes)/100)+1
+        for offset in xrange(0, count):
+            offset = offset*100
+            all_taxes[offset:offset+99].with_delay().export(self, 'standard')
         return True
 
     @api.multi
     def export_product_tags(self):
         """ Export all the products of particular backend """
-
         all_product_tags = self.env['product.product.tag'].search(
             [('backend_id', '=', self.id)])
         export = WpImportExport(self)
-        for tag in all_product_tags:
-            tag.export_product_tag(self)
+        count = (len(all_product_tags)/100)+1
+        for offset in xrange(0, int(count)):
+            offset = offset*100
+            all_product_tags[offset:offset+99].with_delay().export(self)
         return True
 
     @api.multi
@@ -319,8 +507,10 @@ class wp_configure(models.Model):
         all_categories = self.env['product.category'].search(
             [('backend_id', '=', self.id)])
         export = WpImportExport(self)
-        for category in all_categories:
-            category.export_product_category(self)
+        count = (len(all_categories)/100)+1
+        for offset in xrange(0, int(count)):
+            offset = offset*100
+            all_categories[offset:offset+99].with_delay().export(self)
         return True
 
     @api.multi
@@ -329,10 +519,10 @@ class wp_configure(models.Model):
         all_attributes = self.env['product.attribute'].search(
             [('backend_id', '=', self.id)])
         export = WpImportExport(self)
-        for attribute in all_attributes:
-            attribute.export_product_attribute(self)
-            for value in attribute.value_ids:
-                value.export_product_attribute_value(self)
+        count = (len(all_attributes)/100)+1
+        for offset in xrange(0, int(count)):
+            offset = offset*100
+            all_attributes[offset:offset+99].with_delay().export(self)
         return True
 
     @api.multi
@@ -341,8 +531,10 @@ class wp_configure(models.Model):
         all_customers = self.env['res.partner'].search(
             [('backend_id', '=', self.id), ('customer', '=', True)])
         export = WpImportExport(self)
-        for customer in all_customers:
-            customer.export_customer(self)
+        count = (len(all_customers)/100)+1
+        for offset in xrange(0, int(count)):
+            offset = offset*100
+            all_customers[offset:offset+99].with_delay().export(self)
         return True
 
     @api.multi
@@ -351,8 +543,10 @@ class wp_configure(models.Model):
         all_sales_orders = self.env['sale.order'].search(
             [('backend_id', '=', self.id)])
         export = WpImportExport(self)
-        for sales_order in all_sales_orders:
-            sales_order.export_sales_order(self)
+        count = (len(all_sales_orders)/100)+1
+        for offset in xrange(0, int(count)):
+            offset = offset*100
+            all_sales_orders[offset:offset+99].with_delay().export(self)
         return True
 
     @api.multi
@@ -361,6 +555,125 @@ class wp_configure(models.Model):
         all_invoice_orders = self.env['account.invoice'].search(
             [('backend_id', '=', self.id)])
         export = WpImportExport(self)
-        for account_invoice in all_invoice_orders:
-            account_invoice.export_invoice_refund(self)
+        count = (len(all_invoice_orders)/100)+1
+        for offset in xrange(0, count):
+            offset = offset*100
+            all_invoice_orders[offset:offset+99].with_delay().export(self)
         return True
+
+    # @api.multi
+    # def export_product_coupons(self):
+    #     """Export all coupons of a particular backend"""
+    #     all_product_coupons = self.env['product.coupon'].search(
+    #         [('backend_id', '=', self.id)])
+    #     export = WpImportExport(self)
+    #     count = (len(all_product_coupons)/100)+1
+    #     for offset in xrange(0, int(count)):
+    #         offset = offset*100
+    #         coupon[offset:offset+99].with_delay().export(self)
+    #     return True
+
+    # @api.multi
+    # def export_service_order(self):
+    #     """ Export all the refund invoice orders of particular backend """
+    #     all_service_order = self.env['service.repair_order'].search(
+    #         [('backend_id', '=', self.id)])
+    #     export = WpImportExport(self)
+    #     count = (len(all_service_order)/100)+1
+    #     for offset in xrange(0, count):
+    #         offset = offset*100
+    #         service_order[offset:offset+99].with_delay().export(self)
+    #     return True
+
+    # @api.multi
+    # def export_pickup_order(self):
+    #     """ Export all the refund invoice orders of particular backend """
+    #     all_pickup_order = self.env['drm.pickup'].search(
+    #         [('backend_id', '=', self.id)])
+    #     export = WpImportExport(self)
+    #     count = (len(all_pickup_order)/100)+1
+    #     for offset in xrange(0, count):
+    #         offset = offset*100
+    #         pickup_order[offset:offset+99].with_delay().export(self)
+    #     return True
+
+    # @api.multi
+    # def export_standard_job(self):
+    #     """ Export all the refund invoice orders of particular backend """
+    #     all_standard_job = self.env['service.standard_job'].search(
+    #         [('backend_id', '=', self.id)])
+    #     export = WpImportExport(self)
+    #     count = (len(all_standard_job)/100)+1
+    #     for offset in xrange(0, count):
+    #         offset = offset*100
+    #         standard_job[offset:offset+99].with_delay().export(self)
+    #     return True
+
+    # @api.multi
+    # def run_campaign(self):
+    #     """ Export all the refund invoice orders of particular backend """
+    #     all_campaign = self.env['product.deals'].search([])
+    #     export = WpImportExport(self)
+    #     all_campaign.with_delay().run_campaign(self)
+    #     return True
+
+    # @api.multi
+    # def import_sale_orders(self):
+    #     """ Import all the sale order of particular backend """
+    #     sale_order_obj = self.env['sale.order']
+    #     sale_order_obj.with_delay().importer(self)
+    #     return True
+
+    # @api.multi
+    # def import_customer(self):
+    #     """Import all the customers of particular backend"""
+    #     customer_obj = self.env['res.partner']
+    #     customer_obj.with_delay().importer(self)
+    #     return True
+
+    # @api.multi
+    # def import_tax(self):
+    #     """Import all the taxes of particular backend"""
+    #     tax_obj = self.env['account.tax']
+    #     tax_obj.with_delay().importer(self)
+    #     return True
+
+    # @api.multi
+    # def import_form(self):
+    #     """Import all the customers of particular backend"""
+    #     form_obj = self.env['crm.lead']
+    #     form_obj.with_delay().importer(self)
+    #     return True
+
+    # @api.multi
+    # def export_status(self):
+    #     """ Export the status of crm_lead of particular backend """
+    #     crm_status = self.env['crm.lead'].search(
+    #         [('backend_id','=',self.id)])
+    #     export = WpImportExport(self)
+    #     count = (len(crm_status)/100) + 1
+    #     for offset in xrange(0,count):
+    #         offset = offset*100
+    #         crm_status[offset:offset+99].with_delay().export(self)
+    #     return True
+
+    # @api.multi
+    # def import_service_rides(self):
+    #     """Import all the customers of particular backend"""
+    #     repair_order_obj = self.env['service.repair_order']
+    #     repair_order_obj.with_delay().importer(self)
+    #     return True
+
+    # @api.multi
+    # def import_major_units(self):
+    #     """Import all the major_units of particular backend"""
+    #     major_unit_obj = self.env['major_unit.major_unit']
+    #     major_unit_obj.with_delay().importer(self)
+    #     return True
+
+    # @api.multi
+    # def import_product_deals(self):
+    #     """Import all the product deals of particular backend"""
+    #     product_deal = self.env['product.deals']
+    #     product_deal.with_delay().importer(self)
+    #     return True

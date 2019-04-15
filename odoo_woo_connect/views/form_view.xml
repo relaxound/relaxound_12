@@ -1,0 +1,34 @@
+<odoo>
+	<data>
+		<record id="view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+              <notebook>
+                <page name="Form" string="Forms">
+                	<xpath expr="//field[@name='Notification']" position="after">
+	                    <group>
+	                    	
+	                        <field name="bill_of_sale" string = "Bill Of Sale"/>
+	                        <field name="installation_doc" string = "Installation Doc"/>
+	                        <field name="buyers_certificate" string = "Buyers Certificate"/>
+	                        <field name="agreement_to_insurance" string = "Agreement To Insurance"/>
+	                        <field name="seller_certificate" string = "Seller Certificate"/>
+	                        <field name="seller_in_state_delivery" string = "Seller In State Delivery"/>
+	                        <field name="as_is_dealer_warranty_disclaimer" string = "As Is Dealer Warranty Disclaimer"/>
+	                        <field name="lost_title" string = "Lost Title"/>
+	                        <field name="lemon_law" string = "Lemon Law"/>
+	                        <field name="buyers_affidavit" string = "Buyers Affidavit"/>
+	                        <field name="power_of_attorney" string = "Power Of Attorney"/>
+	                        
+	                    </group>
+                	</xpath>
+                </page>
+              </notebook>
+            </field>
+
+		</record>
+	</data>
+</odoo>
+

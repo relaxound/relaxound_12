@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-#
-#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -20,14 +17,15 @@
 #
 
 import logging
-#import urllib2
-#import xmlrpclib
+
+# import xmlrpclib
 from collections import defaultdict
 import base64
 from odoo import models, fields, api, _
 from ..unit.tax_exporter import WpTaxExport
+from ..unit.tax_importer import WpTaxImport
 from odoo.exceptions import Warning
-
+from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
 
@@ -48,11 +46,16 @@ class Tax(models.Model):
     compound = fields.Boolean('compound')
     shipping = fields.Boolean('shipping')
     order = fields.Integer('order')
+
+    @api.model
+    def get_backend(self):
+        return self.env['wordpress.configure'].search([]).ids
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='WP Backend',
+                                  string='Website',
                                   store=True,
                                   readonly=False,
                                   required=True,
+                                  default=get_backend,
                                   )
     backend_mapping = fields.One2many(comodel_name='wordpress.odoo.tax',
                                       string='Tax mapping',
@@ -61,17 +64,120 @@ class Tax(models.Model):
                                       required=False,
                                       )
 
+    tax_class = fields.Selection([
+        ('standard','Standard'),
+        ('showroom','Showroom'),
+        ('accessories','Accessories'),
+        ('apparel','Apparel'),
+        ('parts','Parts'),
+        ('service','Service'),
+        ('deals','Deals')],
+        string="Tax Class")
+
+    @api.model
+    def create(self, vals):
+        """ Override create method """
+        tax_id = super(Tax, self).create(vals)
+        return tax_id
+
+    @api.multi
+    def write(self, vals):
+        """ Override write method to export customers when any details is changed """
+        tax = super(Tax, self).write(vals)
+        return tax
+
+
     @api.multi
     def sync_tax(self):
         for backend in self.backend_id:
-            self.export_tax(backend, 'standard')
+            self.export(backend, 'standard')
         return
 
     @api.multi
-    def export_tax(self, backend, tax_class):
+    @job
+    def importer(self, backend):
+        """ import and create or update backend mapper """
+        if len(self.ids)>1:
+            for obj in self:
+                obj.with_delay().single_importer(backend)
+            return
+
+        method = 'taxes'
+        arguments = [None,self]
+        importer = WpTaxImport(backend)
+
+        # count = 1
+        # data = True
+        # tax_ids = []
+        # while(data):
+        #   res = importer.import_tax(method, arguments, count)['data']
+        #   if(res):
+        #     tax_ids.extend(res)
+        #   else:
+        #     data = False
+        #   count += 1
+        # for tax_id in tax_ids:
+        #   self.with_delay().single_importer(backend, tax_id)
+
+        res = importer.import_tax(method, arguments)
+        if (res['status'] == 200 or res['status'] == 201):
+            if isinstance(res['data'],list):
+                for tax_id in res['data']:
+                    self.with_delay().single_importer(backend,tax_id)
+
+        # if len(self.ids)>1:
+        #     for obj in self:
+        #         obj.with_delay().single_importer(backend)
+        #     return
+
+        # method = 'my_import_form'
+        # arguments = [None,self]
+        # importer = WpCrmLeadImport(backend)
+        # res = importer.import_crm_lead(method, arguments)
+        # if (res['status'] == 200 or res['status'] == 201):
+        #   if isinstance(res['data'],list):
+        #     for crm_id in res['data']:
+        #       self.with_delay().single_importer(backend,crm_id)
+
+    @api.multi
+    @job
+    def single_importer(self,backend,tax_id,status=True,woo_id=None):
+        method = 'taxes'
+        mapper = self.backend_mapping.search(
+            [('backend_id', '=', backend.id), ('woo_id', '=', tax_id)], limit=1)
+        arguments = [tax_id or None,mapper.tax_id or self]
+
+        importer = WpTaxImport(backend)
+        res = importer.import_tax(method, arguments)
+        record = res['data']
+
+        if mapper:
+            importer.write_tax(backend,mapper,res)
+
+        else:
+            account_tax = importer.create_tax(backend,mapper,res,status)
+
+        if mapper and (res['status'] == 200 or res['status'] == 201):
+            vals = {
+                'woo_id' : res['data']['id'],
+                'backend_id' : backend.id,
+                'tax_id' : mapper.tax_id.id,
+            }
+            self.backend_mapping.write(vals)
+        elif (res['status'] == 200 or res['status'] == 201):
+            vals = {
+                'woo_id' : res['data']['id'],
+                'backend_id' : backend.id,
+                'tax_id' : account_tax.id,
+            }
+            self.backend_mapping.create(vals)
+
+    @api.multi
+    @job
+    def export(self, backend, tax_class):
         """ export tax details, save username and create or update backend mapper """
         mapper = self.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('tax_id', '=', self.id)])
+            [('backend_id', '=', backend.id), ('tax_id', '=', self.id)], limit=1)
         arguments = [mapper.woo_id or None, self]
         export = WpTaxExport(backend)
         if self.amount_type == 'group':
@@ -85,20 +191,18 @@ class Tax(models.Model):
             if 'slug' in res['data'].keys():
                 self.write({'slug': res['data']['slug']})
             mapper.write(
-                {'tax_id': self.id, 'backend_id': backend.id, })  # 'woo_id': res['data']['id']
+                {'tax_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
         elif (res['status'] == 200 or res['status'] == 201):
             if 'slug' in res['data'].keys():
                 self.write({'slug': res['data']['slug']})
             self.backend_mapping.create(
-                {'tax_id': self.id, 'backend_id': backend.id, })  # 'woo_id': res['data']['id']
+                {'tax_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
 
 
 class TaxMapping(models.Model):
 
     """ Model to store woocommerce id for particular tax"""
     _name = 'wordpress.odoo.tax'
-    _description = 'wordpress.odoo.tax'
-
 
     tax_id = fields.Many2one(comodel_name='account.tax',
                              string='Tax',
@@ -108,7 +212,7 @@ class TaxMapping(models.Model):
                              )
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Backend',
+                                 string='Website',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,
@@ -117,5 +221,7 @@ class TaxMapping(models.Model):
 
     woo_id = fields.Char(string='Woo id')
 
-
+def import_record(cr, uid, ids, context=None):
+    """ Import a record from woocommerce """
+    importer.run(woo_id)
 

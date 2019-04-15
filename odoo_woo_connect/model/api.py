@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 WooCommerce API Class
 """
@@ -11,7 +9,7 @@ __license__ = "MIT"
 
 from requests import request
 from json import dumps as jsonencode
-from . oauth import OAuth
+from ..model.oauth import OAuth
 
 
 class API(object):

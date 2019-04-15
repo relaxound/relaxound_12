@@ -11,6 +11,9 @@
 					<field name="customer_id" />
 					<field name="backend_id" />
 					<field name="woo_id" />
+					<field name="address_type"/>
+					<field name="internal_name"/>
+					<field name="child_id"/>
 				</tree>
 			</field>
 		</record>
@@ -29,6 +32,9 @@
 						<group string="Mapping" name="Mapping">
 							<field name="backend_id" />
 							<field name="woo_id" />
+							<field name="address_type"/>
+							<field name="internal_name"/>
+							<field name="child_id"/>
 						</group>
 						<group>
 						</group>
@@ -47,7 +53,7 @@
                     <filter string="Customer" name="customer_id" domain="[]"/>
                     <filter string="Backend" name="backend_id" domain="[]"/>
                     <group expand="0" string="Group By">
-                        <filter name="filter_two" string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
                     </group>
                 </search>
             </field>
