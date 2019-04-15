@@ -7,7 +7,7 @@
             <field name="numbercall">-1</field>
             <field name="model_id" ref="model_account_invoice"></field>
             <field name="state">code</field>
-<!--            <field name="function">_export_shipping_data()</field>-->
+            <field name="code">model._export_shipping_data()</field>
         </record>
 
         <record id="ir_cron_import_tracking_num" model="ir.cron">
