@@ -88,15 +88,15 @@ class Customer(models.Model):
     prefer_email = fields.Char('Email')
     in_store_deals = fields.Boolean('In-Store Deals')
     alerts = fields.Boolean('Alerts')
-    latest_news = fields.Boolean('Latest News')
+    latest_news = fields.Boolean('Latest news')
     events = fields.Boolean('Events')
-    do_not_send_mail = fields.Boolean('Do not Send Email')
+    do_not_send_mail = fields.Boolean('Do Not Send Email')
 
     phone_notification = fields.Char('Phone')
     phone_in_store_deals = fields.Boolean('In-Store Deals')
     phone_alerts = fields.Boolean('Alerts')
     phone_latest_news = fields.Boolean('Latest News')
-    phone_events = fields.Boolean('Events')
+    phone_events = fields.Boolean('Event')
     phone_do_not_send_mail = fields.Boolean('Do not Send Email')
 
     primary_store = fields.Selection([

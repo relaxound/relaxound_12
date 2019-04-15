@@ -624,12 +624,12 @@ class wp_configure(models.Model):
     #     sale_order_obj.with_delay().importer(self)
     #     return True
 
-    # @api.multi
-    # def import_customer(self):
-    #     """Import all the customers of particular backend"""
-    #     customer_obj = self.env['res.partner']
-    #     customer_obj.with_delay().importer(self)
-    #     return True
+    @api.multi
+    def import_customer(self):
+        """Import all the customers of particular backend"""
+        customer_obj = self.env['res.partner']
+        customer_obj.with_delay().importer(self)
+        return True
 
     # @api.multi
     # def import_tax(self):

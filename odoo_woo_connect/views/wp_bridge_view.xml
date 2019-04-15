@@ -38,41 +38,41 @@
 						</group>
 						<notebook colspan="4">
 							<page string="Import Data">
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="import_sale_orders" string="Import Sale Order"/>
 									<button class="oe_highlight" name="import_sale_orders" string="Import Sale Order" type="object"/>
-								</group>
+								</group> -->
 								<group>
 									<label class="oe_inline" for="import_customer" string="Import Customer"/>
 									<button class="oe_highlight" name="import_customer" string="
 									Import Customer" type="object"/>
 								</group>
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="import_form" string="Import Form"/>
 									<button class="oe_highlight" name="import_form" string="
 									Import Form" type="object"/>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="import_major_units" string="Import Major Units"/>
 									<button class="oe_highlight" name="import_major_units" string="
 									Import Major Units" type="object"/>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="import_service_rides" string="Import Repair Orders"/>
 									<button class="oe_highlight" name="import_service_rides" string="
 									Import Repair Orders" type="object"/>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="import_tax" string="Import Tax"/>
 									<button class="oe_highlight" name="import_tax" string="
 									Import Tax" type="object"/>
-								</group>
+								</group> -->
 							</page>
 							<page string="Export Data">
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="export_product_tags" string="Export Product Tags"/>
 									<button class="oe_highlight" name="export_product_tags" string="Export Product Tags" type="object"/>
-								</group>
+								</group> -->
 								<group>
 									<label class="oe_inline" for="export_attributes" string="Export Product Attributes"/>
 									<button class="oe_highlight" for="export_attributes" name="export_attributes" string="Export Product Attributes" type="object"/>
@@ -85,10 +85,10 @@
 									<label class="oe_inline" for="export_products" string="Export Products"/>
 									<button class="oe_highlight" name="export_products" string="Export Products" type="object"/>
 								</group>
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="export_product_coupons" string="Export Product Coupons"/>
 									<button class="oe_highlight" name="export_product_coupons" string="Export Product Coupons" type="object"/>
-								</group>
+								</group> -->
 								<group>
 									<label class="oe_inline" for="export_customers" string="Export Customers"/>
 									<button class="oe_highlight" name="export_customers" string="Export Customers" type="object"/>
@@ -105,27 +105,27 @@
 									<label class="oe_inline" for="export_invoices_refund" string="Export Invoice Refund"/>
 									<button class="oe_highlight" name="export_invoices_refund" string="Export Invoice Refund" type="object"/>
 								</group>
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="export_pickup_order" string="Export Pickup Order"/>
 									<button class="oe_highlight" name="export_pickup_order" string="Export Pickup Order" type="object"/>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="export_standard_job" string="Export Standard Job"/>
 									<button class="oe_highlight" name="export_standard_job" string="Export Standard Job" type="object"/>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="run_campaign" string="Run Campaign"/>
 									<button class="oe_highlight" name="run_campaign" string="Run Campaign" type="object"/>
-								</group>
+								</group> -->
 							</page>
 							<page string="Mapping">
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="map_product_tags" string="Product Tags"/>
 									<div>
 										<button class="oe_highlight" name="map_product_tags" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_product_tags" string="Remove" type="object"/>
 									</div>
-								</group>
+								</group> -->
 								<group>
 									<label class="oe_inline" for="map_attributes" string="Product Attributes"/>
 									<div>
@@ -154,13 +154,13 @@
 										<button class="oe_highlight" name="unmap_products" string="Remove" type="object"/>
 									</div>
 								</group>
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="map_product_coupons" string="Product Coupons"/>
 									<div>
 										<button class="oe_highlight" name="map_product_coupons" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_product_coupons" string="Remove" type="object"/>
 									</div>
-								</group>
+								</group> -->
 								<group>
 									<label class="oe_inline" for="map_customers" string="Customers"/>
 									<div>
@@ -175,48 +175,48 @@
 										<button class="oe_highlight" name="unmap_sale_order" string="Remove" type="object"/>
 									</div>
 								</group>
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="map_major_unit" string="Major Unit"/>
 									<div>
 										<button class="oe_highlight" name="map_major_unit" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_major_unit" string="Remove" type="object"/>
 									</div>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="map_service_order" string="Service Order"/>
 									<div>
 										<button class="oe_highlight" name="map_service_order" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_service_order" string="Remove" type="object"/>
 									</div>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="map_pickup_order" string="Pickup Order"/>
 									<div>
 										<button class="oe_highlight" name="map_pickup_order" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_pickup_order" string="Remove" type="object"/>
 									</div>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="map_standard_job" string="Standard Job"/>
 									<div>
 										<button class="oe_highlight" name="map_standard_job" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_standard_job" string="Remove" type="object"/>
 									</div>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="map_product_deal" string="Product Deals"/>
 									<div>
 										<button class="oe_highlight" name="map_product_deal" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_product_deal" string="Remove" type="object"/>
 									</div>
-								</group>
-								<group>
+								</group> -->
+								<!-- <group>
 									<label class="oe_inline" for="map_service_messanger" string="Service Messanger"/>
 									<div>
 										<button class="oe_highlight" name="map_service_messanger" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
 										<button class="oe_highlight" name="unmap_service_messanger" string="Remove" type="object"/>
 									</div>
-								</group>
+								</group> -->
 							</page>
 						</notebook>
 					</sheet>
