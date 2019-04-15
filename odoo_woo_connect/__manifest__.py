@@ -50,14 +50,6 @@ This module works very well with latest version of Wordpress v4.4 or later and W
                 'product',
                 'stock',
                 'sale',
-                'queue_job',
-                'major_unit',
-                'service',
-                'service_messanger',
-                'product_deals',
-                'sales_reward',
-                'credit_application',
-                ],
 
     'data': [
               'security/bridge_security.xml',
