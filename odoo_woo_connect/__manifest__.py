@@ -50,6 +50,7 @@ This module works very well with latest version of Wordpress v4.4 or later and W
                 'product',
                 'stock',
                 'sale',
+                ]
 
     'data': [
               'security/bridge_security.xml',
