@@ -23,7 +23,7 @@ from . import backend
 from . import product
 # from . import coupon
 from . import customer
-# from . import shipping_address
+from . import shipping_address
 # from . import product_category
 # from . import product_attribute
 # from . import sale_order
