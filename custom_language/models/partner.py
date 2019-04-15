@@ -9,40 +9,15 @@ class ResPartner(models.Model):
 	_inherit = 'res.partner'
 
 
-	@api.model
-	def create(self, vals):
-		res=super(ResPartner,self).create(vals)
-
-		pro=self.env['res.country'].search([('id','=',res.country_id.id)])
-
-		if pro.code=='DE' or pro.code=='AT' or pro.code=='CH':
+	@api.onchange('country_id')
+	def onchange_country(self):
+		if self.country_id.code=='DE' or self.country_id.code=='AT' or self.country_id.code=='CH':
 			abc=self.env['res.lang'].search([])
 			for item in abc:
-				if item.code=='de_DE':
-					 res.lang=item.code
-
-
-		return res
-
-
-
-	@api.multi
-	def write(self, vals):
-		if 'country_id' in vals.keys():
-			pro=self.env['res.country'].search([('id','=',vals['country_id'])])
-
-			if pro.code=='DE' or pro.code=='AT' or pro.code=='CH':
-				abc=self.env['res.lang'].search([])
-				for item in abc:
-					if item.code=='de_DE' :
-						vals['lang']=item.code
-
-			else:
-				vals['lang']='en_US'
-
-					
-		return super(ResPartner,self).write(vals)
-	
+				if item.code=='de_CH':
+					self.update({'lang':item.code})
+		else:
+			self.update({'lang':'en_US'})
 	
 
 
