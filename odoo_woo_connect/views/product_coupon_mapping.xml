@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>	
+		<record id="view_wp_odoo_coupon_tree" model="ir.ui.view">
+			<field name="name">wordpress.odoo.product.coupon.tree</field>
+			<field name="model">wordpress.odoo.product.coupon</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree string="coupon_mapping" >
+					<field name="product_coupon_id" />
+					<field name="backend_id"/>
+					<field name="woo_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_wp_odoo_coupon_form" model="ir.ui.view">
+			<field name="name">wordpress.odoo.product.coupon.form</field>
+			<field name="model">wordpress.odoo.product.coupon</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<form string="coupon_mapping">
+					<sheet>
+						<h1>
+							<field name="product_coupon_id" />
+						</h1>
+						<group col="2" name="Mapping">
+							<field name="backend_id"/>
+							<field name="woo_id"/>
+						</group>
+						
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wp_odoo_coupon_search">
+            <field name="name">wordpress.odoo.product.coupon.search</field>
+            <field name="model">wordpress.odoo.product.coupon</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="backend_id"/>
+                    <field name="product_coupon_id"/>
+                    <filter string="Coupon" name="product_coupon_id" domain="[]"/>
+                    <filter string="Backend" name="backend_id" domain="[]"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="wp_odoo_coupon_action">
+			<field name="name">Product Coupon Mapping</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">wordpress.odoo.product.coupon</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="context">{}</field>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="wp_odoo_coupon_action_form">
+			<field name="act_window_id" ref="wp_odoo_coupon_action" />
+			<field name="sequence" eval="20" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_wp_odoo_coupon_form" />
+		</record>
+
+		<record model="ir.actions.act_window.view" id="wp_odoo_coupon_action_tree">
+			<field name="act_window_id" ref="wp_odoo_coupon_action" />
+			<field name="sequence" eval="10" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_wp_odoo_coupon_tree" />
+		</record>
+
+		<menuitem  id="wp_odoo_coupon_id" name="Coupon Mapping" parent="menu_wp_odoo_mapping_id" action="wp_odoo_coupon_action"/>
+
+		<record id="product_coupon_view_tree" model="ir.ui.view">
+			<field name="name">product.coupon.tree</field>
+			<field name="model">product.coupon</field>
+			<field name="type">tree</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree string="Coupons">
+                	<field name="sequence" widget="handle"/>
+					<button name="sync_coupon" string="Sync" type="object" class="oe_highlight"/>
+					<field name="name" />
+					<field name="type"/>
+					<field name="amount"/>
+					<field name="expiry_date"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="product_coupon_view_form" model="ir.ui.view">
+            <field name="name">product.coupon.form</field>
+            <field name="model">product.coupon</field>
+            <field name="arch" type="xml">
+                <form string="Product Coupon">
+                	<sheet>
+	                    <group>
+	                        <group name="main_fields">
+	                            <label for="name" string="Coupon Name"/>
+	                            <field name="name" nolabel="1"/>
+	                        </group>
+	                    </group>
+	                    <group>
+	                        <field name="type"/>
+							<field name="amount"/>
+							<field name="enable_free_shipping"/>
+							<field name="expiry_date"/>
+							<field name="minimum_amount"/>
+							<field name="maximum_amount"/>
+							<field name="individual_use"/>
+							<field name="exclude_sale_items"/>
+							<field name="product_ids" widget="many2many_tags"/>
+							<field name="exclude_product_ids" widget="many2many_tags"/>
+							<field name="product_category_ids" widget="many2many_tags"/>
+							<field name="exclude_product_category_ids" widget="many2many_tags"/>
+							<field name="customer_emails" widget="many2many_tags"/>
+							<field name="usage_limit"/>
+							<field name="usage_limit_per_user"/>
+							<field name="limit_usage_to_x_items"/>
+							<field name="usage_count"/>
+							<field name="desc"/>
+	                    </group>
+					</sheet>
+                </form>
+            </field>
+        </record>
+
+		<record id="coupon_action" model="ir.actions.act_window">
+            <field name="name">Product Coupons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.coupon</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+		
+		<menuitem id="menu_coupons_action" name="Product Coupons" action="coupon_action" 
+        parent="stock.menu_product_in_config_stock" sequence="6" groups="product.group_product_variant"/>
+
+        <menuitem id="menu_coupons_action1" name="Product Coupons" action="coupon_action" 
+        	parent="sale.prod_config_main" sequence="4" groups="product.group_product_variant"/>
+	</data>
+</odoo>
+		
