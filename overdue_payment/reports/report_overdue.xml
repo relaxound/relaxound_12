@@ -3,8 +3,7 @@
 <template id="overdue_payment.report_customer_overdue_document">
     <t t-call="web.external_layout">
         <div class="page">
-            <div class="row">
-                <div style="width:80%; float: right; text-align: right;" >
+                <div style="width:100%; float: right; text-align: right;" >
                     <div class="col-xs-5 col-xs-offset-7">
 
                         <t t-if="o.name">
@@ -31,7 +30,6 @@
                             <span t-field="o.country_id.name"/>
                         </t>
                     </div>
-                </div>
             </div>
                 <div>
                 <p>
