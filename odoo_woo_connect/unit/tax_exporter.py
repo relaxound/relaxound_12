@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -20,7 +23,7 @@ import logging
 from ..model.api import API
 from datetime import datetime
 from datetime import timedelta
-from ..unit.backend_adapter import WpImportExport
+from . backend_adapter import WpImportExport
 _logger = logging.getLogger(__name__)
 
 
@@ -54,14 +57,10 @@ class WpTaxExport(WpImportExport):
                        "compound": arguments[1].compound,
                        "shipping": arguments[1].shipping,
                        "order": arguments[1].order,
-                       "class": str(arguments[1].tax_class),
+                       "class": "standard",
                        }
         res = self.export(method, result_dict, arguments)
-        if res:
-            res_dict = res.json()
-        else:
-            res_dict = None
-        return {'status': res.status_code, 'data': res_dict or {}}
+        return {'status': res.status_code, 'data': res.json()}
 
     def export_tax_class(self, method, arguments):
         """ Export product tax data"""
@@ -70,8 +69,4 @@ class WpTaxExport(WpImportExport):
         if arguments[1].slug:
             result_dict.update({'slug': arguments[1].slug or None})
         res = self.export(method, result_dict, arguments)
-        if res:
-            res_dict = res.json()
-        else:
-            res_dict = None
-        return {'status': res.status_code, 'data': res_dict or {}}
+        return {'status': res.status_code, 'data': res.json()}

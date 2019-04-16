@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -17,10 +20,7 @@
 #
 
 import logging
-
-# import xmlrpclib
 from collections import defaultdict
-from odoo.addons.queue_job.job import job
 import base64
 from odoo import models, fields, api, _
 from ..unit.product_category_exporter import WpCategoryExport
@@ -40,17 +40,11 @@ class ProductCategory(models.Model):
     image = fields.Binary("Image",
                           help="This field holds the image used as image for the cateogry")
     woo_id = fields.Char(string='woo_id')
-    desc = fields.Text(string="Description")
-
-    @api.model
-    def get_backend(self):
-        return self.env['wordpress.configure'].search([]).ids
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Backend',
                                   store=True,
                                   readonly=False,
                                   required=False,
-                                  default=get_backend,
                                   )
     backend_mapping = fields.One2many(comodel_name='wordpress.odoo.category',
                                       string='Category mapping',
@@ -74,19 +68,14 @@ class ProductCategory(models.Model):
     @api.multi
     def sync_category(self):
         for backend in self.backend_id:
-            self.with_delay().export(backend)
+            self.export_product_category(backend)
         return
 
     @api.multi
-    @job
-    def export(self, backend):
+    def export_product_category(self, backend):
         """ export product details, save slug and create or update backend mapper """
-        if len(self.ids)>1:
-            for obj in self:
-                obj.with_delay().export(backend)
-            return
         mapper = self.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('category_id', '=', self.id)], limit=1)
+            [('backend_id', '=', backend.id), ('category_id', '=', self.id)])
         method = 'category'
         arguments = [mapper.woo_id or None, self]
 
@@ -108,9 +97,6 @@ class ProductCategory(models.Model):
                 image_id = None
             self.backend_mapping.create({'category_id': self.id, 'backend_id': backend.id, 'woo_id': res[
                                         'data']['id'], 'image_id': image_id})
-        elif (res['status'] == 400 and res['data']['code'] == 'term_exists'):
-            if 'resource_id' in res['data']['data'].keys():
-                self.backend_mapping.create({'category_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['data']['resource_id']})
         return
 
 
@@ -118,6 +104,7 @@ class ProductCategoryMapping(models.Model):
 
     """ Model to store woocommerce id for particular product category"""
     _name = 'wordpress.odoo.category'
+    _description = 'wordpress.odoo.category'
 
     category_id = fields.Many2one(comodel_name='product.category',
                                   string='Product Category',
@@ -127,7 +114,7 @@ class ProductCategoryMapping(models.Model):
                                   )
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,

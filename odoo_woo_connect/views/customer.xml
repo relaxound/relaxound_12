@@ -35,34 +35,6 @@
                     </group>
                 </xpath>
 
-                <xpath expr="//page[@name='accounting']" position="after">
-                    <page string="Preferences">
-                        <group col="2">
-                            <group string="Email Preferences">
-                                <field name="prefer_email"/>
-                                <field name="in_store_deals"/>
-                                <field name="alerts"/>
-                                <field name="latest_news"/>
-                                <field name="events"/>
-                                <field name="do_not_send_mail"/>
-                            </group>
-                            <group string="Phone Notifications">
-                                <field name="phone_notification"/>
-                                <field name="phone_in_store_deals"/>
-                                <field name="phone_alerts"/>
-                                <field name="phone_latest_news"/>
-                                <field name="phone_events"/>
-                                <field name="phone_do_not_send_mail"/>
-                            </group>
-                        </group>
-                        <group col="2">
-                            <group string="Primary Store">
-                                <field name="primary_store"/>
-                            </group>
-                        </group>
-                    </page>
-                </xpath>
-
             	<xpath expr="//page[@name='internal_notes']" position="before">
             		<page string="Wordpress" col="4" name="wordpress">
                         <group name="shipping_address" string="Shipping Address">
@@ -83,22 +55,6 @@
                     	</group>
 	                </page>
 	            </xpath>
-
-                <xpath expr="//form/sheet/notebook/page[1]/field/form/sheet/group/group[2]/field[@name='comment']" position="after">
-                    <field name="default_address"/>
-                </xpath>
-
-                <xpath expr="//field[@name='function']" position="after">
-                    <field name="work_phone"/>
-                    <field name="other_phone"/>
-                </xpath>
-                <xpath expr="//field[@name='category_id']" position="after">
-                    <field name="tax_resale_number"/>
-                    <field name="parts_tax_cat_desc"/>
-                </xpath>
-                <xpath expr="//field[@name='function']" position="before">
-                    <field name="customer_type"/>
-                </xpath>
             </field>
         </record>
 
@@ -110,7 +66,7 @@
 			<field name="priority" eval="8" />
 			<field name="arch" type="xml">
 				<form string="Shipping">
-					<group>
+					<group col="4" >
 						<group>
 							<field name="ship_first_name" />
 							<field name="default" />

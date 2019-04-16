@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -20,7 +23,7 @@ import logging
 from ..model.api import API
 from datetime import datetime
 from datetime import timedelta
-from ..unit.backend_adapter import WpImportExport
+from . backend_adapter import WpImportExport
 _logger = logging.getLogger(__name__)
 
 
@@ -32,9 +35,9 @@ class WpSaleOrderExport(WpImportExport):
         api_method = None
         if method == 'sales_order':
             if not args[0]:
-                api_method = 'orders/details'
+                api_method = 'orders'
             else:
-                api_method = 'orders/details/' + str(args[0])
+                api_method = 'orders' + str(args[0])
         elif method == 'account_invoice':
             if not args[0]:
                 api_method = 'orders/' + \
@@ -50,20 +53,16 @@ class WpSaleOrderExport(WpImportExport):
         if order_lines:
             for order_line in order_lines:
                 product_id = order_line.product_id.product_tmpl_id.backend_mapping.search(
-                    [('backend_id', '=', self.backend.id),
-                     ('product_id', '=', order_line.product_id.product_tmpl_id.id)],
-                    limit=1)
+                    [('backend_id', '=', self.backend.id), ('product_id', '=', order_line.product_id.product_tmpl_id.id)])
                 variation_id = order_line.product_id.backend_mapping.search(
-                    [('backend_id', '=', self.backend.id),
-                     ('product_id', '=', order_line.product_id.id)],
-                    limit=1)
+                    [('backend_id', '=', self.backend.id), ('product_id', '=', order_line.product_id.id)])
                 if product_id:
-                    lines.append({"product_id": product_id.woo_id,
-                                  "variation_id": variation_id.woo_id,
-                                  "quantity": order_line.product_uom_qty,
-                                  "price": order_line.price_unit,
-                                  "subtotal": order_line.price_subtotal,
-                                  "subtotal_tax": order_line.price_tax,
+                    lines.append({"product_id": product_id.woo_id or '',
+                                  # "variation_id": variation_id.woo_id or None,
+                                  "quantity": order_line.product_uom_qty or '',
+                                  "price": order_line.price_unit or 0.0,
+                                  "subtotal": 'order_line.price_subtotal' or '',
+                                  "subtotal_tax": 'order_line.price_tax' or '',
                                   # "taxes":    tax_id
                                   })
         return lines
@@ -71,91 +70,64 @@ class WpSaleOrderExport(WpImportExport):
     def export_sales_order(self, method, arguments):
         """ Export sale order data"""
         _logger.debug("Start calling Woocommerce api %s", method)
-        # res_dict = {}
-        check=arguments[1].env['wordpress.odoo.sale.order'].search([('order_id','=',arguments[1].id)])
-        customer_mapper = arguments[1].partner_id.backend_mapping.search(
-            [('backend_id', '=', self.backend.id),
-             ('customer_id', '=', arguments[1].partner_id.id)], limit=1)
-        status = ''
-        if arguments[1].state == 'done':
-            status = 'completed'
-        elif arguments[1].state == 'draft':
-            status = 'processing'
-        elif arguments[1].state == 'sale':
-            status = 'on-hold'
-        elif arguments[1].state == 'cancel':
-            status = 'cancelled'
-        if check:
-            result_dict = {
-            "status": status,
-            }
-        else:
-            result_dict = {
-                # "payment_method": "bacs",
-                # "payment_method_title": "Direct Bank Transfer",
-                # "set_paid": arguments[1].invoiced,
-                "customer_id": customer_mapper.woo_id or 0,
-                'total_tax': arguments[1].amount_tax,
-                "total": arguments[1].amount_total,
-                "status": status,
-                "billing": {"first_name": arguments[1].partner_id.name or None,
-                            "last_name": arguments[1].partner_id.last_name or None,
-                            "company": arguments[1].partner_id.company or None,
-                            "address_1": arguments[1].partner_id.street or None,
-                            "address_2": arguments[1].partner_id.street2 or None,
-                            "city": arguments[1].partner_id.city or None,
-                            "state": arguments[1].partner_id.state_id.code or None,
-                            "postcode": arguments[1].partner_id.zip or None,
-                            "country": arguments[1].partner_id.country_id.code or None,
-                            "email": arguments[1].partner_id.email or None,
-                            "phone": arguments[1].partner_id.phone or None,
-                            },
-                "shipping": {"first_name": arguments[1].partner_id.name or None,
-                             "last_name": arguments[1].partner_id.last_name or None,
-                             # "address_1": "969 Market",
-                             # "address_2": "",
-                             # "city": "San Francisco",
-                             # "state": "CA",
-                             # "postcode": "94103",
-                             # "country": "US"
-                             },
-                "line_items": self.get_order_lines(arguments[1].order_line),
-                "tax_lines": []
-                # "shipping_lines": [{
-                #                     "method_id": "flat_rate",
-                #                     "method_title": "Flat Rate",
-                #                     "total": 10
-                #                     }]
-            }
 
-        res = self.export(method, result_dict, arguments)
-        if res:
-            res_dict = res.json()
-        else:
-            res_dict = None
-        return {'status': res.status_code, 'data': res_dict or {}}
+        result_dict = {
+            # "payment_method": "bacs",
+            # "payment_method_title": "Direct Bank Transfer",
+            # "set_paid": arguments[1].invoiced,
+            'total_tax': arguments[1].amount_tax,
+            "total": arguments[1].amount_total,
+            "subtotal_tax": arguments[1].amount_tax or '',
+            # "subtotal": arguments[1].price_subtotal or 0.0,
+
+            "billing": {"first_name": arguments[1].partner_id.name or '',
+                        "last_name": arguments[1].partner_id.last_name or '',
+                        "company": arguments[1].partner_id.company or '',
+                        "address_1": arguments[1].partner_id.street or '',
+                        "address_2": arguments[1].partner_id.street2 or '',
+                        "city": arguments[1].partner_id.city or '',
+                        "state": arguments[1].partner_id.state_id.code or '',
+                        "postcode": arguments[1].partner_id.zip or '',
+                        "country": arguments[1].partner_id.country_id.code or '',
+                        "email": arguments[1].partner_id.email or '',
+                        "phone": arguments[1].partner_id.phone or '',
+                        },
+            "shipping": {"first_name": arguments[1].partner_id.name or '',
+                         "last_name": arguments[1].partner_id.last_name or '',
+                         "address_1": arguments[1].partner_id.street or '',
+                         "address_2": arguments[1].partner_id.street2 or '',
+                         "city": arguments[1].partner_id.city or '',
+                         "state": arguments[1].partner_id.state_id.code or '',
+                         "postcode": arguments[1].partner_id.zip or '',
+                         "country": arguments[1].partner_id.country_id.code or '',
+                         "email": arguments[1].partner_id.email or '',
+                         "phone": arguments[1].partner_id.phone or '',
+                         },
+            "line_items": self.get_order_lines(arguments[1].order_line),
+            "tax_lines": []
+
+        }
+
+        r = self.export(method, result_dict, arguments)
+
+        return {'status': r.status_code, 'data': r.json()}
 
     def export_invoice_refund(self, method, arguments):
         """ Export refund invoice data"""
+        
         _logger.debug("Start calling Woocommerce api %s", method)
 
         line_items = []
         for line_item in arguments[1].invoice_line_ids:
             line_items.append({
                 # "id": arguments[1].invoice_line_ids.id,
-                "name": line_item.product_id.name,
+                "name": line_item.product_id.name or '',
                 # "sku": "12345",
-                "product_id": line_item.product_id.id,
-                # "variation_id": 0,
-                "quantity": line_item.quantity,
+                "product_id": line_item.product_id.id or '',
+                # "variation_id": line_item.product_id.variation_id or 0,
+                "quantity": line_item.quantity or '',
                 # "tax_class": "",
-                "price": line_item.price_unit,
-                # "subtotal": "-2.00",
-                # "subtotal_tax": "0.00",
-                # "total": "-2.00",
-                # "total_tax": "0.00",
-                # "taxes": arguments[1].invoice_line_ids.invoice_line_tax_ids,
-                # "meta": []
+                "price": line_item.price_unit or 0.0,
             })
 
         result_dict = {
@@ -164,9 +136,6 @@ class WpSaleOrderExport(WpImportExport):
             "line_items": line_items,
 
         }
-        res = self.export(method, result_dict, arguments)
-        if res:
-            res_dict = res.json()
-        else:
-            res_dict = None
-        return {'status': res.status_code, 'data': res_dict or {}}
+        r = self.export(method, result_dict, arguments)
+
+        return {'status': r.status_code, 'data': r.json()}

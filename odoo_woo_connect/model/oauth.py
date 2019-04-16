@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 WooCommerce OAuth1.0a Class
 """

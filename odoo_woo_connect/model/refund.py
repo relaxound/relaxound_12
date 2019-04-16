@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -17,10 +20,9 @@
 #
 
 import logging
-
-# import xmlrpclib
+#import urllib2
+#import xmlrpclib
 from collections import defaultdict
-from odoo.addons.queue_job.job import job
 import base64
 from odoo import models, fields, api, _
 from ..unit.sale_order_exporter import WpSaleOrderExport
@@ -33,15 +35,11 @@ _logger = logging.getLogger(__name__)
 class account_invoice_wp(models.Model):
     _inherit = 'account.invoice'
 
-    @api.model
-    def get_backend(self):
-        return self.env['wordpress.configure'].search([]).ids
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Backend',
                                   store=True,
                                   readonly=False,
                                   required=False,
-                                  default=get_backend,
                                   )
     backend_mapping = fields.One2many(comodel_name='wordpress.odoo.account.invoice',
                                       string='Account invoice mapping',
@@ -60,7 +58,7 @@ class account_invoice_wp(models.Model):
         if self.type == 'out_refund' and 'state' in vals.keys():
             if vals['state'] == 'paid':
                 for backend in self.backend_id:
-                    self.export(backend)
+                    self.export_invoice_refund(backend)
         invoice_id = super(account_invoice_wp, self).write(vals)
         return invoice_id
 
@@ -75,23 +73,18 @@ class account_invoice_wp(models.Model):
     @api.multi
     def sync_invoice_refund(self):
         for backend in self.backend_id:
-            self.with_delay().export(backend)
+            self.export_invoice_refund(backend)
         return
 
     @api.multi
-    @job
-    def export(self, backend):
+    def export_invoice_refund(self, backend):
         """ export and create or update backend mapper """
-        if len(self.ids)>1:
-            for obj in self:
-                obj.with_delay().export(backend)
-            return
         mapper = self.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('refund_id', '=', self.id)], limit=1)
+            [('backend_id', '=', backend.id), ('refund_id', '=', self.id)])
         sale_id = self.env['sale.order'].search(
             [('id', '=', self.sale_order_id.id)])
         order_mapper = sale_id.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('order_id', '=', sale_id.id)], limit=1)
+            [('backend_id', '=', backend.id), ('order_id', '=', sale_id.id)])
         method = 'account_invoice'
         arguments = [mapper.woo_id or None, self, order_mapper]
         export = WpSaleOrderExport(backend)
@@ -108,6 +101,7 @@ class RefundInvoiceMapping(models.Model):
 
     """ Model to store woocommerce id for particular invoice refund"""
     _name = 'wordpress.odoo.account.invoice'
+    _description = 'wordpress.odoo.account.invoice'
 
     refund_id = fields.Many2one(comodel_name='account.invoice',
                                 string='Account Invoice',
@@ -117,7 +111,7 @@ class RefundInvoiceMapping(models.Model):
                                 )
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,

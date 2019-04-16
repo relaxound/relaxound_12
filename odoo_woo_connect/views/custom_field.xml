@@ -8,7 +8,7 @@
           <field name="priority" eval="20"/>
           <field name="arch" type="xml">
             <xpath expr="//field[@name='email']" position="replace">
-              <field name="email" required="False" unique="True"/> 
+              <field name="email" required="True" unique="True"/> 
             </xpath>
           </field>
       </record>

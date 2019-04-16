@@ -3,18 +3,10 @@ Some of the feature of the module:
 
 1. Synchronise all the products.
 
-2. Synchronise all the product images.
+2. Synchronise all the products attributes.
 
-3. Synchronise all the product attributes.
+3. Synchronise all the categories.
 
-4. Synchronise all the product tags.
+4. Synchronise all the customers.
 
-5. Synchronise all the product coupons.
-
-6. Synchronise all the product categories.
-
-7. Synchronise all the customers.
-
-8. Synchronise all the sales orders.
-
-9. Synchronise all the taxes.
+5. Synchronise all the sales orders.

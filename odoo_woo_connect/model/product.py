@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -17,18 +20,13 @@
 #
 
 import logging
-
-# import xmlrpclib
 from collections import defaultdict
-from odoo.addons.queue_job.job import job
-from datetime import datetime
 import base64
 from odoo import models, fields, api, _
 from ..unit.product_exporter import WpProductExport
-from ..unit.product_variation_exporter import WpProductVariationExport
 from ..unit.product_tag_exporter import WpProductTagExport
-from odoo.exceptions import Warning
-import re
+
+
 _logger = logging.getLogger(__name__)
 
 
@@ -36,6 +34,7 @@ class ProductTags(models.Model):
 
     """ Models for product tags """
     _name = "product.product.tag"
+    _description = 'product.product.tag'
     _order = 'sequence, name'
 
     sequence = fields.Integer('Sequence', help="Determine the display order")
@@ -49,16 +48,11 @@ class ProductTags(models.Model):
                                       inverse_name='product_tag_id',
                                       readonly=False,
                                       required=False,)
-
-    @api.model
-    def get_backend(self):
-        return self.env['wordpress.configure'].search([]).ids
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Woo Backend',
                                   store=True,
                                   readonly=False,
                                   required=True,
-                                  default=get_backend,
                                   )
 
     @api.model
@@ -73,20 +67,15 @@ class ProductTags(models.Model):
     @api.multi
     def sync_tag(self):
         for backend in self.backend_id:
-            self.with_delay().export(backend)
+            self.export_product_tag(backend)
         return
 
     @api.multi
-    @job
-    def export(self, backend):
+    def export_product_tag(self, backend):
         """ export product attributes, save slug and create or update backend mapper """
-        if len(self.ids) > 1:
-            for obj in self:
-                obj.with_delay().export(backend)
-            return
         method = 'tag'
         mapper = self.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('product_tag_id', '=', self.id)], limit=1)
+            [('backend_id', '=', backend.id), ('product_tag_id', '=', self.id)])
         export = WpProductTagExport(backend)
         arguments = [mapper.woo_id or None, self]
         res = export.export_product_tag(method, arguments)
@@ -96,18 +85,16 @@ class ProductTags(models.Model):
                 {'product_tag_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
         elif (res['status'] == 200 or res['status'] == 201):
             self.write({'slug': res['data']['slug']})
-            backend_mapping = self.backend_mapping.create(
+            self.backend_mapping.create(
                 {'product_tag_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
-        elif (res['status'] == 400 and res['data']['code'] == 'term_exists'):
-            if 'resource_id' in res['data']['data'].keys():
-                backend_mapping = self.backend_mapping.create(
-                    {'product_tag_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['data']['resource_id']})
-        # return backend_mapping
+
 
 class ProductTagMapping(models.Model):
 
     """ Model to store woocommerce id for particular product"""
     _name = 'wordpress.odoo.product.tag'
+    _description = 'wordpress.odoo.product.tag'
+
     product_tag_id = fields.Many2one(comodel_name='product.product.tag',
                                      string='Product tag',
                                      ondelete='cascade',
@@ -115,7 +102,7 @@ class ProductTagMapping(models.Model):
                                      required=True,)
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,
@@ -127,8 +114,12 @@ class ProductTagMapping(models.Model):
 class ProductMultiImages(models.Model):
 
     """ Models for product images """
-    _inherit = "product.image"
-    sequence = fields.Integer(string="Seq")
+    _name = "product.multi.image"
+    _description = 'product.multi.image'
+
+    image = fields.Binary(string="Image")
+    sequence = fields.Char(string="Seq")
+    name = fields.Char(string="Name")
     default = fields.Boolean(string="Main Product Image")
     woo_id = fields.Char(string="Woo id")
     product_id = fields.Many2one(comodel_name='product.product',
@@ -140,42 +131,32 @@ class ProductMultiImages(models.Model):
                                       inverse_name='product_image_id',
                                       readonly=False,
                                       required=False,)
-    @api.model
-    def get_backend(self):
-        return self.env['wordpress.configure'].search([]).ids
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Woo Backend',
                                   store=True,
                                   readonly=False,
                                   required=True,
-                                  default=get_backend,
                                   )
-
-    @api.model
-    def create(self, vals):
-        if 'image' in vals.keys():
-              name=str(vals['name']).split(".")[0]
-              vals['name']=name
-        return super(ProductMultiImages, self).create(vals)
 
 
 class ProductImageMapping(models.Model):
 
     """ Model to store woocommerce id for particular product"""
     _name = 'wordpress.odoo.product.image'
+    _description = 'wordpress.odoo.product.image'
     product_id = fields.Many2one(comodel_name='product.product',
                                  string='Product',
                                  ondelete='cascade',
                                  readonly=False,
                                  required=True,)
-    product_image_id = fields.Many2one(comodel_name='product.image',
+    product_image_id = fields.Many2one(comodel_name='product.multi.image',
                                        string='Product image',
                                        ondelete='cascade',
                                        readonly=False,
                                        required=True,)
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,
@@ -191,40 +172,28 @@ class ProductTemplate(models.Model):
 
     website_published = fields.Boolean()
     from_wp = fields.Boolean('from_wp')
-    superseded_t = fields.Many2one(comodel_name='product.template.details', string='Superseded Part No')
-    @api.model
-    def get_categ_ids(self):
-        return self.env['product.category'].search([('slug', '=', 'all')])
-
-   
-
-
+    # categ_id = fields.Many2one(string='Pricing/Primary Category')
     categ_ids = fields.Many2many(comodel_name='product.category',
                                  relation='product_categ_rel',
                                  column1='product_id',
                                  column2='categ_id',
-                                 string='Product Categories',
-                                 default=get_categ_ids)
+                                 string='Product Categories')
     image_ids = fields.One2many(related='product_variant_ids.image_ids',
                                 string='Product Images')
     tag_ids = fields.Many2many(comodel_name='product.product.tag',
                                inverse_name='product_id',
                                string='Product Tags')
     short_description = fields.Text('Short Description')
-    product_status = fields.Selection([('pending', 'Pending Review'),
-                                       ('draft', 'Draft'),
-                                       ('publish', 'Publish')],
-                                      'Status',
-                                      default='publish')
     slug = fields.Char('Slug')
-    list_price = fields.Float('Sales Price')
+    list_price = fields.Float('Final Sale Price')
     regular_price = fields.Float('Regular Price')
+    sale_price = fields.Float('Sale Price')
     standard_price = fields.Float('Purchase Price')
     wp_managing_stock = fields.Boolean('WP Managing Stock')
 
-    dimention_unit = fields.Many2one(comodel_name='product.uom',
-                                     string='Dimention Unit',
-                                     ondelete='set null')
+    # dimention_unit = fields.Many2one(comodel_name='product.uom',
+    #                                  string='Dimention Unit',
+    #                                  ondelete='set null')
     website_size_x = fields.Integer('Length')
     website_size_y = fields.Integer('Width')
     website_size_z = fields.Integer('Height')
@@ -235,264 +204,133 @@ class ProductTemplate(models.Model):
                                       readonly=False,
                                       required=False,
                                       )
-    vin=fields.Char()
-    enable_deposit = fields.Boolean(string="Enable Deposit", default=False)
-    type_of_deposit = fields.Selection([('fixed','Fixed Value'),
-                                        ('percent','Percentage Of Price')])
-    deposit_amount = fields.Float(string='Deposite Amount')
-    _sql_constraints = [ ('part_number_unique', 'unique(part_number)', 'part number already exists!') ]
-    location_id=fields.Many2many(comodel_name='stock.location',
-                                 column1='product_id',
-                                 column2='categ_id',
-                                 string='location',
-                               )
 
-    tax_status = fields.Selection([('taxable','Taxable'),
-                                    ('none','None')],
-                                    default='none',
-                                    required=True )
-    tax_class = fields.Selection([('standard','Standard rates'),
-                                  ('showroom','Showroom rates'),
-                                  ('accessories','Accessories rates'),
-                                  ('apparel','Apparel rates'),
-                                  ('parts','Parts rates'),
-                                  ('service', 'Service rates'),
-                                  ('deals','Deals rates')],
-                                  default='standard',
-                                  required=True)
-    msrp = fields.Float(string='MSRP',
-                       help='Manufacturer’s suggested Retail Price')
-
-    @api.model
-    def get_backend(self):
-        return self.env['wordpress.configure'].search([]).ids
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Woo Backend',
                                   store=True,
                                   readonly=False,
                                   required=True,
-                                  default=get_backend,
                                   )
 
-    type = fields.Selection([
-        ('consu', _('Consumable')),
-        ('service', _('Service')),
-        ('product', 'Stockable Product')], string='Product Type', default='product', required=True,
-        help='A stockable product is a product for which you manage stock. The "Inventory" app has to be installed.\n'
-             'A consumable product, on the other hand, is a product for which stock is not managed.\n'
-             'A service is a non-material product you provide.\n'
-             'A digital content is a non-material product you sell online. The files attached to the products are the one that are sold on '
-             'the e-commerce such as e-books, music, pictures,... The "Digital Product" module has to be installed.')
-    item_number = fields.Char(string="Part Number / Item Number")
-
-    warranty = fields.Float('Warranty')
-  
-    sale_delay = fields.Float(
-        'Customer Lead Time', default=0)
-    
-
-    _sql_constraints = [('item_number_unique', 'unique(item_number)', 'item_number already exists!')]
-
-     
     @api.multi
-    @api.onchange('details_model')
-    def enable_deposit_on_vehicle(self):
-        if self.details_model == 'nadanew.vehicle.product' :
-            self.enable_deposit = True
-            self.type_of_deposit = 'fixed'
-            self.deposit_amount = 500.0
-        else:
-            self.enable_deposit = False
-
-
-    @api.multi
-    def wp_price_check(self, regular_price, list_price, context=None):
+    def wp_price_check(self, regular_price, sale_price, context=None):
         """ Check sales price and regular price """
-        if regular_price < list_price:
+        if sale_price > 0:
+            list_price = sale_price
+        else:
+            list_price = regular_price
+
+        if regular_price < sale_price:
             res = {'warning': {
                 'title': _('Warning'),
-                'message': _('Regular Price should be greater than Sales Price'),
+                'message': _('Regular Price should be greater than Sale Price'),
             }
             }
             return res
+
         res = {'value': {
             'list_price': list_price,
             'regular_price': regular_price,
-              }
+            'sale_price': sale_price,
+        }
         }
         return res
 
     @api.model
     def create(self, vals):
-        import pdb;pdb.set_trace()
         """ Override create method to check price before creating and export """
-        if 'description' in vals:
-          if vals['description']=='Setup Charges' or vals['description']=='Document Fees' or vals['description']=='Freight Charges':
-              categ_obj = self.env['product.category'].search([('name','=','ignore-cart-count')])
-
-              product_id = super(ProductTemplate, self).create(vals)
-              product_id.categ_ids=categ_obj
-              return product_id
- 
-        attribute_id = self.env['product.attribute'].search([('name', '=ilike', 'Categories')])
-        if not attribute_id:
-            attribute_id = self.env['product.attribute'].create({'name': 'Categories', 'create_variant': False})
-        value_ids = []
-        if 'categ_ids' in vals:
-            categ_obj = self.env['product.category'].search([('id', 'in', vals['categ_ids'][0][2])])
-            for category in categ_obj:
-                value_id = self.env['product.attribute.value'].search([('name', '=ilike', category.name)],limit=1)
-                if not value_id:
-                    value_id = self.env['product.attribute.value'].create({'attribute_id': attribute_id.id, 'name': category.name})
-                value_ids.append(value_id.id)
-            if 'attribute_line_ids' in vals.keys():
-                vals['attribute_line_ids'].append([0, False, {'attribute_id': attribute_id.id, 'value_ids': [[6, False, value_ids]]}])
-        #location attribute values    
-        if 'company_id' in vals:
-          location_attr=self.env['product.attribute'].search([('name', '=ilike', 'Location')])
-          if not location_attr:
-            location_attr = self.env['product.attribute'].create({'name': 'Location', 'create_variant': False})
-          location_vals=[]  
-          location_ids=self.env['stock.location'].search([('company_id','=',vals['company_id'])])
-          for location in location_ids:
-              loc_id = self.env['product.attribute.value'].search([('name', '=ilike', location.name)],limit=1)
-              if not loc_id:
-                      loc_id = self.env['product.attribute.value'].create({'attribute_id': location_attr.id, 'name': location.name})
-              location_vals.append(loc_id.id)    
-          if 'attribute_line_ids' in vals.keys():
-              vals['attribute_line_ids'].append([0, False, {'attribute_id': location_attr.id,  'value_ids': [[6, False, [location_vals[0]]]]}])
-          else:
-              vals['attribute_line_ids'] = [[0, False, {
-                  'attribute_id': location_attr.id,  'value_ids': [[6, False, [location_vals[0]]]]}]]
-        if 'list_price' in vals.keys() and 'regular_price' in vals.keys():
-
-            check = self.wp_price_check(vals['regular_price'], vals['list_price'], None)
-            if 'warning' in check:
-                raise Warning(check['warning']['message'])
-
-        product_id = super(ProductTemplate, self).create(vals)
-        return product_id
+        if not 'regular_price' in vals.keys():
+            vals['regular_price'] = 0
+        if not 'sale_price' in vals.keys():
+            vals['sale_price'] = 0
+        check = self.wp_price_check(
+            vals['regular_price'], vals['sale_price'], None)
+        if 'warning' in check:
+            raise Warning(check['warning']['message'])
+        else:
+            product_id = super(ProductTemplate, self).create(vals)
+            return product_id
 
     @api.multi
     def write(self, vals):
         """ Override write method to export when any details is changed """
-        if self.name and self.name=='Setup Charges' or self.name=='Freight Charges' or self.name=='Document Fees':
-          product = super(ProductTemplate, self).write(vals)
-          return product
+        if (self.backend_id or 'backend_id' in vals.keys()) and not ('default_code' in vals.keys() or 'slug' in vals.keys()):
+            if not 'regular_price' in vals.keys():
+                vals['regular_price'] = self.regular_price
+            if not 'sale_price' in vals.keys():
+                vals['sale_price'] = self.sale_price
+            check = self.wp_price_check(
+                vals['regular_price'], vals['sale_price'], None)
+            if 'warning' in check:
+                raise Warning(check['warning']['message'])
+            else:
+                vals.update(check['value'])
+                product = super(ProductTemplate, self).write(vals)
+                return product
         else:
-          attribute_line_ids = []
-          if 'categ_ids' in vals:
-              attribute_id = self.env['product.attribute'].search([('name', '=ilike', 'Categories')])
-              if not attribute_id:
-                  attribute_id = self.env['product.attribute'].create({'name': 'Categories', 'create_variant': False})
-              value_ids = []
-              categ_obj = self.env['product.category'].search([('id', 'in', vals['categ_ids'][0][2])])
-              for category in categ_obj:
-                  value_id = self.env['product.attribute.value'].search([('name', '=ilike', category.name)])
-                  if not value_id:
-                      value_id = self.env['product.attribute.value'].create({'attribute_id': attribute_id.id,
-                                                                             'name': category.name})
-                  value_ids.append(value_id.id)
-              attribute_line_id = self.env['product.attribute.line'].search([('attribute_id', '=', attribute_id.id),
-                                                                             ('product_tmpl_id', '=', self.id)])
-              if attribute_line_id:
-                  attribute_line_id.update({'value_ids': [[6, False, value_ids]]})
-              else:
-                  attribute_line_ids.append([0, 0, {'attribute_id': attribute_id.id,
-                                                    'value_ids': [[6, False, value_ids]]}])
-                  self.write({'attribute_line_ids': attribute_line_ids})        
-          if (self.backend_id or 'backend_id' in vals.keys()) and not ('default_code' in vals.keys() or 'slug' in vals.keys()):
-              if 'regular_price' in vals.keys() and 'list_price' in vals.keys():
-                  check = self.wp_price_check(vals['regular_price'], vals['list_price'], None)
-                  if 'warning' in check:
-                      raise Warning(check['warning']['message'])
-              
-              product = super(ProductTemplate, self).write(vals)
-          else:
-              product = super(ProductTemplate, self).write(vals)
-          #passing msrp and minap values to product variant
-        #   if self.product_variant_ids:
-        #       for var in self.product_variant_ids:
-        #         var.minap=self.minap
-        #         var.msrp=self.msrp
-          return product
+            product = super(ProductTemplate, self).write(vals)
+            return product
 
     @api.multi
     def sync_product(self):
-      for backend in self.backend_id:
-          self.with_delay().export(backend)
-      return
+        for backend in self.backend_id:
+            self.export_product(backend)
+        return
 
     @api.multi
-    @job
-    def export(self, backend):
+    def export_product(self, backend):
         """ export product details, save default code & slug and create or update backend mapper """
-        if len(self.ids) > 1:
-            for obj in self:
-                obj.with_delay().export(backend)
-            return
-        if self.details_model=='nadanew.vehicle.product':
-          pp=self.env['product.product'].search([('product_tmpl_id','=',self.id)])
-          mu=self.env['major_unit.major_unit'].search([('product_id','in',pp.ids)])
-          for backend in self.backend_id:
-            for m in mu:
-              if m.partner_id:
-                m.with_delay().export(backend)
-              else:
-                m.with_delay().export_mu_pro(backend)
-        else:
-          mapper = self.backend_mapping.search(
-              [('backend_id', '=', backend.id), ('product_id', '=', self.id)], limit=1)
-          arguments = []
-          method = 'products'
-          arguments = [mapper.woo_id or None, self]
-          export = WpProductExport(backend)
-          if arguments[1].customer_owned:
-            return True
-          else:
-            res = export.export_product(method, arguments)
-            if mapper and (res['status'] == 200 or res['status'] == 201):
-                self.write(
+        mapper = self.backend_mapping.search(
+            [('backend_id', '=', backend.id), ('product_id', '=', self.id)])
+        arguments = []
+        method = 'products'
+        arguments = [mapper.woo_id or None, self]
+        export = WpProductExport(backend)
+        res = export.export_product(method, arguments)
+        if mapper and (res['status'] == 200 or res['status'] == 201):
+            self.write(
+                {'default_code': res['data']['sku'], 'slug': res['data']['slug']})
+            mapper.write({'product_id': self.id, 'backend_id': backend.id, 'woo_id': res[
+                         'data']['id'], 'image_id': res['data']['images'][0]['id']})
+            self.map_product(res, backend)
+        elif (res['status'] == 200 or res['status'] == 201):
+            self.write(
+                {'default_code': res['data']['sku'], 'slug': res['data']['slug']})
+            self.backend_mapping.create({'product_id': self.id, 'backend_id': backend.id, 'woo_id': res[
+                                        'data']['id'], 'image_id': res['data']['images'][0]['id']})
+            self.map_product(res, backend)
+
+    def map_product(self, res, backend):
+        """ map product variants with particular woo id and create or update backend mapper"""
+        if res['data']['variations']:
+            for record in res['data']['variations']:
+                variant_id = self.get_variations(
+                    self.product_variant_ids, record, backend)
+                mapper = variant_id.backend_mapping.search(
+                    [('backend_id', '=', backend.id), ('product_id', '=', variant_id.id)])
+                variant_id.write(
                     {'default_code': res['data']['sku'], 'slug': res['data']['slug']})
-                mapper.write({'product_id': self.id, 'backend_id': backend.id, 'woo_id': res[
-                             'data']['id'], 'image_id': res['data']['images'][0]['id'],
-                             'motorcycle_image_id':res['data']['motorcycle_image']['id'],
-                             })
+                if mapper:
+                    mapper.write({'product_id': variant_id.id, 'backend_id': backend.id, 'woo_id': record[
+                                 'id'], 'image_id': record['image'][0]['id']})
+                else:
+                    mapper.create({'product_id': variant_id.id, 'backend_id': backend.id, 'woo_id': record[
+                        'id'], 'image_id': record['image'][0]['id']})
 
-                self.map_images(res, backend)
-            elif (res['status'] == 200 or res['status'] == 201):
-                self.write(
-                    {'default_code': res['data']['sku'], 'slug': res['data']['slug']})
-                self.backend_mapping.create({'product_id': self.id, 'backend_id': backend.id, 'woo_id': res[
-                                            'data']['id'], 'image_id': res['data']['images'][0]['id'],
-                                            'motorcycle_image_id':res['data']['motorcycle_image']['id'],
-                                            })
-                self.map_images(res, backend)
-            if self.product_variant_count > 1:
-                self.export_variation(res['data']['id'], backend)
+        return True
 
-    def export_variation(self, parent_woo_id, backend):
-        if len(self.ids) > 1:
-            for obj in self:
-                obj.with_delay().export_variation(backend)
-            return
-
-        for variant in self.product_variant_ids:
-            mapper = variant.backend_mapping.search(
-                [('backend_id', '=', backend.id), ('product_id', '=', variant.id)], limit=1)
-            arguments = []
-            method = 'variation'
-            arguments = [parent_woo_id, variant, mapper.woo_id or None]
-            export = WpProductVariationExport(backend)
-            res = export.export_product_variant(method, arguments)
-            if mapper and (res['status'] == 200 or res['status'] == 201):
-                variant.write({'default_code': res['data']['sku']})
-                mapper.write({'product_id': variant.id, 'backend_id': backend.id,
-                              'woo_id': res['data']['id'], 'image_id': res['data']['image']['id']})
-            elif (res['status'] == 200 or res['status'] == 201):
-                variant.write({'default_code': res['data']['sku']})
-                mapper.create({'product_id': variant.id, 'backend_id': backend.id,
-                               'woo_id': res['data']['id'], 'image_id': res['data']['image']['id']})
+    def get_variations(self, variant_ids, record, backend):
+        """ check and get the correct variant for particular woo id"""
+        for variant_id in variant_ids:
+            count = 0
+            for attribute_value in variant_id.attribute_value_ids:
+                for record_attr in record['attributes']:
+                    if record_attr['option'] == attribute_value.name:
+                        count += 1
+                        if len(record['attributes']) == count:
+                            return variant_id
+                        else:
+                            break
 
     def map_images(self, res, backend):
         """ map product images with particular woo id and create or update backend mapper"""
@@ -527,29 +365,12 @@ class ProductTemplate(models.Model):
             if record['position'] == image_id.sequence:
                 return image_id
 
-    @api.multi
-    def update_stock(self, vals):
-        """ Changes the Product Quantity by making a Physical Inventory. """
-        update_stock_id = self.env['stock.change.product.qty'].create({'product_tmpl_id': vals['product_tmpl_id'],
-                                                                       'lot_id': False,
-                                                                       'product_id': vals['product_id'],
-                                                                       'new_quantity': vals['new_quantity'],
-                                                                       'location_id': vals['location_id'],
-                                                                       'product_variant_count': vals['product_variant_count']})
-        update_stock_id.change_product_qty()
-        return True
-
-    @api.multi
-    def variant_from_wp(self, vals):
-        """ Create varients from wordpress  """
-        self.create_variant_ids()
-        return True
-
 
 class ProductMapping(models.Model):
 
     """ Model to store woocommerce id for particular product"""
     _name = 'wordpress.odoo.product.template'
+    _description = 'wordpress.odoo.product.template'
 
     product_id = fields.Many2one(comodel_name='product.template',
                                  string='Product Template',
@@ -559,10 +380,9 @@ class ProductMapping(models.Model):
                                  )
 
     image_id = fields.Char('Image id')
-    motorcycle_image_id = fields.Char('Motor Cycle Image id')
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,
@@ -578,10 +398,12 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     woo_id = fields.Char(string='Woo id')
-    image_ids = fields.One2many(comodel_name='product.image',
+    image_ids = fields.One2many(comodel_name='product.multi.image',
                                 inverse_name='product_id',
                                 string='Product Images')
-    variant_regular_price = fields.Float('Variant Regular Price', related='regular_price')
+    regular_price = fields.Float('Regular Price')
+    sale_price = fields.Float('Sale Price')
+    lst_price = fields.Float('Final Sale price')
     website_size_x = fields.Integer('Length')
     website_size_y = fields.Integer('Width')
     website_size_z = fields.Integer('Height')
@@ -593,9 +415,6 @@ class ProductProduct(models.Model):
                                       readonly=False,
                                       required=False,
                                       )
-    schedule_sale1=fields.Boolean(string='Schedule Sale')
-    schedule_date_start1=fields.Date(string='Schedule start date', default=datetime.today())
-    schedule_date_end1=fields.Date(string='Schedule end date', default=datetime.today())
 
     @api.model
     def create(self, vals):
@@ -614,40 +433,39 @@ class ProductProduct(models.Model):
           for image in vals['image_ids'] :
             if image[2]!= False:
               name=str(image[2]['name']).split(".")[0]
-              image[2]['name']=name     
+              image[2]['name']=name
         return super(ProductProduct, self).write(vals)
 
     @api.multi
     def sync_product(self):
         for backend in self.product_tmpl_id.backend_id:
-            self.product_tmpl_id.with_delay().export(backend)
+            self.product_tmpl_id.export_product(backend)
         return
 
     @api.multi
-    @job
-    def export(self, backend):
+    def export_product(self, backend):
         """ export product variant details, and create or update backend mapper """
-        if len(self.ids) > 1:
-            for obj in self:
-                obj.with_delay().export(backend)
-            return
-        return self.product_tmpl_id.export(backend)
+        return self.product_tmpl_id.export_product(backend)
 
     @api.multi
-    def wp_price_check(self, lst_price, variant_sale_price, context=None):
+    def wp_price_check(self, regular_price, sale_price, context=None):
         """ Check sales price and regular price """
+        if sale_price > 0:
+            list_price = sale_price
+        else:
+            list_price = regular_price
 
-        if lst_price < variant_sale_price:
+        if regular_price < sale_price:
             res = {'warning': {
                 'title': _('Warning'),
-                'message': _('Variant regular price should be greater than Variant sale price'),
+                'message': _('Regular Price should be greater than Sale Price'),
             }
             }
             return res
 
         res = {'value': {
-            'lst_price': lst_price,
-            'variant_sale_price': variant_sale_price,
+            'regular_price': regular_price,
+            'sale_price': sale_price,
         }
         }
         return res
@@ -656,14 +474,44 @@ class ProductProduct(models.Model):
     def _website_price(self):
         try:
             res = super(ProductProduct, self)._website_price()
-        except RuntimeError:
+        except AttributeError:
             pass
+
+
+class Website(models.Model):
+    _inherit = "website"
+
+    @api.model
+    def get_current_website(self, fallback=True):
+        try:
+            res = super(Website, self).get_current_website()
+        except RuntimeError:
+            website_id = self._get_current_website_id('localhost')
+            return self.browse(website_id)
+        return res
+
+    @api.multi
+    def get_current_pricelist(self):
+        try:
+            res = super(Website, self).get_current_pricelist()
+        except RuntimeError:
+            return
+        return res
+
+    @api.multi
+    def get_pricelist_available(self, show_visible=False):
+        try:
+            res = super(Website, self).get_pricelist_available()
+        except RuntimeError:
+            return self.env['product.pricelist'].search([('id', '=', 1)]).id
+        return res
 
 
 class ProductProductMapping(models.Model):
 
     """ Model to store woocommerce id for particular product variant"""
     _name = 'wordpress.odoo.product.product'
+    _description = 'wordpress.odoo.product.product'
 
     product_id = fields.Many2one(comodel_name='product.product',
                                  string='Product',
@@ -675,7 +523,7 @@ class ProductProductMapping(models.Model):
     image_id = fields.Char('Image id')
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,
@@ -683,3 +531,31 @@ class ProductProductMapping(models.Model):
                                  )
 
     woo_id = fields.Char(string='Woo id')
+
+
+class StockInventory(models.TransientModel):
+
+    """ Models for woocommerce product qty change"""
+    _inherit = "stock.change.product.qty"
+
+    wp_state = fields.Char('wp state')
+
+    @api.multi
+    def write(self, vals):
+        """ Override write method to update the product qty"""
+        if 'wp_state' in vals.keys():
+            if vals['wp_state'] == 'done':
+                self.change_product_qty()
+        return super(StockInventory, self).write(vals)
+        
+    @api.multi
+    def update_stock(self, vals):
+        """ Changes the Product Quantity by making a Physical Inventory. """
+        update_stock_id = self.env['stock.change.product.qty'].create({'product_tmpl_id': vals['product_tmpl_id'],
+                                                                       'lot_id': False,
+                                                                       'product_id': vals['product_id'],
+                                                                       'new_quantity': vals['new_quantity'],
+                                                                       'location_id': vals['location_id'],
+                                                                       'product_variant_count': vals['product_variant_count']})
+        update_stock_id.change_product_qty()
+        return True

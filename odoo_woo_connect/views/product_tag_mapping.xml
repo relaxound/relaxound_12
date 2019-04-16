@@ -47,7 +47,7 @@
                     <filter string="Backend" name="backend_id" domain="[]"/>
 
                     <group expand="0" string="Group By">
-                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                        <filter name="group_filter" string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
                     </group>
                 </search>
             </field>
@@ -102,7 +102,7 @@
                 <form string="Product Tag">
                     <group>
                         <group name="main_fields">
-                            <label for="name" string="Tag Name"/>
+                            <!-- <label for="name" string="Tag Name"/> -->
                             <field name="name" nolabel="1"/>
                         </group>
                     </group>

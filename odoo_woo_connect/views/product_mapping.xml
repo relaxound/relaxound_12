@@ -49,7 +49,7 @@
                     <filter string="Backend" name="backend_id"/>
                     <filter string="Product" name="product_id"/>
                     <group expand="0" string="Group By">
-                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                        <filter name='backend_filter' string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
                     </group>
                 </search>
             </field>
@@ -131,7 +131,7 @@
                     <filter string="Backend" name="backend_id"/>
                     <filter string="Product" name="product_id"/>
                     <group expand="0" string="Group By">
-                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                        <filter name="back_filter" string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
                     </group>
                 </search>
             </field>

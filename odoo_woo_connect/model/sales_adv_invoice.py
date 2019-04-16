@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -17,8 +20,6 @@
 #
 
 import logging
-
-# import xmlrpclib
 from collections import defaultdict
 import base64
 from odoo import models, fields, api, _
@@ -31,15 +32,11 @@ _logger = logging.getLogger(__name__)
 class sales_order_invoice(models.TransientModel):
     _inherit = 'sale.advance.payment.inv'
 
-    @api.model
-    def get_backend(self):
-        return self.env['wordpress.configure'].search([]).ids
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Backend',
                                   store=True,
                                   readonly=False,
                                   required=False,
-                                  default=get_backend,
                                   )
 
     @api.multi
