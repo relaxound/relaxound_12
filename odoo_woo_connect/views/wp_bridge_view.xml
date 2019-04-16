@@ -39,37 +39,6 @@
 							<field name="verify_ssl" />
 						</group>
 						<notebook colspan="4">
-							<page string="Import Data">
-								<group>
-									<label class="oe_inline" for="import_sale_orders" string="Import Sale Order"/>
-									<button class="oe_highlight" name="import_sale_orders" string="Import Sale Order" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" for="import_customer" string="Import Customer"/>
-									<button class="oe_highlight" name="import_customer" string="
-									Import Customer" type="object"/>
-								</group>
-								<!-- <group>
-									<label class="oe_inline" for="import_form" string="Import Form"/>
-									<button class="oe_highlight" name="import_form" string="
-									Import Form" type="object"/>
-								</group> -->
-								<!-- <group>
-									<label class="oe_inline" for="import_major_units" string="Import Major Units"/>
-									<button class="oe_highlight" name="import_major_units" string="
-									Import Major Units" type="object"/>
-								</group> -->
-								<!-- <group>
-									<label class="oe_inline" for="import_service_rides" string="Import Repair Orders"/>
-									<button class="oe_highlight" name="import_service_rides" string="
-									Import Repair Orders" type="object"/>
-								</group> -->
-								<!-- <group>
-									<label class="oe_inline" for="import_tax" string="Import Tax"/>
-									<button class="oe_highlight" name="import_tax" string="
-									Import Tax" type="object"/>
-								</group> -->
-							</page>
 							<page string="Export Data">
 								
 								<group>
