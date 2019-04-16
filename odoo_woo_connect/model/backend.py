@@ -38,7 +38,7 @@ class wp_configure(models.Model):
 
     consumer_key = fields.Char("Consumer key")
     consumer_secret = fields.Char("Consumer Secret")
-    version = fields.Selection([('v1', 'v1'),('v2', 'v2')], 'Version')
+    version = fields.Selection([('v1', 'v1'),('v2', 'v2'),('v3', 'v3')], 'Version')
     verify_ssl = fields.Boolean("Verify SSL")
 
     @api.multi
@@ -212,6 +212,20 @@ class wp_configure(models.Model):
                 if self.id != backend_id.id:
                     backends.append(backend_id.id)
             tax.write({'backend_id': [[6, False, backends]]})
+        return True
+
+    @api.multi
+    def import_customer(self):
+        """Import all the customers of particular backend"""
+        customer_obj = self.env['res.partner']
+        customer_obj.importer(self)
+        return True
+
+    @api.multi
+    def import_sale_orders(self):
+        """ Import all the sale order of particular backend """
+        sale_order_obj = self.env['sale.order']
+        sale_order_obj.importer(self)
         return True
 
     @api.multi
