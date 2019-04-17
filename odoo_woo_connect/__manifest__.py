@@ -53,7 +53,7 @@ This module works very well with latest version of Wordpress v4.4 or later and W
                 'website',
                 'stock',
                 'sale',
-                'sale_management',
+              
                 ],
     'data': [
               'security/bridge_security.xml',
