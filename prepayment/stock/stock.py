@@ -248,7 +248,7 @@ class stock_picking(models.Model):
         self.filtered(lambda picking: picking.state == 'draft').action_confirm()
         moves = self.mapped('move_lines').filtered(lambda move: move.state not in ('draft', 'cancel', 'done'))
         if not moves:
-            raise UserError(_('Nothing to check the availability for.'))
+            raise UserError('Nothing to check the availability for.')
         # If a package level is done when confirmed its location can be different than where it will be reserved.
         # So we remove the move lines created when confirmed to set quantity done to the new reserved ones.
         package_level_done = self.mapped('package_level_ids').filtered(
