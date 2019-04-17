@@ -47,7 +47,7 @@ manager_wordpress_odoo_sale_order,WP Sales Order Mapping manager,model_wordpress
 
 
 
-access_wordpress_odoo_tax,access_wordpress_odoo_tax,model_wordpress_odoo_tax,base.group_user,1,1,1,1
+
 access_wordpress_configure,access_wordpress_configure,model_wordpress_configure,base.group_user,1,1,1,1
 access_res_partner,access_res_partner,model_res_partner,base.group_user,1,1,1,1
 access_wordpress_odoo_res_partner,access_wordpress_odoo_res_partner,model_wordpress_odoo_res_partner,base.group_user,1,1,1,1
