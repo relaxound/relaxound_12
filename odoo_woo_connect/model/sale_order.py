@@ -281,6 +281,6 @@ class SalesOrderMapping(models.Model):
     woo_id = fields.Char(string='woo_id')
 
 
-def import_record(cr, uid, ids, context=None):
-    """ Import a record from woocommerce """
-    importer.run(woo_id)
+# def import_record(cr, uid, ids, context=None):
+#     """ Import a record from woocommerce """
+#     importer.run(woo_id)
