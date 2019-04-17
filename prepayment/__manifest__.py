@@ -1,7 +1,7 @@
 {
     "name": "Prepayment",
     "version": "12.0",
-    "depends": ["base","sale","sale_management","stock","sale_payment_method","account","purchase"],
+    "depends": ["base","sale","stock","sale_payment_method","account","purchase","sale_management"],
     "author": "Level9",
     "website":"https://www.level9.de",
     "category": "Custom Development",

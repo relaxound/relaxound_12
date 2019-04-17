@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 
 class stock_move(models.Model):
     _inherit = 'stock.move'
+
     state = fields.Selection([
         ('draft', 'New'), ('to_pay', 'Waiting Payment'),
         ('cancel', 'Cancelled'),
@@ -238,7 +239,7 @@ class stock_picking(models.Model):
             .mapped('move_lines')._action_assign()
         return True
 
-    @api.multi
+    # @api.multi
     # def action_assign(self):
     #     """ Check availability of picking moves.
     #     This has the effect of changing the state and reserve quants on available moves, and may

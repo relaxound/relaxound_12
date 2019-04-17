@@ -11,8 +11,9 @@ def context(args):
 
 class procurement_order(models.Model):
     _inherit='purchase.order'
-    
-    def run(self):                
+
+    def run(self):
+        context = self._context
         new_ids = [x.id for x in self.browse() if x.state not in ('running', 'done', 'cancel')]
         context = dict(context or {}, procurement_auto_defer=True) #When creating
         res = super(procurement_order, self).run()
