@@ -70,7 +70,7 @@ This module works very well with latest version of Wordpress v4.4 or later and W
               'views/product_category_mapping.xml',
               # 'views/tax_mapping.xml',
               'views/customer_mapping.xml',
-              # 'views/sale_order_mapping.xml',
+              'views/sale_order_mapping.xml',
               # 'views/invoice_refund_view.xml',
              ],
     'images': ['static/description/main.png'],
