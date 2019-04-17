@@ -29,6 +29,6 @@ from . import product_category_exporter
 from . import product_exporter
 from . import product_tag_exporter
 from . import sale_order_exporter
-from . import sale_order_importer
+# from . import sale_order_importer
 from . import tax_exporter
 from . import product_variation_exporter
