@@ -10,7 +10,7 @@ class account_payment(models.Model):
         res=super(account_payment,self).post()
 
         for inv in self.invoice_ids:
-            print('inv.state')
+            print(inv.state)
             if inv.state!='paid':
                 continue            
             #sales= self.env['sale.order'].search([('invoice_ids','in',inv.ids)])
@@ -19,7 +19,7 @@ class account_payment(models.Model):
             for sa in sales:
                 if inv in sa.invoice_ids:                    
                     for picking in sa.picking_ids:
-                        print ('picking.state')
+                        print (picking.state)
                         if picking.state=='to_pay':
                             picking.action_payed()    
         return res
