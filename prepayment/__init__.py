@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# from . import stock
+from . import stock
 from . import procurement
 from . import account
 

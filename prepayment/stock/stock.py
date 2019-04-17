@@ -161,29 +161,41 @@ class stock_picking(models.Model):
 
                     if paid:
                         picking.action_payed()
-
+     @api.multi
     def action_confirm(self):
-        cr = self.env.cr
-        ids = self.ids
-        uid = self._uid
-        # item_id = self.item_id
-        context = self._context
-        todo = []
-        todo_force_assign = []
-        for picking in self.browse():
-            if not picking.move_lines:
-                self.launch_packops([picking.id])
-            if picking.location_id.usage in ('supplier', 'inventory', 'production'):
-                todo_force_assign.append(picking.id)
-            for r in picking.move_lines:
-                if r.state == 'draft':  # or r.state=='to_pay':
-                    todo.append(r.id)
-        if len(todo):
-            self.env('stock.move').action_confirm(todo)
-
-        if todo_force_assign:
-            self.action_assign(todo_force_assign)
+        self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'draft' and not pl.move_ids)._generate_moves()
+        # call `_action_confirm` on every draft move
+        self.mapped('move_lines')\
+            .filtered(lambda move: move.state == 'draft')\
+            ._action_confirm()
+        # call `_action_assign` on every confirmed move which location_id bypasses the reservation
+        self.filtered(lambda picking: picking.location_id.usage in ('supplier', 'inventory', 'production') and picking.state == 'confirmed')\
+            .mapped('move_lines')._action_assign()
         return True
+
+
+    # def action_confirm(self):
+    #     cr = self.env.cr
+    #     ids = self.ids
+    #     uid = self._uid
+    #     # item_id = self.item_id
+    #     context = self._context
+    #     todo = []
+    #     todo_force_assign = []
+    #     for picking in self.browse():
+    #         if not picking.move_lines:
+    #             self.launch_packops([picking.id])
+    #         if picking.location_id.usage in ('supplier', 'inventory', 'production'):
+    #             todo_force_assign.append(picking.id)
+    #         for r in picking.move_lines:
+    #             if r.state == 'draft':  # or r.state=='to_pay':
+    #                 todo.append(r.id)
+    #     if len(todo):
+    #         self.env('stock.move').action_confirm(todo)
+
+    #     if todo_force_assign:
+    #         self.action_assign(todo_force_assign)
+    #     return True
 
     def action_payed(self):
         self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'to_pay' and not pl.move_ids)._generate_moves()
