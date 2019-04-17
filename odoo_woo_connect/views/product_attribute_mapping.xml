@@ -47,7 +47,7 @@
                     <filter string="Backend" name="backend_id" domain="[]"/>
 
                     <group expand="0" string="Group By">
-                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                        <filter name="home_filter" string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
                     </group>
                 </search>
             </field>
@@ -126,7 +126,7 @@
                     <filter string="Backend" name="backend_id" domain="[]"/>
 
                     <group expand="0" string="Group By">
-                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                        <filter name="group_id" string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
                     </group>
                 </search>
             </field>
@@ -155,38 +155,6 @@
 			<field name="view_mode">tree</field>
 			<field name="view_id" ref="view_wp_odoo_attr_value_tree" />
 		</record>
-
-		<record id="sync_value_all" model="ir.actions.server">
-			<field name="name">Sync All </field>
-			<field name="model_id" ref="product.model_product_attribute_value"/>
-			<field name="state">code</field>
-			<field name="code">
-			if records:
-				action = records.sync_product_attribute_value_multi()</field>
-		</record>
-
-<!-- 		<record id="sync_attribute_value" model="ir.values">
-			<field eval="'client_action_multi'" name="key2"/>
-			<field eval="'product.attribute.value'" name="model"/>
-			<field name="name">sync</field>
-			<field eval="'ir.actions.server,%d'%sync_value_all" name="value"/>
-		</record> -->
-
-		<record id="sync_attribute_all" model="ir.actions.server">
-			<field name="name">Sync All </field>
-			<field name="model_id" ref="product.model_product_attribute"/>
-			<field name="state">code</field>
-			<field name="code">
-			if records:
-				action = records.sync_product_attribute_multi()</field>
-		</record>
-
-<!-- 		<record id="sync_attribute" model="ir.values">
-			<field eval="'client_action_multi'" name="key2"/>
-			<field eval="'product.attribute'" name="model"/>
-			<field name="name">sync</field>
-			<field eval="'ir.actions.server,%d'%sync_attribute_all" name="value"/>
-		</record> -->
 
 		<menuitem  id="wp_odoo_attr_value_id" name="Attribute Value Mapping" parent="menu_wp_odoo_mapping_id" action="wp_odoo_attr_value_action"/>
 

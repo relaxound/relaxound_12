@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -15,27 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-"""
+""" 
 All files in current directory imported here
 """
-# from . import backend_adapter
+from . import backend_adapter
 from . import customer_exporter
 from . import customer_importer
-# from . import product_attribute_exporter
-# from . import product_category_exporter
-# from . import product_exporter
-# from . import product_variation_exporter
-# from . import product_tag_exporter
-# from . import sale_order_exporter
-# from . import sale_order_importer
-# from . import tax_exporter
-# from . import product_coupon_exporter
-# from . import standard_job_exporter
-# from . import service_messanger_exporter
-# from . import product_deals_exporter
-# from . import crm_lead_exporter
-# from . import crm_lead_importer
-# from . import service_order_importer
-# from . import major_unit_importer
-# from . import major_unit_exporter
-# from . import product_ecommerce_category_exporter
+from . import product_attribute_exporter
+from . import product_category_exporter
+from . import product_exporter
+from . import product_tag_exporter
+from . import sale_order_exporter
+from . import sale_order_importer
+from . import tax_exporter
+from . import product_variation_exporter

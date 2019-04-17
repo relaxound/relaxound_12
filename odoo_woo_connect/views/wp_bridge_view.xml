@@ -1,229 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-	<data>
+    <data>
+		
 		<record id="view_wp_odoo_backend_tree" model="ir.ui.view">
 			<field name="name">wordpress.configure.tree</field>
 			<field name="model">wordpress.configure</field>
 			<field name="type">tree</field>
-			<field eval="8" name="priority"/>
+			<field name="priority" eval="8" />
 			<field name="arch" type="xml">
 				<tree string="Backend">
-					<field name="name"/>
+					<field name="name" />
 				</tree>
 			</field>
 		</record>
+
 		<record id="view_wp_odoo_backend_form" model="ir.ui.view">
 			<field name="name">wordpress.configure.form</field>
 			<field name="model">wordpress.configure</field>
 			<field name="type">form</field>
-			<field eval="8" name="priority"/>
+			<field name="priority" eval="8" />
 			<field name="arch" type="xml">
 				<form string="Backend">
 					<header>
-						<button class="oe_highlight" name="test_connection" string="Check Connection" type="object"/>
+						<button string="Check Connection" class="oe_highlight"
+							type="object" name="test_connection" />
 					</header>
 					<sheet>
-						<label string="Name"/>
+						<!-- <label string="Name" /> -->
 						<h1>
-							<field name="name" required="1"/>
+							<field name="name" required="1" />
 						</h1>
-						<separator colspan="4" string="Configuration"/>
+						<separator string="Configuration" colspan="4" />
 						<group col="2">
-							<field name="location" required="1"/>
-							<field name="consumer_key" required="1"/>
-							<field name="consumer_secret" required="1"/>
-							<field name="version" required="1"/>
-							<field name="verify_ssl"/>
-							<field name="wp_api"/>
+							<field name="location" required="1" />
+							<field name="consumer_key" required="1" />
+							<field name="consumer_secret" required="1" />
+							<field name="version" required="1" />
+							<field name="verify_ssl" />
 						</group>
 						<notebook colspan="4">
 							<page string="Import Data">
 								<group>
-									<label class="oe_inline" string="Import Sale Order"/>
+									<label class="oe_inline" for="import_sale_orders" string="Import Sale Order"/>
 									<button class="oe_highlight" name="import_sale_orders" string="Import Sale Order" type="object"/>
 								</group>
 								<group>
-									<label class="oe_inline" string="Import Customer"/>
+									<label class="oe_inline" for="import_customer" string="Import Customer"/>
 									<button class="oe_highlight" name="import_customer" string="
 									Import Customer" type="object"/>
 								</group>
-								<group>
-									<label class="oe_inline" string="Import Form"/>
+								<!-- <group>
+									<label class="oe_inline" for="import_form" string="Import Form"/>
 									<button class="oe_highlight" name="import_form" string="
 									Import Form" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Import Major Units"/>
+								</group> -->
+								<!-- <group>
+									<label class="oe_inline" for="import_major_units" string="Import Major Units"/>
 									<button class="oe_highlight" name="import_major_units" string="
 									Import Major Units" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Import Repair Orders"/>
+								</group> -->
+								<!-- <group>
+									<label class="oe_inline" for="import_service_rides" string="Import Repair Orders"/>
 									<button class="oe_highlight" name="import_service_rides" string="
 									Import Repair Orders" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Import Tax"/>
+								</group> -->
+								<!-- <group>
+									<label class="oe_inline" for="import_tax" string="Import Tax"/>
 									<button class="oe_highlight" name="import_tax" string="
 									Import Tax" type="object"/>
-								</group>
+								</group> -->
 							</page>
 							<page string="Export Data">
+								
 								<group>
-									<label class="oe_inline" string="Export Product Tags"/>
-									<button class="oe_highlight" name="export_product_tags" string="Export Product Tags" type="object"/>
+									<label string="Export Product Tags" for="export_product_tags" class="oe_inline" />
+									<button name="export_product_tags" type="object" class="oe_highlight"
+										string="Export Product Tags" />
 								</group>
 								<group>
-									<label class="oe_inline" string="Export Product Attributes"/>
-									<button class="oe_highlight" name="export_attributes" string="Export Product Attributes" type="object"/>
+									<label string="Export Product Attributes" for="export_attributes" class="oe_inline" />
+									<button name="export_attributes" type="object" class="oe_highlight"
+										string="Export Product Attributes" />
 								</group>
 								<group>
-									<label class="oe_inline" string="Export Product Categories"/>
-									<button class="oe_highlight" name="export_categories" string="Export Product Categories" type="object"/>
+									<label string="Export Product Categories" for="export_categories" class="oe_inline" />
+									<button name="export_categories" type="object" class="oe_highlight"
+										string="Export Product Categories" />
 								</group>
 								<group>
-									<label class="oe_inline" string="Export Products"/>
-									<button class="oe_highlight" name="export_products" string="Export Products" type="object"/>
+									<label string="Export Products" for="export_products" class="oe_inline" />
+									<button name="export_products" type="object" class="oe_highlight"
+										string="Export Products" />
 								</group>
+								
 								<group>
-									<label class="oe_inline" string="Export Product Coupons"/>
-									<button class="oe_highlight" name="export_product_coupons" string="Export Product Coupons" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Export Customers"/>
-									<button class="oe_highlight" name="export_customers" string="Export Customers" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Export Taxes"/>
-									<button class="oe_highlight" name="export_taxes" string="Export Taxes" type="object"/>
-								</group>
-								<!-- <group>
-									<label class="oe_inline" string="Export Sales Orders"/>
-									<button class="oe_highlight" name="export_sale_order" string="Export Sales Orders" type="object"/>
-								</group> -->
-								<group>
-									<label class="oe_inline" string="Export Invoice Refund"/>
-									<button class="oe_highlight" name="export_invoices_refund" string="Export Invoice Refund" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Export Pickup Order"/>
-									<button class="oe_highlight" name="export_pickup_order" string="Export Pickup Order" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Export Standard Job"/>
-									<button class="oe_highlight" name="export_standard_job" string="Export Standard Job" type="object"/>
-								</group>
-								<group>
-									<label class="oe_inline" string="Run Campaign"/>
-									<button class="oe_highlight" name="run_campaign" string="Run Campaign" type="object"/>
-								</group>
+		                           <label string="Export Customers" for="export_customers" class="oe_inline" />
+		                           <button name="export_customers" type="object" class="oe_highlight" string="Export Customers" />
+		                        </group>
+		                        <group>
+		                           <label string="Export Taxes" for="export_taxes" class="oe_inline" />
+		                           <button name="export_taxes" type="object" class="oe_highlight" string="Export Taxes" />
+		                        </group>
+		                        <group>
+		                           <label string="Export Sales Orders" for="export_sale_order" class="oe_inline" />
+		                           <button name="export_sale_order" type="object" class="oe_highlight" string="Export Sales Orders" />
+		                        </group>
+		                        <group>
+		                           <label string="Export Invoice Refund" for="export_invoices_refund" class="oe_inline" />
+		                           <button name="export_invoices_refund" type="object" class="oe_highlight" string="Export Invoice Refund" />
+		                        </group>
 							</page>
 							<page string="Mapping">
 								<group>
-									<label class="oe_inline" string="Product Tags"/>
+									<label string="Product Tags" for ="map_product_tags" class="oe_inline"/>
 									<div>
-										<button class="oe_highlight" name="map_product_tags" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_product_tags" string="Remove" type="object"/>
+										<button name="map_product_tags" type="object" class="oe_highlight"
+										string="Add" style="margin-right:12%; margin-left:2%;"/>
+										<button name="unmap_product_tags" type="object" class="oe_highlight"
+										string="Remove" />
+									</div>
+									
+								</group>
+								<group>
+									<label string="Product Attributes" for="map_attributes" class="oe_inline" />
+									<div>
+									<button name="map_attributes" type="object" class="oe_highlight"
+										string="Add" style="margin-right:12%; margin-left:2%;"/>
+									<button name="unmap_attributes" type="object" class="oe_highlight"
+										string="Remove" />
 									</div>
 								</group>
 								<group>
-									<label class="oe_inline" string="Product Attributes"/>
+									<label string="Product Categories" for="map_categories" class="oe_inline" />
 									<div>
-										<button class="oe_highlight" name="map_attributes" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_attributes" string="Remove" type="object"/>
+									<button name="map_categories" type="object" class="oe_highlight"
+										string="Add" style="margin-right:12%; margin-left:2%;"/>
+									<button name="unmap_categories" type="object" class="oe_highlight"
+										string="Remove" />
 									</div>
 								</group>
 								<group>
-									<label class="oe_inline" string="Product Categories"/>
+									<label string="Taxes" for="map_taxes" class="oe_inline" />
 									<div>
-										<button class="oe_highlight" name="map_categories" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_categories" string="Remove" type="object"/>
+									<button name="map_taxes" type="object" class="oe_highlight"
+										string="Add" style="margin-right:12%; margin-left:2%;"/>
+									<button name="unmap_taxes" type="object" class="oe_highlight"
+										string="Remove" />
 									</div>
 								</group>
 								<group>
-									<label class="oe_inline" string="Taxes"/>
+									<label string="Products" for="map_products" class="oe_inline" />
 									<div>
-										<button class="oe_highlight" name="map_taxes" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_taxes" string="Remove" type="object"/>
+									<button name="map_products" type="object" class="oe_highlight"
+										string="Add" style="margin-right:12%; margin-left:2%;"/>
+									<button name="unmap_products" type="object" class="oe_highlight"
+										string="Remove" />
 									</div>
 								</group>
 								<group>
-									<label class="oe_inline" string="Products"/>
-									<div>
-										<button class="oe_highlight" name="map_products" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_products" string="Remove" type="object"/>
+		                           	<label string="Customers" for="map_customers" class="oe_inline" />
+		                           	<div>
+		                           	<button name="map_customers" type="object" class="oe_highlight"
+										string="Add" style="margin-right:12%; margin-left:2%;"/>
+									<button name="unmap_customers" type="object" class="oe_highlight"
+										string="Remove" />
 									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Product Coupons"/>
-									<div>
-										<button class="oe_highlight" name="map_product_coupons" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_product_coupons" string="Remove" type="object"/>
+		                        </group>
+		                        <group>
+		                           	<label string="Sales Orders" for="map_sale_order" class="oe_inline" />
+		                           	<div>
+		                           	<button name="map_sale_order" type="object" class="oe_highlight"
+										string="Add" style="margin-right:12%; margin-left:2%;"/>
+									<button name="unmap_sale_order" type="object" class="oe_highlight"
+										string="Remove" />
 									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Customers"/>
-									<div>
-										<button class="oe_highlight" name="map_customers" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_customers" string="Remove" type="object"/>
-									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Sales Orders"/>
-									<div>
-										<button class="oe_highlight" name="map_sale_order" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_sale_order" string="Remove" type="object"/>
-									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Major Unit"/>
-									<div>
-										<button class="oe_highlight" name="map_major_unit" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_major_unit" string="Remove" type="object"/>
-									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Service Order"/>
-									<div>
-										<button class="oe_highlight" name="map_service_order" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_service_order" string="Remove" type="object"/>
-									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Pickup Order"/>
-									<div>
-										<button class="oe_highlight" name="map_pickup_order" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_pickup_order" string="Remove" type="object"/>
-									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Standard Job"/>
-									<div>
-										<button class="oe_highlight" name="map_standard_job" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_standard_job" string="Remove" type="object"/>
-									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Product Deals"/>
-									<div>
-										<button class="oe_highlight" name="map_product_deal" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_product_deal" string="Remove" type="object"/>
-									</div>
-								</group>
-								<group>
-									<label class="oe_inline" string="Service Messanger"/>
-									<div>
-										<button class="oe_highlight" name="map_service_messanger" string="Add" style="margin-right:12%; margin-left:2%;" type="object"/>
-										<button class="oe_highlight" name="unmap_service_messanger" string="Remove" type="object"/>
-									</div>
-								</group>
+		                        </group>
 							</page>
 						</notebook>
 					</sheet>
 				</form>
 			</field>
 		</record>
-		<record id="wp_odoo_site_action" model="ir.actions.act_window">
+
+		<record model="ir.actions.act_window" id="wp_odoo_site_action">
 			<field name="name">Wordpress Connection</field>
 			<field name="type">ir.actions.act_window</field>
 			<field name="res_model">wordpress.configure</field>
@@ -232,28 +191,32 @@
 			<field name="domain">[]</field>
 			<field name="context">{}</field>
 		</record>
-		<record id="wp_odoo_site_action_form" model="ir.actions.act_window.view">
-			<field name="act_window_id" ref="wp_odoo_site_action"/>
-			<field eval="20" name="sequence"/>
+
+		<record model="ir.actions.act_window.view" id="wp_odoo_site_action_form">
+			<field name="act_window_id" ref="wp_odoo_site_action" />
+			<field name="sequence" eval="20" />
 			<field name="view_mode">form</field>
-			<field name="view_id" ref="view_wp_odoo_backend_form"/>
+			<field name="view_id" ref="view_wp_odoo_backend_form" />
 		</record>
-		<record id="wp_odoo_site_action_tree" model="ir.actions.act_window.view">
-			<field name="act_window_id" ref="wp_odoo_site_action"/>
-			<field eval="10" name="sequence"/>
+
+		<record model="ir.actions.act_window.view" id="wp_odoo_site_action_tree">
+			<field name="act_window_id" ref="wp_odoo_site_action" />
+			<field name="sequence" eval="10" />
 			<field name="view_mode">tree</field>
-			<field name="view_id" ref="view_wp_odoo_backend_tree"/>
+			<field name="view_id" ref="view_wp_odoo_backend_tree" />
 		</record>
-		<!--
-		 <menuitem
-        id="menu_point_root"
-        name="WP ODOO Bridge"
-        load_xmlid="True"
-        groups="group_wp_odoo,,group_wp_odoo_user"
-        />-->
-		<menuitem groups="group_wp_odoo,group_wp_odoo_user" id="menu_point_root" name="ODOO WOO Connect"/>
-		<menuitem groups="group_wp_odoo_user" id="menu_wp_odoo_mapping_id" name="WordPress Site" parent="menu_point_root" sequence="1"/>
-		<menuitem action="wp_odoo_site_action" groups="group_wp_odoo_user" id="wp_odoo_id0" name="WP Site" parent="menu_wp_odoo_mapping_id"/>
-		<menuitem groups="group_wp_odoo_user" id="menu_wp_odoo_mapping_id" name="Mapping" parent="menu_point_root" sequence="1"/>
+
+		 <!-- <menuitem id="menu_point_root" name="WP ODOO Bridge" load_xmlid="True"
+        groups="base.group_user" sequence="6"/> -->
+		
+		 <menuitem id="menu_point_root" name="WP ODOO Bridge"  />	<!-- load_xmlid="True" groups="group_wp_odoo,group_wp_odoo_user" -->	
+					
+		<menuitem  id="menu_wp_odoo_id" name="WordPress Site" parent="menu_point_root" sequence="1" /><!-- groups="group_wp_odoo_user" -->
+		<menuitem  id="wp_odoo_id0" name="WP Site" parent="menu_wp_odoo_id" action="wp_odoo_site_action" /><!-- groups="group_wp_odoo_user" -->
+
+		<menuitem  id="menu_wp_odoo_mapping_id" name="Mapping" parent="menu_point_root" sequence="1" /> <!-- groups="group_wp_odoo_user" -->
+		
+				
 	</data>
 </odoo>
+		

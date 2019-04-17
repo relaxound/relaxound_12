@@ -47,7 +47,7 @@ class WpProductVariationExport(WpImportExport):
             product_image_id = 0
 
         if product.image :
-            images = [{"src": product.image.decode('utf-8') or False,
+            images = [{"src": product.image or False,
                        "name": product.name or None,
                        "position": 0,
                        'id': product_image_id or 0}]
@@ -71,7 +71,7 @@ class WpProductVariationExport(WpImportExport):
             if not val_mapper.woo_id:
                 attr.export(self.backend)
             attributes.append({
-                "id": mapper.woo_id or 0,
+                "id": mapper.woo_id or None,
                 "name": attr.attribute_id.name or None,
                 'option': attr.name or None,
                 "visible": attr.attribute_id.visible,
@@ -83,7 +83,7 @@ class WpProductVariationExport(WpImportExport):
         """ Export product data"""
         _logger.debug("Start calling Woocommerce api %s", method)
         templ=arguments[1].env['product.template'].search([('id','=',arguments[1].product_tmpl_id.id)])
-        sale_price = str(arguments[1].lst_price)
+        sale_price = str(arguments[1].offer_price)
         if sale_price == '0.0':
             sale_price=None
 

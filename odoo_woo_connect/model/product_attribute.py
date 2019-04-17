@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -17,10 +20,7 @@
 #
 
 import logging
-
-# import xmlrpclib
 from collections import defaultdict
-from odoo.addons.queue_job.job import job
 import base64
 from odoo import models, fields, api, _
 from ..unit.product_attribute_exporter import WpProductAttributeExport
@@ -37,16 +37,11 @@ class ProductAttribute(models.Model):
 
     slug = fields.Char('Slug')
 
-    @api.model
-    def get_backend(self):
-        return self.env['wordpress.configure'].search([]).ids
-
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Backend',
                                   store=True,
                                   readonly=False,
                                   required=False,
-                                  default=get_backend,
                                   )
 
     backend_mapping = fields.One2many(comodel_name='wordpress.odoo.attribute',
@@ -55,18 +50,6 @@ class ProductAttribute(models.Model):
                                       readonly=False,
                                       required=False,
                                       )
-
-    # visible and variant here
-    visible = fields.Boolean(string="Visible", help="Visible on product page", default=True)
-
-    value_order_by = fields.Selection(
-        selection=[('menu_order', 'Custome Order'),
-                  ('name', 'Name'),
-                  ('name_num', 'Name(Numeric)'),
-                  ('id', 'Term ID')],
-        string='Order By',
-        default='menu_order', help='To Sort Attribute Values In Order'
-    )
 
     @api.model
     def create(self, vals):
@@ -86,26 +69,15 @@ class ProductAttribute(models.Model):
     @api.multi
     def sync_attribute(self):
         for backend in self.backend_id:
-            self.with_delay().export(backend)
+            self.export_product_attribute(backend)
         return
 
     @api.multi
-    def sync_product_attribute_multi(self):
-        for value in self:
-            value.sync_attribute()
-
-    @api.multi
-    @job
-    def export(self, backend):
+    def export_product_attribute(self, backend):
         """ export product attributes, save slug and create or update backend mapper """
-        if len(self.ids)>1:
-            for obj in self:
-                obj.with_delay().export(backend)
-                obj.value_ids.with_delay().export(backend)
-            return
         method = 'attribute'
         mapper = self.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('attribute_id', '=', self.id)], limit=1)
+            [('backend_id', '=', backend.id), ('attribute_id', '=', self.id)])
         export = WpProductAttributeExport(backend)
         arguments = [mapper.woo_id or None, self]
         res = export.export_product_attribute(method, arguments)
@@ -117,10 +89,6 @@ class ProductAttribute(models.Model):
             self.write({'slug': res['data']['slug']})
             self.backend_mapping.create(
                 {'attribute_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
-        elif (res['status'] == 400 and res['data']['code'] == 'woocommerce_rest_invalid_product_attribute_slug_already_exists'):
-            if 'resource_id' in res['data']['data'].keys():
-                self.backend_mapping.create(
-                    {'attribute_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['data']['resource_id']})
 
 
 def import_record(cr, uid, ids, context=None):
@@ -132,6 +100,7 @@ class ProductAttributeMapping(models.Model):
 
     """ Model to store woocommerce id for particular product attribute """
     _name = 'wordpress.odoo.attribute'
+    _description = 'wordpress.odoo.attribute'
 
     attribute_id = fields.Many2one(comodel_name='product.attribute',
                                    string='Product Attribute',
@@ -141,7 +110,7 @@ class ProductAttributeMapping(models.Model):
                                    )
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,
@@ -158,7 +127,7 @@ class ProductAttributeValue(models.Model):
 
     slug = fields.Char('Slug')
     backend_id = fields.Many2many(comodel_name='wordpress.configure',
-                                  string='Website',
+                                  string='Backend',
                                   store=True,
                                   readonly=False,
                                   required=False,
@@ -188,29 +157,17 @@ class ProductAttributeValue(models.Model):
     @api.multi
     def sync_attribute_value(self):
         for backend in self.backend_id:
-            self.with_delay().export(backend)
+            self.export_product_attribute_value(backend)
         return
 
     @api.multi
-    def sync_product_attribute_value_multi(self):
-        for value in self:
-            value.sync_attribute_value()
-
-    @api.multi
-    @job
-    def export(self, backend):
+    def export_product_attribute_value(self, backend):
         """ export product attribute value details, and create or update backend mapper """
-        if len(self.ids)>1:
-            for obj in self:
-                obj.with_delay().export(backend)
-            return
-        if len(self.ids) == 0:
-            return
         method = 'attribute_value'
         mapper = self.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('attribute_value_id', '=', self.id)], limit=1)
+            [('backend_id', '=', backend.id), ('attribute_value_id', '=', self.id)])
         attr_mapper = self.attribute_id.backend_mapping.search(
-            [('backend_id', '=', backend.id), ('attribute_id', '=', self.attribute_id.id)], limit=1)
+            [('backend_id', '=', backend.id), ('attribute_id', '=', self.attribute_id.id)])
         export = WpProductAttributeExport(backend)
         arguments = [mapper.woo_id or None, self, attr_mapper]
         res = export.export_product_attribute_value(method, arguments)
@@ -222,16 +179,13 @@ class ProductAttributeValue(models.Model):
             self.write({'slug': res['data']['slug']})
             self.backend_mapping.create(
                 {'attribute_value_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
-        elif (res['status'] == 400 and res['data']['code']=='term_exists'):
-            if 'resource_id' in res['data']['data'].keys():
-                self.backend_mapping.create(
-                    {'attribute_value_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['data']['resource_id']})
 
 
 class ProductAttributeValueMapping(models.Model):
 
     """ Model to store woocommerce id for particular product attribute value"""
     _name = 'wordpress.odoo.attribute.value'
+    _description = 'wordpress.odoo.attribute.value'
 
     attribute_value_id = fields.Many2one(comodel_name='product.attribute.value',
                                          string='Product Attribute Value',
@@ -241,7 +195,7 @@ class ProductAttributeValueMapping(models.Model):
                                          )
 
     backend_id = fields.Many2one(comodel_name='wordpress.configure',
-                                 string='Website',
+                                 string='Backend',
                                  ondelete='set null',
                                  store=True,
                                  readonly=False,

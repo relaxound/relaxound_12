@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -20,7 +23,7 @@ import logging
 from ..model.api import API
 from datetime import datetime
 from datetime import timedelta
-from ..unit.backend_adapter import WpImportExport
+from . backend_adapter import WpImportExport
 _logger = logging.getLogger(__name__)
 
 
@@ -31,69 +34,34 @@ class WpProductAttributeExport(WpImportExport):
         api_method = None
         if method == 'attribute':
             if not args[0]:
-                api_method = 'products/attributes/details'
+                api_method = 'products/attributes'
             else:
-                api_method = 'products/attributes/details/' + str(args[0])
+                api_method = 'products/attributes/' + str(args[0])
         elif method == 'attribute_value':
             if not args[0]:
                 api_method = 'products/attributes/' + \
-                    str(args[2].woo_id) + '/terms/details'
+                    str(args[2].woo_id) + '/terms'
             else:
                 api_method = 'products/attributes/' + \
-                    str(args[2].woo_id) + '/terms/details/' + str(args[0])
+                    str(args[2].woo_id) + '/terms/' + str(args[0])
         return api_method
 
     def export_product_attribute(self, method, arguments):
         """ Export product attribute data"""
         _logger.debug("Start calling Woocommerce api %s", method)
-        
-        # add visible and variation here
+
         result_dict = {"name": arguments[1].name,
                        "type": "select",
                        "order_by": "menu_order",
                        "has_archives": True,
-                       "visible":  arguments[1].visible,
-                       "variation":  arguments[1].create_variant,
                        }
-        _logger.debug("Export: %s", result_dict)
-        res = self.export(method, result_dict, arguments)
-        if res:
-            res_dict = res.json()
-        else:
-            res_dict = res.json()
-        return {'status': res.status_code, 'data': res_dict or {}}
+        r = self.export(method, result_dict, arguments)
+        return {'status': r.status_code, 'data': r.json()}
 
     def export_product_attribute_value(self, method, arguments):
         """ Export product attribute value data"""
         _logger.debug("Start calling Woocommerce api %s", method)
-        mail = arguments[1].env['stock.location'].search([('name','=',arguments[1].name)]).company_id.email
-        ware = arguments[1].env['stock.location'].search([('name','=',arguments[1].name)]).company_id
-        ware_city = arguments[1].env['stock.warehouse'].search([('company_id','=',ware.id)]).name
-        ware_address = arguments[1].env['stock.warehouse'].search([('company_id','=',ware.id)]).physical_address
-        # image = arguments[1].env['stock.location'].search([('name','=',arguments[1].name)]).company_id.logo
-        zip_code = arguments[1].env['stock.location'].search([('name','=',arguments[1].name)]).company_id.zip
-        phone = arguments[1].env['stock.location'].search([('name','=',arguments[1].name)]).company_id.phone
 
-        result_dict = {"name": arguments[1].name,
-                       "city" : ware_city,
-                       "store_location": ware_address,
-                       "zip_code": zip_code,
-                       "store_email": mail,
-                       # "image": image.decode('utf-8'),
-                       "store_hours":{
-                           "Monday": "Closed",
-                           "Tuesday": "10am- 6pm",
-                           "Wednesday": "10am- 6pm",
-                           "Thursday": "10am- 6pm",
-                           "Friday": "10am- 6pm",
-                           "Saturday": "10am- 5pm",
-                           "Sunday": "Closed"
-                        },
-                       "phone_number": phone
-                    }
-        res = self.export(method, result_dict, arguments)
-        if res:
-            res_dict = res.json()
-        else:
-            res_dict = res.json()
-        return {'status': res.status_code, 'data': res_dict or {}}
+        result_dict = {"name": arguments[1].name}
+        r = self.export(method, result_dict, arguments)
+        return {'status': r.status_code, 'data': r.json()}

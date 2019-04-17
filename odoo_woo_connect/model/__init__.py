@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -16,35 +19,16 @@
 #
 #
 
-"""
+""" 
 All files in current directory imported here
 """
 from . import backend
 from . import product
-# from . import coupon
 from . import customer
-# from . import shipping_address
-# from . import product_category
-# from . import product_attribute
-# from . import sale_order
-# from . import refund
+from . import shipping_address
+from . import product_category
+from . import product_attribute
+from . import sale_order
+from . import refund
 # from . import sales_adv_invoice
-# from . import tax
-# from . import major_unit
-# from . import service_rides
-# from . import pickup_delivery
-# from . import standard_job
-# from . import jobs
-# from . import messanger
-# from . import product_deal
-# from . import crm_lead
-# from . import sales_order_scheduler
-# from . import credit_application
-# from . import mu_product
-# from . import product_video
-# from . import form
-# from . import descr_notes
-# from . import ecommerce_category
-# from . import standard_job_custom
-# from . import sale_settings
-# from . import stock_ware
+from . import tax

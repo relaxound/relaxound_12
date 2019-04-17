@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+#
 #    Techspawn Solutions Pvt. Ltd.
 #    Copyright (C) 2016-TODAY Techspawn(<http://www.Techspawn.com>).
 #
@@ -20,7 +23,7 @@ import logging
 from ..model.api import API
 from datetime import datetime
 from datetime import timedelta
-from ..unit.backend_adapter import WpImportExport
+from . backend_adapter import WpImportExport
 _logger = logging.getLogger(__name__)
 
 
@@ -31,17 +34,18 @@ class WpCategoryExport(WpImportExport):
         api_method = None
         if method == 'category':
             if not args[0]:
-                api_method = 'products/categories/details'
+                api_method = 'products/categories'
             else:
-                api_method = 'products/categories/details/' + str(args[0])
+                api_method = 'products/categories/' + str(args[0])
         return api_method
 
     def export_product_category(self, method, arguments):
         """ Export product category data"""
         _logger.debug("Start calling Woocommerce api %s", method)
+
         if arguments[1].parent_id:
             mapper = arguments[1].parent_id.backend_mapping.search(
-                [('backend_id', '=', self.backend.id), ('category_id', '=', arguments[1].parent_id.id)], limit=1)
+                [('backend_id', '=', self.backend.id), ('category_id', '=', arguments[1].parent_id.id)])
             parent = mapper.woo_id or None
             if not parent:
                 res = self.export_product_category(
@@ -62,32 +66,13 @@ class WpCategoryExport(WpImportExport):
                     parent = arguments[1].parent_id.woo_id
         else:
             parent = 0
-
-        mapper = arguments[1].backend_mapping.search(
-            [('backend_id', '=', self.backend.id),
-             ('category_id', '=', arguments[1].id)],
-            limit=1)
-
-        image_dict = {}
-        if mapper.image_id:
-            image_dict['id'] = mapper.image_id
-            image_dict['src'] = arguments[1].image or None
-        else:
-            image_dict=None
-
         result_dict = {
             'name': arguments[1].name,
-            'image': image_dict,
-            'desc': arguments[1].desc or None,
         }
         if parent != 0:
             result_dict.update({'parent': parent, })
+
         if arguments[1].slug:
             result_dict.update({'slug': arguments[1].slug or None})
-        _logger.info(result_dict)
         res = self.export(method, result_dict, arguments)
-        if res:
-            res_dict = res.json()
-        else:
-            res_dict = res.json()
-        return {'status': res.status_code, 'data': res_dict or {}}
+        return {'status': res.status_code, 'data': res.json()}

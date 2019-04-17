@@ -48,7 +48,7 @@
                     <filter string="Backend" domain="[]" name="backend_id"/>
                     
                     <group expand="0" string="Group By">
-                        <filter string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
+                        <filter name="filter_two" string="Backend" icon="terp-go-home" domain="[]"  context="{'group_by':'backend_id'}"/>
                     </group>
                 </search>
             </field>
