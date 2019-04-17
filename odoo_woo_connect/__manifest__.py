@@ -62,7 +62,7 @@ This module works very well with latest version of Wordpress v4.4 or later and W
               'views/product.xml',
               'views/customer.xml',
               'views/custom_field.xml',
-              'views/sale_order.xml',
+              # 'views/sale_order.xml',
               'views/tax.xml',
               'views/product_mapping.xml',
               'views/product_tag_mapping.xml',

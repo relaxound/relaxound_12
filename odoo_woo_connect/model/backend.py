@@ -222,13 +222,6 @@ class wp_configure(models.Model):
         return True
 
     @api.multi
-    def import_sale_orders(self):
-        """ Import all the sale order of particular backend """
-        sale_order_obj = self.env['sale.order']
-        sale_order_obj.importer(self)
-        return True
-
-    @api.multi
     def unmap_attributes(self):
         """ Remove particular backend from all the products attributes """
         all_attributes = self.env['product.attribute'].search(

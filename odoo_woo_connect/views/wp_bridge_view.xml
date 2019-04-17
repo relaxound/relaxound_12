@@ -40,10 +40,10 @@
 						</group>
 						<notebook colspan="4">
 							<page string="Import Data">
-								<group>
+								<!-- <group>
 									<label class="oe_inline" for="import_sale_orders" string="Import Sale Order"/>
 									<button class="oe_highlight" name="import_sale_orders" string="Import Sale Order" type="object"/>
-								</group>
+								</group> -->
 								<group>
 									<label class="oe_inline" for="import_customer" string="Import Customer"/>
 									<button class="oe_highlight" name="import_customer" string="
