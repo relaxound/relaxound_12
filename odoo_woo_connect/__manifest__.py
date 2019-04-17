@@ -55,6 +55,7 @@ This module works very well with latest version of Wordpress v4.4 or later and W
                 'stock',
                 'sale_stock',
                 'sale',
+                'sale_management',
               
                 ],
     'data': [
