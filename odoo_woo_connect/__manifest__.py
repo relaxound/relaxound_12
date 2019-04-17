@@ -51,7 +51,9 @@ This module works very well with latest version of Wordpress v4.4 or later and W
     'depends': ['base',
                 'product',
                 'website',
+                'website_sale',
                 'stock',
+                'sale_stock',
                 'sale',
               
                 ],
