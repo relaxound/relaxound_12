@@ -235,10 +235,7 @@ class stock_picking(models.Model):
             .filtered(lambda move: move.state == 'to_pay')\
             ._action_confirm()
         # call `_action_assign` on every confirmed move which location_id bypasses the reservation
-        self.filtered(lambda picking: picking.location_id.usage in ('supplier', 'inventory', 'production') and picking.state == 'confirmed') \
-            .mapped('move_lines')._action_assign()
         return True
-
     # @api.multi
     # def action_assign(self):
     #     """ Check availability of picking moves.
