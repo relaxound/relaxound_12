@@ -53,209 +53,209 @@ class SalesOrder(models.Model):
                                       required=False,
                                       )
 
-    # @api.model
-    # def create(self, vals):
-    #     """ Override create method to export"""
-    #     _logger.info("create vals %s", vals)
-    #     if 'partner_id' in vals.keys():
-    #         vals['partner_id'] = int(vals['partner_id'])
-    #     sales_order_id = super(SalesOrder, self).create(vals)
-    #     return sales_order_id
+    @api.model
+    def create(self, vals):
+        """ Override create method to export"""
+        _logger.info("create vals %s", vals)
+        if 'partner_id' in vals.keys():
+            vals['partner_id'] = int(vals['partner_id'])
+        sales_order_id = super(SalesOrder, self).create(vals)
+        return sales_order_id
 
-    # @api.multi
-    # def write(self, vals):
-    #     """ Override write method to export when any details is changed """
-    #     _logger.info("write vals %s", vals)
-    #     for sale_order in self:
-    #       res = super(SalesOrder, sale_order).write(vals)
-    #     return True
+    @api.multi
+    def write(self, vals):
+        """ Override write method to export when any details is changed """
+        _logger.info("write vals %s", vals)
+        for sale_order in self:
+          res = super(SalesOrder, sale_order).write(vals)
+        return True
 
-    # @api.multi
-    # def sync_sale_order(self):
-    #     for backend in self.backend_id:
-    #         self.export(backend)
-    #     return
+    @api.multi
+    def sync_sale_order(self):
+        for backend in self.backend_id:
+            self.export(backend)
+        return
 
-    # @api.multi
-    # def sales_line(self, vals):
-    #     res = self.write({'order_line': [[0, 0, vals]]})
-    #     return True
+    @api.multi
+    def sales_line(self, vals):
+        res = self.write({'order_line': [[0, 0, vals]]})
+        return True
 
-    # @api.multi
-    # # @job
-    # def importer(self, backend, date=None):
-    #     """ import and create or update backend mapper """
-    #     if len(self.ids) > 1:
-    #         for obj in self:
-    #             obj.single_importer(backend)
-    #         return
+    @api.multi
+    # @job
+    def importer(self, backend, date=None):
+        """ import and create or update backend mapper """
+        if len(self.ids) > 1:
+            for obj in self:
+                obj.single_importer(backend)
+            return
 
-    #     method = 'sales_order_import'
-    #     arguments = [None, self]
-    #     importer = WpSaleOrderImport(backend)
+        method = 'sales_order_import'
+        arguments = [None, self]
+        importer = WpSaleOrderImport(backend)
 
-    #     count = 1
-    #     data = True
-    #     sale_ids = []
-    #     while(data):
-    #       res = importer.import_sales_order(method, arguments, count, date)['data']
-    #       if(res):
-    #         sale_ids.extend(res)
-    #       else:
-    #         data = False
-    #       count += 1
-    #     for sale_id in sale_ids:
-    #       self.single_importer(backend, sale_id)
+        count = 1
+        data = True
+        sale_ids = []
+        while(data):
+          res = importer.import_sales_order(method, arguments, count, date)['data']
+          if(res):
+            sale_ids.extend(res)
+          else:
+            data = False
+          count += 1
+        for sale_id in sale_ids:
+          self.single_importer(backend, sale_id)
 
-    # @api.multi
-    # # @job
-    # def single_importer(self, backend, sale_id, woo_id=None):
-    #     method = 'sales_order_import'
-    #     mapper = self.backend_mapping.search(
-    #         [('backend_id', '=', backend.id), ('woo_id', '=', sale_id)], limit=1)
-    #     arguments = [sale_id or None, mapper.order_id or self]
+    @api.multi
+    # @job
+    def single_importer(self, backend, sale_id, woo_id=None):
+        method = 'sales_order_import'
+        mapper = self.backend_mapping.search(
+            [('backend_id', '=', backend.id), ('woo_id', '=', sale_id)], limit=1)
+        arguments = [sale_id or None, mapper.order_id or self]
 
-    #     importer = WpSaleOrderImport(backend)
-    #     res = importer.import_sales_order(method, arguments)
-    #     partner_id = self.env['wordpress.odoo.res.partner'].search(
-    #         [('backend_id', '=', backend.id), ('woo_id', '=', res['data']['customer_id'])])
-    #     record = res['data']
-    #     if partner_id:
-    #       pass
-    #     else:
-    #       partner = self.env['res.partner']
-    #       partner.single_importer(backend, res['data']['customer_id'],False)
-    #       partner_id = self.env['wordpress.odoo.res.partner'].search(
-    #         [('backend_id', '=', backend.id), ('woo_id', '=', res['data']['customer_id'])])
+        importer = WpSaleOrderImport(backend)
+        res = importer.import_sales_order(method, arguments)
+        partner_id = self.env['wordpress.odoo.res.partner'].search(
+            [('backend_id', '=', backend.id), ('woo_id', '=', res['data']['customer_id'])])
+        record = res['data']
+        if partner_id:
+          pass
+        else:
+          partner = self.env['res.partner']
+          partner.single_importer(backend, res['data']['customer_id'],False)
+          partner_id = self.env['wordpress.odoo.res.partner'].search(
+            [('backend_id', '=', backend.id), ('woo_id', '=', res['data']['customer_id'])])
 
-    #     if mapper:
-    #       # importer.write_sale_order(record, mapper, backend)
-    #       sale_order_id = mapper.order_id
-    #       if 'line_items' in record:
-    #         product_ids = []
-    #         for lines in record['line_items']:
-    #           if 'product_id' in lines:
-    #             product_template_id = self.env['wordpress.odoo.product.template'].search(
-    #                 [('backend_id', '=', backend.id),
-    #                     ('woo_id', '=', lines['product_id'])])
-    #             product=product_template_id.product_id.product_variant_id
-    #             if not product_template_id:
-    #               product_template_id = self.env['wordpress.odoo.mu.product'].search(
-    #                 [('backend_id', '=', backend.id),
-    #                  ('woo_id', '=', lines['product_id'])])
-    #               product=product_template_id.major_unit_id.product_id
-    #             if not product_template_id:
-    #               product_template_id = self.env['wordpress.odoo.majorunit'].search(
-    #                 [('backend_id', '=', backend.id),
-    #                  ('woo_id', '=', lines['product_id'])])
-    #               product=product_template_id.majorunit_id.product_id
-    #             for prod in product:
-    #               result = {'product_id': product.id,
-    #                           'price_unit': lines['price'],
-    #                           'product_uom_qty': lines['quantity'],
-    #                           'product_uom': 1,
-    #                           'price_subtotal': lines['subtotal'],
-    #                           'name': lines['name'],
-    #                           'order_id': sale_order_id.id,
-    #                           'backend': lines['id']
-    #                           }
-    #               product_ids.append(result)
-    #         for details in product_ids:
-    #           order = self.env['sale.order.line'].search(
-    #               [('backend', '=', details['backend'])])
-    #           if order:
-    #             order.write(details)
+        if mapper:
+          # importer.write_sale_order(record, mapper, backend)
+          sale_order_id = mapper.order_id
+          if 'line_items' in record:
+            product_ids = []
+            for lines in record['line_items']:
+              if 'product_id' in lines:
+                product_template_id = self.env['wordpress.odoo.product.template'].search(
+                    [('backend_id', '=', backend.id),
+                        ('woo_id', '=', lines['product_id'])])
+                product=product_template_id.product_id.product_variant_id
+                if not product_template_id:
+                  product_template_id = self.env['wordpress.odoo.mu.product'].search(
+                    [('backend_id', '=', backend.id),
+                     ('woo_id', '=', lines['product_id'])])
+                  product=product_template_id.major_unit_id.product_id
+                if not product_template_id:
+                  product_template_id = self.env['wordpress.odoo.majorunit'].search(
+                    [('backend_id', '=', backend.id),
+                     ('woo_id', '=', lines['product_id'])])
+                  product=product_template_id.majorunit_id.product_id
+                for prod in product:
+                  result = {'product_id': product.id,
+                              'price_unit': lines['price'],
+                              'product_uom_qty': lines['quantity'],
+                              'product_uom': 1,
+                              'price_subtotal': lines['subtotal'],
+                              'name': lines['name'],
+                              'order_id': sale_order_id.id,
+                              'backend': lines['id']
+                              }
+                  product_ids.append(result)
+            for details in product_ids:
+              order = self.env['sale.order.line'].search(
+                  [('backend', '=', details['backend'])])
+              if order:
+                order.write(details)
 
-    #     else:
-    #       # importer.create_sale_order(record, partner_id, backend)
-    #       product_ids = []
-    #       if record['date_created']:
-    #         date_created = record['date_created']
-    #       else:
-    #         date_created = ''
-    #       if partner_id:
-    #         values = {
-    #             'partner_id': partner_id[0].customer_id.id,
-    #             'date_order': date_created.replace('T',' ')
-    #         }
+        else:
+          # importer.create_sale_order(record, partner_id, backend)
+          product_ids = []
+          if record['date_created']:
+            date_created = record['date_created']
+          else:
+            date_created = ''
+          if partner_id:
+            values = {
+                'partner_id': partner_id[0].customer_id.id,
+                'date_order': date_created.replace('T',' ')
+            }
 
-    #         sale_order = self.create(values)
+            sale_order = self.create(values)
 
-    #         if 'line_items' in record:
-    #           product_ids = []
-    #           for lines in record['line_items']:
-    #             if 'product_id' in lines:
-    #               product_template_id = self.env['wordpress.odoo.product.template'].search(
-    #                   [('backend_id', '=', backend.id),
-    #                    ('woo_id', '=', lines['product_id'])])
-    #               product=product_template_id.product_id.product_variant_id
-    #               if not product_template_id:
-    #                 product_template_id = self.env['wordpress.odoo.mu.product'].search(
-    #                   [('backend_id', '=', backend.id),
-    #                    ('woo_id', '=', lines['product_id'])])
-    #                 product=product_template_id.major_unit_id.product_id
-    #               if not product_template_id:
-    #                 product_template_id = self.env['wordpress.odoo.majorunit'].search(
-    #                   [('backend_id', '=', backend.id),
-    #                    ('woo_id', '=', lines['product_id'])])
-    #                 product=product_template_id.majorunit_id.product_id
-    #               for prod in product:
-    #                 result = [0,0,{
-    #                         'product_id': prod.id,
-    #                         'price_unit': lines['price'],
-    #                         'product_uom_qty': lines['quantity'],
-    #                         'product_uom': 1,
-    #                         'price_subtotal': lines['subtotal'],
-    #                         'name': lines['name'],
-    #                         'order_id': sale_order.id,
-    #                         'backend': lines['id'],
-    #                         }]
-    #                 product_ids.append(result)
-    #           sale_order.update({'order_line': product_ids})
-    #     if mapper and (res['status'] == 200 or res['status'] == 201):
-    #       vals = {
-    #           'woo_id': res['data']['id'],
-    #           'backend_id': backend.id,
-    #           'order_id': mapper.order_id.id,
-    #       }
-    #       self.backend_mapping.write(vals)
-    #     else:
-    #       if(partner_id):
-    #         vals = {
-    #             'woo_id': res['data']['id'],
-    #             'backend_id': backend.id,
-    #             'order_id': sale_order.id,
-    #         }
+            if 'line_items' in record:
+              product_ids = []
+              for lines in record['line_items']:
+                if 'product_id' in lines:
+                  product_template_id = self.env['wordpress.odoo.product.template'].search(
+                      [('backend_id', '=', backend.id),
+                       ('woo_id', '=', lines['product_id'])])
+                  product=product_template_id.product_id.product_variant_id
+                  if not product_template_id:
+                    product_template_id = self.env['wordpress.odoo.mu.product'].search(
+                      [('backend_id', '=', backend.id),
+                       ('woo_id', '=', lines['product_id'])])
+                    product=product_template_id.major_unit_id.product_id
+                  if not product_template_id:
+                    product_template_id = self.env['wordpress.odoo.majorunit'].search(
+                      [('backend_id', '=', backend.id),
+                       ('woo_id', '=', lines['product_id'])])
+                    product=product_template_id.majorunit_id.product_id
+                  for prod in product:
+                    result = [0,0,{
+                            'product_id': prod.id,
+                            'price_unit': lines['price'],
+                            'product_uom_qty': lines['quantity'],
+                            'product_uom': 1,
+                            'price_subtotal': lines['subtotal'],
+                            'name': lines['name'],
+                            'order_id': sale_order.id,
+                            'backend': lines['id'],
+                            }]
+                    product_ids.append(result)
+              sale_order.update({'order_line': product_ids})
+        if mapper and (res['status'] == 200 or res['status'] == 201):
+          vals = {
+              'woo_id': res['data']['id'],
+              'backend_id': backend.id,
+              'order_id': mapper.order_id.id,
+          }
+          self.backend_mapping.write(vals)
+        else:
+          if(partner_id):
+            vals = {
+                'woo_id': res['data']['id'],
+                'backend_id': backend.id,
+                'order_id': sale_order.id,
+            }
 
-    #         self.backend_mapping.create(vals)
+            self.backend_mapping.create(vals)
 
-    # @api.multi
-    # # @job
-    # def export(self, backend):
-    #     """ export and create or update backend mapper """
-    #     if len(self.ids) > 1:
-    #         for obj in self:
-    #             obj.export(backend)
-    #         return
-    #     mapper = self.backend_mapping.search(
-    #         [('backend_id', '=', backend.id), ('order_id', '=', self.id)], limit=1)
-    #     method = 'sales_order'
-    #     arguments = [mapper.woo_id or None, self]
-    #     export = WpSaleOrderExport(backend)
-    #     res = export.export_sales_order(method, arguments)
-    #     if mapper and (res['status'] == 200 or res['status'] == 201):
-    #         mapper.write(
-    #             {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
-    #     elif (res['status'] == 200 or res['status'] == 201):
-    #         self.backend_mapping.create(
-    #             {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
+    @api.multi
+    # @job
+    def export(self, backend):
+        """ export and create or update backend mapper """
+        if len(self.ids) > 1:
+            for obj in self:
+                obj.export(backend)
+            return
+        mapper = self.backend_mapping.search(
+            [('backend_id', '=', backend.id), ('order_id', '=', self.id)], limit=1)
+        method = 'sales_order'
+        arguments = [mapper.woo_id or None, self]
+        export = WpSaleOrderExport(backend)
+        res = export.export_sales_order(method, arguments)
+        if mapper and (res['status'] == 200 or res['status'] == 201):
+            mapper.write(
+                {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
+        elif (res['status'] == 200 or res['status'] == 201):
+            self.backend_mapping.create(
+                {'order_id': self.id, 'backend_id': backend.id, 'woo_id': res['data']['id']})
 
-    # @api.multi
-    # def _prepare_invoice(self):
-    #     invoice_id = super(SalesOrder, self)._prepare_invoice()
-    #     invoice_id['backend_id'] = [[6, 0, self.backend_id.ids]]
-    #     invoice_id['sale_order_id'] = self.id
-    #     return invoice_id
+    @api.multi
+    def _prepare_invoice(self):
+        invoice_id = super(SalesOrder, self)._prepare_invoice()
+        invoice_id['backend_id'] = [[6, 0, self.backend_id.ids]]
+        invoice_id['sale_order_id'] = self.id
+        return invoice_id
 
 
 class SalesOrderMapping(models.Model):
