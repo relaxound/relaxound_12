@@ -225,7 +225,7 @@ class stock_picking(models.Model):
             self.env('stock.move').action_confirm(todo)
 
         if todo_force_assign:
-            self.force_assign(todo_force_assign)
+            self.action_assign(todo_force_assign)
         return True
 
     def action_payed(self):
@@ -235,26 +235,9 @@ class stock_picking(models.Model):
             .filtered(lambda move: move.state == 'to_pay')\
             ._action_confirm()
         # call `_action_assign` on every confirmed move which location_id bypasses the reservation
+        # self.filtered(lambda picking: picking.location_id.usage in ('supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+
         return True
-    # @api.multi
-    # def action_assign(self):
-    #     """ Check availability of picking moves.
-    #     This has the effect of changing the state and reserve quants on available moves, and may
-    #     also impact the state of the picking as it is computed based on move's states.
-    #     @return: True
-    #     """
-    #     self.filtered(lambda picking: picking.state == 'draft').action_confirm()
-    #     moves = self.mapped('move_lines').filtered(lambda move: move.state not in ('draft', 'cancel', 'done'))
-    #     if not moves:
-    #         raise UserError('Nothing to check the availability for.')
-    #     # If a package level is done when confirmed its location can be different than where it will be reserved.
-    #     # So we remove the move lines created when confirmed to set quantity done to the new reserved ones.
-    #     package_level_done = self.mapped('package_level_ids').filtered(
-    #         lambda pl: pl.is_done and pl.state == 'confirmed')
-    #     package_level_done.write({'is_done': False})
-    #     moves._action_assign()
-    #     package_level_done.write({'is_done': True})
-    #     return True
 
     def _state_get(self):
         '''The state of a picking depends on the state of its related stock.move
