@@ -79,9 +79,9 @@ class procurement_order(models.Model):
         sale_order=False
 #        sale_order=procurement.sale_line_id.order_id
 #         if not(sale_order):        
-        poids=self.env.get('procurement.order').search([('id', '!=', procurement.id),('group_id','=',procurement.group_id.id)])
+        poids=self.env('procurement.order').search([('id', '!=', procurement.id),('group_id','=',procurement.group_id.id)])
         for poid in poids:
-            po= self.env.get('procurement.order').browse()
+            po= self.env('procurement.order').browse()
             if po.sale_line_id.order_id:
                 sale_order=po.sale_line_id.order_id
         

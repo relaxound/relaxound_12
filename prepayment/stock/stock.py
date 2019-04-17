@@ -50,140 +50,97 @@ class stock_move(models.Model):
             pick = pick_obj.create(cr, uid, values, context=context)
         return self.write(cr, uid, move_ids, {'picking_id': pick}, context=context)
 
-    def action_payed(self):
+   
+    def _action_payed(self, merge=True, merge_into=False):
         """ Confirms stock move or put it in waiting if it's linked to another move.
-        @return: List of ids.
+        :param: merge: According to this boolean, a newly confirmed move will be merged
+        in another move of the same picking sharing its characteristics.
         """
-        cr = self.env.cr
-        ids = self.ids
-        uid = self._uid
-        item_id = self.item_id
-        context = self._context
-        if not context:
-            context = {}
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-        states = {
-            'confirmed': [],
-            'waiting': [],
-            'to_pay': []
-        }
+        move_create_proc = self.env['stock.move']
+        move_to_confirm = self.env['stock.move']
+        move_waiting = self.env['stock.move']
+
         to_assign = {}
-        for move in self.browse():
-            self.attribute_price(move)
-            state = 'confirmed'
-
-            if move.state == 'to_pay':
-                state = move.state
+        for move in self:
+            # if the move is preceeded, then it's waiting (if preceeding move is done, then action_assign has been called already and its state is already available)
+            if move.move_orig_ids:
+                move_waiting |= move
             else:
-                # if the move is preceeded, then it's waiting (if preceeding move is done, then action_assign has been called already and its state is already available)
-                if move.move_orig_ids:
-                    state = 'waiting'
-                # if the move is split and some of the ancestor was preceeded, then it's waiting as well
-                elif move.split_from:
-                    move2 = move.split_from
-                    while move2 and state != 'waiting':
-                        if move2.move_orig_ids:
-                            state = 'waiting'
-                        move2 = move2.split_from
-            states[state].append(move.id)
-
-            if not move.picking_id and move.picking_type_id:
+                if move.procure_method == 'make_to_order':
+                    move_create_proc |= move
+                else:
+                    move_to_confirm |= move
+            if move._should_be_assigned():
                 key = (move.group_id.id, move.location_id.id, move.location_dest_id.id)
                 if key not in to_assign:
-                    to_assign[key] = []
-                to_assign[key].append(move.id)
-        #         moves = [move for move in self.browse(cr, uid, states['confirmed'], context=context) if move.procure_method == 'make_to_order']
-        #         self._create_procurements(cr, uid, moves, context=context)
-        #         for move in moves:
-        #             states['waiting'].append(move.id)
-        #             states['confirmed'].remove(move.id)
-        #         moves = [move for move in self.browse(cr, uid, states['to_pay'], context=context) if move.procure_method == 'make_to_order']
-        #         self._create_procurements(cr, uid, moves, context=context)
-        moves = [move for move in self.browse(states['to_pay']) if
-                 move.procure_method == 'make_to_stock']
-        for move in moves:
-            states['confirmed'].append(move.id)
-            states['to_pay'].remove(move.id)
+                    to_assign[key] = self.env['stock.move']
+                to_assign[key] |= move
 
-        for state, write_ids in states.items():
-            if len(write_ids):
-                self.write(write_ids, {'state': state})
+        # create procurements for make to order moves
+        for move in move_create_proc:
+            values = move._prepare_procurement_values()
+            origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
+            self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+                                              move.rule_id and move.rule_id.name or "/", origin,
+                                              values)
+
+        move_to_confirm.write({'state': 'confirmed'})
+        (move_waiting | move_create_proc).write({'state': 'waiting'})
+        
+
         # assign picking in batch for all confirmed move that share the same details
-        for key, move_ids in to_assign.items():
-            self._picking_assign(move_ids)
-        moves = self.browse()
-        self._push_apply(moves)
-        return ids
+        for moves in to_assign.values():
+            moves._assign_picking()
+        self._push_apply()
+        if merge:
+            return self._merge_moves(merge_into=merge_into)
+        return self
 
-    def action_confirm(self):
+    def _action_confirm(self, merge=True, merge_into=False):
         """ Confirms stock move or put it in waiting if it's linked to another move.
-        @return: List of ids.
+        :param: merge: According to this boolean, a newly confirmed move will be merged
+        in another move of the same picking sharing its characteristics.
         """
-        cr = self.env.cr
-        ids = self.ids
-        uid = self._uid
-        item_id = self.item_id
-        context = self._context
-        if not context:
-            context = {}
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-        states = {
-            'confirmed': [],
-            'waiting': [],
-            'to_pay': []
-        }
+        move_create_proc = self.env['stock.move']
+        move_to_confirm = self.env['stock.move']
+        move_waiting = self.env['stock.move']
+
         to_assign = {}
-        for move in self.browse():
-            self.attribute_price(move)
-            state = 'confirmed'
-
-            if move.state == 'to_pay':
-                state = move.state
+        for move in self:
+            # if the move is preceeded, then it's waiting (if preceeding move is done, then action_assign has been called already and its state is already available)
+            if move.move_orig_ids:
+                move_waiting |= move
             else:
-                # if the move is preceeded, then it's waiting (if preceeding move is done, then action_assign has been called already and its state is already available)
-                if move.move_orig_ids:
-                    state = 'waiting'
-                # if the move is split and some of the ancestor was preceeded, then it's waiting as well
-                elif move.split_from:
-                    move2 = move.split_from
-                    while move2 and state != 'waiting':
-                        if move2.move_orig_ids:
-                            state = 'waiting'
-                        move2 = move2.split_from
-            states[state].append(move.id)
-
-            if not move.picking_id and move.picking_type_id:
+                if move.procure_method == 'make_to_order':
+                    move_create_proc |= move
+                else:
+                    move_to_confirm |= move
+            if move._should_be_assigned():
                 key = (move.group_id.id, move.location_id.id, move.location_dest_id.id)
                 if key not in to_assign:
-                    to_assign[key] = []
-                to_assign[key].append(move.id)
-        moves = [move for move in self.browse(states['confirmed']) if
-                 move.procure_method == 'make_to_order']
-        self._create_procurements(moves)
-        for move in moves:
-            states['waiting'].append(move.id)
-            states['confirmed'].remove(move.id)
-        moves = [move for move in self.browse(states['to_pay']) if
-                 move.procure_method == 'make_to_order']
-        self._create_procurements(moves)
-        moves = [move for move in self.browse(states['to_pay']) if
-                 move.procure_method == 'make_to_stock']
-        #         for move in moves:
-        #             states['waiting'].append(move.id)
-        #             states['to_pay'].remove(move.id)
+                    to_assign[key] = self.env['stock.move']
+                to_assign[key] |= move
 
-        for state, write_ids in states.items():
-            if len(write_ids):
-                self.write(write_ids, {'state': state})
+        # create procurements for make to order moves
+        for move in move_create_proc:
+            values = move._prepare_procurement_values()
+            origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
+            self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+                                              move.rule_id and move.rule_id.name or "/", origin,
+                                              values)
+
+        move_to_confirm.write({'state': 'confirmed'})
+        (move_waiting | move_create_proc).write({'state': 'waiting'})
+
         # assign picking in batch for all confirmed move that share the same details
-        for key, move_ids in to_assign.items():
-            self._picking_assign(move_ids)
-        moves = self.browse()
-        self._push_apply(moves)
-        return ids
+        for moves in to_assign.values():
+            moves._assign_picking()
+        self._push_apply()
+        if merge:
+            return self._merge_moves(merge_into=merge_into)
+        return self
 
+    
 
 class stock_picking(models.Model):
     _inherit = 'stock.picking'
