@@ -72,7 +72,6 @@ class SalesOrder(models.Model):
 
     @api.multi
     def sync_sale_order(self):
-        import pdb;pdb.set_trace()
         for backend in self.backend_id:
             self.export(backend)
         return
@@ -85,7 +84,6 @@ class SalesOrder(models.Model):
     @api.multi
     # @job
     def importer(self, backend, date=None):
-        import pdb;pdb.set_trace()
         """ import and create or update backend mapper """
         if len(self.ids) > 1:
             for obj in self:
@@ -112,7 +110,6 @@ class SalesOrder(models.Model):
     @api.multi
     # @job
     def single_importer(self, backend, sale_id, woo_id=None):
-        import pdb;pdb.set_trace()
         method = 'sales_order_import'
         mapper = self.backend_mapping.search(
             [('backend_id', '=', backend.id), ('woo_id', '=', sale_id)], limit=1)
