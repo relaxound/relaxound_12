@@ -9,8 +9,8 @@
     """,
     "init_xml": [],
     'data': [
-             # 'stock/stock_view.xml',
-             # 'cron/cron.xml'
+             'stock/stock_view.xml',
+             'cron/cron.xml'
             ],
     'demo_xml': [],
     'installable': True,
