@@ -13,8 +13,8 @@
                 <xpath expr="//field[@name='list_price']" position="replace">
                     <field name="backend_id" widget="many2many_tags" required="1"/>
                     <field name='tag_ids' widget="many2many_tags"/>
-                    <field name="regular_price" on_change="wp_price_check(regular_price,sale_price)"/>
-                    <field name="sale_price" on_change="wp_price_check(regular_price,sale_price)"/>
+                    <!-- <field name="regular_price" on_change="wp_price_check(regular_price,sale_price)"/>
+                    <field name="sale_price" on_change="wp_price_check(regular_price,sale_price)"/> -->
                     <field name="list_price" readonly="1" />
                 </xpath>
                 <xpath expr="//page[@name='general_information']/group" position="after">

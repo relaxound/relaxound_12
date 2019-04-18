@@ -212,29 +212,29 @@ class ProductTemplate(models.Model):
                                   required=True,
                                   )
 
-    @api.multi
-    def wp_price_check(self, regular_price, sale_price, context=None):
-        """ Check sales price and regular price """
-        if sale_price > 0:
-            list_price = sale_price
-        else:
-            list_price = regular_price
+    # @api.multi
+    # def wp_price_check(self, regular_price, sale_price, context=None):
+    #     """ Check sales price and regular price """
+    #     if sale_price > 0:
+    #         list_price = sale_price
+    #     else:
+    #         list_price = regular_price
 
-        if regular_price < sale_price:
-            res = {'warning': {
-                'title': _('Warning'),
-                'message': _('Regular Price should be greater than Sale Price'),
-            }
-            }
-            return res
+    #     if regular_price < sale_price:
+    #         res = {'warning': {
+    #             'title': _('Warning'),
+    #             'message': _('Regular Price should be greater than Sale Price'),
+    #         }
+    #         }
+    #         return res
 
-        res = {'value': {
-            'list_price': list_price,
-            'regular_price': regular_price,
-            'sale_price': sale_price,
-        }
-        }
-        return res
+    #     res = {'value': {
+    #         'list_price': list_price,
+    #         'regular_price': regular_price,
+    #         'sale_price': sale_price,
+    #     }
+    #     }
+    #     return res
 
     @api.model
     def create(self, vals):
@@ -243,10 +243,10 @@ class ProductTemplate(models.Model):
             vals['regular_price'] = 0
         if not 'sale_price' in vals.keys():
             vals['sale_price'] = 0
-        check = self.wp_price_check(
-            vals['regular_price'], vals['sale_price'], None)
-        if 'warning' in check:
-            raise Warning(check['warning']['message'])
+        # check = self.wp_price_check(
+        #     vals['regular_price'], vals['sale_price'], None)
+        # if 'warning' in check:
+        #     raise Warning(check['warning']['message'])
         else:
             product_id = super(ProductTemplate, self).create(vals)
             return product_id
@@ -259,14 +259,14 @@ class ProductTemplate(models.Model):
                 vals['regular_price'] = self.regular_price
             if not 'sale_price' in vals.keys():
                 vals['sale_price'] = self.sale_price
-            check = self.wp_price_check(
-                vals['regular_price'], vals['sale_price'], None)
-            if 'warning' in check:
-                raise Warning(check['warning']['message'])
-            else:
-                vals.update(check['value'])
-                product = super(ProductTemplate, self).write(vals)
-                return product
+            # check = self.wp_price_check(
+            #     vals['regular_price'], vals['sale_price'], None)
+            # if 'warning' in check:
+            #     raise Warning(check['warning']['message'])
+            # else:
+            #     vals.update(check['value'])
+            #     product = super(ProductTemplate, self).write(vals)
+            #     return product
         else:
             product = super(ProductTemplate, self).write(vals)
             return product
@@ -447,28 +447,28 @@ class ProductProduct(models.Model):
         """ export product variant details, and create or update backend mapper """
         return self.product_tmpl_id.export_product(backend)
 
-    @api.multi
-    def wp_price_check(self, regular_price, sale_price, context=None):
-        """ Check sales price and regular price """
-        if sale_price > 0:
-            list_price = sale_price
-        else:
-            list_price = regular_price
+    # @api.multi
+    # def wp_price_check(self, regular_price, sale_price, context=None):
+    #     """ Check sales price and regular price """
+    #     if sale_price > 0:
+    #         list_price = sale_price
+    #     else:
+    #         list_price = regular_price
 
-        if regular_price < sale_price:
-            res = {'warning': {
-                'title': _('Warning'),
-                'message': _('Regular Price should be greater than Sale Price'),
-            }
-            }
-            return res
+    #     if regular_price < sale_price:
+    #         res = {'warning': {
+    #             'title': _('Warning'),
+    #             'message': _('Regular Price should be greater than Sale Price'),
+    #         }
+    #         }
+    #         return res
 
-        res = {'value': {
-            'regular_price': regular_price,
-            'sale_price': sale_price,
-        }
-        }
-        return res
+    #     res = {'value': {
+    #         'regular_price': regular_price,
+    #         'sale_price': sale_price,
+    #     }
+    #     }
+    #     return res
 
     @api.multi
     def _website_price(self):
