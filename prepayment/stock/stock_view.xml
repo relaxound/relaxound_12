@@ -22,12 +22,12 @@
                 	<button name="action_confirm" states="draft,to_pay" string="Mark as Todo" type="object" class="oe_highlight" groups="base.group_user"/>
                 </xpath>
                 
-                <!--
+        
                 <xpath expr="//button[@name='do_new_transfer']" position="replace">
                 	<button name="do_new_transfer" states="draft,to_pay,partially_available,assigned" string="Validate" groups="stock.group_stock_user" type="object" class="oe_highlight"/>
                 </xpath>
                 -->
-                <xpath expr="//button[@name='action_cancel']" position="replace">
+        <!--         <xpath expr="//button[@name='action_cancel']" position="replace">
                 	<button name="action_cancel" states="assigned,confirmed,partially_available,draft,to_pay,waiting" string="Cancel" groups="base.group_user" type="object"/>
                 </xpath>
                 <xpath expr="//button[@name='action_assign_owner']" position="replace">
@@ -39,4 +39,4 @@
             </field>
         </record>
     </data>
-</odoo> -->
+</odoo> --> -->
