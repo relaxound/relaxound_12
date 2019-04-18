@@ -215,8 +215,8 @@ class ProductTemplate(models.Model):
     @api.multi
     def wp_price_check(self, regular_price, sale_price, context=None):
         """ Check sales price and regular price """
-        regular_price=str(regular_price)
-        sale_price=str(sale_price)
+        # regular_price=str(regular_price)
+        # sale_price=str(sale_price)
         if sale_price > 0:
             list_price = sale_price
         else:
@@ -245,10 +245,11 @@ class ProductTemplate(models.Model):
             vals['regular_price'] = 0
         if not 'sale_price' in vals.keys():
             vals['sale_price'] = 0
-        check = self.wp_price_check(
-            vals['regular_price'], vals['sale_price'], None)
-        if 'warning' in check:
-            raise Warning(check['warning']['message'])
+        if 'list_price' in vals.keys() and 'regular_price' in vals.keys():
+            check = self.wp_price_check(
+              vals['regular_price'], vals['sale_price'], None)
+            if 'warning' in check:
+                raise Warning(check['warning']['message'])
         else:
             product_id = super(ProductTemplate, self).create(vals)
             return product_id
@@ -452,8 +453,8 @@ class ProductProduct(models.Model):
     @api.multi
     def wp_price_check(self, regular_price, sale_price, context=None):
         """ Check sales price and regular price """
-        regular_price=str(regular_price)
-        sale_price=str(sale_price)
+        # regular_price=str(regular_price)
+        # sale_price=str(sale_price)
         if sale_price > 0:
             list_price = sale_price
         else:
