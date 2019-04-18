@@ -35,33 +35,6 @@ class stock_move(models.Model):
             ('state', 'in', ['draft', 'confirmed', 'waiting', 'partially_available','to_pay'])], limit=1)
         return picking
 
-    # def _picking_assign(self, move_ids):
-    #     cr = self.env.cr
-    #     ids = self.ids
-    #     uid = self._uid
-    #     context = self._context
-    #     """Try to assign the moves to an existing picking
-    #     that has not been reserved yet and has the same
-    #     procurement group, locations and picking type  (moves should already have them identical)
-    #      Otherwise, create a new picking to assign them to.
-    #     """
-    #     move = self.browse(move_ids)[0]
-    #     pick_obj = self.env.get("stock.picking")
-    #     picks = pick_obj.search(cr, uid, [
-    #         ('group_id', '=', move.group_id.id),
-    #         ('location_id', '=', move.location_id.id),
-    #         ('location_dest_id', '=', move.location_dest_id.id),
-    #         ('picking_type_id', '=', move.picking_type_id.id),
-    #         ('printed', '=', False),
-    #         ('state', 'in', ['draft', 'confirmed', 'waiting', 'partially_available', 'assigned', 'to_pay'])], limit=1,
-    #                             )
-    #     if picks:
-    #         pick = picks[0]
-    #     else:
-    #         values = self._prepare_picking_assign(cr, uid, move, context=context)
-    #         pick = pick_obj.create(cr, uid, values, context=context)
-    #     return self.write(cr, uid, move_ids, {'picking_id': pick}, context=context)
-
     def _action_payed(self, merge=True, merge_into=False):
         """ Confirms stock move or put it in waiting if it's linked to another move.
         :param: merge: According to this boolean, a newly confirmed move will be merged
@@ -93,7 +66,7 @@ class stock_move(models.Model):
         for move in move_create_proc:
             values = move._prepare_procurement_values()
             origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
-            self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+            self.env['procurement.group'].run(move.product_id, move.location_id,
                                               move.rule_id and move.rule_id.name or "/", origin,
                                               values)
 
@@ -139,7 +112,7 @@ class stock_move(models.Model):
         for move in move_create_proc:
             values = move._prepare_procurement_values()
             origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
-            self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+            self.env['procurement.group'].run(move.product_id, move.location_id,
                                               move.rule_id and move.rule_id.name or "/", origin,
                                               values)
 
