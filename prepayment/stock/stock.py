@@ -1,6 +1,7 @@
 from odoo import models, api
 from odoo import fields
 
+
 class stock_move(models.Model):
     _inherit = 'stock.move'
 
@@ -65,7 +66,8 @@ class stock_move(models.Model):
                                               values)
 
         move_to_confirm.write({'state': 'confirmed'})
-        (move_waiting | move_create_proc | move_to_pay).write({'state': 'to_pay'})
+        move_to_pay.write({'state': 'to_pay'})
+        (move_waiting | move_create_proc | move_to_pay).write({'state': 'waiting'})
 
         # assign picking in batch for all confirmed move that share the same details
         for moves in to_assign.values():
@@ -84,7 +86,7 @@ class stock_move(models.Model):
         move_create_proc = self.env['stock.move']
         move_to_confirm = self.env['stock.move']
         move_waiting = self.env['stock.move']
-
+        move_to_pay = self.env['stock.move']
         to_assign = {}
         for move in self:
             # if the move is preceeded, then it's waiting (if preceeding move is done, then action_assign has been called already and its state is already available)
@@ -109,8 +111,8 @@ class stock_move(models.Model):
                                               move.rule_id and move.rule_id.name or "/", origin,
                                               values)
 
-        move_to_confirm.write({'state': 'waiting'})
-        (move_waiting | move_create_proc).write({'state': 'confirmed'})
+        move_to_confirm.write({'state': 'confirmed'})
+        (move_waiting | move_create_proc).write({'state': 'waiting'})
 
         # assign picking in batch for all confirmed move that share the same details
         for moves in to_assign.values():
