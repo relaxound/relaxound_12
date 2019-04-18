@@ -198,81 +198,81 @@ class stock_picking(models.Model):
 
         return True
 
-    def _compute_state(self):
-        ''' State of a picking depends on the state of its related stock.move
-        - Draft: only used for "planned pickings"
-        - Waiting: if the picking is not ready to be sent so if
-          - (a) no quantity could be reserved at all or if
-          - (b) some quantities could be reserved and the shipping policy is "deliver all at once"
-        - Waiting another move: if the picking is waiting for another move
-        - Ready: if the picking is ready to be sent so if:
-          - (a) all quantities are reserved or if
-          - (b) some quantities could be reserved and the shipping policy is "as soon as possible"
-        - Done: if the picking is done.
-        - Cancelled: if the picking is cancelled
-        '''
-        if not self.move_lines:
-            self.state = 'draft'
-        elif any(move.state == 'draft' for move in self.move_lines):  # TDE FIXME: should be all ?
-            self.state = 'draft'
-        elif all(move.state == 'to_pay' for move in self.move_lines):
-            self.state = 'to_pay'
-        elif all(move.state == 'cancel' for move in self.move_lines):
-            self.state = 'cancel'
-        elif all(move.state in ['cancel', 'done'] for move in self.move_lines):
-            self.state = 'done'
-        else:
-            relevant_move_state = self.move_lines._get_relevant_state_among_moves()
-            if relevant_move_state == 'partially_available':
-                self.state = 'assigned'
-            else:
-                self.state = relevant_move_state
-
-    # def _state_get(self):
-    #     '''The state of a picking depends on the state of its related stock.move
-    #         draft: the picking has no line or any one of the lines is draft
-    #         done, draft, cancel: all lines are done / draft / cancel
-    #         confirmed, waiting, assigned, partially_available depends on move_type (all at once or partial)
+    # def _compute_state(self):
+    #     ''' State of a picking depends on the state of its related stock.move
+    #     - Draft: only used for "planned pickings"
+    #     - Waiting: if the picking is not ready to be sent so if
+    #       - (a) no quantity could be reserved at all or if
+    #       - (b) some quantities could be reserved and the shipping policy is "deliver all at once"
+    #     - Waiting another move: if the picking is waiting for another move
+    #     - Ready: if the picking is ready to be sent so if:
+    #       - (a) all quantities are reserved or if
+    #       - (b) some quantities could be reserved and the shipping policy is "as soon as possible"
+    #     - Done: if the picking is done.
+    #     - Cancelled: if the picking is cancelled
     #     '''
-    #     res = {}
-    #     for pick in self.browse():
-    #         if not pick.move_lines:
-    #             res[pick.id] = pick.launch_pack_operations and 'assigned' or 'draft'
-    #             continue
-    #         if any([x.state == 'draft' for x in pick.move_lines]):
-    #             res[pick.id] = 'draft'
-    #             continue
-    #         if any([x.state == 'to_pay' for x in pick.move_lines]):
-    #             res[pick.id] = 'to_pay'
-    #             continue
-    #         if all([x.state == 'cancel' for x in pick.move_lines]):
-    #             res[pick.id] = 'cancel'
-    #             continue
-    #         if all([x.state in ('cancel', 'done') for x in pick.move_lines]):
-    #             res[pick.id] = 'done'
-    #             continue
-    #
-    #         order = {'confirmed': 0, 'waiting': 1, 'assigned': 2}
-    #         order_inv = {0: 'confirmed', 1: 'waiting', 2: 'assigned'}
-    #         lst = [order[x.state] for x in pick.move_lines if x.state not in ('cancel', 'done')]
-    #         if pick.move_type == 'one':
-    #             res[pick.id] = order_inv[min(lst)]
+    #     if not self.move_lines:
+    #         self.state = 'draft'
+    #     elif any(move.state == 'draft' for move in self.move_lines):  # TDE FIXME: should be all ?
+    #         self.state = 'draft'
+    #     elif all(move.state == 'to_pay' for move in self.move_lines):
+    #         self.state = 'to_pay'
+    #     elif all(move.state == 'cancel' for move in self.move_lines):
+    #         self.state = 'cancel'
+    #     elif all(move.state in ['cancel', 'done'] for move in self.move_lines):
+    #         self.state = 'done'
+    #     else:
+    #         relevant_move_state = self.move_lines._get_relevant_state_among_moves()
+    #         if relevant_move_state == 'partially_available':
+    #             self.state = 'assigned'
     #         else:
-    #             # we are in the case of partial delivery, so if all move are assigned, picking
-    #             # should be assign too, else if one of the move is assigned, or partially available, picking should be
-    #             # in partially available state, otherwise, picking is in waiting or confirmed state
-    #             res[pick.id] = order_inv[max(lst)]
-    #             if not all(x == 2 for x in lst):
-    #                 if any(x == 2 for x in lst):
-    #                     res[pick.id] = 'partially_available'
-    #                 else:
-    #                     # if all moves aren't assigned, check if we have one product partially available
-    #
-    #                     for move in pick.move_lines:
-    #                         if move.partially_available:
-    #                             res[pick.id] = 'partially_available'
-    #                             break
-    #     return res
+    #             self.state = relevant_move_state
+
+    def _state_get(self):
+        '''The state of a picking depends on the state of its related stock.move
+            draft: the picking has no line or any one of the lines is draft
+            done, draft, cancel: all lines are done / draft / cancel
+            confirmed, waiting, assigned, partially_available depends on move_type (all at once or partial)
+        '''
+        res = {}
+        for pick in self.browse():
+            if not pick.move_lines:
+                res[pick.id] = pick.launch_pack_operations and 'assigned' or 'draft'
+                continue
+            if any([x.state == 'draft' for x in pick.move_lines]):
+                res[pick.id] = 'draft'
+                continue
+            if any([x.state == 'to_pay' for x in pick.move_lines]):
+                res[pick.id] = 'to_pay'
+                continue
+            if all([x.state == 'cancel' for x in pick.move_lines]):
+                res[pick.id] = 'cancel'
+                continue
+            if all([x.state in ('cancel', 'done') for x in pick.move_lines]):
+                res[pick.id] = 'done'
+                continue
+    
+            order = {'confirmed': 0, 'waiting': 1, 'assigned': 2}
+            order_inv = {0: 'confirmed', 1: 'waiting', 2: 'assigned'}
+            lst = [order[x.state] for x in pick.move_lines if x.state not in ('cancel', 'done')]
+            if pick.move_type == 'one':
+                res[pick.id] = order_inv[min(lst)]
+            else:
+                # we are in the case of partial delivery, so if all move are assigned, picking
+                # should be assign too, else if one of the move is assigned, or partially available, picking should be
+                # in partially available state, otherwise, picking is in waiting or confirmed state
+                res[pick.id] = order_inv[max(lst)]
+                if not all(x == 2 for x in lst):
+                    if any(x == 2 for x in lst):
+                        res[pick.id] = 'partially_available'
+                    else:
+                        # if all moves aren't assigned, check if we have one product partially available
+    
+                        for move in pick.move_lines:
+                            if move.partially_available:
+                                res[pick.id] = 'partially_available'
+                                break
+        return res
 
     def _get_pickings(self):
         res = set()
