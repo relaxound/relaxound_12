@@ -58,12 +58,12 @@ class stock_move(models.Model):
                 to_assign[key] |= move
 
         # create procurements for make to order moves
-        for move in move_create_proc:
-            values = move._prepare_procurement_values()
-            origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
-            # self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
-            #                                   move.rule_id and move.rule_id.name or "/", origin,
-            #                                   values)
+        # for move in move_create_proc:
+        #     values = move._prepare_procurement_values()
+        #     origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
+        #     # self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+        #     #                                   move.rule_id and move.rule_id.name or "/", origin,
+        #     #                                   values)
 
         move_to_confirm.write({'state': 'confirmed'})
         move_to_pay.write({'state': 'to_pay'})
@@ -104,12 +104,12 @@ class stock_move(models.Model):
                 to_assign[key] |= move
 
         # create procurements for make to order moves
-        for move in move_create_proc:
-            values = move._prepare_procurement_values()
-            origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
-            # self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
-            #                                   move.rule_id and move.rule_id.name or "/", origin,
-            #                                   values)
+        # for move in move_create_proc:
+        #     values = move._prepare_procurement_values()
+        #     origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
+        #     # self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+        #     #                                   move.rule_id and move.rule_id.name or "/", origin,
+        #     #                                   values)
 
         move_to_confirm.write({'state': 'confirmed'})
         (move_waiting | move_create_proc).write({'state': 'waiting'})
