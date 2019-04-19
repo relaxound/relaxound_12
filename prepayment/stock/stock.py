@@ -142,18 +142,18 @@ class stock_picking(models.Model):
                     if paid:
                         picking.action_payed()
 
-    # @api.multi
-    # def action_confirm(self):
-    #     self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'draft' and not pl.move_ids)._generate_moves()
-    #     # call `_action_confirm` on every draft move
-    #     self.mapped('move_lines') \
-    #         .filtered(lambda move: move.state == 'draft') \
-    #         ._action_confirm()
-    #     # call `_action_assign` on every confirmed move which location_id bypasses the reservation
-    #     self.filtered(lambda picking: picking.location_id.usage in (
-    #     'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
-    #         .mapped('move_lines')._action_assign()
-    #     return True
+    @api.multi
+    def action_confirm(self):
+        self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'draft' and not pl.move_ids)._generate_moves()
+        # call `_action_confirm` on every draft move
+        self.mapped('move_lines') \
+            .filtered(lambda move: move.state == 'draft') \
+            ._action_confirm()
+        # call `_action_assign` on every confirmed move which location_id bypasses the reservation
+        self.filtered(lambda picking: picking.location_id.usage in (
+        'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+            .mapped('move_lines')._action_assign()
+        return True
 
     def action_payed(self):
         self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'to_pay' and not pl.move_ids)._generate_moves()
@@ -162,9 +162,9 @@ class stock_picking(models.Model):
             .filtered(lambda move: move.state == 'to_pay') \
             ._action_payed()
         # call `_action_assign` on every confirmed move which location_id bypasses the reservation
-        self.filtered(lambda picking: picking.location_id.usage in (
-            'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
-            .mapped('move_lines')._action_assign()
+        # self.filtered(lambda picking: picking.location_id.usage in (
+        #     'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+        #     .mapped('move_lines')._action_assign()
         return True
 
     @api.depends('move_type', 'move_lines.state', 'move_lines.picking_id')
