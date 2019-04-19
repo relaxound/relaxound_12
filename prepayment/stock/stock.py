@@ -6,15 +6,14 @@ class stock_move(models.Model):
     _inherit = 'stock.move'
 
     state = fields.Selection([
-        ('draft', 'New'),
-        ('to_pay', 'Waiting Payment'),
+        ('draft', 'New'), ('to_pay', 'Waiting Payment'),
         ('cancel', 'Cancelled'),
         ('waiting', 'Waiting Another Move'),
         ('confirmed', 'Waiting Availability'),
         ('partially_available', 'Partially Available'),
         ('assigned', 'Available'),
         ('done', 'Done')], string='Status',
-        copy=False, default='draft', index=True, readonly=True,
+        copy=False, default='draft', index=True, readonly=True, track_visibility='onchange',
         help="* New: When the stock move is created and not yet confirmed.\n"
              "* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
              "* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to be manufactured...\n"
@@ -36,7 +35,6 @@ class stock_move(models.Model):
         :param: merge: According to this boolean, a newly confirmed move will be merged
         in another move of the same picking sharing its characteristics.
         """
-        # import pdb;pdb.set_trace()
         move_create_proc = self.env['stock.move']
         move_to_confirm = self.env['stock.move']
         move_waiting = self.env['stock.move']
@@ -85,7 +83,6 @@ class stock_move(models.Model):
         :param: merge: According to this boolean, a newly confirmed move will be merged
         in another move of the same picking sharing its characteristics.
         """
-        # import pdb;pdb.set_trace()
         move_create_proc = self.env['stock.move']
         move_to_confirm = self.env['stock.move']
         move_waiting = self.env['stock.move']
@@ -125,108 +122,105 @@ class stock_move(models.Model):
             return self._merge_moves(merge_into=merge_into)
         return self
 
-class stock_picking(models.Model):
-    _inherit = 'stock.picking'
+# class stock_picking(models.Model):
+#     _inherit = 'stock.picking'
 
-    @api.model
-    def run_prepayment_cron(self):
+#     @api.model
+#     def run_prepayment_cron(self):
 
-        order_obj = self.env['sale.order']
+#         order_obj = self.env['sale.order']
 
-        for picking in self.search([('state', '=like', 'to_pay')]):
-            for sale in order_obj.search([]):
-                if picking in sale.picking_ids:
-                    paid = True
-                    for inv in sale.invoice_ids:
-                        if inv.state != 'paid':
-                            paid = False
-                            break
+#         for picking in self.search([('state', '=like', 'to_pay')]):
+#             for sale in order_obj.search([]):
+#                 if picking in sale.picking_ids:
+#                     paid = True
+#                     for inv in sale.invoice_ids:
+#                         if inv.state != 'paid':
+#                             paid = False
+#                             break
 
-                    if paid:
-                        picking.action_payed()
+#                     if paid:
+#                         picking.action_payed()
 
-    @api.multi
-    def action_confirm(self):
-        pass
-        # # import pdb;pdb.set_trace()
-        # self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'draft' and not pl.move_ids)._generate_moves()
-        # # call `_action_confirm` on every draft move
-        # self.mapped('move_lines') \
-        #     .filtered(lambda move: move.state == 'draft') \
-        #     ._action_confirm()
-        # # call `_action_assign` on every confirmed move which location_id bypasses the reservation
-        # self.filtered(lambda picking: picking.location_id.usage in (
-        # 'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
-        #     .mapped('move_lines')._action_assign()
-        # return True
+#     @api.multi
+#     def action_confirm(self):
+#         self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'draft' and not pl.move_ids)._generate_moves()
+#         # call `_action_confirm` on every draft move
+#         self.mapped('move_lines') \
+#             .filtered(lambda move: move.state == 'draft') \
+#             ._action_confirm()
+#         # call `_action_assign` on every confirmed move which location_id bypasses the reservation
+#         self.filtered(lambda picking: picking.location_id.usage in (
+#         'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+#             .mapped('move_lines')._action_assign()
+#         return True
 
-    def action_payed(self):
-        # import pdb;pdb.set_trace()
-        self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'to_pay' and not pl.move_ids)._generate_moves()
-        # call `_action_confirm` on every draft move
-        self.mapped('move_lines') \
-            .filtered(lambda move: move.state == 'to_pay') \
-            ._action_payed()
-        # call `_action_assign` on every confirmed move which location_id bypasses the reservation
-        self.filtered(lambda picking: picking.location_id.usage in (
-            'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
-            .mapped('move_lines')._action_assign()
-        return True
+#     def action_payed(self):
+#         self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'to_pay' and not pl.move_ids)._generate_moves()
+#         # call `_action_confirm` on every draft move
+#         self.mapped('move_lines') \
+#             .filtered(lambda move: move.state == 'to_pay') \
+#             ._action_payed()
+#         # call `_action_assign` on every confirmed move which location_id bypasses the reservation
+#         self.filtered(lambda picking: picking.location_id.usage in (
+#             'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+#             .mapped('move_lines')._action_assign()
+#         return True
 
-    @api.depends('move_type', 'move_lines.state', 'move_lines.picking_id')
-    @api.one
-    def _compute_state(self):
-        ''' State of a picking depends on the state of its related stock.move
-        - Draft: only used for "planned pickings"
-        - Waiting: if the picking is not ready to be sent so if
-          - (a) no quantity could be reserved at all or if
-          - (b) some quantities could be reserved and the shipping policy is "deliver all at once"
-        - Waiting another move: if the picking is waiting for another move
-        - Ready: if the picking is ready to be sent so if:
-          - (a) all quantities are reserved or if
-          - (b) some quantities could be reserved and the shipping policy is "as soon as possible"
-        - Done: if the picking is done.
-        - Cancelled: if the picking is cancelled
-        '''
-        if not self.move_lines:
-            self.state = 'draft'
-        elif any(move.state == 'draft' for move in self.move_lines):  # TDE FIXME: should be all ?
-            self.state = 'draft'
-        elif all(move.state == 'to_pay' for move in self.move_lines):
-            self.state = 'to_pay'
-        elif all(move.state == 'cancel' for move in self.move_lines):
-            self.state = 'cancel'
-        elif all(move.state in ['cancel', 'done'] for move in self.move_lines):
-            self.state = 'done'
-        else:
-            relevant_move_state = self.move_lines._get_relevant_state_among_moves()
-            if relevant_move_state == 'partially_available':
-                self.state = 'assigned'
-            else:
-                self.state = relevant_move_state
+#     @api.depends('move_type', 'move_lines.state', 'move_lines.picking_id')
+#     @api.one
+#     def _compute_state(self):
+#         ''' State of a picking depends on the state of its related stock.move
+#         - Draft: only used for "planned pickings"
+#         - Waiting: if the picking is not ready to be sent so if
+#           - (a) no quantity could be reserved at all or if
+#           - (b) some quantities could be reserved and the shipping policy is "deliver all at once"
+#         - Waiting another move: if the picking is waiting for another move
+#         - Ready: if the picking is ready to be sent so if:
+#           - (a) all quantities are reserved or if
+#           - (b) some quantities could be reserved and the shipping policy is "as soon as possible"
+#         - Done: if the picking is done.
+#         - Cancelled: if the picking is cancelled
+#         '''
+#         if not self.move_lines:
+#             self.state = 'draft'
+#         elif any(move.state == 'draft' for move in self.move_lines):  # TDE FIXME: should be all ?
+#             self.state = 'draft'
+#         elif all(move.state == 'to_pay' for move in self.move_lines):
+#             self.state = 'to_pay'
+#         elif all(move.state == 'cancel' for move in self.move_lines):
+#             self.state = 'cancel'
+#         elif all(move.state in ['cancel', 'done'] for move in self.move_lines):
+#             self.state = 'done'
+#         else:
+#             relevant_move_state = self.move_lines._get_relevant_state_among_moves()
+#             if relevant_move_state == 'partially_available':
+#                 self.state = 'assigned'
+#             else:
+#                 self.state = relevant_move_state
 
-    state = fields.Selection([('draft', 'New'),
-                                  ('draft', 'Draft'),
-                                  ('to_pay', 'Waiting Payment'),
-                                  ('cancel', 'Cancelled'),
-                                  ('waiting', 'Waiting Another Operation'),
-                                  ('confirmed', 'Waiting Availability'),
-                                  ('partially_available', 'Partially Available'),
-                                  ('assigned', 'Available'),
-                                  ('done', 'Done'),
-                                  ], string='Status', readonly=True, index=True, track_visibility='onchange',
-                                 help="""
-                    * Draft: not confirmed yet and will not be scheduled until confirmed\n
-                    * Waiting Another Operation: waiting for another move to proceed before it becomes automatically available (e.g. in Make-To-Order flows)\n
-                    * Waiting Availability: still waiting for the availability of products\n
-                    * Partially Available: some products are available and reserved\n
-                    * Ready to Transfer: products reserved, simply waiting for confirmation.\n
-                    * Transferred: has been processed, can't be modified or cancelled anymore\n
-                    * Cancelled: has been cancelled, can't be confirmed anymore"""
-                                 )
+#     state = fields.Selection([('draft', 'New'),
+#                                   ('draft', 'Draft'),
+#                                   ('to_pay', 'Waiting Payment'),
+#                                   ('cancel', 'Cancelled'),
+#                                   ('waiting', 'Waiting Another Operation'),
+#                                   ('confirmed', 'Waiting Availability'),
+#                                   ('partially_available', 'Partially Available'),
+#                                   ('assigned', 'Available'),
+#                                   ('done', 'Done'),
+#                                   ], string='Status', readonly=True, index=True, track_visibility='onchange',
+#                                  help="""
+#                     * Draft: not confirmed yet and will not be scheduled until confirmed\n
+#                     * Waiting Another Operation: waiting for another move to proceed before it becomes automatically available (e.g. in Make-To-Order flows)\n
+#                     * Waiting Availability: still waiting for the availability of products\n
+#                     * Partially Available: some products are available and reserved\n
+#                     * Ready to Transfer: products reserved, simply waiting for confirmation.\n
+#                     * Transferred: has been processed, can't be modified or cancelled anymore\n
+#                     * Cancelled: has been cancelled, can't be confirmed anymore"""
+#                                  )
 
-    @api.one
-    def action_to_pay(self):
-            for ml in self.move_lines:
-                ml.state = 'to_pay'
-                return True
+#     @api.one
+#     def action_to_pay(self):
+#             for ml in self.move_lines:
+#                 ml.state = 'to_pay'
+#                 return True
