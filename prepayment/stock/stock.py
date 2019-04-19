@@ -6,14 +6,15 @@ class stock_move(models.Model):
     _inherit = 'stock.move'
 
     state = fields.Selection([
-        ('draft', 'New'), ('to_pay', 'Waiting Payment'),
+        ('draft', 'New'),
+        ('to_pay', 'Waiting Payment'),
         ('cancel', 'Cancelled'),
         ('waiting', 'Waiting Another Move'),
         ('confirmed', 'Waiting Availability'),
         ('partially_available', 'Partially Available'),
         ('assigned', 'Available'),
         ('done', 'Done')], string='Status',
-        copy=False, default='draft', index=True, readonly=True, track_visibility='onchange',
+        copy=False, default='draft', index=True, readonly=True,
         help="* New: When the stock move is created and not yet confirmed.\n"
              "* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
              "* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to be manufactured...\n"
@@ -35,6 +36,7 @@ class stock_move(models.Model):
         :param: merge: According to this boolean, a newly confirmed move will be merged
         in another move of the same picking sharing its characteristics.
         """
+        # import pdb;pdb.set_trace()
         move_create_proc = self.env['stock.move']
         move_to_confirm = self.env['stock.move']
         move_waiting = self.env['stock.move']
@@ -83,6 +85,7 @@ class stock_move(models.Model):
         :param: merge: According to this boolean, a newly confirmed move will be merged
         in another move of the same picking sharing its characteristics.
         """
+        # import pdb;pdb.set_trace()
         move_create_proc = self.env['stock.move']
         move_to_confirm = self.env['stock.move']
         move_waiting = self.env['stock.move']
@@ -144,27 +147,30 @@ class stock_picking(models.Model):
 
     @api.multi
     def action_confirm(self):
-        self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'draft' and not pl.move_ids)._generate_moves()
-        # call `_action_confirm` on every draft move
-        self.mapped('move_lines') \
-            .filtered(lambda move: move.state == 'draft') \
-            ._action_confirm()
-        # call `_action_assign` on every confirmed move which location_id bypasses the reservation
-        self.filtered(lambda picking: picking.location_id.usage in (
-        'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
-            .mapped('move_lines')._action_assign()
-        return True
+        pass
+        # # import pdb;pdb.set_trace()
+        # self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'draft' and not pl.move_ids)._generate_moves()
+        # # call `_action_confirm` on every draft move
+        # self.mapped('move_lines') \
+        #     .filtered(lambda move: move.state == 'draft') \
+        #     ._action_confirm()
+        # # call `_action_assign` on every confirmed move which location_id bypasses the reservation
+        # self.filtered(lambda picking: picking.location_id.usage in (
+        # 'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+        #     .mapped('move_lines')._action_assign()
+        # return True
 
     def action_payed(self):
+        # import pdb;pdb.set_trace()
         self.mapped('package_level_ids').filtered(lambda pl: pl.state == 'to_pay' and not pl.move_ids)._generate_moves()
         # call `_action_confirm` on every draft move
         self.mapped('move_lines') \
             .filtered(lambda move: move.state == 'to_pay') \
             ._action_payed()
         # call `_action_assign` on every confirmed move which location_id bypasses the reservation
-        # self.filtered(lambda picking: picking.location_id.usage in (
-        #     'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
-        #     .mapped('move_lines')._action_assign()
+        self.filtered(lambda picking: picking.location_id.usage in (
+            'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+            .mapped('move_lines')._action_assign()
         return True
 
     @api.depends('move_type', 'move_lines.state', 'move_lines.picking_id')
