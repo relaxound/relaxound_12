@@ -19,16 +19,16 @@ class stock_move(models.Model):
              "* Available: When products are reserved, it is set to \'Available\'.\n"
              "* Done: When the shipment is processed, the state is \'Done\'.")
 
-    # def _search_picking_for_assignation(self):
-    #     self.ensure_one()
-    #     picking = self.env['stock.picking'].search([
-    #         ('group_id', '=', self.group_id.id),
-    #         ('location_id', '=', self.location_id.id),
-    #         ('location_dest_id', '=', self.location_dest_id.id),
-    #         ('picking_type_id', '=', self.picking_type_id.id),
-    #         ('printed', '=', False),
-    #         ('state', 'in', ['draft', 'confirmed', 'waiting', 'partially_available','to_pay'])], limit=1)
-    #     return picking
+    def _search_picking_for_assignation(self):
+        self.ensure_one()
+        picking = self.env['stock.picking'].search([
+            ('group_id', '=', self.group_id.id),
+            ('location_id', '=', self.location_id.id),
+            ('location_dest_id', '=', self.location_dest_id.id),
+            ('picking_type_id', '=', self.picking_type_id.id),
+            ('printed', '=', False),
+            ('state', 'in', ['draft', 'confirmed', 'waiting', 'partially_available','to_pay'])], limit=1)
+        return picking
     def _action_payed(self, merge=True, merge_into=False):
         """ Confirms stock move or put it in waiting if it's linked to another move.
         :param: merge: According to this boolean, a newly confirmed move will be merged
