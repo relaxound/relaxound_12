@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="request_quote_button" inherit_id="website_sale.product" name="Quote Button On Product"
+    <!-- <template id="request_quote_button" inherit_id="website_sale.product" name="Quote Button On Product"
               customize_show="True">
         <xpath expr="//div[@id='product_details']" position="after">
             <div id="custom_product_details">
@@ -23,15 +23,15 @@
                 </form>
             </div>
         </xpath>
-    </template>
+    </template> -->
 
-    <template id="custom_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+    <!-- <template id="custom_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/request_quote/static/src/js/crm_sale_quote.js"></script>
         </xpath>
-    </template>
+    </template> -->
 
-    <template id="quotation" name="Quotation" customize_show="True">
+    <!-- <template id="quotation" name="Quotation" customize_show="True">
         <t t-call="website.layout">
             <t t-set="additional_title">Quotation</t>
             <div id="quotations" class="row">
@@ -119,7 +119,7 @@
                 <div class="col-md-2"></div>
             </div>
         </t>
-    </template>
+    </template> -->
 
     <template id="contactus-thank-you" name="Contact us">
         <t t-call="website.layout">
@@ -158,7 +158,7 @@
         </t>
     </template>
 
-    <record id="contactus_thanks" model="website.page">
+    <!-- <record id="contactus_thanks" model="website.page">
         <field name="name">Thanks (Contact us)</field>
         <field name="type">qweb</field>
         <field name="url">/contactus-thank-you</field>
@@ -206,10 +206,10 @@
                 </t>
             </t>
         </field>
-    </record>
+    </record> -->
 
 
-    <data>
+    <!-- data>
         <record id="crm.model_crm_lead" model="ir.model">
             <field name="website_form_default_field_id" ref="crm.field_crm_lead__description"/>
             <field name="website_form_access">True</field>
@@ -233,6 +233,6 @@
             ]"/>
         </function>
     </data>
-
+ -->
 
 </odoo>
