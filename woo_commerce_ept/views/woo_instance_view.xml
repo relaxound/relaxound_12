@@ -5,7 +5,7 @@
 	    	<field name="name">woo.instance.ept.kanban</field>
 	        <field name="model">woo.instance.ept</field>
 	        <field name="arch" type="xml">
-	        	<kanban class="oe_background_grey o_kanban_dashboard o_woo_kanban" create="false">
+	        	<kanban class="oe_background_grey o_kanban_dashboard o_woo_kanban" create="false" style="width:50%%">
                    	<field name="name"/>                    
                    	<field name="color"/>
                    	<field name="product_count"/>
@@ -27,7 +27,7 @@
                    	<field name="refund_invoice_count"/>
                    	<field name="coupons_count"/>
                    	<templates>
-                   		<t t-name="kanban-box">
+                   		<t t-name="kanban-box" >
 	                        <div t-attf-class="#{kanban_color(record.color.raw_value)}">
 	                        	<div class="o_kanban_card_header">
 	                                <div class="o_kanban_card_header_title">
@@ -40,12 +40,12 @@
 	                            </div>
 	                            <div class="container o_kanban_card_content o_visible">
 	                                <div class="row">
-	                                    <div class="col-xs-4 o_kanban_primary_left">
+	                                    <div class="col-xs-6 o_kanban_primary_left">
 	                                    	<button class="btn btn-primary" name="%(woo_commerce_ept.action_wizard_woo_instance_processes_ept)d" type="action">
 	                                            <span>Perform Operation</span>
 	                                        </button>
 	                                    </div>
-	                                    <div class="col-xs-4 o_kanban_primary_right">	                                        
+	                                    <!-- <div class="col-xs-6 o_kanban_primary_right">	                                        
 	                                        <div class="row">
 	                                        	<div groups="woo_commerce_ept.group_woo_manager_ept">
 		                                        	<a name="%(woo_commerce_ept.action_woo_instance_config)d" title = "Settings" type="action">Settings</a><br/>		                                            
@@ -53,23 +53,138 @@
                                                 	<a name="%(woo_commerce_ept.action_mismatch_instance_log_ept)d" title="Mismatch Logs" type="action">Mismatch Logs</a>                                               	
 	                                        	</div>
 	                                        </div>
-	                                    </div>
+	                                    </div> -->
 	                                    <div class="col-xs-4 o_kanban_primary_right">	                                        
 	                                        <div class="row">
 	                                        	<div class="col-xs-8">
-		                                        	<a name="%(woo_commerce_ept.action_woo_product_instance_ept)d" type="action" title="Products"><t t-esc="record.product_count.value"/> Products</a>		                                            
+		                                        	<!-- <a name="%(woo_commerce_ept.action_woo_product_instance_ept)d" type="action" title="Products"><t t-esc="record.product_count.value"/> Products</a>		                                            
                                                 	<a name="%(woo_commerce_ept.action_woo_coupons_ept_instance)d" type="action" title="Coupons"><t t-esc="record.coupons_count.value"/> Coupons</a>
-                                                	<a name="%(woo_commerce_ept.action_woo_sale_instance_ept)d" type="action" title="Orders"><t t-esc="record.sale_order_count.value"/> Orders</a>                                               	
-                                                	<a name="%(woo_commerce_ept.action_woo_picking_instance_ept)d" type="action" title="Delivery"><t t-esc="record.picking_count.value"/> Delivery</a>		                                            
-                                                	<a name="%(woo_commerce_ept.action_woo_invoice_instance_ept)d" type="action" title="Invoices"><t t-esc="record.invoice_count.value"/> Invoices</a>
+                                                	<a name="%(woo_commerce_ept.action_woo_sale_instance_ept)d" type="action" title="Orders"><t t-esc="record.sale_order_count.value"/> Orders</a> -->                                               	
+                                                	<!-- <a name="%(woo_commerce_ept.action_woo_picking_instance_ept)d" type="action" title="Delivery"><t t-esc="record.picking_count.value"/> Delivery</a>		                                            
+                                                	<a name="%(woo_commerce_ept.action_woo_invoice_instance_ept)d" type="action" title="Invoices"><t t-esc="record.invoice_count.value"/> Invoices</a> -->
                                                 </div>
 	                                        </div>
 	                                    </div>
 
-                                	</div>                                	
-	                            </div>
+                                	</div> 
+                                	<table>
+                                		<tr>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_instance_config)d" title = "Settings" type="action">Settings</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.act_sale_workflow_config_instance_form)d" title = "Financial Status" type="action">Financial Status</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_mismatch_instance_log_ept)d" title="Mismatch Logs" type="action">Mismatch Logs</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_product_instance_ept)d" type="action" title="Products"><t t-esc="record.product_count.value"/> Products</a>
+                                			</td>
+                                		</tr>
+                                		<tr>
+                                			
+                                			<td  width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_coupons_ept_instance)d" type="action" title="Coupons"><t t-esc="record.coupons_count.value"/> Coupons</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_sale_instance_ept)d" type="action" title="Orders"><t t-esc="record.sale_order_count.value"/> Orders</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_picking_instance_ept)d" type="action" title="Delivery"><t t-esc="record.picking_count.value"/> Delivery</a>
+                                			</td>
+                                			<td width="40">
+                                				<a name="%(woo_commerce_ept.action_woo_invoice_instance_ept)d" type="action" title="Invoices"><t t-esc="record.invoice_count.value"/> Invoices</a>
+                                			</td>
+                                		</tr>
 
-	                            <div class="container o_kanban_card_manage_pane o_invisible">
+
+                                	</table>
+                                	<table>
+                                		<tr>
+                                			<th class="text-left " align="left">
+                                				<span>Products</span>
+                                			</th>
+                                			<th class="text-center " align="center" width="40%">
+                                				<span>Sales</span>
+                                			</th>
+                                			<th class="text-left " align="left" width="40%">
+                                				<span>Delivery</span>
+                                			</th>
+                                			<th width="40%">
+                                				<span>Invoices</span>
+                                			</th>
+                                		</tr>
+                                		<tr>
+                                			<td class="text-left " align="left">
+                                				<a name="%(woo_commerce_ept.action_woo_product_exported_ept)d" type="action" title="Exported"><t t-esc="record.exported_product_count.value"/> Exported</a>
+                                			</td>
+                                			<td class="text-center " align="left" width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_instance_sale_quotation)d" type="action" title="Quotations"><t t-esc="record.quotation_count.raw_value"/> Quotations</a>
+                                				
+                                			</td>
+                                			<td class="text-left " align="left" width="40%">
+                                				<a name="%(woo_commerce_ept.action_picking_view_confirm_ept)d" type="action" title="Waiting Availability"><t t-esc="record.confirmed_picking_count.value"/> Waiting Availability</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_invoice_woo_invoices_open)d" type="action" title="Open"><t t-esc="record.open_invoice_count.raw_value"/> Open</a>
+                                				
+                                			</td>
+                                		</tr>
+                                		<tr>
+                                			<td class="text-left " align="left">
+                                				<a name="%(woo_commerce_ept.action_woo_product_not_exported_ept)d" type="action" title="Ready to Export"><t t-esc="record.ready_to_expor_product_count.value"/> Ready to Export</a>
+                                			</td>
+                                			
+                                			<td class="text-center " align="center" width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_instance_sales_order_only)d" type="action" title="Sale Orders"><t t-esc="record.order_count.raw_value"/> Sale Orders</a>
+                                			</td>
+                                			<td class="text-left " align="left" width="40%">
+                                				<a name="%(woo_commerce_ept.action_picking_view_partially_available_ept)d" type="action" title="Partially Available"><t t-esc="record.partially_available_picking_count.value"/> Partially Available</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_invoice_woo_invoices_paid)d" type="action" title="Paid"><t t-esc="record.paid_invoice_count.raw_value"/> Paid</a>
+                                			</td>
+                                		</tr>
+                                		<tr>
+                                			<td class="text-left " align="left">
+                                				<a name="%(woo_commerce_ept.action_woo_product_published_ept)d" type="action" title="Published"><t t-esc="record.published_product_count.value"/> Published</a>
+                                			</td>
+                                			<td class="text-center " align="center" width="40%">
+                                				<a name="%(woo_commerce_ept.action_woo_instance_payment_gateway_ept)d" type="action" title="Payment Method(s)">Payment Method(s)</a>
+                                			</td>
+                                			<td class="text-left " align="left" width="40%">
+                                				<a name="%(woo_commerce_ept.action_picking_view_assigned_ept)d" type="action" title="Ready to Transfer"><t t-esc="record.assigned_picking_count.value"/> Ready to Transfer</a>
+                                			</td>
+                                			<td width="40%">
+                                				<a name="%(woo_commerce_ept.action_invoice_woo_invoices_refund)d" type="action" title="Refunds"><t t-esc="record.refund_invoice_count.raw_value"/> Refunds</a>
+
+                                			</td>
+                                		</tr>
+                                		<tr>
+                                			<td class="text-left " align="left">
+                                				<a name="%(woo_commerce_ept.action_woo_product_not_published_ept)d" type="action" title="UnPublished"><t t-esc="record.unpublished_product_count.value"/> UnPublished</a>
+                                			</td>
+                                			<td class="text-center " align="center" width="40%">
+                                				
+                                			</td>
+                                			<td class="text-left " align="left" width="40%">
+                                				<a name="%(woo_commerce_ept.action_picking_view_done_ept)d" type="action" title="Transfered"><t t-esc="record.done_picking_count.value"/> Transfered</a>
+                                			</td>
+                                			<td width="40%" >
+
+                                			</td>
+                                		</tr>
+
+
+
+
+                                	</table>
+                                	                              	
+	                            </div>
+	                            
+
+	                            <!-- <div class="container o_kanban_card_manage_pane o_invisible">
 	                                <div class="row">
 	                                	<div class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_new">
 	                                		<div class="o_kanban_card_manage_title">
@@ -87,9 +202,9 @@
 	                                        <div>
 	                                            <a name="%(woo_commerce_ept.action_woo_product_not_published_ept)d" type="action" title="UnPublished"><t t-esc="record.unpublished_product_count.value"/> UnPublished</a>
 	                                        </div>
-	                                	</div>
+	                                	</div> -->
 
-	                                	<div class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">
+	                                	<!-- <div class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">
 	                                    	<div class="o_kanban_card_manage_title">
 												<span>Sales</span>
                                            	</div>
@@ -102,8 +217,8 @@
 	                                        <div>
 	                                            <a name="%(woo_commerce_ept.action_woo_instance_payment_gateway_ept)d" type="action" title="Payment Method(s)">Payment Method(s)</a>
 	                                        </div>
-                                        </div>
-                                        <div class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_new">
+                                        </div> -->
+                                       <!--  <div class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_new">
 	                                    	<div class="o_kanban_card_manage_title">
 												<span>Delivery</span>
                                            	</div>
@@ -119,9 +234,9 @@
 	                                        <div>
 	                                            <a name="%(woo_commerce_ept.action_picking_view_done_ept)d" type="action" title="Transfered"><t t-esc="record.done_picking_count.value"/> Transfered</a>
 	                                        </div>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">
+                                        <!-- <div class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">
 	                                    	<div class="o_kanban_card_manage_title">
 												<span>Invoices</span>
                                            	</div>
@@ -134,14 +249,14 @@
 	                                        <div>
 	                                            <a name="%(woo_commerce_ept.action_invoice_woo_invoices_refund)d" type="action" title="Refunds"><t t-esc="record.refund_invoice_count.raw_value"/> Refunds</a>
 	                                        </div>
-                                        </div>
-	                                </div>
+                                        </div> -->
+	                               <!--  </div>
 	                                <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
 	                                    <div class="col-xs-8">
 	                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
 	                                    </div>                                            
                                     </div>
-	                            </div>
+	                            </div> -->
 	                        </div>
 	                    </t>
                    	</templates>

@@ -81,8 +81,6 @@ class sale_report(models.Model):
                       join res_partner partner on s.partner_id = partner.id
                         left join product_product p on (l.product_id=p.id)
                             left join product_template t on (p.product_tmpl_id=t.id)
-                    left join product_uom u on (u.id=l.product_uom)
-                    left join product_uom u2 on (u2.id=t.uom_id)
                     left join product_pricelist pp on (s.pricelist_id = pp.id)
                     left join currency_rate cr on (cr.currency_id = pp.currency_id and
                         cr.company_id = s.company_id and

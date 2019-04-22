@@ -1,14 +1,12 @@
 {
     'name': 'Odoo WooCommerce Connector',
     'version': '12.0',
-    'license': 'OPL-1',
+    
     'category': 'Sale',
     'summary' : 'Integrate & Manage all your WooCommerce operations from Odoo',
     'description': """
 """,
-    'author': 'Emipro Technologies Pvt. Ltd.',
-    'website': 'http://www.emiprotechnologies.com/',
-    'maintainer': 'Emipro Technologies Pvt. Ltd.',
+
     'depends': ['base','delivery','auto_invoice_workflow_ept'],    
     'data': [
              'security/group.xml',
@@ -43,10 +41,7 @@
     'installable': True,
     'auto_install': False,
     'application' : True,
-    'pre_init_hook':'version_check',  
-    'live_test_url' : 'https://shop.emiprotechnologies.com/odoo-woocommerce-connector.html#request-a-demo', 
-    'price': 299.00,
-    'currency': 'EUR',
+    'pre_init_hook':'version_check',
     'active': False,
     'images': ['static/description/main_screen.jpg'],
 }

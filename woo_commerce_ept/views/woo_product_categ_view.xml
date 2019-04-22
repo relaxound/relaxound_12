@@ -77,6 +77,7 @@
             <field name="name">Product Categories</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">woo.product.categ.ept</field>
+            <field name="src_model">woo.product.categ.ept</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -85,6 +86,7 @@
             <field name="name">Product Categories</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">woo.product.categ.ept</field>
+            <field name="src_model">woo.product.categ.ept</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('woo_instance_id','=',active_id)]</field>
