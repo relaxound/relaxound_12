@@ -29,7 +29,7 @@ class stock_move(models.Model):
     #         ('printed', '=', False),
     #         ('state', 'in', ['draft', 'confirmed', 'waiting', 'partially_available','to_pay'])], limit=1)
     #     return picking
-      def _action_payed(self, merge=True, merge_into=False):
+    def _action_payed(self, merge=True, merge_into=False):
         """ Confirms stock move or put it in waiting if it's linked to another move.
         :param: merge: According to this boolean, a newly confirmed move will be merged
         in another move of the same picking sharing its characteristics.
@@ -151,7 +151,7 @@ class stock_picking(models.Model):
             ._action_confirm()
         # call `_action_assign` on every confirmed move which location_id bypasses the reservation
         self.filtered(lambda picking: picking.location_id.usage in (
-        'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
+            'supplier', 'inventory', 'production') and picking.state == 'confirmed') \
             .mapped('move_lines')._action_assign()
         return True
 
@@ -200,16 +200,16 @@ class stock_picking(models.Model):
                 self.state = relevant_move_state
 
     state = fields.Selection([('draft', 'New'),
-                                  ('draft', 'Draft'),
-                                  ('to_pay', 'Waiting Payment'),
-                                  ('cancel', 'Cancelled'),
-                                  ('waiting', 'Waiting Another Operation'),
-                                  ('confirmed', 'Waiting Availability'),
-                                  ('partially_available', 'Partially Available'),
-                                  ('assigned', 'Available'),
-                                  ('done', 'Done'),
-                                  ], string='Status', readonly=True, index=True, track_visibility='onchange',
-                                 help="""
+                              ('draft', 'Draft'),
+                              ('to_pay', 'Waiting Payment'),
+                              ('cancel', 'Cancelled'),
+                              ('waiting', 'Waiting Another Operation'),
+                              ('confirmed', 'Waiting Availability'),
+                              ('partially_available', 'Partially Available'),
+                              ('assigned', 'Available'),
+                              ('done', 'Done'),
+                              ], string='Status', readonly=True, index=True, track_visibility='onchange',
+                             help="""
                     * Draft: not confirmed yet and will not be scheduled until confirmed\n
                     * Waiting Another Operation: waiting for another move to proceed before it becomes automatically available (e.g. in Make-To-Order flows)\n
                     * Waiting Availability: still waiting for the availability of products\n
@@ -217,10 +217,10 @@ class stock_picking(models.Model):
                     * Ready to Transfer: products reserved, simply waiting for confirmation.\n
                     * Transferred: has been processed, can't be modified or cancelled anymore\n
                     * Cancelled: has been cancelled, can't be confirmed anymore"""
-                                 )
+                             )
 
     @api.one
     def action_to_pay(self):
-            for ml in self.move_lines:
-                ml.state = 'to_pay'
-                return True
+        for ml in self.move_lines:
+            ml.state = 'to_pay'
+            return True
