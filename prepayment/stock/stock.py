@@ -19,17 +19,17 @@ class stock_move(models.Model):
              "* Available: When products are reserved, it is set to \'Available\'.\n"
              "* Done: When the shipment is processed, the state is \'Done\'.")
 
-    def _search_picking_for_assignation(self):
-        self.ensure_one()
-        picking = self.env['stock.picking'].search([
-            ('group_id', '=', self.group_id.id),
-            ('location_id', '=', self.location_id.id),
-            ('location_dest_id', '=', self.location_dest_id.id),
-            ('picking_type_id', '=', self.picking_type_id.id),
-            ('printed', '=', False),
-            ('state', 'in', ['draft', 'confirmed', 'waiting', 'partially_available','to_pay'])], limit=1)
-        return picking
-    def _action_payed(self, merge=True, merge_into=False):
+    # def _search_picking_for_assignation(self):
+    #     self.ensure_one()
+    #     picking = self.env['stock.picking'].search([
+    #         ('group_id', '=', self.group_id.id),
+    #         ('location_id', '=', self.location_id.id),
+    #         ('location_dest_id', '=', self.location_dest_id.id),
+    #         ('picking_type_id', '=', self.picking_type_id.id),
+    #         ('printed', '=', False),
+    #         ('state', 'in', ['draft', 'confirmed', 'waiting', 'partially_available','to_pay'])], limit=1)
+    #     return picking
+      def _action_payed(self, merge=True, merge_into=False):
         """ Confirms stock move or put it in waiting if it's linked to another move.
         :param: merge: According to this boolean, a newly confirmed move will be merged
         in another move of the same picking sharing its characteristics.
@@ -60,7 +60,7 @@ class stock_move(models.Model):
         for move in move_create_proc:
             values = move._prepare_procurement_values()
             origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
-            self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+            self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.uom_uom, move.location_id,
                                               move.rule_id and move.rule_id.name or "/", origin,
                                               values)
 
@@ -93,7 +93,7 @@ class stock_move(models.Model):
                 move_waiting |= move
             else:
                 if move.procure_method == 'make_to_order':
-                    move_create_proc |= move
+                    move_to_pay |= move
                 else:
                     move_to_confirm |= move
             if move._should_be_assigned():
@@ -106,7 +106,7 @@ class stock_move(models.Model):
         for move in move_create_proc:
             values = move._prepare_procurement_values()
             origin = (move.group_id and move.group_id.name or (move.origin or move.picking_id.name or "/"))
-            self.env['procurement.group'].run(move.product_id, move.product_uom_qty, move.product_uom, move.location_id,
+            self.env['procurement.group'].run(move.product_id, move.uom_uom_qty, move.uom_uom, move.location_id,
                                               move.rule_id and move.rule_id.name or "/", origin,
                                               values)
 
@@ -120,6 +120,7 @@ class stock_move(models.Model):
         if merge:
             return self._merge_moves(merge_into=merge_into)
         return self
+
 
 class stock_picking(models.Model):
     _inherit = 'stock.picking'
