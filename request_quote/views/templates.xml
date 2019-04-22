@@ -158,7 +158,7 @@
         </t>
     </template>
 
-    <!-- <record id="contactus_thanks" model="website.page">
+    <record id="contactus_thanks" model="website.page">
         <field name="name">Thanks (Contact us)</field>
         <field name="type">qweb</field>
         <field name="url">/contactus-thank-you</field>
@@ -206,10 +206,10 @@
                 </t>
             </t>
         </field>
-    </record> -->
+    </record>
 
 
-    <!-- data>
+    data>
         <record id="crm.model_crm_lead" model="ir.model">
             <field name="website_form_default_field_id" ref="crm.field_crm_lead__description"/>
             <field name="website_form_access">True</field>
@@ -233,6 +233,6 @@
             ]"/>
         </function>
     </data>
- -->
+
 
 </odoo>
