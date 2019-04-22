@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="request_quote_button" inherit_id="website_sale.product" name="Quote Button On Product"
+    <!-- <template id="request_quote_button" inherit_id="website_sale.product" name="Quote Button On Product"
               customize_show="True">
         <xpath expr="//div[@id='product_details']" position="after">
             <div id="custom_product_details">
@@ -23,9 +23,9 @@
                 </form>
             </div>
         </xpath>
-    </template>
+    </template> -->
 
-    <!-- <template id="custom_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+    <template id="custom_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/request_quote/static/src/js/crm_sale_quote.js"></script>
         </xpath>
@@ -121,7 +121,7 @@
         </t>
     </template>
 
-    <template id="contactus-thank-you" name="Contact us">
+    <!-- <template id="contactus-thank-you" name="Contact us">
         <t t-call="website.layout">
             <div id="wrap">
                 <div class="oe_structure"/>
@@ -156,9 +156,9 @@
                 <div class="oe_structure"/>
             </div>
         </t>
-    </template>
+    </template> -->
 
-    <record id="contactus_thanks" model="website.page">
+    <!-- <record id="contactus_thanks" model="website.page">
         <field name="name">Thanks (Contact us)</field>
         <field name="type">qweb</field>
         <field name="url">/contactus-thank-you</field>
@@ -232,7 +232,7 @@
                 'question',
             ]"/>
         </function>
-    </data> -->
-
+    </data>
+ -->
 
 </odoo>
