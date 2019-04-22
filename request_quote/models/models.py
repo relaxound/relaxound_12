@@ -142,37 +142,37 @@ class RequestOrderLine(models.Model):
     _name = 'request.order.line'
     _description = 'Request Order Line'
 
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'taxes_id')
-    def _compute_amount(self):
-        for line in self:
-            vals = line._prepare_compute_all_values()
-            taxes = line.taxes_id.compute_all(
-                vals['price_unit'],
-                vals['currency_id'],
-                vals['product_uom_qty'],
-                vals['product'],
-                vals['partner'])
-            line.update({
-                'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
-                'price_total': taxes['total_included'],
-                'price_subtotal': taxes['total_excluded'],
-            })
-
     # @api.depends('product_uom_qty', 'discount', 'price_unit', 'taxes_id')
     # def _compute_amount(self):
-    #     """
-    #     Compute the amounts of the SO line.
-    #     """
     #     for line in self:
-    #         price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+    #         vals = line._prepare_compute_all_values()
     #         taxes = line.taxes_id.compute_all(
-    #             price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id,
-    #             partner=line.order_id.partner_id)
+    #             vals['price_unit'],
+    #             vals['currency_id'],
+    #             vals['product_uom_qty'],
+    #             vals['product'],
+    #             vals['partner'])
     #         line.update({
-    #             'price_tax': taxes['total_included'] - taxes['total_excluded'],
+    #             'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
     #             'price_total': taxes['total_included'],
     #             'price_subtotal': taxes['total_excluded'],
     #         })
+
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'taxes_id')
+    def _compute_amount(self):
+        """
+        Compute the amounts of the SO line.
+        """
+        for line in self:
+            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            taxes = line.taxes_id.compute_all(
+                price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id,
+                partner=line.order_id.partner_id)
+            line.update({
+                'price_tax': taxes['total_included'] - taxes['total_excluded'],
+                'price_total': taxes['total_included'],
+                'price_subtotal': taxes['total_excluded'],
+            })
 
     sequence = fields.Integer(string='Sequence', default=10)
     order_id = fields.Many2one('crm.lead', string='Request Reference',
