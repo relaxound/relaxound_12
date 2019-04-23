@@ -10,24 +10,26 @@
                         <div style="visibility: hidden; position: absolute;">
                             <t attrs="{'invisible': 1}" t-placeholder="select">
                                 <input type="hidden" class="product_id" name="product_id"/>
+                                <input type="hidden" class="product_template_id" name="product_template_id"/>
                                 <t t-if="first_possible_combination" t-call="sale.variants">
                                     <t t-set="ul_class" t-value="'flex-column'" />
                                     <t t-set="parent_combination" t-value="None" />
                                 </t>
+                                <t t-else="">
+                                    <ul class="d-none js_add_cart_variants" t-att-data-attribute_exclusions="{'exclusions: []'}"/>
+                                </t>
                             </t>
                         </div>
-                        <a id="add_to_quote" class="btn btn-primary btn-lg mt8 js_check_product a-submit1" href="#">Get
-                            Quotation
-                        </a>
+                        <a id="add_to_quote" class="btn btn-primary btn-lg mt8 js_check_product a-submit1" href="#">Get Quotation</a>
                     </div>
                 </form>
             </div>
         </xpath>
     </template>
 
-    <!-- <template id="custom_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/request_quote/static/src/js/crm_sale_quote.js"></script>
+    <template id="custom_assets_frontend" inherit_id="website.assets_frontend">
+        <xpath expr="link[last()]" position="after">
+    <script type="text/javascript" src="/request_quote/static/src/js/crm_sale_quote.js"/>
         </xpath>
     </template>
 
@@ -35,7 +37,7 @@
         <t t-call="website.layout">
             <t t-set="additional_title">Quotation</t>
             <div id="quotations" class="row">
-                <div class="col-md-2"></div>
+                <div class="col-md-2"/>
                 <div class="col-md-8">
                     <h1 class="mb32 text-center">Quotation</h1>
                     <div class="oe_structure">
@@ -61,14 +63,14 @@
                                 <label class="col-md-3 col-sm-4 control-label" for="description">Product</label>
                                 <div class="col-md-7 col-sm-8">
                                     <input type="text" class="form-control o_website_form_input" name="product_name"
-                                           id="product_name" required=""></input>
+                                           id="product_name" required=""/>
                                 </div>
                             </div>
                             <div class="form-group form-field o_website_form_required_custom">
                                 <label class="col-md-3 col-sm-4 control-label" for="description">Quantity</label>
                                 <div class="col-md-7 col-sm-8">
                                     <input type="text" class="form-control o_website_form_input" name="product_uom_qty"
-                                           t-att-value="request.params.get('product_uom_qty', '')" required=""></input>
+                                           t-att-value="request.params.get('product_uom_qty', '')" required=""/>
                                 </div>
                             </div>
                             <div class="form-group form-field o_website_form_required">
@@ -103,25 +105,25 @@
                                 <div class="col-md-7 col-sm-8">
                                     <input type="hidden" class="form-control o_website_form_input" id="product_id"
                                            name="product_id" t-att-value="request.params.get('product_id', '')"
-                                           required=""></input>
+                                           required=""/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7 text-center">
                                     <span class="btn btn-primary btn-lg o_website_form_send">Send</span>
-                                    <span id="o_website_form_result"></span>
+                                    <span id="o_website_form_result"/>
                                 </div>
                             </div>
                         </form>
                         <div class="oe_structure"/>
                     </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-2"/>
             </div>
         </t>
-    </template> -->
+    </template>
 
-    <!-- <template id="contactus-thank-you" name="Contact us">
+    <template id="contactus-thank-you" name="Contact us">
         <t t-call="website.layout">
             <div id="wrap">
                 <div class="oe_structure"/>
@@ -137,12 +139,12 @@
                             <p class="mt64">If you have an emergency, do not hesitate to contact us by phone:</p>
                             <ul class="list-unstyled">
                                 <li>
-                                    <i class="fa fa-phone"></i>
+                                    <i class="fa fa-phone"/>
                                     :
                                     <span t-field="res_company.phone"/>
                                 </li>
                                 <li>
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="fa fa-envelope"/>
                                     :
                                     <span t-field="res_company.email"/>
                                 </li>
@@ -156,9 +158,9 @@
                 <div class="oe_structure"/>
             </div>
         </t>
-    </template> -->
+    </template>
 
-    <!-- <record id="contactus_thanks" model="website.page">
+    <record id="contactus_thanks" model="website.page">
         <field name="name">Thanks (Contact us)</field>
         <field name="type">qweb</field>
         <field name="url">/contactus-thank-you</field>
@@ -185,12 +187,12 @@
                                     </p>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <i class="fa fa-phone"></i>
+                                            <i class="fa fa-phone"/>
                                             :
                                             <span t-field="res_company.phone"/>
                                         </li>
                                         <li>
-                                            <i class="fa fa-envelope"></i>
+                                            <i class="fa fa-envelope"/>
                                             :
                                             <span t-field="res_company.email"/>
                                         </li>
@@ -232,7 +234,8 @@
                 'question',
             ]"/>
         </function>
+    
     </data>
- -->
+
 
 </odoo>
