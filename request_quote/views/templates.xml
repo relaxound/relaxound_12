@@ -11,10 +11,10 @@
                             <t attrs="{'invisible': 1}" t-placeholder="select">
                                 <input type="hidden" class="product_id" name="product_id"/>
                                 <input type="hidden" class="product_template_id" name="product_template_id"/>
-                                <!-- <t t-if="first_possible_combination" t-call="sale.variants">
+                                <t t-if="first_possible_combination" t-call="sale.variants">
                                     <t t-set="ul_class" t-value="'flex-column'" />
                                     <t t-set="parent_combination" t-value="None" />
-                                </t> -->
+                                </t>
                                 <!-- <t t-else="">
                                     <ul class="d-none js_add_cart_variants" t-att-data-attribute_exclusions="{'exclusions: []'}"/>
                                 </t> -->
