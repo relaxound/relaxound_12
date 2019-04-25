@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	 <record id="product_color_template_form_view" model="ir.ui.view">
+            <field name="name">product_color_template_form_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field eval="16" name="priority"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='name']" position="after">
+                    <field name="color_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_color_template_tree_view" model="ir.ui.view">
+            <field name="name">product_color_template_tree_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view" />
+            <field eval="16" name="priority"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='name']" position="after">
+                    <field name="color_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_color_template_kanban_view" model="ir.ui.view">
+            <field name="name">product_color_template_kanban_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view" />
+            <field eval="16" name="priority"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='name']" position="after">
+                    <span t-if="record.color_id.value"> (<field name="color_id"/>)</span>
+                </xpath>
+            </field>
+        </record>
+                
+        <record id="product_color_form_view" model="ir.ui.view">
+            <field name="name">product_color_form_view</field>
+            <field name="model">product.color</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+	            <form string="Color">
+					<sheet>
+		            	<group>
+		            		<field name="name"/>
+		            	</group>
+		            </sheet>
+		        </form>
+            </field>
+        </record>
+    </data>
+</odoo>
