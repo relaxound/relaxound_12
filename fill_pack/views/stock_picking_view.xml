@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='move_ids_without_package']" position="after">
                     <field name="sale_description"/>
-                    <button class="oe_link oe_right" name="fill_pack" type="object" string="&#8594;Fill in" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}" groups="stock.group_tracking_lot"/>
+                    <button class="oe_link oe_right" name="fill_pack" type="object" string="Fill in" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}" groups="stock.group_tracking_lot"/>
                 </xpath>
             </field>
         </record>
