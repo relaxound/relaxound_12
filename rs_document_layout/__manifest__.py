@@ -1,7 +1,7 @@
 {
     "name": "RS Document Layout",
     "version": "12.0",
-    "depends": ["base","sale","sale_management","stock","account","delivery","product_color_field","fill_pack"],
+    "depends": ["base","sale","sale_management","delivery","stock","account","product_color_field","fill_pack"],
     "author": "Level9",
     "category": "Custom Development",
     "description": """    
