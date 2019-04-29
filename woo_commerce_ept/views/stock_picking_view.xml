@@ -43,7 +43,11 @@
             		<field name="picking_type_code" invisible="1"/>
                     <button name="mark_not_sent_woo" attrs="{'invisible':['|',('updated_in_woo','=',True),('picking_type_code','!=','outgoing')]}" string="" type="object" help="Click Here To Set Picking Updated Into woo" />
 
+<<<<<<< HEAD
                     <!-- <button name="mark_sent_woo" attrs="{'invisible':['|',('updated_in_woo','=',False),('picking_type_code','!=','outgoing')]}" string="" type="object" help="Click Here To Set Picking Not Updated Into woo" /> -->
+=======
+                    <button name="mark_sent_woo" attrs="{'invisible':['|',('updated_in_woo','=',False),('picking_type_code','!=','outgoing')]}" string="" type="object" help="Click Here To Set Picking Not Updated Into woo" />
+>>>>>>> 413ef672c448317e93507f107836ab052d139f2b
             		<!-- <button name="mark_not_sent_woo" type="object" help="Click Here To Set Picking Updated Into woo" icon="fa fa-level-up fa-lg" attrs="{'invisible':['|',('updated_in_woo','=',True),('picking_type_code','!=','outgoing')]}"/>            	
             		<button name="mark_sent_woo" type="object" help="Click Here To Set Picking Not Updated Into woo" icon="fa fa-lock fa-lg" attrs="{'invisible':['|',('updated_in_woo','=',False),('picking_type_code','!=','outgoing')]}"/> -->            	
                     <field name="name"/>

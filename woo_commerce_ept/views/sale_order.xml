@@ -9,8 +9,13 @@
                 <tree string="WooCommerce Sale Order Tree View" colors="grey:state=='cancel';green:updated_in_woo==True;blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except')" create="false">            
 
 					<field name="updated_in_woo" invisible="1"/>
+<<<<<<< HEAD
                     <!-- <button name="mark_sent_woo" attrs="{'invisible':[('updated_in_woo','=',True)]}" string="" help="Not Updated In WooCommerce" type="object" />
                     <button name="mark_not_sent_woo" attrs="{'invisible':[('updated_in_woo','=',False)]}" string="" help="Updated In WooCommerce" type="object"/> -->
+=======
+                    <button name="mark_sent_woo" attrs="{'invisible':[('updated_in_woo','=',True)]}" string="" help="Not Updated In WooCommerce" type="object" />
+                    <button name="mark_not_sent_woo" attrs="{'invisible':[('updated_in_woo','=',False)]}" string="" help="Updated In WooCommerce" type="object"/>
+>>>>>>> 413ef672c448317e93507f107836ab052d139f2b
 					<!-- <button name="mark_sent_woo"  help="Not Updated In WooCommerce" icon="fa fa-level-up fa-lg" attrs="{'invisible':[('updated_in_woo','=',True)]}"/>
 					<button name="mark_not_sent_woo"  help="Updated In WooCommerce" icon="fa fa-lock fa-lg" attrs="{'invisible':[('updated_in_woo','=',False)]}"/> -->
 

@@ -190,6 +190,7 @@
 								<group>
 									<group name="import_so" string="Sales Orders">
 										<field name="is_import_orders"/>
+<<<<<<< HEAD
 										<!-- <field name="is_import_customers"/> -->
 										<!-- <field name="sync_woo_coupons"/>     -->
 									</group>		                			
@@ -199,6 +200,17 @@
 										<field name="sync_product_category_from_woo"/>
 										<!-- <field name="sync_product_tags_from_woo"/> -->
 										<!-- <field name="is_import_stock"/>								 -->
+=======
+										<field name="is_import_customers"/>
+										<field name="sync_woo_coupons"/>    
+									</group>		                			
+									<group name="import_product" string="Products">
+										<field name="sync_product_from_woo"/>
+										<field name="sync_attributes"></field>
+										<field name="sync_product_category_from_woo"/>
+										<field name="sync_product_tags_from_woo"/>
+										<field name="is_import_stock"/>								
+>>>>>>> 413ef672c448317e93507f107836ab052d139f2b
 									</group>									
 								</group>
 	                		</page>
@@ -213,6 +225,7 @@
 		                			<group name="mis_product" string="Miscellaneous">
 		                				<field name="is_update_stock"/>
 		                				<field name="is_update_price"/>
+<<<<<<< HEAD
 		                				<!-- <field name="is_update_image"/> -->
 		                				<!-- <field name="is_update_coupon"/> -->
 		                			</group>
@@ -222,6 +235,17 @@
 		                				  <field name="is_update_product_categ"/>
 		                				<field name="is_export_product_tags"/>
 		                				  <field name="is_update_product_tags"/>                						                					                													
+=======
+		                				<field name="is_update_image"/>
+		                				<field name="is_update_coupon"/>
+		                			</group>
+		                			<group name="mis_product" string="Coupons, Categories &amp; Tags">
+		                				<field name="is_export_coupons"/>
+		                				<field name="is_export_product_categ"/>
+		                				<!--  <field name="is_update_product_categ"/>-->
+		                				<field name="is_export_product_tags"/>
+		                				<!--  <field name="is_update_product_tags"/>-->                						                					                													
+>>>>>>> 413ef672c448317e93507f107836ab052d139f2b
 									</group>
 									<group name="op_order" string="Shipment Status">
 		                				<field name="is_update_order_status"/>                				
