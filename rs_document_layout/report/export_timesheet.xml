@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_analytic_line" model="ir.ui.view">
+            <field name="name">Timesheet</field>
+            <field name="model">account.custom</field>
+            <field name="arch" type="xml">
+                <form string="Timesheets">
+                    <p class="black">
+                        Export Record into Excel Sheet.
+                    </p>
+                    <footer>
+                        <button name="" type="object" string="Export"
+                            class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_timesheet" model="ir.actions.act_window">
+            <field name="name">Timesheet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.custom</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="analytic.model_account_analytic_line" />
+        </record>
+
+</odoo>

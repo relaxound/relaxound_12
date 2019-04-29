@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="business_form_inherit" model="ir.ui.view">
+            <field name="name">journal_inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[2]/group/group[1]/field[@name='reference']" position="before">
+                    <field name="journal_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
