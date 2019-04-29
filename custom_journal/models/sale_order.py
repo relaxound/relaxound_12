@@ -9,7 +9,7 @@ class sale_order_fun(models.Model):
 		res=super(sale_order_fun,self).action_view_invoice()
 		res1=self.env['account.invoice'].search([])
 		pro1=self.env['account.journal'].search([])
-		if self.name[0]=='S' self.name[0]=='P' and self.name[1]=='O':
+		if self.name[0]=='S' or self.name[0]=='P' and self.name[1]=='O':
 			for item in pro1:
 				if item.name=='Retail Invoices':
 					res1.update({'journal_id':item.id})
