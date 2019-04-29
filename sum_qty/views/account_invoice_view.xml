@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_invoice_sum_qty_form">
+            <field name="name">view.invoice.sum.qty.inherit</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='quantity']" position="attributes">
+                    <attribute name="sum">Invoiced Qty</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']" position="after">
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="qty_delivered"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
