@@ -45,8 +45,8 @@ class woo_req_res_ept(models.Model):
                     woo_req_type = woo_req_type_obj.search([('name','=',result.title())],limit=1)
                     if not woo_req_type:
                         woo_req_type = woo_req_type_obj.create({'name':result.title()})
-                if url and url.__contains__("wc-api/v3"):
-                    req_type = url.split("?")[0].split("/wc-api/v3/")[1].replace("/", " ")
+                if url and url.__contains__("wc-api/v2"):
+                    req_type = url.split("?")[0].split("/wc-api/v2/")[1].replace("/", " ")
                     result = ''.join(i for i in req_type if not i.isdigit())
                     if not result[-1].isalpha():
                         result=result[:-1]
