@@ -13,15 +13,15 @@ class sale_order_fun(models.Model):
 			for item in pro1:
 				if item.name=='Retail Invoices':
 					res1.update({'journal_id':item.id})
-			
-			print("hello")
 		elif self.name[0]=='0' or self.name[0]=='1' or self.name[0]=='2' or self.name[0]=='3' or self.name[0]=='4' or self.name[0]=='5' or self.name[0]=='6' or self.name[0]=='7' or self.name[0]=='8' or self.name[0]=='9':
 			for item in pro1:
 				if item.name=='Customer Invoices':
 					res1.update({'journal_id':item.id})
 
 		else:
-			res1.update({'journal_id':'Export Invoices'})
+			for item in pro1:
+				if item.name=='Export Invoices':
+					res1.update({'journal_id':item.id})
 
 		return res
 			
