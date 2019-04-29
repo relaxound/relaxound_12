@@ -60,11 +60,7 @@
 		                                        	<!-- <a name="%(woo_commerce_ept.action_woo_product_instance_ept)d" type="action" title="Products"><t t-esc="record.product_count.value"/> Products</a>		                                            
                                                 	<a name="%(woo_commerce_ept.action_woo_coupons_ept_instance)d" type="action" title="Coupons"><t t-esc="record.coupons_count.value"/> Coupons</a>
                                                 	<a name="%(woo_commerce_ept.action_woo_sale_instance_ept)d" type="action" title="Orders"><t t-esc="record.sale_order_count.value"/> Orders</a> -->                                               	
-<<<<<<< HEAD
                                                 	<!-- <a name="%(woo_commerce_ept.action_woo_picking_instance_ept)d" type="action" title="Delilivery"><t t-esc="record.picking_count.value"/> Delivery</a>		                                            
-=======
-                                                	<!-- <a name="%(woo_commerce_ept.action_woo_picking_instance_ept)d" type="action" title="Delivery"><t t-esc="record.picking_count.value"/> Delivery</a>		                                            
->>>>>>> 413ef672c448317e93507f107836ab052d139f2b
                                                 	<a name="%(woo_commerce_ept.action_woo_invoice_instance_ept)d" type="action" title="Invoices"><t t-esc="record.invoice_count.value"/> Invoices</a> -->
                                                 </div>
 	                                        </div>
@@ -94,12 +90,6 @@
                                 			<td width="40%">
                                 				<a name="%(woo_commerce_ept.action_woo_sale_instance_ept)d" type="action" title="Orders"><t t-esc="record.sale_order_count.value"/> Orders</a>
                                 			</td>
-<<<<<<< HEAD
-=======
-                                			<td width="40%">
-                                				<a name="%(woo_commerce_ept.action_woo_picking_instance_ept)d" type="action" title="Delivery"><t t-esc="record.picking_count.value"/> Delivery</a>
-                                			</td>
->>>>>>> 413ef672c448317e93507f107836ab052d139f2b
                                 			<td width="40">
                                 				<a name="%(woo_commerce_ept.action_woo_invoice_instance_ept)d" type="action" title="Invoices"><t t-esc="record.invoice_count.value"/> Invoices</a>
                                 			</td>

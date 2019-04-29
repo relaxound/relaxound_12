@@ -17,14 +17,9 @@ class stock_picking(models.Model):
                     record.is_woo_delivery_order=False
                     record.woo_instance_id=False
     updated_in_woo=fields.Boolean("Updated In Woo Commerce",default=False)
-<<<<<<< HEAD
     woo_instance_id=fields.Many2one("woo.instance.ept","Instance")
     is_woo_delivery_order=fields.Boolean("Woo Commerce Delivery Order",compute="get_woo_orders",store=True)
     # woo_instance_id=fields.Many2one("woo.instance.ept","Instance",store=True,compute="get_woo_orders")
-=======
-    is_woo_delivery_order=fields.Boolean("Woo Commerce Delivery Order",compute="get_woo_orders",store=True)
-    woo_instance_id=fields.Many2one("woo.instance.ept","Instance",store=True,compute="get_woo_orders")
->>>>>>> 413ef672c448317e93507f107836ab052d139f2b
     canceled_in_woo=fields.Boolean("Canceled In woo",default=False)
     #pack_operation_ids=fields.One2many('stock.pack.operation', 'picking_id', string='Related Packing Operations',states={'cancel': [('readonly', True)]})
     

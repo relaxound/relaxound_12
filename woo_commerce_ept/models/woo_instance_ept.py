@@ -162,11 +162,7 @@ class woo_instance_ept(models.Model):
         consumer_key = self.consumer_key
         consumer_secret = self.consumer_secret
         wp_api = True if self.woo_version == 'new' else False
-<<<<<<< HEAD
         version = "wc/v1" if wp_api else "v2"
-=======
-        version = "wc/v1" if wp_api else "v3"
->>>>>>> 413ef672c448317e93507f107836ab052d139f2b
         if self.is_latest:
             version = "wc/v2"
         wcapi = woocommerce.api.API(url=host, consumer_key=consumer_key,
