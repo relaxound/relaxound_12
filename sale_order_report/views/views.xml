@@ -1,0 +1,92 @@
+<odoo>
+  <data>
+    <template id="report_saleorder_document-1" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//h2" position="replace">
+                <br/>
+                <br/>
+                <br/>
+                <div class="row">
+                    <h2>
+                        <div class="col-auto mw-100 mb-2">
+
+                            ZWITSCHERBOX
+
+
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <span t-if="doc.state not in ['draft','sent']">Order</span>
+                            <span t-if="doc.state in ['draft','sent']">Quotation</span>
+                        </div>
+                    </h2>
+
+                </div>
+        </xpath>
+        <xpath expr="//div[hasclass('row','mt32','mb32')]" position="replace">
+        <!--<xpath expr="//div[@class='row mt32 mb32']" position="replace">-->
+            <div class="row">
+                <div class="col-auto mw-100 mb-2">
+                        <style>
+                            #order_data td{
+                            padding:3px 10px 3px 0px
+                            }
+                        </style>
+                        <table id="order_data">
+                            <t t-if="doc.partner_id.ref">
+                                <tr>
+                                    <td>CNr.</td>
+                                    <td>
+                                        <span t-field="doc.partner_id.ref"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="doc.name">
+                                <tr>
+                                    <td>Order-No.</td>
+                                    <td>
+                                        <span t-field="doc.name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <!-- Customized customer reference in quotations by techspawn -->
+                            <t t-if="doc.client_order_ref">
+                                <tr>
+                                    <td>Ihre Referenz:</td>
+                                    <td>
+                                        <span t-field="doc.client_order_ref"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="doc.date_order">
+                                <tr>
+                                    <td>Order Date</td>
+                                    <td>
+                                        <span t-field="doc.date_order" widget="date" t-field-options='{"format": "dd.MM.yyyy"}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="doc.validity_date">
+                                <tr>
+                                    <td>ETD</td>
+                                    <td>
+                                        <span t-field="doc.validity_date"/>
+                                        <!--<span t-field="doc.date_order" widget="date" t-field-options='{"format": "dd.MM.yyyy"}'/>-->
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="doc.partner_id.name">
+                                <tr>
+                                    <td>Ordered By</td>
+                                    <td>
+                                        <span t-field="doc.partner_id.name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </xpath>
+    </template>
+  </data>
+</odoo>
+
+
