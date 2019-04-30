@@ -93,15 +93,15 @@
                                 <field name="country_id" invisible="1" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="company_id"/> -->
+                                <label for="company_id"/>
                                 <field name="company_id" widget="selection" attrs="{'required':[('woo_instance_id','!=',False)]}" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="lang_id"/> -->
+                                <label for="lang_id"/>
                                 <field name="lang_id" widget="selection" attrs="{'required':[('woo_instance_id','!=',False)]}" class="oe_inline"/>
                             </div>
                             <div id="fiscal_position">
-                            	<!-- <label for="fiscal_position_id"/> -->
+                            	<label for="fiscal_position_id"/>
                             	<field name="fiscal_position_id" class="oe_inline"/>
                             </div>
                         </div>
@@ -111,41 +111,41 @@
                         <label for="id" string="Products"/>
                         <div name="product_config">
                             <div>
-                                <!-- <label for="discount_product_id"/> -->
+                                <label for="discount_product_id"/>
                                 <field name="discount_product_id" attrs="{'required':[('woo_instance_id','!=',False)]}" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="fee_line_id"/> -->
+                                <label for="fee_line_id"/>
                                 <field name="fee_line_id" attrs="{'required':[('woo_instance_id','!=',False)]}" class="oe_inline"/>
                             </div>
                         </div>
                         <label for="id" string="Products Bulk Export Operation"/>
                         <div name="product_export_config">
                             <div>
-                                <!-- <label for="is_set_price"/> -->
+                                <label for="is_set_price"/>
                                 <field name="is_set_price" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="is_set_stock"/> -->
+                                <label for="is_set_stock"/>
                                 <field name="is_set_stock" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="is_publish"/> -->
+                                <label for="is_publish"/>
                                 <field name="is_publish" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="is_set_image"/> -->
+                                <label for="is_set_image"/>
                                 <field name="is_set_image" class="oe_inline"/>
                             </div>
                         </div>
                         <label for="id" string="Products Bulk Sync/Import Operation"/>
                         <div name="product_import_config">
                         	<div>
-                                <!-- <label for="sync_images_with_product"/> -->
+                                <label for="sync_images_with_product"/>
                                 <field name="sync_images_with_product" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="sync_price_with_product"/> -->
+                                <label for="sync_price_with_product"/>
                                 <field name="sync_price_with_product" class="oe_inline"/>
                             </div>
                         </div>
@@ -155,11 +155,11 @@
                         <label for="id" string="Payment"/>
                         <div name="payment_config">
                             <div>
-                                <!-- <label for="pricelist_id"/> -->
+                                <label for="pricelist_id"/>
                                 <field name="pricelist_id" attrs="{'required':[('woo_instance_id','!=',False)]}" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="payment_term_id"/> -->
+                                <label for="payment_term_id"/>
                                 <field name="payment_term_id" attrs="{'required':[('woo_instance_id','!=',False)]}" class="oe_inline"/>
                             </div>
                         </div>
@@ -169,19 +169,19 @@
                         <label for="id" string="Orders"/>
                         <div name="order_config">
                         	<div>
-                                <!-- <label for="import_order_status_ids" /> -->
+                                <label for="import_order_status_ids" />
                                 <field name="import_order_status_ids" widget="many2many_tags" options="{'no_create':True,'no_create_edit': True}" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="order_prefix" /> -->
+                                <label for="order_prefix" />
                                 <field name="order_prefix"  class="oe_inline"/>
                             </div>
                             <div>  
-                            	<!-- <label for="section_id"/> -->
+                            	<label for="section_id"/>
 								<field name="section_id" options="{'no_create': True}" class="oe_inline" />                            	
                             </div>
                             <div>
-                            	<!-- <label for="auto_import_product"/> -->
+                            	<label for="auto_import_product"/>
                             	<field name="auto_import_product" class="oe_inline"/>
                             </div>
                             <div groups="woo_commerce_ept.group_woo_debug_ept">
@@ -189,7 +189,7 @@
                             	<field name="is_show_debug_info" class="oe_inline"/>
                             </div>
                             <div>
-                                <!-- <label for="order_auto_import" /> -->
+                                <label for="order_auto_import" />
                                 <field name="order_auto_import"  class="oe_inline"/>								
                             </div>                                                        
                             <div attrs="{'invisible': [('order_auto_import', '=', False)]}">
@@ -200,7 +200,7 @@
                                 <field name="order_import_user_id" attrs="{'required': [('order_auto_import', '=', True)]}" class="oe_inline" />
                             </div>                            
                             <div>
-                                <!-- <label for="order_auto_update"/> -->
+                                <label for="order_auto_update"/>
                                 <field name="order_auto_update" class="oe_inline" help="If Ticked, WooCommerce Order will be automatically updated by system to WooCommerce."/>
                             </div>
                             <div attrs="{'invisible': [('order_auto_update', '=', False)]}">
@@ -217,11 +217,11 @@
                         <label for="id" string="Stock"/>
                         <div name="stock_config">
                         	<div>
-                                <!-- <label for="stock_field" /> -->
+                                <label for="stock_field" />
                                 <field name="stock_field" widget="selection" domain="[('model_id.model','=','product.product'),('name','in',['qty_available','virtual_available'])]" attrs="{'required':[('woo_instance_id','!=',False)]}" class="oe_inline"/>
                             </div>
                         	<div>
-                                <!-- <label for="stock_auto_export"/> -->
+                                <label for="stock_auto_export"/>
                                 <field name="stock_auto_export" class="oe_inline" help="If Ticked, Product Stock will be automatically updated by system to WooCommerce."/>
                             </div>
                             <div attrs="{'invisible': [('stock_auto_export', '=', False)]}">
