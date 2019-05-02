@@ -115,9 +115,9 @@
 
             </xpath>
 
-            <xpath expr="//div[hasclass('row', 'mt32', 'mb32')]" position="attributes">
+            <!-- <xpath expr="//div[hasclass('row', 'mt32', 'mb32')]" position="attributes">
                 <attribute name="style">display:none</attribute>
-            </xpath>
+            </xpath> -->
 
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <table class="table table-condensed" style="margin-top:10px" id="items">
