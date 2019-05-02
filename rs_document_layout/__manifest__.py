@@ -1,7 +1,7 @@
 {
     "name": "RS Document Layout",
     "version": "12.0",
-    "depends": ["base","sale","sale_management","stock","account","delivery","product_color_field","fill_pack"],
+    "depends": ["base","sale","sale_management","stock","account","delivery","product_color_field","customer_sequence","fill_pack"],
     "author": "Level9",
     "category": "Custom Development",
     "description": """    
@@ -14,7 +14,8 @@
             "report/layout_account_invoice.xml",
             "report/layout_sale_order.xml",
             "report/layout_delivery.xml",
-            ],
+            'report/res_partner.xml',
+    ],
     'demo_xml': [],
     'installable': True,
     'active': False,
