@@ -92,7 +92,8 @@
                                 <tr>
                                     <td>Order Date</td>
                                     <td>
-                                        <span t-field="doc.date_order" widget="date"/>
+                                        <span t-esc="doc.date_order.strftime(''%A, %d %B %Y'',doc.date_order.strptime(o.date_order,'%Y-%m-%d'))"/>
+                                        <!-- <span t-field="doc.date_order" widget="date"/> -->
                                         <!-- <span t-field="doc.date_order" widget="date" t-field-options='{"format": "dd.MM.yyyy"}'/> -->
                                     </td>
                                 </tr>
