@@ -69,6 +69,10 @@
                                     <br/>
                                     <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
                                 </t>
+                                <t t-if="o.name">
+                                <br/>
+                                <font color="#0e71b8">Your Reference:</font> <span t-field="o.name"/>
+                                </t>
                                 <t t-if="o.partner_id.vat">
                                     <br/>
                                     <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
