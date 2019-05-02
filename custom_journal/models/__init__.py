@@ -4,4 +4,3 @@
 
 from . import journal
 from . import sale_order
-from . import account_invoice
