@@ -328,9 +328,6 @@
                             </t>
                             <t t-set="i" t-value="i+1"/>
                         </tr>
-                        <tr style="border-bottom: 6px solid black">
-                            <span t-field="l.quantity"/>
-                        </tr>
                     </tbody>
                 </table>
             </xpath>
