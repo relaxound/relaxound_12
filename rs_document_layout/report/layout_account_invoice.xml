@@ -309,9 +309,6 @@
                                         <span t-field="l.quantity"/>
                                     </t>
                                 </td>
-                                 <tr style="border-bottom: 1px solid black">
-                                    <span t-field="l.quantity"/>
-                                </tr>
                                 <td class="text-right" style="white-space:nowrap">
                                     <span t-field="o.currency_id.symbol"/>&#32;
                                     <t t-if="l.quantity == 0">
@@ -330,6 +327,9 @@
                                 </td>
                             </t>
                             <t t-set="i" t-value="i+1"/>
+                        </tr>
+                        <tr style="border-bottom: 6px solid black">
+                            <span t-field="l.quantity"/>
                         </tr>
                     </tbody>
                 </table>
