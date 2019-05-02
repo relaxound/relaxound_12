@@ -92,7 +92,8 @@
                                 <tr>
                                     <td>Order Date</td>
                                     <td>
-                                        <span t-field="doc.date_order" widget="date" t-field-options='{"format": "dd.MM.yyyy"}'/>
+                                        <span t-field="doc.date_order" widget="date"/>
+                                        <!-- <span t-field="doc.date_order" widget="date" t-field-options='{"format": "dd.MM.yyyy"}'/> -->
                                     </td>
                                 </tr>
                             </t>
