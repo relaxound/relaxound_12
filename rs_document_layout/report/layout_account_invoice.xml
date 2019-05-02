@@ -4,215 +4,207 @@
     <data>
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
-                <div class="row" >
-                    <t t-if="o.partner_id.is_retailer">
-                        <div style="width:100%;">
-                            <div style="width:50%; float: left;">
-                                <t t-if="o.partner_id.parent_id">
-                                    <span t-field="o.partner_id.parent_id.name"/>
-                                </t>
+                <div style="width:100%;">
+                    <div style="width:50%; float: left;">
+                        <t t-if="o.partner_id.parent_id">
+                            <span t-field="o.partner_id.parent_id.name"/>
+                        </t>
 
-                                <t t-if="o.partner_id.name">
-                                    <br/>
-                                    <span t-field="o.partner_id.name"/>
-                                </t>
+                        <t t-if="o.partner_id.name">
+                            <br/>
+                            <span t-field="o.partner_id.name"/>
+                        </t>
 
-                                <t t-if="o.partner_id.street">
-                                    <br/>
-                                    <span t-field="o.partner_id.street"/>
-                                </t>
-                                <t t-if="o.partner_id.street2">
-                                    <br/>
-                                    <span t-field="o.partner_id.street2"/>
-                                </t>
+                        <t t-if="o.partner_id.street">
+                            <br/>
+                            <span t-field="o.partner_id.street"/>
+                        </t>
+                        <t t-if="o.partner_id.street2">
+                            <br/>
+                            <span t-field="o.partner_id.street2"/>
+                        </t>
 
-                                <t t-if="o.partner_id.zip or o.partner_id.city">
-                                    <br/>
-                                    <span t-field="o.partner_id.zip"/>&#32;&#32;
-                                    <span t-field="o.partner_id.city"/>
-                                </t>
-                                <t t-if="o.partner_id.country_id">
-                                    <br/>
-                                    <span t-field="o.partner_id.country_id.name"/>
-                                </t>
-                                <t t-if="o.partner_id.vat">
-                                    <br/>
-                                    <span>VAT: <span t-field="o.partner_id.vat"/></span>
-                                </t>
+                        <t t-if="o.partner_id.zip or o.partner_id.city">
+                            <br/>
+                            <span t-field="o.partner_id.zip"/>&#32;&#32;
+                            <span t-field="o.partner_id.city"/>
+                        </t>
+                        <t t-if="o.partner_id.country_id">
+                            <br/>
+                            <span t-field="o.partner_id.country_id.name"/>
+                        </t>
+                        <!--<t t-if="o.partner_id.vat">-->
+                        <!--<br/>-->
+                        <!--<span>VAT: <span t-field="o.partner_id.vat"/></span>-->
+                        <!--</t>-->
+                        <!--<t t-if="not o.partner_id.vat and o.partner_id.parent_id and o.partner_id.parent_id.vat">-->
+                        <!--<br/>-->
+                        <!--<span>VAT: <span t-field="o.partner_id.parent_id.vat"/></span>-->
+                        <!--</t>-->
 
+                    </div>
+                    <div style="width:50%; float: right; text-align: right;" >
+                        <t t-if="o.number">
+                            <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
+                        </t>
 
-                                <!--<t t-if="not o.partner_id.vat and o.partner_id.parent_id and o.partner_id.parent_id.vat">-->
-                                <!--<br/>-->
-                                <!--<span>VAT: <span t-field="o.partner_id.parent_id.vat"/></span>-->
-                                <!--</t>-->
+                        <t t-if="o.origin">
+                            <br/>
+                            <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
+                        </t>
 
-                            </div>
-                            <div style="width:50%; float: right; text-align: right;" >
-                                <t t-if="o.number">
-                                    <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
-                                </t>
-
-                                <t t-if="o.origin">
-                                    <br/>
-                                    <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
-                                </t>
-
-                                <t t-if="o.date_invoice">
-                                    <br/>
-                                    <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
-                                </t>
-                                <t t-if="o.date_invoice">
-                                    <br/>
-                                    <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
-                                </t>
-                                <t t-if="o.partner_id.ref">
-                                    <br/>
-                                    <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
-                                </t>
-                                <t t-if="o.partner_id.vat">
-                                    <br/>
-                                    <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
-                                </t>
+                        <t t-if="o.date_invoice">
+                            <br/>
+                            <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
+                        </t>
+                        <t t-if="o.date_invoice">
+                            <br/>
+                            <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
+                        </t>
+                        <t t-if="o.partner_id.ref">
+                            <br/>
+                            <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
+                        </t>
+                        <t t-if="o.partner_id.vat">
+                            <br/>
+                            <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
+                        </t>
+                        <br/>
+                        <t t-if="o.user_id.name != 'Relaxound GmbH'">
+                            <t t-if="o.user_id">
                                 <br/>
-                                <t t-if="o.user_id.name != 'Relaxound GmbH'">
-                                    <t t-if="o.user_id">
-                                        <br/>
-                                        <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
-                                    </t>
-                                </t>
-                                <t t-if="o.user_id.name == 'Relaxound GmbH'">
-                                    <t t-if="o.user_id">
-                                        <br/>
-                                        <font color="#0e71b8">Contact:</font> Rahel Heuser
-                                    </t>
-                                </t>
-                                <t >
-                                    <br/>
-                                    <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com
-                                </t>
-                                <t>
-                                    <br/>
-                                    <font color="#0e71b8">Phone:</font> +49(0) 30 7468 44 50
-                                </t>
+                                <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
+                            </t>
+                        </t>
+                        <t t-if="o.user_id.name == 'Relaxound GmbH'">
+                            <t t-if="o.user_id">
+                                <br/>
+                                <font color="#0e71b8">Contact:</font> Rahel Heuser
+                            </t>
+                        </t>
+                        <t >
+                            <br/>
+                            <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com
+                        </t>
+                        <t>
+                            <br/>
+                            <font color="text-a#0e71b8">Phone:</font> +49(0) 30 7468 44 50
+                        </t>
 
-                            </div>
-                        </div>
-                    </t>
-                    <t t-else="o.partner_id.is_retailer and o.partner_id.Customer">
-                        <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
-                        <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></div>
-                    </t>
+                    </div>
+
                 </div>
+                <!--</div>-->
             </xpath>
 
 
-            <xpath expr="//div[@id='total']" position="replace">
+        <xpath expr="//div[@id='total']" position="replace">
                 <div id="total" class="row">
+                   <div class="col-6">
+                            <br/>
+                            <table>
+                                <tr t-if="o.partner_id.property_delivery_carrier_id">
+                                    <td class="text-left" style="font-size:15px">
+                                        Shipping method:
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="font-size:15px">
+                                        Payment method:
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="o.payment_method_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="o.partner_id.property_payment_term_id">
+                                    <td class="text-left" style="font-size:15px">
+                                        Payment term:
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="o.partner_id.property_payment_term_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="font-size:15px">
+                                        Shipping address:
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-esc="o._get_shipping_address()"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     <div class="col-6">
-                        <br/>
-                        <table>
-                            <tr t-if="o.partner_id.property_delivery_carrier_id">
-                                <td class="text-left" style="font-size:15px">
-                                    Shipping method:
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" style="font-size:15px">
-                                    Payment method:
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="o.payment_method_id.name"/>
-                                </td>
-                            </tr>
-                            <tr t-if="o.partner_id.property_payment_term_id">
-                                <td class="text-left" style="font-size:15px">
-                                    Payment term:
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="o.partner_id.property_payment_term_id.name"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left" style="font-size:15px">
-                                    Shipping address:
-                                </td>
-                                <td class="text-left">
-                                    <span t-esc="o._get_shipping_address()"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-6">
-                        <table class="table table-condensed" id="summary" style="border: none">
-                            <style>
-                                table#summary td {
-                                border:0
-                                }
-                            </style>
+                            <table class="table table-condensed" id="summary" style="border: none">
+                                <style>
+                                    table#summary td {
+                                    border:0
+                                    }
+                                </style>
 
-                            <t t-set="delivery_cost" t-value="0"/>
+                                <t t-set="delivery_cost" t-value="0"/>
 
-                            <t t-foreach="o.invoice_line_ids" t-as="l">
-                                <t t-if="l.sale_line_ids.is_delivery">
-                                    <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
+                                <t t-foreach="o.invoice_line_ids" t-as="l">
+                                    <t t-if="l.sale_line_ids.is_delivery">
+                                        <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
+                                    </t>
                                 </t>
-                            </t>
-                            <tr style="border: none">
-                                <td class='col-xs-3 text-right'>
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
+                                <tr style="border: none">
+                                    <td class='col-xs-3 text-right'>
+                                        <span>Total</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid black">
+                                    <td class='text-right'>
+                                        <span>Shipping</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr style="border: none">
+                                    <td class='text-right'>Untaxed Amount</td>
+                                    <td class="text-right">
                                         <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid black">
-                                <td class='text-right'>
-                                    <span>Shipping</span>
-                                </td>
-                                <td class="text-right">
-                                    <strong>
-                                        <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr style="border: none">
-                                <td class='text-right'>Untaxed Amount</td>
-                                <td class="text-right">
-                                    <span t-field="o.currency_id.symbol"/>&#32;
-                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </tr>
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </tr>
 
-                            <tr style="border-bottom: 1px solid black">
-                                <td class='text-right'>VAT 19%</td>
+                                <tr style="border-bottom: 1px solid black">
+                                    <td class='text-right'>VAT 19%</td>
 
-                                <td class="text-right">
-                                    <span t-field="o.currency_id.symbol"/>&#32;
-                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </tr>
-                            <tr style="border: none">
-                                <td class='text-right'>
-                                    <strong>Total</strong>
-                                </td>
-                                <td class="text-right">
-                                    <strong>
+                                    <td class="text-right">
                                         <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                        </table>
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </tr>
+                                <tr style="border: none">
+                                    <td class='text-right'>
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
                     </div>
-
-                </div>
                 <!--</div>-->
             </xpath>
 
@@ -224,7 +216,7 @@
                     <h2>
                         <!--<div class="col-xs-6">-->
 
-                        <!--                        ZWITSCHERBOX-->
+                        ZWITSCHERBOX
 
                         <!--</div>-->
                         <div class="col-xs-6">
@@ -266,7 +258,6 @@
                             <th class="text-center">Article</th>
                             <th class="text-center">Colour</th>
                             <th class="text-center">Quantity</th>
-                            <th class="text-center">Single Unit</th>
                             <th class="text-right">Unit Price</th>
                             <th class="text-right">Total</th>
 
@@ -290,21 +281,6 @@
                                 <td class="text-center" style="white-space:nowrap">
                                     <span t-field="l.quantity"/>
                                 </td>
-                                 <td class="text-center" style="white-space:nowrap">
-                                    <!-- <span t-field="l.name"/> -->
-                                    <!-- <t t-if="p.name like '%20x%'"> -->
-                                    <t t-if="'20x' in l.name or '20X' in l.name">
-                                        <t t-set="temp" t-value="(l.quantity * 20)" />
-                                        <span t-esc="temp"/>
-                                    </t>
-                                    <t t-elif="'80x' in l.name or '80X' in l.name ">
-                                        <t t-set="temp1" t-value="(l.quantity * 80)" />
-                                        <span t-esc="temp1"/>
-                                    </t>
-                                     <t t-else="">
-                                        <span t-field="l.quantity"/>
-                                    </t>
-                                </td>
                                 <td class="text-right" style="white-space:nowrap">
                                     <span t-field="o.currency_id.symbol"/>&#32;
                                     <t t-if="l.quantity == 0">
@@ -316,7 +292,6 @@
 
                                     <!--<span t-field="l.price_unit"/>-->
                                 </td>
-
                                 <td class="text-right" style="white-space:nowrap">
                                     <span t-field="o.currency_id.symbol"/>&#32;
                                     <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -378,7 +353,7 @@
                             </span>
                         </div>
                     </t>
-                    <!--                    </t>-->
+<!--                    </t>-->
                     <!--
                     <t t-if="o.partner_id.company_type=='company'">
                         <div class="col-xs-12">
@@ -398,7 +373,7 @@
 
             <xpath expr="//p[@t-if='o.comment']" position="replace"/>
 
-            <xpath expr="//p[@t-if='o.payment_term_id']" position="replace"/>
+          <xpath expr="//p[@t-if='o.payment_term_id']" position="replace"/>
 
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
