@@ -12,7 +12,7 @@
     'depends': ['base', 'account', 'sale'],
 
     'data': [ 
-            'views/res_partner.xml',          
+            'views/res_partner.xml',       
              ],
     'installable': True,
     'application': True,

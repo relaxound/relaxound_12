@@ -6,13 +6,14 @@ class sale_invoice_fun(models.Model):
 
     @api.multi
     def action_invoice_open(self):
+        res=self.env['res.partner'].search([])
         pro1=self.env['account.journal'].search([])
-        if self.origin[0]=='S' or self.origin[0]=='P' and self.origin[1]=='O':
+        if self.partner_id.customer and self.partner_id.is_retailer:
             for item in pro1:
                 if item.name=='Retail Invoices':
                     self.update({'journal_id':item.id})
 
-        elif self.origin[0]=='0' or self.origin[0]=='1' or self.origin[0]=='2' or self.origin[0]=='3' or self.origin[0]=='4' or self.origin[0]=='5' or self.origin[0]=='6' or self.origin[0]=='7' or self.origin[0]=='8' or self.origin[0]=='9':
+        elif self.partner_id.customer:
             for item in pro1:
                 if item.name=='Customer Invoices':
                     self.update({'journal_id':item.id})
