@@ -5,9 +5,8 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
 
             <xpath expr="//t[2][@t-set='address']" position="replace">
-                <br/>
-                <br/>
-                <div class="col-xs-6">
+                 <br/> <br/> <br/>
+                <div class="col-xs-6" style="padding-left:30px;">
                     <t t-if="doc.partner_id.parent_id">
                         <span t-field="doc.partner_id.parent_id.name"/>
                     </t>
@@ -40,24 +39,19 @@
             </xpath>
             <xpath expr="//h2" position="replace">
                 <br/>
-                <div class="row">
-                    <h2>
-                        <div class="col-xs-6">
-                            ZWITSCHERBOX
-                        </div>
-                        <div class="col-xs-6">
-                            <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                <div class="row" style="padding-left:30px;">
+                    <h2><div class ="col-xs-4" style="padding-left:15px;">ZWITSCHERBOX &#160;&#160;&#160;&#160;&#160;&#160;&#160;</div></h2>
+                    <h2><div class ="col-xs-4">
+                        <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                                 <span t-if="doc.state not in ['draft','sent']">Order </span>
                                 <span t-if="doc.state in ['draft','sent']">Quotation </span>
                             </t>
                             <t t-if="env.context.get('proforma', False) or is_pro_forma">
                                 <span>Pro-Forma Invoice </span>
                             </t>
-                        </div>
-                    </h2>
-
+                    </div></h2>
                 </div>
-                <div class="row">
+                <div class="row" style="padding-left:30px;">
                     <div class="col-auto mw-100 mb-2">
                         <style>
                             #order_data td{
@@ -94,7 +88,8 @@
                                 <tr>
                                     <td>Order Date</td>
                                     <td>
-                                        <span t-field="doc.date_order" widget="date" t-field-options='{"format": "dd.MM.yyyy"}'/>
+                                        <span t-esc="doc.date_order" t-options='{"widget": "date"}'/>
+                                        
                                     </td>
                                 </tr>
                             </t>
@@ -122,12 +117,42 @@
 
             </xpath>
 
-            <xpath expr="//div[hasclass('row', 'mt32', 'mb32')]" position="attributes">
+            <!-- <xpath expr="//div[hasclass('row', 'mt32', 'mb32')]" position="attributes">
                 <attribute name="style">display:none</attribute>
+            </xpath> -->
+            <xpath expr="//div/div[@id='informations']" position="replace">
+                <div class="row mt32 mb32" style="padding-left:30px;">
+                    <div t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
+                        <strong>Your Reference:</strong>
+                        <p class="m-0" t-field="doc.client_order_ref"/>
+                    </div>
+                    <div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="col-auto mw-100 mb-2">
+                        <strong>Date Ordered:</strong>
+                        <span class="m-0" t-esc="doc.confirmation_date" t-options='{"widget": "date"}'/>
+                        <!-- <p class="m-0" t-field="doc.confirmation_date"/> -->
+                    </div>
+                    <div t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto mw-100 mb-2">
+                        <strong>Quotation Date:</strong>
+                        <span class="m-0" t-esc="doc.date_order" t-options='{"widget": "date"}'/>
+                        <!-- <p class="m-0" t-field="doc.date_order"/> -->
+                    </div>
+                    <div t-if="doc.user_id.name" class="col-auto mw-100 mb-2">
+                        <strong>Salesperson:</strong>
+                        <p class="m-0" t-field="doc.user_id"/>
+                    </div>
+                    <div name="payment_term" t-if="doc.payment_term_id" class="col-auto mw-100 mb-2">
+                        <strong>Payment Terms:</strong>
+                        <p class="m-0" t-field="doc.payment_term_id"/>
+                    </div>
+                    <div t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto mw-100 mb-2">
+                        <strong>Expiration Date:</strong>
+                        <p class="m-0" t-field="doc.validity_date"/>
+                    </div>
+                </div>
             </xpath>
 
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <table class="table table-condensed" style="margin-top:10px" id="items">
+                <table class="table table-condensed" style="margin-top:10px; padding-left:30px;" id="items">
                     <style>
                         #items td{
                         border:0
@@ -148,7 +173,7 @@
                     <tbody class="invoice_tbody">
                         <tr t-foreach="doc.order_line" t-as="l">
                             <t t-if="not l.is_delivery"> <!-- remove delivery cost -->
-                                <td>
+                                <td class="text-center">
                                     <span t-field="l.product_id.name"/>
                                 </td>
                                 <td class="text-center">
@@ -184,7 +209,7 @@
             </xpath>
 
              <xpath expr="//div/div[@id='total']" position="replace">
-                <div class="text-right" name="total">
+                <div class="text-right" name="total" style="padding-left:30px;">
                     <div class="pull-right">
                         <table class="table table-condensed" id="summary" style="border: none">
                             <style>
@@ -254,7 +279,7 @@
             </xpath>
 
              <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
-                <div class="text-right" t-if="doc.payment_method_id">
+                <div class="text-right" t-if="doc.payment_method_id" style="padding-left:30px;">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
                             Payment term:
@@ -266,7 +291,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="padding-left:30px;">
                     <br/>
                   <div class="col-xs-12">
                     <span t-field="doc.note"/>

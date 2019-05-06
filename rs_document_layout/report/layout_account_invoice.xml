@@ -5,7 +5,8 @@
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
-                <div class="row" >
+                <br/><br/>
+                <div class="row" style="padding-left:40px;">
                     <t t-if="o.partner_id.is_retailer">
                         <div style="width:100%;">
                             <div style="width:50%; float: left;">
@@ -36,10 +37,7 @@
                                     <br/>
                                     <span t-field="o.partner_id.country_id.name"/>
                                 </t>
-                                <t t-if="o.partner_id.vat">
-                                    <br/>
-                                    <span>VAT: <span t-field="o.partner_id.vat"/></span>
-                                </t>
+                                
 
 
                                 <!--<t t-if="not o.partner_id.vat and o.partner_id.parent_id and o.partner_id.parent_id.vat">-->
@@ -69,6 +67,10 @@
                                 <t t-if="o.partner_id.ref">
                                     <br/>
                                     <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
+                                </t>
+                                <t t-if="o.name">
+                                <br/>
+                                <font color="#0e71b8">Your Reference:</font> <span t-field="o.name"/>
                                 </t>
                                 <t t-if="o.partner_id.vat">
                                     <br/>
@@ -101,14 +103,13 @@
                     </t>
                     <t t-else="o.partner_id.is_retailer and o.partner_id.Customer">
                         <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
-                        <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></div>
                     </t>
                 </div>
             </xpath>
 
 
             <xpath expr="//div[@id='total']" position="replace">
-                <div id="total" class="row">
+                <div id="total" class="row" style="padding-left:40px;">
                     <div class="col-6">
                         <br/>
                         <table>
@@ -221,7 +222,7 @@
                 <br/>
                 <br/>
                 <br/>
-                <div class="row">
+                <div class="row" style="padding-left:40px;">
                     <h2>
                         <!--<div class="col-xs-6">-->
 
@@ -252,7 +253,7 @@
 
             <xpath expr="//div/table[1]" position="replace">
                 <t t-set="i" t-value="1"/>
-                <table class="table table-sm o_main_table" style="margin-top:10px" id="items">
+                <table class="table table-sm o_main_table" style="margin-top:10px; padding-left:40px;" id="items">
                     <style>
                         #items td{
                         border:0
@@ -273,6 +274,7 @@
 
                         </tr>
                     </thead>
+                    <t t-set="single_total" t-value="0.0"/>
                     <tbody class="invoice_tbody">
                         <tr t-foreach="o.invoice_line_ids" t-as="l">
                             <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
@@ -296,10 +298,12 @@
                                     <!-- <t t-if="p.name like '%20x%'"> -->
                                     <t t-if="'20x' in l.name or '20X' in l.name">
                                         <t t-set="temp" t-value="(l.quantity * 20)" />
+                                        <t t-set="single_total" t-value="single_total + temp"/>
                                         <span t-esc="temp"/>
                                     </t>
                                     <t t-elif="'80x' in l.name or '80X' in l.name ">
                                         <t t-set="temp1" t-value="(l.quantity * 80)" />
+                                        <t t-set="single_total" t-value="single_total + temp1"/>
                                         <span t-esc="temp1"/>
                                     </t>
                                      <t t-else="">
@@ -325,7 +329,18 @@
                             </t>
                             <t t-set="i" t-value="i+1"/>
                         </tr>
+                        <tr>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center"><t t-esc="sum(line.quantity for line in o.invoice_line_ids)"/></th>
+                            <th class="text-center"><t t-esc="single_total"/></th>
+                            <th class="text-right"></th>
+                            <th class="text-right"></th>
+
+                        </tr>
                     </tbody>
+                    <t t-set="single_total" t-value="0.0"/>
                 </table>
             </xpath>
 
@@ -342,7 +357,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
-                <div class="row">
+                <div class="row" style="padding-left:40px;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <div class="col-xs-12">
