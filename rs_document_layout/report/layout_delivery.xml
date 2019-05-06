@@ -5,6 +5,10 @@
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
 			<xpath expr="//t[@t-set='address']" position="replace"/>
 			<xpath expr="//div[hasclass('page')]" position="replace">
+				<br/>
+				<br/>
+				<br/>
+				<br/>
 				<div class="row">
 					<div class="col-xs-6">
 						<t t-if="o.partner_id.parent_id">
