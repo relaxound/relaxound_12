@@ -7,8 +7,6 @@
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
 				<br/>
-				<br/>
-				<br/>
 				<div class="row">
 					<div class="col-xs-6">
 						<t t-if="o.partner_id.parent_id">
