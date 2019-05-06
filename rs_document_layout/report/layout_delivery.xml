@@ -6,15 +6,11 @@
 <!--			<xpath expr="//div[hasclass('page')]" position="attributes">-->
 <!--                <attribute name="style">margin-right:80px; margin-left:3cm</attribute>-->
 <!--            </xpath>-->
-			<xpath expr="//t[@t-call='web.external_layout']" position="replace">
-				<div class="page" style="padding-left:30px;">
-					 <div class="col-xs-12 col-md-12" align="center">
-		                <div style="font-size:20px" class="center">
-		        			<span>Packing List</span>
-		                </div>
-		                <div t-if="o.partner_id.ref">CNr.<span t-field="o.partner_id.ref"/>
-		                </div>
-		            </div>
+			<xpath expr="//t[@t-set='address']" position="replace"/>
+			<xpath expr="//div[hasclass('page')]" position="replace">
+				<br/>
+				<br/>
+				<div class="row" style="padding-left:30px;">
 					<div class="col-xs-6">
 						<t t-if="o.partner_id.parent_id">
 						    <span t-field="o.partner_id.parent_id.name"/>
@@ -29,7 +25,6 @@
 						    <br/>
 						    <span t-field="o.partner_id.street"/>
 						</t>
-
 						<t t-if="o.partner_id.street2">
 						    <br/>
 						    <span t-field="o.partner_id.street2"/>
@@ -45,12 +40,16 @@
 						    <span t-field="o.partner_id.country_id.name"/>
 						</t>
 					</div>
+					<div class="col-xs-9 ">
+		                <div style="font-size:20px">
+		        			<span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Packing List</span>
+		                </div>
+		                <div t-if="o.partner_id.ref">CNr.<span t-field="o.partner_id.ref"/>
+		                </div>
+		            </div>
 	            </div>
-				<br/>
                 <br/>
-                <br/>
-                <br/>
-                <h2 style="padding-left:30px;" >ZWITSCHERBOX</h2>
+                <h2 style="padding-left:30px;">ZWITSCHERBOX</h2>
 				<div class="row" style="padding-left:30px;">
                     <div class="table table-sm">
                         <style>
