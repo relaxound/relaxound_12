@@ -6,7 +6,7 @@
 
             <xpath expr="//t[2][@t-set='address']" position="replace">
                  <br/> <br/> <br/>
-                <div class="col-xs-6" style="padding-left:20px;">
+                <div class="col-xs-6" style="padding-left:30px;">
                     <t t-if="doc.partner_id.parent_id">
                         <span t-field="doc.partner_id.parent_id.name"/>
                     </t>
