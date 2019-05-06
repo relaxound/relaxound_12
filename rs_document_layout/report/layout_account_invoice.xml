@@ -4,6 +4,9 @@
     <data>
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
+                <br/>
+                <br/>
+                <br/>
                 <div class="row" >
                     <t t-if="o.partner_id.is_retailer">
                         <div style="width:100%;">
