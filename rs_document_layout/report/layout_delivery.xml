@@ -5,7 +5,7 @@
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
 			<xpath expr="//t[@t-set='address']" position="replace"/>
 			<xpath expr="//div[hasclass('page')]" position="replace">
-				<div class="row">
+				<!-- <div class="row"> -->
 					 <div class="col-xs-12 col-md-12" align="center">
 		                <div style="font-size:20px" class="center">
 		        			<span>Packing List</span>
@@ -43,7 +43,7 @@
 						    <span t-field="o.partner_id.country_id.name"/>
 						</t>
 					</div>
-	            </div>
+	            <!-- </div> -->
                 <br/>
                 <h2>ZWITSCHERBOX</h2>
 				<div class="row">
