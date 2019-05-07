@@ -274,7 +274,7 @@
 
                         </tr>
                     </thead>
-                    <t t-set="single_total" t-value="0.0"/>
+                    <t t-set="single_total" t-value="0"/>
                     <tbody class="invoice_tbody">
                         <tr t-foreach="o.invoice_line_ids" t-as="l">
                             <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
@@ -292,11 +292,13 @@
                                 </td>
                                 <td class="text-center" style="white-space:nowrap">
                                     <span t-field="l.quantity"/>
+
                                 </td>
                                  <td class="text-center" style="white-space:nowrap">
                                     <!-- <span t-field="l.name"/> -->
                                     <!-- <t t-if="p.name like '%20x%'"> -->
                                     <span t-esc="l.single_unit"/>
+                                    <t t-set="single_total" t-value="single_total+l.single_unit"/>
                                     
                                 </td>
                                 <td class="text-right" style="white-space:nowrap">
@@ -329,7 +331,7 @@
 
                         </tr>
                     </tbody>
-                    <t t-set="single_total" t-value="0.0"/>
+                    <t t-set="single_total" t-value="0"/>
                 </table>
             </xpath>
 
