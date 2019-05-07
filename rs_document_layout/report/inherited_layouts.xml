@@ -42,7 +42,7 @@
             <xpath expr="//div[3]" position="replace">
                 <div class="footer " style="font-size:9px; margin-left: 0.5cm">
                     <div class="text-left row">
-                        <div class="col-xs-8" style="margin-bottom:10px;" >
+                        <div class="col-xs-6" style="margin-bottom:10px;" >
                             <table style="width:100%">
 
                                 <tr>
@@ -93,6 +93,8 @@
                                     <td colspan="3">www.zwitscherbox.com</td>
                                 </tr>
                             </table>
+                        </div>
+                        <div class="col-xs-2" style="margin-bottom:10px;" >
                         </div>
                         <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px;">
                             <img src="/rs_document_layout/static/src/img/wavemedic.png" class="pull-right"
