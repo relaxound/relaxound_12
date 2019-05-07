@@ -61,7 +61,7 @@
                         <table id="order_data">
                             <t t-if="doc.partner_id.ref">
                                 <tr>
-                                    <td>CNr.</td>
+                                    <td>CNr:</td>
                                     <td>
                                         <span t-field="doc.partner_id.ref"/>
                                     </td>
@@ -69,7 +69,7 @@
                             </t>
                             <t t-if="doc.name">
                                 <tr>
-                                    <td>Order-No.</td>
+                                    <td>Order-No:</td>
                                     <td>
                                         <span t-field="doc.name"/>
                                     </td>
@@ -84,28 +84,28 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.date_order">
+                            <t t-if="doc.order_date">
                                 <tr>
-                                    <td>Order Date</td>
+                                    <td>Order Date:</td>
                                     <td>
-                                        <span t-esc="doc.date_order" t-options='{"widget": "date"}'/>
+                                        <span t-esc="doc.order_date" t-options='{"widget": "date"}'/>
                                         
                                     </td>
                                 </tr>
                             </t>
 <!--                             Added the order by and ETD field in sale order report-->                            <t t-if="doc.validity_date">
                                 <tr>
-                                    <td>ETD</td>
+                                    <td>ETD:</td>
                                     <td>
                                         <span t-field="doc.validity_date"/>
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.partner_id.name">
+                            <t t-if="doc.order_by.name">
                                 <tr>
-                                    <td>Ordered By</td>
+                                    <td>Ordered By:</td>
                                     <td>
-                                        <span t-field="doc.partner_id.name"/>
+                                        <span t-field="doc.order_by.name"/>
                                     </td>
                                 </tr>
                             </t>
