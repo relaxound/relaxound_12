@@ -1,0 +1,18 @@
+from odoo import models, fields, api, _
+
+
+class OrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    single_unit=fields.Integer(string="Single Unit",)
+
+    
+    @api.onchange('product_id','product_uom_qty')
+    def change_qty(self):
+    	pro=self.product_id.name
+    	if pro:
+	    	if '20x' in pro or '20X' in pro:
+	    		self.update({'single_unit':self.product_uom_qty*20})
+
+	    	elif '80x' in pro or '80X' in pro:
+	    		self.update({'single_unit':self.product_uom_qty*80})

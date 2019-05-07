@@ -296,19 +296,8 @@
                                  <td class="text-center" style="white-space:nowrap">
                                     <!-- <span t-field="l.name"/> -->
                                     <!-- <t t-if="p.name like '%20x%'"> -->
-                                    <t t-if="'20x' in l.name or '20X' in l.name">
-                                        <t t-set="temp" t-value="(l.quantity * 20)" />
-                                        <t t-set="single_total" t-value="single_total + temp"/>
-                                        <span t-esc="temp"/>
-                                    </t>
-                                    <t t-elif="'80x' in l.name or '80X' in l.name ">
-                                        <t t-set="temp1" t-value="(l.quantity * 80)" />
-                                        <t t-set="single_total" t-value="single_total + temp1"/>
-                                        <span t-esc="temp1"/>
-                                    </t>
-                                     <t t-else="">
-                                        <span t-field="l.quantity"/>
-                                    </t>
+                                    <span t-field="l.single_unit"/>
+                                    
                                 </td>
                                 <td class="text-right" style="white-space:nowrap">
                                     <span t-field="o.currency_id.symbol"/>&#32;
