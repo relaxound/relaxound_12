@@ -296,7 +296,7 @@
                                  <td class="text-center" style="white-space:nowrap">
                                     <!-- <span t-field="l.name"/> -->
                                     <!-- <t t-if="p.name like '%20x%'"> -->
-                                    <span t-field="l.single_unit"/>
+                                    <span t-esc="l.single_unit"/>
                                     
                                 </td>
                                 <td class="text-right" style="white-space:nowrap">
