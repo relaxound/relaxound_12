@@ -118,7 +118,7 @@
 						<span style="padding-left:30px;" t-field="o.sale_description"/>
 					</tr>
 				</t>
-				</xpath>
+				<!-- </xpath> -->
 			</xpath>
 		</template>
 	</data>
