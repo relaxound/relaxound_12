@@ -3,6 +3,7 @@
 	<data>
 		<!-- Delivery Slip -->
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+
 			<xpath expr="//t[@t-set='address']" position="replace"/>
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
@@ -67,7 +68,6 @@
                         </table>
                     </div>
                 </div>
-
 			<xpath expr="//table[@t-if='o.product_ids']" position="replace">
 				<t t-set="count" t-value="0"/>
 				<table class="table table-condensed " style="margin-top:20px; padding-left:30px;" t-if="o.product_id" id="items">
