@@ -103,7 +103,7 @@
                             </t>
                             <t t-if="doc.order_by.name">
                                 <tr>
-                                    <td>Ordered By:</td>
+                                    <td>Order By:</td>
                                     <td>
                                         <span t-field="doc.order_by.name"/>
                                     </td>
