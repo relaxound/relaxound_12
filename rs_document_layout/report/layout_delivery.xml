@@ -4,7 +4,7 @@
 		<!-- Delivery Slip -->
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
 			<xpath expr="//t[@t-set='address']" position="replace"/>
-			<xpath expr="//div[hasclass('page')]" position="replace">
+			<!-- <xpath expr="//div[hasclass('page')]" position="replace"> -->
 				<br/>
 				<br/>
 				<div class="row" style="padding-left:30px;">
