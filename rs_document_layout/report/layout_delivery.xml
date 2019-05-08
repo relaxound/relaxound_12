@@ -8,7 +8,7 @@
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
 				<br/>
-				<div class="row" style="padding-left:30px;">
+				<div class="row" style="padding:94px;">
 					 <div class="col-xs-6">
 						<t t-if="o.partner_id.parent_id">
 						    <span t-field="o.partner_id.parent_id.name"/>
@@ -47,8 +47,8 @@
 		            </div>
 	            </div>
                 <br/>
-                <h2 style="padding-left:30px;" >ZWITSCHERBOX</h2>
-				<div class="row" style="padding-left:30px;">
+                <h2 style="padding:94px;" >ZWITSCHERBOX</h2>
+				<div class="row" style="padding:94px;">
                     <div class="table table-sm">
                         <style>
                             #delivery_data td{
@@ -70,7 +70,7 @@
                 </div>
 			<xpath expr="//table[@t-if='o.product_ids']" position="replace">
 				<t t-set="count" t-value="0"/>
-				<table class="table table-condensed " style="margin-top:20px; padding-left:30px;" t-if="o.product_id" id="items">
+				<table class="table table-condensed " style="margin-top:20px; padding:94px;" t-if="o.product_id" id="items">
 					<style>
                         #items td{
                         border:0
@@ -107,7 +107,7 @@
 					<tr>
 					<br/>
 						<br/>
-						<td style="padding-left:30px;">We will send the invoice via Email to : </td>
+						<td style="padding:94px;">We will send the invoice via Email to : </td>
 						<td>
 							<span t-esc="o._get_invoicing_address()"/>
 						</td>
@@ -115,7 +115,7 @@
 				</t>
 				<t t-if="o.sale_description">
 					<tr>
-						<span style="padding-left:30px;" t-field="o.sale_description"/>
+						<span style="padding:94px;" t-field="o.sale_description"/>
 					</tr>
 				</t>
 				</xpath>

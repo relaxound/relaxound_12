@@ -6,7 +6,7 @@
 
             <xpath expr="//t[2][@t-set='address']" position="replace">
                  <br/> <br/> <br/>
-                <div class="col-xs-6" style="padding-left:30px;">
+                <div class="col-xs-6" style="padding:94px;">
                     <t t-if="doc.partner_id.parent_id">
                         <span t-field="doc.partner_id.parent_id.name"/>
                     </t>
@@ -39,8 +39,8 @@
             </xpath>
             <xpath expr="//h2" position="replace">
                 <br/>
-                <div class="row" style="padding-left:30px;">
-                    <h2><div class ="col-xs-4" style="padding-left:15px;">ZWITSCHERBOX &#160;&#160;&#160;&#160;&#160;&#160;&#160;</div></h2>
+                <div class="row" style="padding:94px;">
+                    <h2><div class ="col-xs-4" style="padding:94px;">ZWITSCHERBOX &#160;&#160;&#160;&#160;&#160;&#160;&#160;</div></h2>
                     <h2><div class ="col-xs-4">
                         <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                                 <span t-if="doc.state not in ['draft','sent']">Order </span>
@@ -51,7 +51,7 @@
                             </t>
                     </div></h2>
                 </div>
-                <div class="row" style="padding-left:30px;">
+                <div class="row" style="padding:94px;">
                     <div class="col-auto mw-100 mb-2">
                         <style>
                             #order_data td{
@@ -121,7 +121,7 @@
                 <attribute name="style">display:none</attribute>
             </xpath> -->
             <xpath expr="//div/div[@id='informations']" position="replace">
-                <div class="row mt32 mb32" style="padding-left:30px;">
+                <div class="row mt32 mb32" style="padding:94px;">
                     <div t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
                         <strong>Your Reference:</strong>
                         <p class="m-0" t-field="doc.client_order_ref"/>
@@ -152,7 +152,7 @@
             </xpath>
 
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <table class="table table-condensed" style="margin-top:10px; padding-left:30px;" id="items">
+                <table class="table table-condensed" style="margin-top:10px; padding:94px;" id="items">
                     <style>
                         #items td{
                         border:0
@@ -237,7 +237,7 @@
             </xpath>
 
              <xpath expr="//div/div[@id='total']" position="replace">
-                <div class="text-right" name="total" style="padding-left:30px;">
+                <div class="text-right" name="total" style="padding:94px;">
                     <div class="pull-right">
                         <table class="table table-condensed" id="summary" style="border: none">
                             <style>
@@ -307,7 +307,7 @@
             </xpath>
 
              <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
-                <div class="text-right" t-if="doc.payment_method_id" style="padding-left:30px;">
+                <div class="text-right" t-if="doc.payment_method_id" style="padding:94px;">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
                             Payment term:
@@ -319,7 +319,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="padding-left:30px;">
+                <div class="row" style="padding:94px;">
                     <br/>
                   <div class="col-xs-12">
                     <span t-field="doc.note"/>
