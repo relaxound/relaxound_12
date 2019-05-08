@@ -55,6 +55,14 @@
                                     <br/>
                                     <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
                                 </t>
+                                <t t-if="o.origin">
+                                    <br/>
+                                    <font color="#0e71b8">Order Date:</font> <span t-field="o.order_date"/>
+                                </t>
+                                <t t-if="o.origin">
+                                    <br/>
+                                    <font color="#0e71b8">Order By:</font> <span t-field="o.order_by"/>
+                                </t>
 
                                 <t t-if="o.date_invoice">
                                     <br/>
