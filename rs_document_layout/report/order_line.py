@@ -17,6 +17,10 @@ class OrderLine(models.Model):
 	    	elif '80x' in pro or '80X' in pro:
 	    		self.update({'single_unit':self.product_uom_qty*80})
 
+            else:
+                self.update({'single_unit':self.product_uom_qty})
+
+
 
     @api.multi
     def _prepare_invoice_line(self, qty):
