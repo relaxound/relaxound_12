@@ -215,6 +215,27 @@
                                     </strong>
                                 </td>
                             </tr>
+                            <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                            <t t-foreach="payments_vals" t-as="payment_vals">
+                                <br/>
+                                <br/><br/>
+                                <tr>
+                                    <td>
+                                        <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="len(payments_vals) > 0">
+                                <tr class="border-black">
+                                    <td><strong>Amount Due</strong></td>
+                                    <td class="text-right">
+                                        <span t-field="o.residual"/>
+                                    </td>
+                                </tr>
+                            </t>
                         </table>
                     </div>
 
@@ -418,6 +439,12 @@
             <xpath expr="//p[@t-if='o.payment_term_id']" position="replace"/>
 
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
+        </template>
+
+        <template id="report_invoice_document_sale" inherit_id="account.report_invoice_document_with_payments">
+            <xpath expr="//t[@t-if='len(payments_vals) > 0']" position="replace"/>
+            <xpath expr="//t[@t-foreach = 'payments_vals']" position="replace"/>
+
         </template>
     </data>
 </odoo>
