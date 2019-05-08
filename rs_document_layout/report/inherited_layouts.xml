@@ -96,7 +96,7 @@
                         </div>
                         <div class="col-xs-2" style="margin-bottom:10px;" >
                         </div>
-                        <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px;">
+                        <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px; padding-left:40px;">
                             <img src="/rs_document_layout/static/src/img/wavemedic.png" class="pull-right"
                                  style="max-height:70px;margin-left:20px"/>
                             <img src="/rs_document_layout/static/src/img/hypnosound.png" class="pull-right"
