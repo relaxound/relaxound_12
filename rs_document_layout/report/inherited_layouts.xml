@@ -41,8 +41,8 @@
         <template id="external_layout_footer" inherit_id="web.external_layout_standard">
             <xpath expr="//div[3]" position="replace">
                 <div class="footer " style="font-size:9px; margin-left: 0.5cm">
-                    <div class="text-center row">
-                        <div class="col-xs-8 col-md-8" style="margin-bottom:10px;" >
+                    <div class="text-left row">
+                        <div class="col-xs-6" style="margin-bottom:10px;" >
                             <table style="width:100%">
 
                                 <tr>
@@ -94,7 +94,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-xs-12 col-md-4" style="margin-bottom:10px;">
+                        <div class="col-xs-2" style="margin-bottom:10px;" >
+                        </div>
+                        <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px;">
                             <img src="/rs_document_layout/static/src/img/wavemedic.png" class="pull-right"
                                  style="max-height:70px;margin-left:20px"/>
                             <img src="/rs_document_layout/static/src/img/hypnosound.png" class="pull-right"
