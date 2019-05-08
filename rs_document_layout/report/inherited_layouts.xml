@@ -49,15 +49,15 @@
                                     <td>
                                         <span t-field="company.name"/>
                                     </td>
-                                    <td>HypoVereinsbank</td>
-                                    <td>Geschäftsführer:</td>
+                                    <td style="padding-left:40px;">HypoVereinsbank</td>
+                                    <td style="padding-left:40px;">Geschäftsführer:</td>
                                 </tr>
                                 <tr style="padding-left:40px;">
-                                    <td>
+                                    <td style="padding-left:40px;">
                                         <span t-field="company.street"/>
                                     </td>
-                                    <td>IBAN DE37 1002 0890 0026 6861 30</td>
-                                    <td>Dennis N. Clasen, Philipp Störring</td>
+                                    <td style="padding-left:40px;">IBAN DE37 1002 0890 0026 6861 30</td>
+                                    <td style="padding-left:40px;">Dennis N. Clasen, Philipp Störring</td>
                                 </tr>
                                 <tr style="padding-left:40px;">
                                     <td>
