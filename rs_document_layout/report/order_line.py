@@ -4,7 +4,7 @@ from odoo import models, fields, api, _
 class OrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    single_unit=fields.Integer(string="Single Unit",)
+    single_unit=fields.Integer(string="Single Unit")
 
     
     @api.onchange('product_id','product_uom_qty')
