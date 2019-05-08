@@ -41,26 +41,26 @@
         <template id="external_layout_footer" inherit_id="web.external_layout_standard">
             <xpath expr="//div[3]" position="replace">
                 <div class="footer " style="font-size:9px; margin-left: 0.5cm">
-                    <div class="text-center row">
-                        <div class="col-xs-8 col-md-8" style="margin-bottom:10px;" >
+                    <div class="text-left row">
+                        <div class="col-xs-6" style="margin-bottom:10px;" >
                             <table style="width:100%">
 
-                                <tr>
+                                <tr style="padding-left:40px;">
                                     <td>
-                                        <span t-field="company.name"/>
+                                        <span style="padding-left:40px;" t-field="company.name"/>
                                     </td>
-                                    <td>HypoVereinsbank</td>
-                                    <td>Geschäftsführer:</td>
+                                    <td style="padding-left:40px;">HypoVereinsbank</td>
+                                    <td style="padding-left:40px;">Geschäftsführer:</td>
                                 </tr>
-                                <tr>
-                                    <td>
+                                <tr style="padding-left:40px;">
+                                    <td style="padding-left:40px;">
                                         <span t-field="company.street"/>
                                     </td>
-                                    <td>IBAN DE37 1002 0890 0026 6861 30</td>
-                                    <td>Dennis N. Clasen, Philipp Störring</td>
+                                    <td style="padding-left:40px;">IBAN DE37 1002 0890 0026 6861 30</td>
+                                    <td style="padding-left:40px;">Dennis N. Clasen, Philipp Störring</td>
                                 </tr>
-                                <tr>
-                                    <td>
+                                <tr style="padding-left:40px;">
+                                    <td style="padding-left:40px;">
                                         <t t-if="company.country_id.code=='DE'">
                                             <span>D</span>
                                         </t>
@@ -72,29 +72,31 @@
                                         <span>&#32;</span>
                                         <span t-field="company.city"/>
                                     </td>
-                                    <td>BIC HYVEDEMM488</td>
-                                    <td>Amtsgericht Charlottenburg</td>
+                                    <td style="padding-left:40px;">BIC HYVEDEMM488</td>
+                                    <td style="padding-left:40px;">Amtsgericht Charlottenburg</td>
                                 </tr>
-                                <tr>
-                                    <td>Tel.&#32;
+                                <tr style="padding-left:40px;">
+                                    <td style="padding-left:40px;">Tel.&#32;
                                         <span t-field="company.phone"/>
                                     </td>
-                                    <td>Steuernummer: 29/490/30659</td>
-                                    <td>Handelsregisternummer:</td>
+                                    <td style="padding-left:40px;">Steuernummer: 29/490/30659</td>
+                                    <td style="padding-left:40px;">Handelsregisternummer:</td>
                                 </tr>
-                                <tr>
-                                    <td>
+                                <tr style="padding-left:40px;">
+                                    <td style="padding-left:40px;">
                                         <span t-field="company.email"/>
                                     </td>
-                                    <td>USt-IdNr.: <span t-field="company.vat"/></td>
-                                    <td>HRB 181702 B</td>
+                                    <td style="padding-left:40px;">USt-IdNr.: <span t-field="company.vat"/></td>
+                                    <td style="padding-left:40px;">HRB 181702 B</td>
                                 </tr>
-                                <tr>
-                                    <td colspan="3">www.zwitscherbox.com</td>
+                                <tr style="padding-left:40px;">
+                                    <td colspan="3" style="padding-left:40px;">www.zwitscherbox.com</td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-xs-12 col-md-4" style="margin-bottom:10px;">
+                        <div class="col-xs-2" style="margin-bottom:10px;" >
+                        </div>
+                        <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px; padding-left:200px;">
                             <img src="/rs_document_layout/static/src/img/wavemedic.png" class="pull-right"
                                  style="max-height:70px;margin-left:20px"/>
                             <img src="/rs_document_layout/static/src/img/hypnosound.png" class="pull-right"

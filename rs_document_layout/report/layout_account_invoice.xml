@@ -7,103 +7,107 @@
                 <br/>
                 <br/><br/>
                 <div class="row" style="padding-left:40px;">
-                    <t t-if="o.partner_id.is_retailer">
-                        <div style="width:100%;">
-                            <div style="width:50%; float: left;">
-                                <t t-if="o.partner_id.parent_id">
-                                    <span t-field="o.partner_id.parent_id.name"/>
-                                </t>
+                    <div style="width:100%;">
+                        <div style="width:50%; float: left;">
+                            <t t-if="o.partner_id.parent_id">
+                                <span t-field="o.partner_id.parent_id.name"/>
+                            </t>
 
-                                <t t-if="o.partner_id.name">
-                                    <br/>
-                                    <span t-field="o.partner_id.name"/>
-                                </t>
-
-                                <t t-if="o.partner_id.street">
-                                    <br/>
-                                    <span t-field="o.partner_id.street"/>
-                                </t>
-                                <t t-if="o.partner_id.street2">
-                                    <br/>
-                                    <span t-field="o.partner_id.street2"/>
-                                </t>
-
-                                <t t-if="o.partner_id.zip or o.partner_id.city">
-                                    <br/>
-                                    <span t-field="o.partner_id.zip"/>&#32;&#32;
-                                    <span t-field="o.partner_id.city"/>
-                                </t>
-                                <t t-if="o.partner_id.country_id">
-                                    <br/>
-                                    <span t-field="o.partner_id.country_id.name"/>
-                                </t>
-                                
-
-
-                                <!--<t t-if="not o.partner_id.vat and o.partner_id.parent_id and o.partner_id.parent_id.vat">-->
-                                <!--<br/>-->
-                                <!--<span>VAT: <span t-field="o.partner_id.parent_id.vat"/></span>-->
-                                <!--</t>-->
-
-                            </div>
-                            <div style="width:50%; float: right; text-align: right;" >
-                                <t t-if="o.number">
-                                    <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
-                                </t>
-
-                                <t t-if="o.origin">
-                                    <br/>
-                                    <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
-                                </t>
-
-                                <t t-if="o.date_invoice">
-                                    <br/>
-                                    <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
-                                </t>
-                                <t t-if="o.date_invoice">
-                                    <br/>
-                                    <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
-                                </t>
-                                <t t-if="o.partner_id.ref">
-                                    <br/>
-                                    <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
-                                </t>
-                                <t t-if="o.name">
+                            <t t-if="o.partner_id.name">
                                 <br/>
-                                <font color="#0e71b8">Your Reference:</font> <span t-field="o.name"/>
-                                </t>
-                                <t t-if="o.partner_id.vat">
-                                    <br/>
-                                    <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
-                                </t>
-                                <br/>
-                                <t t-if="o.user_id.name != 'Relaxound GmbH'">
-                                    <t t-if="o.user_id">
-                                        <br/>
-                                        <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
-                                    </t>
-                                </t>
-                                <t t-if="o.user_id.name == 'Relaxound GmbH'">
-                                    <t t-if="o.user_id">
-                                        <br/>
-                                        <font color="#0e71b8">Contact:</font> Rahel Heuser
-                                    </t>
-                                </t>
-                                <t >
-                                    <br/>
-                                    <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com
-                                </t>
-                                <t>
-                                    <br/>
-                                    <font color="#0e71b8">Phone:</font> +49(0) 30 7468 44 50
-                                </t>
+                                <span t-field="o.partner_id.name"/>
+                            </t>
 
-                            </div>
+                            <t t-if="o.partner_id.street">
+                                <br/>
+                                <span t-field="o.partner_id.street"/>
+                            </t>
+                            <t t-if="o.partner_id.street2">
+                                <br/>
+                                <span t-field="o.partner_id.street2"/>
+                            </t>
+
+                            <t t-if="o.partner_id.zip or o.partner_id.city">
+                                <br/>
+                                <span t-field="o.partner_id.zip"/>&#32;&#32;
+                                <span t-field="o.partner_id.city"/>
+                            </t>
+                            <t t-if="o.partner_id.country_id">
+                                <br/>
+                                <span t-field="o.partner_id.country_id.name"/>
+                            </t>
+                            
+
+
+                            <!--<t t-if="not o.partner_id.vat and o.partner_id.parent_id and o.partner_id.parent_id.vat">-->
+                            <!--<br/>-->
+                            <!--<span>VAT: <span t-field="o.partner_id.parent_id.vat"/></span>-->
+                            <!--</t>-->
+
                         </div>
-                    </t>
-                    <t t-else="o.partner_id.is_retailer and o.partner_id.Customer">
-                        <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
-                    </t>
+                        <div style="width:50%; float: right; text-align: right;" >
+                            <t t-if="o.number">
+                                <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
+                            </t>
+
+                            <t t-if="o.origin">
+                                <br/>
+                                <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
+                            </t>
+                            <t t-if="o.order_date">
+                                <br/>
+                                <font color="#0e71b8">Order Date:</font> <span t-field="o.order_date"/>
+                            </t>
+                            <t t-if="o.order_by">
+                                <br/>
+                                <font color="#0e71b8">Order By:</font> <span t-field="o.order_by"/>
+                            </t>
+
+                            <t t-if="o.date_invoice">
+                                <br/>
+                                <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
+                            </t>
+                            <t t-if="o.date_invoice">
+                                <br/>
+                                <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
+                            </t>
+                            <t t-if="o.partner_id.ref">
+                                <br/>
+                                <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
+                            </t>
+                            <t t-if="o.name">
+                            <br/>
+                            <font color="#0e71b8">Your Reference:</font> <span t-field="o.name"/>
+                            </t>
+                            <t t-if="o.partner_id.vat">
+                                <br/>
+                                <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
+                            </t>
+                            <br/>
+                            <t t-if="o.user_id.name != 'Relaxound GmbH'">
+                                <t t-if="o.user_id">
+                                    <br/>
+                                    <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
+                                </t>
+                            </t>
+                            <t t-if="o.user_id.name == 'Relaxound GmbH'">
+                                <t t-if="o.user_id">
+                                    <br/>
+                                    <font color="#0e71b8">Contact:</font> Rahel Heuser
+                                </t>
+                            </t>
+                            <t >
+                                <br/>
+                                <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com
+                            </t>
+                            <t>
+                                <br/>
+                                <font color="#0e71b8">Phone:</font> +49(0) 30 7468 44 50
+                            </t>
+
+                        </div>
+                    </div>
+                    
                 </div>
             </xpath>
 
@@ -268,13 +272,15 @@
                             <th class="text-center">Article</th>
                             <th class="text-center">Colour</th>
                             <th class="text-center">Quantity</th>
-                            <th class="text-center">Single Unit</th>
+                            <t t-if="o.partner_id.is_retailer">
+                                <th class="text-center">Single Unit</th>
+                            </t>
                             <th class="text-right">Unit Price</th>
                             <th class="text-right">Total</th>
 
                         </tr>
                     </thead>
-                    <t t-set="single_total" t-value="0.0"/>
+                    <t t-set="single_total" t-value="0"/>
                     <tbody class="invoice_tbody">
                         <tr t-foreach="o.invoice_line_ids" t-as="l">
                             <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
@@ -292,24 +298,17 @@
                                 </td>
                                 <td class="text-center" style="white-space:nowrap">
                                     <span t-field="l.quantity"/>
+
                                 </td>
-                                 <td class="text-center" style="white-space:nowrap">
-                                    <!-- <span t-field="l.name"/> -->
-                                    <!-- <t t-if="p.name like '%20x%'"> -->
-                                    <t t-if="'20x' in l.name or '20X' in l.name">
-                                        <t t-set="temp" t-value="(l.quantity * 20)" />
-                                        <t t-set="single_total" t-value="single_total + temp"/>
-                                        <span t-esc="temp"/>
-                                    </t>
-                                    <t t-elif="'80x' in l.name or '80X' in l.name ">
-                                        <t t-set="temp1" t-value="(l.quantity * 80)" />
-                                        <t t-set="single_total" t-value="single_total + temp1"/>
-                                        <span t-esc="temp1"/>
-                                    </t>
-                                     <t t-else="">
-                                        <span t-field="l.quantity"/>
-                                    </t>
-                                </td>
+                                <t t-if="o.partner_id.is_retailer">
+                                    <td class="text-center" style="white-space:nowrap">
+                                        <!-- <span t-field="l.name"/> -->
+                                        <!-- <t t-if="p.name like '%20x%'"> -->
+                                        <span t-esc="l.single_unit"/>
+                                        <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                        
+                                    </td>
+                                </t>
                                 <td class="text-right" style="white-space:nowrap">
                                     <span t-field="o.currency_id.symbol"/>&#32;
                                     <t t-if="l.quantity == 0">
@@ -329,18 +328,20 @@
                             </t>
                             <t t-set="i" t-value="i+1"/>
                         </tr>
-                        <tr>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center">Total</th>
-                            <th class="text-center"><t t-esc="sum(line.quantity for line in o.invoice_line_ids)"/></th>
-                            <th class="text-center"><t t-esc="single_total"/></th>
-                            <th class="text-right"></th>
-                            <th class="text-right"></th>
+                        <t t-if="o.partner_id.is_retailer">
+                            <tr>
+                                <th class="text-center"></th>
+                                <th class="text-center"></th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                <th class="text-center"><t t-esc="single_total"/></th>
+                                <th class="text-right"></th>
+                                <th class="text-right"></th>
 
-                        </tr>
+                            </tr>
+                        </t>
                     </tbody>
-                    <t t-set="single_total" t-value="0.0"/>
+                    <t t-set="single_total" t-value="0"/>
                 </table>
             </xpath>
 
