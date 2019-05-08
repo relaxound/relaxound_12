@@ -17,10 +17,7 @@ class OrderLine(models.Model):
 	    	elif '80x' in pro or '80X' in pro:
 	    		self.update({'single_unit':self.product_uom_qty*80})
 
-            elif '20x' not in pro or '20X' not in pro '80x' not in pro or '80X' not in pro:
-                self.update({'single_unit':self.product_uom_qty*1})
-        else:
-            return True
+
 
 
 
