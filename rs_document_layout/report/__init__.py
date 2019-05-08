@@ -5,4 +5,5 @@ from . import stock_picking
 from . import partner
 from . import order_line
 from . import invoice_order
+from . import invoice_field
 
