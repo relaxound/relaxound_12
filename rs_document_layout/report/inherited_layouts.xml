@@ -47,7 +47,7 @@
 
                                 <tr style="padding-left:40px;">
                                     <td>
-                                        <span t-field="company.name"/>
+                                        <span style="padding-left:40px;" t-field="company.name"/>
                                     </td>
                                     <td style="padding-left:40px;">HypoVereinsbank</td>
                                     <td style="padding-left:40px;">Geschäftsführer:</td>
@@ -60,7 +60,7 @@
                                     <td style="padding-left:40px;">Dennis N. Clasen, Philipp Störring</td>
                                 </tr>
                                 <tr style="padding-left:40px;">
-                                    <td>
+                                    <td style="padding-left:40px;">
                                         <t t-if="company.country_id.code=='DE'">
                                             <span>D</span>
                                         </t>
@@ -72,25 +72,25 @@
                                         <span>&#32;</span>
                                         <span t-field="company.city"/>
                                     </td>
-                                    <td>BIC HYVEDEMM488</td>
-                                    <td>Amtsgericht Charlottenburg</td>
+                                    <td style="padding-left:40px;">BIC HYVEDEMM488</td>
+                                    <td style="padding-left:40px;">Amtsgericht Charlottenburg</td>
                                 </tr>
                                 <tr style="padding-left:40px;">
-                                    <td>Tel.&#32;
+                                    <td style="padding-left:40px;">Tel.&#32;
                                         <span t-field="company.phone"/>
                                     </td>
-                                    <td>Steuernummer: 29/490/30659</td>
-                                    <td>Handelsregisternummer:</td>
+                                    <td style="padding-left:40px;">Steuernummer: 29/490/30659</td>
+                                    <td style="padding-left:40px;">Handelsregisternummer:</td>
                                 </tr>
                                 <tr style="padding-left:40px;">
-                                    <td>
+                                    <td style="padding-left:40px;">
                                         <span t-field="company.email"/>
                                     </td>
-                                    <td>USt-IdNr.: <span t-field="company.vat"/></td>
-                                    <td>HRB 181702 B</td>
+                                    <td style="padding-left:40px;">USt-IdNr.: <span t-field="company.vat"/></td>
+                                    <td style="padding-left:40px;">HRB 181702 B</td>
                                 </tr>
                                 <tr style="padding-left:40px;">
-                                    <td colspan="3">www.zwitscherbox.com</td>
+                                    <td colspan="3" style="padding-left:40px;">www.zwitscherbox.com</td>
                                 </tr>
                             </table>
                         </div>
