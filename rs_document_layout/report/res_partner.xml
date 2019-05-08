@@ -1,20 +1,20 @@
 <odoo>
     <data>
-<!-- 
+
         <record id="business_form_inherit" model="ir.ui.view">
             <field name="name">journal_inherit</field>
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/notebook/page[2]/group/group[1]/field[@name='reference']" position="before">
-                    <field name="journal_id"/>
+                    <!-- <field name="journal_id"/> -->
                 </xpath>
             </field>
-        </record> -->
+        </record>
 
         <record id="sale_order_inherit" model="ir.ui.view">
             <field name="name">sale_inherit</field>
-            <field name="model">sale.order.line</field>
+            <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group[1]/field[@name='partner_shipping_id']" position="after">
@@ -29,7 +29,7 @@
 
         <record id="invoice_order_inherit" model="ir.ui.view">
             <field name="name">account_inherit</field>
-            <field name="model">account.invoice.line</field>
+            <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
                 <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="after">
