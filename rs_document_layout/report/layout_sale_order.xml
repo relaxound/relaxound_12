@@ -180,7 +180,7 @@
                       </table>
                       </div> -->
 
-                <div class="col-sm-12 table-responsive" style="margin-left:94px;">
+                <div class="col-sm-12 table-responsive">
 
                     <table class="table" id="items">
                         <style>
