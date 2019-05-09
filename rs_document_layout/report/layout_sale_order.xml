@@ -168,13 +168,13 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td>1</td>
-                            <td>Anna</td>
-                            <td>Pitt</td>
-                            <td>35</td>
-                            <td>New York</td>
-                            <td>USA</td>
-                            <td>USA7</td>
+                            <td class="col-sm-1">1</td>
+                            <td class="col-sm-2">Anna</td>
+                            <td class="col-sm-2">Pitt</td>
+                            <td class="col-sm-2">35</td>
+                            <td class="col-sm-2">New York</td>
+                            <td class="col-sm-2">USA</td>
+                            <td class="col-sm-1">USA7</td>
                           </tr>
                         </tbody>
                       </table>
