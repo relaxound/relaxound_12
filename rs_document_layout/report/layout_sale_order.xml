@@ -163,9 +163,9 @@
                     </style>
                     <thead>
                         <tr style="border-bottom: 1px solid black">
-                            <th class="text-center" style="max-width:20px;" >Article</th>
-                            <th class="text-center" style="max-width:20px;">Colour</th>
-                            <th class="text-center" style="max-width:20px;">Quantity</th>
+                            <th class="text-center">Article</th>
+                            <th class="text-center">Colour</th>
+                            <th class="text-center">Quantity</th>
                             <t t-if="doc.partner_id.is_retailer">
                                 <th class="text-center">Single Unit</th>
                             </t>
@@ -177,14 +177,14 @@
                     <tbody class="invoice_tbody">
                         <tr t-foreach="doc.order_line" t-as="l">
                             <t t-if="not l.is_delivery"> <!-- remove delivery cost -->
-                                <td class="text-center">
+                                <td class="text-center" style="max-width:80px;">
                                     <span t-field="l.product_id.name"/>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center" style="max-width:80px;">
                                     <span t-if="l.product_id.product_tmpl_id.color_id"
                                           t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center" style="max-width:80px;">
                                     <span t-field="l.product_uom_qty"/>
                                 </td>
                                 <t t-if="doc.partner_id.is_retailer">
