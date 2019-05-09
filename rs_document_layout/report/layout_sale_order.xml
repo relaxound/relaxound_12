@@ -154,7 +154,7 @@
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
 
                 <table class="table  table-condensed"  style="margin-top:10px;  max-width:800px;
-                margin-right:2%; margin-left:2%;" id="items">
+                margin-right:40px; margin-left:40px;" id="items">
                     <style>
                         #items td{
                         border:0
@@ -179,18 +179,18 @@
                     <tbody class="invoice_tbody">
                         <tr t-foreach="doc.order_line" t-as="l">
                             <t t-if="not l.is_delivery"> <!-- remove delivery cost -->
-                                <td class="text-center" style="max-width:80px;">
+                                <td class="text-center" >
                                     <span t-field="l.product_id.name"/>
                                 </td>
-                                <td class="text-center" style="max-width:80px;">
+                                <td class="text-center">
                                     <span t-if="l.product_id.product_tmpl_id.color_id"
                                           t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                 </td>
-                                <td class="text-center" style="max-width:80px;">
+                                <td class="text-center" >
                                     <span t-field="l.product_uom_qty"/>
                                 </td>
                                 <t t-if="doc.partner_id.is_retailer">
-                                    <td class="text-center" style="white-space:nowrap; max-width:80px;">
+                                    <td class="text-center" style="white-space:nowrap;">
                                         <!-- <span t-field="l.name"/> -->
                                         <!-- <t t-if="p.name like '%20x%'"> -->
                                         
@@ -199,7 +199,7 @@
                                     
                                     </td>
                                 </t>
-                                <td class="text-right" style="max-width:80px;">
+                                <td class="text-right">
                                     <span t-field="doc.currency_id.symbol"/>&#32;
                                     <t t-if="doc.partner_id.company_type=='person'">
 					<span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -208,7 +208,7 @@
 					<span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </t>
                                 </td>
-                                <td class="text-right" style="max-width:80px;">
+                                <td class="text-right">
                                     <span t-field="doc.currency_id.symbol"/>&#32;
                                     <t t-if="doc.partner_id.company_type=='person'">
 					<span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
