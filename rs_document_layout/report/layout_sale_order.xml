@@ -182,7 +182,7 @@
 
                 <div class="col-sm-12 table-responsive">
 
-                    <table class="table" id="items" style="table-layout:fixed;margin:0 30px;">
+                    <table class="table" id="items">
                         <style>
                             #items td{
                             border:0
@@ -192,15 +192,15 @@
                             }
                         </style>
                         <thead>
-                            <tr style="border-bottom: 1px solid black">
-                                <th class="text-center" style="width:10%;">Article</th>
-                                <th class="text-center" style="width:10%;">Colour</th>
-                                <th class="text-center" style="width:10%;">Quantity</th>
+                            <tr>
+                                <th class="text-center">Article</th>
+                                <th class="text-center">Colour</th>
+                                <th class="text-center">Quantity</th>
                                 <t t-if="doc.partner_id.is_retailer">
-                                    <th class="text-center" style="width:10%;">Single Unit</th>
+                                    <th class="text-center">Single Unit</th>
                                 </t>
-                                <th class="text-right" style="width:10%;">Unit Price</th>
-                                <th class="text-right" style="width:10%;">Total</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Total</th>
                             </tr>
                         </thead>
                         <t t-set="single_total" t-value="0"/>
