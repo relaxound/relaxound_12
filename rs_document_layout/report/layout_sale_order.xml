@@ -163,9 +163,9 @@
                     </style>
                     <thead>
                         <tr style="border-bottom: 1px solid black">
-                            <th class="text-center">Article</th>
-                            <th class="text-center">Colour</th>
-                            <th class="text-center">Quantity</th>
+                            <th class="text-center" style="max-width:20px;" >Article</th>
+                            <th class="text-center" style="max-width:20px;">Colour</th>
+                            <th class="text-center" style="max-width:20px;">Quantity</th>
                             <t t-if="doc.partner_id.is_retailer">
                                 <th class="text-center">Single Unit</th>
                             </t>
