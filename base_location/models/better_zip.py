@@ -32,6 +32,8 @@ class BetterZip(models.Model):
         related='country_id.enforce_cities',
         readonly=True,
     )
+
+    user_id = fields.Many2one('res.users', string='Salesperson')
     latitude = fields.Float()
     longitude = fields.Float()
 

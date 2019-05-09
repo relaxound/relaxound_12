@@ -17,8 +17,11 @@
                         <field name="code"/>
                         <field name="city"/>
                         <field name="country_id"/>
+                        <field name="user_id"/>
+                        
                     </tree>
                 </field>
+                <!-- <field name="city"/> -->
             </field>
         </field>
     </record>
