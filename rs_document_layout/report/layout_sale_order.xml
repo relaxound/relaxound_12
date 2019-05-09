@@ -182,7 +182,7 @@
 
                 <div class="col-sm-12 table-responsive">
 
-                    <table class="table" style="width:700%" id="items">
+                    <table class="table" style="width:700%; word-wrap: break-word;" id="items">
                         <style>
                             #items td{
                             border:0
