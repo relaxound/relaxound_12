@@ -153,8 +153,8 @@
 
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
 
-                <table class="table  table-condensed"style="margin-top:2px; 
-                margin:40px; word-wrap: break-word; " id="items">
+                <table class="table  table-condensed" style="margin-top:2px; 
+                margin:40px; word-wrap: break-word;" id="items">
                     <style>
                         #items td{
                         border:0
