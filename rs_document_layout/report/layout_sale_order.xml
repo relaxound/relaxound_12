@@ -152,90 +152,89 @@
             </xpath>
 
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <div style="width='500';">
-                    <table class="table table-condensed" style="width='500';" id="items">
-                        <style>
-                            #items td{
-                            border:0
-                            }
-                            #items th {
-                            border-top:0
-                            }
-                        </style>
-                        <thead>
-                            <tr style="border-bottom: 1px solid black">
-                                <th class="text-center">Article</th>
-                                <th class="text-center">Colour</th>
-                                <th class="text-center">Quantity</th>
-                                <t t-if="doc.partner_id.is_retailer">
-                                    <th class="text-center">Single Unit</th>
-                                </t>
-                                <th class="text-right">Unit Price</th>
-                                <th class="text-right">Total</th>
-                            </tr>
-                        </thead>
-                        <t t-set="single_total" t-value="0"/>
-                        <tbody class="invoice_tbody">
-                            <tr t-foreach="doc.order_line" t-as="l">
-                                <t t-if="not l.is_delivery"> <!-- remove delivery cost -->
-                                    <td class="text-center" style="max-width:80px;">
-                                        <span t-field="l.product_id.name"/>
-                                    </td>
-                                    <td class="text-center" style="max-width:80px;">
-                                        <span t-if="l.product_id.product_tmpl_id.color_id"
-                                              t-field="l.product_id.product_tmpl_id.color_id.name"/>
-                                    </td>
-                                    <td class="text-center" style="max-width:80px;">
-                                        <span t-field="l.product_uom_qty"/>
-                                    </td>
-                                    <t t-if="doc.partner_id.is_retailer">
-                                        <td class="text-center" style="white-space:nowrap">
-                                            <!-- <span t-field="l.name"/> -->
-                                            <!-- <t t-if="p.name like '%20x%'"> -->
-                                            
-                                            <span t-esc="l.single_unit"/>
-                                            <t t-set="single_total" t-value="single_total+l.single_unit"/>
-                                        
-                                        </td>
-                                    </t>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/>&#32;
-                                        <t t-if="doc.partner_id.company_type=='person'">
-    					<span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                        <t t-if="doc.partner_id.company_type=='company'">
-    					<span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/>&#32;
-                                        <t t-if="doc.partner_id.company_type=='person'">
-    					<span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                        <t t-if="doc.partner_id.company_type=='company'">
-    					<span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-
-                                    </td>
-                                </t>
-                            </tr>
+                
+                <table class="table table-condensed" style="margin-top:10px; max-width:300px; margin-left:85px;" id="items">
+                    <style>
+                        #items td{
+                        border:0
+                        }
+                        #items th {
+                        border-top:0
+                        }
+                    </style>
+                    <thead>
+                        <tr style="border-bottom: 1px solid black">
+                            <th class="text-center">Article</th>
+                            <th class="text-center">Colour</th>
+                            <th class="text-center">Quantity</th>
                             <t t-if="doc.partner_id.is_retailer">
-
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Total</th>
-                                    <th class="text-center"><t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/></th>
-                                    <th class="text-center"><t t-esc="single_total"/></th>
-                                    <th class="text-center"></th>
-                                    <th class="text-right"></th>
-                                    <th class="text-right"></th>
-
-                                </tr>
+                                <th class="text-center">Single Unit</th>
                             </t>
-                        </tbody>
-                        <t t-set="single_total" t-value="0"/>
-                    </table>
-                </div>
+                            <th class="text-right">Unit Price</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <t t-set="single_total" t-value="0"/>
+                    <tbody class="invoice_tbody">
+                        <tr t-foreach="doc.order_line" t-as="l">
+                            <t t-if="not l.is_delivery"> <!-- remove delivery cost -->
+                                <td class="text-center" style="max-width:80px;">
+                                    <span t-field="l.product_id.name"/>
+                                </td>
+                                <td class="text-center" style="max-width:80px;">
+                                    <span t-if="l.product_id.product_tmpl_id.color_id"
+                                          t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                </td>
+                                <td class="text-center" style="max-width:80px;">
+                                    <span t-field="l.product_uom_qty"/>
+                                </td>
+                                <t t-if="doc.partner_id.is_retailer">
+                                    <td class="text-center" style="white-space:nowrap">
+                                        <!-- <span t-field="l.name"/> -->
+                                        <!-- <t t-if="p.name like '%20x%'"> -->
+                                        
+                                        <span t-esc="l.single_unit"/>
+                                        <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                    
+                                    </td>
+                                </t>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>&#32;
+                                    <t t-if="doc.partner_id.company_type=='person'">
+					<span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </t>
+                                    <t t-if="doc.partner_id.company_type=='company'">
+					<span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </t>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>&#32;
+                                    <t t-if="doc.partner_id.company_type=='person'">
+					<span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </t>
+                                    <t t-if="doc.partner_id.company_type=='company'">
+					<span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </t>
+
+                                </td>
+                            </t>
+                        </tr>
+                        <t t-if="doc.partner_id.is_retailer">
+
+                            <tr>
+                                <th class="text-center"></th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center"><t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/></th>
+                                <th class="text-center"><t t-esc="single_total"/></th>
+                                <th class="text-center"></th>
+                                <th class="text-right"></th>
+                                <th class="text-right"></th>
+
+                            </tr>
+                        </t>
+                    </tbody>
+                    <t t-set="single_total" t-value="0"/>
+                </table>
             </xpath>
 
              <xpath expr="//div/div[@id='total']" position="replace">
