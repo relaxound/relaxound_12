@@ -153,7 +153,34 @@
 
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
 
-                <table class="table  table-condensed" style="margin-top:2px; 
+                <div class="table-responsive">          
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Age</th>
+                            <th>City</th>
+                            <th>Country</th>
+                             <th>seven</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>Anna</td>
+                            <td>Pitt</td>
+                            <td>35</td>
+                            <td>New York</td>
+                            <td>USA</td>
+                            <td>USA7</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+
+                <!-- <table class="table  table-condensed" style="margin-top:2px; 
                 margin:40px; word-wrap: break-word; width:'14%';" id="items">
                     <style>
                         #items td{
@@ -178,7 +205,7 @@
                     <t t-set="single_total" t-value="0"/>
                     <tbody class="invoice_tbody">
                         <tr t-foreach="doc.order_line" t-as="l">
-                            <t t-if="not l.is_delivery"> <!-- remove delivery cost -->
+                            <t t-if="not l.is_delivery"> 
                                 <td class="text-center" style="width:2%" >
                                     <span t-field="l.product_id.name"/>
                                 </td>
@@ -191,8 +218,7 @@
                                 </td>
                                 <t t-if="doc.partner_id.is_retailer">
                                     <td class="text-center" style="white-space:nowrap; width:16%">
-                                        <!-- <span t-field="l.name"/> -->
-                                        <!-- <t t-if="p.name like '%20x%'"> -->
+                                        
                                         
                                         <span t-esc="l.single_unit"/>
                                         <t t-set="single_total" t-value="single_total+l.single_unit"/>
@@ -235,7 +261,7 @@
                         </t>
                     </tbody>
                     <t t-set="single_total" t-value="0"/>
-                </table>
+                </table> -->
             </xpath>
 
              <xpath expr="//div/div[@id='total']" position="replace">
