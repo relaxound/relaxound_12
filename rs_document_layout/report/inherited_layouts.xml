@@ -6,7 +6,7 @@
         <template id="external_layout_header" inherit_id="web.external_layout_standard">
 
             <xpath expr="//div[hasclass('header')]" position="replace">
-                <div class="header" style="margin-left: 1cm; margin-right: 1cm;">
+                <div class="header" style="margin-left: 2.5cm; margin-right: 2.5cm;">
                         <div class="row" >
                             <div class="col-xs-12 col-md-12" align="center" style="margin-top:10px;"  >
                             <img src="/rs_document_layout/static/src/img/relaxound_header.png" class="center-block"
@@ -94,7 +94,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-xs-2" style="margin-bottom:10px;" >
+                        <div class="col-xs-2" style="margin-bottom:10px; margin-right:94px;" >
                         </div>
                         <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px; padding-left:200px;">
                             <img src="/rs_document_layout/static/src/img/wavemedic.png" class="pull-right"
