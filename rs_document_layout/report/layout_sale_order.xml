@@ -51,7 +51,7 @@
                     </t>
                 </div></h2>
             </div>
-            <div class="row" style="margin-left: 85px; margin-right: 94px;">
+            <div class="row" style="margin-left: 85px; margin-right: 74px;">
                 <div class="col-md-10">
                     <div class="col-md-5" style="width:50%; float: left;">
                         <style>
@@ -119,7 +119,7 @@
 
                     <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                      <div class="col-md-5" style="width:70%; float: right; text-align: right;">
+                      <div class="col-md-5" style="width:50%; float: right; text-align: right;">
                             <table id="data">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
