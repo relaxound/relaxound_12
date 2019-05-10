@@ -180,9 +180,9 @@
                       </table>
                       </div> -->
 
-                <div class="col-sm-12 table-responsive">
+                <div class="col-sm-12 col-md-12 table-responsive">
 
-                    <table class="table" id="items">
+                    <table class="table" style="table-layout: fixed; width: 90%" id="items">
                         <style>
                             #items td{
                             border:0
@@ -193,14 +193,14 @@
                         </style>
                         <thead>
                             <tr style="border-bottom: 1px solid black">
-                                <th class="text-center">Article</th>
-                                <th class="text-center">Colour</th>
-                                <th class="text-center">Quantity</th>
+                                <th class="text-center" style="width: 25%">Article</th>
+                                <th class="text-center" style="width: 10%">Colour</th>
+                                <th class="text-center" style="width: 10%">Quantity</th>
                                 <t t-if="doc.partner_id.is_retailer">
-                                    <th class="text-center">Single Unit</th>
+                                    <th class="text-center" style="width: 30%">Single Unit</th>
                                 </t>
-                                <th class="text-right">Unit Price</th>
-                                <th class="text-right">Total</th>
+                                <th class="text-right" style="width: 15%">Unit Price</th>
+                                <th class="text-right" style="width: 15%">Total</th>
                             </tr>
                         </thead>
                         <t t-set="single_total" t-value="0"/>
@@ -209,7 +209,7 @@
                                 <t t-if="not l.is_delivery"> 
                                     <!-- <td style="width: 10%">
                                     </td> -->
-                                    <td class="text-center" style="width: 20%" >
+                                    <td class="text-center" style="width: 25%" >
                                         <span t-field="l.product_id.name"/>
                                     </td>
                                     <td class="text-center" style="width: 10%">
@@ -220,7 +220,7 @@
                                         <span t-field="l.product_uom_qty"/>
                                     </td>
                                     <t t-if="doc.partner_id.is_retailer">
-                                        <td class="text-center" style="white-space:nowrap; width: 10%">
+                                        <td class="text-center" style="white-space:nowrap; width: 15%">
                                             
                                             
                                             <span t-esc="l.single_unit"/>
@@ -228,7 +228,7 @@
                                         
                                         </td>
                                     </t>
-                                    <td class="text-right" style="width: 10%">
+                                    <td class="text-right" style="width: 15%">
                                         <span t-field="doc.currency_id.symbol"/>&#32;
                                         <t t-if="doc.partner_id.company_type=='person'">
     					<span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -237,7 +237,7 @@
     					<span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                     </td>
-                                    <td class="text-right" style="width: 10%">
+                                    <td class="text-right" style="width: 15%">
                                         <span t-field="doc.currency_id.symbol"/>&#32;
                                         <t t-if="doc.partner_id.company_type=='person'">
     					<span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
