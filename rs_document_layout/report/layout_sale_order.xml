@@ -118,32 +118,34 @@
             <!-- </xpath> -->
             <xpath expr="//div/div[@id='informations']" position="replace">
                 <div class="col-xs-4" style="margin-left: 85px; margin-right: 94px;">
-                    <div t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
+                    <table>
+                    <tr t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
                         <strong>Your Reference:</strong>
                         <p class="m-0" t-field="doc.client_order_ref"/>
-                    </div>
-                    <div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="col-auto mw-100 mb-2">
+                    </t>
+                    <tr t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="col-auto mw-100 mb-2">
                         <strong>Date Ordered:</strong>
                         <span class="m-0" t-esc="doc.confirmation_date" t-options='{"widget": "date"}'/>
                         <!-- <p class="m-0" t-field="doc.confirmation_date"/> -->
-                    </div>
-                    <div t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto mw-100 mb-2">
+                    </t>
+                    <tr t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto mw-100 mb-2">
                         <strong>Quotation Date:</strong>
                         <span class="m-0" t-esc="doc.date_order" t-options='{"widget": "date"}'/>
                         <!-- <p class="m-0" t-field="doc.date_order"/> -->
-                    </div>
-                    <div t-if="doc.user_id.name" class="col-auto mw-100 mb-2">
+                    </tr>
+                    <tr t-if="doc.user_id.name" class="col-auto mw-100 mb-2">
                         <strong>Salesperson:</strong>
                         <p class="m-0" t-field="doc.user_id"/>
-                    </div>
-                    <div name="payment_term" t-if="doc.payment_term_id" class="col-auto mw-100 mb-2">
+                    </tr>
+                    <tr name="payment_term" t-if="doc.payment_term_id" class="col-auto mw-100 mb-2">
                         <strong>Payment Terms:</strong>
                         <p class="m-0" t-field="doc.payment_term_id"/>
-                    </div>
-                    <div t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto mw-100 mb-2">
+                    </tr>
+                    <table-responsive t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto mw-100 mb-2">
                         <strong>Expiration Date:</strong>
                         <p class="m-0" t-field="doc.validity_date"/>
-                    </div>
+                    </tr>
+                </table>
                 </div>
             </xpath>
         </div>
