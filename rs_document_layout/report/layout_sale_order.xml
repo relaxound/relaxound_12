@@ -5,7 +5,7 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
 
             <xpath expr="//t[2][@t-set='address']" position="replace">
-                 <br/> <br/> <br/>
+                <br/> <br/> <br/>
                 <div class="col-xs-6" style="margin-left:100px; margin-right:94px;">
                     <t t-if="doc.partner_id.parent_id">
                         <span t-field="doc.partner_id.parent_id.name"/>
@@ -38,22 +38,22 @@
 
             </xpath>
             <xpath expr="//h2" position="replace">
-                <br/>
-                <div class="row" style="margin-left:100px; margin-right:94px;">
-                    <h2><div class ="col-xs-4">ZWITSCHERBOX &#160;&#160;&#160;&#160;&#160;&#160;&#160;</div></h2>
-                    <h2><div class ="col-xs-4">
-                        <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                                <span t-if="doc.state not in ['draft','sent']">Order </span>
-                                <span t-if="doc.state in ['draft','sent']">Quotation </span>
-                            </t>
-                            <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                                <span>Pro-Forma Invoice </span>
-                            </t>
-                    </div></h2>
-                </div>
-                <div class="row" style="margin-left: 85px; margin-right: 94px;">
-                     <div style="width:100%;">
-                        <div style="width:50%; float: left;">
+            <br/>
+            <div class="row" style="margin-left:100px; margin-right:94px;">
+                <h2><div class ="col-xs-4">ZWITSCHERBOX &#160;&#160;&#160;&#160;&#160;&#160;&#160;</div></h2>
+                <h2><div class ="col-xs-4">
+                    <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                        <span t-if="doc.state not in ['draft','sent']">Order </span>
+                        <span t-if="doc.state in ['draft','sent']">Quotation </span>
+                    </t>
+                    <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                        <span>Pro-Forma Invoice </span>
+                    </t>
+                </div></h2>
+            </div>
+            <div class="row" style="margin-left: 85px; margin-right: 94px;">
+                <div style="width:100%;">
+                    <div style="width:50%; float: left;">
                         <style>
                             #order_data td{
                             padding:3px 10px 3px 0px
@@ -90,18 +90,18 @@
                                     <td>Order Date:</td>
                                     <td>
                                         <span t-esc="doc.order_date" t-options='{"widget": "date"}'/>
-                                        
+
                                     </td>
                                 </tr>
                             </t>
-<!--                             Added the order by and ETD field in sale order report-->                            <t t-if="doc.validity_date">
-                                <tr>
-                                    <td>ETD:</td>
-                                    <td>
-                                        <span t-field="doc.validity_date"/>
-                                    </td>
-                                </tr>
-                            </t>
+                            <!--                             Added the order by and ETD field in sale order report-->                            <t t-if="doc.validity_date">
+                            <tr>
+                                <td>ETD:</td>
+                                <td>
+                                    <span t-field="doc.validity_date"/>
+                                </td>
+                            </tr>
+                        </t>
                             <t t-if="doc.order_by.name">
                                 <tr>
                                     <td>Order By:</td>
@@ -114,66 +114,67 @@
                         </table>
                     </div>
 
-                <!-- </div> -->
+                    <!-- </div> -->
 
-            <!-- </xpath> -->
-            <xpath expr="//div/div[@id='informations']" position="replace">
-                <div style="width:50%; float: right; text-align: right;" >
-                    <table id="data">
-                            <t t-if="doc.client_order_ref">
-                                <tr>
-                                    <td>Your Reference:</td>
-                                    <td>
-                                        <span t-field="doc.client_order_ref"/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.confirmation_date and doc.state not in ['draft','sent']">
-                                <tr>
-                                    <td>Date Ordered:</td>
-                                    <td>
-                                        <span t-esc="doc.confirmation_date" t-options='{"widget": "date"}'/>                                        
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.date_order and doc.state in ['draft','sent']">
-                                <tr>
-                                    <td>Quotation Date:</td>
-                                    <td>
-                                        <span t-esc="doc.date_order" t-options='{"widget": "date"}'/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.user_id.name">
-                                <tr>
-                                    <td>Salesperson:</td>
-                                    <td>
-                                        <span t-field="doc.user_id"/>
-                                        
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.payment_term_id">
-                                <tr>
-                                    <td>Payment Terms:</td>
-                                    <td>
-                                        <span t-field="doc.payment_term_id"/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.validity_date and doc.state in ['draft', 'sent']">
-                                <tr>
-                                    <td>Expiration Date:</td>
-                                    <td>
-                                        <span t-field="doc.validity_date"/>
-                                    </td>
-                                </tr>
-                            </t>
-                        </table>
+                    <!-- </xpath> -->
+                    <xpath expr="//div/div[@id='informations']" position="replace">
+                        <div class="col-6" style="margin-left: 85px; margin-right: 94px;">
+                            <table id="data">
+                                <t t-if="doc.client_order_ref">
+                                    <tr>
+                                        <td>Your Reference:</td>
+                                        <td>
+                                            <span t-field="doc.client_order_ref"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.confirmation_date and doc.state not in ['draft','sent']">
+                                    <tr>
+                                        <td>Date Ordered:</td>
+                                        <td>
+                                            <span t-esc="doc.confirmation_date" t-options='{"widget": "date"}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.date_order and doc.state in ['draft','sent']">
+                                    <tr>
+                                        <td>Quotation Date:</td>
+                                        <td>
+                                            <span t-esc="doc.date_order" t-options='{"widget": "date"}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.user_id.name">
+                                    <tr>
+                                        <td>Salesperson:</td>
+                                        <td>
+                                            <span t-field="doc.user_id"/>
+
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.payment_term_id">
+                                    <tr>
+                                        <td>Payment Terms:</td>
+                                        <td>
+                                            <span t-field="doc.payment_term_id"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.validity_date and doc.state in ['draft', 'sent']">
+                                    <tr>
+                                        <td>Expiration Date:</td>
+                                        <td>
+                                            <span t-field="doc.validity_date"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </xpath>
                 </div>
+            </div>
             </xpath>
-        </div>
-        </xpath>
          <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
         </xpath>
