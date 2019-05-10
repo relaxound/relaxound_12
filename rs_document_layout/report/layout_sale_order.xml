@@ -94,14 +94,15 @@
                                     </td>
                                 </tr>
                             </t>
-                            <!--                             Added the order by and ETD field in sale order report-->                            <t t-if="doc.validity_date">
-                            <tr>
-                                <td>ETD:</td>
-                                <td>
-                                    <span t-field="doc.validity_date"/>
-                                </td>
-                            </tr>
-                        </t>
+                            <!--Added the order by and ETD field in sale order report-->  
+                            <t t-if="doc.validity_date">
+                                <tr>
+                                    <td>ETD:</td>
+                                    <td>
+                                        <span t-field="doc.validity_date"/>
+                                    </td>
+                                </tr>
+                            </t>
                             <t t-if="doc.order_by.name">
                                 <tr>
                                     <td>Order By:</td>
@@ -118,7 +119,7 @@
 
                     <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                      <div class="col-md-5" style="width:50%; float: right; text-align: right;">
+                      <div class="col-md-5" style="width:70%; float: right; text-align: right;">
                             <table id="data">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
