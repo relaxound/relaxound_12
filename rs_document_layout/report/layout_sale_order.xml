@@ -151,7 +151,7 @@
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div class="col-sm-12 col-md-12 table-responsive pull-right">
 
-                    <table class="table table-condensed" align="right" style="table-layout: fixed; width: 90%; border: none; page-break-before: always;" id="items">
+                    <table class="table table-condensed" align="right" style="table-layout: fixed; width: 90%; border: none; page-break-before: always; top: 120px" id="items">
                         <style>
                             #items td{
                             border:0
