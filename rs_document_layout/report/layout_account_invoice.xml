@@ -289,15 +289,15 @@
                     </style>
                     <thead>
                         <tr style="border-bottom: 1px solid black">
-                            <th class="text-center">Position</th>
-                            <th class="text-center">Article</th>
-                            <th class="text-center">Colour</th>
-                            <th class="text-center">Quantity</th>
+                            <th class="text-center" style="width: 15%">Position</th>
+                            <th class="text-center" style="width: 15%">Article</th>
+                            <th class="text-center" style="width: 15%">Colour</th>
+                            <th class="text-center" style="width: 15%">Quantity</th>
                             <t t-if="o.partner_id.is_retailer">
-                                <th class="text-center">Single Unit</th>
+                                <th class="text-center" style="width: 15%">Single Unit</th>
                             </t>
-                            <th class="text-right">Unit Price</th>
-                            <th class="text-right">Total</th>
+                            <th class="text-right" style="width: 15%">Unit Price</th>
+                            <th class="text-right" style="width: 15%">Total</th>
 
                         </tr>
                     </thead>

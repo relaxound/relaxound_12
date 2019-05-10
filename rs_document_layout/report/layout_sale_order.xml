@@ -164,7 +164,7 @@
                             <tr style="border-bottom: 1px solid black">
                                 <th class="text-center" style="width: 25%">Article</th>
                                 <th class="text-center" style="width: 15%">Colour</th>
-                                <th class="text-center" style="width: 15%">Quantity</th>
+                                <th class="text-center" style="width: 13%">Quantity</th>
                                 <t t-if="doc.partner_id.is_retailer">
                                     <th class="text-center" style="width: 13%">Single Unit</th>
                                 </t>
@@ -185,11 +185,11 @@
                                         <span t-if="l.product_id.product_tmpl_id.color_id"
                                               t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                     </td>
-                                    <td class="text-center" style="width: 10%" >
+                                    <td class="text-center" style="width: 13%" >
                                         <span t-field="l.product_uom_qty"/>
                                     </td>
                                     <t t-if="doc.partner_id.is_retailer">
-                                        <td class="text-center" style="white-space:nowrap; width: 15%">
+                                        <td class="text-center" style="white-space:nowrap; width: 13%">
                                             
                                             
                                             <span t-esc="l.single_unit"/>
