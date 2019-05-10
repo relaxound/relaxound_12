@@ -150,7 +150,7 @@
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div class="col-sm-12 col-md-12 table-responsive">
 
-                    <table class="table" style="table-layout: fixed; width: 90%" id="items">
+                    <table class="table" style="table-layout: fixed; width: 80%" id="items">
                         <style>
                             #items td{
                             border:0
@@ -161,7 +161,7 @@
                         </style>
                         <thead>
                             <tr style="border-bottom: 1px solid black">
-                                <th class="text-center" style="width: 25%">Article</th>
+                                <th class="text-center" style="width: 15%">Article</th>
                                 <th class="text-center" style="width: 15%">Colour</th>
                                 <th class="text-center" style="width: 15%">Quantity</th>
                                 <t t-if="doc.partner_id.is_retailer">
