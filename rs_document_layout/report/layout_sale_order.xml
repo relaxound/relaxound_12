@@ -204,11 +204,11 @@
                         </t>
                         <t t-if="not(doc.partner_id.is_retailer)">
                             <tr style="border-bottom: 1px solid black, padding-left:40px">
-                                <th class="text-center" >Article1</th>
-                                <th class="text-center" >Colour1</th>
-                                <th class="text-center" >Quantity1</th>
-                                <th class="text-right" >Unit Price1</th>
-                                <th class="text-right" >Total1</th>
+                                <th class="text-center" width= "22%">Article1</th>
+                                <th class="text-center" width= "15%">Colour1</th>
+                                <th class="text-center" width= "15%">Quantity1</th>
+                                <th class="text-right" width= "15%">Unit Price1</th>
+                                <th class="text-right" width= "15%">Total1</th>
                             </tr>
                         </t>
                         </thead>
