@@ -162,7 +162,7 @@
                         </style>
                         <thead>
                             <tr style="border-bottom: 1px solid black, padding-left:40px">
-                                <th class="text-center" style="width: 15%">Article</th>
+                                <th class="text-center" style="width: 30%">Article</th>
                                 <th class="text-center" style="width: 15%">Colour</th>
                                 <th class="text-center" style="width: 15%">Quantity</th>
                                 <t t-if="doc.partner_id.is_retailer">
