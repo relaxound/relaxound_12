@@ -351,7 +351,7 @@
                                         <td class="text-right col-xs-2">
                                             <strong>
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
-        					<span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+        					                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </strong>
                                         </td>
                                     </tr>
@@ -362,7 +362,7 @@
                                         <td class="text-right">
                                             <strong>
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
-        					<span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+        					                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </strong>
                                         </td>
                                     </tr>
@@ -370,7 +370,7 @@
                                         <td class='text-right'>Untaxed Amount</td>
                                         <td class="text-right">
                                             <span t-field="doc.currency_id.symbol"/>&#32;
-        				    <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+        				                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </tr>
 
@@ -378,7 +378,7 @@
                                         <td class='text-right'>VAT 19%</td>
                                         <td class="text-right">
                                             <span t-field="doc.currency_id.symbol"/>&#32;
-        				    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+        				                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </tr>
                                     <tr style="border: none">
@@ -388,7 +388,7 @@
                                         <td class="text-right">
                                             <strong>
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
-        					<span t-esc="('{0:,.2f}'.format(float(doc.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+        					                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </strong>
                                         </td>
                                     </tr>
