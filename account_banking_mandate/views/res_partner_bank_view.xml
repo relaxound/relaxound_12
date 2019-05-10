@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+# Copyright (c) 2016 Openfellas (http://openfellas.com) All Rights Reserved.
+#
+# WARNING: This program as such is intended to be used by professional
+# programmers who take the whole responsibility of assessing all potential
+# consequences resulting from its eventual inadequacies and bugs
+# End users who are looking for a ready-to-use solution with commercial
+# guarantees and support are strongly advised to contract support@openfellas.com
+#
+##############################################################################
+-->
+
+<odoo>
+    <data>
+
+        <record id="mandate_partner_bank_form" model="ir.ui.view">
+            <field name="name">mandate.res.partner.bank.form</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+                <group position="after">
+                
+                    <!-- <field name="bank_id" position="after" invisible="1">
+                        <group position="after"> -->
+                            <group name="mandates" string="Direct Debit Mandates">
+                                <field name="mandate_ids" context="{'mandate_bank_partner_view': True}" nolabel="1"/>
+                            </group>
+                   <!--  </group>   
+                    </field> -->
+                </group>
+
+            </field>
+        </record>
+
+        <record id="mandate_partner_bank_tree" model="ir.ui.view">
+            <field name="name">mandate.res.partner.bank.tree</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="mandate_ids" string="DD Mandates"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- add number of mandates in this list of bank accounts on the partner form -->
+        <record id="mandate_partner_form" model="ir.ui.view">
+            <field name="name">mandate.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <button type="action" class="btn-link" name="%(base.action_res_partner_bank_account_form)d" context="{'search_default_partner_id': active_id, 'default_partner_id': active_id, 'form_view_ref': 'account.view_company_partner_bank_form'}" position="after" >
+
+                    <group name="container_row_2" position="inside">
+                        <group string="Mandates" name="dd_mandates_group">
+                            <div>
+                                <button type="action" class="btn-link"
+                                    name="%(account_banking_mandate.mandate_action)d"
+                                    context="{'search_default_partner_id': active_id, 'default_partner_id': active_id}">
+                                    <field name="mandates_count" string="Mandates" widget="statinfo"/>
+                                </button>
+                            </div>
+                        </group>
+                    </group>
+
+                </button>
+            </field>
+        </record>
+
+    </data>
+</odoo>
