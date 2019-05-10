@@ -51,7 +51,7 @@
                     </t>
                 </div></h2>
             </div>
-            <div class="row" style="margin-left: 85px; margin-right: 94px;">
+            <div class="row" style="margin-left: 85px; margin-right: 74px;">
                 <div class="col-md-10">
                     <div class="col-md-5" style="width:50%; float: left;">
                         <style>
@@ -94,14 +94,15 @@
                                     </td>
                                 </tr>
                             </t>
-                            <!--                             Added the order by and ETD field in sale order report-->                            <t t-if="doc.validity_date">
-                            <tr>
-                                <td>ETD:</td>
-                                <td>
-                                    <span t-field="doc.validity_date"/>
-                                </td>
-                            </tr>
-                        </t>
+                            <!--Added the order by and ETD field in sale order report-->  
+                            <t t-if="doc.validity_date">
+                                <tr>
+                                    <td>ETD:</td>
+                                    <td>
+                                        <span t-field="doc.validity_date"/>
+                                    </td>
+                                </tr>
+                            </t>
                             <t t-if="doc.order_by.name">
                                 <tr>
                                     <td>Order By:</td>
