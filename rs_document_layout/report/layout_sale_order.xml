@@ -131,7 +131,7 @@
                                 <tr>
                                     <td>Date Ordered:</td>
                                     <td>
-                                        <span class="m-0" t-esc="doc.confirmation_date" t-options='{"widget": "date"}'/>                                        
+                                        <span t-esc="doc.confirmation_date" t-options='{"widget": "date"}'/>                                        
                                     </td>
                                 </tr>
                             </t>
@@ -140,7 +140,7 @@
                                 <tr>
                                     <td>Quotation Date:</td>
                                     <td>
-                                        <span class="m-0" t-esc="doc.date_order" t-options='{"widget": "date"}'/>
+                                        <span t-esc="doc.date_order" t-options='{"widget": "date"}'/>
                                     </td>
                                 </tr>
                             </t>
