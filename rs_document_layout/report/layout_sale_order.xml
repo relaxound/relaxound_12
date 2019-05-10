@@ -281,6 +281,7 @@
 
                             <t t-set="delivery_cost" t-value="0"/>
 
+<<<<<<< HEAD
                             <t t-foreach="doc.order_line" t-as="l">
                                 <t t-if="l.is_delivery">
                                     <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
@@ -335,6 +336,64 @@
                                 </td>
                             </tr>
                         </table>
+=======
+                                    <t t-foreach="doc.order_line" t-as="l">
+                                        <t t-if="l.is_delivery">
+                                            <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
+                                        </t>
+                                    </t>
+                                    <tr style="border: none">
+                                        <td class="col-xs-3 text-right">
+                                            <span>Total</span>
+                                        </td>
+                                        <td class="text-right col-xs-2">
+                                            <strong>
+                                                <span t-field="doc.currency_id.symbol"/>&#32;
+        					                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid black">
+                                        <td class='text-right'>
+                                            <span>Shipping</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>
+                                                <span t-field="doc.currency_id.symbol"/>&#32;
+        					                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: none">
+                                        <td class='text-right'>Untaxed Amount</td>
+                                        <td class="text-right">
+                                            <span t-field="doc.currency_id.symbol"/>&#32;
+        				                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid black">
+                                        <td class='text-right'>VAT 19%</td>
+                                        <td class="text-right">
+                                            <span t-field="doc.currency_id.symbol"/>&#32;
+        				                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: none">
+                                        <td class='text-right'>
+                                            <strong>Total</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>
+                                                <span t-field="doc.currency_id.symbol"/>&#32;
+        					                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+>>>>>>> 1a9eb3dde35694317cb54d6bf26f2db50540812b
                     </div>
                 </div>
             </xpath>
