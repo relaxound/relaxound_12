@@ -180,7 +180,7 @@
                       </table>
                       </div> -->
 
-                <!-- <div class="col-sm-12 table-responsive"> -->
+                <div class="col-sm-12 table-responsive">
 
                     <table class="table" id="items">
                         <style>
@@ -266,7 +266,7 @@
                         </tbody>
                         <t t-set="single_total" t-value="0"/>
                     </table>
-                <!-- </div> -->
+                </div>
             </xpath>
 
              <xpath expr="//div/div[@id='total']" position="replace">
