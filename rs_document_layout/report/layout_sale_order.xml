@@ -199,6 +199,9 @@
             </xpath>
         </div>
         </xpath>
+         <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
+                <attribute name="style">display:none</attribute>
+        </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div class="col-sm-12 col-md-12 table-responsive pull-right">
 
