@@ -16,7 +16,7 @@ class InvoiceJournal(models.Model):
     def _compute_amount(self):
         round_curr = self.currency_id.round
         self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
-        if self.partner_id.vat and 'ni' in self.partner_id.property_account_position_id.name:
+        if self.partner_id.vat and 'EU' in self.partner_id.property_account_position_id.name:
             self.amount_tax = 0.0
             self.amount_total = self.amount_untaxed
             amount_total_company_signed = self.amount_total
