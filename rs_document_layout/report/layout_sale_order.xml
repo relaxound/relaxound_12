@@ -52,7 +52,7 @@
                     </div></h2>
                 </div>
                 <div class="row" style="margin-left: 85px; margin-right: 94px;">
-                    <div class="col-auto mw-100 mb-2">
+                    <div class="col-6">
                         <style>
                             #order_data td{
                             padding:3px 10px 3px 0px
@@ -117,8 +117,8 @@
 
             <!-- </xpath> -->
             <xpath expr="//div/div[@id='informations']" position="replace">
-                <div class="row mt32 mb32" style="margin-left: 85px; margin-right: 94px;">
-                    <table id="order_data">
+                <div class="col-6" style="margin-left: 85px; margin-right: 94px;">
+                    <table id="data">
                             <t t-if="doc.client_order_ref">
                                 <tr>
                                     <td>Your Reference:</td>
@@ -135,7 +135,6 @@
                                     </td>
                                 </tr>
                             </t>
-                            <!-- Customized customer reference in quotations by techspawn -->
                             <t t-if="doc.date_order and doc.state in ['draft','sent']">
                                 <tr>
                                     <td>Quotation Date:</td>
@@ -153,7 +152,7 @@
                                     </td>
                                 </tr>
                             </t>
-<!--                             Added the order by and ETD field in sale order report-->                   <t t-if="doc.payment_term_id">
+                            <t t-if="doc.payment_term_id">
                                 <tr>
                                     <td>Payment Terms:</td>
                                     <td>
