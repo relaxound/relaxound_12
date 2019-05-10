@@ -149,9 +149,9 @@
         <!-- </div>
             </xpath> -->
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <div class="col-sm-12 col-md-12 table-responsive pull-right" style="float:right;">
+                <div class="col-sm-12 col-md-12 table-responsive pull-right">
 
-                    <table class="table" style="table-layout: fixed; width: 90%,  float:right;" id="items">
+                    <table class="table" style="table-layout: fixed; width: 90%;" id="items">
                         <style>
                             #items td{
                             border:0
@@ -161,7 +161,7 @@
                             }
                         </style>
                         <thead>
-                            <tr style="border-bottom: 1px solid black">
+                            <tr style="border-bottom: 1px solid black, padding-left:40px">
                                 <th class="text-center" style="width: 25%">Article</th>
                                 <th class="text-center" style="width: 15%">Colour</th>
                                 <th class="text-center" style="width: 13%">Quantity</th>
