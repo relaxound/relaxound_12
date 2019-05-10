@@ -118,7 +118,7 @@
 
                     <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                        <div class="col-6" style="margin-left: 85px; margin-right: 94px;">
+                        <div style="width:50%; float: left;">
                             <table id="data">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
