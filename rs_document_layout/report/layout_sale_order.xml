@@ -113,11 +113,11 @@
                         </table>
                     </div>
 
-                </div>
+                <!-- </div> -->
 
-            </xpath>
+            <!-- </xpath> -->
             <xpath expr="//div/div[@id='informations']" position="replace">
-                <div class="row mt32 mb32" style="margin-left: 85px; margin-right: 94px;">
+                <div class="col-xs-4" style="margin-left: 85px; margin-right: 94px;">
                     <div t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
                         <strong>Your Reference:</strong>
                         <p class="m-0" t-field="doc.client_order_ref"/>
@@ -146,8 +146,8 @@
                     </div>
                 </div>
             </xpath>
-        <!-- </div>
-            </xpath> -->
+        </div>
+        </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div class="col-sm-12 col-md-12 table-responsive pull-right">
 
