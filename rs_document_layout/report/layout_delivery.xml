@@ -3,7 +3,7 @@
 	<data>
 		<!-- Delivery Slip -->
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
-			<xpath expr="//t[4][@t-set='address']" position="replace">
+			<xpath expr="//t[@t-set='address']" position="replace">
 			</xpath>
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
