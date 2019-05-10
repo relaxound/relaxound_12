@@ -62,7 +62,7 @@
                         <table id="order_data">
                             <t t-if="doc.partner_id.ref">
                                 <tr>
-                                    <td>CNr:</td>
+                                    <td>&#160;&#160;&#160;&#160;CNr:</td>
                                     <td>
                                         <span t-field="doc.partner_id.ref"/>
                                     </td>
@@ -70,7 +70,7 @@
                             </t>
                             <t t-if="doc.name">
                                 <tr>
-                                    <td>Order-No:</td>
+                                    <td>&#160;&#160;&#160;&#160;Order-No:</td>
                                     <td>
                                         <span t-field="doc.name"/>
                                     </td>
