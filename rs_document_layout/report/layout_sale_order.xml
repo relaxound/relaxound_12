@@ -116,10 +116,6 @@
                 </div>
 
             </xpath>
-
-            <!-- <xpath expr="//div[hasclass('row', 'mt32', 'mb32')]" position="attributes">
-                <attribute name="style">display:none</attribute>
-            </xpath> -->
             <xpath expr="//div/div[@id='informations']" position="replace">
                 <div class="row mt32 mb32" style="margin-left: 85px; margin-right: 94px;">
                     <div t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
@@ -152,37 +148,9 @@
             </xpath>
 
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-
-                <!-- <div class="col-sm-12 table-responsive">          
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>Age</th>
-                            <th>City</th>
-                            <th>Country</th>
-                             <th>seven</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td style="width: 20%">1</td>
-                            <td style="width: 10%">Anna</td>
-                            <td style="width: 10%">Pitt</td>
-                            <td style="width: 10%">35</td>
-                            <td style="width: 10%">New York</td>
-                            <td style="width: 10%">USA</td>
-                            <td style="width: 30%">USA7</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      </div> -->
-
                 <div class="col-sm-12 col-md-12 table-responsive">
 
-                    <table class="table" style="table-layout: fixed; width: 90%" id="items">
+                    <table class="table" style="table-layout: fixed; width: 80%" id="items">
                         <style>
                             #items td{
                             border:0
@@ -193,9 +161,9 @@
                         </style>
                         <thead>
                             <tr style="border-bottom: 1px solid black">
-                                <th class="text-center" style="width: 25%">Article</th>
-                                <th class="text-center" style="width: 10%">Colour</th>
-                                <th class="text-center" style="width: 10%">Quantity</th>
+                                <th class="text-center" style="width: 35%">Article</th>
+                                <th class="text-center" style="width: 15%">Colour</th>
+                                <th class="text-center" style="width: 15%">Quantity</th>
                                 <t t-if="doc.partner_id.is_retailer">
                                     <th class="text-center" style="width: 30%">Single Unit</th>
                                 </t>
