@@ -149,9 +149,9 @@
         <!-- </div>
             </xpath> -->
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <div class="col-sm-12 col-md-12 table-responsive pull-right">
+                <div class="col-sm-12 col-md-12 table-responsive pull-right" style="float:right;">
 
-                    <table class="table" style="table-layout: fixed; width: 90%" id="items">
+                    <table class="table" style="table-layout: fixed; width: 90%,  float:right;" id="items">
                         <style>
                             #items td{
                             border:0
