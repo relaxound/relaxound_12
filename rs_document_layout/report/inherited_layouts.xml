@@ -40,7 +40,7 @@
          <!--Footer -->
         <template id="external_layout_footer" inherit_id="web.external_layout_standard">
             <xpath expr="//div[3]" position="replace">
-                <div class="footer " style="font-size:9px; margin-left: 2cm; ">
+                <div class="footer " style="font-size:9px; margin-left: 1.2cm; ">
                     <div class="text-left row">
                         <div class="col-xs-6" style="margin-bottom:10px;" >
                             <table style="width:100%">
