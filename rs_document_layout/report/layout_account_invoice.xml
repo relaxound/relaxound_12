@@ -280,7 +280,7 @@
                 <t t-set="i" t-value="1"/>
                 <t>
                     <t t-if="o.partner_id.is_retailer">
-                        <table class="table table-condensed" align="center" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid;" id="items">
+                        <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
                             <style>
                                 #items td{
                                 border:0
@@ -366,7 +366,7 @@
                         </table>
                     </t>
                     <t t-if="not(o.partner_id.is_retailer)">
-                        <table class="table table-sm o_main_table" style="margin-top:10px; max-width:800px; margin-left:85px; width: 90%;" id="items">
+                        <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto;" id="items">
                             <style>
                                 #items td{
                                 border:0
