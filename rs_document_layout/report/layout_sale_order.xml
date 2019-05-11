@@ -181,9 +181,11 @@
         </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div class="col-sm-12 col-md-12 table-responsive pull-right">
+                    <br/>
+                    <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed" align="right" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid; top: 120px" id="items">
+                            <table class="table table-condensed" align="right" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -195,9 +197,9 @@
                                 <thead>
                                     <tr style="border-bottom: 1px solid black, padding-left:40px">
                                         <th class="text-center" style="width: 25%">Article</th>
-                                        <th class="text-center" style="width: 10%">Colour</th>
+                                        <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
-                                        <th class="text-center" style="width: 15%">Single Unit</th>
+                                        <th class="text-center" style="width: 13%">Single Unit</th>
                                         <th class="text-right" style="width: 13%">Unit Price</th>
                                         <th class="text-right" style="width: 15%">Total</th>
                                     </tr>
@@ -211,7 +213,7 @@
                                             <td class="text-center" style="width: 25%" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 10%">
+                                            <td class="text-center" style="width: 12%">
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
                                                       t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                             </td>
@@ -219,7 +221,7 @@
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
                                             <t t-if="doc.partner_id.is_retailer">
-                                                <td class="text-center" style="white-space:nowrap; width: 15%">
+                                                <td class="text-center" style="white-space:nowrap; width: 13%">
                                                     
                                                     
                                                     <span t-esc="l.single_unit"/>
@@ -267,7 +269,7 @@
                             </table>
                         </t>
                         <t t-if="not(doc.partner_id.is_retailer)">
-                            <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; page-break-inside: avoid; top: 120px; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" style="table-layout: fixed; width: 83%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -279,7 +281,7 @@
                                 <thead>
                                     <tr style="border-bottom: 1px solid black, padding-left:40px">
                                         <th class="text-center" style="width: 22%">Article</th>
-                                        <th class="text-center" style="width: 15%">Colour</th>
+                                        <th class="text-center" style="width: 13%">Colour</th>
                                         <th class="text-center" style="width: 15%">Quantity</th>
                                         <th class="text-right" style="width: 16%">Unit Price</th>
                                         <th class="text-right" style="width: 17%">Total</th>
@@ -294,7 +296,7 @@
                                             <td class="text-center" style="width: 22%" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 15%">
+                                            <td class="text-center" style="width: 13%">
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
                                                       t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                             </td>
