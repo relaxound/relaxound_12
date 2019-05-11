@@ -279,7 +279,7 @@
 
             <xpath expr="//div/table[1]" position="replace">
                 <t t-set="i" t-value="1"/>
-                <table class="table table-sm o_main_table" align="right" style="margin-top:10px; max-width:800px; margin-left:85px; width: 90%;" id="items">
+                <table class="table table-sm o_main_table" style="margin-top:10px; max-width:800px; margin-left:85px; width: 90%;" id="items">
                     <style>
                         #items td{
                         border:0
