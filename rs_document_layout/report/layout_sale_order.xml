@@ -52,8 +52,8 @@
                 </div></h2>
             </div>
             <div class="row" style="margin-left: 75px; margin-right: 4px;">
-                <div class="col-md-10">
-                    <div class="col-md-5" style="width:50%; float: left;">
+                <div class="col-md-11">
+                    <div class="col-md-6" style="width:50%; float: left;">
                         <style>
                             #order_data td{
                             padding:3px 10px 3px 0px
@@ -119,8 +119,8 @@
 
                     <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                      <div class="col-md-5" style="width:50%; float: right; text-align: left;">
-                            <table id="data">
+                      <div class="col-md-6" style="width:50%; float: right; text-align: left;">
+                            <table id="data" style=" float:right">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
                                         <td>Your Reference:</td>
@@ -267,7 +267,7 @@
                             </table>
                         </t>
                         <t t-if="not(doc.partner_id.is_retailer)">
-                            <table class="table table-condensed" align="right" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid; top: 120px" id="items">
+                            <table class="table table-condensed" align="center" style="table-layout: fixed; width: 85%; border: none; page-break-inside: avoid; top: 120px" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -279,9 +279,9 @@
                                 <thead>
                                     <tr style="border-bottom: 1px solid black, padding-left:40px">
                                         <th class="text-center" style="width: 22%">Article</th>
-                                        <th class="text-center" style="width: 17%">Colour</th>
-                                        <th class="text-center" style="width: 17%">Quantity</th>
-                                        <th class="text-right" style="width: 17%">Unit Price</th>
+                                        <th class="text-center" style="width: 15%">Colour</th>
+                                        <th class="text-center" style="width: 15%">Quantity</th>
+                                        <th class="text-right" style="width: 16%">Unit Price</th>
                                         <th class="text-right" style="width: 17%">Total</th>
                                     </tr>
                                 </thead>
@@ -294,14 +294,14 @@
                                             <td class="text-center" style="width: 22%" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 17%">
+                                            <td class="text-center" style="width: 15%">
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
                                                       t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 17%" >
+                                            <td class="text-center" style="width: 15%" >
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
-                                            <td class="text-right" style="width: 17%">
+                                            <td class="text-right" style="width: 16%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
