@@ -6,9 +6,9 @@
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/><br/>
-                <div class="row" style="margin-left:85px; margin-right:98px;">
+                <div class="row" style="margin-left:85px; margin-right:94px;">
                     <div style="width:100%;">
-                        <div style="width:70%; float: left;">
+                        <div style="width:50%; float: left;">
                             <t t-if="o.partner_id.parent_id">
                                 <span t-field="o.partner_id.parent_id.name"/>
                             </t>
@@ -45,7 +45,7 @@
                             <!--</t>-->
 
                         </div>
-                        <div style="width:50%; float: right; text-align: right;" >
+                        <div style="width:50%; float: right;" >
                             <t t-if="o.number">
                                 <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
                             </t>
