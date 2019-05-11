@@ -149,7 +149,7 @@
                                     <tr>
                                         <td>Salesperson:</td>
                                         <td>
-                                            <span t-field="doc.user_id"/>
+                                            <span t-field="doc.user_id.name"/>
 
                                         </td>
                                     </tr>
@@ -200,8 +200,8 @@
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
                                         <th class="text-center" style="width: 13%">Single Unit</th>
-                                        <th class="text-right" style="width: 13%">Unit Price</th>
-                                        <th class="text-right" style="width: 15%">Total</th>
+                                        <th class="text-right" style="width: 14%">Unit Price</th>
+                                        <th class="text-right" style="width: 14%">Total</th>
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
@@ -221,7 +221,7 @@
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
                                             <t t-if="doc.partner_id.is_retailer">
-                                                <td class="text-center" style="white-space:nowrap; width: 13%">
+                                                <td class="text-center" style="white-space:nowrap; width: 1%">
                                                     
                                                     
                                                     <span t-esc="l.single_unit"/>
@@ -229,7 +229,7 @@
                                                 
                                                 </td>
                                             </t>
-                                            <td class="text-right" style="width: 13%">
+                                            <td class="text-right" style="width: 14%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
             					<span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -238,7 +238,7 @@
             					<span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
-                                            <td class="text-right" style="width: 15%">
+                                            <td class="text-right" style="width: 14%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
             					<span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
