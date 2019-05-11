@@ -47,7 +47,7 @@
 
                                 <tr style="padding-left:20px;">
                                     <td>
-                                        <span style="padding-left:40px;" t-field="company.name"/>
+                                        <span style="padding-left:20px;" t-field="company.name"/>
                                     </td>
                                     <td style="padding-left:20px;">HypoVereinsbank</td>
                                     <td style="padding-left:20px;">Geschäftsführer:</td>
