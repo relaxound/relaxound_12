@@ -279,7 +279,7 @@
 
             <xpath expr="//div/table[1]" position="replace">
                 <t t-set="i" t-value="1"/>
-                <table class="table table-sm o_main_table" style="margin-top:10px; max-width:800px; margin-left:85px;" id="items">
+                <table class="table table-sm o_main_table" align="right" style="margin-top:10px; max-width:800px; margin-left:85px; width: 90%;" id="items">
                     <style>
                         #items td{
                         border:0
@@ -290,15 +290,15 @@
                     </style>
                     <thead>
                         <tr style="border-bottom: 1px solid black">
-                            <th class="text-center">Position</th>
-                            <th class="text-center">Article</th>
-                            <th class="text-center">Colour</th>
-                            <th class="text-center">Quantity</th>
+                            <th class="text-center" style="width: 10%">Position</th>
+                            <th class="text-center" style="width: 25%">Article</th>
+                            <th class="text-center" style="width: 13%">Colour</th>
+                            <th class="text-center" style="width: 13%">Quantity</th>
                             <t t-if="o.partner_id.is_retailer">
-                                <th class="text-center">Single Unit</th>
+                                <th class="text-center" style="width: 12%">Single Unit</th>
                             </t>
-                            <th class="text-right">Unit Price</th>
-                            <th class="text-right">Total</th>
+                            <th class="text-right" style="width: 12%">Unit Price</th>
+                            <th class="text-right" style="width: 14%">Total</th>
 
                         </tr>
                     </thead>
