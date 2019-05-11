@@ -45,7 +45,7 @@
                             <!--</t>-->
 
                         </div>
-                        <div style="width:50%; float: right;" >
+                        <div style="width:50%; float: right; text-align: right; margin-left:50px" >
                             <t t-if="o.number">
                                 <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
                             </t>
