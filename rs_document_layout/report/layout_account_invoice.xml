@@ -428,16 +428,7 @@
                                     </t>
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Total</th>
-                                    <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
-                                    <th class="text-center"></th>
-                                    <th class="text-right"></th>
-                                    <th class="text-right"></th>
-
-                                </tr>
+                                
                             </tbody>
                             <t t-set="single_total" t-value="0"/>
                         </table>
