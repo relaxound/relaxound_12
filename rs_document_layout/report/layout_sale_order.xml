@@ -37,6 +37,9 @@
                 </div>
 
             </xpath>
+            <xpath expr="//div[@class='page']" position="attributes">
+                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm</attribute>
+            </xpath>
             <xpath expr="//h2" position="replace">
             <br/>
             <div class="row" style="margin-left:100px; margin-right:94px;">
