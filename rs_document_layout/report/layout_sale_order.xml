@@ -179,6 +179,7 @@
                 </div>
             </div>
             </xpath>
+            
             <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
@@ -188,7 +189,7 @@
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
+                            
                             <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-after: avoid; margin: 0 auto;" id="items">
                                 <style>
                                     #items td{
@@ -236,19 +237,19 @@
                                             <td class="text-right" style="width: 14%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
-                                <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
+            					<span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                                 <t t-if="doc.partner_id.company_type=='company'">
-                                <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
+            					<span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
                                             <td class="text-right" style="width: 14%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
-                                <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+            					<span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                                 <t t-if="doc.partner_id.company_type=='company'">
-                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+            					<span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
 
                                             </td>
@@ -464,10 +465,8 @@
                         </div> -->
                     </div>
                 </div>
-                
 
             </xpath>
-
 
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
                 <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;">
