@@ -37,6 +37,9 @@
                 </div>
 
             </xpath>
+            <!-- <xpath expr="//div[@class='page']" position="attributes">
+                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm</attribute>
+            </xpath> -->
             <xpath expr="//h2" position="replace">
             <br/>
             <div class="row" style="margin-left:100px; margin-right:94px;">
@@ -176,6 +179,10 @@
                 </div>
             </div>
             </xpath>
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 95297608367d9255723884175cba8fd34a49bc05
             <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
@@ -185,7 +192,11 @@
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
+<<<<<<< HEAD
                             <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
+=======
+                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-after: avoid; margin: 0 auto;" id="items">
+>>>>>>> 95297608367d9255723884175cba8fd34a49bc05
                                 <style>
                                     #items td{
                                     border:0
@@ -195,7 +206,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black, padding-left:40px">
+                                    <tr style="border-bottom: 1px solid black">
                                         <th class="text-center" style="width: 25%">Article</th>
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
@@ -205,7 +216,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody">
+                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black">
                                     <tr style="padding-left:20px" t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
@@ -279,7 +290,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black, padding-left:40px">
+                                    <tr style="border-bottom: 1px solid black">
                                         <th class="text-center" style="width: 22%">Article</th>
                                         <th class="text-center" style="width: 13%">Colour</th>
                                         <th class="text-center" style="width: 15%">Quantity</th>
@@ -288,7 +299,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody">
+                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black">
                                     <tr style="padding-left:20px" t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
@@ -460,8 +471,14 @@
                         </div> -->
                     </div>
                 </div>
+<<<<<<< HEAD
 
             </xpath>
+=======
+
+            </xpath>
+
+>>>>>>> 95297608367d9255723884175cba8fd34a49bc05
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
                 <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;">
                     <div class="col-auto mw-100 mb-2 pull-right">
