@@ -176,6 +176,7 @@
                 </div>
             </div>
             </xpath>
+            
             <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
@@ -462,6 +463,7 @@
                 </div>
 
             </xpath>
+
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
                 <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;">
                     <div class="col-auto mw-100 mb-2 pull-right">
