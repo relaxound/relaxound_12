@@ -190,6 +190,8 @@
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
                             <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-after: avoid; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
                                 <style>
                                     #items td{
                                     border:0
