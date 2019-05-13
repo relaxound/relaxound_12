@@ -115,131 +115,129 @@
 
             <xpath expr="//div[@id='total']" position="replace">
                 <div id="total" class="row" style="margin-left:70px; margin-right:50px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <br/>
-                            <table>
-                                <tr t-if="o.partner_id.property_delivery_carrier_id">
-                                    <td class="text-left" style="font-size:15px">
-                                        Shipping method:
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left" style="font-size:15px">
-                                        Payment method:
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-field="o.payment_method_id.name"/>
-                                    </td>
-                                </tr>
-                                <tr t-if="o.partner_id.property_payment_term_id">
-                                    <td class="text-left" style="font-size:15px">
-                                        Payment term:
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-field="o.partner_id.property_payment_term_id.name"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left" style="font-size:15px">
-                                        Shipping address:
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-esc="o._get_shipping_address()"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-md-6">
-                            <table class="table table-condensed" id="summary" style="border: none">
-                                <style>
-                                    table#summary td {
-                                    border:0
-                                    }
-                                </style>
+                    <div class="col-6">
+                        <br/>
+                        <table>
+                            <tr t-if="o.partner_id.property_delivery_carrier_id">
+                                <td class="text-left" style="font-size:15px">
+                                    Shipping method:
+                                </td>
+                                <td class="text-left">
+                                    <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="font-size:15px">
+                                    Payment method:
+                                </td>
+                                <td class="text-left">
+                                    <span t-field="o.payment_method_id.name"/>
+                                </td>
+                            </tr>
+                            <tr t-if="o.partner_id.property_payment_term_id">
+                                <td class="text-left" style="font-size:15px">
+                                    Payment term:
+                                </td>
+                                <td class="text-left">
+                                    <span t-field="o.partner_id.property_payment_term_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="font-size:15px">
+                                    Shipping address:
+                                </td>
+                                <td class="text-left">
+                                    <span t-esc="o._get_shipping_address()"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-condensed" id="summary" style="border: none">
+                            <style>
+                                table#summary td {
+                                border:0
+                                }
+                            </style>
 
-                                <t t-set="delivery_cost" t-value="0"/>
+                            <t t-set="delivery_cost" t-value="0"/>
 
-                                <t t-foreach="o.invoice_line_ids" t-as="l">
-                                    <t t-if="l.sale_line_ids.is_delivery">
-                                        <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
-                                    </t>
+                            <t t-foreach="o.invoice_line_ids" t-as="l">
+                                <t t-if="l.sale_line_ids.is_delivery">
+                                    <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
                                 </t>
-                                <tr style="border: none">
-                                    <td class='col-xs-3 text-right'>
-                                        <span>Total</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>&#32;
-                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                                <tr style="border-bottom: 1px solid black">
-                                    <td class='text-right'>
-                                        <span>Shipping</span>
-                                    </td>
-                                    <td class="text-right">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>&#32;
-                                            <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                                <tr style="border: none">
-                                    <td class='text-right'>Untaxed Amount</td>
-                                    <td class="text-right">
+                            </t>
+                            <tr style="border: none">
+                                <td class='col-xs-3 text-right'>
+                                    <span>Total</span>
+                                </td>
+                                <td class="text-right col-xs-2">
+                                    <strong>
                                         <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </tr>
-
-                                <tr style="border-bottom: 1px solid black">
-                                    <td class='text-right'>VAT 19%</td>
-
-                                    <td class="text-right">
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black">
+                                <td class='text-right'>
+                                    <span>Shipping</span>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
                                         <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </tr>
-                                <tr style="border: none">
-                                    <td class='text-right'>
-                                        <strong>Total</strong>
+                                        <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr style="border: none">
+                                <td class='text-right'>Untaxed Amount</td>
+                                <td class="text-right">
+                                    <span t-field="o.currency_id.symbol"/>&#32;
+                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid black">
+                                <td class='text-right'>VAT 19%</td>
+
+                                <td class="text-right">
+                                    <span t-field="o.currency_id.symbol"/>&#32;
+                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </tr>
+                            <tr style="border: none">
+                                <td class='text-right'>
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        <span t-field="o.currency_id.symbol"/>&#32;
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                            <t t-foreach="payments_vals" t-as="payment_vals">
+                                <br/>
+                                <br/><br/>
+                                <tr>
+                                    <td>
+                                        <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
                                     </td>
                                     <td class="text-right">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>&#32;
-                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
+                                        <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                     </td>
                                 </tr>
-                                <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
-                                <t t-foreach="payments_vals" t-as="payment_vals">
-                                    <br/>
-                                    <br/><br/>
-                                    <tr>
-                                        <td>
-                                            <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                        </td>
-                                    </tr>
-                                </t>
-                                <t t-if="len(payments_vals) > 0">
-                                    <tr class="border-black">
-                                        <td><strong>Amount Due</strong></td>
-                                        <td class="text-right">
-                                            <span t-field="o.residual"/>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </table>
-                        </div>
+                            </t>
+                            <t t-if="len(payments_vals) > 0">
+                                <tr class="border-black">
+                                    <td><strong>Amount Due</strong></td>
+                                    <td class="text-right">
+                                        <span t-field="o.residual"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
                     </div>
 
                 </div>
@@ -278,12 +276,11 @@
             <xpath expr="//div[hasclass('row','mt32','mb32')]" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
-
             <xpath expr="//div/table[1]" position="replace">
                 <t t-set="i" t-value="1"/>
                 <t>
                     <t t-if="o.partner_id.is_retailer">
-                        <table class="table table-sm o_main_table" align="right" style="margin-top:10px; max-width:800px; margin-left:85px; width:100%" id="items">
+                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
                             <style>
                                 #items td{
                                 border:0
@@ -294,13 +291,13 @@
                             </style>
                             <thead>
                                 <tr style="border-bottom: 1px solid black">
-                                    <th class="text-center">Position</th>
-                                    <th class="text-center">Article</th>
-                                    <th class="text-center">Colour</th>
-                                    <th class="text-center">Quantity</th>
-                                    <th class="text-center">Single Unit</th>
-                                    <th class="text-right">Unit Price</th>
-                                    <th class="text-right">Total</th>
+                                    <th class="text-center" style="width:10%">Position</th>
+                                    <th class="text-center" style="width:20%">Article</th>
+                                    <th class="text-center" style="width:11%">Colour</th>
+                                    <th class="text-center" style="width:11%">Quantity</th>
+                                    <th class="text-center" style="width:11%">Single Unit</th>
+                                    <th class="text-right" style="width:14%">Unit Price</th>
+                                    <th class="text-right" style="width:14%">Total</th>
 
                                 </tr>
                             </thead>
@@ -369,7 +366,7 @@
                         </table>
                     </t>
                     <t t-if="not(o.partner_id.is_retailer)">
-                        <table class="table table-sm o_main_table" align="right" style="margin-top:10px; max-width:800px; margin-left:85px; width: 100%;" id="items">
+                        <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto;" id="items">
                             <style>
                                 #items td{
                                 border:0
@@ -380,12 +377,12 @@
                             </style>
                             <thead>
                                 <tr style="border-bottom: 1px solid black">
-                                    <th class="text-center" style="width: 12%">Position</th>
-                                    <th class="text-center" style="width: 24%">Article</th>
-                                    <th class="text-center" style="width: 13%">Colour</th>
-                                    <th class="text-center" style="width: 13%">Quantity</th>
-                                    <th class="text-right" style="width: 14%">Unit Price</th>
-                                    <th class="text-right" style="width: 14%">Total</th>
+                                    <th class="text-center" style="width:12%">Position</th>
+                                    <th class="text-center" style="width:24%">Article</th>
+                                    <th class="text-center" style="width:13%">Colour</th>
+                                    <th class="text-center" style="width:13%">Quantity</th>
+                                    <th class="text-right" style="width:14%">Unit Price</th>
+                                    <th class="text-right" style="width:14%">Total</th>
 
                                 </tr>
                             </thead>
