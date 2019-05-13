@@ -403,9 +403,10 @@
                 </div>
             </xpath> -->
             <xpath expr="//div/div[@id='total']" position="replace">
-                <div class="row">
+                <div id="total" class="row" style="margin-left:70px; margin-right:50px;">
+                <!-- <div class="row"> -->
                     <div class="col-6">
-                        <div class="text-left" name="total" style="margin-left:94px;">
+                        <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
                             <br/>
                             <table>
                                 <tr t-if="doc.carrier_id">
@@ -460,8 +461,8 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;">
-                            <div class="pull-right">
+                      <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;">
+                            <div class="pull-right"> -->
                                 <table class="table table-condensed" id="summary" style="border: none">
                                     <style>
                                         table#summary td {
@@ -525,8 +526,8 @@
                                         </td>
                                     </tr>
                                 </table>
-                            </div>
-                        </div>
+                          <!--   </div>
+                        </div> -->
                     </div>
                 </div>
 
