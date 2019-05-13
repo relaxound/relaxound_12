@@ -462,78 +462,7 @@
                 </div>
 
             </xpath>
-
-            <!-- <xpath expr="//div/div[@id='total']" position="replace">
-                <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;">
-                    <div class="pull-right">
-                        <table class="table table-condensed"  id="summary" style="border: none;page-break-inside: avoid">
-                            <style>
-                                table#summary td {
-                                border:0
-                                }
-                            </style>
-
-                            <t t-set="delivery_cost" t-value="0"/>
-
-                            <t t-foreach="doc.order_line" t-as="l">
-                                <t t-if="l.is_delivery">
-                                    <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
-                                </t>
-                            </t>
-                            <tr style="border: none">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>&#32;
-					<span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid black">
-                                <td class='text-right'>
-                                    <span>Shipping</span>
-                                </td>
-                                <td class="text-right">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>&#32;
-					<span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr style="border: none">
-                                <td class='text-right'>Untaxed Amount</td>
-                                <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>&#32;
-				    <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </tr>
-
-                            <tr style="border-bottom: 1px solid black">
-                                <td class='text-right'>VAT 19%</td>
-                                <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>&#32;
-				    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </tr>
-                            <tr style="border: none">
-                                <td class='text-right'>
-                                    <strong>Total</strong>
-                                </td>
-                                <td class="text-right">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>&#32;
-					<span t-esc="('{0:,.2f}'.format(float(doc.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </xpath> -->
-
-             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
+            <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
                 <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">

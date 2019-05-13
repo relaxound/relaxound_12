@@ -9,6 +9,7 @@
 				<br/>
 				<br/>
 				<div class="row" style="margin-left:94px; margin-right:94px;">
+					<div class=" col-xs-12">
 					 <div class="col-xs-6">
 						<t t-if="o.partner_id.parent_id">
 						    <span t-field="o.partner_id.parent_id.name"/>
@@ -40,11 +41,12 @@
 					</div>
 					<div class="col-xs-6 ">
 		                <div style="font-size:20px">
-		        			<span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Packing List</span>
+		        			<span>Packing List</span>
 		                </div>
 		                <div t-if="o.partner_id.ref">CNr.<span t-field="o.partner_id.ref"/>
 		                </div>
 		            </div>
+		        </div>
 	            </div>
                 <br/>
                 <h2 style="margin-left:94px; margin-right:94px;" >ZWITSCHERBOX</h2>
