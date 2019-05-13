@@ -179,10 +179,6 @@
                 </div>
             </div>
             </xpath>
-<<<<<<< HEAD
-=======
-            
->>>>>>> 95297608367d9255723884175cba8fd34a49bc05
             <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
@@ -192,11 +188,8 @@
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-<<<<<<< HEAD
                             <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
-=======
                             <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-after: avoid; margin: 0 auto;" id="items">
->>>>>>> 95297608367d9255723884175cba8fd34a49bc05
                                 <style>
                                     #items td{
                                     border:0
@@ -471,14 +464,11 @@
                         </div> -->
                     </div>
                 </div>
-<<<<<<< HEAD
-
-            </xpath>
-=======
+                
 
             </xpath>
 
->>>>>>> 95297608367d9255723884175cba8fd34a49bc05
+
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
                 <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;">
                     <div class="col-auto mw-100 mb-2 pull-right">
