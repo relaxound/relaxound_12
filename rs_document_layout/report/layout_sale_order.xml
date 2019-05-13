@@ -337,7 +337,7 @@
                 <!-- <div class="row"> -->
                     <div class="col-6">
                         <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
-                            <br/>
+                            <br/><br/><br/><br/>
                             <table>
                                 <tr t-if="doc.carrier_id">
                                     <td class="text-left" style="font-size:15px">
