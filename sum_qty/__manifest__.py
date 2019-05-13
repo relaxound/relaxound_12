@@ -4,7 +4,7 @@
 
 {
     'name': 'Sum Of Quantities',
-    'version': '10.0',
+    'version': '12.0',
     'category': 'Base',
     'license': 'AGPL-3',
     'author': "Odoo Tips",
