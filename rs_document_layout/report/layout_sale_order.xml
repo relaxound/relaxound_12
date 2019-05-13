@@ -189,8 +189,12 @@
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
+<<<<<<< HEAD
+                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
+=======
                             
                             <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-after: avoid; margin: 0 auto;" id="items">
+>>>>>>> 73587ae6e6afe73c6d9867488b97085ea6f26998
                                 <style>
                                     #items td{
                                     border:0
@@ -200,7 +204,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black">
+                                    <tr>
                                         <th class="text-center" style="width: 25%">Article</th>
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
@@ -210,7 +214,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black">
+                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black; border-top: 1px solid black">
                                     <tr style="padding-left:20px" t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
@@ -293,7 +297,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black">
+                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black; border-top: 1px solid black">
                                     <tr style="padding-left:20px" t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
