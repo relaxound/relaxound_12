@@ -128,7 +128,7 @@
                                     <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr t-if="o.payment_method_id.name">
                                 <td class="text-left" style="font-size:15px">
                                     Payment method:
                                 </td>

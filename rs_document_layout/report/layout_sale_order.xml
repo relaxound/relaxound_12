@@ -347,7 +347,7 @@
                                         <span t-field="doc.carrier_id"/>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr t-if="doc.payment_method_id.name">
                                     <td class="text-left" style="font-size:15px">
                                         Payment method:
                                     </td>
