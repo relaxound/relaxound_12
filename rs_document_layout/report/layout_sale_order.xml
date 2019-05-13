@@ -180,12 +180,12 @@
                 <attribute name="style">display:none</attribute>
             </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <div class="col-sm-12 col-md-12 table-responsive pull-right">
+                <div class="col-sm-12 col-md-12 table-responsive">
                     <br/>
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed" align="right" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid;" id="items">
+                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -333,7 +333,7 @@
                 </div>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
-                <div id="total" class="row" style="margin-left:70px; margin-right:50px;">
+                <div id="total" class="row" style="margin-left:70px; margin-right:50px; ">
                 <!-- <div class="row"> -->
                     <div class="col-6">
                         <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
