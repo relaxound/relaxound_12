@@ -215,7 +215,7 @@
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-center" style="width: 25%" >
+                                            <td class="text-left" style="width: 25%" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
                                             <td class="text-center" style="width: 12%">
@@ -298,7 +298,7 @@
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-center" style="width: 22%" >
+                                            <td class="text-left" style="width: 22%" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
                                             <td class="text-center" style="width: 13%">
