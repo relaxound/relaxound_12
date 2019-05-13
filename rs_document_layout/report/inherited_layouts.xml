@@ -37,6 +37,7 @@
                 </div>
             </xpath>
         </template>
+        <body>
          <!--Footer -->
         <template id="external_layout_footer" inherit_id="web.external_layout_standard">
             <xpath expr="//div[3]" position="replace">
