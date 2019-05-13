@@ -15,7 +15,7 @@
             "report/layout_sale_order.xml",
             "report/layout_delivery.xml",
             # 'report/res_partner.xml',
-            "report/laout_purchase.xml"
+            "report/layout_purchase.xml"
     ],
     'demo_xml': [],
     'installable': True,
