@@ -4,7 +4,7 @@ from odoo import models, fields, api, _
 class OrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    single_unit=fields.Float(string="Single Unit")
+    single_unit=fields.Integer(string="Single Unit")
 
     
     @api.onchange('product_id','product_uom_qty')
@@ -16,9 +16,6 @@ class OrderLine(models.Model):
 
 	    	elif '80x' in pro or '80X' in pro:
 	    		self.update({'single_unit':self.product_uom_qty*80})
-            else:
-                self.update({'single_unit':self.product_uom_qty})
-
             
 
 
