@@ -116,7 +116,7 @@
             <xpath expr="//div[@id='total']" position="replace">
                 <div id="total" class="row" style="margin-left:70px; margin-right:50px;">
                     <div class="col-6">
-                        <br/>
+                        <!-- <br/> -->
                         <table>
                             <tr t-if="o.partner_id.property_delivery_carrier_id">
                                 <td class="text-left" style="font-size:15px">
