@@ -39,6 +39,9 @@
                     </div>
                 </div>
             </xpath>
+            <xpath expr="//div[@class='page']" position="attributes">
+                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm</attribute>
+            </xpath>
         </template>
     </data>
 </odoo>
