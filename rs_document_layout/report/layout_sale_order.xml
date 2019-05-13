@@ -200,7 +200,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 3px solid black;">
+                                    <tr style="border-bottom: 2px solid black;">
                                         <th class="text-center" style="width: 25%">Article</th>
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
@@ -286,7 +286,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 3px solid black;">
+                                    <tr style="border-bottom: 2px solid black;">
                                         <th class="text-center" style="width: 22%">Article</th>
                                         <th class="text-center" style="width: 13%">Colour</th>
                                         <th class="text-center" style="width: 15%">Quantity</th>
