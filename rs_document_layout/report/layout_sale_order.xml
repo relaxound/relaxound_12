@@ -185,7 +185,7 @@
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; page-break-after: avoid; margin: 0 auto;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -269,7 +269,7 @@
                             </table>
                         </t>
                         <t t-if="not(doc.partner_id.is_retailer)">
-                            <table class="table table-condensed" style="table-layout: fixed; width: 83%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" style="table-layout: fixed; width: 83%; border: none; page-break-after: avoid; margin: 0 auto;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -367,7 +367,7 @@
                                     <td class="text-left" style="font-size:15px">
                                         Shipping address:
                                     </td>
-                                    <td class="text-left">
+                                    <td class="text-left" style="font-size:15px">
                                         <t t-if="doc.partner_id.street">
                                             <span t-field="doc.partner_id.street"/>
                                         </t>
