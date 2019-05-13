@@ -280,7 +280,7 @@
                 <t t-set="i" t-value="1"/>
                 <t>
                     <t t-if="o.partner_id.is_retailer">
-                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
+                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto;" id="items">
                             <style>
                                 #items td{
                                 border:0
