@@ -53,11 +53,11 @@
             </div>
             <div class="row" style="margin-left: 75px; margin-right: 74px;">
                 <div class="col-md-11">
-                    <div class="col-md-5" style="width:50%; float: left;">
+                    <div class="col-md-6" style="width:50%; float: left;">
                         <style>
                             #order_data td{
                             padding:3px 10px 3px 0px
-                            }s
+                            }
                         </style>
                         <table id="order_data">
                             <t t-if="doc.partner_id.ref">
