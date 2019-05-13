@@ -205,7 +205,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black;">
+                                <tbody class="invoice_tbody">
                                     <tr style="padding-left:20px" t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
@@ -253,7 +253,7 @@
                                     </tr>
                                     <t t-if="doc.partner_id.is_retailer">
 
-                                        <tr style="border-bottom: 1px solid black;">
+                                        <tr>
                                             <th class="text-center"></th>
                                             <th class="text-center">Total</th>
                                             <th class="text-center"><t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/></th>
@@ -288,7 +288,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="border-bottom: 1px solid black" >
+                                <tbody class="invoice_tbody">
                                     <tr style="padding-left:20px" t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">

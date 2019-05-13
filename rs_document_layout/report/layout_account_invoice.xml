@@ -305,7 +305,7 @@
                                 </tr>
                             </thead>
                             <t t-set="single_total" t-value="0"/>
-                            <tbody class="invoice_tbody" style="border-bottom: 1px solid black">
+                            <tbody class="invoice_tbody" >
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
@@ -390,7 +390,7 @@
                                 </tr>
                             </thead>
                             <t t-set="single_total" t-value="0"/>
-                            <tbody class="invoice_tbody" style="border-bottom: 1px solid black; border-top: 1px solid black">
+                            <tbody class="invoice_tbody">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
