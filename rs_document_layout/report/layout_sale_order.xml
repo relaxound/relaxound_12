@@ -200,7 +200,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr>
+                                    <tr style="border-bottom:red">
                                         <th class="text-center" style="width: 25%">Article</th>
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
@@ -258,7 +258,7 @@
                                     </tr>
                                     <t t-if="doc.partner_id.is_retailer">
 
-                                        <tr>
+                                        <tr style="border-bottom: 1px solid black;" >
                                             <th class="text-center"></th>
                                             <th class="text-center">Total</th>
                                             <th class="text-center"><t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/></th>
@@ -284,7 +284,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black">
+                                    <tr style="border-bottom:red">
                                         <th class="text-center" style="width: 22%">Article</th>
                                         <th class="text-center" style="width: 13%">Colour</th>
                                         <th class="text-center" style="width: 15%">Quantity</th>
