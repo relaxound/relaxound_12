@@ -6,7 +6,7 @@
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/><br/>
-                <div class="row" style="padding-left:40px;">
+                <div class="row" style="margin-left:85px; margin-right:40px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <t t-if="o.partner_id.parent_id">
@@ -102,7 +102,8 @@
                             </t>
                             <t>
                                 <br/>
-                                <font color="#0e71b8">Phone:</font> +49(0) 30 7468 44 50
+                                <font color="#0e71b8">Phone:</font>
+                                +49(0) 30 7468 44 50
                             </t>
 
                         </div>
@@ -113,7 +114,7 @@
 
 
             <xpath expr="//div[@id='total']" position="replace">
-                <div id="total" class="row" style="padding-left:40px;">
+                <div id="total" class="row" style="margin-left:70px; margin-right:50px;">
                     <div class="col-6">
                         <br/>
                         <table>
@@ -247,7 +248,7 @@
                 <br/>
                 <br/>
                 <br/>
-                <div class="row" style="padding-left:40px;">
+                <div class="row" style="margin-left:94px; margin-right:94px;">
                     <h2>
                         <!--<div class="col-xs-6">-->
 
@@ -275,95 +276,160 @@
             <xpath expr="//div[hasclass('row','mt32','mb32')]" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
-
             <xpath expr="//div/table[1]" position="replace">
                 <t t-set="i" t-value="1"/>
-                <table class="table table-sm o_main_table" style="margin-top:10px; padding-left:40px;" id="items">
-                    <style>
-                        #items td{
-                        border:0
-                        }
-                        #items th {
-                        border-top:0
-                        }
-                    </style>
-                    <thead>
-                        <tr style="border-bottom: 1px solid black">
-                            <th class="text-center">Position</th>
-                            <th class="text-center">Article</th>
-                            <th class="text-center">Colour</th>
-                            <th class="text-center">Quantity</th>
-                            <t t-if="o.partner_id.is_retailer">
-                                <th class="text-center">Single Unit</th>
-                            </t>
-                            <th class="text-right">Unit Price</th>
-                            <th class="text-right">Total</th>
+                <t>
+                    <t t-if="o.partner_id.is_retailer">
+                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; page-break-inside: avoid; margin: 0 auto;" id="items">
+                            <style>
+                                #items td{
+                                border:0
+                                }
+                                #items th {
+                                border-top:0
+                                }
+                            </style>
+                            <thead>
+                                <tr style="border-bottom: 1px solid black">
+                                    <th class="text-center" style="width:10%">Position</th>
+                                    <th class="text-center" style="width:20%">Article</th>
+                                    <th class="text-center" style="width:11%">Colour</th>
+                                    <th class="text-center" style="width:11%">Quantity</th>
+                                    <th class="text-center" style="width:11%">Single Unit</th>
+                                    <th class="text-right" style="width:14%">Unit Price</th>
+                                    <th class="text-right" style="width:14%">Total</th>
 
-                        </tr>
-                    </thead>
-                    <t t-set="single_total" t-value="0"/>
-                    <tbody class="invoice_tbody">
-                        <tr t-foreach="o.invoice_line_ids" t-as="l">
-                            <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
-                                <td class="text-center">
-                                    <span t-esc="i"/>
-                                </td>
-                                <td>
-                                    <span t-field="l.product_id.name"/>
-                                    <br/>
-                                    <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
-                                </td>
-                                <td class="text-center" style="white-space:nowrap">
-                                    <span t-if="l.product_id.product_tmpl_id.color_id"
-                                          t-field="l.product_id.product_tmpl_id.color_id.name"/>
-                                </td>
-                                <td class="text-center" style="white-space:nowrap">
-                                    <span t-field="l.quantity"/>
+                                </tr>
+                            </thead>
+                            <t t-set="single_total" t-value="0"/>
+                            <tbody class="invoice_tbody">
+                                <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                    <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
+                                        <td class="text-center">
+                                            <span t-esc="i"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="l.product_id.name"/>
+                                            <br/>
+                                            <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
+                                        </td>
+                                        <td class="text-center" style="white-space:nowrap">
+                                            <span t-if="l.product_id.product_tmpl_id.color_id"
+                                                  t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                        </td>
+                                        <td class="text-center" style="white-space:nowrap">
+                                            <span t-field="l.quantity"/>
 
-                                </td>
+                                        </td>
+                                        <t t-if="o.partner_id.is_retailer">
+                                            <td class="text-center" style="white-space:nowrap">
+                                                <!-- <span t-field="l.name"/> -->
+                                                <!-- <t t-if="p.name like '%20x%'"> -->
+                                                <span t-esc="l.single_unit"/>
+                                                <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                                
+                                            </td>
+                                        </t>
+                                        <td class="text-right" style="white-space:nowrap">
+                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <t t-if="l.quantity == 0">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="l.quantity > 0">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+
+                                            <!--<span t-field="l.price_unit"/>-->
+                                        </td>
+
+                                        <td class="text-right" style="white-space:nowrap">
+                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </td>
+                                    </t>
+                                    <t t-set="i" t-value="i+1"/>
+                                </tr>
                                 <t t-if="o.partner_id.is_retailer">
-                                    <td class="text-center" style="white-space:nowrap">
-                                        <!-- <span t-field="l.name"/> -->
-                                        <!-- <t t-if="p.name like '%20x%'"> -->
-                                        <span t-esc="l.single_unit"/>
-                                        <t t-set="single_total" t-value="single_total+l.single_unit"/>
-                                        
-                                    </td>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                        <th class="text-center"><t t-esc="single_total"/></th>
+                                        <th class="text-right"></th>
+                                        <th class="text-right"></th>
+
+                                    </tr>
                                 </t>
-                                <td class="text-right" style="white-space:nowrap">
-                                    <span t-field="o.currency_id.symbol"/>&#32;
-                                    <t t-if="l.quantity == 0">
-                                        <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </tbody>
+                            <t t-set="single_total" t-value="0"/>
+                        </table>
+                    </t>
+                    <t t-if="not(o.partner_id.is_retailer)">
+                        <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto;" id="items">
+                            <style>
+                                #items td{
+                                border:0
+                                }
+                                #items th {
+                                border-top:0
+                                }
+                            </style>
+                            <thead>
+                                <tr style="border-bottom: 1px solid black">
+                                    <th class="text-center" style="width:12%">Position</th>
+                                    <th class="text-center" style="width:24%">Article</th>
+                                    <th class="text-center" style="width:13%">Colour</th>
+                                    <th class="text-center" style="width:13%">Quantity</th>
+                                    <th class="text-right" style="width:14%">Unit Price</th>
+                                    <th class="text-right" style="width:14%">Total</th>
+
+                                </tr>
+                            </thead>
+                            <t t-set="single_total" t-value="0"/>
+                            <tbody class="invoice_tbody">
+                                <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                    <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
+                                        <td class="text-center">
+                                            <span t-esc="i"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="l.product_id.name"/>
+                                            <br/>
+                                            <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
+                                        </td>
+                                        <td class="text-center" style="white-space:nowrap">
+                                            <span t-if="l.product_id.product_tmpl_id.color_id"
+                                                  t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                        </td>
+                                        <td class="text-center" style="white-space:nowrap">
+                                            <span t-field="l.quantity"/>
+
+                                        </td>
+                                        <td class="text-right" style="white-space:nowrap">
+                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <t t-if="l.quantity == 0">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="l.quantity > 0">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+
+                                            <!--<span t-field="l.price_unit"/>-->
+                                        </td>
+
+                                        <td class="text-right" style="white-space:nowrap">
+                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </td>
                                     </t>
-                                    <t t-if="l.quantity > 0">
-                                        <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </t>
-
-                                    <!--<span t-field="l.price_unit"/>-->
-                                </td>
-
-                                <td class="text-right" style="white-space:nowrap">
-                                    <span t-field="o.currency_id.symbol"/>&#32;
-                                    <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </t>
-                            <t t-set="i" t-value="i+1"/>
-                        </tr>
-                        <t t-if="o.partner_id.is_retailer">
-                            <tr>
-                                <th class="text-center"></th>
-                                <th class="text-center"></th>
-                                <th class="text-center">Total</th>
-                                <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
-                                <th class="text-center"><t t-esc="single_total"/></th>
-                                <th class="text-right"></th>
-                                <th class="text-right"></th>
-
-                            </tr>
-                        </t>
-                    </tbody>
-                    <t t-set="single_total" t-value="0"/>
-                </table>
+                                    <t t-set="i" t-value="i+1"/>
+                                </tr>
+                            </tbody>
+                            <t t-set="single_total" t-value="0"/>
+                        </table>
+                    </t>
+                </t>
             </xpath>
 
             <xpath expr="//p[@t-if='o.reference']" position="replace">
@@ -379,7 +445,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
-                <div class="row" style="padding-left:40px;">
+                <div class="row" style="margin-right:94px; margin-left:85px;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <div class="col-xs-12">
