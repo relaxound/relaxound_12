@@ -155,6 +155,7 @@
                         </table>
                     </div>
                     <div class="col-6">
+                        <br/><br/>
                         <table class="table table-condensed" id="summary" style="border: none">
                             <style>
                                 table#summary td {
@@ -304,13 +305,13 @@
                                 </tr>
                             </thead>
                             <t t-set="single_total" t-value="0"/>
-                            <tbody class="invoice_tbody">
+                            <tbody class="invoice_tbody" style="border-bottom: 1px solid black">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
                                             <span t-esc="i"/>
                                         </td>
-                                        <td>
+                                        <td class="text-left">
                                             <span t-field="l.product_id.name"/>
                                             <br/>
                                             <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
@@ -352,7 +353,7 @@
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
                                 <t t-if="o.partner_id.is_retailer">
-                                    <tr>
+                                    <tr style="border-bottom: 1px solid black">
                                         <th class="text-center"></th>
                                         <th class="text-center"></th>
                                         <th class="text-center">Total</th>
@@ -395,7 +396,7 @@
                                         <td class="text-center">
                                             <span t-esc="i"/>
                                         </td>
-                                        <td>
+                                        <td class="text-left">
                                             <span t-field="l.product_id.name"/>
                                             <br/>
                                             <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
