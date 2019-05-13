@@ -45,7 +45,7 @@ class InvoiceJournal(models.Model):
 
     @api.multi
     def action_invoice_open(self):
-        res=super(CustomInvoiceOrder,self).action_invoice_open()
+        res=super(InvoiceJournal,self).action_invoice_open()
         if self.partner_id.vat and 'EU' in self.partner_id.property_account_position_id.name:
             self.update({'residual':self.amount_total})
         return res
