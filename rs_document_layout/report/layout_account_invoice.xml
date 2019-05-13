@@ -432,7 +432,7 @@
                                     <th class="text-center"></th>
                                     <th class="text-center"></th>
                                     <th class="text-center">Total</th>
-                                    <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th></th>
+                                    <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
                                     <th class="text-right"></th>
                                     <th class="text-right"></th>
 
