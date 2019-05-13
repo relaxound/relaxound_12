@@ -353,7 +353,7 @@
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
                                 <t t-if="o.partner_id.is_retailer">
-                                    <tr style="border-bottom: 1px solid black">
+                                    <tr>
                                         <th class="text-center"></th>
                                         <th class="text-center"></th>
                                         <th class="text-center">Total</th>
