@@ -182,7 +182,6 @@
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div class="col-sm-12 col-md-12 table-responsive">
                     <br/>
-                    <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
                             <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
@@ -195,13 +194,13 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black, padding-left:40px">
-                                        <th class="text-left" style="width: 25%">Article</th>
+                                    <tr style="border-bottom: 2.5px solid black, padding-left:40px">
+                                        <th class="text-left" style="width: 28%">Article</th>
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
                                         <th class="text-center" style="width: 13%">Single Unit</th>
-                                        <th class="text-right" style="width: 14%">Unit Price</th>
-                                        <th class="text-right" style="width: 14%">Total</th>
+                                        <th class="text-right" style="width: 12%">Unit Price</th>
+                                        <th class="text-right" style="width: 13%">Total</th>
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
@@ -279,12 +278,12 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black;">
-                                        <th class="text-left" style="width: 22%">Article</th>
+                                    <tr style="border-bottom: 2.5px solid black;">
+                                        <th class="text-left" style="width: 28%">Article</th>
                                         <th class="text-center" style="width: 13%">Colour</th>
                                         <th class="text-center" style="width: 15%">Quantity</th>
-                                        <th class="text-right" style="width: 16%">Unit Price</th>
-                                        <th class="text-right" style="width: 17%">Total</th>
+                                        <th class="text-right" style="width: 13%">Unit Price</th>
+                                        <th class="text-right" style="width: 13%">Total</th>
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
