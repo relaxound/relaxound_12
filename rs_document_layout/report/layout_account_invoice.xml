@@ -5,7 +5,6 @@
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
-                <br/><br/>
                 <div class="row" style="margin-left:85px; margin-right:40px; font-size: 12px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
@@ -480,8 +479,6 @@
                     -->
                     <t t-if="o.payment_method_id.name!='payment_term'">
                         <div class="col-xs-12">
-                            <br/>
-                            <br/>
                             <span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.
                             </span>
                             <br/>
