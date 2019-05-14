@@ -196,7 +196,7 @@
                                 </style>
                                 <thead>
                                     <tr style="border-bottom: 1px solid black, padding-left:40px">
-                                        <th class="text-left" style="width: 25%">Article</th>
+                                        <th class="text-center" style="width: 25%">Article</th>
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
                                         <th class="text-center" style="width: 13%">Single Unit</th>
@@ -280,7 +280,7 @@
                                 </style>
                                 <thead>
                                     <tr style="border-bottom: 1px solid black;">
-                                        <th class="text-left" style="width: 22%">Article</th>
+                                        <th class="text-center" style="width: 22%">Article</th>
                                         <th class="text-center" style="width: 13%">Colour</th>
                                         <th class="text-center" style="width: 15%">Quantity</th>
                                         <th class="text-right" style="width: 16%">Unit Price</th>
