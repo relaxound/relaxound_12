@@ -31,28 +31,18 @@
                 </t>
             </t>
        </template> -->
-
-
-
-
-
-
-
-       <template id="report_invoice_document_sample">
+    <template id="report_invoice_document_sample">
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang': lang})"/>
                 
                 <div class="page">
-                    
-
-                    <div id="informations" class="row mt32 mb32">
-                        <div class="col-auto mw-100 mb-2" name="description">
-                            <div class="pulled-right">
-                            <h4 t-if="o.scheme != 'B2B'"><strong>SEPA DIRECT DEBIT MANDATE</strong></h4>
-                            <h4 t-if="o.scheme == 'B2B'"><strong>SEPA LASTSCHRIFTMANDAT</strong></h4>
-                            <p class="text-right">Gläubiger-Identifikationsnummer: DE88ZZZ00002032863</p>
-                        </div>
-                           
+                    <div id="informations" class="row mt32 mb32" style="float: right;">
+                        <div class="col-md-12" name="description">
+                            <div class="pull-right">
+                                <h4 t-if="o.scheme != 'B2B'"><strong>SEPA DIRECT DEBIT MANDATE</strong></h4>
+                                <h4 t-if="o.scheme == 'B2B'"><strong>SEPA LASTSCHRIFTMANDAT</strong></h4>
+                                <p class="text-right">Gläubiger-Identifikationsnummer: DE88ZZZ00002032863</p>
+                            </div>
                         </div>
                         
                     </div>
@@ -73,9 +63,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row mt8">
-                        
                         <div class="col-xs-6">
                             <div class="panel panel-default"> 
                                 <div class="panel-heading">
@@ -89,7 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                  
 
                     <div class="row mt0">
                         <div class="col-xs-12">
@@ -118,22 +105,13 @@
                     </div>
                     <div class="row mt16">
                         <div class="col-xs-12">
-                            Location and sign: _______________________, at ______ from ____________ from                                                   </div>
+                        Location and sign: _______________________, at ______ from ____________ from <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>
+                        </div>
                     </div> 
                 <!-- </div> -->
                 <br/>
                 <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-
-
-                <div class="page">
+                <!-- <div class="page"> -->
                     <div class="row mt32">
                         <div class="col-xs-12">
                             <div class="panel panel-default">
@@ -194,9 +172,9 @@
                             </div>
                         </div>
                     </div> 
-                </div>
                 <!-- </div> -->
-                <xpath expr="//div[hasclass='footer']" position="replace">
+                <!-- </div> -->
+               <!--  <xpath expr="//div[hasclass='footer']" position="replace">
                     <div class="footer" style="font-size:9px; margin-left: 0.5cm">
                         <div class="row">
                             <div class="col-xs-8">
@@ -260,28 +238,17 @@
                             </div>
                         </div>
                     </div>
-                </xpath>
+                </xpath> -->
 
                 </div>
-            </t>     
-            
+            </t>   
         </template>    
-
-
-       
-
-            <template id="account_banking_mandate">
-                <t t-call="web.html_container">
-                    
-                    <t t-foreach="docs" t-as="o">
-                        <t t-call="account_banking_mandate.report_invoice_document_sample" t-lang="o.partner_id.lang"/>
+    <template id="account_banking_mandate">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="account_banking_mandate.report_invoice_document_sample" t-lang="o.partner_id.lang"/>
                     </t>
                 </t>
-            </template>
-            
-        
-
-       
-
+        </template>
     </data>
 </odoo>
