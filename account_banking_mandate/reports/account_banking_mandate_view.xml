@@ -50,28 +50,26 @@
 
                     <div class="row mt8">
                         <div class="col-xs-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Service Provider / Creditor:
-                                </div>
-                                <div class="panel-body mb8">
-                                    <strong t-field="o.company_id.partner_id and o.company_id.partner_id.name"/><br/>
-                                    <span t-if="o.company_id.partner_id.vat">VAT: <span t-field="o.company_id.partner_id.vat"/></span>
-                                    <span t-field="o.company_id.partner_id"
+                            <div class="container">
+                                <div class="card" style="width: 25rem;">
+                                    <div class="card-header">Service Provider / Creditor:</div>
+                                    <div class="card-body">
+                                        <strong t-field="o.company_id.partner_id and o.company_id.partner_id.name"/><br/>
+                                        <span t-if="o.company_id.partner_id.vat">VAT: <span t-field="o.company_id.partner_id.vat"/></span>
+                                        <span t-field="o.company_id.partner_id"
                                         t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                         <div class="col-xs-6">
-                            <div class="panel panel-default"> 
-                                <div class="panel-heading">
-                                    Policyholder Service / Debtor:
-                                </div>
-                                <div class="panel-body">
+                            <div class="card" style="width: 25rem;">
+                                <div class="card-header">Policyholder Service / Debtor:</div>
+                                <div class="card-body">
                                     <strong t-field="o.partner_id and o.partner_id.name"/>
                                     <span t-field="o.partner_id"
-                                        t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
+                                    t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
                                     <span t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></span>
                                 </div>
                             </div>
