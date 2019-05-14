@@ -39,63 +39,62 @@
                 </div>
             </xpath>
             <xpath expr="//div[@class='page']" position="attributes">
-<<<<<<< HEAD
-                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm</attribute>
+                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm;font-size:12px;</attribute>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
-                    <div class="row">
-                        <div class="col-6">
-                        <table>
-                                <!--<tr t-if="doc.carrier_id">-->
-                                <!--    <td class="text-left" style="font-size:15px">-->
-                                <!--        Shipping method:-->
-                                <!--    </td>-->
-                                <!--    <td class="text-left">-->
-                                <!--        <span t-field="o.carrier_id"/>-->
-                                <!--    </td>-->
-                                <!--</tr>-->
-                                <tr>
-                                    <td class="text-left" style="font-size:15px">
-                                        Payment term:
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-field="o.payment_term_id.name"/>
-                                    </td>
-                                </tr>
-                                <!-- <tr t-if="doc.payment_term_id">
-                                    <td class="text-left" style="font-size:15px">
-                                        Payment term:
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-field="doc.payment_term_id"/>
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td class="text-left" style="font-size:15px">
-                                        Shipping address:
-                                    </td>
-                                    <td class="text-left" style="font-size:15px">
-                                        <t t-if="o.partner_id.child_ids.street">
-                                            <span t-field="o.partner_id.child_ids.street"/>
-                                        </t>
+                <div class="row">
+                    <div class="col-6">
+                            <table>
+                                    <!--<tr t-if="doc.carrier_id">-->
+                                    <!--    <td class="text-left" style="font-size:15px">-->
+                                    <!--        Shipping method:-->
+                                    <!--    </td>-->
+                                    <!--    <td class="text-left">-->
+                                    <!--        <span t-field="o.carrier_id"/>-->
+                                    <!--    </td>-->
+                                    <!--</tr>-->
+                                    <tr>
+                                        <td class="text-left" style="font-size:15px">
+                                            Payment term:
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="o.payment_term_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr t-if="doc.payment_term_id">
+                                        <td class="text-left" style="font-size:15px">
+                                            Payment term:
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="doc.payment_term_id"/>
+                                        </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td class="text-left" style="font-size:15px">
+                                            Shipping address:
+                                        </td>
+                                        <td class="text-left" style="font-size:15px">
+                                            <t t-if="o.partner_id.child_ids.street">
+                                                <span t-field="o.partner_id.child_ids.street"/>
+                                            </t>
 
-                                        <t t-if="o.partner_id.child_ids.street2">
-                                            <br/>
-                                            <span t-field="o.partner_id.child_ids.street2"/>
-                                        </t>
+                                            <t t-if="o.partner_id.child_ids.street2">
+                                                <br/>
+                                                <span t-field="o.partner_id.child_ids.street2"/>
+                                            </t>
 
-                                        <t t-if="o.partner_id.child_ids.zip or o.partner_id.child_ids.city">
-                                            <br/>
-                                            <span t-field="o.partner_id.child_ids.zip"/>&#32;&#32;
-                                            <span t-field="o.partner_id.child_ids.city"/>
-                                        </t>
-                                        <t t-if="o.partner_id.child_ids.country_id">
-                                            <br/>
-                                            <span t-field="o.partner_id.child_ids.country_id.name"/>
-                                        </t>
-                                    </td>
-                                </tr>
-                        </table>
+                                            <t t-if="o.partner_id.child_ids.zip or o.partner_id.child_ids.city">
+                                                <br/>
+                                                <span t-field="o.partner_id.child_ids.zip"/>&#32;&#32;
+                                                <span t-field="o.partner_id.child_ids.city"/>
+                                            </t>
+                                            <t t-if="o.partner_id.child_ids.country_id">
+                                                <br/>
+                                                <span t-field="o.partner_id.child_ids.country_id.name"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                            </table>
                     </div>
                     <div class="col-6">
                         <table class="table table-sm">
@@ -123,10 +122,6 @@
                         </table>
                     </div>
                 </div>
-=======
-                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; font-size:12px;</attribute>
-                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm font-size: 12px;</attribute>
->>>>>>> 6bdfd3176df8fdc7c29c8ec687a267ec7ba75049
             </xpath>
         </template>
     </data>
