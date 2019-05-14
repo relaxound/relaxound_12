@@ -179,7 +179,7 @@
                 <attribute name="style">display:none</attribute>
             </xpath>
             <xpath expr="//div[@class='page']" position="attributes">
-                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; fond-size:12px</attribute>
+                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; fond-size:12px;line-height:1;</attribute>
             </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div>
