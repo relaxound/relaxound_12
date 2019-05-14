@@ -3,7 +3,7 @@
 
 <template id="overdue_payment.report_due_document">
     <t t-call="web.external_layout">
-        <div class="page" style="margin-right:2.5cm; margin-left:2.5cm">
+        <div class="page" style="margin-right:2.5cm; margin-left:2.5cm;font-size: 12px;">
                 <div style="width:100%; float: right; text-align: right;" >
                     <div class="col-xs-5 col-xs-offset-7">
 
@@ -74,7 +74,7 @@
                 </div>
                 <div>
                 <p t-if="not o.customer_invoices">
-                    <strong>There is nothing due with this customer.</strong>
+                    <strong>There are no due invoices for the customer.</strong>
                 </p>
                 </div>
             </div>
