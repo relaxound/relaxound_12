@@ -6,7 +6,7 @@
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/><br/>
-                <div class="row" style="margin-left:85px; margin-right:40px;">
+                <div class="row" style="margin-left:85px; margin-right:40px; font-size: 12px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <t t-if="o.partner_id.parent_id">
@@ -114,7 +114,7 @@
 
 
             <xpath expr="//div[@id='total']" position="replace">
-                <div id="total" class="row" style="margin-left:70px; margin-right:50px;">
+                <div id="total" class="row" style="margin-left:70px; margin-right:50px; font-size: 12px;">
                     <div class="col-6">
                         <!-- <br/> -->
                         <br/>
@@ -251,7 +251,7 @@
                 <br/>
                 <br/>
                 <br/>
-                <div class="row" style="margin-left:94px; margin-right:94px;">
+                <div class="row" style="margin-left:94px; margin-right:94px; font-size: 12px;">
                     <h2>
                         <!--<div class="col-xs-6">-->
 
@@ -283,7 +283,7 @@
                 <t t-set="i" t-value="1"/>
                 <t>
                     <t t-if="o.partner_id.is_retailer">
-                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto;" id="items">
+                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto; font-size: 12px;" id="items">
                             <style>
                                 #items td{
                                 border:0
@@ -369,7 +369,7 @@
                         </table>
                     </t>
                     <t t-if="not(o.partner_id.is_retailer)">
-                        <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto;" id="items">
+                        <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto; font-size: 12px;" id="items">
                             <style>
                                 #items td{
                                 border:0
@@ -458,7 +458,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
-                <div class="row" style="margin-right:94px; margin-left:85px;">
+                <div class="row" style="margin-right:94px; margin-left:85px; font-size: 12px;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <div class="col-xs-12">
