@@ -280,7 +280,7 @@
                 <t t-set="i" t-value="1"/>
                 <t>
                     <t t-if="o.partner_id.is_retailer">
-                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto; font-size: 12px;" id="items">
+                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto; font-size: 12px; cellspacing:1" id="items">
                             <style>
                                 #items td{
                                 border:0
@@ -289,8 +289,8 @@
                                 border-top:0
                                 }
                             </style>
-                            <thead style="line-height:1">
-                                <tr style="border-bottom: 1px solid black">
+                            <thead>
+                                <tr style="border-bottom: 1px solid black;line-height:0;">
                                     <th class="text-center" style="width:11%">Position</th>
                                     <th class="text-center" style="width:20%">Article</th>
                                     <th class="text-center" style="width:11%">Colour</th>
