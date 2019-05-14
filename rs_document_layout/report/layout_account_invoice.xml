@@ -121,7 +121,7 @@
                         <br/><br/><br/>
                         <table>
                             <tr t-if="o.partner_id.property_delivery_carrier_id">
-                                <td class="text-left" style="font-size:15px">
+                                <td class="text-left">
                                     Shipping method:
                                 </td>
                                 <td class="text-left">
@@ -129,7 +129,7 @@
                                 </td>
                             </tr>
                             <tr t-if="o.payment_method_id.name">
-                                <td class="text-left" style="font-size:15px">
+                                <td class="text-left">
                                     Payment method:
                                 </td>
                                 <td class="text-left">
@@ -137,7 +137,7 @@
                                 </td>
                             </tr>
                             <tr t-if="o.partner_id.property_payment_term_id">
-                                <td class="text-left" style="font-size:15px">
+                                <td class="text-left">
                                     Payment term:
                                 </td>
                                 <td class="text-left">
@@ -145,7 +145,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left" style="font-size:15px">
+                                <td class="text-left">
                                     Shipping address:
                                 </td>
                                 <td class="text-left">
