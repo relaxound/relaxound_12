@@ -51,7 +51,7 @@
                     <div class="row mt8">
                         <div class="col-6">
                             <div class="container">
-                                <div class="card" style="width: 25rem;">
+                                <div class="card" style="width: 18rem;">
                                     <div class="card-header">Service Provider / Creditor:</div>
                                     <div class="card-body">
                                         <strong t-field="o.company_id.partner_id and o.company_id.partner_id.name"/><br/>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                         <div class="col-6">
-                            <div class="card" style="width: 25rem;">
+                            <div class="card" style="width: 18rem;">
                                 <div class="card-header">Policyholder Service / Debtor:</div>
                                 <div class="card-body">
                                     <strong t-field="o.partner_id and o.partner_id.name"/>
