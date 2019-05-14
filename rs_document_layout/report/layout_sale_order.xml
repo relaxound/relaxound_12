@@ -172,6 +172,9 @@
                 </div>
             </div>
             </xpath>
+            <xpath expr="//div[@class='page']" position="attributes">
+                <attribute name="style">margin:10px</attribute>
+            </xpath>
             <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
