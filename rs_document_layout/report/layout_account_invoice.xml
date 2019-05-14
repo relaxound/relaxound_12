@@ -290,7 +290,7 @@
                                 }
                             </style>
                             <thead>
-                                <tr style="border-bottom: 1px solid black;line-height:1;">
+                                <tr style="border-bottom: 1px solid black;line-height:0.7;">
                                     <th class="text-center" style="width:11%">Position</th>
                                     <th class="text-center" style="width:20%">Article</th>
                                     <th class="text-center" style="width:11%">Colour</th>
@@ -302,8 +302,8 @@
                                 </tr>
                             </thead>
                             <t t-set="single_total" t-value="0"/>
-                            <tbody class="invoice_tbody" style="line-height:1">
-                                <tr t-foreach="o.invoice_line_ids" style="line-height:1;" t-as="l">
+                            <tbody class="invoice_tbody" style="line-height:0.7">
+                                <tr t-foreach="o.invoice_line_ids" style="line-height:0.7;" t-as="l">
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
                                             <span t-esc="i"/>
@@ -366,7 +366,7 @@
                         </table>
                     </t>
                     <t t-if="not(o.partner_id.is_retailer)">
-                        <div style="line-height:1">
+                        <div style="line-height:0.7">
                             <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto; font-size: 12px;" id="items">
                                 <style>
                                     #items td{
@@ -376,7 +376,7 @@
                                     border-top:0
                                     }
                                 </style>
-                                <thead style="line-height:1">
+                                <thead style="line-height:0.7">
                                     <tr style="border-bottom: 1px solid black">
                                         <th class="text-center" style="width:12%">Position</th>
                                         <th class="text-center" style="width:24%">Article</th>
@@ -388,7 +388,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="line-height:1">
+                                <tbody class="invoice_tbody" style="line-height:0.7">
                                     <tr t-foreach="o.invoice_line_ids" t-as="l">
                                         <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                             <td class="text-center">
