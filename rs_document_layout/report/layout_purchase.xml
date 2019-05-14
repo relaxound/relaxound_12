@@ -41,11 +41,8 @@
             </xpath>
             
             <xpath expr="//div[@class='page']" position="attributes">
-<<<<<<< HEAD
                  <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; font-size:12px;</attribute>
-=======
                  <attribute name="style">margin-right:2.5cm; margin-left:2.5cm font-size: 12px;</attribute>
->>>>>>> 7d55d58f826ad6278b3d5b24d0653ecd04eb3b4b
             </xpath>
         </template>
     </data>
