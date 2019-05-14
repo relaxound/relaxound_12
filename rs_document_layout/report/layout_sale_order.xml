@@ -3,7 +3,6 @@
     <data>
         <!-- Angebot/Bestellung anpassen -->
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
-
             <xpath expr="//t[2][@t-set='address']" position="replace">
                 <br/> <br/> <br/>
                 <div class="col-xs-6" style="margin-left:100px; margin-right:94px;">
@@ -190,7 +189,7 @@
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
 
-                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" style="table-layout: fixed; width: 90%; border: none; margin: 0 auto; margin-left:41px;" id="items">
                                 <style>
                                     #items td{
                                     border:0

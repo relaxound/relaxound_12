@@ -21,7 +21,7 @@
 
                             <t t-if="o.partner_id.child_ids.zip or o.partner_id.child_ids.city">
                                 <br/>
-                                <span t-field="o.partner_id.child_ids.zip"/>&#32;&#32;
+                                <span t-field="o.partner_id.child_ids.zip"/>  
                                 <span t-field="o.partner_id.child_ids.city"/>
                             </t>
                             <t t-if="o.partner_id.child_ids.country_id">
@@ -29,10 +29,9 @@
                                 <span t-field="o.partner_id.child_ids.country_id.name"/>
                             </t>
                         </div>
-                        <div style="width:50%; float: right; text-align: right;" >
+                        <div style="width:50%; float: right; text-align: right;">
 
-                               <div t-field="o.partner_id"
-                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                               <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
                                 <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
                         </div>
 
@@ -41,6 +40,88 @@
             </xpath>
             <xpath expr="//div[@class='page']" position="attributes">
                  <attribute name="style">margin-right:2.5cm; margin-left:2.5cm</attribute>
+            </xpath>
+            <xpath expr="//div/div[@id='total']" position="replace">
+                    <div class="row">
+                        <div class="col-6">
+                        <table>
+                                <!--<tr t-if="doc.carrier_id">-->
+                                <!--    <td class="text-left" style="font-size:15px">-->
+                                <!--        Shipping method:-->
+                                <!--    </td>-->
+                                <!--    <td class="text-left">-->
+                                <!--        <span t-field="o.carrier_id"/>-->
+                                <!--    </td>-->
+                                <!--</tr>-->
+                                <tr>
+                                    <td class="text-left" style="font-size:15px">
+                                        Payment term:
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="o.payment_term_id.name"/>
+                                    </td>
+                                </tr>
+                                <!-- <tr t-if="doc.payment_term_id">
+                                    <td class="text-left" style="font-size:15px">
+                                        Payment term:
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="doc.payment_term_id"/>
+                                    </td>
+                                </tr> -->
+                                <tr>
+                                    <td class="text-left" style="font-size:15px">
+                                        Shipping address:
+                                    </td>
+                                    <td class="text-left" style="font-size:15px">
+                                        <t t-if="o.partner_id.child_ids.street">
+                                            <span t-field="o.partner_id.child_ids.street"/>
+                                        </t>
+
+                                        <t t-if="o.partner_id.child_ids.street2">
+                                            <br/>
+                                            <span t-field="o.partner_id.child_ids.street2"/>
+                                        </t>
+
+                                        <t t-if="o.partner_id.child_ids.zip or o.partner_id.child_ids.city">
+                                            <br/>
+                                            <span t-field="o.partner_id.child_ids.zip"/>&#32;&#32;
+                                            <span t-field="o.partner_id.child_ids.city"/>
+                                        </t>
+                                        <t t-if="o.partner_id.child_ids.country_id">
+                                            <br/>
+                                            <span t-field="o.partner_id.child_ids.country_id.name"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-sm">
+                            <tr class="border-black">
+                                <td><strong>Subtotal</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_untaxed"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_tax"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr class="border-black o_total">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_total"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </xpath>
         </template>
     </data>
