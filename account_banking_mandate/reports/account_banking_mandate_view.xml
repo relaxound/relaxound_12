@@ -110,13 +110,13 @@
                 <br/>
                 <br/>
                 <!-- <div class="page"> -->
-                    <!-- <div class="row mt32">
+                    <div class="row mt32">
                         <div class="col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Details regarding the underlying relationship between the Creditor and the Debtor - for information purposes only.
+                                    Note: I can refund the amount debited within eight weeks, starting with the debit date desire. Applicable in this regard by the contract with my bank conditions.
                                 </div>
-                                <div class="panel-body">
+                                <!-- <div class="panel-body">
                                     <div class="row">
                                         <div class="col-xs-3">Debtor identification code:</div>
                                         <div class="col-xs-9">
@@ -165,11 +165,11 @@
                                                 Description of contract.
                                             </h6>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
-                    </div>  -->
+                    </div> 
                 <!-- </div> -->
                 <!-- </div> -->
                <!--  <xpath expr="//div[hasclass='footer']" position="replace">
