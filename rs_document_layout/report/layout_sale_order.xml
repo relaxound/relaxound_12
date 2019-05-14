@@ -179,13 +179,16 @@
             <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
+             <xpath expr="//div[@class='page']" position="attributes">
+                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm</attribute>
+            </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div class="col-sm-12 col-md-12 table-responsive">
                     <br/>
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed" style=" table-layout: fixed; width: 90%; border: none; margin: 0 auto; margin-top:10px; margin-left:40px" id="items">
+                            <table class="table table-condensed" style="margin-top:10px;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -196,12 +199,12 @@
                                 </style>
                                 <thead>
                                     <tr style="border-bottom: 1px solid black;">
-                                        <th class="text-center" style="width: 25%">Article</th>
-                                        <th class="text-center" style="width: 12%">Colour</th>
-                                        <th class="text-center" style="width: 12%">Quantity</th>
-                                        <th class="text-center" style="width: 13%">Single Unit</th>
-                                        <th class="text-right" style="width: 14%">Unit Price</th>
-                                        <th class="text-right" style="width: 14%">Total</th>
+                                        <th class="text-center" >Article</th>
+                                        <th class="text-center">Colour</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Single Unit</th>
+                                        <th class="text-right">Unit Price</th>
+                                        <th class="text-right">Total</th>
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
@@ -210,14 +213,14 @@
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-left" style="width: 25%" >
+                                            <td class="text-left"  >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 12%">
+                                            <td class="text-center" >
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
                                                       t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 12%" >
+                                            <td class="text-center" >
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
                                             <t t-if="doc.partner_id.is_retailer">
@@ -227,7 +230,7 @@
                                                 
                                                 </td>
                                             </t>
-                                            <td class="text-right" style="width: 14%">
+                                            <td class="text-right" >
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -236,7 +239,7 @@
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
-                                            <td class="text-right" style="width: 14%">
+                                            <td class="text-right" >
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -267,7 +270,7 @@
                             </table>
                         </t>
                         <t t-if="not(doc.partner_id.is_retailer)">
-                            <table class="table table-condensed" style="table-layout: fixed; width: 83%; border: none; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" style="margin-top:10px;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -278,11 +281,11 @@
                                 </style>
                                 <thead>
                                     <tr style="border-bottom: 1px solid black;">
-                                        <th class="text-center" style="width: 22%">Article</th>
-                                        <th class="text-center" style="width: 13%">Colour</th>
-                                        <th class="text-center" style="width: 15%">Quantity</th>
-                                        <th class="text-right" style="width: 16%">Unit Price</th>
-                                        <th class="text-right" style="width: 17%">Total</th>
+                                        <th class="text-center" >Article</th>
+                                        <th class="text-center" >Colour</th>
+                                        <th class="text-center" >Quantity</th>
+                                        <th class="text-right" >Unit Price</th>
+                                        <th class="text-right" >Total</th>
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
@@ -291,17 +294,17 @@
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-left" style="width: 22%" >
+                                            <td class="text-left" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 13%">
+                                            <td class="text-center" >
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
                                                       t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 15%" >
+                                            <td class="text-center"  >
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
-                                            <td class="text-right" style="width: 16%">
+                                            <td class="text-right" >
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -310,7 +313,7 @@
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
-                                            <td class="text-right" style="width: 17%">
+                                            <td class="text-right" >
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -339,7 +342,7 @@
                 </div>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
-                <div id="total" class="row" style="margin-left:70px; margin-right:50px; width: 83%;">
+                <div id="total" class="row" >
                 <!-- <div class="row"> -->
                     <div class="col-6">
                         <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
@@ -470,7 +473,7 @@
 
             </xpath>
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
-                <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;">
+                <div class="text-right" t-if="doc.payment_method_id">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
                             Payment term:
@@ -482,7 +485,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-left:85px; margin-right:94px;">
+                <div class="row" >
                     <br/>
                   <div class="col-xs-12">
                     <span t-field="doc.note"/>
