@@ -114,10 +114,6 @@
 
                         </table>
                     </div>
-
-                    <!-- </div> -->
-
-                    <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
                       <div class="col-md-6" style="width:50%; float: right; text-align: left;">
                             <table id="data" style=" float:right">
