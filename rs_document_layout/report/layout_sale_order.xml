@@ -195,7 +195,7 @@
                                     }
                                 </style>
                                 <thead style="font-size: 12px;">
-                                    <tr style="border-bottom: 1px solid black">
+                                    <tr style="border-bottom: 1px solid black;line-height:0.7;">
                                         <th class="text-center">Article</th>
                                         <th class="text-center">Colour</th>
                                         <th class="text-center">Quantity</th>
@@ -205,7 +205,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="font-size: 12px">
+                                <tbody class="invoice_tbody" style="font-size: 12px;line-height:0">
                                     <tr t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
@@ -398,11 +398,11 @@
                             </table>
                         <!-- </div> -->
                     </div>
-                    <div class="col-6" style="line-height:0">
+                    <div class="col-6">
                       <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;">
                             <div class="pull-right"> -->
                                 <br/>
-                                <table class="table table-condensed" id="summary" style="border: none">
+                                <table class="table table-condensed" id="summary" style="border: none; line-height:0">
                                     <style>
                                         table#summary td {
                                         border:0
