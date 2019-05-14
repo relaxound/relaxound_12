@@ -472,7 +472,7 @@
 
             </xpath>
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
-                <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;font-size: 12px">
+                <div class="text-right" t-if="doc.payment_method_id" style="font-size: 12px">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
                             Payment term:
@@ -484,14 +484,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="font-size: 12px ">
+                <div class="row" style="font-size: 12px; line-height: 1; ">
                     <br/>
                   <div class="col-xs-12">
                     <span t-field="doc.note"/>
                       <br/>
                   </div>
                         <t t-if="doc.payment_method_id.name!='Rechnung'">
-                            <div class="col-xs-12">
+                            <div class="col-xs-12" style="line-height: 1;">
                                 <span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.
                                 </span>
                                 <br/>
@@ -511,8 +511,6 @@
             </xpath>
             <xpath expr="//p[@id='fiscal_position_remark']" position="replace">
             </xpath>
-
-           
         </template>
     </data>
 </odoo>
