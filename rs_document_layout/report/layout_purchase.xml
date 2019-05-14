@@ -3,10 +3,10 @@
     <data>
         <!-- Purchase Order -->
         <template id="report_purchase_document" inherit_id="purchase.report_purchaseorder_document">
-            <xpath expr="//t[@t-set='address']" position="replace">
+             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/>
-                <div class="row" style="margin-left:100px; margin-right:94px;">
+                <div class="row" style="margin-left:100px; margin-right:94px; font-size: 12px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <strong>Shipping address:</strong><br/>
@@ -38,8 +38,9 @@
                     </div>
                 </div>
             </xpath>
+            
             <xpath expr="//div[@class='page']" position="attributes">
-                <attribute name="style">margin-right:2.5cm;margin-left:2.5cm;font-size:12px;</attribute>
+                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm;font-size:12px;</attribute>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
                 <div class="row">
@@ -54,7 +55,7 @@
                                     <!--    </td>-->
                                     <!--</tr>-->
                                     <tr>
-                                        <td class="text-left" style="font-size:15px">
+                                        <td class="text-left" style="font-size:12px">
                                             Payment term:
                                         </td>
                                         <td class="text-left">
@@ -70,10 +71,10 @@
                                         </td>
                                     </tr> -->
                                     <tr>
-                                        <td class="text-left" style="font-size:15px">
+                                        <td class="text-left" style="font-size:12px">
                                             Shipping address:
                                         </td>
-                                        <td class="text-left" style="font-size:15px">
+                                        <td class="text-left" style="font-size:12px">
                                             <t t-if="o.partner_id.child_ids.street">
                                                 <span t-field="o.partner_id.child_ids.street"/>
                                             </t>
