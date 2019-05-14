@@ -118,7 +118,7 @@
 
                     <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                      <div class="col-md-6" style="width:50%; float: right; text-align: left;font-size: 12px">
+                      <div class="col-md-6" style="width:50%; float: right; text-align: right;font-size: 12px">
                             <table id="data" style=" float:right">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
@@ -269,7 +269,7 @@
                             </table>
                         </t>
                         <t t-if="not(doc.partner_id.is_retailer)">
-                            <table class="table table-condensed" id="items">
+                            <table class="table table-condensed" style="cellspacing:1;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -279,7 +279,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black;">
+                                    <tr style="border-bottom: 1px solid black; line-height:0;">
                                         <th class="text-center">Article</th>
                                         <th class="text-center" >Colour</th>
                                         <th class="text-center">Quantity</th>
@@ -343,7 +343,7 @@
             <xpath expr="//div/div[@id='total']" position="replace">
                 <div id="total" class="row" style="font-size: 12px;">
                 <!-- <div class="row"> -->
-                    <div class="col-6">
+                    <div class="col-6" style="line-height:1">
                         <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
                             <br/>
                             <table>
@@ -398,7 +398,7 @@
                             </table>
                         <!-- </div> -->
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" style="line-height:0">
                       <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;">
                             <div class="pull-right"> -->
                                 <br/>

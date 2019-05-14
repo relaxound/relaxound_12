@@ -39,6 +39,7 @@
                 </div>
             </xpath>
             <xpath expr="//div[@class='page']" position="attributes">
+<<<<<<< HEAD
                  <attribute name="style">margin-right:2.5cm; margin-left:2.5cm</attribute>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
@@ -122,6 +123,10 @@
                         </table>
                     </div>
                 </div>
+=======
+                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; font-size:12px;</attribute>
+                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm font-size: 12px;</attribute>
+>>>>>>> 6bdfd3176df8fdc7c29c8ec687a267ec7ba75049
             </xpath>
         </template>
     </data>
