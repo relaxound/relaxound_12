@@ -39,8 +39,8 @@
                     <div id="informations" class="row mt32 mb32" style="float: right;">
                         <div class="col-md-12" name="description">
                             <div class="pull-right">
-                                <h4 t-if="o.scheme != 'B2B'"><strong>SEPA DIRECT DEBIT MANDATE</strong></h4>
-                                <h4 t-if="o.scheme == 'B2B'"><strong>SEPA LASTSCHRIFTMANDAT</strong></h4>
+                                <h4 t-if="o.scheme != 'B2B'" class="text-right"><strong>SEPA DIRECT DEBIT MANDATE</strong></h4>
+                                <h4 t-if="o.scheme == 'B2B'" class="text-right"><strong>SEPA LASTSCHRIFTMANDAT</strong></h4>
                                 <p class="text-right">Gläubiger-Identifikationsnummer: DE88ZZZ00002032863</p>
                             </div>
                         </div>
