@@ -39,7 +39,7 @@
                 </div>
             </xpath>
             <xpath expr="//div[@class='page']" position="attributes">
-                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm;font-size:12px;</attribute>
+                <attribute name="style">margin-right:2.5cm;margin-left:2.5cm;font-size:12px;</attribute>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
                 <div class="row">
