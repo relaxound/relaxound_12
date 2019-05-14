@@ -3,10 +3,10 @@
     <data>
         <!-- Purchase Order -->
         <template id="report_purchase_document" inherit_id="purchase.report_purchaseorder_document">
-            <xpath expr="//t[@t-set='address']" position="replace">
+             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/>
-                <div class="row" style="margin-left:100px; margin-right:94px;">
+                <div class="row" style="margin-left:100px; margin-right:94px; font-size: 12px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <strong>Shipping address:</strong><br/>
@@ -38,8 +38,9 @@
                     </div>
                 </div>
             </xpath>
+            
             <xpath expr="//div[@class='page']" position="attributes">
-                <attribute name="style">margin-right:2.5cm;margin-left:2.5cm;font-size:12px;</attribute>
+                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm;font-size:12px;</attribute>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
                 <div class="row">
