@@ -5,6 +5,8 @@
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
 			<xpath expr="//t[@t-set='address']" position="replace">
 			</xpath>
+			<xpath expr="//t[@t-set='address']" position="replace">
+			</xpath>
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
 				<br/>
