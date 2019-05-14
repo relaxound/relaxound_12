@@ -398,7 +398,7 @@
                             </table>
                         <!-- </div> -->
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" style="line-height:0">
                       <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;">
                             <div class="pull-right"> -->
                                 <br/>

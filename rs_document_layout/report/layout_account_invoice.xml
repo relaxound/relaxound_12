@@ -366,7 +366,7 @@
                         </table>
                     </t>
                     <t t-if="not(o.partner_id.is_retailer)">
-                        <div style="line-height:1">
+                        <div style="line-height:0">
                             <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto; font-size: 12px;" id="items">
                                 <style>
                                     #items td{
