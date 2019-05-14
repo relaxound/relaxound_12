@@ -180,7 +180,7 @@
                 <attribute name="style">display:none</attribute>
             </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <div class="col-sm-12 col-md-12 table-responsive">
+                <!-- <div class="col-sm-12 col-md-12 table-responsive"> -->
                     <br/>
                     <br/>
                     <t>
@@ -338,7 +338,7 @@
                             </table>
                         </t>
                     </t>
-                </div>
+                <!-- </div> -->
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
                 <div id="total" class="row" style="margin-left:70px; margin-right:50px; width: 83%;">
