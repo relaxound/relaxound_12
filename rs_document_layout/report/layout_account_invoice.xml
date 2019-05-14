@@ -292,12 +292,12 @@
                             <thead>
                                 <tr style="border-bottom: 1px solid black;line-height:0.9">
                                     <th class="text-center" style="width:11%">Position</th>
-                                    <th class="text-center" style="width:24%">Article</th>
-                                    <th class="text-center" style="width:11%">Colour</th>
+                                    <th class="text-center" style="width:27%">Article</th>
+                                    <th class="text-center" style="width:10%">Colour</th>
                                     <th class="text-center" style="width:12%">Quantity</th>
-                                    <th class="text-center" style="width:11%">Single Unit</th>
+                                    <th class="text-center" style="width:10%">Single Unit</th>
                                     <th class="text-right" style="width:12%">Unit Price</th>
-                                    <th class="text-right" style="width:12%">Total</th>
+                                    <th class="text-right" style="width:11%">Total</th>
 
                                 </tr>
                             </thead>
