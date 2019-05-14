@@ -209,7 +209,7 @@
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-left" style="width: 25%" >
+                                            <td class="text-left" style="width: 28%" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
                                             <td class="text-center" style="width: 12%">
@@ -228,7 +228,7 @@
                                                 
                                                 </td>
                                             </t>
-                                            <td class="text-right" style="width: 14%">
+                                            <td class="text-right" style="width: 13%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -237,7 +237,7 @@
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
-                                            <td class="text-right" style="width: 14%">
+                                            <td class="text-right" style="width: 12%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -292,7 +292,7 @@
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-left" style="width: 22%" >
+                                            <td class="text-left" style="width: 28%" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
                                             <td class="text-center" style="width: 13%">
@@ -302,7 +302,7 @@
                                             <td class="text-center" style="width: 15%" >
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
-                                            <td class="text-right" style="width: 16%">
+                                            <td class="text-right" style="width: 13%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -311,7 +311,7 @@
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
-                                            <td class="text-right" style="width: 17%">
+                                            <td class="text-right" style="width: 13s%">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
