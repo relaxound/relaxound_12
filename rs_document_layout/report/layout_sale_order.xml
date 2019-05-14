@@ -3,10 +3,9 @@
     <data>
         <!-- Angebot/Bestellung anpassen -->
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
-
             <xpath expr="//t[2][@t-set='address']" position="replace">
-                <br/> <br/> <br/>
-                <div class="col-xs-6" style="margin-left:100px; margin-right:94px; font-size:10px;">
+                <br/> 
+                <div class="col-xs-6" style="margin-left:100px; margin-right:94px;font-size: 12px">
                     <t t-if="doc.partner_id.parent_id">
                         <span t-field="doc.partner_id.parent_id.name"/>
                     </t>
@@ -39,8 +38,8 @@
             </xpath>
             <xpath expr="//h2" position="replace">
             <br/>
-            <div class="row" style="margin-left:100px; margin-right:94px;">
-                <h2><div class ="col-xs-4">ZWITSCHERBOX &#160;&#160;&#160;&#160;&#160;&#160;&#160;</div></h2>
+            <div class="row">
+                <h2><div class ="col-xs-4">&#160;&#160;&#160;ZWITSCHERBOX &#160;&#160;&#160;&#160;&#160;&#160;&#160;</div></h2>
                 <h2><div class ="col-xs-4">
                     <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                         <span t-if="doc.state not in ['draft','sent']">Order </span>
@@ -51,9 +50,9 @@
                     </t>
                 </div></h2>
             </div>
-            <div class="row" style="margin-left: 75px; margin-right: 74px;">
-                <div class="col-md-11" style="font-size:12px;">
-                    <div class="col-md-6" style="width:50%; float: left;">
+            <div class="row" >
+                <div class="col-md-11">
+                    <div class="col-md-6" style="width:50%; float: left; font-size: 12px">
                         <style>
                             #order_data td{
                             padding:3px 10px 3px 0px
@@ -114,8 +113,12 @@
 
                         </table>
                     </div>
+
+                    <!-- </div> -->
+
+                    <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                      <div class="col-md-6" style="width:50%; float: right; text-align: left; font-size:12px;">
+                      <div class="col-md-6" style="width:50%; float: right; text-align: left;font-size: 12px">
                             <table id="data" style=" float:right">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
@@ -175,13 +178,14 @@
             <xpath expr="//div[@class='row mt32 mb32']" position="attributes">
                 <attribute name="style">display:none</attribute>
             </xpath>
+            <xpath expr="//div[@class='page']" position="attributes">
+                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; fond-size:12px</attribute>
+            </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
-                <div class="col-sm-12 col-md-12 table-responsive">
-                    <br/>
-                    <br/>
+                <div>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed"  style="table-layout: fixed; width: 87%; border: none; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -190,30 +194,30 @@
                                     border-top:0
                                     }
                                 </style>
-                                <thead>
+                                <thead style="font-size: 12px;">
                                     <tr style="border-bottom: 1px solid black">
-                                        <th class="text-center" style="width: 25%">Article</th>
-                                        <th class="text-center" style="width: 12%">Colour</th>
-                                        <th class="text-center" style="width: 12%">Quantity</th>
-                                        <th class="text-center" style="width: 13%">Single Unit</th>
-                                        <th class="text-right" style="width: 12%">Unit Price</th>
-                                        <th class="text-right" style="width: 13%">Total</th>
+                                        <th class="text-center">Article</th>
+                                        <th class="text-center">Colour</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Single Unit</th>
+                                        <th class="text-right">Unit Price</th>
+                                        <th class="text-right">Total</th>
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="font-size:12px" >
-                                    <tr style="padding-left:20px;" t-foreach="doc.order_line" t-as="l">
+                                <tbody class="invoice_tbody" style="font-size: 12px">
+                                    <tr t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-left" style="width: 25%; font-size:12px" >
+                                            <td class="text-left" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 12%; font-size:12px">
+                                            <td class="text-center">
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
                                                       t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 12%;font-size:12px" >
+                                            <td class="text-center">
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
                                             <t t-if="doc.partner_id.is_retailer">
@@ -225,7 +229,7 @@
                                                 
                                                 </td>
                                             </t>
-                                            <td class="text-right" style="width: 14%; font-size:12px">
+                                            <td class="text-right">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -234,7 +238,7 @@
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
-                                            <td class="text-right" style="width: 14%; font-size:12px">
+                                            <td class="text-right">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -265,7 +269,7 @@
                             </table>
                         </t>
                         <t t-if="not(doc.partner_id.is_retailer)">
-                            <table class="table table-condensed" style="table-layout: fixed; width: 83%; border: none; margin: 0 auto;" id="items">
+                            <table class="table table-condensed" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -276,30 +280,30 @@
                                 </style>
                                 <thead>
                                     <tr style="border-bottom: 1px solid black;">
-                                        <th class="text-center" style="width: 22%">Article</th>
-                                        <th class="text-center" style="width: 13%">Colour</th>
-                                        <th class="text-center" style="width: 15%">Quantity</th>
-                                        <th class="text-right" style="width: 16%">Unit Price</th>
-                                        <th class="text-right" style="width: 17%">Total</th>
+                                        <th class="text-center">Article</th>
+                                        <th class="text-center" >Colour</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-right">Unit Price</th>
+                                        <th class="text-right" >Total</th>
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="font-size:12px;">
-                                    <tr style="padding-left:20px;" t-foreach="doc.order_line" t-as="l">
+                                <tbody class="invoice_tbody" style="font-size: 12px">
+                                    <tr style="padding-left:20px" t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
                                             </td> -->
-                                            <td class="text-left" style="width: 22%; font-size:12px" >
+                                            <td class="text-left" >
                                                 <span t-field="l.product_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 13%; font-size:12px">
+                                            <td class="text-center">
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
                                                       t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                             </td>
-                                            <td class="text-center" style="width: 15%; font-size:12px" >
+                                            <td class="text-center" >
                                                 <span t-field="l.product_uom_qty"/>
                                             </td>
-                                            <td class="text-right" style="width: 16%; font-size:12px">
+                                            <td class="text-right">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -308,7 +312,7 @@
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
                                                 </t>
                                             </td>
-                                            <td class="text-right" style="width: 17%">
+                                            <td class="text-right">
                                                 <span t-field="doc.currency_id.symbol"/>&#32;
                                                 <t t-if="doc.partner_id.company_type=='person'">
                                 <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -337,14 +341,14 @@
                 </div>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
-                <div id="total" class="row" style="margin-left:70px; margin-right:50px; width: 83%;">
+                <div id="total" class="row" style="font-size: 12px;">
                 <!-- <div class="row"> -->
                     <div class="col-6">
                         <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
-                            <br/><br/><br/><br/>
+                            <br/>
                             <table>
                                 <tr t-if="doc.carrier_id">
-                                    <td class="text-left" style="font-size:10px">
+                                    <td class="text-left" style="font-size:12px">
                                         Shipping method:
                                     </td>
                                     <td class="text-left">
@@ -352,7 +356,7 @@
                                     </td>
                                 </tr>
                                 <tr t-if="doc.payment_method_id.name">
-                                    <td class="text-left" style="font-size:10px">
+                                    <td class="text-left" style="font-size:12px">
                                         Payment method:
                                     </td>
                                     <td class="text-left">
@@ -394,10 +398,10 @@
                             </table>
                         <!-- </div> -->
                     </div>
-                    <div class="col-6" style="font-size:10px">
+                    <div class="col-6">
                       <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;">
                             <div class="pull-right"> -->
-                                <br/><br/><br/>
+                                <br/>
                                 <table class="table table-condensed" id="summary" style="border: none">
                                     <style>
                                         table#summary td {
@@ -468,9 +472,9 @@
 
             </xpath>
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
-                <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;">
+                <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;font-size: 12px">
                     <div class="col-auto mw-100 mb-2 pull-right">
-                        <div class="text-right" style="font-size:10px">
+                        <div class="text-right">
                             Payment term:
                         </div>
                         <div class="text-right">
@@ -480,14 +484,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-left:85px; margin-right:94px;">
+                <div class="row" style="font-size: 12px ">
                     <br/>
                   <div class="col-xs-12">
                     <span t-field="doc.note"/>
                       <br/>
                   </div>
                         <t t-if="doc.payment_method_id.name!='Rechnung'">
-                            <div class="col-xs-12" style="font-size:10px">
+                            <div class="col-xs-12">
                                 <span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.
                                 </span>
                                 <br/>
@@ -507,6 +511,8 @@
             </xpath>
             <xpath expr="//p[@id='fiscal_position_remark']" position="replace">
             </xpath>
+
+           
         </template>
     </data>
 </odoo>
