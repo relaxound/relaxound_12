@@ -48,8 +48,8 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-xs-6">
+                    <div class="row mt8">
+                        <div class="col-6">
                             <div class="container">
                                 <div class="card" style="width: 25rem;">
                                     <div class="card-header">Service Provider / Creditor:</div>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                        <div class="col-xs-6">
+                        <div class="col-6">
                             <div class="card" style="width: 25rem;">
                                 <div class="card-header">Policyholder Service / Debtor:</div>
                                 <div class="card-body">
