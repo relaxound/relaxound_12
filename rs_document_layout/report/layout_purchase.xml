@@ -55,7 +55,7 @@
                                     <!--    </td>-->
                                     <!--</tr>-->
                                     <tr>
-                                        <td class="text-left" style="font-size:15px">
+                                        <td class="text-left" style="font-size:12px">
                                             Payment term:
                                         </td>
                                         <td class="text-left">
@@ -71,10 +71,10 @@
                                         </td>
                                     </tr> -->
                                     <tr>
-                                        <td class="text-left" style="font-size:15px">
+                                        <td class="text-left" style="font-size:12px">
                                             Shipping address:
                                         </td>
-                                        <td class="text-left" style="font-size:15px">
+                                        <td class="text-left" style="font-size:12px">
                                             <t t-if="o.partner_id.child_ids.street">
                                                 <span t-field="o.partner_id.child_ids.street"/>
                                             </t>
