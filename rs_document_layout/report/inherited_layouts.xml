@@ -30,12 +30,11 @@
                             </t>
                             <span>-</span>
                             <span t-field="company.zip"/>
-                            <span>&#32;</span>
                             <span t-field="company.city"/>
                         </div>
                     </div>
                 </div>
-                <br/><br/><br/><br/>
+                <br/><br/>
 
             </xpath>
         </template>
