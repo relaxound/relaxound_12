@@ -311,7 +311,7 @@
                                         <td class="text-left">
                                             <span t-field="l.product_id.name"/>
                                             <br/>
-                                            <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
+                                            <font style="font-size:10px"></font>
                                         </td>
                                         <td class="text-center" style="white-space:nowrap">
                                             <span t-if="l.product_id.product_tmpl_id.color_id"
@@ -397,7 +397,7 @@
                                             <td class="text-left">
                                                 <span t-field="l.product_id.name"/>
                                                 <br/>
-                                                <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
+                                                <font style="font-size:10px"></font>
                                             </td>
                                             <td class="text-center" style="white-space:nowrap">
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
