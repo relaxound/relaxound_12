@@ -185,7 +185,7 @@
                     <br/>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed" style=" table-layout: fixed; width: 90%; border: none; margin: 0 auto; margin-top:10px" id="items">
+                            <table class="table table-condensed" style=" table-layout: fixed; width: 90%; border: none; margin: 0 auto; margin-top:10px; margin-left:40px" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -195,7 +195,7 @@
                                     }
                                 </style>
                                 <thead>
-                                    <tr style="border-bottom: 1px solid black, padding-left:40px">
+                                    <tr style="border-bottom: 1px solid black;">
                                         <th class="text-center" style="width: 25%">Article</th>
                                         <th class="text-center" style="width: 12%">Colour</th>
                                         <th class="text-center" style="width: 12%">Quantity</th>
