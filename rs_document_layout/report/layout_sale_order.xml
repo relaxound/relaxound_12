@@ -472,7 +472,7 @@
 
             </xpath>
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
-                <div class="text-right" t-if="doc.payment_method_id" style="margin-left:85px; margin-right:94px;font-size: 12px">
+                <div class="text-right" t-if="doc.payment_method_id" style="font-size: 12px">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
                             Payment term:
