@@ -185,8 +185,8 @@
                 <div>
                     <t>
                         <t t-if="doc.partner_id.is_retailer">
-                            <table class="table table-condensed"  style="margin-left:10px;" id="items">
-                                <style>
+                            <table class="table table-condensed"  style="table-layout:fixed;width:100%;" id="items">
+                                <style>s
                                     #items td{
                                     border:0
                                     }
