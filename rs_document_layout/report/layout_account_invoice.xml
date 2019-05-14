@@ -290,27 +290,26 @@
                                 }
                             </style>
                             <thead>
-                                <tr style="border-bottom: 1px solid black;line-height:0.7;">
+                                <tr style="border-bottom: 1px solid black;line-height:0.9">
                                     <th class="text-center" style="width:11%">Position</th>
-                                    <th class="text-center" style="width:20%">Article</th>
-                                    <th class="text-center" style="width:11%">Colour</th>
+                                    <th class="text-center" style="width:27%">Article</th>
+                                    <th class="text-center" style="width:10%">Colour</th>
                                     <th class="text-center" style="width:12%">Quantity</th>
-                                    <th class="text-center" style="width:11%">Single Unit</th>
-                                    <th class="text-right" style="width:14%">Unit Price</th>
-                                    <th class="text-right" style="width:14%">Total</th>
+                                    <th class="text-center" style="width:10%">Single Unit</th>
+                                    <th class="text-right" style="width:12%">Unit Price</th>
+                                    <th class="text-right" style="width:11%">Total</th>
 
                                 </tr>
                             </thead>
                             <t t-set="single_total" t-value="0"/>
                             <tbody class="invoice_tbody" style="line-height:0">
-                                <tr t-foreach="o.invoice_line_ids" style="line-height:0;" t-as="l">
+                                <tr t-foreach="o.invoice_line_ids" t-as="l">
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
                                             <span t-esc="i"/>
                                         </td>
                                         <td class="text-left">
                                             <span t-field="l.product_id.name"/>
-                                            <br/>
                                             <font style="font-size:10px"></font>
                                         </td>
                                         <td class="text-center" style="white-space:nowrap">
