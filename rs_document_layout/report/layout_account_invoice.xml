@@ -286,7 +286,7 @@
                                 border:0
                                 }
                                 #items th {
-                                <!-- border-top:0 -->
+                                border-top:0
                                 }
                             </style>
                             <thead>
@@ -373,7 +373,7 @@
                                     border:0
                                     }
                                     #items th {
-                                    <!-- border-top:0 -->
+                                    border-top:0
                                     }
                                 </style>
                                 <thead style="line-height:0.9">
