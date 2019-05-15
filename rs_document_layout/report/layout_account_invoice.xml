@@ -254,7 +254,6 @@
                         <!--                        ZWITSCHERBOX-->
 
                         <!--</div>-->
-                        <br/><br/>
                         <div class="col-xs-6">
                             <div style="font-size:30px">
                                 <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
