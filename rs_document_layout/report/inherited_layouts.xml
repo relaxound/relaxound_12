@@ -6,7 +6,7 @@
         <template id="external_layout_header" inherit_id="web.external_layout_standard">
 
             <xpath expr="//div[hasclass('header')]" position="replace">
-                <div class="header" style="margin-left: 2.5cm; margin-right: 2.5cm;">
+                <div class="header">
                         <div class="row" >
                             <div class="col-xs-12 col-md-12" align="center" style="margin-top:10px;"  >
                             <img src="/rs_document_layout/static/src/img/relaxound_header.png" class="center-block"
@@ -46,22 +46,22 @@
                         <div class="col-xs-6" style="margin-bottom:10px;" >
                             <table style="width:100%">
 
-                                <tr style="padding-left:20px;">
+                                <tr >
                                     <td>
-                                        <span style="padding-left:20px;" t-field="company.name"/>
+                                        <span t-field="company.name"/>
                                     </td>
-                                    <td style="padding-left:20px;">HypoVereinsbank</td>
-                                    <td style="padding-left:20px;">Geschäftsführer:</td>
+                                    <td>HypoVereinsbank</td>
+                                    <td >Geschäftsführer:</td>
                                 </tr>
-                                <tr style="padding-left:20px;">
-                                    <td style="padding-left:20px;">
+                                <tr>
+                                    <td>
                                         <span t-field="company.street"/>
                                     </td>
-                                    <td style="padding-left:20px;">IBAN DE37 1002 0890 0026 6861 30</td>
-                                    <td style="padding-left:20px;">Dennis N. Clasen, Philipp Störring</td>
+                                    <td>IBAN DE37 1002 0890 0026 6861 30</td>
+                                    <td >Dennis N. Clasen, Philipp Störring</td>
                                 </tr>
-                                <tr style="padding-left:20px;">
-                                    <td style="padding-left:20px;">
+                                <tr>
+                                    <td>
                                         <t t-if="company.country_id.code=='DE'">
                                             <span>D</span>
                                         </t>
@@ -73,25 +73,25 @@
                                         <span>&#32;</span>
                                         <span t-field="company.city"/>
                                     </td>
-                                    <td style="padding-left:20px;">BIC HYVEDEMM488</td>
-                                    <td style="padding-left:20px;">Amtsgericht Charlottenburg</td>
+                                    <td>BIC HYVEDEMM488</td>
+                                    <td >Amtsgericht Charlottenburg</td>
                                 </tr>
-                                <tr style="padding-left:20px;">
-                                    <td style="padding-left:20px;">Tel.&#32;
+                                <tr>
+                                    <td >Tel.&#32;
                                         <span t-field="company.phone"/>
                                     </td>
-                                    <td style="padding-left:20px;">Steuernummer: 29/490/30659</td>
-                                    <td style="padding-left:20px;">Handelsregisternummer:</td>
+                                    <td >Steuernummer: 29/490/30659</td>
+                                    <td>Handelsregisternummer:</td>
                                 </tr>
-                                <tr style="padding-left:20px;">
-                                    <td style="padding-left:20px;">
+                                <tr>
+                                    <td>
                                         <span t-field="company.email"/>
                                     </td>
-                                    <td style="padding-left:20px;">USt-IdNr.: <span t-field="company.vat"/></td>
-                                    <td style="padding-left:20px;">HRB 181702 B</td>
+                                    <td >USt-IdNr.: <span t-field="company.vat"/></td>
+                                    <td >HRB 181702 B</td>
                                 </tr>
-                                <tr style="padding-left:20px;">
-                                    <td colspan="3" style="padding-left:20px;">www.zwitscherbox.com</td>
+                                <tr>
+                                    <td colspan="3">www.zwitscherbox.com</td>
                                 </tr>
                             </table>
                         </div>
