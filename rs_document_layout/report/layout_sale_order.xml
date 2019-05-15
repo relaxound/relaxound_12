@@ -191,9 +191,9 @@
                 <t t-if="doc.partner_id.is_retailer">
                     <table class="table table-condensed" style="table-layout:fixed;width:100%;border-collapse: collapse;" id="items">
                         <style>
-                                    #item tbody{ border-top:1px solid black;
+                                    
                                     #items td{
-                                     border-top:1px solid black;padding-top: .5em;
+                                     padding-top: .5em;
     padding-bottom: .5em;
                                     }
                                     #items th {
@@ -285,7 +285,7 @@
                                     }
                                 </style>
                         <thead>
-                            <tr style="border-bottom: 1px solid black;">
+                            <tr>
                                 <th class="text-center" style="border-bottom: 2px solid black;">Article</th>
                                 <th class="text-center" style="border-bottom: 2px solid black;">Colour</th>
                                 <th class="text-center" style="border-bottom: 2px solid black;">Quantity</th>
@@ -483,7 +483,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="font-size: 12px;">
+        <div class="row" style="font-size: 13px;">
             <br/>
             <div class="col-xs-12">
                 <span t-field="doc.note"/>
