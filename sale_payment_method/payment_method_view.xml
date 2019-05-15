@@ -52,7 +52,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem action="act_payment_method_form" id="menu_action_paymetn_method_form" parent="sales_team.sales_team_config_action" sequence="20"/>
+        <menuitem action="act_payment_method_form" id="menu_action_paymetn_method_form" parent="sale.menu_sale_config" sequence="20"/>
 
     </data>
 </odoo>
