@@ -9,9 +9,10 @@
     'license': 'AGPL-3',
     'author': "Techspawn",
     'website': 'http://www.Techspawn.com/',
-    'depends': ['contacts'],
+    'depends': ['contacts', 'account', 'mail'],
 
-    'data': [             
+    'data': [
+        'views/invoice_mail_template.xml',             
              ],
     'installable': True,
     'application': True,
