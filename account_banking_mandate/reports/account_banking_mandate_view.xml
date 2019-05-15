@@ -233,9 +233,9 @@
                     </div>
                 </xpath> -->
 
-                </div>
-            </t>   
-        </template>    
+                <!-- </div> -->
+            </t>  
+    </template>    
     <template id="account_banking_mandate">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
