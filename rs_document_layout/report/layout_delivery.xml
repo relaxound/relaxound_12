@@ -65,10 +65,10 @@
 							<tr>
 							<t t-if="o.origin">
 
-                                    <td>Order-No.</td>
+                                 <td>Order-No.</td>
                                     <td>
                                         <span t-field="o.origin"/>
-                                    </td>
+                                 	</td>
                             </t>
 							</tr>
                         </table>
