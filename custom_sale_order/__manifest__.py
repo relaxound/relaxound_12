@@ -3,16 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Custom Language',
+    'name': 'Custom Order',
     'version': '12.0',
     'category': 'Tools',
     'license': 'AGPL-3',
     'author': "Techspawn",
     'website': 'http://www.Techspawn.com/',
-    'depends': ['contacts', 'account', 'mail'],
+    'depends': ['base', 'account', 'sale'],
 
-    'data': [
-        'views/invoice_mail_template.xml',             
+    'data': [ 
+                   
              ],
     'installable': True,
     'application': True,

@@ -10,14 +10,7 @@ class InvoiceJournal(models.Model):
 
     order_by = fields.Many2one('res.partner', string="Order By")
     order_date = fields.Date(string='Order Date')
-
-    @api.multi
-    def _prepare_invoice(self):
-        res=super(InvoiceJournal,self)._prepare_invoice()
-        res.update({'order_date':self.order_date,
-            'order_by':self.order_by.id
-            })
-        return res
+    
 
 
 

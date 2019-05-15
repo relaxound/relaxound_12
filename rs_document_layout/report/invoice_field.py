@@ -6,3 +6,4 @@ class InvoiceJournal(models.Model):
 
     order_by = fields.Many2one('res.partner', string="Order By")
     order_date = fields.Date(string='Order Date')
+    

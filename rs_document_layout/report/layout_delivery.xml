@@ -5,10 +5,12 @@
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
 			<xpath expr="//t[@t-set='address']" position="replace">
 			</xpath>
+			<xpath expr="//t[@t-set='address']" position="replace">
+			</xpath>
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
 				<br/>
-				<div class="row" style="padding-left:30px;">
+				<div class="row" style="margin-left:94px; margin-right:94px;">
 					 <div class="col-xs-6">
 						<t t-if="o.partner_id.parent_id">
 						    <span t-field="o.partner_id.parent_id.name"/>
@@ -47,15 +49,15 @@
 		            </div>
 	            </div>
                 <br/>
-                <h2 style="padding-left:30px;" >ZWITSCHERBOX</h2>
-				<div class="row" style="padding-left:30px;">
+                <h2 style="margin-left:94px; margin-right:94px;" >ZWITSCHERBOX</h2>
+				<div class="row">
                     <div class="table table-sm">
                         <style>
                             #delivery_data td{
                             padding:3px 10px 3px 0px
                             }
                         </style>
-                        <table id="delivery_data">
+                        <table id="delivery_data" style="margin-top:10px;margin-left:90px;">
 							<tr>
 							<t t-if="o.origin">
 
@@ -70,7 +72,7 @@
                 </div>
 			<xpath expr="//table[@t-if='o.product_ids']" position="replace">
 				<t t-set="count" t-value="0"/>
-				<table class="table table-condensed " style="margin-top:20px; padding-left:30px;" t-if="o.product_id" id="items">
+				<table class="table table-condensed " style="margin-top:20px; margin-top:10px; max-width:800px; margin-left:90px;" id="items">
 					<style>
                         #items td{
                         border:0
@@ -104,19 +106,23 @@
 			</xpath>
 				<xpath expr="//table[@t-if='o.move_line_ids']" position="after">
 				<t t-if="o._get_invoicing_address()">
-					<tr>
-					<br/>
+					<table  style="margin-left:94px; margin-right:94px;">
+						<tr>
 						<br/>
-						<td style="padding-left:30px;">We will send the invoice via Email to : </td>
-						<td>
-							<span t-esc="o._get_invoicing_address()"/>
-						</td>
-					</tr>
+							<br/>
+							<td style="padding-left:30px;">We will send the invoice via Email to : </td>
+							<td>
+								<span t-esc="o._get_invoicing_address()"/>
+							</td>
+						</tr>
+					</table>
 				</t>
 				<t t-if="o.sale_description">
-					<tr>
-						<span style="padding-left:30px;" t-field="o.sale_description"/>
-					</tr>
+					<table  style="margin-left:94px; margin-right:94px;">
+						<tr>
+							<span style="padding-left:30px;" t-field="o.sale_description"/>
+						</tr>
+					</table>
 				</t>
 				</xpath>
 			</xpath>
