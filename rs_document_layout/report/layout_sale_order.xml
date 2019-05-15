@@ -3,7 +3,7 @@
     <data>
         <!-- Angebot/Bestellung anpassen -->
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
-           <xpath expr="//t[2][@t-set='address']" position="replace">
+        <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
         <div class="col-xs-6" style="margin-left:2.2cm; margin-right:94px;font-size: 13px">
             <t t-if="doc.partner_id.parent_id">
@@ -193,8 +193,8 @@
                         <style>
                                     
                                     #items td{
-                                     padding-top: .5em;
-    padding-bottom: .5em;
+                                    border:0; padding-top: .5em;
+                                    padding-bottom: .5em;
                                     }
                                     #items th {
                                     border-top:0
@@ -278,7 +278,7 @@
                         <style>
                                     #items td{
                                     border:0;padding-top: .5em;
-    padding-bottom: .5em;
+                                    padding-bottom: .5em;
                                     }
                                     #items th {
                                     border-top:0
