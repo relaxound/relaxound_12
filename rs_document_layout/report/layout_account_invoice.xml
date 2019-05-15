@@ -458,6 +458,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
+                <br/><br/><br/>
                 <div class="row" style="margin-right:94px; margin-left:85px; font-size: 13px; font-family:Arial;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
@@ -483,8 +484,6 @@
                     -->
                     <t t-if="o.payment_method_id.name!='payment_term'">
                         <div class="col-xs-12" style="line-height:1">
-                            <br/>
-                            <br/>
     
                             <span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.
                             </span>

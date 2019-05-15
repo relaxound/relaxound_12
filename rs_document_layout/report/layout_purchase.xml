@@ -1,48 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <odoo>
-    <data>
-        <!-- Purchase Order -->
-        <template id="report_purchase_document" inherit_id="purchase.report_purchaseorder_document">
-             <xpath expr="//t[@t-set='address']" position="replace">
-                <br/>
-                <br/>
-                <div class="row" style="margin-left:100px; margin-right:94px; font-size: 12px;">
-                    <div style="width:100%;">
-                        <div style="width:50%; float: left;">
-                            <strong>Shipping address:</strong><br/>
-                            <t t-if="o.partner_id.child_ids.street">
-                                <span t-field="o.partner_id.child_ids.street"/>
-                            </t>
+    <data inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//t[@t-set='address']" position="replace">
+            <br/>
+            <br/>
+            <div class="row" style="margin-left:100px; margin-right:94px; font-size: 12px;">
+                <div style="width:100%;">
+                    <div style="width:50%; float: left;">
+                        <strong>Shipping address:</strong><br/>
+                        <t t-if="o.partner_id.child_ids.street">
+                            <span t-field="o.partner_id.child_ids.street"/>
+                        </t>
 
-                            <t t-if="o.partner_id.child_ids.street2">
-                                <br/>
-                                <span t-field="o.partner_id.child_ids.street2"/>
-                            </t>
+                        <t t-if="o.partner_id.child_ids.street2">
+                            <br/>
+                            <span t-field="o.partner_id.child_ids.street2"/>
+                        </t>
 
-                            <t t-if="o.partner_id.child_ids.zip or o.partner_id.child_ids.city">
-                                <br/>
-                                <span t-field="o.partner_id.child_ids.zip"/>  
-                                <span t-field="o.partner_id.child_ids.city"/>
-                            </t>
-                            <t t-if="o.partner_id.child_ids.country_id">
-                                <br/>
-                                <span t-field="o.partner_id.child_ids.country_id.name"/>
-                            </t>
-                        </div>
-                        <div style="width:50%; float: right; text-align: right;">
-
-                               <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
-                                <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
-                        </div>
-
+                        <t t-if="o.partner_id.child_ids.zip or o.partner_id.child_ids.city">
+                            <br/>
+                            <span t-field="o.partner_id.child_ids.zip"/>  
+                            <span t-field="o.partner_id.child_ids.city"/>
+                        </t>
+                        <t t-if="o.partner_id.child_ids.country_id">
+                            <br/>
+                            <span t-field="o.partner_id.child_ids.country_id.name"/>
+                        </t>
                     </div>
+                    <div style="width:50%; float: right; text-align: right;">
+
+                           <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                            <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
+                    </div>
+
                 </div>
-            </xpath>
+            </div>
+        </xpath>
+        
+        <xpath expr="//div[@class='page']" position="attributes">
+             <attribute name="style">margin-right:2.5cm; margin-left:2.5cm;font-size:12px;</attribute>
+        </xpath>
+
             
-            <xpath expr="//div[@class='page']" position="attributes">
-                 <attribute name="style">margin-right:2.5cm; margin-left:2.5cm;font-size:12px;</attribute>
-            </xpath>
-            
-        </template>
     </data>
 </odoo>
