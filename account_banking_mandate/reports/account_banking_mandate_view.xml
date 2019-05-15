@@ -86,23 +86,17 @@
                             I authorize Relaxound GmbH to collect payments from my above account by direct debit. At the same time wise I call my bank to redeem the direct debits drawn by Relaxound GmbH on my account.
                         </div>
                     </div>
-                    <br/><br/><br/>
-
-                    <div class="row mt16">
-                        <div class="col-xs-12">
-                        
-                            Date and Location: _______________________, Signature and Company Stamp _______________________
-                        </div>
-                    </div> 
-                <!-- </div> -->
-                    <br/>
                     <br/><br/>
-                <!-- <div class="page"> -->
-                    <div class="row mt32">
-                        <div class="col-xs-12">
-                            Note: I can refund the amount debited within eight weeks, starting with the debit date desire. Applicable in this regard by the contract with my bank conditions.
+                    <div class="row mt8">
+                        <div class="col-xs-12 mb32">
+                            <span class="mt0">
+                                  Date and Location: _______________________, Signature and Company Stamp _______________________
+                            </span>
+                            <br/><br/><br/><br/>
+                            <span class="mt0">
+                                Note: I can refund the amount debited within eight weeks, starting with the debit date desire. Applicable in this regard by the contract with my bank conditions.
+                            </span>
                         </div>
-
                     </div>
                 </div>
 
