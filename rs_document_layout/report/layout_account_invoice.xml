@@ -290,7 +290,7 @@
                                 }
                             </style>
                             <thead>
-                                <tr style="border-bottom: 2px solid black;line-height:0.9">
+                                <tr style="border-bottom: 2px solid black !important;line-height:0.9">
                                     <th class="text-center" style="width:11%">Position</th>
                                     <th class="text-center" style="width:27%">Article</th>
                                     <th class="text-center" style="width:10%">Colour</th>
@@ -376,7 +376,7 @@
                                     }
                                 </style>
                                 <thead style="line-height:0.9">
-                                    <tr style="border-bottom: 2px solid black">
+                                    <tr style="border-bottom: 2px solid black !important">
                                         <th class="text-center" style="width:12%">Position</th>
                                         <th class="text-center" style="width:33%">Article</th>
                                         <th class="text-center" style="width:10%">Colour</th>

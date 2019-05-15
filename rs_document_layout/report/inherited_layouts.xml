@@ -46,19 +46,19 @@
                         <div class="col-xs-6" style="margin-bottom:10px;" >
                             <table style="width:100%">
 
-                                <tr >
+                                <tr>
                                     <td>
                                         <span t-field="company.name"/>
                                     </td>
-                                    <td>HypoVereinsbank</td>
-                                    <td >Geschäftsführer:</td>
+                                    <td style="padding-left:20px;">HypoVereinsbank</td>
+                                    <td style="padding-left:20px;">Geschäftsführer:</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <span t-field="company.street"/>
                                     </td>
-                                    <td>IBAN DE37 1002 0890 0026 6861 30</td>
-                                    <td >Dennis N. Clasen, Philipp Störring</td>
+                                    <td style="padding-left:20px;">IBAN DE37 1002 0890 0026 6861 30</td>
+                                    <td style="padding-left:20px;">Dennis N. Clasen, Philipp Störring</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -73,31 +73,31 @@
                                         <span>&#32;</span>
                                         <span t-field="company.city"/>
                                     </td>
-                                    <td>BIC HYVEDEMM488</td>
-                                    <td >Amtsgericht Charlottenburg</td>
+                                    <td style="padding-left:20px;">BIC HYVEDEMM488</td>
+                                    <td style="padding-left:20px;">Amtsgericht Charlottenburg</td>
                                 </tr>
                                 <tr>
                                     <td >Tel.&#32;
                                         <span t-field="company.phone"/>
                                     </td>
-                                    <td >Steuernummer: 29/490/30659</td>
-                                    <td>Handelsregisternummer:</td>
+                                    <td style="padding-left:20px;">Steuernummer: 29/490/30659</td>
+                                    <td style="padding-left:20px;">Handelsregisternummer:</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <span t-field="company.email"/>
                                     </td>
-                                    <td >USt-IdNr.: <span t-field="company.vat"/></td>
-                                    <td >HRB 181702 B</td>
+                                    <td style="padding-left:20px;">USt-IdNr.: <span t-field="company.vat"/></td>
+                                    <td style="padding-left:20px;">HRB 181702 B</td>
                                 </tr>
-                                <tr>
+                                <tr >
                                     <td colspan="3">www.zwitscherbox.com</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-xs-2" style="margin-bottom:10px;" >
                         </div>
-                        <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px; margin-left:25px;">
+                        <div class="col-xs-4" align="pull-right"  style="margin-bottom:10px; margin-left:200px;">
                             <img src="/rs_document_layout/static/src/img/wavemedic.png" class="pull-right"
                                  style="max-height:70px;margin-left:20px"/>
                             <img src="/rs_document_layout/static/src/img/hypnosound.png" class="pull-right"

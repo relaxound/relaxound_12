@@ -45,7 +45,7 @@
             <xpath expr="//div/div[@id='total']" position="replace">
                 <div class="row">
                     <div class="col-6">
-                            <table>
+                            <!-- <table> -->
                                     <!--<tr t-if="doc.carrier_id">-->
                                     <!--    <td class="text-left" style="font-size:15px">-->
                                     <!--        Shipping method:-->
@@ -54,14 +54,14 @@
                                     <!--        <span t-field="o.carrier_id"/>-->
                                     <!--    </td>-->
                                     <!--</tr>-->
-                                    <tr>
+                                    <!-- <tr>
                                         <td class="text-left" style="font-size:12px">
                                             Payment term:
                                         </td>
                                         <td class="text-left">
                                             <span t-field="o.payment_term_id.name"/>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     <!-- <tr t-if="doc.payment_term_id">
                                         <td class="text-left" style="font-size:15px">
                                             Payment term:
@@ -70,7 +70,7 @@
                                             <span t-field="doc.payment_term_id"/>
                                         </td>
                                     </tr> -->
-                                    <tr>
+                                    <!-- <tr>
                                         <td class="text-left" style="font-size:12px">
                                             Shipping address:
                                         </td>
@@ -94,8 +94,8 @@
                                                 <span t-field="o.partner_id.child_ids.country_id.name"/>
                                             </t>
                                         </td>
-                                    </tr>
-                            </table>
+                                    </tr> -->
+                            <!-- </table> -->
                     </div>
                     <div class="col-6">
                         <table class="table table-sm">
