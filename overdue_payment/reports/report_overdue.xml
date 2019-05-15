@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="overdue_payment.report_customer_overdue_document">
-    <t t-call="web.external_layout">
-        <div class="page" style="margin-right:2.5cm; margin-left:2.5cm; font-size: 13px;">
-                <div style="width:100%; float: right; text-align: right;" >
+     <t t-call="web.external_layout">
+        <div class="page" style="margin-right:3cm; margin-left:2cm;font-size: 13px;">
+                <div style="width:100%; float: right; text-align: right;">
                     <div class="col-xs-5 col-xs-offset-7">
 
                         <t t-if="o.name">
@@ -30,7 +30,7 @@
                             <span t-field="o.country_id.name"/>
                         </t>
                     </div>
-            </div>
+                </div>
                 <div>
                 <p>
                     Document: Customer account statement<br/>
@@ -42,41 +42,72 @@
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
                     <table class="table table-condensed">
-                        <thead>
+                        <thead style="border-bottom: 2px solid black;">
                             <tr>
                                 <th>Reference number</th>
                                 <th class="text-center">Date</th>
                                 <th class="text-center">Due Date</th>
-                                <th class="text-right">Total</th>
+                                <th >Communication</th>
                                 <th class="text-right">Due</th>
+                                <th class="text-right">Paid</th>
+                                <th class="text-center">Open</th>
                             </tr>
                         </thead>
-                        <tr t-foreach="o.customer_invoices" t-as="invoice">
+                        <tr t-foreach="o.customer_moves" t-as="invoice">
                             <td>
-                                <span t-esc="invoice.number"/>
+                                <span t-esc="invoice.move_id.name"/>
                             </td>
                             <td>
-                                <span t-esc="invoice.date_invoice"/>
+                                <span t-esc="invoice.date"/>
                             </td>
                             <td>
-                                <span t-esc="invoice.date_due"/>
+                                <span t-esc="invoice.date_maturity"/>
+                            </td>
+                            <td>
+                                <t t-if="invoice.name != '/'">
+                                    <span t-esc="invoice.name"/></t>
+                        
+                            </td>
+                             <td class="text-right">
+                                <span t-esc="invoice.debit"/>
                             </td>
                             <td class="text-right">
-                                <span t-esc="invoice.amount_total_signed"/>
+                                <span t-esc="invoice.credit"/>
                             </td>
                             <td class="text-right">
-                                <span t-esc="invoice.residual_signed"/>
+                                <span t-if="invoice['blocked']">x</span>                            
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td><strong>Sub-Total :</strong></td>
+                            <td><t t-esc="float(float(sum(line.debit for line in o.customer_moves)))">
+                                </t>
+                            </td>
+                            <td><t t-esc="float(float(sum(line.credit for line in o.customer_moves)))"/></td>
+
+                            <td>
+                                <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"> </td>
+                            <td><strong>Balance :</strong>
+                            <td>
+                            <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
+                            </td>
+                           </td>
                         </tr>
                     </table>
                 </t>
                 </div>
-            <div>
+                <div>
                 <p t-if="not o.customer_invoices">
-                    <strong>There is nothing due with this customer.</strong>
+                    <strong>There are no due invoices for the customer.</strong>
                 </p>
+                </div>
             </div>
-        </div>
    </t>
 </template>
 
