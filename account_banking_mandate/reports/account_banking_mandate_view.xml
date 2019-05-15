@@ -100,7 +100,8 @@
                     </div>
                     <div class="row mt16">
                         <div class="col-xs-12">
-                        Location and sign: _______________________, at ______ from ____________ from <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>
+                        
+                            Date and Location: _______________________, Signature and Company Stamp _______________________
                         </div>
                     </div> 
                 <!-- </div> -->
