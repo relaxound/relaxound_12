@@ -10,58 +10,55 @@
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
 				<br/>
-				<div class="row" style="margin-left:94px; margin-right:94px;">
-					<div class=" col-md-12">
-						<div class="col-md-6 ">
+				<div class="row col-xs-12" style="margin-right:2.5cm; margin-left:2.5cm;" >
+					<div class="col-xs-6">
+						<t t-if="o.partner_id.parent_id">
+						    <span t-field="o.partner_id.parent_id.name"/>
+						</t>
+						
+						<t t-if="o.partner_id.name">
+						    <br/>
+						    <span t-field="o.partner_id.name"/>
+						</t>
+						
+						<t t-if="o.partner_id.street">
+						    <br/>
+						    <span t-field="o.partner_id.street"/>
+						</t>
+						<t t-if="o.partner_id.street2">
+						    <br/>
+						    <span t-field="o.partner_id.street2"/>
+						</t>
+						
+						<t t-if="o.partner_id.zip or o.partner_id.city">
+						    <br/>
+						    <span t-field="o.partner_id.zip"/>&#32;&#32;
+						    <span t-field="o.partner_id.city"/>
+						</t>
+						<t t-if="o.partner_id.country_id">
+						    <br/>
+						    <span t-field="o.partner_id.country_id.name"/>
+						</t>
+					</div>		
+					<div class="col-xs-6" align="center">
 		                <div style="font-size:20px">
 		        			<span>Packing List</span>
 		                </div>
 		                <div t-if="o.partner_id.ref">CNr.<span t-field="o.partner_id.ref"/>
 		                </div>
-		            	</div>
-
-						<div class="col-md-6">
-							<t t-if="o.partner_id.parent_id">
-							    <span t-field="o.partner_id.parent_id.name"/>
-							</t>
-
-							<t t-if="o.partner_id.name">
-							    <br/>
-							    <span t-field="o.partner_id.name"/>
-							</t>
-
-							<t t-if="o.partner_id.street">
-							    <br/>
-							    <span t-field="o.partner_id.street"/>
-							</t>
-							<t t-if="o.partner_id.street2">
-							    <br/>
-							    <span t-field="o.partner_id.street2"/>
-							</t>
-
-							<t t-if="o.partner_id.zip or o.partner_id.city">
-							    <br/>
-							    <span t-field="o.partner_id.zip"/>&#32;&#32;
-							    <span t-field="o.partner_id.city"/>
-							</t>
-							<t t-if="o.partner_id.country_id">
-							    <br/>
-							    <span t-field="o.partner_id.country_id.name"/>
-							</t>
-						</div>
-					
-		        </div>
+		            </div>
 	            </div>
+				
                 <br/>
-                <h2 style="margin-left:94px; margin-right:94px;" >ZWITSCHERBOX</h2>
-				<div class="row">
+                <h2 style="margin-right:2.5cm; margin-left:2.5cm">ZWITSCHERBOX</h2>
+				<div class="row" style="margin-right:2.5cm; margin-left:2.5cm">
                     <div class="table table-sm">
                         <style>
                             #delivery_data td{
                             padding:3px 10px 3px 0px
                             }
                         </style>
-                        <table id="delivery_data" style="margin-top:10px;margin-left:90px;">
+                        <table id="delivery_data">
 							<tr>
 							<t t-if="o.origin">
 
@@ -76,7 +73,7 @@
                 </div>
 			<xpath expr="//table[@t-if='o.product_ids']" position="replace">
 				<t t-set="count" t-value="0"/>
-				<table class="table table-condensed " style="margin-top:20px; margin-top:10px; max-width:800px; margin-left:90px;" id="items">
+				<table class="table table-condensed" style="margin-left:2.5cm;margin-right:2.5cm; table-layout:fixed; width:80%;" id="items">
 					<style>
                         #items td{
                         border:0
@@ -87,21 +84,20 @@
                     </style>
                     <thead>
                         <tr style="border-bottom: 1px solid black">
-                            <th class="text-left" align="left" valign="left" >Article</th>
-                            <th class="text-center" align="center" valign="center">Colour</th>
-                            <th class="text-right" align="right" valign="right">Quantity</th>
+                            <th class="text-left">Article</th>
+                            <th class="text-center">Colour</th>
+                            <th class="text-center" >Quantity</th>
                         </tr>
                     </thead>
 					<tbody>
 							<tr t-foreach="o.move_line_ids" t-as="move_line">
-								<td class="text-left " align="left" width="35%">
+								<td class="text-left " align="left">
 									<span t-field="move_line.product_id"/>
                                 </td>
-                                <td class="text-center" align="center" width="30%">
-									<span t-if="move_line.product_id.product_tmpl_id.color_id"
-                                          t-field="move_line.product_id.product_tmpl_id.color_id.name"/>
+                                <td class="text-center" align="center">
+									<span t-if="move_line.product_id.product_tmpl_id.color_id" t-field="move_line.product_id.product_tmpl_id.color_id.name"/>
                                 </td>
-                                <td  class="text-right" align="right" width="30%">
+                                <td class="text-center" align="center">
                                     <span t-field="move_line.qty_done"/>
                                 </td>
                             </tr>
@@ -110,7 +106,7 @@
 			</xpath>
 				<xpath expr="//table[@t-if='o.move_line_ids']" position="after">
 				<t t-if="o._get_invoicing_address()">
-					<table  style="margin-left:94px; margin-right:94px;">
+					<table style="margin-left:94px; margin-right:94px;">
 						<tr>
 						<br/>
 							<br/>
@@ -122,7 +118,7 @@
 					</table>
 				</t>
 				<t t-if="o.sale_description">
-					<table  style="margin-left:94px; margin-right:94px;">
+					<table style="margin-left:94px; margin-right:94px;">
 						<tr>
 							<span style="padding-left:30px;" t-field="o.sale_description"/>
 						</tr>

@@ -446,7 +446,6 @@
                 <!--</div>-->
                 <!--</div>-->
                 <div class="row">
-                    <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <div class="col-xs-12">
                         <span t-field="o.comment"/>
