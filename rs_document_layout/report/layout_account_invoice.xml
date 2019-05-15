@@ -348,16 +348,16 @@
                                     </t>
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
-                                <tr style="border-bottom: 1px solid black"></tr>
+                                <!-- <tr style="border-bottom: 1px solid black"></tr> -->
                                 <t t-if="o.partner_id.is_retailer">
                                     <tr style="line-height:0;">
-                                        <th class="text-center"></th>
-                                        <th class="text-center"></th>
-                                        <th class="text-center">Total</th>
-                                        <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
-                                        <th class="text-center"><t t-esc="single_total"/></th>
-                                        <th class="text-right"></th>
-                                        <th class="text-right"></th>
+                                        <th class="text-center" style="border-bottom: 1px solid black"></th>
+                                        <th class="text-center" style="border-bottom: 1px solid black"></th>
+                                        <th class="text-center" style="border-bottom: 1px solid black">Total</th>
+                                        <th class="text-center" style="border-bottom: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                        <th class="text-center" style="border-bottom: 1px solid black"><t t-esc="single_total"/></th>
+                                        <th class="text-right" style="border-bottom: 1px solid black"></th>
+                                        <th class="text-right" style="border-bottom: 1px solid black"></th>
 
                                     </tr>
                                 </t>
@@ -426,7 +426,7 @@
                                         </t>
                                         <t t-set="i" t-value="i+1"/>
                                     </tr>
-                                    
+
                                     <tr style="line-height:0;">
                                         <th class="text-center"></th>
                                         <th class="text-center"></th>
