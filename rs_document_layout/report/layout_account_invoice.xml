@@ -154,7 +154,7 @@
                         </table>
                     </div>
                     <div class="col-6" style="line-height:0">
-                        <br/><br/>
+                        <br/><br/><br/>
                         <table class="table table-condensed" id="summary" style="border: none">
                             <style>
                                 table#summary td {
