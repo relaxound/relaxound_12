@@ -3,9 +3,15 @@
 <odoo>
     <data>
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+
+            <xpath expr="//div[@class='page']" position="attributes">
+                <attribute name="style">margin-right:3cm; margin-left:2cm;font-size: 13px;font-family:Arial;</attribute>
+
+            </xpath>
+
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
-                <div class="row" style="margin-left:85px; margin-right:80px; font-size: 13px; font-family:Arial;">
+                <div class="row" style="margin-left:2cm; margin-right:3cm; font-size: 13px; font-family:Arial;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <t t-if="o.partner_id.parent_id">
