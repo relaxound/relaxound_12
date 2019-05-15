@@ -6,7 +6,6 @@
     'summary' : 'Integrate & Manage all your WooCommerce operations from Odoo',
     'description': """
 """,
-
     'depends': ['base','delivery','auto_invoice_workflow_ept'],    
     'data': [
              'security/group.xml',
