@@ -93,7 +93,7 @@
                         </tr>
                     </thead>
 					<tbody>
-							<tr t-foreach="o.move_line_ids" t-as="move_line">
+						<tr t-foreach="o.move_line_ids" t-as="move_line">
 								<td class="text-left " align="left">
 									<span t-field="move_line.product_id"/>
                                 </td>
@@ -103,7 +103,7 @@
                                 <td class="text-center" align="center">
                                     <span t-field="move_line.qty_done"/>
                                 </td>
-                            </tr>
+                        </tr>
 					</tbody>
 				</table>
 			</xpath>
