@@ -6,7 +6,7 @@
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/><br/>
-                <div class="row" style="margin-left:85px; margin-right:80px; font-size: 12px;">
+                <div class="row" style="margin-left:85px; margin-right:80px; font-size: 13px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <t t-if="o.partner_id.parent_id">
@@ -114,7 +114,7 @@
 
 
             <xpath expr="//div[@id='total']" position="replace">
-                <div id="total" class="row" style="margin-left:70px; margin-right:50px; font-size: 12px;">
+                <div id="total" class="row" style="margin-left:70px; margin-right:50px; font-size: 13px;">
                     <div class="col-6" style="line-height:1">
                         <!-- <br/> -->
                         <br/>
@@ -248,7 +248,7 @@
             </xpath>
 
             <xpath expr="//h2" position="replace">
-                <div class="row" style="margin-left:94px; margin-right:94px; font-size: 12px; line-height:1">
+                <div class="row" style="margin-left:94px; margin-right:94px; font-size: 13px; line-height:1">
                     <h2>
                         <!--<div class="col-xs-6">-->
 
@@ -280,7 +280,7 @@
                 <t t-set="i" t-value="1"/>
                 <t>
                     <t t-if="o.partner_id.is_retailer">
-                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto; font-size: 12px; cellspacing:1" id="items">
+                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto; font-size: 13px; cellspacing:1" id="items">
                             <style>
                                 #items td{
                                 border:0
@@ -310,7 +310,7 @@
                                         </td>
                                         <td class="text-left">
                                             <span t-field="l.product_id.name"/>
-                                            <font style="font-size:10px"></font>
+                                            <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
                                         </td>
                                         <td class="text-center" style="white-space:nowrap">
                                             <span t-if="l.product_id.product_tmpl_id.color_id"
@@ -366,7 +366,7 @@
                     </t>
                     <t t-if="not(o.partner_id.is_retailer)">
                         <div style="line-height:0">
-                            <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto; font-size: 12px;" id="items">
+                            <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto; font-size: 13px;" id="items">
                                 <style>
                                     #items td{
                                     border:0
@@ -396,7 +396,7 @@
                                             <td class="text-left">
                                                 <span t-field="l.product_id.name"/>
                                                 <br/>
-                                                <font style="font-size:10px"></font>
+                                                <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
                                             </td>
                                             <td class="text-center" style="white-space:nowrap">
                                                 <span t-if="l.product_id.product_tmpl_id.color_id"
@@ -456,7 +456,7 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
-                <div class="row" style="margin-right:94px; margin-left:85px; font-size: 12px;">
+                <div class="row" style="margin-right:94px; margin-left:85px; font-size: 13px;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <div class="col-xs-12">
