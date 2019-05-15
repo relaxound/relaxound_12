@@ -290,7 +290,7 @@
                                 }
                             </style>
                             <thead>
-                                <tr style="border-bottom: 2px solid black !important;line-height:0.9">
+                                <tr style="line-height:0.9">
                                     <th class="text-center" style="width:11%">Position</th>
                                     <th class="text-center" style="width:27%">Article</th>
                                     <th class="text-center" style="width:10%">Colour</th>
@@ -300,7 +300,9 @@
                                     <th class="text-right" style="width:11%">Total</th>
 
                                 </tr>
+
                             </thead>
+                            <hr>
                             <t t-set="single_total" t-value="0"/>
                             <tbody class="invoice_tbody" style="line-height:0.9">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
@@ -348,7 +350,8 @@
                                     </t>
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
-                                <tr style="border-bottom: 1px solid black"></tr>
+                                <!-- <tr style="border-bottom: 1px solid black"></tr> -->
+                                <hr>
                                 <t t-if="o.partner_id.is_retailer">
                                     <tr style="line-height:0;">
                                         <th class="text-center"></th>
