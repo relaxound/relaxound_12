@@ -54,7 +54,7 @@
                 </div></h2>
             </div>
             <div class="row" >
-                <div class="col-md-11">
+                <div class="col-md-12">
                     <div class="col-md-6" style="width:50%; float: left; font-size: 12px">
                         <style>
                             #order_data td{
@@ -121,8 +121,8 @@
 
                     <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                      <div class="col-md-6" style="width:50%; float: left; text-align: left;font-size: 12px">
-                            <table id="data" style=" float:right">
+                      <div class="col-md-6" style="width:50%; float: left; font-size: 12px">
+                            <table id="data" style=" float:right;text-align:right">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
                                         <td>Your Reference:</td>
@@ -192,7 +192,7 @@
                                 <style>
                                     #items td{
                                     border:0;padding-top: .5em;
-    padding-bottom: .5em;
+                                    padding-bottom: .5em;
                                     }
                                     #items th {
                                     border-top:0
