@@ -350,10 +350,8 @@
                                     </t>
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
-                                <!-- <tr style="border-bottom: 1px solid black"></tr> -->
-                                <hr>
-                                <t t-if="o.partner_id.is_retailer">
-                                    <tr style="line-height:0;">
+                                <tr style="border-bottom: 1.5px solid black;"></tr>
+                                <!-- <hr> -->
                                         <th class="text-center"></th>
                                         <th class="text-center"></th>
                                         <th class="text-center">Total</th>
