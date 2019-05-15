@@ -286,7 +286,7 @@
                                 border:0
                                 }
                                 #items th {
-                                border-top:0
+                                <!-- border-top:0 -->
                                 }
                             </style>
                             <thead>
@@ -348,6 +348,7 @@
                                     </t>
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
+                                <tr style="border-bottom: 1px solid black"></tr>
                                 <t t-if="o.partner_id.is_retailer">
                                     <tr style="line-height:0;">
                                         <th class="text-center"></th>
@@ -425,6 +426,7 @@
                                         </t>
                                         <t t-set="i" t-value="i+1"/>
                                     </tr>
+                                    <tr style="border-bottom: 1px solid black"></tr>
                                     <tr style="line-height:0;">
                                         <th class="text-center"></th>
                                         <th class="text-center"></th>
