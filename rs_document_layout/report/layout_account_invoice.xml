@@ -290,14 +290,14 @@
                                 }
                             </style>
                             <thead>
-                                <tr style="border-bottom: 2px solid black !important;line-height:0.9">
-                                    <th class="text-center" style="width:11%">Position</th>
-                                    <th class="text-center" style="width:27%">Article</th>
-                                    <th class="text-center" style="width:10%">Colour</th>
-                                    <th class="text-center" style="width:12%">Quantity</th>
-                                    <th class="text-center" style="width:10%">Single Unit</th>
-                                    <th class="text-right" style="width:12%">Unit Price</th>
-                                    <th class="text-right" style="width:11%">Total</th>
+                                <tr>
+                                    <th class="text-center" style="width:11%; border-bottom: 1.5px solid black;">Position</th>
+                                    <th class="text-center" style="width:27%; border-bottom: 1.5px solid black;">Article</th>
+                                    <th class="text-center" style="width:10%; border-bottom: 1.5px solid black;">Colour</th>
+                                    <th class="text-center" style="width:12%; border-bottom: 1.5px solid black;">Quantity</th>
+                                    <th class="text-center" style="width:10%; border-bottom: 1.5px solid black;">Single Unit</th>
+                                    <th class="text-right" style="width:12%; border-bottom: 1.5px solid black;">Unit Price</th>
+                                    <th class="text-right" style="width:11%; border-bottom: 1.5px solid black;">Total</th>
 
                                 </tr>
                             </thead>
@@ -378,12 +378,12 @@
                                 </style>
                                 <thead style="line-height:0.9">
                                     <tr style="border-bottom: 2px solid black !important">
-                                        <th class="text-center" style="width:12%">Position</th>
-                                        <th class="text-center" style="width:33%">Article</th>
-                                        <th class="text-center" style="width:10%">Colour</th>
-                                        <th class="text-center" style="width:12%">Quantity</th>
-                                        <th class="text-right" style="width:12%">Unit Price</th>
-                                        <th class="text-right" style="width:11%">Total</th>
+                                        <th class="text-center" style="width:12%; border-bottom: 1.5px solid black;">Position</th>
+                                        <th class="text-center" style="width:33%; border-bottom: 1.5px solid black;">Article</th>
+                                        <th class="text-center" style="width:10%; border-bottom: 1.5px solid black;">Colour</th>
+                                        <th class="text-center" style="width:12%; border-bottom: 1.5px solid black;">Quantity</th>
+                                        <th class="text-right" style="width:12%; border-bottom: 1.5px solid black;">Unit Price</th>
+                                        <th class="text-right" style="width:11%; border-bottom: 1.5px solid black;">Total</th>
 
                                     </tr>
                                 </thead>
@@ -428,12 +428,12 @@
                                     </tr>
 
                                     <tr style="line-height:0;">
-                                        <th class="text-center"></th>
-                                        <th class="text-center"></th>
-                                        <th class="text-center">Total</th>
-                                        <th class="text-center"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
-                                        <th class="text-right"></th>
-                                        <th class="text-right"></th>
+                                        <th class="text-center" style="border-bottom: 1px solid black"></th>
+                                        <th class="text-center" style="border-bottom: 1px solid black"></th>
+                                        <th class="text-center" style="border-bottom: 1px solid black">Total</th>
+                                        <th class="text-center" style="border-bottom: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                        <th class="text-right" style="border-bottom: 1px solid black"></th>
+                                        <th class="text-right" style="border-bottom: 1px solid black"></th>
 
                                     </tr>
 
@@ -483,6 +483,8 @@
                     -->
                     <t t-if="o.payment_method_id.name!='payment_term'">
                         <div class="col-xs-12" style="line-height:1">
+                            <br/>
+                            <br/>
     
                             <span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.
                             </span>
