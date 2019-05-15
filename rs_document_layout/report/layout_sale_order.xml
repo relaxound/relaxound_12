@@ -5,7 +5,7 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
             <xpath expr="//t[2][@t-set='address']" position="replace">
                 <br/> 
-                <div class="col-xs-6" style="margin-left:100px; margin-right:94px;font-size: 12px">
+                <div class="col-xs-6" style="margin-left:100px; margin-right:94px;font-size: 13px">
                     <t t-if="doc.partner_id.parent_id">
                         <span t-field="doc.partner_id.parent_id.name"/>
                     </t>
@@ -55,7 +55,7 @@
             </div>
             <div class="row" >
                 <div class="col-md-12">
-                    <div class="col-md-6" style="width:50%; float: left; font-size: 12px">
+                    <div class="col-md-6" style="width:50%; float: left; font-size: 13px">
                         <style>
                             #order_data td{
                             padding:3px 10px 3px 0px
@@ -121,7 +121,7 @@
 
                     <!-- </xpath> -->
                     <xpath expr="//div/div[@id='informations']" position="replace">
-                      <div class="col-md-6" style="width:50%; float: left; font-size: 12px">
+                      <div class="col-md-6" style="width:50%; float: left; font-size: 13px">
                             <table id="data" style=" float:right;text-align:right">
                                 <t t-if="doc.client_order_ref">
                                     <tr>
@@ -182,7 +182,7 @@
                 <attribute name="style">display:none</attribute>
             </xpath>
             <xpath expr="//div[@class='page']" position="attributes">
-                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; fond-size:12px;line-height:1;</attribute>
+                <attribute name="style">margin-right:2.5cm; margin-left:2.5cm; font-size:13px;line-height:1;</attribute>
             </xpath>
             <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
                 <div>
@@ -198,7 +198,7 @@
                                     border-top:0
                                     }
                                 </style>
-                                <thead style="font-size: 12px;">
+                                <thead style="font-size: 13px;">
                                     <tr style="border-bottom: 1px solid black; line-height:1">
                                         <th class="text-center" style="width:24%">Article</th>
                                         <th class="text-center" style="width:15%">Colour</th>
@@ -209,7 +209,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="font-size: 12px;line-height:1; margin-left:10px;">
+                                <tbody class="invoice_tbody" style="font-size: 13px;line-height:1; margin-left:10px;">
                                     <tr t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
@@ -293,7 +293,7 @@
                                     </tr>
                                 </thead>
                                 <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="font-size: 12px; margin-bottom:0px;">
+                                <tbody class="invoice_tbody" style="font-size: 13px; margin-bottom:0px;">
                                     <tr  t-foreach="doc.order_line" t-as="l">
                                         <t t-if="not l.is_delivery"> 
                                             <!-- <td style="width: 10%">
@@ -346,14 +346,14 @@
                 </div>
             </xpath>
             <xpath expr="//div/div[@id='total']" position="replace">
-                <div id="total" class="row" style="font-size: 12px;">
+                <div id="total" class="row" style="font-size: 13px;">
                 <!-- <div class="row"> -->
                     <div class="col-6">
                         <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
                             <br/>
                             <table style="line-height: 1;">
                                 <tr t-if="doc.carrier_id">
-                                    <td class="text-left" style="font-size:12px">
+                                    <td class="text-left" style="font-size:13px">
                                         Shipping method:
                                     </td>
                                     <td class="text-left">
@@ -361,7 +361,7 @@
                                     </td>
                                 </tr>
                                 <tr t-if="doc.payment_method_id.name">
-                                    <td class="text-left" style="font-size:12px">
+                                    <td class="text-left" style="font-size:13px">
                                         Payment method:
                                     </td>
                                     <td class="text-left">
@@ -377,10 +377,10 @@
                                     </td>
                                 </tr> -->
                                 <tr>
-                                    <td class="text-left" style="font-size:12px">
+                                    <td class="text-left" style="font-size:13px">
                                         Shipping address:
                                     </td>
-                                    <td class="text-left" style="font-size:12px">
+                                    <td class="text-left" style="font-size:13px">
                                         <t t-if="doc.partner_id.street">
                                             <span t-field="doc.partner_id.street"/>
                                         </t>
@@ -477,7 +477,7 @@
 
             </xpath>
             <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
-                <div class="text-right" t-if="doc.payment_method_id" style="font-size: 12px">
+                <div class="text-right" t-if="doc.payment_method_id" style="font-size: 13px">
                     <div class="col-auto mw-100 mb-2 pull-right">
                         <div class="text-right">
                             Payment term:
@@ -489,7 +489,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="font-size: 12px; line-height: 1; ">
+                <div class="row" style="font-size: 13px; line-height: 1; ">
                     <br/>
                   <div class="col-xs-12">
                     <span t-field="doc.note"/>
