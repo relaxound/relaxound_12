@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="overdue_payment.report_customer_overdue_document">
-     <t t-call="web.external_layout">
+    <t t-call="web.external_layout">
         <div class="page" style="margin-right:3cm; margin-left:2cm;font-size: 13px;">
                 <div style="width:100%; float: right; text-align: right;">
                     <div class="col-xs-5 col-xs-offset-7">
@@ -42,15 +42,24 @@
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
                     <table class="table table-condensed">
+                        <style>
+                                    
+                                  #items td{
+                                    border:0;padding-top: .5em;
+                                    padding-bottom: .5em;
+                                    }
+                                    #items th {
+                                    border-top:0
+                        </style>
                         <thead style="border-bottom: 2px solid black;">
                             <tr>
-                                <th>Reference number</th>
-                                <th class="text-center">Date</th>
-                                <th class="text-center">Due Date</th>
-                                <th >Communication</th>
-                                <th class="text-right">Due</th>
-                                <th class="text-right">Paid</th>
-                                <th class="text-center">Open</th>
+                                <th style="width:24%;border-bottom: 2px solid black;">Reference number</th>
+                                <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Date</th>
+                                <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Due Date</th>
+                                <th style="width:24%;border-bottom: 2px solid black;">Communication</th>
+                                <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Due</th>
+                                <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Paid</th>
+                                <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Open</th>
                             </tr>
                         </thead>
                         <tr t-foreach="o.customer_moves" t-as="invoice">
