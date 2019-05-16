@@ -463,22 +463,9 @@
                         <span t-field="o.comment"/>
                         <br/>
                     </div>
-                    <!--
-                    <t t-if="o.payment_method_id.name=='Rechnung'">
-                      <br/>
-                      <div class="col-xs-12">
-                        <span>Please transfer the amount to the following bank account of our
-                          payment service provider Novalnet
-                          <br/>Account Owner: Novalnet AG,
-                          <br/>IBAN: DE49100500000190348771,
-                          <br/>BIC: BELADEBEXXX,
-                          <br/>Bank: Berliner Sparkasse Berlin
-                          <br/>Please use the intended purpose as indicated in the order confirmation email,
-                          since only in this way your money can be allocated. Thank you!!
-                        </span>
-                      </div>
-                    </t>
-                    -->
+
+                </div><br/><br/>
+                <div style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                     <t t-if="o.payment_method_id.name!='payment_term'">
                         <div class="col-xs-12" style="line-height:1">
     
@@ -492,19 +479,7 @@
                             </span>
                         </div>
                     </t>
-                    <!--                    </t>-->
-                    <!--
-                    <t t-if="o.partner_id.company_type=='company'">
-                        <div class="col-xs-12">
-                            <span>Wir weisen darauf hin, dass Sie mit der Zahlung in Verzug geraten, ohne dass es einer
-                                Mahnung bedarf, wenn der Betrag nicht innerhalb von 14 Tagen nach Rechnungserhalt
-                                gezahlt wird<br/>
-                            </span>
-                            <br/>
-                            <span>Bei Zahlung bitte die Rechnung Nr. angeben</span>
-                        </div>
-                    </t>-->
-
+                    
                 </div>
             </xpath>
 
