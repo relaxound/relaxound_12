@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="overdue_payment.report_customer_overdue_document">
+    <t t-call="web.external_layout">
+        <div class="page" style="margin-right:3cm; margin-left:2cm;font-size: 13px;">
+                <div style="width:100%; float: right; text-align: right;">
+                    <div class="col-xs-5 col-xs-offset-7">
+
+                        <t t-if="o.name">
+                            <br/>
+                            <span t-field="o.name"/>
+                        </t>
+
+                        <t t-if="o.street">
+                            <br/>
+                            <span t-field="o.street"/>
+                        </t>
+                        <t t-if="o.street2">
+                            <br/>
+                            <span t-field="o.street2"/>
+                        </t>
+
+                        <t t-if="o.zip or o.city">
+                            <br/>
+                            <span t-field="o.zip"/>
+                            <span t-field="o.city"/>
+                        </t>
+                        <t t-if="o.country_id">
+                            <br/>
+                            <span t-field="o.country_id.name"/>
+                        </t>
+                    </div>
+                </div>
+                <div>
+                <p>
+                    Document: Customer account statement<br/>
+                    Date: <span t-esc="Date"/><br/>
+                    <t t-if="o.ref">Customer ref: <span t-field="o.ref"/></t>
+                </p>
+                </div>
+            <div>
+                <t t-if="o.customer_invoices">
+                    <span t-field="res_company.overdue_msg"/>
+                    <table class="table table-condensed" style=" font-size: 13px; cellspacing:1; margin-left:-0.3cm" id="items">
+                        <style>
+                                
+                                #items td{
+                                border:0
+                                }
+                                #items th {
+                                 border-top:0 
+                                }
+                           
+                        </style>
+                        <thead>
+                            <tr style="line-height:0.9;">
+                                <th style="border-bottom: 2px solid black;">Reference number</th>
+                                <th class="text-center" style="border-bottom: 2px solid black;">Date</th>
+                                <th class="text-center" style="border-bottom: 2px solid black;">Due Date</th>
+                                <th style="border-bottom: 2px solid black;">Communication</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Due</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Paid</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Open</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody" style="line-height:0.9">
+                        <tr t-foreach="o.customer_moves" t-as="invoice">
+                            <td>
+                                <span t-esc="invoice.move_id.name"/>
+                            </td>
+                            <td>
+                                <span t-esc="invoice.date"/>
+                            </td>
+                            <td>
+                                <span t-esc="invoice.date_maturity"/>
+                            </td>
+                            <td>
+                                <t t-if="invoice.name != '/'">
+                                    <span t-esc="invoice.name"/></t>
+                        
+                            </td>
+                             <td class="text-right">
+                                <span t-esc="invoice.debit"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="invoice.credit"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-if="invoice['blocked']">x</span>                            
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td><strong>Sub-Total :</strong></td>
+                            <td  class="text-right"><t t-esc="float(float(sum(line.debit for line in o.customer_moves)))">
+                                </t>
+                            </td>
+                            <td class="text-right" >
+                                <t t-esc="float(float(sum(line.credit for line in o.customer_moves)))"/></td>
+
+                            <td  class="text-right">
+                                <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"> </td>
+                            <td><strong>Balance :</strong>
+                            <td  class="text-right">
+                            <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
+                            </td>
+                           </td>
+                        </tr>
+                    </tbody>    
+                    </table>
+                </t>
+                </div>
+                <div>
+                <p t-if="not o.customer_invoices">
+                    <strong>There are no due invoices for the customer.</strong>
+                </p>
+                </div>
+            </div>
+   </t>
+</template>
+
+<template id="report_customer_overdue">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="overdue_payment.report_customer_overdue_document" t-lang="o.lang"/>
+        </t>
+    </t>
+</template>
+</odoo>
