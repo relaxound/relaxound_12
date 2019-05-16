@@ -41,8 +41,18 @@
             <div>
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
-                    <table class="table table-condensed">
-                        <thead style="border-bottom: 2px solid black;">
+                    <table class="table table-condensed" style="table-layout: fixed; border: none; margin: 0 auto; font-size: 13px; cellspacing:1">
+                        <style>
+                                
+                                #items td{
+                                border:0
+                                }
+                                #items th {
+                                <!-- border-top:0 -->
+                                }
+                           
+                        </style>
+                        <thead>
                             <tr>
                                 <th style="width:24%;border-bottom: 2px solid black;">Reference number</th>
                                 <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Date</th>
@@ -50,9 +60,10 @@
                                 <th style="width:24%;border-bottom: 2px solid black;">Communication</th>
                                 <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Due</th>
                                 <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Paid</th>
-                                <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Open</th>
+                                <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Open</th>
                             </tr>
                         </thead>
+                        <tbody class="invoice_tbody" style="line-height:0.9">
                         <tr t-foreach="o.customer_moves" t-as="invoice">
                             <td>
                                 <span t-esc="invoice.move_id.name"/>
@@ -81,12 +92,13 @@
                         <tr>
                             <td colspan="3"></td>
                             <td><strong>Sub-Total :</strong></td>
-                            <td><t t-esc="float(float(sum(line.debit for line in o.customer_moves)))">
+                            <td  class="text-right"><t t-esc="float(float(sum(line.debit for line in o.customer_moves)))">
                                 </t>
                             </td>
-                            <td><t t-esc="float(float(sum(line.credit for line in o.customer_moves)))"/></td>
+                            <td class="text-right" >
+                                <t t-esc="float(float(sum(line.credit for line in o.customer_moves)))"/></td>
 
-                            <td>
+                            <td  class="text-right">
                                 <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
 
                             </td>
@@ -94,11 +106,12 @@
                         <tr>
                             <td colspan="3"> </td>
                             <td><strong>Balance :</strong>
-                            <td>
+                            <td  class="text-right">
                             <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
                             </td>
                            </td>
                         </tr>
+                    </tbody>    
                     </table>
                 </t>
                 </div>
