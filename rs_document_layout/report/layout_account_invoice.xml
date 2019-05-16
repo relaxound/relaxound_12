@@ -5,7 +5,7 @@
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
-                <div class="row" style="margin-left:85px; margin-right:80px; font-size: 13px; font-family:Arial;">
+                <div class="row" style="margin-left:1.5cm; margin-right:3cm; font-size: 13px; font-family:Arial;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <t t-if="o.partner_id.parent_id">
