@@ -44,14 +44,15 @@
                     <span t-field="res_company.overdue_msg"/>
                     <table class="table table-condensed">
                         <thead>
-                            <tr>
-                                <th>Reference number</th>
-                                <th class="text-center">Date</th>
-                                <th class="text-center">Due Date</th>
-                                <th class="text-right">Total</th>
-                                <th class="text-right">Due</th>
+                            <tr style="line-height:0.9;">
+                                <th style="border-bottom: 2px solid black;">Reference number</th>
+                                <th class="text-center" style="border-bottom: 2px solid black;">Date</th>
+                                <th class="text-center" style="border-bottom: 2px solid black;">Due Date</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Total</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Due</th>
                             </tr>
                         </thead>
+                        <tbody style="line-height:0.9">
                         <tr t-foreach="o.customer_invoices" t-as="invoice">
                             <td>
                                 <span t-esc="invoice.number"/>
@@ -69,6 +70,7 @@
                                 <span t-esc="invoice.residual_signed"/>
                             </td>
                         </tr>
+                    </tbody>
                     </table>
                 </t>
                 </div>

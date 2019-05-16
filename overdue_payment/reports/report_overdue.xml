@@ -41,26 +41,26 @@
             <div>
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
-                    <table class="table table-condensed" style="table-layout: fixed; border: none; margin: 0 auto; font-size: 13px; cellspacing:1">
+                    <table class="table table-condensed" style=" font-size: 13px; cellspacing:1; margin-left:-0.3cm" id="items">
                         <style>
                                 
                                 #items td{
                                 border:0
                                 }
                                 #items th {
-                                <!-- border-top:0 -->
+                                 border-top:0 
                                 }
                            
                         </style>
                         <thead>
-                            <tr>
-                                <th style="width:24%;border-bottom: 2px solid black;">Reference number</th>
-                                <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Date</th>
-                                <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Due Date</th>
-                                <th style="width:24%;border-bottom: 2px solid black;">Communication</th>
-                                <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Due</th>
-                                <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Paid</th>
-                                <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Open</th>
+                            <tr style="line-height:0.9;">
+                                <th style="border-bottom: 2px solid black;">Reference number</th>
+                                <th class="text-center" style="border-bottom: 2px solid black;">Date</th>
+                                <th class="text-center" style="border-bottom: 2px solid black;">Due Date</th>
+                                <th style="border-bottom: 2px solid black;">Communication</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Due</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Paid</th>
+                                <th class="text-right" style="border-bottom: 2px solid black;">Open</th>
                             </tr>
                         </thead>
                         <tbody class="invoice_tbody" style="line-height:0.9">
