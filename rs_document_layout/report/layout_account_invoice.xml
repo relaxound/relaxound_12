@@ -260,7 +260,7 @@
                                 Invoice
                             </span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
-                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Bill</span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
                             <span t-if="o.type == 'out_refund'">Refund</span>
                             <span t-if="o.type == 'in_refund'">Vendor Refund</span>
