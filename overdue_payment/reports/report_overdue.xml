@@ -42,15 +42,6 @@
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
                     <table class="table table-condensed">
-                        <style>
-                                    
-                                  #items td{
-                                    border:0;padding-top: .5em;
-                                    padding-bottom: .5em;
-                                    }
-                                    #items th {
-                                    border-top:0
-                        </style>
                         <thead style="border-bottom: 2px solid black;">
                             <tr>
                                 <th style="width:24%;border-bottom: 2px solid black;">Reference number</th>
