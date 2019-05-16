@@ -42,7 +42,17 @@
             <div>
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
-                    <table class="table table-condensed">
+                    <table class="table table-condensed" style="margin-left:-0.3cm" id="items">
+                        <style>
+                                
+                                #items td{
+                                border:0
+                                }
+                                #items th {
+                                 border-top:0 
+                                }
+                           
+                        </style>
                         <thead>
                             <tr style="line-height:0.9;">
                                 <th style="border-bottom: 2px solid black;">Reference number</th>
@@ -57,10 +67,10 @@
                             <td>
                                 <span t-esc="invoice.number"/>
                             </td>
-                            <td>
+                            <td  class="text-center">
                                 <span t-esc="invoice.date_invoice"/>
                             </td>
-                            <td>
+                            <td  class="text-center">
                                 <span t-esc="invoice.date_due"/>
                             </td>
                             <td class="text-right">
