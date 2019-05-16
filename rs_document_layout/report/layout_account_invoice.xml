@@ -46,12 +46,12 @@
                     </div>
                     <div style="width:50%; float: right; text-align: right;">
                         <t t-if="o.number">
-                            <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
+                            <font color="#0e71b8">Bill number:</font> <span t-field="o.number"/>
                         </t>
 
                         <t t-if="o.origin">
                             <br/>
-                            <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
+                            <font color="#0e71b8">Order number:</font> <span t-field="o.origin"/>
                         </t>
                         <t t-if="o.order_date">
                             <br/>
@@ -64,15 +64,15 @@
 
                         <t t-if="o.date_invoice">
                             <br/>
-                            <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
+                            <font color="#0e71b8">Date of invoice:</font> <span t-field="o.date_invoice"/>
                         </t>
                         <t t-if="o.date_invoice">
                             <br/>
-                            <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
+                            <font color="#0e71b8">Shipping / service date:</font> <span t-field="o.date_invoice"/>
                         </t>
                         <t t-if="o.partner_id.ref">
                             <br/>
-                            <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
+                            <font color="#0e71b8">Customer Number:</font> <span t-field="o.partner_id.ref"/>
                         </t>
                         <t t-if="o.name">
                         <br/>
@@ -137,7 +137,7 @@
                         </tr>
                         <tr t-if="o.partner_id.property_payment_term_id">
                             <td class="text-left">
-                                Payment term:
+                                Terms of payment:
                             </td>
                             <td class="text-left">
                                 <span t-field="o.partner_id.property_payment_term_id.name"/>
@@ -291,9 +291,9 @@
                         <thead>
                             <tr>
                                 <th class="text-center" style="width:11%; border-bottom: 2px solid black;">Position</th>
-                                <th class="text-center" style="width:27%; border-bottom: 2px solid black;">Article</th>
+                                <th class="text-center" style="width:27%; border-bottom: 2px solid black;">Items</th>
                                 <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Colour</th>
-                                <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Quantity</th>
+                                <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Piece</th>
                                 <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Single Unit</th>
                                 <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Unit Price</th>
                                 <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Total</th>
@@ -308,7 +308,7 @@
                                         <span t-esc="i"/>
                                     </td>
                                     <td class="text-left">
-                                        <span t-field="l.product_id.name"/>
+                                        <span t-field="l.product_id.name"/><br/>
                                         <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
                                     </td>
                                     <td class="text-center" style="white-space:nowrap">
@@ -377,9 +377,9 @@
                             <thead style="line-height:0.9">
                                 <tr>
                                     <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Position</th>
-                                    <th class="text-center" style="width:33%; border-bottom: 2px solid black;">Article</th>
+                                    <th class="text-center" style="width:33%; border-bottom: 2px solid black;">Items</th>
                                     <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Colour</th>
-                                    <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Quantity</th>
+                                    <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Piece</th>
                                     <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Unit Price</th>
                                     <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Total</th>
 
