@@ -308,7 +308,7 @@
                                         <span t-esc="i"/>
                                     </td>
                                     <td class="text-left">
-                                        <span t-field="l.product_id.name"/>
+                                        <span t-field="l.product_id.name"/><br/>
                                         <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
                                     </td>
                                     <td class="text-center" style="white-space:nowrap">
