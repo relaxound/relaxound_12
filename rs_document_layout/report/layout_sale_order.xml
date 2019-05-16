@@ -481,13 +481,10 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="font-size: 13px;">
-            <br/>
-            <div class="col-xs-12" style="margin-left:0.4cm;">
-                <span t-field="doc.note"/>
+        <div style="margin-right:0.5cm;">
+                <p t-field="doc.note"></p>
                 <br/>
-            </div>
-        </div>   
+        </div>
         <div class="row" style="font-size: 13px;">
             <t t-if="doc.payment_method_id.name!='Rechnung'">
                 <div class="col-xs-12" style="margin-left:0.4cm;">
