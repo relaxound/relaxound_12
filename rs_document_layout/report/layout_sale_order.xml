@@ -288,8 +288,8 @@
                                 <th class="text-center" style="border-bottom: 2px solid black;">Article</th>
                                 <th class="text-center" style="border-bottom: 2px solid black;">Colour</th>
                                 <th class="text-center" style="border-bottom: 2px solid black;">Quantity</th>
-                                <th class="text-right" style="border-bottom: 2px solid black;">Unit Price</th>
-                                <th class="text-right" style="border-bottom: 2px solid black;">Total</th>
+                                <th class="text-right" style="width:15%;border-bottom: 2px solid black;">Unit Price</th>
+                                <th class="text-right" style="width:15%;border-bottom: 2px solid black;">Total</th>
                             </tr>
                         </thead>
                         <t t-set="single_total" t-value="0"/>
