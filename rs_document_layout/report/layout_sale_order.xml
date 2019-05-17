@@ -193,8 +193,10 @@
                         <style>
                                     
                                     #items td{
-                                    border:0; padding-top: .5em;
-                                    padding-bottom: .5em;
+                                    border:0; padding-top: .3em;
+                                    padding-bottom: .3em;
+                                    padding-left:0.2em;
+                                    padding-right:0.2em;
                                     }
                                     #items th {
                                     border-top:0
@@ -265,7 +267,7 @@
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
-                                    <th class="text-right" style="border-top: 1px solid black"/>
+                                    <!--<th class="text-right" style="border-top: 1px solid black"/>-->
                                 </tr>
                             </t>
                         </tbody>
@@ -276,11 +278,15 @@
                     <table class="table table-condensed" style="border-collapse: collapse;" id="items">
                         <style>
                                     #items td{
-                                    border:0;padding-top: .5em;
-                                    padding-bottom: .5em;
+                                    border:0;padding-top: .3em;
+                                    padding-bottom: .3em;
+                                    padding-left:0.2em;
+                                    padding-right:0.2em;
                                     }
                                     #items th {
                                     border-top:0
+                                    <!--padding-right:0.5cm;-->
+                                    
                                     }
                                 </style>
                         <thead>
@@ -288,8 +294,8 @@
                                 <th class="text-center" style="border-bottom: 2px solid black;">Article</th>
                                 <th class="text-center" style="border-bottom: 2px solid black;">Colour</th>
                                 <th class="text-center" style="border-bottom: 2px solid black;">Quantity</th>
-                                <th class="text-right" style="border-bottom: 2px solid black;">Unit Price</th>
-                                <th class="text-right" style="border-bottom: 2px solid black;">Total</th>
+                                <th class="text-right" style="width:15%;border-bottom: 2px solid black;">Unit Price</th>
+                                <th class="text-right" style="width:15%;border-bottom: 2px solid black;">Total</th>
                             </tr>
                         </thead>
                         <t t-set="single_total" t-value="0"/>
@@ -403,6 +409,7 @@
                 <table class="table table-condensed" id="summary" style="border: none; line-height:0;">
                     <style>
                                         table#summary td {
+                                    padding-right:0.2em;
                                         border:0
                                         }
                                     </style>
@@ -481,13 +488,13 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="font-size: 13px;">
-            <br/>
-            <div class="col-xs-12" style="margin-left:0.4cm;">
-                <span t-field="doc.note"/>
+        <!--<div class="row" style="font-size: 13px;">-->
+            <!--<br/>-->
+            <div style="margin-right:0.5cm;">
+                <p t-field="doc.note"></p>
                 <br/>
             </div>
-        </div>   
+        <!--</div>   -->
         <div class="row" style="font-size: 13px;">
             <t t-if="doc.payment_method_id.name!='Rechnung'">
                 <div class="col-xs-12" style="margin-left:0.4cm;">
