@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Rechnung -->
+        <template id="report_invoice_document" inherit_id="rs_document_layout.report_invoice_document">
+
+            <xpath expr="//div[1]/div[1]/t[1]" position="before">
+                        <t t-if="o.woo_company_name_ept">
+                            <span t-field="o.woo_company_name_ept"/>
+                        </t>
+
+            </xpath>
+
+        </template>
+    </data>
+</odoo>
