@@ -457,9 +457,9 @@ class sale_order(models.Model):
 
     def import_all_woo_orders(self,wcapi,instance,transaction_log_obj,order_status,page):
         if instance.woo_version == 'new':
-            res = wcapi.get('orders?status=%s&per_page=100&page=%s'%(order_status.status,page))        
+            res = wcapi.get('orders?status=%s&per_page=1&page=%s'%(order_status.status,page))        
         else:
-            res = wcapi.get('orders?status=%s&filter[limit]=1000&page=%s'%(order_status.status,page))
+            res = wcapi.get('orders?status=%s&filter[limit]=1&page=%s'%(order_status.status,page))
         if not isinstance(res,requests.models.Response):               
             transaction_log_obj.create({'message': "Import All Orders \nResponse is not in proper format :: %s"%(res),
                                          'mismatch_details':True,
