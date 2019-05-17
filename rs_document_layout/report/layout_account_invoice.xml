@@ -4,298 +4,382 @@
     <data>
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
-                <br/>
-                <div class="row" style="margin-left:85px; margin-right:80px; font-size: 13px; font-family:Arial;">
-                    <div style="width:100%;">
-                        <div style="width:50%; float: left;">
-                            <t t-if="o.partner_id.parent_id">
-                                <span t-field="o.partner_id.parent_id.name"/>
-                            </t>
+                <br/><br/>
+                <div class="row" style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
+                <div style="width:100%;">
+                    <div style="width:50%; float: left;">
+                        <t t-if="o.partner_id.parent_id">
+                            <span t-field="o.partner_id.parent_id.name"/>
+                        </t>
 
-                            <t t-if="o.partner_id.name">
-                                <br/>
-                                <span t-field="o.partner_id.name"/>
-                            </t>
-
-                            <t t-if="o.partner_id.street">
-                                <br/>
-                                <span t-field="o.partner_id.street"/>
-                            </t>
-                            <t t-if="o.partner_id.street2">
-                                <br/>
-                                <span t-field="o.partner_id.street2"/>
-                            </t>
-
-                            <t t-if="o.partner_id.zip or o.partner_id.city">
-                                <br/>
-                                <span t-field="o.partner_id.zip"/>&#32;&#32;
-                                <span t-field="o.partner_id.city"/>
-                            </t>
-                            <t t-if="o.partner_id.country_id">
-                                <br/>
-                                <span t-field="o.partner_id.country_id.name"/>
-                            </t>
-                            
-
-
-                            <!--<t t-if="not o.partner_id.vat and o.partner_id.parent_id and o.partner_id.parent_id.vat">-->
-                            <!--<br/>-->
-                            <!--<span>VAT: <span t-field="o.partner_id.parent_id.vat"/></span>-->
-                            <!--</t>-->
-
-                        </div>
-                        <div style="width:50%; float: right; text-align: right;" >
-                            <t t-if="o.number">
-                                <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
-                            </t>
-
-                            <t t-if="o.origin">
-                                <br/>
-                                <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
-                            </t>
-                            <t t-if="o.order_date">
-                                <br/>
-                                <font color="#0e71b8">Order Date:</font> <span t-field="o.order_date"/>
-                            </t>
-                            <t t-if="o.order_by">
-                                <br/>
-                                <font color="#0e71b8">Order By:</font> <span t-field="o.order_by"/>
-                            </t>
-
-                            <t t-if="o.date_invoice">
-                                <br/>
-                                <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
-                            </t>
-                            <t t-if="o.date_invoice">
-                                <br/>
-                                <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
-                            </t>
-                            <t t-if="o.partner_id.ref">
-                                <br/>
-                                <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
-                            </t>
-                            <t t-if="o.name">
+                        <t t-if="o.partner_id.name">
                             <br/>
-                            <font color="#0e71b8">Your Reference:</font> <span t-field="o.name"/>
-                            </t>
-                            <t t-if="o.partner_id.vat">
-                                <br/>
-                                <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
-                            </t>
-                            <br/>
-                            <t t-if="o.user_id.name != 'Relaxound GmbH'">
-                                <t t-if="o.user_id">
-                                    <br/>
-                                    <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
-                                </t>
-                            </t>
-                            <t t-if="o.user_id.name == 'Relaxound GmbH'">
-                                <t t-if="o.user_id">
-                                    <br/>
-                                    <font color="#0e71b8">Contact:</font> Rahel Heuser
-                                </t>
-                            </t>
-                            <t >
-                                <br/>
-                                <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com
-                            </t>
-                            <t>
-                                <br/>
-                                <font color="#0e71b8">Phone:</font>
-                                +49(0) 30 7468 44 50
-                            </t>
+                            <span t-field="o.partner_id.name"/>
+                        </t>
 
-                        </div>
+                        <t t-if="o.partner_id.street">
+                            <br/>
+                            <span t-field="o.partner_id.street"/>
+                        </t>
+                        <t t-if="o.partner_id.street2">
+                            <br/>
+                            <span t-field="o.partner_id.street2"/>
+                        </t>
+
+                        <t t-if="o.partner_id.zip or o.partner_id.city">
+                            <br/>
+                            <span t-field="o.partner_id.zip"/>  
+                            <span t-field="o.partner_id.city"/>
+                        </t>
+                        <t t-if="o.partner_id.country_id">
+                            <br/>
+                            <span t-field="o.partner_id.country_id.name"/>
+                        </t>
+                        
+
+
+                        <!--<t t-if="not o.partner_id.vat and o.partner_id.parent_id and o.partner_id.parent_id.vat">-->
+                        <!--<br/>-->
+                        <!--<span>VAT: <span t-field="o.partner_id.parent_id.vat"/></span>-->
+                        <!--</t>-->
+
                     </div>
-                    
-                </div>
-            </xpath>
+                    <div style="width:50%; float: right; text-align: right;">
+                        <t t-if="o.number">
+                            <font color="#0e71b8">Invoice no:</font> <span t-field="o.number"/>
+                        </t>
 
+                        <t t-if="o.origin">
+                            <br/>
+                            <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
+                        </t>
+                        <t t-if="o.order_date">
+                            <br/>
+                            <font color="#0e71b8">Order Date:</font> <span t-field="o.order_date"/>
+                        </t>
+                        <t t-if="o.order_by">
+                            <br/>
+                            <font color="#0e71b8">Order By:</font> <span t-field="o.order_by"/>
+                        </t>
 
-            <xpath expr="//div[@id='total']" position="replace">
-                <div id="total" class="row" style="margin-left:70px; margin-right:50px; font-size: 13px; font-family:Arial;">
-                    <div class="col-6" style="line-height:1">
-                        <!-- <br/> -->
+                        <t t-if="o.date_invoice">
+                            <br/>
+                            <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
+                        </t>
+                        <t t-if="o.date_invoice">
+                            <br/>
+                            <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
+                        </t>
+                        <t t-if="o.partner_id.ref">
+                            <br/>
+                            <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
+                        </t>
+                        <t t-if="o.name">
                         <br/>
-                        <br/><br/><br/>
-                        <table>
-                            <tr t-if="o.partner_id.property_delivery_carrier_id">
-                                <td class="text-left">
-                                    Shipping method:
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
-                                </td>
-                            </tr>
-                            <tr t-if="o.payment_method_id.name">
-                                <td class="text-left">
-                                    Payment method:
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="o.payment_method_id.name"/>
-                                </td>
-                            </tr>
-                            <tr t-if="o.partner_id.property_payment_term_id">
-                                <td class="text-left">
-                                    Payment term:
-                                </td>
-                                <td class="text-left">
-                                    <span t-field="o.partner_id.property_payment_term_id.name"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left">
-                                    Shipping address:
-                                </td>
-                                <td class="text-left">
-                                    <span t-esc="o._get_shipping_address()"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-6" style="line-height:0">
-                        <br/><br/><br/>
-                        <table class="table table-condensed" id="summary" style="border: none">
-                            <style>
-                                table#summary td {
-                                border:0
-                                }
-                            </style>
-
-                            <t t-set="delivery_cost" t-value="0"/>
-
-                            <t t-foreach="o.invoice_line_ids" t-as="l">
-                                <t t-if="l.sale_line_ids.is_delivery">
-                                    <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
-                                </t>
-                            </t>
-                            <tr style="border: none">
-                                <td class='col-xs-3 text-right'>
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid black">
-                                <td class='text-right'>
-                                    <span>Shipping</span>
-                                </td>
-                                <td class="text-right">
-                                    <strong>
-                                        <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr style="border: none">
-                                <td class='text-right'>Untaxed Amount</td>
-                                <td class="text-right">
-                                    <span t-field="o.currency_id.symbol"/>&#32;
-                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </tr>
-
-                            <tr style="border-bottom: 1px solid black">
-                                <td class='text-right'>VAT 19%</td>
-
-                                <td class="text-right">
-                                    <span t-field="o.currency_id.symbol"/>&#32;
-                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </tr>
-                            <tr style="border: none">
-                                <td class='text-right'>
-                                    <strong>Total</strong>
-                                </td>
-                                <td class="text-right">
-                                    <strong>
-                                        <span t-field="o.currency_id.symbol"/>&#32;
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
-                            <t t-foreach="payments_vals" t-as="payment_vals">
+                        <font color="#0e71b8">Your Reference:</font> <span t-field="o.name"/>
+                        </t>
+                        <t t-if="o.partner_id.vat">
+                            <br/>
+                            <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
+                        </t>
+                        <br/>
+                        <t t-if="o.user_id.name != 'Relaxound GmbH'">
+                            <t t-if="o.user_id">
                                 <br/>
-                                <br/><br/>
-                                <tr>
-                                    <td>
-                                        <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                    </td>
-                                </tr>
+                                <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
                             </t>
-                            <t t-if="len(payments_vals) > 0">
-                                <tr class="border-black">
-                                    <td><strong>Amount Due</strong></td>
-                                    <td class="text-right">
-                                        <span t-field="o.residual"/>
-                                    </td>
-                                </tr>
+                        </t>
+                        <t t-if="o.user_id.name == 'Relaxound GmbH'">
+                            <t t-if="o.user_id">
+                                <br/>
+                                <font color="#0e71b8">Contact:</font> Rahel Heuser
                             </t>
-                        </table>
+                        </t>
+                        <t>
+                            <br/>
+                            <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com
+                        </t>
+                        <t>
+                            <br/>
+                            <font color="#0e71b8">Phone:</font>
+                            +49(0) 30 7468 44 50
+                        </t>
+
                     </div>
-
                 </div>
-                <!--</div>-->
-            </xpath>
+                
+            </div>
+        </xpath>
 
-            <xpath expr="//h2" position="replace">
-                <div class="row" style="margin-left:94px; margin-right:94px; font-size: 13px; font-family:Arial; line-height:1;">
-                    <h2>
-                        <!--<div class="col-xs-6">-->
 
-                        <!--                        ZWITSCHERBOX-->
+        <xpath expr="//div[@id='total']" position="replace">
+            <div id="total" class="row" style=" margin-right:2.5cm; margin-left:38px;  font-size: 13px; font-family:Arial;">
+                <div class="col-6" style="line-height:1">
+                    <!-- <br/> -->
+                    <br/>
+                    <br/><br/><br/>
+                    <table>
+                        <tr t-if="o.partner_id.property_delivery_carrier_id">
+                            <td class="text-left">
+                                Shipping method:
+                            </td>
+                            <td class="text-left">
+                                <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
+                            </td>
+                        </tr>
+                        <tr t-if="o.payment_method_id.name">
+                            <td class="text-left">
+                                Payment method:
+                            </td>
+                            <td class="text-left">
+                                <span t-field="o.payment_method_id.name"/>
+                            </td>
+                        </tr>
+                        <tr t-if="o.partner_id.property_payment_term_id">
+                            <td class="text-left">
+                                Payment term:
+                            </td>
+                            <td class="text-left">
+                                <span t-field="o.partner_id.property_payment_term_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                Shipping address:
+                            </td>
+                            <td class="text-left">
+                                <span t-esc="o._get_shipping_address()"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6" style="line-height:0">
+                    <br/><br/><br/>
+                    <table class="table table-condensed" id="summary" style="border: none; margin-left:15px;">
+                        <style>
+                            table#summary td {
+                            border:0
+                            }
+                        </style>
 
-                        <!--</div>-->
-                        <br/><br/>
-                        <div class="col-xs-6">
-                            <div style="font-size:30px">
-                                <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
-                                    Invoice
-                                </span>
-                                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
-                                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
-                                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
-                                <span t-if="o.type == 'out_refund'">Refund</span>
-                                <span t-if="o.type == 'in_refund'">Vendor Refund</span>
-                                <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
-                            </div>
+                        <t t-set="delivery_cost" t-value="0"/>
 
+                        <t t-foreach="o.invoice_line_ids" t-as="l">
+                            <t t-if="l.sale_line_ids.is_delivery">
+                                <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
+                            </t>
+                        </t>
+                        <tr style="border: none">
+                            <td class="col-xs-3 text-right">
+                                <span>Total</span>
+                            </td>
+                            <td class="text-right col-xs-2">
+                                <strong>
+                                    <span t-field="o.currency_id.symbol"/> 
+                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid black">
+                            <td class="text-right">
+                                <span>Shipping</span>
+                            </td>
+                            <td class="text-right">
+                                <strong>
+                                    <span t-field="o.currency_id.symbol"/> 
+                                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr style="border: none">
+                            <td class="text-right">Untaxed Amount</td>
+                            <td class="text-right">
+                                <span t-field="o.currency_id.symbol"/> 
+                                <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px solid black">
+                            <td class="text-right">VAT 19%</td>
+
+                            <td class="text-right">
+                                <span t-field="o.currency_id.symbol"/> 
+                                <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </td>
+                        </tr>
+                        <tr style="border: none">
+                            <td class="text-right">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="text-right">
+                                <strong>
+                                    <span t-field="o.currency_id.symbol"/> 
+                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </strong>
+                            </td>
+                        </tr>
+                        <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                        <t t-foreach="payments_vals" t-as="payment_vals">
+                            <br/>
+                            <br/><br/>
+                            <tr>
+                                <td>
+                                    <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="len(payments_vals) &gt; 0">
+                            <tr class="border-black">
+                                <td><strong>Amount Due</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.residual"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+
+            </div>
+            <!--</div>-->
+        </xpath>
+
+        <xpath expr="//h2" position="replace">
+            <div class="row" style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial; line-height:1;">
+                <h2>
+                    <!--<div class="col-xs-6">-->
+
+                    <!--                        ZWITSCHERBOX-->
+
+                    <!--</div>-->
+                    <div class="col-xs-6">
+                        <div style="font-size:30px">
+                            <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
+                                Invoice
+                            </span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                            <span t-if="o.type == 'out_refund'">Refund</span>
+                            <span t-if="o.type == 'in_refund'">Vendor Refund</span>
+                            <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
                         </div>
-                    </h2>
-                </div>
-            </xpath>
 
-            <xpath expr="//div[hasclass('row','mt32','mb32')]" position="attributes">
-                <attribute name="style">display:none</attribute>
-            </xpath>
-            <xpath expr="//div/table[1]" position="replace">
-                <t t-set="i" t-value="1"/>
-                <t>
-                    <t t-if="o.partner_id.is_retailer">
-                        <table class="table table-condensed" style="table-layout: fixed; width: 85%; border: none; margin: 0 auto; font-size: 13px; font-family:Arial; cellspacing:1" id="items">
+                    </div>
+                </h2>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[hasclass('row','mt32','mb32')]" position="attributes">
+            <attribute name="style">display:none</attribute>
+        </xpath>
+        <xpath expr="//div/table[1]" position="replace">
+            <t t-set="i" t-value="1"/>
+            <t>
+                <t t-if="o.partner_id.is_retailer">
+                    <table class="table table-condensed" style="table-layout: fixed; width: 82%; border: none; margin-left:54px; font-size: 13px; font-family:Arial; cellspacing:1" id="items">
+                        <style>
+                            #items td{
+                            border:0
+                            }
+                            #items th {
+                            border-top:0
+                            }
+                        </style>
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:11%; border-bottom: 2px solid black;">Position</th>
+                                <th class="text-center" style="width:27%; border-bottom: 2px solid black;">Article</th>
+                                <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Colour</th>
+                                <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Quantity</th>
+                                <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Single Unit</th>
+                                <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Unit Price</th>
+                                <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Total</th>
+
+                            </tr>
+                        </thead>
+                        <t t-set="single_total" t-value="0"/>
+                        <tbody class="invoice_tbody" style="line-height:0.9">
+                            <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
+                                    <td class="text-center">
+                                        <span t-esc="i"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="l.product_id.name"/><br/>
+                                        <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
+                                    </td>
+                                    <td class="text-center" style="white-space:nowrap">
+                                        <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                    </td>
+                                    <td class="text-center" style="white-space:nowrap">
+                                        <span t-field="l.quantity"/>
+
+                                    </td>
+                                    <t t-if="o.partner_id.is_retailer">
+                                        <td class="text-center" style="white-space:nowrap">
+                                            <!-- <span t-field="l.name"/> -->
+                                            <!-- <t t-if="p.name like '%20x%'"> -->
+                                            <span t-esc="l.single_unit"/>
+                                            <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                            
+                                        </td>
+                                    </t>
+                                    <td class="text-right" style="white-space:nowrap">
+                                        <span t-field="o.currency_id.symbol"/> 
+                                        <t t-if="l.quantity == 0">
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </t>
+                                        <t t-if="l.quantity &gt; 0">
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </t>
+
+                                        <!--<span t-field="l.price_unit"/>-->
+                                    </td>
+
+                                    <td class="text-right" style="white-space:nowrap">
+                                        <span t-field="o.currency_id.symbol"/> 
+                                        <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t>
+                                <t t-set="i" t-value="i+1"/>
+                            </tr>
+                            <!-- <tr style="border-bottom: 1px solid black"></tr> -->
+                            <t t-if="o.partner_id.is_retailer">
+                                <tr style="line-height:0;">
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+                                    <th class="text-center" style="border-top: 1px solid black">Total</th>
+                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="single_total"/></th>
+                                    <th class="text-right" style="border-top: 1px solid black"/>
+                                    <th class="text-right" style="border-top: 1px solid black"/>
+
+                                </tr>
+                            </t>
+                        </tbody>
+                        <t t-set="single_total" t-value="0"/>
+                    </table>
+                </t>
+                <t t-if="not(o.partner_id.is_retailer)">
+                    <div style="line-height:0">
+                        <table class="table table-condensed" style="margin-top:10px; width: 82%; margin-left:54px; font-size: 13px; font-family:Arial;" id="items">
                             <style>
                                 #items td{
                                 border:0
                                 }
                                 #items th {
-                                <!-- border-top:0 -->
+                                border-top:0
                                 }
                             </style>
-                            <thead>
+                            <thead style="line-height:0.9">
                                 <tr>
-                                    <th class="text-center" style="width:11%; border-bottom: 2px solid black;">Position</th>
-                                    <th class="text-center" style="width:27%; border-bottom: 2px solid black;">Article</th>
+                                    <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Position</th>
+                                    <th class="text-center" style="width:33%; border-bottom: 2px solid black;">Article</th>
                                     <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Colour</th>
                                     <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Quantity</th>
-                                    <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Single Unit</th>
                                     <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Unit Price</th>
                                     <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Total</th>
 
@@ -310,31 +394,22 @@
                                         </td>
                                         <td class="text-left">
                                             <span t-field="l.product_id.name"/>
+                                            <br/>
                                             <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
                                         </td>
                                         <td class="text-center" style="white-space:nowrap">
-                                            <span t-if="l.product_id.product_tmpl_id.color_id"
-                                                  t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                            <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                         </td>
                                         <td class="text-center" style="white-space:nowrap">
                                             <span t-field="l.quantity"/>
 
                                         </td>
-                                        <t t-if="o.partner_id.is_retailer">
-                                            <td class="text-center" style="white-space:nowrap">
-                                                <!-- <span t-field="l.name"/> -->
-                                                <!-- <t t-if="p.name like '%20x%'"> -->
-                                                <span t-esc="l.single_unit"/>
-                                                <t t-set="single_total" t-value="single_total+l.single_unit"/>
-                                                
-                                            </td>
-                                        </t>
                                         <td class="text-right" style="white-space:nowrap">
-                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <span t-field="o.currency_id.symbol"/> 
                                             <t t-if="l.quantity == 0">
                                                 <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </t>
-                                            <t t-if="l.quantity > 0">
+                                            <t t-if="l.quantity &gt; 0">
                                                 <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </t>
 
@@ -342,108 +417,30 @@
                                         </td>
 
                                         <td class="text-right" style="white-space:nowrap">
-                                            <span t-field="o.currency_id.symbol"/>&#32;
+                                            <span t-field="o.currency_id.symbol"/> 
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </t>
                                     <t t-set="i" t-value="i+1"/>
                                 </tr>
-                                <!-- <tr style="border-bottom: 1px solid black"></tr> -->
-                                <t t-if="o.partner_id.is_retailer">
-                                    <tr style="line-height:0;">
-                                        <th class="text-center" style="border-top: 1px solid black"></th>
-                                        <th class="text-center" style="border-top: 1px solid black"></th>
-                                        <th class="text-center" style="border-top: 1px solid black">Total</th>
-                                        <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
-                                        <th class="text-center" style="border-top: 1px solid black"><t t-esc="single_total"/></th>
-                                        <th class="text-right" style="border-top: 1px solid black"></th>
-                                        <th class="text-right" style="border-top: 1px solid black"></th>
 
-                                    </tr>
-                                </t>
+                                <tr style="line-height:0;">
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+                                    <th class="text-center" style="border-top: 1px solid black">Total</th>
+                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                    <th class="text-right" style="border-top: 1px solid black"/>
+                                    <th class="text-right" style="border-top: 1px solid black"/>
+
+                                </tr>
+
                             </tbody>
                             <t t-set="single_total" t-value="0"/>
                         </table>
-                    </t>
-                    <t t-if="not(o.partner_id.is_retailer)">
-                        <div style="line-height:0">
-                            <table class="table table-condensed" style="margin-top:10px; margin-left:85px; width: 85%; margin: 0 auto; font-size: 13px; font-family:Arial;" id="items">
-                                <style>
-                                    #items td{
-                                    border:0
-                                    }
-                                    #items th {
-                                    <!-- border-top:0 -->
-                                    }
-                                </style>
-                                <thead style="line-height:0.9">
-                                    <tr>
-                                        <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Position</th>
-                                        <th class="text-center" style="width:33%; border-bottom: 2px solid black;">Article</th>
-                                        <th class="text-center" style="width:10%; border-bottom: 2px solid black;">Colour</th>
-                                        <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Quantity</th>
-                                        <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Unit Price</th>
-                                        <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Total</th>
-
-                                    </tr>
-                                </thead>
-                                <t t-set="single_total" t-value="0"/>
-                                <tbody class="invoice_tbody" style="line-height:0.9">
-                                    <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                        <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
-                                            <td class="text-center">
-                                                <span t-esc="i"/>
-                                            </td>
-                                            <td class="text-left">
-                                                <span t-field="l.product_id.name"/>
-                                                <br/>
-                                                <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
-                                            </td>
-                                            <td class="text-center" style="white-space:nowrap">
-                                                <span t-if="l.product_id.product_tmpl_id.color_id"
-                                                      t-field="l.product_id.product_tmpl_id.color_id.name"/>
-                                            </td>
-                                            <td class="text-center" style="white-space:nowrap">
-                                                <span t-field="l.quantity"/>
-
-                                            </td>
-                                            <td class="text-right" style="white-space:nowrap">
-                                                <span t-field="o.currency_id.symbol"/>&#32;
-                                                <t t-if="l.quantity == 0">
-                                                    <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </t>
-                                                <t t-if="l.quantity > 0">
-                                                    <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </t>
-
-                                                <!--<span t-field="l.price_unit"/>-->
-                                            </td>
-
-                                            <td class="text-right" style="white-space:nowrap">
-                                                <span t-field="o.currency_id.symbol"/>&#32;
-                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                            </td>
-                                        </t>
-                                        <t t-set="i" t-value="i+1"/>
-                                    </tr>
-
-                                    <tr style="line-height:0;">
-                                        <th class="text-center" style="border-top: 1px solid black"></th>
-                                        <th class="text-center" style="border-top: 1px solid black"></th>
-                                        <th class="text-center" style="border-top: 1px solid black">Total</th>
-                                        <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
-                                        <th class="text-right" style="border-top: 1px solid black"></th>
-                                        <th class="text-right" style="border-top: 1px solid black"></th>
-
-                                    </tr>
-
-                                </tbody>
-                                <t t-set="single_total" t-value="0"/>
-                            </table>
-                        </div>
-                    </t>
+                    </div>
                 </t>
-            </xpath>
+            </t>
+        </xpath>
 
             <xpath expr="//p[@t-if='o.reference']" position="replace">
                 <!--<div class="row" t-if="o.payment_method_id">-->
@@ -459,29 +456,16 @@
                 <!--</div>-->
                 <!--</div>-->
                 <br/><br/><br/>
-                <div class="row" style="margin-right:94px; margin-left:85px; font-size: 13px; font-family:Arial;">
+                <div class="row" style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <div class="col-xs-12">
                         <span t-field="o.comment"/>
                         <br/>
                     </div>
-                    <!--
-                    <t t-if="o.payment_method_id.name=='Rechnung'">
-                      <br/>
-                      <div class="col-xs-12">
-                        <span>Please transfer the amount to the following bank account of our
-                          payment service provider Novalnet
-                          <br/>Account Owner: Novalnet AG,
-                          <br/>IBAN: DE49100500000190348771,
-                          <br/>BIC: BELADEBEXXX,
-                          <br/>Bank: Berliner Sparkasse Berlin
-                          <br/>Please use the intended purpose as indicated in the order confirmation email,
-                          since only in this way your money can be allocated. Thank you!!
-                        </span>
-                      </div>
-                    </t>
-                    -->
+
+                </div><br/><br/>
+                <div style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                     <t t-if="o.payment_method_id.name!='payment_term'">
                         <div class="col-xs-12" style="line-height:1">
     
@@ -495,18 +479,6 @@
                             </span>
                         </div>
                     </t>
-                    <!--                    </t>-->
-                    <!--
-                    <t t-if="o.partner_id.company_type=='company'">
-                        <div class="col-xs-12">
-                            <span>Wir weisen darauf hin, dass Sie mit der Zahlung in Verzug geraten, ohne dass es einer
-                                Mahnung bedarf, wenn der Betrag nicht innerhalb von 14 Tagen nach Rechnungserhalt
-                                gezahlt wird<br/>
-                            </span>
-                            <br/>
-                            <span>Bei Zahlung bitte die Rechnung Nr. angeben</span>
-                        </div>
-                    </t>-->
 
                 </div>
             </xpath>
