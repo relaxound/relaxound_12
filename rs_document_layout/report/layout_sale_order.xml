@@ -199,7 +199,8 @@
                                     padding-right:0.2em;
                                     }
                                     #items th {
-                                    border-top:0
+                                    border-top:0;
+                                    padding-right:0.2em
                                     }
                                 </style>
                         <thead style="font-size: 13px;">
@@ -284,8 +285,8 @@
                                     padding-right:0.2em;
                                     }
                                     #items th {
-                                    border-top:0
-                                    <!--padding-right:0.5cm;-->
+                                    border-top:0;
+                                    padding-right:0.2em;
                                     
                                     }
                                 </style>
