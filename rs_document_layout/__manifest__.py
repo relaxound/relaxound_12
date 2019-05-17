@@ -13,7 +13,7 @@
             "report/inherited_layouts.xml",
             "report/layout_account_invoice.xml",
             "report/layout_sale_order.xml",
-            "report/layout_delivery.xml",
+            # "report/layout_delivery.xml",
             'report/res_partner.xml',
             "report/layout_purchase.xml",
     ],
