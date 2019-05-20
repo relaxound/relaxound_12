@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<odoo>
-	<data>
-  		<menuitem id="woo_commerce_main_menu" name="WooCommerce"/>
-	</data>
-</odoo>
