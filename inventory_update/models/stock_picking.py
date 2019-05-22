@@ -9,7 +9,8 @@ import pdb
 from ftplib import FTP
 import time
 from dateutil import parser
-from pandas.io.common import EmptyDataError
+
+_logger = logging.getLogger(__name__)
 
 class stockpicking(models.Model):
 	_inherit="stock.picking"
@@ -27,7 +28,7 @@ class stockpicking(models.Model):
 				name = file[0]
 				timestamp = file[1]['modify']
 				time = parser.parse(timestamp)
-				#print(name + ' - ' + str(time))
+				
 
 			if(file[1]['type']=="dir"):
 				pass
@@ -40,7 +41,6 @@ class stockpicking(models.Model):
 			return file_name
 
 	def _import_inventory_(self): 
-		import pdb;pdb.set_trace()
 		db="relaxound-relaxound-12-test-master-new-405959"  # main stage
 		username="rahelheuser@zwitscherbox.com"
 		password="let/s1_smile"
@@ -68,7 +68,6 @@ class stockpicking(models.Model):
 		localfile = open("/home/src/user/STOCK-DATA"+latest_one, 'wb')
 
 		ftp.retrbinary('RETR '+ftp.pwd()+"/"+latest_one,localfile.write)
-		# ftp.close()
 		localfile.close()
 
 	
@@ -82,16 +81,14 @@ class stockpicking(models.Model):
 		### user id  
 		common = xmlrpclib.ServerProxy('{}/xmlrpc/2/common'.format(url),allow_none=True)
 		uid = common.login(db, username, password)
-		print(uid)
-		print(common.version())
+		_logger.info(uid)
 
-		#print(SKU)
+	
 
 		for i,s in zip(SKU,stock):
-			#print(i)	
 			ids= model.execute(db,uid,password,'product.product','search',[['default_code','=',i]])
 			if(len(ids)==0):
-				print(ids,"not available",s)
+				pass
 			else:
 				if(len(ids)>1):
 					for k in ids:
@@ -113,12 +110,10 @@ class stockpicking(models.Model):
 
 
 		
-		for id1,stock_qty in dict1.items():
-			#print(id1,stock_qty) 
-			# pdb.set_trace()	
+		for id1,stock_qty in dict1.items():	
 			dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id1]])
 			if(len(dc)==0):
-				print(id1,stock_qty)
+				pass
 			
 			else:
 				id12 = dc[0]['id']
@@ -143,8 +138,7 @@ class stockpicking(models.Model):
 				model.execute(db,uid,password,'stock.inventory.line','create',	
 				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': stock_qty}])
 
-		# id2_list=[]
-		# id2_list.append(id2)
+		
 
 		
 		inv_create = model.execute(db,uid,password,'stock.inventory','action_start',id2)
