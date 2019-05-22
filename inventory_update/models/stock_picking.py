@@ -82,7 +82,7 @@ class stockpicking(models.Model):
 		uid = common.login(db, username, password)
 		_logger.info(uid)
 
-		pdb.set_trace()
+		
 		for i,s1 in zip(SKU,stock):
 			ids = self.env['product.product'].search([('default_code','=',i)])
 			if( not ids):
@@ -108,16 +108,6 @@ class stockpicking(models.Model):
 			[{'name':"Inventory-Updated-"+date_time,'filter':'partial','company_id':1,
 				'state':'draft','location_id':200 }])	
 
-		# for id1,stock_qty in dict1.items():	
-		# 	dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id1]])
-		# 	if(len(dc)==0):
-		# 		pass
-			
-		# 	else:
-		# 		id12 = dc[0]['id']
-		# 		company_id = dc[0]['company_id'][0]
-		# 		name = dc[0]['name']
-		# 		use_dict.update({id12:stock_qty})
 
 		
 		for id12,stock_qty in dict1.items():
