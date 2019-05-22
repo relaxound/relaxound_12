@@ -65,13 +65,13 @@ class stockpicking(models.Model):
 
 		latest_one = self._sort_data(cwd,ftp)
 
-		localfile = open("/home/src/user/STOCK-DATA"+latest_one, 'wb')
+		localfile = open("src/user/STOCK-DATA"+latest_one, 'wb')
 
 		ftp.retrbinary('RETR '+ftp.pwd()+"/"+latest_one,localfile.write)
 		localfile.close()
 
 	
-		df = pd.read_csv("/home/src/user/STOCK-DATA"+latest_one,sep=';')
+		df = pd.read_csv("src/user/STOCK-DATA"+latest_one,sep=';')
 		
 
 		SKU = df['SKU']
@@ -105,7 +105,7 @@ class stockpicking(models.Model):
 		print("date and time:",date_time)
 
 		id2= model.execute(db,uid,password,'stock.inventory','create',
-			[{'name':"PRODUCT_DEMO"+date_time,'filter':'partial','company_id':1,
+			[{'name':"Inventory-Updated-"+date_time,'filter':'partial','company_id':1,
 				'state':'draft','location_id':200 }])	
 
 
