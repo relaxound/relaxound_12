@@ -49,7 +49,7 @@ class stockpicking(models.Model):
 		ftp = FTP("62.214.48.227")
 		ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
 		ftp.cwd('STOCK')
-		print("connect")
+	
 
 		cwd="STOCK"
 
@@ -108,16 +108,6 @@ class stockpicking(models.Model):
 			[{'name':"Inventory-Updated-"+date_time,'filter':'partial','company_id':1,
 				'state':'draft','location_id':200 }])	
 
-		# for id1,stock_qty in dict1.items():	
-		# 	dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id1]])
-		# 	if(len(dc)==0):
-		# 		pass
-			
-		# 	else:
-		# 		id12 = dc[0]['id']
-		# 		company_id = dc[0]['company_id'][0]
-		# 		name = dc[0]['name']
-		# 		use_dict.update({id12:stock_qty})
 
 		
 		for id12,stock_qty in dict1.items():
@@ -139,4 +129,4 @@ class stockpicking(models.Model):
 		try:
 			inv = model.execute(db,uid,password,'stock.inventory','action_validate',id2)
 		except Exception as e:
-			print("done")
+			_logger.info(e)
