@@ -49,14 +49,14 @@ class stockpicking(models.Model):
 		ftp = FTP("62.214.48.227")
 		ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
 		ftp.cwd('STOCK')
-		print("connect")
+	
 
 		cwd="STOCK"
 
 		current_date = fields.Datetime.now()
 
 		model = xmlrpclib.ServerProxy('{}/xmlrpc/2/object'.format(url),allow_none=True)
-		print(model)
+		
 
 		product_id_list=[]
 		single_product=[]
@@ -64,45 +64,45 @@ class stockpicking(models.Model):
 		use_dict={}
 
 		latest_one = self._sort_data(cwd,ftp)
-
-		localfile = open("src/user/STOCK-DATA"+latest_one, 'wb')
+		
+		localfile = open(latest_one, 'wb')
 
 		ftp.retrbinary('RETR '+ftp.pwd()+"/"+latest_one,localfile.write)
 		localfile.close()
 
 	
-		df = pd.read_csv("src/user/STOCK-DATA"+latest_one,sep=';')
-		
+		df = pd.read_csv(latest_one,sep=';')
+			
 
 		SKU = df['SKU']
 		stock= df['stock']
 		dict1={}
 
-		### user id  
 		common = xmlrpclib.ServerProxy('{}/xmlrpc/2/common'.format(url),allow_none=True)
 		uid = common.login(db, username, password)
 		_logger.info(uid)
 
-	
-
-		for i,s in zip(SKU,stock):
-			ids= model.execute(db,uid,password,'product.product','search',[['default_code','=',i]])
-			if(len(ids)==0):
+		
+		for i,s1 in zip(SKU,stock):
+			ids = self.env['product.product'].search([('default_code','=',i)])
+			if( not ids):
 				pass
 			else:
 				if(len(ids)>1):
-					for k in ids:
-						dict1.update({k:s})
-						print(k,s)
-				else:
-					if(s==0 or self.isnegative(s)):
-						pass
-					else:			
-						dict1.update({ids[0]:s}) # ids of product with stock to update
-						print(ids)
+					for i in ids:
+						if(i.type=='product'and s1!=0 and s1>0):
+							dict1.update({i.id:s1})
+						else:
+							pass		
+				else:			
+					if(ids.type =="product" and s1!=0 and s1>0):
+							dict1.update({ids.id:s1})
+						
+					else:
+							pass
 
 		date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
-		print("date and time:",date_time)
+	
 
 		id2= model.execute(db,uid,password,'stock.inventory','create',
 			[{'name':"Inventory-Updated-"+date_time,'filter':'partial','company_id':1,
@@ -110,31 +110,15 @@ class stockpicking(models.Model):
 
 
 		
-		for id1,stock_qty in dict1.items():	
-			dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id1]])
-			if(len(dc)==0):
-				pass
-			
-			else:
-				id12 = dc[0]['id']
-				company_id = dc[0]['company_id'][0]
-				name = dc[0]['name']
-				use_dict.update({id12:stock_qty})
-
-
-				
-
-
-
-		for id12,stock_qty in use_dict.items():
-			dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id12]])
-			if(dc[0]['qty_at_date']!=0):
+		for id12,stock_qty in dict1.items():
+			dc = model.execute(db,uid,password,'product.product','search_read',[['id','=',id12]])
+			stock_ex =dc[0]['qty_at_date']
+			if(stock_ex!=0):
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+dc[0]['qty_at_date']}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+stock_ex}])
 
 			else:
-				print(id12)
-				print(id12,stock_qty)
+			
 				model.execute(db,uid,password,'stock.inventory.line','create',	
 				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': stock_qty}])
 
@@ -145,4 +129,4 @@ class stockpicking(models.Model):
 		try:
 			inv = model.execute(db,uid,password,'stock.inventory','action_validate',id2)
 		except Exception as e:
-			print("done")
+			_logger.info(e)

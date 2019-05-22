@@ -5,7 +5,8 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
-        <div class="row" style="margin-left:2cm; margin-right:3cm; font-size: 13px;">
+        <br/>
+        <div class="row" style="margin-left:1.5cm; margin-right:3cm; font-size: 13px;">
         <div style="width:100%">
         <div style="width:50%; float: left;">
             <t t-if="doc.partner_id.parent_id">
@@ -93,12 +94,15 @@
     </xpath>
     <xpath expr="//h2" position="replace">
         <br/>
+        <br/>
+        <br/>
+            
         <div class="row">
             <h2>
-                <div class="col-xs-4" style="margin-left:0.4cm">ZWITSCHERBOX</div>
+                <div class="col-xs-4" style="margin-left:.4cm">ZWITSCHERBOX</div>
             </h2>
             <h2>
-                <div class="col-xs-4" style="margin-left:1.5cm">
+                <div class="col-xs-4" style="margin-left:3cm">
                     <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                         <span t-if="doc.state not in ['draft','sent']">Order </span>
                         <span t-if="doc.state in ['draft','sent']">Quotation </span>
@@ -114,7 +118,7 @@
         <attribute name="style">display:none</attribute>
     </xpath>
     <xpath expr="//div[@class='page']" position="attributes">
-        <attribute name="style">margin-right:3cm; margin-left:2cm; font-size:13px;</attribute>
+        <attribute name="style">margin-right:3cm; margin-left:1.5cm; font-size:13px;</attribute>
     </xpath>
     <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
         <div>
@@ -194,7 +198,7 @@
                                     <th class="text-center" style="border-top: 1px solid black;  padding-left:0.1em;">
                                         <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/>
                                     </th>
-                                    <th class="text-center" style="border-top: 1px solid black">
+                                    <th class="text-center" style="border-top: 1px solid black;padding-left:0.1em;">
                                         <t t-esc="single_total"/>
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black"/>
@@ -266,7 +270,7 @@
                                     </td>
                                 </t>
                             </tr>
-                            <tr >
+                            <tr>
                                 <th class="text-center" style="border-top: 1px solid black"/>
                                 <th class="text-center" style="border-top: 1px solid black; padding-left:0.1em;">Total</th>
                                 <th class="text-center" style="border-top: 1px solid black; padding-left:0.1em;">
@@ -446,6 +450,6 @@
     </xpath>
     <xpath expr="//p[@t-field='doc.note']" position="replace"/>
     <xpath expr="//p[@id='fiscal_position_remark']" position="replace"/>
-        </template>
+    </template>
     </data>
 </odoo>
