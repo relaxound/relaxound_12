@@ -5,7 +5,7 @@
          so users can freely customize/delete them -->
     <data noupdate="1">
 
-        <record id="email_template_sample_invoice17" model="mail.template">
+        <record id="email_template_sample_invoice15" model="mail.template">
             <field name="name">Zwitscherbox - Händler Rechnung (copy)</field>
             <field name="model_id" ref="account.model_account_invoice"/>
             <field name="email_from">${object.user_id.email_formatted |safe}</field>
