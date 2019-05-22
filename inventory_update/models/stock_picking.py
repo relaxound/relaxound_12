@@ -121,10 +121,11 @@ class stockpicking(models.Model):
 
 		
 		for id12,stock_qty in dict1.items():
-
-			if(ids.qty_at_date!=0):
+			dc = model.execute(db,uid,password,'product.product','search_read',[['id','=',id12]])
+			stock_ex =dc[0]['qty_at_date']
+			if(stock_ex!=0):
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+ids.qty_at_date}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+stock_ex}])
 
 			else:
 			
