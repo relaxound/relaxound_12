@@ -49,7 +49,7 @@ class stockpicking(models.Model):
 		ftp = FTP("62.214.48.227")
 		ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
 		ftp.cwd('STOCK')
-		print("connect")
+	
 
 		cwd="STOCK"
 
@@ -129,5 +129,4 @@ class stockpicking(models.Model):
 		try:
 			inv = model.execute(db,uid,password,'stock.inventory','action_validate',id2)
 		except Exception as e:
-			print("done")
-
+			
