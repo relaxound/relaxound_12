@@ -13,7 +13,10 @@
 
     'data': [
             'data/sale_order_template.xml',
-            'data/purchase_order_sample.xml',          
+            'data/purchase_order_sample.xml',
+            'data/invoice_sample.xml',
+            'data/invoice_sample_test.xml',
+            # 'report/sale_order.xml',        
              ],
     'installable': True,
     'application': True,
