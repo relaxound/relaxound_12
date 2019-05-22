@@ -9,7 +9,8 @@ import pdb
 from ftplib import FTP
 import time
 from dateutil import parser
-from pandas.io.common import EmptyDataError
+
+_logger = logging.getLogger(__name__)
 
 class stockpicking(models.Model):
 	_inherit="stock.picking"
@@ -27,7 +28,7 @@ class stockpicking(models.Model):
 				name = file[0]
 				timestamp = file[1]['modify']
 				time = parser.parse(timestamp)
-				#print(name + ' - ' + str(time))
+				
 
 			if(file[1]['type']=="dir"):
 				pass
@@ -40,7 +41,6 @@ class stockpicking(models.Model):
 			return file_name
 
 	def _import_inventory_(self): 
-
 		db="relaxound-relaxound-12-test-master-new-405959"  # main stage
 		username="rahelheuser@zwitscherbox.com"
 		password="let/s1_smile"
@@ -65,14 +65,13 @@ class stockpicking(models.Model):
 
 		latest_one = self._sort_data(cwd,ftp)
 
-		localfile = open("/home/saurajchopade/Relex_Sound/"+latest_one, 'wb')
+		localfile = open("/home/src/user/STOCK-DATA"+latest_one, 'wb')
 
 		ftp.retrbinary('RETR '+ftp.pwd()+"/"+latest_one,localfile.write)
-		# ftp.close()
 		localfile.close()
 
 	
-		df = pd.read_csv("/home/saurajchopade/Relex_Sound/"+latest_one,sep=';')
+		df = pd.read_csv("/home/src/user/STOCK-DATA"+latest_one,sep=';')
 		
 
 		SKU = df['SKU']
@@ -82,16 +81,14 @@ class stockpicking(models.Model):
 		### user id  
 		common = xmlrpclib.ServerProxy('{}/xmlrpc/2/common'.format(url),allow_none=True)
 		uid = common.login(db, username, password)
-		print(uid)
-		print(common.version())
+		_logger.info(uid)
 
-		#print(SKU)
+	
 
 		for i,s in zip(SKU,stock):
-			#print(i)	
 			ids= model.execute(db,uid,password,'product.product','search',[['default_code','=',i]])
 			if(len(ids)==0):
-				print(ids,"not available",s)
+				pass
 			else:
 				if(len(ids)>1):
 					for k in ids:
@@ -109,16 +106,14 @@ class stockpicking(models.Model):
 
 		id2= model.execute(db,uid,password,'stock.inventory','create',
 			[{'name':"PRODUCT_DEMO"+date_time,'filter':'partial','company_id':1,
-				'state':'draft','location_id':250 }])	
+				'state':'draft','location_id':200 }])	
 
 
 		
-		for id1,stock_qty in dict1.items():
-			#print(id1,stock_qty) 
-			# pdb.set_trace()	
+		for id1,stock_qty in dict1.items():	
 			dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id1]])
 			if(len(dc)==0):
-				print(id1,stock_qty)
+				pass
 			
 			else:
 				id12 = dc[0]['id']
@@ -135,16 +130,15 @@ class stockpicking(models.Model):
 			dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id12]])
 			if(dc[0]['qty_at_date']!=0):
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 29,'product_qty': float(stock_qty)+dc[0]['qty_at_date']}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+dc[0]['qty_at_date']}])
 
 			else:
 				print(id12)
 				print(id12,stock_qty)
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 29,'product_qty': stock_qty}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': stock_qty}])
 
-		# id2_list=[]
-		# id2_list.append(id2)
+		
 
 		
 		inv_create = model.execute(db,uid,password,'stock.inventory','action_start',id2)
