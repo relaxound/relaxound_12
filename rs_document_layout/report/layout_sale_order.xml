@@ -126,6 +126,7 @@
                 <t t-if="doc.partner_id.is_retailer">
                     <table class="table table-condensed" style="table-layout:fixed;width:100%;border-collapse: collapse;" id="items">
                         <style>
+                                    
                                     #items td{
                                     border:0; padding-top: .3em;
                                     padding-bottom: .3em;
@@ -202,6 +203,7 @@
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
+                                    <!--<th class="text-right" style="border-top: 1px solid black"/>-->
                                 </tr>
                             </t>
                         </tbody>
@@ -286,7 +288,9 @@
     </xpath>
     <xpath expr="//div/div[@id='total']" position="replace">
         <div id="total" class="row" style="font-size: 13px;">
+            <!-- <div class="row"> -->
             <div class="col-6">
+                <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
                 <br/>
                 <table>
                     <tr t-if="doc.carrier_id">
@@ -333,8 +337,10 @@
                         </td>
                     </tr>
                 </table>
+                <!-- </div> -->
             </div>
             <div class="col-6">
+                <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;"><div class="pull-right"> -->
                 <br/>
                 <table class="table table-condensed" id="summary" style="border: none; line-height:0;">
                     <style>
@@ -401,6 +407,7 @@
                         </td>
                     </tr>
                 </table>
+                <!--   </div></div> -->
             </div>
         </div>
     </xpath>
@@ -417,10 +424,13 @@
                 </div>
             </div>
         </div>
-        <div style="margin-right:0.5cm;">
-            <p t-field="doc.note"/>
-            <br/>
-        </div>
+        <!--<div class="row" style="font-size: 13px;">-->
+            <!--<br/>-->
+            <div style="margin-right:0.5cm;">
+                <p t-field="doc.note"/>
+                <br/>
+            </div>
+        <!--</div>   -->
         <div class="row" style="font-size: 13px;">
             <t t-if="doc.payment_method_id.name!='Rechnung'">
                 <div class="col-xs-12" style="margin-left:0.4cm;">
