@@ -82,7 +82,7 @@ class stockpicking(models.Model):
 		uid = common.login(db, username, password)
 		_logger.info(uid)
 
-		
+		pdb.set_trace()
 		for i,s1 in zip(SKU,stock):
 			ids = self.env['product.product'].search([('default_code','=',i)])
 			if( not ids):
