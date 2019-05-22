@@ -5,6 +5,7 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
+        <br/>
         <div class="row" style="margin-left:2cm; margin-right:3cm; font-size: 13px;">
         <div style="width:100%">
         <div style="width:50%; float: left;">
@@ -93,9 +94,8 @@
     </xpath>
     <xpath expr="//h2" position="replace">
         <br/>
-        <br/>s
         <br/>
-            
+        <br/>     
         <div class="row">
             <h2>
                 <div class="col-xs-4" style="margin-left:0.4cm">ZWITSCHERBOX</div>
