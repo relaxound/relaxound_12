@@ -40,7 +40,7 @@ class stockpicking(models.Model):
 			return file_name
 
 	def _import_inventory_(self): 
-
+		import pdb;pdb.set_trace()
 		db="relaxound-relaxound-12-test-master-new-405959"  # main stage
 		username="rahelheuser@zwitscherbox.com"
 		password="let/s1_smile"
@@ -65,14 +65,14 @@ class stockpicking(models.Model):
 
 		latest_one = self._sort_data(cwd,ftp)
 
-		localfile = open("/home/saurajchopade/Relex_Sound/"+latest_one, 'wb')
+		localfile = open("/home/src/user/STOCK-DATA"+latest_one, 'wb')
 
 		ftp.retrbinary('RETR '+ftp.pwd()+"/"+latest_one,localfile.write)
 		# ftp.close()
 		localfile.close()
 
 	
-		df = pd.read_csv("/home/saurajchopade/Relex_Sound/"+latest_one,sep=';')
+		df = pd.read_csv("/home/src/user/STOCK-DATA"+latest_one,sep=';')
 		
 
 		SKU = df['SKU']
@@ -109,7 +109,7 @@ class stockpicking(models.Model):
 
 		id2= model.execute(db,uid,password,'stock.inventory','create',
 			[{'name':"PRODUCT_DEMO"+date_time,'filter':'partial','company_id':1,
-				'state':'draft','location_id':250 }])	
+				'state':'draft','location_id':200 }])	
 
 
 		
@@ -135,13 +135,13 @@ class stockpicking(models.Model):
 			dc = model.execute(db,uid,password,'product.product','search_read',[['type','=','product'],['id','=',id12]])
 			if(dc[0]['qty_at_date']!=0):
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 29,'product_qty': float(stock_qty)+dc[0]['qty_at_date']}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+dc[0]['qty_at_date']}])
 
 			else:
 				print(id12)
 				print(id12,stock_qty)
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 29,'product_qty': stock_qty}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': stock_qty}])
 
 		# id2_list=[]
 		# id2_list.append(id2)
