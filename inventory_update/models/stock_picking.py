@@ -39,18 +39,18 @@ class stockpicking(models.Model):
 			max1=max(dict1)
 			file_name = dict1.get(max1)
 			return file_name
-
+	@api.model
 	def _import_inventory_(self): 
-		db="relaxound-relaxound-12-test-master-new-405959"  # main stage
+		db="relaxound-relaxound-12-test-master-new-409305"  # main stage
 		username="rahelheuser@zwitscherbox.com"
 		password="let/s1_smile"
-		url = "https://relaxound-relaxound-12-test-master-new-405959.dev.odoo.com" # main stage
+		url = "https://relaxound-relaxound-12-test-master-new-409305.dev.odoo.com" # main stage
 
 		ftp = FTP("62.214.48.227")
 		ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
 		ftp.cwd('STOCK')
 	
-
+		
 		cwd="STOCK"
 
 		current_date = fields.Datetime.now()
@@ -65,7 +65,7 @@ class stockpicking(models.Model):
 
 		latest_one = self._sort_data(cwd,ftp)
 		
-		localfile = open(latest_one, 'wb')
+		localfile = open(latest_one, 'wb') # src/user/STOCK-DATA/
 
 		ftp.retrbinary('RETR '+ftp.pwd()+"/"+latest_one,localfile.write)
 		localfile.close()
@@ -129,5 +129,4 @@ class stockpicking(models.Model):
 		try:
 			inv = model.execute(db,uid,password,'stock.inventory','action_validate',id2)
 		except Exception as e:
-			_logger.info(e)
-			print("done")
+			_logger.info("done")
