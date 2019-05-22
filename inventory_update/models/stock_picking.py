@@ -130,3 +130,4 @@ class stockpicking(models.Model):
 			inv = model.execute(db,uid,password,'stock.inventory','action_validate',id2)
 		except Exception as e:
 			print("done")
+
