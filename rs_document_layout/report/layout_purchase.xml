@@ -20,14 +20,19 @@
                                     <br/>
                                     <span t-field="child.street2"/>
                                 </t>
-                                <t t-if="child.zip">
-                                 <br/>
-                                    <span t-field="child.zip"/>
-                                </t>
                                 <t t-if="child.city">
                                     <br/>
                                     <span t-field="child.city"/>
                                 </t>
+                                <t t-if="child.zip">
+                                 <br/>
+                                    <span t-field="child.zip"/>
+                                </t>
+                                <t t-if ="child.state_id">
+                                    <br/>
+                                    <spam t-field="child.state_id"></spam>
+                                </t>
+                                
                                 <t t-if="child.country_id.name">
                                     <br/>
                                     <span t-field="child.country_id.name"/>
