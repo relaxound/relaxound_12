@@ -5,7 +5,7 @@
          so users can freely customize/delete them -->
     <data noupdate="1">
 
-        <record id="email_template_sample12" model="mail.template">
+        <record id="email_template_sample_test" model="mail.template">
             <field name="name">Sales Order: Send by email</field>
             <field name="model_id" ref="sale.model_sale_order"/>
             <field name="email_from">${object.user_id.email_formatted |safe}</field>
@@ -18,7 +18,8 @@
     
     <p>Here is your ${object.state in ('draft', 'sent') and 'quotation' or 'order confirmation'} from ${object.company_id.name}: </p>
 
-    <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+
+    <p style="margin-left:30px; border-left:1.4px solid #000; padding-left: 8px;">
        <strong>REFERENCES</strong><br />
        Order number: <strong>${object.name}</strong><br />
        Order total: <strong>${object.amount_total} ${object.pricelist_id.currency_id.name}</strong><br />
