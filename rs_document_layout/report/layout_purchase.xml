@@ -3,10 +3,7 @@
     <data>
         <!-- Purchase Order -->
         <template id="report_purchase_document" inherit_id="purchase.report_purchaseorder_document">
-            <xpath expr="//t[@t-set='address']" position="replace">
-                <br/>
-                <br/>
-                <div class="row" style="margin-left:2cm; font-size: 13px;">
+            <div class="row" style="margin-left:2cm; font-size: 13px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                         <strong>Shipping address:</strong><br/>
