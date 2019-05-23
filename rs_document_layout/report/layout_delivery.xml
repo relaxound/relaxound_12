@@ -3,10 +3,10 @@
 	<data>
 		<!-- Delivery Slip -->
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
-			<!-- <xpath expr="//t[@t-set='address']" position="replace">
+			 <xpath expr="//t[@t-set='address']" position="replace">
 			</xpath>
-			<xpath expr="//t[@t-set='address']" position="replace">
-			</xpath> -->
+			<!--<xpath expr="//t[@t-set='address']" position="replace">-->
+			<!--</xpath> -->
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
 				<div class="row" style="margin-left:1cm;">
@@ -78,14 +78,27 @@
 			<xpath expr="//table[@t-if='o.product_ids']" position="replace">
 				<t t-set="count" t-value="0"/>
 				<table class="table table-condensed" style=" width:80%; margin-left:1.9cm; font-size:13px;" id="items">
-					<style>
-                        #items td{
-                        border:0
-                        }
-                        #items th {
-                        border-top:0
-                        }
-                    </style>
+					<!--<style>-->
+     <!--                   #items td{-->
+     <!--                   border:0-->
+     <!--                   }-->
+     <!--                   #items th {-->
+     <!--                   border-top:0-->
+     <!--                   }-->
+     <!--               </style>-->
+                    <style>
+                                    
+                                    #items td{
+                                    border:0; padding-top: .3em;
+                                    padding-bottom: .3em;
+                                    padding-left:0.2em;
+                                    padding-right:0.2em;
+                                    }
+                                    #items th {
+                                    border-top:0;
+                                    padding-right:0.2em
+                                    }
+                                </style>
                     <thead>
                         <tr>
                             <th class="text-center" style="border-bottom: 2px solid black; width:40%;">Article</th>

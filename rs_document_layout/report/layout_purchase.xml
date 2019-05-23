@@ -4,9 +4,9 @@
         <!-- Purchase Order -->
         <template id="report_purchase_document" inherit_id="purchase.report_purchaseorder_document">
             <xpath expr="//t[@t-set='address']" position="replace">
-            <br/>
-            <br/>
-            <div class="row" style="margin-left:2cm; font-size: 13px;">
+                <br/>
+                <br/>
+                <div class="row" style="margin-left:2cm; font-size: 13px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                         <strong>Shipping address:</strong><br/>
@@ -32,7 +32,6 @@
                                     <br/>
                                     <spam t-field="child.state_id"></spam>
                                 </t>
-                                
                                 <t t-if="child.country_id.name">
                                     <br/>
                                     <span t-field="child.country_id.name"/>
@@ -48,7 +47,7 @@
 
                     </div>
                 </div>
-             </xpath> 
+             </xpath>  
             <xpath expr="//div[@class='page']" position="replace">
                 <br/>
                 <div class="page">
