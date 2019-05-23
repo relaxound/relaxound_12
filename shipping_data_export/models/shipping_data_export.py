@@ -101,15 +101,10 @@ class StockPicking(models.Model):
             name = file[0]
             timestamp = file[1]['modify']
             time = parser.parse(timestamp)
-            # time_list.append(time)
-            # name_list.append(name)
-
             if(file[1]['type']=="dir"):
                 pass
             else:
                 dict1.update({time:name})
-    
-
         max1=max(dict1)
         file_name = dict1.get(max1)
         return file_name
