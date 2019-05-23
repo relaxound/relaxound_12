@@ -4,6 +4,8 @@
         <!-- Purchase Order -->
         <template id="report_req_for_qut_document" inherit_id="purchase.report_purchasequotation_document">
         <xpath expr="//t[@t-set='address']" position="replace">
+            <br/>
+            <br/>
                 <div class="row" style="margin-left:2cm; font-size: 13px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
@@ -18,14 +20,19 @@
                                     <br/>
                                     <span t-field="child.street2"/>
                                 </t>
-                                <t t-if="child.zip">
-                                 <br/>
-                                    <span t-field="child.zip"/>
-                                </t>
                                 <t t-if="child.city">
                                     <br/>
                                     <span t-field="child.city"/>
                                 </t>
+                                <t t-if="child.zip">
+                                 <br/>
+                                    <span t-field="child.zip"/>
+                                </t>
+                                <t t-if ="child.state_id">
+                                    <br/>
+                                    <spam t-field="child.state_id"></spam>
+                                </t>
+                                
                                 <t t-if="child.country_id.name">
                                     <br/>
                                     <span t-field="child.country_id.name"/>
@@ -72,8 +79,8 @@
                 <thead>
                     <tr>
                         <th style="border-bottom: 2px solid black;"><strong>Description</strong></th>
-                        <th class="text-center" style="border-bottom: 2px solid black;"><strong>Expected Date</strong></th>
-                        <th class="text-right" style="border-bottom: 2px solid black;"><strong>Qty</strong></th>
+                        <th class="text-center" style="border-bottom: 2px solid black; width:25%;"><strong>Expected Date</strong></th>
+                        <th class="text-right" style="border-bottom: 2px solid black; width:15%;"><strong>Qty</strong></th>
                     </tr>
                 </thead>
                 <tbody>

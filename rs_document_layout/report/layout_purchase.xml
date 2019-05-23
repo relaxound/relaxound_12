@@ -91,11 +91,11 @@
                 <thead>
                     <tr>
                         <th style="border-bottom: 2px solid black;"><strong>Description</strong></th>
-                        <th style="border-bottom: 2px solid black;"><strong>Taxes</strong></th>
-                        <th class="text-center" style="border-bottom: 2px solid black;"><strong>Date Req.</strong></th>
-                        <th class="text-right" style="border-bottom: 2px solid black;"><strong>Qty</strong></th>
-                        <th class="text-right" style="border-bottom: 2px solid black;"><strong>Unit Price</strong></th>
-                        <th class="text-right" style="border-bottom: 2px solid black;"><strong>Amount</strong></th>
+                        <th style="border-bottom: 2px solid black; width:15%"><strong>Taxes</strong></th>
+                        <th class="text-center" style="border-bottom: 2px solid black; width:15%"><strong>Date Req.</strong></th>
+                        <th class="text-right" style="border-bottom: 2px solid black; width:10%"><strong>Qty</strong></th>
+                        <th class="text-right" style="border-bottom: 2px solid black; width:15%"><strong>Unit Price</strong></th>
+                        <th class="text-right" style="border-bottom: 2px solid black; width:15%"><strong>Amount</strong></th>
                     </tr>
                 </thead>
                 <tbody>
