@@ -16,6 +16,7 @@
             "report/layout_delivery.xml",
             'report/res_partner.xml',
             "report/layout_purchase.xml",
+            "report/Request_for_qut.xml",
     ],
     'demo_xml': [],
     'installable': True,
