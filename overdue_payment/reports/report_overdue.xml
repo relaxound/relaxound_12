@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="overdue_payment.report_customer_overdue_document">
-    <t t-call="web.external_layout">
+     <t t-call="web.external_layout">
         <div class="page" style="margin-right:3cm; margin-left:2cm;font-size: 13px;">
                 <div style="width:100%; float: right; text-align: right;">
                     <div class="col-xs-5 col-xs-offset-7">
@@ -41,17 +41,25 @@
             <div>
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
-                    <table class="table table-condensed" style=" font-size: 13px; cellspacing:1; margin-left:-0.3cm" id="items">
-                        <style>
-                                
-                                #items td{
-                                border:0
-                                }
-                                #items th {
-                                 border-top:0 
-                                }
-                           
-                        </style>
+                    <table class="table table-condensed" style=" font-size: 13px; cellspacing:1;" id="items">
+                       <style>
+                                    #items td{
+                                    border:0;
+                                    border-top:0;
+                                    border:0;padding-top: .5em;
+                                    padding-bottom: .5em;
+                                    padding-left:0.2em;
+                                    padding-right:0.2em;
+                                    }
+                                    #items th {
+                                    border:0; 
+                                    border-top:0;
+                                    padding-right:0.2em;
+                                    padding-bottom: .3em;
+                                    padding-left:0.2em;
+                                    <!--padding-right:0.2em;-->
+                                    }
+                </style>
                         <thead>
                             <tr style="line-height:0.9;">
                                 <th style="border-bottom: 2px solid black;">Reference number</th>
@@ -80,34 +88,34 @@
                         
                             </td>
                              <td class="text-right">
-                                <span t-esc="invoice.debit"/>
+                                <span t-esc="round(invoice.debit,3)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                             <td class="text-right">
-                                <span t-esc="invoice.credit"/>
+                                <span t-esc="round(invoice.credit,3)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                             <td class="text-right">
                                 <span t-if="invoice['blocked']">x</span>                            
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3"></td>
+                            <br/>
+                            <td colspan="3" style="margin:10px"/>
                             <td><strong>Sub-Total :</strong></td>
-                            <td  class="text-right"><t t-esc="float(float(sum(line.debit for line in o.customer_moves)))">
+                            <td class="text-right"><t t-esc="round(float(float(sum(line.debit for line in o.customer_moves))),3)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'>
                                 </t>
                             </td>
-                            <td class="text-right" >
-                                <t t-esc="float(float(sum(line.credit for line in o.customer_moves)))"/></td>
+                            <td class="text-right">
+                                <t t-esc="round(float(float(sum(line.credit for line in o.customer_moves))),3)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 
-                            <td  class="text-right">
-                                <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
-
+                            <td class="text-right">
+                                <t t-esc="round(float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves)),3)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3"> </td>
                             <td><strong>Balance :</strong>
-                            <td  class="text-right">
-                            <t t-esc="float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves))"/>
+                            <td class="text-right">
+                            <t t-esc="round(float(sum(line.debit for line in o.customer_moves))-float(sum(line.credit for line in o.customer_moves)),3)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                            </td>
                         </tr>
