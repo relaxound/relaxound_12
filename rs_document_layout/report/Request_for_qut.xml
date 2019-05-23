@@ -3,32 +3,77 @@
     <data>
         <!-- Purchase Order -->
         <template id="report_req_for_qut_document" inherit_id="purchase.report_purchasequotation_document">
-        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
-            <t t-call="web.external_layout">
-            <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                <t t-set="address">
-            <div t-field="o.partner_id"
-                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
-            </t>
-        <t t-if="o.dest_address_id">
-            <t t-set="information_block">
-                <strong>Shipping address:</strong>
-                <div t-field="o.dest_address_id"
-                    t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' name="purchase_shipping_address"/>
-            </t>
-        </t>
+        <xpath expr="//t[@t-set='address']" position="replace">
+                <div class="row" style="margin-left:2cm; font-size: 13px;">
+                    <div style="width:100%;">
+                        <div style="width:50%; float: left;">
+                        <strong>Shipping address:</strong><br/>
+                        <t t-foreach="o.partner_id.child_ids" t-as="child">
+                        <t t-if="child.type=='delivery'"> 
+                            <tr>
+                                <t t-if="child.street">
+                                    <span t-field="child.street"/>
+                                </t>
+                                <t t-if="child.street2">
+                                    <br/>
+                                    <span t-field="child.street2"/>
+                                </t>
+                                <t t-if="child.zip">
+                                 <br/>
+                                    <span t-field="child.zip"/>
+                                </t>
+                                <t t-if="child.city">
+                                    <br/>
+                                    <span t-field="child.city"/>
+                                </t>
+                                <t t-if="child.country_id.name">
+                                    <br/>
+                                    <span t-field="child.country_id.name"/>
+                                </t>
+                            </tr>
+                        </t>
+                        </t>
+                        </div>
+                        <div style="width:50%; float: right;">
+                            <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                            <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
+                        </div>
+
+                    </div>
+                </div>
+             </xpath> 
+        <xpath expr="//div[@class='page']" position="replace">
+            <br/>
+
         <div class="page">
             <div class="oe_structure"/>
 
             <h2>Request for Quotation <span t-field="o.name"/></h2>
 
-            <table class="table table-sm">
+            <table class="table table-condensed" id="items">
+                <style>
+                                    #items td{
+                                    border:0;
+                                    border-top:0;
+                                    border:0;padding-top: .3em;
+                                    padding-bottom: .3em;
+                                    padding-left:0.2em;
+                                    padding-right:0.2em;
+                                    }
+                                    #items th {
+                                    border:0; 
+                                    border-top:0;
+                                    padding-right:0.2em;
+                                    padding-bottom: .3em;
+                                    padding-left:0.2em;
+                                    <!--padding-right:0.2em;-->
+                                    }
+                </style>
                 <thead>
                     <tr>
-                        <th><strong>Description</strong></th>
-                        <th class="text-center"><strong>Expected Date</strong></th>
-                        <th class="text-right"><strong>Qty</strong></th>
+                        <th style="border-bottom: 2px solid black;"><strong>Description</strong></th>
+                        <th class="text-center" style="border-bottom: 2px solid black;"><strong>Expected Date</strong></th>
+                        <th class="text-right" style="border-bottom: 2px solid black;"><strong>Qty</strong></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,13 +96,12 @@
 
             <div class="oe_structure"/>
         </div>
-    </t>
+    <!--</t>-->
         </xpath>
             
         <xpath expr="//div[@class='page']" position="attributes">
             <attribute name="style">margin-right:3cm; margin-left:2cm;font-size:13px;</attribute>
         </xpath>
-            
         </template>
     </data>
 </odoo>
