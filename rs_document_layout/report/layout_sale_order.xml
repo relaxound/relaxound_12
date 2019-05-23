@@ -46,9 +46,9 @@
                 <font color="#0e71b8">Order-No: </font> <span t-field="doc.name"/>
             </t>
 
-            <t t-if="doc.client_order_ref">
+            <!-- <t t-if="doc.client_order_ref">
                 <font color="#0e71b8">Ihre Referenz: </font><span t-field="doc.client_order_ref"/>
-            </t>
+            </t> -->
 
             <t t-if="doc.order_date">
                 <br/>
