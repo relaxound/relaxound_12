@@ -20,7 +20,6 @@
                             <br/>
                             <span t-field="o.street2"/>
                         </t>
-
                         <t t-if="o.zip or o.city">
                             <br/>
                             <span t-field="o.zip"/>
