@@ -2,7 +2,7 @@
 <odoo>
 <template id="overdue_payment.report_customer_overdue_document">
      <t t-call="web.external_layout">
-        <div class="page" style="margin-right:3cm; margin-left:2cm;font-size: 13px;">
+        <div class="page" style="margin-right:3cm; margin-left:1.5cm;font-size: 13px;">
                 <div style="width:100%; float: right; text-align: right;">
                     <div class="col-xs-5 col-xs-offset-7">
 
@@ -99,7 +99,7 @@
                         </tr>
                         <tr>
                             <br/>
-                            <td colspan="3" style="margin:10px"/>
+                            <td colspan="3"/>
                             <td><strong>Sub-Total :</strong></td>
                             <td class="text-right"><t t-esc="round(float(float(sum(line.debit for line in o.customer_moves))),3)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'>
                                 </t>

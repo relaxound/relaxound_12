@@ -6,7 +6,7 @@
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/>
-                <div class="row" style="margin-left:2cm; font-size: 13px;">
+                <div class="row" style="margin-left:1.5cm; font-size: 13px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                         <strong>Shipping address:</strong><br/>
@@ -159,7 +159,7 @@
             </xpath>
             
             <xpath expr="//div[@class='page']" position="attributes">
-                 <attribute name="style">margin-right:3cm; margin-left:2cm;font-size:13px;</attribute>
+                 <attribute name="style">margin-right:3cm; margin-left:1.5cm;font-size:13px;</attribute>
             </xpath>
             
         </template>

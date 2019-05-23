@@ -3,7 +3,7 @@
 
 <template id="overdue_payment.report_due_document">
     <t t-call="web.external_layout">
-        <div class="page" style="margin-right:3cm; margin-left:2cm;font-size: 13px;">
+        <div class="page" style="margin-right:3cm; margin-left:1.5cm;font-size: 13px;">
                 <div style="width:100%; float: right; text-align: right;">
                     <div class="col-xs-5 col-xs-offset-7">
 
