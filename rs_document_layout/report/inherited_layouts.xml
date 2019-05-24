@@ -4,7 +4,6 @@
         <!-- Header -->
         <!-- <template id="external_layout_header" inherit_id="report.external_layout_header"> -->
         <template id="external_layout_header" inherit_id="web.external_layout_standard">
-
             <xpath expr="//div[hasclass('header')]" position="replace">
                 <div class="header">
                         <div class="row" >
