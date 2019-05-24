@@ -37,7 +37,7 @@ class AccountInvoice(models.Model):
         _logger.debug("1 ---------------------> %s" % orders)
         current_date = fields.Datetime.now()
         with open(os.path.join("src/user/SALE-ORDER-DATA/",'shipping_data_%s.csv' % (current_date)), 'wb') as shipping_data:
-            shipping_data.write(b'ship_dataname1;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;item_quantity;item_line_number;item_name;item_description;item_price\n')
+            shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;client_order_ref;item_quantity;item_line_number;item_name;item_description;item_price;\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
                     [('origin', '=', order.name)])  
@@ -51,7 +51,7 @@ class AccountInvoice(models.Model):
                         order.partner_invoice_id.street2 or '', order.partner_invoice_id.city or '', ' ', order.partner_invoice_id.zip or '',
                         order.partner_invoice_id.country_id 
                         and order.partner_invoice_id.country_id.name or '', 
-                        order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET',str(order.order_line.product_uom_qty)]
+                        order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET',str(order.order_line.product_uom_qty),order.client_order_ref]
                 if invoices:
                     for invoice in invoices:
                         for line in invoice.invoice_line_ids:
@@ -105,6 +105,8 @@ class StockPicking(models.Model):
                 pass
             else:
                 dict1.update({time:name})
+    
+
         max1=max(dict1)
         file_name = dict1.get(max1)
         return file_name
@@ -130,7 +132,7 @@ class StockPicking(models.Model):
             file = open(file_path)
             # print ('file ===================>', file)
             for line in file.readlines()[1:]:
-                data = line.split(',')
+                data = line.split(',',1)
                 # print("line, data --------------------->", line, data[0].replace('"', ''), data[1].replace('"', ''))
                 delivery = self.env['stock.picking'].search(
                     [('origin', '=',data[0].replace('"', '') )]) #
