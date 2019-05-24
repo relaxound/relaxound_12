@@ -8,14 +8,14 @@
             <xpath expr="//div[hasclass('header')]" position="replace">
                 <div class="header" style="margin-left: 1cm; margin-right: 1cm;">
                         <div class="row" >
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-12" align="center">
                             <img src="/rs_document_layout/static/src/img/relaxound_header.png" class="center-block"
-                                style="max-height:110px;" />
+                                style="max-height:110px; margin-top:7px" />
                             </div>
                         </div>
                     <br/>
                     <div class="row" style="margin-top:16px">
-                        <div class="col-xs-12" name="company_address"
+                        <div class="col-md-12 " name="company_address"
                              style="color:#084199;font-size:8px;font-weight:100;font-family:Arial;letter-spacing:1px">
                             <br/>
                                 <span t-field="company.name"/>
