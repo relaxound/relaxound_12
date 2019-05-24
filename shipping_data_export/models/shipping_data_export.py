@@ -148,4 +148,3 @@ class StockPicking(models.Model):
             pass
 
     
-
