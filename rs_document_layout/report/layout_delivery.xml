@@ -5,22 +5,25 @@
 		<template id="report_delivery_document" inherit_id="stock.report_delivery_document">
 			<xpath expr="//t[@t-set='address']" position="replace">
 			</xpath>
-			<xpath expr="//t[@t-set='address']" position="replace">
-			</xpath>
+			<!--<xpath expr="//t[@t-set='address']" position="replace">-->
+			<!--</xpath> -->
 			<xpath expr="//div[hasclass('page')]" position="replace">
 				<br/>
-				<div class="row" style="margin-left:1cm;">
+				<div class="row" style="margin-left:4cm;">
                     <div class="col-lg-12" style=" text-align:center">
 		                <div style="font-size:20px">
 		        			<span>Packing List</span>
 		                </div>
-		                <div t-if="o.partner_id.ref">CNr.<span t-field="o.partner_id.ref"/>
+		                <div t-if="o.partner_id.ref">
+		                    <span >CNr.</span>
+		                    <span t-field="o.partner_id.ref"/>
 		                </div>
 		            </div>
 	            </div>
-				<div class="row" style=" margin-left:2cm; font-size:13px;">
+				<div class="row" style=" margin-left:2.5cm; font-size:13px; margin-top:-0.5cm;">
                     <div>
 						<t t-if="o.partner_id.parent_id">
+						    <br/>
 						    <span t-field="o.partner_id.parent_id.name"/>
 						</t>
 
@@ -51,7 +54,9 @@
 				</div>
 				
                 <br/>
-                <h2 style="margin-left:2cm; margin-right:94px;">ZWITSCHERBOX</h2>
+                <br/>
+                <br/>
+                <h2 style="margin-left:2.5cm; margin-right:94px;">ZWITSCHERBOX</h2>
 				<div class="row">
                     <div class="table table-sm" id="items">
                         <style>
@@ -62,7 +67,7 @@
                             <!--border-top:0-->
                             }
                         </style>
-                        <table id="delivery_data" style="margin-top:10px;margin-left:2.3cm; font-size:13px;">
+                        <table id="delivery_data" style="margin-top:10px;margin-left:2.9cm; font-size:13px;">
 							<tr>
 							<t t-if="o.origin">
 
@@ -77,15 +82,20 @@
                 </div>
 			<xpath expr="//table[@t-if='o.product_ids']" position="replace">
 				<t t-set="count" t-value="0"/>
-				<table class="table table-condensed" style=" width:80%; margin-left:1.9cm; font-size:13px;" id="items">
-					<style>
-                        #items td{
-                        border:0
-                        }
-                        #items th {
-                        border-top:0
-                        }
-                    </style>
+				<table class="table table-condensed" style=" width:80%; margin-left:2.5cm; font-size:13px;" id="items">
+                    <style>
+                                    
+                                    #items td{
+                                    border:0; padding-top: .3em;
+                                    padding-bottom: .3em;
+                                    padding-left:0.2em;
+                                    padding-right:0.2em;
+                                    }
+                                    #items th {
+                                    border-top:0;
+                                    <!--padding-right:0.2em-->
+                                    }
+                                </style>
                     <thead>
                         <tr>
                             <th class="text-center" style="border-bottom: 2px solid black; width:40%;">Article</th>
@@ -112,7 +122,7 @@
 				<t t-if="o._get_invoicing_address()">
 				    <br/>
 					<br/>
-					<div class="row" style="margin-left:2cm; font-size:13px ">
+					<div class="row" style="margin-left:2.5cm; font-size:13px ">
 					    <table>
 						<tr>
 							<td>We will send the invoice via Email to : </td>
@@ -132,6 +142,7 @@
 				</t>
 				</xpath>
 			</xpath>
+			
 		</template>
 	</data>
 </odoo>
