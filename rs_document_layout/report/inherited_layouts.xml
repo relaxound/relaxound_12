@@ -6,17 +6,17 @@
         <template id="external_layout_header" inherit_id="web.external_layout_standard">
 
             <xpath expr="//div[hasclass('header')]" position="replace">
-                <div class="header" style="margin-left: 0.5cm;">
+                <div class="header" style="margin-left: 1cm; margin-right: 1cm;">
                         <div class="row" >
-                            <div class="col-xs-12 col-md-12" align="center" style="margin-top:10px;"  >
+                            <div class="col-xs-12">
                             <img src="/rs_document_layout/static/src/img/relaxound_header.png" class="center-block"
-                                style="max-height:110px; margin-top:5px;" />
+                                style="max-height:110px;" />
                             </div>
                         </div>
                     <br/>
                     <div class="row" style="margin-top:16px">
-                        <div class="col-md-12 " name="company_address"
-                             style="color:#084199;font-size:9px;font-weight:100;font-family:Arial;letter-spacing:1px">
+                        <div class="col-xs-12" name="company_address"
+                             style="color:#084199;font-size:8px;font-weight:100;font-family:Arial;letter-spacing:1px">
                             <br/>
                                 <span t-field="company.name"/>
                             <span>&#32;&#183;&#32;</span>
@@ -30,6 +30,7 @@
                             </t>
                             <span>-</span>
                             <span t-field="company.zip"/>
+                            <span>&#32;</span>
                             <span t-field="company.city"/>
                         </div>
                     </div>
