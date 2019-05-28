@@ -159,7 +159,7 @@
                                 <br/>
                                 <span t-field="o.partner_id.street2"/>
                             </t>
-                            <t t-if="o.partner_id.zip or doc.partner_id.city">
+                            <t t-if="o.partner_id.zip or o.partner_id.city">
                                 <br/>
                                 <span t-field="o.partner_id.zip"/>  
                                             
