@@ -176,7 +176,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -186,7 +186,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -255,7 +255,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -265,7 +265,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>

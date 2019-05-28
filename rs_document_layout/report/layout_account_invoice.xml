@@ -337,7 +337,7 @@
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="l.quantity &gt; 0">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
 
                                         <!--<span t-field="l.price_unit"/>-->
@@ -414,7 +414,7 @@
                                                 <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </t>
                                             <t t-if="l.quantity &gt; 0">
-                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal/l.quantity))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </t>
 
                                             <!--<span t-field="l.price_unit"/>-->
