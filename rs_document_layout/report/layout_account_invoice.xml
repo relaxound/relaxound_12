@@ -151,9 +151,25 @@
                             <td class="text-left">
                                 Shipping address:
                             </td>
-                            <td class="text-left">
-                                <span t-esc="o._get_shipping_address()"/>
-                            </td>
+                            <td class="text-left" style="font-size:13px">
+                            <t t-if="o.partner_id.street">
+                                <span t-field="o.partner_id.street"/>
+                            </t>
+                            <t t-if="o.partner_id.street2">
+                                <br/>
+                                <span t-field="o.partner_id.street2"/>
+                            </t>
+                            <t t-if="o.partner_id.zip or doc.partner_id.city">
+                                <br/>
+                                <span t-field="o.partner_id.zip"/>  
+                                            
+                                <span t-field="o.partner_id.city"/>
+                            </t>
+                            <t t-if="o.partner_id.country_id">
+                                <br/>
+                                <span t-field="o.partner_id.country_id.name"/>
+                            </t>
+                        </td>
                         </tr>
                     </table>
                 </div>
