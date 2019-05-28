@@ -7,6 +7,7 @@ class CustomInvoiceOrder(models.Model):
 
     @api.onchange('invoice_line_ids')
     def onchange_invoice(self):
+        
         if self.invoice_line_ids:
             if self.partner_id.country_id or self.partner_id.property_account_position_id:
                 if self.partner_id.country_id.name=='Germany':

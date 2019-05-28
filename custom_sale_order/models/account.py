@@ -6,6 +6,7 @@ class InvoiceOrder(models.Model):
 
     @api.depends('invoice_id.invoice_line_ids')
     def _compute_base_amount(self):
+        
         tax_grouped = {}
         for invoice in self.mapped('invoice_id'):
             tax_grouped[invoice.id] = invoice.get_taxes_values()
@@ -22,4 +23,6 @@ class InvoiceOrder(models.Model):
                 if tax.invoice_id and key in tax_grouped[tax.invoice_id.id]:
                     tax.base = tax_grouped[tax.invoice_id.id][key]['base']
                 else:
-                    tax.base = tax_grouped[tax.invoice_id.id]['3-17-False-False']['base']
+
+                    tax.base = list(tax_grouped[tax.invoice_id.id].values())[0]['base']
+                    
