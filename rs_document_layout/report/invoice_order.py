@@ -12,5 +12,8 @@ class OrderLine(models.Model):
             if '20x' in self.product_id.name or '20X' in self.product_id.name:
                 self.update({'single_unit':self.quantity*20}) 
 
+            elif '80x' in self.product_id.name or '80X' in self.product_id.name:
+                self.update({'single_unit':self.quantity*80})
+
             else:
                 self.update({'single_unit':self.quantity})
