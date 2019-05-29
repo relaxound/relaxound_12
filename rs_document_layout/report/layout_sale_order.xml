@@ -5,100 +5,107 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
-        <div class="row" style="margin-left:2cm; margin-right:3cm; font-size: 13px;">
+        <br/>
+        <div class="row" style="margin-left:1.5cm; margin-right:3cm; font-size: 13px;">
         <div style="width:100%">
-        <div style="width:50%; float: left;">
-            <t t-if="doc.partner_id.parent_id">
-                <span t-field="doc.partner_id.parent_id.name"/>
-            </t>
-            <t t-if="doc.partner_id.name">
-                <br/>
-                <span t-field="doc.partner_id.name"/>
-            </t>
-            <t t-if="doc.partner_id.street">
-                <br/>
-                <span t-field="doc.partner_id.street"/>
-            </t>
-            <t t-if="doc.partner_id.street2">
-                <br/>
-                <span t-field="doc.partner_id.street2"/>
-            </t>
-            <t t-if="doc.partner_id.zip or doc.partner_id.city">
-                <br/>
-                <span t-field="doc.partner_id.zip"/>
-
-                <span t-field="doc.partner_id.city"/>
-            </t>
-            <t t-if="doc.partner_id.country_id">
-                <br/>
-                <span t-field="doc.partner_id.country_id.name"/>
-            </t>
+            <div style="width:50%; float: left;">
+                <t t-if="doc.partner_id.parent_id">
+                    <span t-field="doc.partner_id.parent_id.name"/>
+                </t>
+                <t t-if="doc.partner_id.name">
+                    <br/>
+                    <span t-field="doc.partner_id.name"/>
+                </t>
+                <t t-if="doc.partner_id.street">
+                    <br/>
+                    <span t-field="doc.partner_id.street"/>
+                </t>
+                <t t-if="doc.partner_id.street2">
+                    <br/>
+                    <span t-field="doc.partner_id.street2"/>
+                </t>
+                <t t-if="doc.partner_id.zip or doc.partner_id.city">
+                    <br/>
+                    <span t-field="doc.partner_id.zip"/>
+    
+                    <span t-field="doc.partner_id.city"/>
+                </t>
+                <t t-if="doc.partner_id.country_id">
+                    <br/>
+                    <span t-field="doc.partner_id.country_id.name"/>
+                </t>
+            </div>
+            <div style="width:50%; float:right; text-align:right;">
+                <t t-if="doc.partner_id.ref">
+                    <br/>
+                    <font color="#0e71b8">CNr: </font> <span t-field="doc.partner_id.ref"/>
+                </t>
+    
+                <t t-if="doc.name">
+                    <br/>
+                    <font color="#0e71b8">Order-No: </font> <span t-field="doc.name"/>
+                </t>
+    
+                <!-- <t t-if="doc.client_order_ref">
+                    <font color="#0e71b8">Ihre Referenz: </font><span t-field="doc.client_order_ref"/>
+                </t> -->
+    
+                <t t-if="doc.order_date">
+                    <br/>
+                    <font color="#0e71b8">Order Date: </font> <span t-esc="doc.order_date"/>
+                </t>
+    
+                <t t-if="doc.validity_date">
+                    <br/>
+                    <font color="#0e71b8">ETD: </font> <span t-field="doc.validity_date"/>
+                </t>
+                <t t-if="doc.order_by.name">
+                    <br/>
+                    <font color="#0e71b8">Order-By: </font> <span t-field="doc.order_by.name"/>
+                </t>
+                <t t-if="doc.client_order_ref">
+                    <br/>
+                    <font color="#0e71b8">Your Reference: </font> <span t-field="doc.client_order_ref"/>
+                </t>
+                <t t-if="doc.confirmation_date and doc.state not in ['draft','sent']">
+                    <br/>
+                    <font color="#0e71b8">Date Ordered: </font> <span t-esc="doc.confirmation_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                </t>
+    
+                <t t-if="doc.date_order and doc.state in ['draft','sent']">
+                    <br/>
+                    <font color="#0e71b8">Quotation Date: </font> <span t-esc="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                </t>
+                <t t-if="doc.user_id.name">
+                    <br/>
+                    <font color="#0e71b8">Salesperson: </font> <span t-field="doc.user_id.name"/>
+                </t>
+                <t t-if="doc.payment_term_id">
+                    <br/>
+                    <font color="#0e71b8">Payment Terms: </font> <span t-field="doc.payment_term_id"/>
+                </t>
+                <t t-if="doc.validity_date and doc.state in ['draft','sent']">
+                    <br/>
+                    <font color="#0e71b8">Expiration Date: </font> <span t-field="doc.validity_date"/>
+                </t>
+                <t >
+                    <br/>
+                    <!--<font color="#0e71b8">Expiration Date: </font> <span t-field="doc.validity_date"/>-->
+                </t>
+            </div>
         </div>
-        <div style="width:50%; float: right; text-align:right;">
-            <t t-if="doc.partner_id.ref">
-                <br/>
-                <font color="#0e71b8">CNr: </font> <span t-field="doc.partner_id.ref"/>
-            </t>
-
-            <t t-if="doc.name">
-                <br/>
-                <font color="#0e71b8">Order-No: </font> <span t-field="doc.name"/>
-            </t>
-
-            <t t-if="doc.client_order_ref">
-                <font color="#0e71b8">Ihre Referenz: </font><span t-field="doc.client_order_ref"/>
-            </t>
-
-            <t t-if="doc.order_date">
-                <br/>
-                <font color="#0e71b8">Order Date: </font><span t-esc="doc.order_date"/>
-            </t>
-
-            <t t-if="doc.validity_date">
-                <br/>
-                <font color="#0e71b8">ETD: </font><span t-field="doc.validity_date"/>
-            </t>
-            <t t-if="doc.order_by.name">
-                <br/>
-                <font color="#0e71b8">Order-By: </font><span t-field="doc.order_by.name"/>
-            </t>
-            <t t-if="doc.client_order_ref">
-                <br/>
-                <font color="#0e71b8">Your Reference: </font><span t-field="doc.client_order_ref"/>
-            </t>
-            <t t-if="doc.confirmation_date and doc.state not in ['draft','sent']">
-                <br/>
-                <font color="#0e71b8">Date Ordered: </font><span t-esc="doc.confirmation_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
-            </t>
-
-            <t t-if="doc.date_order and doc.state in ['draft','sent']">
-                <br/>
-                <font color="#0e71b8">Quotation Date: </font><span t-esc="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
-            </t>
-            <t t-if="doc.user_id.name">
-                <br/>
-                <font color="#0e71b8">Salesperson: </font><span t-field="doc.user_id.name"/>
-            </t>
-            <t t-if="doc.payment_term_id">
-                <br/>
-                <font color="#0e71b8">Payment Terms: </font><span t-field="doc.payment_term_id"/>
-            </t>
-            <t t-if="doc.validity_date and doc.state in ['draft', 'sent']">
-                <br/>
-                <font color="#0e71b8">Expiration Date: </font><span t-field="doc.validity_date"/>
-            </t>
-        </div>
-    </div>
     </div>
     </xpath>
     <xpath expr="//h2" position="replace">
         <br/>
+        <br/>
+        <br/>
         <div class="row">
             <h2>
-                <div class="col-xs-4" style="margin-left:0.4cm">ZWITSCHERBOX</div>
+                <div class="col-xs-4" style="margin-left:.4cm">ZWITSCHERBOX</div>
             </h2>
             <h2>
-                <div class="col-xs-4" style="margin-left:1.5cm">
+                <div class="col-xs-4" style="margin-left:3cm">
                     <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                         <span t-if="doc.state not in ['draft','sent']">Order </span>
                         <span t-if="doc.state in ['draft','sent']">Quotation </span>
@@ -114,7 +121,7 @@
         <attribute name="style">display:none</attribute>
     </xpath>
     <xpath expr="//div[@class='page']" position="attributes">
-        <attribute name="style">margin-right:3cm; margin-left:2cm; font-size:13px;</attribute>
+        <attribute name="style">margin-right:3cm; margin-left:1.5cm; font-size:13px;</attribute>
     </xpath>
     <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
         <div>
@@ -169,7 +176,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -179,7 +186,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -194,7 +201,7 @@
                                     <th class="text-center" style="border-top: 1px solid black;  padding-left:0.1em;">
                                         <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/>
                                     </th>
-                                    <th class="text-center" style="border-top: 1px solid black">
+                                    <th class="text-center" style="border-top: 1px solid black;padding-left:0.1em;">
                                         <t t-esc="single_total"/>
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black"/>
@@ -248,7 +255,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total/l.product_uom_qty))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -258,7 +265,7 @@
                                         <span t-field="doc.currency_id.symbol"/> 
                                                 
                                         <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                         <t t-if="doc.partner_id.company_type=='company'">
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -266,7 +273,7 @@
                                     </td>
                                 </t>
                             </tr>
-                            <tr >
+                            <tr>
                                 <th class="text-center" style="border-top: 1px solid black"/>
                                 <th class="text-center" style="border-top: 1px solid black; padding-left:0.1em;">Total</th>
                                 <th class="text-center" style="border-top: 1px solid black; padding-left:0.1em;">
@@ -446,6 +453,6 @@
     </xpath>
     <xpath expr="//p[@t-field='doc.note']" position="replace"/>
     <xpath expr="//p[@id='fiscal_position_remark']" position="replace"/>
-        </template>
+    </template>
     </data>
 </odoo>
