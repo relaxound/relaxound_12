@@ -25,7 +25,10 @@ class CustomInvoiceOrder(models.Model):
                 elif self.partner_id.country_id and self.partner_id.property_account_position_id:
                     if self.partner_id.country_id.name!='Germany' and 'EU' in self.partner_id.property_account_position_id.name:
                         self.invoice_line_ids.update({'invoice_line_tax_ids':None})
-                        self.tax_line_ids.update({'tax_id':None})
+                        self.tax_line_ids.update({'tax_id':None,
+                                                  'amount_total':None,
+                                                  'amount':None,
+                                                  'name':None})
 
 
 
