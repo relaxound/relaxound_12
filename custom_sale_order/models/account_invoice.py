@@ -28,7 +28,7 @@ class CustomInvoiceOrder(models.Model):
                         self.tax_line_ids.update({'tax_id':None,
                                                   'amount_total':None,
                                                   'amount':None,
-                                                  'name':None})
+                                                  'name':'    '})
 
 
 
