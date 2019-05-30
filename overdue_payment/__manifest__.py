@@ -9,7 +9,7 @@
     'license': 'AGPL-3',
     'author': "Odoo Tips",
     'website': 'http://www.gotodoo.com/',
-    'depends': ['base', 'account', 'sale','account_banking_mandate'
+    'depends': ['base', 'account', 'sale','account_banking_mandate','mail'
                 ],
 
     'images': ['images/main_screenshot.png'],
