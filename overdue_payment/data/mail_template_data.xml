@@ -3,7 +3,7 @@
     <data>
 
         <!--Email template -->
-        <record id="email_template_edi_overdue1" model="mail.template">
+        <record id="email_template_edi_overdue2" model="mail.template">
             <field name="name">Overdue Payment - Send by Email</field>
             <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
             <field name="subject">Overdue Payment : (Ref ${object.name or 'n/a' })</field>
@@ -13,24 +13,28 @@
             <field name="report_template" ref="report_customeroverdue"/>
             <field name="report_name">${(object.name or '').replace('/','_')}</field>
             <field name="lang">${object.lang}</field>
-            <field name="body_html"><![CDATA[
+            <field name="body_html" type="html">
+
+
 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 13px; color: rgb(34, 34, 34); background-color: #FFF; ">
 
     <p>Hello ${object.name},</p>
     
     <p>So far we have not been able to find payment for the attached invoice in our system. We therefore ask you to check your bookkeeping in this regard and to remit the amount due in a timely manner. You have already cleared the bill? Then we apologize and send you a quick feedback so we can find the problem and fix it. ,</p>
 
-    <p>Thank you and best regards from Berlin.<p>
+    <p>Thank you and best regards from Berlin.</p>
 
-    <p>Please note that we have to charge a processing fee of 10 EUR if the discount deduction is not agreed or if the invoice amount is reduced.<p>
+    <p>Please note that we have to charge a processing fee of 10 EUR if the discount deduction is not agreed or if the invoice amount is reduced.</p>
+
+
 
     </div>
 
-            ]]></field>
+            </field>
         </record>
 
         <!--Email template -->
-        <record id="email_template_edi_due" model="mail.template">
+        <record id="email_template_edi_due116" model="mail.template">
             <field name="name">Due Payment - Send by Email</field>
             <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
             <field name="subject">Due Payment : (Ref ${object.name or 'n/a' })</field>
@@ -40,7 +44,7 @@
             <field name="report_template" ref="action_report_print_overdue"/>
             <field name="report_name">${(object.name or '').replace('/','_')}</field>
             <field name="lang">${object.lang}</field>
-            <field name="body_html"><![CDATA[
+            <field name="body_html" type="html">
 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 13px; color: rgb(34, 34, 34); background-color: #FFF; ">
 
     <p>Hello ${object.name},</p>
@@ -58,7 +62,7 @@ If you have any queries regarding your account, Please contact us.</p>
 
     </div>
 
-            ]]></field>
+            </field>
         </record>
 
     </data>
