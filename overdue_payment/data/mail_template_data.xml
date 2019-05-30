@@ -18,16 +18,11 @@
 
     <p>Hello ${object.name},</p>
     
-    <p>Our records indicate that some payments on your account are still due. Please find details below.
-If the amount has already been paid, please disregard this notice. Otherwise, please forward us the total amount stated below.
-If you have any queries regarding your account, Please contact us.</p>
+    <p>So far we have not been able to find payment for the attached invoice in our system. We therefore ask you to check your bookkeeping in this regard and to remit the amount due in a timely manner. You have already cleared the bill? Then we apologize and send you a quick feedback so we can find the problem and fix it. ,</p>
 
-    <p>
-    Thank you in advance for your cooperation.
-    </p>
-    <p>
-    Best Regards,
-    </p>
+    <p>Thank you and best regards from Berlin.</p>
+
+    <p>Please note that we have to charge a processing fee of 10 EUR if the discount deduction is not agreed or if the invoice amount is reduced.</p>
 
     </div>
 
