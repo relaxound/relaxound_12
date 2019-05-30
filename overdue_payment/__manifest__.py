@@ -19,7 +19,7 @@
              'reports/report_overdue.xml',
              'reports/report_overdue_document.xml',
              'data/mail_template_data.xml',
-             'data/mail_data.xml',
+             # 'data/mail_data.xml',
              'data/partner_data.xml',
              ],
     'installable': True,
