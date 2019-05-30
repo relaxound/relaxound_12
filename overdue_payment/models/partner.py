@@ -56,7 +56,7 @@ class ResPartner(models.Model):
             message loaded by default
         """
         self.ensure_one()
-        template = self.env.ref('overdue_payment.email_template_edi_overdue', False)
+        template = self.env.ref('overdue_payment.email_template_edi_overdue1', False)
         compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
         ctx = dict(
             default_model='res.partner',
