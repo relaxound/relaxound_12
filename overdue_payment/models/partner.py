@@ -83,13 +83,17 @@ class ResPartner(models.Model):
             message loaded by default
         """
         self.ensure_one()
-        template = self.env.ref('overdue_payment.email_template_edi_due', False)
-        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        ir_model_data = self.env['ir.model.data']
+
+        template = ir_model_data.get_object_reference('overdue_payment', 'email_template_edi_due')[1]
+
+        # template = self.env.ref('overdue_payment.email_template_edi_due', False)
+        compose_form = ir_model_data.get_object_reference('mail', 'email_compose_message_wizard_form')[1]
         ctx = dict(
             default_model='res.partner',
             default_res_id=self.id,
             default_use_template=bool(template),
-            default_template_id=template.id,
+            default_template_id=template,
             default_composition_mode='comment',
         )
         return {
@@ -98,8 +102,8 @@ class ResPartner(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'mail.compose.message',
-            'views': [(compose_form.id, 'form')],
-            'view_id': compose_form.id,
+            'views': [(compose_form, 'form')],
+            'view_id': compose_form,
             'target': 'new',
             'context': ctx,
         }
