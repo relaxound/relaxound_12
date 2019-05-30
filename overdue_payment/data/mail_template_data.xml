@@ -13,7 +13,7 @@
             <field name="report_template" ref="report_customeroverdue"/>
             <field name="report_name">${(object.name or '').replace('/','_')}</field>
             <field name="lang">${object.lang}</field>
-            <field name="body_html"><![CDATA[
+            <field name="body_html" type="html">
 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 13px; color: rgb(34, 34, 34); background-color: #FFF; ">
 
     <p>Hello ${object.name},</p>
@@ -26,7 +26,7 @@
 
     </div>
 
-            ]]></field>
+            </field>
         </record>
 
         <!--Email template -->
@@ -40,7 +40,7 @@
             <field name="report_template" ref="action_report_print_overdue"/>
             <field name="report_name">${(object.name or '').replace('/','_')}</field>
             <field name="lang">${object.lang}</field>
-            <field name="body_html"><![CDATA[
+            <field name="body_html" type="html">
 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 13px; color: rgb(34, 34, 34); background-color: #FFF; ">
 
     <p>Hello ${object.name},</p>
@@ -58,7 +58,7 @@ If you have any queries regarding your account, Please contact us.</p>
 
     </div>
 
-            ]]></field>
+            </field>
         </record>
 
     </data>
