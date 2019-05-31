@@ -10,7 +10,7 @@ class sale_invoice_fun(models.Model):
         pro1=self.env['account.journal'].search([])
         if self.partner_id.customer and self.partner_id.is_retailer:
             for item in pro1:
-                if item.name=='Retail Invoices':
+                if item.name=='Retailer Invoices':
                     self.update({'journal_id':item.id})
 
         elif self.partner_id.customer:
