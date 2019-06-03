@@ -64,7 +64,7 @@ class AccountInvoice(models.Model):
                                         #                     str(item.qty_uom * line.quantity), bundle_price]
                                         ship_data.append('\n')
                                         shipping_data.write(
-                                            ';'.join(ship_data).encode('utf-8'))
+                                            ';'.join(map(str,ship_data)).encode('utf-8'))
                                         bundle_price = ''
                                         bundle_id = ''
                                 else:
