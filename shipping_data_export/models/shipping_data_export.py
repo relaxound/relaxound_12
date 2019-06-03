@@ -83,7 +83,6 @@ class AccountInvoice(models.Model):
 
         # return self.pool.get('report').get_action(self, 'shipping.data.xlsx')
 
-
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
