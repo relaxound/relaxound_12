@@ -9,7 +9,7 @@
     'license': 'AGPL-3',
     'author': "Odoo Tips",
     'website': 'http://www.gotodoo.com/',
-    'depends': ['base', 'account', 'sale','account_banking_mandate'
+    'depends': ['base', 'account', 'sale','account_banking_mandate','mail'
                 ],
 
     'images': ['images/main_screenshot.png'],
@@ -20,6 +20,7 @@
              'reports/report_overdue_document.xml',
              'data/mail_template_data.xml',
              'data/partner_data.xml',
+             'data/mail_data.xml',
              ],
     'installable': True,
     'application': True,
