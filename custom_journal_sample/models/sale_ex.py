@@ -24,5 +24,3 @@ class sale_order_fun(models.Model):
 					res1.update({'journal_id':item.id})
 
 		return res
-			
-
