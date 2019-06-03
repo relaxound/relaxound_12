@@ -49,7 +49,7 @@ class AccountInvoice(models.Model):
                         order.partner_invoice_id.street2 or '', order.partner_invoice_id.city or '', ' ', order.partner_invoice_id.zip or '',
                         order.partner_invoice_id.country_id 
                         and order.partner_invoice_id.country_id.name or '', 
-                        order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET',str(order.order_line.product_uom_qty),order.client_order_ref]
+                        order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET',order.client_order_ref,str(order.order_line.product_uom_qty)]
                 if invoices:
                     for invoice in invoices:
                         for line in invoice.invoice_line_ids:
