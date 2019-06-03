@@ -42,28 +42,14 @@ class AccountInvoice(models.Model):
                 invoices = self.env['account.invoice'].search(
                     [('origin', '=', order.name)])  
                 _logger.debug("2 ---------------------> %s" % invoices)
-                data = [order.partner_shipping_id and order.partner_shipping_id.name or '' ,
-                        'True' or 'False', '', 
-                        order.partner_shipping_id.street or '',
-                        order.partner_shipping_id.street2 or '', 
-                        order.partner_shipping_id.city or '',
-                        order.partner_shipping_id.state_id.name or '', 
-                        order.partner_shipping_id.zip or '', 
-                        order.partner_shipping_id.country_id.name or '',
-                        order.partner_shipping_id.email or '', 
-                        order.partner_invoice_id.name or '', 
-                        ' ', 
-                        order.partner_invoice_id.street or '',
-                        order.partner_invoice_id.street2 or '', 
-                        order.partner_invoice_id.city or '', 
-                        ' ', 
-                        order.partner_invoice_id.zip or '',
-                        order.partner_invoice_id.country_id and order.partner_invoice_id.country_id.name or '', 
-                        order.name or '', 
-                        invoices and str(invoices[0].date_invoice) or '', 
-                        'PACKET', 
-                        order.client_order_ref or '',
-                        str(order.order_line.product_uom_qty)]
+                data = [order.partner_shipping_id and order.partner_shipping_id.name or '' ,'True' or 'False', '', 
+                        order.partner_shipping_id.street or '', order.partner_shipping_id.street2 or '', order.partner_shipping_id.city or '',
+                        order.partner_shipping_id.state_id.name or '', order.partner_shipping_id.zip or '', order.partner_shipping_id.country_id.name or '',
+                        order.partner_shipping_id.email or '', order.partner_invoice_id.name or '', ' ', order.partner_invoice_id.street or '',
+                        order.partner_invoice_id.street2 or '', order.partner_invoice_id.city or '', ' ', order.partner_invoice_id.zip or '',
+                        order.partner_invoice_id.country_id 
+                        and order.partner_invoice_id.country_id.name or '', 
+                        order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET', order.client_order_ref or '' ,str(order.order_line.product_uom_qty)]
                 if invoices:
                     for invoice in invoices:
                         for line in invoice.invoice_line_ids:
