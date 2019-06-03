@@ -40,16 +40,14 @@ class AccountInvoice(models.Model):
             shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;client_order_ref;item_quantity;item_line_number;item_name;item_description;item_price;\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
-                    [('origin', '=', order.name)])  
+                    [('origin', '=', order.name)])
                 _logger.debug("2 ---------------------> %s" % invoices)
-                data = [order.partner_shipping_id and order.partner_shipping_id.name or '' ,'True' or 'False', '', 
+                data = [order.partner_shipping_id and order.partner_shipping_id.name or '' ,'True' or 'False', '',
                         order.partner_shipping_id.street or '', order.partner_shipping_id.street2 or '', order.partner_shipping_id.city or '',
                         order.partner_shipping_id.state_id.name or '', order.partner_shipping_id.zip or '', order.partner_shipping_id.country_id.name or '',
                         order.partner_shipping_id.email or '', order.partner_invoice_id.name or '', ' ', order.partner_invoice_id.street or '',
                         order.partner_invoice_id.street2 or '', order.partner_invoice_id.city or '', ' ', order.partner_invoice_id.zip or '',
-                        order.partner_invoice_id.country_id 
-                        and order.partner_invoice_id.country_id.name or '', 
-                        order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET',order.client_order_ref or '' ,str(order.order_line.product_uom_qty)]
+                        order.partner_invoice_id.country_id and order.partner_invoice_id.country_id.name or '',order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET', order.client_order_ref or '', str(order.order_line.product_uom_qty)]
                 if invoices:
                     for invoice in invoices:
                         for line in invoice.invoice_line_ids:
@@ -81,7 +79,7 @@ class AccountInvoice(models.Model):
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
         # print("date and time:",date_time)     
 
-        file = open("src/user/SALE-ORDER-DATA/shipping_data_%s.csv" % (current_date),'rb')                  
+        file = open("src/user/SALE-ORDER-DATA/shipping_data_%s.csv" % (current_date),'rb')
         ftp.storbinary('STOR '+ftp.pwd()+'/shipping_data_%s.csv'%(date_time),file)
 
         # return self.pool.get('report').get_action(self, 'shipping.data.xlsx')
@@ -104,7 +102,7 @@ class StockPicking(models.Model):
                 pass
             else:
                 dict1.update({time:name})
-    
+
 
         max1=max(dict1)
         file_name = dict1.get(max1)
@@ -122,7 +120,7 @@ class StockPicking(models.Model):
         localfile = open(file_path, 'wb')
         ftp.retrbinary('RETR '+ftp.pwd()+'/'+ filename, localfile.write, 1024)
         localfile.close()
-            
+
         current_date = fields.Datetime.now()
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
         new_name = 'TRACKING_old_%s.csv'%(date_time)
