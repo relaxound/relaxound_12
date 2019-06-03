@@ -73,7 +73,7 @@ class AccountInvoice(models.Model):
                                         line.quantity), str(line.price_subtotal)]
                                     ship_data.append('\n')
                                     shipping_data.write(
-                                        ';'.join(ship_data).encode('utf-8'))
+                                        ';'.join(map(str,ship_data)).encode('utf-8'))
                 order.imported_to_lido = True
                 order.imported_date = current_date
 
