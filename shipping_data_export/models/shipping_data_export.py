@@ -20,7 +20,6 @@ class SaleOrder(models.Model):
     imported_to_lido = fields.Boolean('Imported to Lido')
     imported_date = fields.Datetime('Imported Date')
 
-
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
