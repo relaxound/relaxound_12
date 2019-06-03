@@ -3,16 +3,15 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Custom Journal',
+    'name': 'Custom Journal sample',
     'version': '12.0',
     'category': 'Tools',
     'license': 'AGPL-3',
     'author': "Techspawn",
     'website': 'http://www.Techspawn.com/',
-    'depends': ['base', 'account', 'sale'],
+    'depends': ['contacts','sale','account'],
 
-    'data': [ 
-            'views/res_partner.xml',       
+    'data': [             
              ],
     'installable': True,
     'application': True,
