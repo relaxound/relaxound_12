@@ -6,7 +6,7 @@
         <xpath expr="//t[@t-set='address']" position="replace">
             <br/>
             <br/>
-                <div class="row" style="margin-left:1.5cm; font-size: 13px;">
+                <div class="row" style="margin-left:1.5cm; margin-right:3cm; font-size: 13px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                         <strong>Shipping address:</strong><br/>
@@ -28,9 +28,9 @@
                                  <br/>
                                     <span t-field="child.zip"/>
                                 </t>
-                                <t t-if ="child.state_id">
+                                <t t-if="child.state_id">
                                     <br/>
-                                    <spam t-field="child.state_id"></spam>
+                                    <spam t-field="child.state_id"/>
                                 </t>
                                 
                                 <t t-if="child.country_id.name">
@@ -41,7 +41,7 @@
                         </t>
                         </t>
                         </div>
-                        <div style="width:50%; float: right;">
+                        <div style="width:50%; float: right; text-align:right">
                             <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
                             <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
                         </div>
