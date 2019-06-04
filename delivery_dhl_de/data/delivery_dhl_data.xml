@@ -25,12 +25,12 @@
 	    <record id="delivery_carrier_dhl_de_nat" model="delivery.carrier">
 	        <field name="name">DHL Paket National</field>
 			<field name="product_id" ref="delivery_dhl_de.product_product_delivery_dhl_usa"/>
-	        <field name="partner_id" ref="dhl_de_partner"/>
-	        <field name="product_sale_ok" eval="False"/>
-	        <field name="product_type">service</field>
+	        <!-- <field name="partner_id" ref="dhl_de_partner"/> -->
+	        <!-- <field name="product_sale_ok" eval="False"/> -->
+	        <!-- <field name="product_type">service</field> -->
 	        <field name="delivery_type">dhl_de</field>
 	        <field name="dhl_product">EPN</field>
-	        <field name="invoice_policy">order</field>
+	        <!-- <field name="invoice_policy">order</field> -->
 	    </record>
 		<record id="product_product_delivery01" model="product.product">
 			  <field name="name">DHL Paket International</field>
@@ -44,12 +44,12 @@
 	    <record id="delivery_carrier_dhl_de_intl" model="delivery.carrier">
 	        <field name="name">DHL Paket International</field>
 			<field name="product_id" ref="delivery_dhl_de.product_product_delivery01"/>
-	        <field name="partner_id" ref="dhl_de_partner"/>
-	        <field name="product_sale_ok" eval="False"/>
-	        <field name="product_type">service</field>
+	        <!-- <field name="partner_id" ref="dhl_de_partner"/> -->
+	        <!-- <field name="product_sale_ok" eval="False"/> -->
+	        <!-- <field name="product_type">service</field> -->
 	        <field name="delivery_type">dhl_de</field>
 	        <field name="dhl_product">BPI</field>
-	        <field name="invoice_policy">order</field>
+	        <!-- <field name="invoice_policy">order</field> -->
 	    </record>
 	</data>
 </odoo>
