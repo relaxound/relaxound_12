@@ -9,7 +9,7 @@
     'license': 'AGPL-3',
     'author': "Techspawn",
     'website': 'http://www.Techspawn.com/',
-    'depends': ['contacts','account','customer_sequence'],
+    'depends': ['contacts','sale','account'],
 
     'data': [             
              ],
