@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_retailer_form">
+            <field name="name">view.retailer.inherit</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[3]/group/group[1]/field[@name='customer']" position="after">
+                    <field name="is_retailer"/>
+                    <field name="country_name" invisible="True"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_retailer_tree">
+            <field name="name">view.retailer.inherit</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="before">
+                    <field name="create_date"/>
+                </xpath>
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="ref"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_form_fiscal_position" model="ir.ui.view">
+            <field name="name">res.partner.fisc.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <field name="property_account_position_id" position="attributes">
+                    <attribute name="attrs">{'required': [('is_retailer', '=', True), ('country_name', '!=', 'Germany')]}</attribute>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
