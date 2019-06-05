@@ -11,7 +11,8 @@
     'website': 'http://www.Techspawn.com/',
     'depends': ['contacts','sale','account'],
 
-    'data': [             
+    'data': [    
+             'views/res_partner.xml',         
              ],
     'installable': True,
     'application': True,

@@ -4,3 +4,4 @@
 
 from . import partner
 from . import sale_ex
+from . import journal
