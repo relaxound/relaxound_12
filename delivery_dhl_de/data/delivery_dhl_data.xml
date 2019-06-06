@@ -15,7 +15,7 @@
 	    </record>
 		<record id="product_product_delivery_dhl_usa" model="product.product">
 			  <field name="name">DHL Paket National</field>
-			  <!-- <field name="default_code">Delivery_0011</field> -->
+			  <field name="default_code">Delivery_0011</field>
 			  <field name="type">service</field>
 			  <field name="categ_id" ref="delivery.product_category_deliveries"/>
 			  <field name="sale_ok" eval="False"/>
@@ -34,7 +34,7 @@
     	</record>
 		<record id="product_product_delivery01" model="product.product">
 			  <field name="name">DHL Paket International</field>
-			  <!-- <field name="default_code">Delivery_0012</field> -->
+			  <field name="default_code">Delivery_0012</field>
 			  <field name="type">service</field>
 			  <field name="categ_id" ref="delivery.product_category_deliveries"/>
 			  <field name="sale_ok" eval="False"/>
