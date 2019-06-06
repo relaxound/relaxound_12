@@ -9,7 +9,9 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
             	<xpath expr="//field[@name='name']" position="after">
-                    <field name="color_id"/>
+                    <div>
+                        <field name="color_id"/>
+                    </div>
                 </xpath>
             </field>
         </record>
@@ -21,7 +23,7 @@
             <field eval="16" name="priority"/>
             <field name="arch" type="xml">
             	<xpath expr="//field[@name='name']" position="after">
-                    <field name="color_id"/>
+		            <field name="color_id"/>
                 </xpath>
             </field>
         </record>
