@@ -6,7 +6,7 @@
         <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
         <br/>
-        <div class="row" style="margin-left:1.5cm; margin-right:3cm; font-size: 13px;">
+        <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
         <div style="width:100%">
             <div style="width:50%; float: left;">
                 <t t-if="doc.partner_id.parent_id">
@@ -50,7 +50,7 @@
                     <font color="#0e71b8">Ihre Referenz: </font><span t-field="doc.client_order_ref"/>
                 </t> -->
     
-                 <t t-if="doc.order_date">
+                <t t-if="doc.order_date">
                     <br/>
                     <font color="#0e71b8">Order Date: </font> <span t-esc="doc.order_date"  t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                 </t>
@@ -88,7 +88,7 @@
                     <br/>
                     <font color="#0e71b8">Expiration Date: </font> <span t-field="doc.validity_date"/>
                 </t>
-                <t >
+                <t>
                     <br/>
                     <!--<font color="#0e71b8">Expiration Date: </font> <span t-field="doc.validity_date"/>-->
                 </t>
@@ -121,7 +121,7 @@
         <attribute name="style">display:none</attribute>
     </xpath>
     <xpath expr="//div[@class='page']" position="attributes">
-        <attribute name="style">margin-right:3cm; margin-left:1.5cm; font-size:13px;</attribute>
+        <attribute name="style">margin-right:3cm; margin-left:1.4cm; font-size:13px;</attribute>
     </xpath>
     <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
         <div>
