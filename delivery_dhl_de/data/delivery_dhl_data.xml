@@ -27,10 +27,10 @@
 		        <field name="product_id" ref="delivery_dhl_de.product_product_delivery_dhl_usa"/>
 		        <field name="delivery_type">dhl_de</field>
 		        <field name="dhl_product">EPN</field>
-		        <field name="dhl_SiteID"></field>
+		        <!-- <field name="dhl_SiteID"></field>
 		        <field name="dhl_password"></field>
 		        <field name="dhl_account_number"></field>
-		        <!-- <field name="dhl_default_packaging_id" ref="dhl_packaging_BOX"/> -->
+ -->		        <!-- <field name="dhl_default_packaging_id" ref="dhl_packaging_BOX"/> -->
     	</record>
 		<record id="product_product_delivery01" model="product.product">
 			  <field name="name">DHL Paket International</field>
@@ -46,9 +46,9 @@
 		        <field name="product_id" ref="delivery_dhl_de.product_product_delivery01"/>
 		        <field name="delivery_type">dhl_de</field>
 		        <field name="dhl_product">BPI</field>
-		        <field name="dhl_SiteID"></field>
+		        <!-- <field name="dhl_SiteID"></field>
 		        <field name="dhl_password"></field>
-		        <field name="dhl_account_number"></field>
+		        <field name="dhl_account_number"></field> -->
 		        <!-- <field name="dhl_default_packaging_id" ref="dhl_packaging_BOX"/> -->
     	</record>
 	</data>
