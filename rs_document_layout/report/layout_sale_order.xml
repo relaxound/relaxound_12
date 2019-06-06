@@ -50,9 +50,9 @@
                     <font color="#0e71b8">Ihre Referenz: </font><span t-field="doc.client_order_ref"/>
                 </t> -->
     
-                <t t-if="doc.order_date">
+                 <t t-if="doc.order_date">
                     <br/>
-                    <font color="#0e71b8">Order Date: </font> <span t-esc="doc.order_date"/>
+                    <font color="#0e71b8">Order Date: </font> <span t-esc="doc.order_date"  t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                 </t>
     
                 <t t-if="doc.validity_date">
