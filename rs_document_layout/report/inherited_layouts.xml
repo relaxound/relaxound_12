@@ -5,15 +5,15 @@
         <!-- <template id="external_layout_header" inherit_id="report.external_layout_header"> -->
         <template id="external_layout_header" inherit_id="web.external_layout_standard">
             <xpath expr="//div[hasclass('header')]" position="replace">
-                <div class="header" style="margin-left:-0.3cm">
+                <div class="header" style="margin-left:-0.2cm">
                         <div class="row" >
-                            <div class="col-xs-12 col-md-12" align="center" style="margin-top:10px;"  >
+                            <div class="col-xs-12 col-md-12" align="center" >
                             <img src="/rs_document_layout/static/src/img/relaxound_header.png" class="center-block"
                                 style="max-height:110px; margin-top:10px" />
                             </div>
                         </div>
                     <br/>
-                    <div class="row" style="margin-top:10px; ">
+                    <div class="row" style="margin-top:16px; ">
                         <div class="col-md-12 " name="company_address"
                              style="color:#084199;font-size:9px;font-weight:100;font-family:Arial;letter-spacing:1px; margin-left:0.7cm;">
                             <br/>
