@@ -7,7 +7,7 @@
             <xpath expr="//div[hasclass('header')]" position="replace">
                 <div class="header" style="margin-left:-0.3cm">
                         <div class="row" >
-                            <div class="col-xs-12 col-md-12" align="center" style="margin-top:10px;"  >
+                            <div class="col-xs-12" align="center" style="margin-top:10px;"  >
                             <img src="/rs_document_layout/static/src/img/relaxound_header.png" class="center-block"
                                 style="max-height:110px; margin-top:10px" />
                             </div>
