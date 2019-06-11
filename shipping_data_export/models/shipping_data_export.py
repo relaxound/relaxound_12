@@ -36,7 +36,7 @@ class AccountInvoice(models.Model):
         _logger.debug("1 ---------------------> %s" % orders)
         current_date = fields.Datetime.now()
         with open(os.path.join("src/user/SALE-ORDER-DATA/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
-            shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;client_order_ref;item_quantity;item_line_number;item_name;item_description;item_price;\n')
+            shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;client_order_ref;item_line_number;item_name;item_description;item_quantity;item_price;\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
                     [('origin', '=', order.name)])
@@ -46,7 +46,7 @@ class AccountInvoice(models.Model):
                         order.partner_shipping_id.state_id.name or '', order.partner_shipping_id.zip or '', order.partner_shipping_id.country_id.name or '',
                         order.partner_shipping_id.email or '', order.partner_invoice_id.name or '', ' ', order.partner_invoice_id.street or '',
                         order.partner_invoice_id.street2 or '', order.partner_invoice_id.city or '', ' ', order.partner_invoice_id.zip or '',
-                        order.partner_invoice_id.country_id and order.partner_invoice_id.country_id.name or '',order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET', order.client_order_ref or '', str(order.order_line[0].product_uom_qty)]
+                        order.partner_invoice_id.country_id and order.partner_invoice_id.country_id.name or '',order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET', order.client_order_ref or '']
                 if invoices:
                     for invoice in invoices:
                         for line in invoice.invoice_line_ids:
@@ -57,11 +57,11 @@ class AccountInvoice(models.Model):
                                     bundle_id = str(line.id)
                                     for item in items:
                                         ship_data = data
-                                        # ship_data = data + [bundle_id, str(item.item_id.code), item.item_id.name,
-                                        #                     str(item.qty_uom * line.quantity), bundle_price]
+                                        ship_data = data + [bundle_id,str(item.code), item.name,
+                                                            str(line.quantity), bundle_price]
                                         ship_data.append('\n')
                                         shipping_data.write(
-                                            ';'.join(map(str,ship_data)).encode('utf-8'))
+                                            ';'.join(map(str, ship_data)).encode('utf-8'))
                                         bundle_price = ''
                                         bundle_id = ''
                                 else:
