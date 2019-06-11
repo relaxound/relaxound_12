@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+    	<template id="report_invoice_document_sale" inherit_id="account.report_invoice_document_with_payments">
+            <xpath expr="//t[@t-if='len(payments_vals) > 0']" position="replace"/>
+            <xpath expr="//t[@t-foreach = 'payments_vals']" position="replace"/>
+
+        </template>
+    </data>
+</odoo>
