@@ -2,7 +2,7 @@ from odoo import models, fields, api, _
 
 
 class payment(models.Model):
-    _inherit = 'sale.order'
+    _inherit = 'account.invoice'
     @api.onchange('partner_id')
     def onchange_payment_term(self):
     	self.ensure_one()
