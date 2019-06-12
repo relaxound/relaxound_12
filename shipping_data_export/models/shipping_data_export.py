@@ -17,8 +17,8 @@ except ImportError:
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    imported_to_lido = fields.Boolean('Imported to Lido')
-    imported_date = fields.Datetime('Imported Date')
+    imported_to_lido = fields.Boolean('Imported to Lido', copy=False)
+    imported_date = fields.Datetime('Imported Date', copy=False)
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
