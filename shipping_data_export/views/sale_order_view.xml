@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_export_shipping_form">
+            <field name="name">view.export.shipping.inherit</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[@name='other_information']/group/group[2]/field[@name='client_order_ref']" position="after">
+                    <field name="imported_to_lido"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sale_imported_to_lido">
+            <field name="name">view.sale.imported.lido.inherit</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="field[@name='state']" position="before">
+                    <field name="imported_to_lido"/>
+                    <field name="imported_date"/>
+                    <field name="warehouse_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
