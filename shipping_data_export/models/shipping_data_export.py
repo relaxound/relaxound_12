@@ -30,7 +30,7 @@ class AccountInvoice(models.Model):
         ftp.cwd('TEST')
         # print(ftp.pwd())
         orders = self.env['sale.order'].search([('imported_to_lido', '=', False), (
-            'invoice_status', '=', 'invoiced'), ('warehouse_id.name', '=', 'LIMAL')])
+            'invoice_status', 'in', ['invoiced','to invoice']), ('warehouse_id.name', '=', 'LIMAL')])
         if not orders:
             return 1
         _logger.debug("1 ---------------------> %s" % orders)
