@@ -84,7 +84,6 @@ class stockpicking(models.Model):
 
 		
 		for i,s1 in zip(SKU,stock):
-			
 			ids = self.env['product.product'].search([('default_code','=',i)])
 			if( not ids):
 				pass
