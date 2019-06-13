@@ -84,21 +84,25 @@ class stockpicking(models.Model):
 
 		
 		for i,s1 in zip(SKU,stock):
-			ids = self.env['product.product'].search([('default_code','=',i)])
-			if( not ids):
+			SKU_list=SKU.rsplit("-",1)
+			if('20x' in SKU_list[1]):
 				pass
 			else:
-				if(len(ids)>1):
-					for i in ids:
-						if(i.type=='product'and s1!=0 and s1>0):
-							dict1.update({i.id:s1})
-						else:
-							pass		
-				else:			
-					if(ids.type =="product" and s1!=0 and s1>0):
+				ids = self.env['product.product'].search([('default_code','=',i)])
+				if( not ids):
+					pass
+				else:
+					if(len(ids)>1):
+						for i in ids:
+							if(i.type=='product'and s1!=0 and s1>0):
+								dict1.update({i.id:s1})
+							else:
+								pass		
+					else:			
+						if(ids.type =="product" and s1!=0 and s1>0):
 							dict1.update({ids.id:s1})
 						
-					else:
+						else:
 							pass
 
 		date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
