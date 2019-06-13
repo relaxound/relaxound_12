@@ -115,12 +115,12 @@ class stockpicking(models.Model):
 			stock_ex =dc[0]['qty_at_date']
 			if(stock_ex!=0):
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+stock_ex}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty':stock_qty}])
 
 			else:
 			
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': stock_qty}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty':stock_qty}])
 
 		
 
