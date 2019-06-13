@@ -71,9 +71,7 @@ class AccountInvoice(models.Model):
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str,ship_data)).encode('utf-8'))
-                else:
-                    shipping_data.write(
-                        ';'.join(map(str, data)).encode('utf-8'))
+                                    
                 order.imported_to_lido = True
                 order.imported_date = current_date
 
