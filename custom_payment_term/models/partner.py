@@ -19,13 +19,13 @@ class SaleOrder(models.Model):
                 self.update({'payment_term_id':item.id})
 
 
-    @api.multi
-    def _prepare_invoice(self):
-        res=super(SaleOrder,self)._prepare_invoice()
-        res.update({'payment_term_id':self.payment_term_id.id})
+    # @api.multi
+    # def _prepare_invoice(self):
+    #     res=super(SaleOrder,self)._prepare_invoice()
+    #     res.update({'payment_term_id':self.payment_term_id.id})
         
 
-        return res
+    #     return res
 
 
 
