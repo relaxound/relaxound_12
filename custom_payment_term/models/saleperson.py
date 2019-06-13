@@ -7,10 +7,11 @@ class AccountInvoice(models.Model):
 
 	@api.onchange('partner_id')
 	def payment_term(self):
-		if self.payment_term_id:
+		import pdb;pdb.set_trace()
+		if not self.payment_term_id:
 			res=self.env['account.payment.term'].search([])
 			for item in res:
 				if item.name=='14 days after receipt of invoice':
-					res.update({'payment_term_id':item.id})
+					self.update({'payment_term_id':item})
 
 
