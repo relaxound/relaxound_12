@@ -80,7 +80,6 @@ class AccountInvoice(models.Model):
 
         file = open("src/user/SALE-ORDER-DATA/shipping_data_%s.csv" % (current_date),'rb')
         ftp.storbinary('STOR '+ftp.pwd()+'/shipping_data_%s.csv'%(date_time),file)
-
         # return self.pool.get('report').get_action(self, 'shipping.data.xlsx')
 
 class StockPicking(models.Model):
