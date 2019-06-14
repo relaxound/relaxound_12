@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    payment_method_id = fields.Many2one(comodel_name='payment.method2',string='Payment Method')
+    payment_method_id = fields.Many2one(comodel_name='payment.method2',string='Payment Method',required=True )
 
     payment_term_id = fields.Many2one('account.payment.term', string='Payment Term', oldname='payment_term',
                                       readonly=True, states={'draft': [('readonly', False)]},
