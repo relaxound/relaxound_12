@@ -4,6 +4,8 @@ from odoo import models, fields, api, _
 class AccountInvoice(models.Model):
 	_inherit = 'account.invoice'
 
+	payment_term_id = fields.Many2one('account.payment.term', string='Payment Terms', oldname='payment_term',store=1)
+
 
 	@api.onchange('partner_id')
 	def payment_term(self):
