@@ -64,13 +64,18 @@ class AccountInvoice(models.Model):
                                             ';'.join(map(str, ship_data)).encode('utf-8'))
                                         bundle_price = ''
                                         bundle_id = ''
-                                else:
+                                 else:
                                     ship_data = data
                                     ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
                                         line.quantity), str(line.price_subtotal)]
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str,ship_data)).encode('utf-8'))
+                else:
+                    shipping_data.write(
+                        ';'.join(map(str, data)).encode('utf-8'))
+                
+
                 order.imported_to_lido = True
                 order.imported_date = current_date
 
