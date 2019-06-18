@@ -13,4 +13,4 @@ class StockPicking(models.Model):
     @api.multi
     def fill_pack(self):
         for operation in self.move_ids_without_package:
-            operation.qty_done = operation.product_qty
+            operation.quantity_done = operation.product_uom_qty
