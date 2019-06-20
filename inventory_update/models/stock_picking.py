@@ -41,10 +41,10 @@ class stockpicking(models.Model):
 			return file_name
 	@api.model
 	def _import_inventory_(self): 
-		db="relaxound-relaxound-12-test-master-new-409305"  # main stage
+		db="relaxound-relaxound-12-test-master-new-427406"  # main stage
 		username="rahelheuser@zwitscherbox.com"
 		password="let/s1_smile"
-		url = "https://relaxound-relaxound-12-test-master-new-409305.dev.odoo.com" # main stage
+		url = "https://relaxound-relaxound-12-test-master-new-427406.dev.odoo.com" # main stage
 
 		ftp = FTP("62.214.48.227")
 		ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
@@ -96,10 +96,10 @@ class stockpicking(models.Model):
 							pass		
 				else:			
 					if(ids.type =="product" and s1!=0 and s1>0):
-							dict1.update({ids.id:s1})
-						
+						dict1.update({ids.id:s1})
+					
 					else:
-							pass
+						pass
 
 		date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
 	
@@ -115,12 +115,12 @@ class stockpicking(models.Model):
 			stock_ex =dc[0]['qty_at_date']
 			if(stock_ex!=0):
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': float(stock_qty)+stock_ex}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty':stock_qty}])
 
 			else:
 			
 				model.execute(db,uid,password,'stock.inventory.line','create',	
-				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty': stock_qty}])
+				[{'inventory_id': id2[0],'product_id': id12,'location_id': 200,'product_qty':stock_qty}])
 
 		
 

@@ -56,13 +56,14 @@ class ResPartner(models.Model):
             message loaded by default
         """
         self.ensure_one()
-        template = self.env.ref('overdue_payment.email_template_edi_overdue', False)
+        template = self.env.ref('overdue_payment.email_template_edi_overdue2', False)
         compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
         ctx = dict(
             default_model='res.partner',
             default_res_id=self.id,
             default_use_template=bool(template),
             default_template_id=template.id,
+            custom_layout="overdue_payment.mail_notification_paynow_ex",
             default_composition_mode='comment',
         )
         return {
@@ -83,17 +84,21 @@ class ResPartner(models.Model):
             message loaded by default
         """
         self.ensure_one()
-        template = self.env.ref('overdue_payment.email_template_edi_due', False)
+        template = self.env.ref('overdue_payment.email_template_edi_due116', False)
         compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
-        ctx = dict(
+        ctx =dict(
             default_model='res.partner',
             default_res_id=self.id,
             default_use_template=bool(template),
             default_template_id=template.id,
             default_composition_mode='comment',
-        )
+            # mark_so_as_sent= True,
+            custom_layout="overdue_payment.mail_notification_paynow_ex",
+            # force_email= True
+            )
+
+
         return {
-            'name': _('Compose Email'),
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form',

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_withcarrier_dhl_de_out_form_shipping" model="ir.ui.view">
+            <field name="name">view_picking_withcarrier_dhl_de_out_form_shipping</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+            <field eval="16" name="priority"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='carrier_id']" position="after">
+                    <field name="ignore_warnings"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+            <field name="name">delivery_dhl_de.stock.picking_withcarrier.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <data>
+                <div name="button_box" position="inside">
+                    <button type="object" name="open_return_website" class="oe_stat_button" icon='fa-reply' string="DHL Return"/>
+                         <!--attrs="{'invisible': ['|','|',('carrier_tracking_ref','=',False),('carrier_id', '=', False),('delivery_type','=','grid')]}" 
+                    />-->
+                </div>
+              </data>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+
+

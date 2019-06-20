@@ -48,7 +48,8 @@ class SaleOrder(models.Model):
     payment_method_id = fields.Many2one(
         comodel_name='payment.method2',
         string='Payment Method',
-        ondelete='restrict'
+        ondelete='restrict',
+        required=True
     )
     residual = fields.Float(
         compute='_compute_amount',
