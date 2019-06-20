@@ -121,8 +121,8 @@
                 <div class="col-6" style="line-height:1">
                     <!-- <br/> -->
                     <br/>
-                    <br/><br/><br/>
-                    <table>
+                    <br/>
+                    <table style="line-height:1.5">
                         <tr t-if="o.partner_id.property_delivery_carrier_id">
                             <td class="text-left">
                                 Shipping method:
@@ -152,23 +152,23 @@
                                 Shipping address:
                             </td>
                             <td class="text-left" style="font-size:13px">
-                            <t t-if="o.partner_id.street">
-                                <span t-field="o.partner_id.street"/>
-                            </t>
-                            <t t-if="o.partner_id.street2">
-                                <br/>
-                                <span t-field="o.partner_id.street2"/>
-                            </t>
-                            <t t-if="o.partner_id.zip or o.partner_id.city">
-                                <br/>
-                                <span t-field="o.partner_id.zip"/>  
-                                            
-                                <span t-field="o.partner_id.city"/>
-                            </t>
-                            <t t-if="o.partner_id.country_id">
-                                <br/>
-                                <span t-field="o.partner_id.country_id.name"/>
-                            </t>
+                                <t t-if="o.partner_shipping_id.street">
+                                    <span t-field="o.partner_shipping_id.street"/>
+                                </t>
+                                <t t-if="o.partner_shipping_id.street2">
+                                    <br/>
+                                    <span t-field="o.partner_shipping_id.street2"/>
+                                </t>
+                                <t t-if="o.partner_shipping_id.zip or o.partner_shipping_id.city">
+                                    <br/>
+                                    <span t-field="o.partner_shipping_id.zip"/>  
+                                                
+                                    <span t-field="o.partner_shipping_id.city"/>
+                                </t>
+                                <t t-if="o.partner_shipping_id.country_id">
+                                    <br/>
+                                    <span t-field="o.partner_shipping_id.country_id.name"/>
+                                </t>
                         </td>
                         </tr>
                     </table>
@@ -522,10 +522,6 @@
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
 
-        <template id="report_invoice_document_sale" inherit_id="account.report_invoice_document_with_payments">
-            <xpath expr="//t[@t-if='len(payments_vals) > 0']" position="replace"/>
-            <xpath expr="//t[@t-foreach = 'payments_vals']" position="replace"/>
-
-        </template>
+        
     </data>
 </odoo>

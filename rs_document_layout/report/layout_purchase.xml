@@ -6,7 +6,7 @@
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/>
-                <div class="row" style="margin-left:1.5cm; margin-right:3cm; font-size: 13px;">
+                <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                         <strong>Shipping address:</strong><br/>
@@ -61,7 +61,7 @@
             <div id="informations" class="row mt32 mb32">
                 <div t-if="o.name" class="col-3 bm-2">
                     <strong>Our Order Reference:</strong>
-                    <p t-field="o.name" class="m-0"/>
+                        <p t-field="o.name" class="m-0"/>
                 </div>
                 <div t-if="o.partner_ref" class="col-3 bm-2">
                     <strong>Your Order Reference:</strong>
@@ -159,7 +159,7 @@
             </xpath>
             
             <xpath expr="//div[@class='page']" position="attributes">
-                 <attribute name="style">margin-right:3cm; margin-left:1.5cm;font-size:13px;</attribute>
+                 <attribute name="style">margin-right:3cm; margin-left:1.4cm;font-size:13px;</attribute>
             </xpath>
             
         </template>

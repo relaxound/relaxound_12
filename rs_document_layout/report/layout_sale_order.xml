@@ -6,7 +6,7 @@
         <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
         <br/>
-        <div class="row" style="margin-left:1.5cm; margin-right:3cm; font-size: 13px;">
+        <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
         <div style="width:100%">
             <div style="width:50%; float: left;">
                 <t t-if="doc.partner_id.parent_id">
@@ -52,7 +52,7 @@
     
                 <t t-if="doc.order_date">
                     <br/>
-                    <font color="#0e71b8">Order Date: </font> <span t-esc="doc.order_date"/>
+                    <font color="#0e71b8">Order Date: </font> <span t-esc="doc.order_date"  t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                 </t>
     
                 <t t-if="doc.validity_date">
@@ -88,7 +88,7 @@
                     <br/>
                     <font color="#0e71b8">Expiration Date: </font> <span t-field="doc.validity_date"/>
                 </t>
-                <t >
+                <t>
                     <br/>
                     <!--<font color="#0e71b8">Expiration Date: </font> <span t-field="doc.validity_date"/>-->
                 </t>
@@ -121,7 +121,7 @@
         <attribute name="style">display:none</attribute>
     </xpath>
     <xpath expr="//div[@class='page']" position="attributes">
-        <attribute name="style">margin-right:3cm; margin-left:1.5cm; font-size:13px;</attribute>
+        <attribute name="style">margin-right:3cm; margin-left:1.4cm; font-size:13px;</attribute>
     </xpath>
     <xpath expr="//div[hasclass('page')]/table[1]" position="replace">
         <div>
@@ -416,16 +416,16 @@
     </xpath>
     <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
         <div class="text-right" t-if="doc.payment_method_id" style="font-size: 13px">
-            <div class="col-auto mw-100 mb-2 pull-right">
+            <!-- <div class="col-auto mw-100 mb-2 pull-right"> -->
                 <div class="text-right">
                             Payment term:
-                        </div>
+                </div>
                 <div class="text-right">
                     <b>
                         <span t-field="doc.payment_method_id.name"/>
                     </b>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
         <!--<div class="row" style="font-size: 13px;">-->
             <!--<br/>-->

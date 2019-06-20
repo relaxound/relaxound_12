@@ -3,34 +3,38 @@
 
 <template id="overdue_payment.report_due_document">
     <t t-call="web.external_layout">
-        <div class="page" style="margin-right:3cm; margin-left:1.5cm;font-size: 13px;">
-                <div style="width:100%; float: right; text-align: right;">
-                    <div class="col-xs-5 col-xs-offset-7">
+        <div class="page" style="margin-right:3cm; margin-left:1.4cm;font-size: 13px;">
+            <br/>
+                        <div style="width:100%; float: right; text-align: right;">
+                        
+                            <t t-if="o.name">
+                                <br/>
+                                <span t-field="o.name"/>
+                            </t>
 
-                        <t t-if="o.name">
-                            <br/>
-                            <span t-field="o.name"/>
-                        </t>
+                            <t t-if="o.street">
+                                <br/>
+                                <span t-field="o.street"/>
+                            </t>
+                            <t t-if="o.street2">
+                                <br/>
+                                <span t-field="o.street2"/>
+                            </t>
 
-                        <t t-if="o.street">
-                            <br/>
-                            <span t-field="o.street"/>
-                        </t>
-                        <t t-if="o.street2">
-                            <br/>
-                            <span t-field="o.street2"/>
-                        </t>
-                        <t t-if="o.zip or o.city">
-                            <br/>
-                            <span t-field="o.zip"/>
-                            <span t-field="o.city"/>
-                        </t>
-                        <t t-if="o.country_id">
-                            <br/>
-                            <span t-field="o.country_id.name"/>
-                        </t>
-                    </div>
-                </div>
+                            <t t-if="o.zip or o.city">
+                                <br/>
+                                <span t-field="o.zip"/>
+                                <span t-field="o.city"/>
+                            </t>
+                            <t t-if="o.country_id">
+                                <br/>
+                                <span t-field="o.country_id.name"/>
+                            </t>
+                            <t t-if="o.country_id">
+                                <br/>
+                                <!--<span t-field="o.country_id.name"/>-->
+                            </t>
+                        </div>
                 <div>
                 <p>
                     Document: Customer account statement<br/>
@@ -41,25 +45,21 @@
             <div>
                 <t t-if="o.customer_invoices">
                     <span t-field="res_company.overdue_msg"/>
-                    <table class="table table-condensed" id="items">
+                    <table class="table table-condensed"  id="items">
                         <style>
-                                    #items td{
-                                    border:0;
-                                    border-top:0;
-                                    border:0;padding-top: .5em;
-                                    padding-bottom: .5em;
-                                    padding-left:0.2em;
-                                    padding-right:0.2em;
-                                    }
-                                    #items th {
+                                #items td{
                                     border:0; 
-                                    border-top:0;
-                                    padding-right:0.2em;
+                                    padding-top: .3em;
                                     padding-bottom: .3em;
                                     padding-left:0.2em;
-                                    <!--padding-right:0.2em;-->
+                                    padding-right:0.2em;
                                     }
-                </style>
+                                #items th {
+                                    border:0;
+                                    border-top:0;
+                                    padding-right:0.2em;
+                                    padding-left:0.2em;
+                        </style>
                         <thead>
                             <tr style="line-height:0.9;">
                                 <th style="border-bottom: 2px solid black;">Reference number</th>
@@ -81,10 +81,10 @@
                                 <span t-esc="invoice.date_due"/>
                             </td>
                             <td class="text-right">
-                                <span t-esc="invoice.amount_total_signed"/>
+                                <span t-esc="invoice.amount_total_signed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                             <td class="text-right">
-                                <span t-esc="invoice.residual_signed"/>
+                                <span t-esc="invoice.residual_signed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                         </tr>
                     </tbody>
