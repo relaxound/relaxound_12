@@ -52,14 +52,14 @@ class crm_claim(models.Model):
     write_date = fields.Datetime('Update Date' , readonly=True)
     date_deadline = fields.Datetime('Deadline')
     date_closed = fields.Datetime('Closed', readonly=True)
-    date = fields.Datetime('Claim Date', select=True,default=lambda self: self._context.get('date', fields.Datetime.now()))
+    date = fields.Datetime('Claim Date', index=True,default=lambda self: self._context.get('date', fields.Datetime.now()))
     categ_id = fields.Many2one('crm.claim.category', 'Category')
     priority = fields.Selection([('0','Low'), ('1','Normal'), ('2','High')], 'Priority',default='1')
     type_action = fields.Selection([('correction','Corrective Action'),('prevention','Preventive Action')], 'Action Type')
     user_id = fields.Many2one('res.users', 'Responsible', track_visibility='always',default=lambda self: self.env['res.users'].browse(self._context['uid']))
     user_fault = fields.Char('Trouble Responsible')
     team_id = fields.Many2one('crm.team', 'Sales Team', oldname='section_id',\
-                        select=True, help="Responsible sales team."\
+                        index=True, help="Responsible sales team."\
                                 " Define Responsible user and Email account for"\
                                 " mail gateway.")#,default=lambda self: self.env['crm.team']._get_default_team_id()
     company_id = fields.Many2one('res.company', 'Company',default=lambda self: self.env['res.company']._company_default_get('crm.case'))
