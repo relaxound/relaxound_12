@@ -14,9 +14,9 @@ class PurchaseOrder(models.Model):
         ir_model_data = self.env['ir.model.data']
         try:
             if self.env.context.get('send_rfq', False):
-                template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_invoice_sample')[1]
+                template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_invoice_sample11')[1]
             else:
-                template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_purchase_order_done')[1]
+                template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_purchase_order_done1')[1]
         except ValueError:
             template_id = False
         try:
