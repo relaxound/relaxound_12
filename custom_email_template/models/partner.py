@@ -17,7 +17,11 @@ class ResPartner(models.Model):
         self.ensure_one()
         ir_model_data = self.env['ir.model.data']
         try:
+<<<<<<< HEAD
             template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_sample_test11')[1]
+=======
+            template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_sample_test10111112')[1]
+>>>>>>> 4d8be179e7d112e0b44d05a627ebefae19ced3cc
         except ValueError:
             template_id = False
         try:

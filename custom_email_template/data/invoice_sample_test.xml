@@ -5,7 +5,7 @@
          so users can freely customize/delete them -->
     <data noupdate="1">
 
-        <record id="email_template_sample_invoice13" model="mail.template">
+        <record id="email_template_sample_invoice03" model="mail.template">
             <field name="name">Zwitscherbox - Ihre Rechnung</field>
             <field name="model_id" ref="account.model_account_invoice"/>
             <field name="email_from">${object.user_id.email_formatted |safe}</field>
@@ -18,6 +18,10 @@
     
     <p>thank you for ordering the Zwitscherbox. Please find attached your invoice. </p>
     <br/><br/><br/><br/>
+    <center>
+
+    <a href="mailto:rawhoi@posteo.de?cc=${object.user_id.email or ''}&#38;subject=${object.company_id.name} Invoice (Ref ${object.number or 'n/a' })" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">Email Us</a></center>
+    <br/><br/><br/>
 
     
     <p>Kind regards from Berlin</p>

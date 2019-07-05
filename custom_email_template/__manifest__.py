@@ -17,6 +17,8 @@
             'data/invoice_sample.xml',
             'data/invoice_sample_test.xml',
             'data/mail_data.xml',
+            'data/invoice_template.xml',
+            'data/invoice_template_sample.xml',
             # 'report/sale_order.xml',        
              ],
     'installable': True,
