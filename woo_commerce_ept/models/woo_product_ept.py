@@ -908,8 +908,8 @@ class woo_product_template_ept(models.Model):
         else:
             results = res
         if int(total_pages) >=2:
-            # for page in range(2,int(total_pages)+1):
-            list3=[1,2,3,4,5,6,7,8,9]            
+            list3=[1,2,3,4,5,6,7,8,9]
+            # for page in range(2,int(total_pages)+1):            
             results = results + self.import_all_products(wcapi,instance,transaction_log_obj,list3[0])
         if instance.is_latest:
             for result in results:
@@ -1052,8 +1052,9 @@ class woo_product_template_ept(models.Model):
                                             })
             results = results + draft_res.get('products')
             if draft_total_pages >=2:
-                for page in range(2,int(draft_total_pages)+1):            
-                    results = results + self.import_all_draft_products(wcapi,instance,transaction_log_obj,page)
+                list3=[1,2,3,4,5,6,7,8,9]
+                # for page in range(2,int(draft_total_pages)+1):            
+                results = results + self.import_all_draft_products(wcapi,instance,transaction_log_obj,list3[0])
         if int(total_pages) >=2:
             list3=[1,2,3,4,5,6,7,8,9]
             # for page in range(2,int(total_pages)+1):            

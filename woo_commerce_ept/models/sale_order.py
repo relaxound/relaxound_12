@@ -589,7 +589,7 @@ class sale_order(models.Model):
                     list3=[1,2,3,4,5,6,7,8,9]
                     # for page in list3:
                     # for page in range(2,int(total_pages)+1):            
-                    order_ids = order_ids + self.import_all_woo_orders(wcapi,instance,transaction_log_obj,order_status,list3[0])            
+                    order_ids = order_ids + self.import_all_woo_orders(wcapi,instance,transaction_log_obj,order_status, list3[0])            
             
             import_order_ids=[]
             
