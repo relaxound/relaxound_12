@@ -283,8 +283,9 @@ class woo_tags_ept(models.Model):
             elif instance.woo_version == 'new':                               
                 results = res
             if int(total_pages) >=2:
-                for page in range(2,int(total_pages)+1):            
-                    results = results + self.import_all_tags(wcapi,instance,transaction_log_obj,page)
+                # for page in range(2,int(total_pages)+1):
+                list3=[1,2,3,4,5,6,7,8,9]            
+                results = results + self.import_all_tags(wcapi,instance,transaction_log_obj,list3[0])
             
             for res in results:
                 if not isinstance(res, dict):
