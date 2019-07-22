@@ -84,12 +84,12 @@ class woo_process_import_export(models.TransientModel):
             # k = Process(target=self.import_sale_orders, args=())
             # k.start()
             # k.join()
-            logger.info('**************************************************************************')
+            logger.info('********************************************************')
             logger.info('Before update: %d' % config['limit_time_real'])
             config['limit_time_real'] = 10000
             logger.info('%s' % config)
             logger.info('After update: %d' % config['limit_time_real'])
-            logger.info('**************************************************************************')
+            logger.info('********************************************************')
             self.import_sale_orders()
 
         if self.is_import_customers:

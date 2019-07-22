@@ -3,6 +3,10 @@ import odoo.addons.decimal_precision as dp
 from odoo.exceptions import Warning
 import requests
 from datetime import datetime
+from odoo.tools import config
+import logging
+
+logger = logging.getLogger(__name__)
 
 class sale_order(models.Model):
     _inherit="sale.order"
@@ -503,6 +507,14 @@ class sale_order(models.Model):
     
     @api.model
     def auto_import_woo_sale_order_ept(self,ctx={}):
+        # Update the limit_time_real for extending thread time. ---------------------
+        logger.info('********************************************************')
+        logger.info('Before update: %d' % config['limit_time_real'])
+        config['limit_time_real'] = 10000
+        logger.info('%s' % config)
+        logger.info('After update: %d' % config['limit_time_real'])
+        logger.info('********************************************************')
+        # ----------------------------------------------------------------------------
         woo_instance_obj=self.env['woo.instance.ept']
         if not isinstance(ctx,dict) or not 'woo_instance_id' in ctx:
             return True
