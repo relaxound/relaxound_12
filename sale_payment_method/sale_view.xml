@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
 
                 <field name="payment_term_id" position="after">
-                    <field name="payment_term_id"/>
+                    <field name="payment_method_id"/>
                 </field>
                 <!--
                 <field name="fiscal_position_id" position="after">
@@ -39,7 +39,7 @@
             <field name="inherit_id" ref="sale.view_order_tree" />
             <field name="arch" type="xml">
                 <field name="state" position="after">
-                    <field name="payment_term_id" />
+                    <field name="payment_method_id" />
                 </field>
             </field>
         </record>
@@ -51,7 +51,7 @@
             <field name="arch" type="xml">
                 <field name="amount_total" position="after">
                     <field name="amount_paid" invisible="1"/>
-                    <field name="payment_term_id"/>
+                    <field name="payment_method_id"/>
                 </field>
             </field>
         </record>
