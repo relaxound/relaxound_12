@@ -63,9 +63,6 @@ class SaleOrder(models.Model):
         string='Amount Paid',
         store=False,
     )
-    
-    payment_gateway_id=fields.Many2one("woo.payment.gateway","Payment Gateway")
-
 
     @api.multi
     def action_cancel(self):
@@ -232,10 +229,10 @@ class SaleOrder(models.Model):
         if method.payment_term_id:
             self.payment_term_id = method.payment_term_id.id
             
-            values = {
-                'payment_term_id': method.payment_term_id.id or False,
-            }
-            self.update(values)    
+#             values = {
+#                 'payment_term_id': method.payment_term_id.id or False,
+#             }
+#             self.update(values)    
         
 
     @api.multi
