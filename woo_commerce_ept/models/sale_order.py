@@ -587,9 +587,9 @@ class sale_order(models.Model):
                 total_pages = response.headers.get('X-WC-TotalPages')
                 if int(total_pages) >=2:
                     list3=[1,2,3,4,5,6,7,8,9]
-                    for page in list3:
+                    # for page in list3:
                     # for page in range(2,int(total_pages)+1):            
-                        order_ids = order_ids + self.import_all_woo_orders(wcapi,instance,transaction_log_obj,order_status,page)            
+                    order_ids = order_ids + self.import_all_woo_orders(wcapi,instance,transaction_log_obj,order_status, list3[0])            
             
             import_order_ids=[]
             
@@ -754,6 +754,7 @@ class sale_order(models.Model):
     
     @api.model
     def import_new_woo_orders(self,instance=False):
+      
         instances=[]
         transaction_log_obj=self.env["woo.transaction.log"]
         if not instance:
@@ -792,12 +793,14 @@ class sale_order(models.Model):
                     continue
                 total_pages = response.headers.get('x-wp-totalpages')
                 if int(total_pages) >=2:
-                    for page in range(2,int(total_pages)+1):            
-                        order_ids = order_ids + self.import_all_woo_orders(wcapi,instance,transaction_log_obj,order_status,page)            
+                    list3=[1,2,3,4,5,6,7,8,9]
+                    # for page in range(2,int(total_pages)+1):            
+                    order_ids = order_ids + self.import_all_woo_orders(wcapi,instance,transaction_log_obj,order_status,list3[0])            
             
             import_order_ids=[]
             
             for order in order_ids:
+                # import pdb;pdb.set_trace()
                 tax_included  = order.get('prices_include_tax')
                 if self.search([('woo_instance_id','=',instance.id),('woo_order_id','=',order.get('id')),('woo_order_number','=',order.get('number'))]):
                     continue

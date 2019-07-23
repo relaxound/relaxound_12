@@ -378,8 +378,9 @@ class woo_product_template_ept(models.Model):
             elif instance.woo_version == 'new':                    
                 total_pages = response and response.headers.get('x-wp-totalpages') or 1
             if int(total_pages) >=2:
-                for page in range(2,int(total_pages)+1):            
-                    attributes_term_data = attributes_term_data + self.import_all_attribute_terms(wcapi,instance,woo_attribute,transaction_log_obj,page)
+                list3=[1,2,3,4,5,6,7,8,9]
+                # for page in range(2,int(total_pages)+1):            
+                attributes_term_data = attributes_term_data + self.import_all_attribute_terms(wcapi,instance,woo_attribute,transaction_log_obj,list3[0])
             if response.status_code in [201,200]:
                 for attribute_term in attributes_term_data:
                     woo_attribute_term = obj_woo_attribute_term.search([('woo_attribute_term_id','=',attribute_term.get('id')),('woo_instance_id','=',instance.id),('exported_in_woo','=',True)],limit=1)
@@ -485,8 +486,9 @@ class woo_product_template_ept(models.Model):
                                         })
             return True
         if int(total_pages) >=2:
-            for page in range(2,int(total_pages)+1):            
-                attributes_data = attributes_data + self.import_all_attributes(wcapi,instance,transaction_log_obj,page)
+            list3=[1,2,3,4,5,6,7,8,9]
+            # for page in range(2,int(total_pages)+1):            
+            attributes_data = attributes_data + self.import_all_attributes(wcapi,instance,transaction_log_obj,list3[0])
         if response.status_code in [201,200]:
             for attribute in attributes_data:
                 woo_attribute = obj_woo_attribute.search([('woo_attribute_id','=',attribute.get('id')),('woo_instance_id','=',instance.id),('exported_in_woo','=',True)],limit=1)
@@ -906,8 +908,9 @@ class woo_product_template_ept(models.Model):
         else:
             results = res
         if int(total_pages) >=2:
-            for page in range(2,int(total_pages)+1):            
-                results = results + self.import_all_products(wcapi,instance,transaction_log_obj,page)
+            list3=[1,2,3,4,5,6,7,8,9]
+            # for page in range(2,int(total_pages)+1):            
+            results = results + self.import_all_products(wcapi,instance,transaction_log_obj,list3[0])
         if instance.is_latest:
             for result in results:
                 variants=[]
@@ -1049,11 +1052,13 @@ class woo_product_template_ept(models.Model):
                                             })
             results = results + draft_res.get('products')
             if draft_total_pages >=2:
-                for page in range(2,int(draft_total_pages)+1):            
-                    results = results + self.import_all_draft_products(wcapi,instance,transaction_log_obj,page)
+                list3=[1,2,3,4,5,6,7,8,9]
+                # for page in range(2,int(draft_total_pages)+1):            
+                results = results + self.import_all_draft_products(wcapi,instance,transaction_log_obj,list3[0])
         if int(total_pages) >=2:
-            for page in range(2,int(total_pages)+1):            
-                results = results + self.import_all_products(wcapi,instance,transaction_log_obj,page)
+            list3=[1,2,3,4,5,6,7,8,9]
+            # for page in range(2,int(total_pages)+1):            
+            results = results + self.import_all_products(wcapi,instance,transaction_log_obj,list3[0])
                 
         for result in results:
             woo_product=False

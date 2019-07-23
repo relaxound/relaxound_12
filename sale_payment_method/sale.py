@@ -49,7 +49,7 @@ class SaleOrder(models.Model):
         comodel_name='payment.method2',
         string='Payment Method',
         ondelete='restrict',
-        required=True
+        # required=True
     )
     residual = fields.Float(
         compute='_compute_amount',
