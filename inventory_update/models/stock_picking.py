@@ -41,10 +41,10 @@ class stockpicking(models.Model):
 			return file_name
 	@api.model
 	def _import_inventory_(self): 
-		db="relaxound-relaxound-12-test-2-staging-496782"  # main stage
+		db="relaxound-relaxound-12-master-240358"  # main stage
 		username="rahelheuser@zwitscherbox.com"
 		password="let/s1_smile"
-		url = "https://relaxound-relaxound-12-test-2-staging-496782.dev.odoo.com" # main stage
+		url = "https://relaxound-relaxound-12.odoo.com" # main stage
 
 		ftp = FTP("62.214.48.227")
 		ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
