@@ -63,6 +63,9 @@ class SaleOrder(models.Model):
         string='Amount Paid',
         store=False,
     )
+    
+    payment_gateway_id=fields.Many2one("woo.payment.gateway","Payment Gateway")
+
 
     @api.multi
     def action_cancel(self):
