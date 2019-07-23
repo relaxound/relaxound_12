@@ -7,7 +7,7 @@
     'description': """
 """,
 
-    'depends': ['base','delivery','auto_invoice_workflow_ept'],    
+    'depends': ['base','delivery','auto_invoice_workflow_ept','sale_payment_method'],    
     'data': [
              'security/group.xml',
              'data/import_order_status.xml',

@@ -31,7 +31,7 @@
     'depends': ['sale'],
     'data': [
 
-        # 'sale_view.xml',
+        'sale_view.xml',
         'payment_method_view.xml',
         'invoice_view.xml',
         'security/ir.model.access.csv',
