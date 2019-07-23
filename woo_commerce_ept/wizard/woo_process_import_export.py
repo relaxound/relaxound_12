@@ -1,5 +1,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import Warning
+from odoo.tools import config
+import logging
+
+logger = logging.getLogger(__name__)
 
 class woo_process_import_export(models.TransientModel):
     _name = 'woo.process.import.export'
@@ -74,7 +78,20 @@ class woo_process_import_export(models.TransientModel):
         if self.sync_product_from_woo:
             self.sync_products()
         if self.is_import_orders:
+            # import pdb
+            # pdb.set_trace()
+            # from multiprocessing import Process
+            # k = Process(target=self.import_sale_orders, args=())
+            # k.start()
+            # k.join()
+            logger.info('********************************************************')
+            logger.info('Before update: %d' % config['limit_time_real'])
+            config['limit_time_real'] = 10000
+            logger.info('%s' % config)
+            logger.info('After update: %d' % config['limit_time_real'])
+            logger.info('********************************************************')
             self.import_sale_orders()
+
         if self.is_import_customers:
             self.import_woo_customers()
         if self.is_update_order_status:
