@@ -446,7 +446,8 @@ class sale_order(models.Model):
                 'company_id':instance.company_id.id,
                 'payment_gateway_id':payment_gateway and payment_gateway.id or False,
                 'woo_trans_id':woo_trans_id,
-                'woo_customer_ip':woo_customer_ip,                
+                'woo_customer_ip':woo_customer_ip,
+                'payment_method_id': 1,                
             }   
             
             if workflow:
@@ -507,6 +508,7 @@ class sale_order(models.Model):
     
     @api.model
     def auto_import_woo_sale_order_ept(self,ctx={}):
+
         # Update the limit_time_real for extending thread time. ---------------------
         logger.info('********************************************************')
         logger.info('Before update: %d' % config['limit_time_real'])
@@ -520,6 +522,8 @@ class sale_order(models.Model):
             return True
         woo_instance_id = ctx.get('woo_instance_id',False)
         if woo_instance_id:
+            import pdb
+            pdb.set_trace()
             instance=woo_instance_obj.search([('id','=',woo_instance_id),('state','=','confirmed')])
             if instance and instance.woo_version == 'old':
                 self.import_woo_orders(instance)
@@ -551,6 +555,7 @@ class sale_order(models.Model):
 
     @api.model
     def import_woo_orders(self,instance=False):
+        logger.info('inside import_woo_orders()  >>>>>>>>>>>>>>>>*******')
         instances=[]
         transaction_log_obj=self.env["woo.transaction.log"]
         if not instance:
@@ -766,6 +771,7 @@ class sale_order(models.Model):
     
     @api.model
     def import_new_woo_orders(self,instance=False):
+        logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******')
       
         instances=[]
         transaction_log_obj=self.env["woo.transaction.log"]
