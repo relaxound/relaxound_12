@@ -447,7 +447,7 @@ class sale_order(models.Model):
                 'payment_gateway_id':payment_gateway and payment_gateway.id or False,
                 'woo_trans_id':woo_trans_id,
                 'woo_customer_ip':woo_customer_ip,
-                'payment_method_id': 1,                
+                'payment_method_id': 2,                
             }   
             
             if workflow:
