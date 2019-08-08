@@ -70,6 +70,13 @@ class crm_claim(models.Model):
     stage_id = fields.Many2one ('crm.claim.stage', 'Stage', track_visibility='onchange',
                 domain="['|', ('team_ids', '=', team_id), ('case_default', '=', True)]")    #,default=lambda self:self.env['crm.claim']._get_default_stage_id()
     cause = fields.Text('Root Cause')
+    ref = fields.Reference(selection=[('res.partner', 'Partner'), ('product.product', 'Product'), ('account.invoice', 'Invoice'),
+        ('sale.order', 'Sales Order'),
+        ('stock.production.lot', 'Serial Number'),
+        ('purchase.order', 'Purchase Order'),
+        ('stock.picking', 'Delivery Order'),
+        ('project.project', 'Project'),
+        ('project.task', 'Project task')], string="Reference")
 
     @api.multi
     @api.onchange('partner_id')
