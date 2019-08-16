@@ -55,28 +55,28 @@
                         </t>
                         <t t-if="o.order_date">
                             <br/>
-                            <font color="#0e71b8">Order Date:</font> <span t-field="o.order_date"/>
+                            <font color="#0e71b8">Auftragsdatum:</font> <span t-field="o.order_date"/>
                         </t>
                         <t t-if="o.order_by">
                             <br/>
-                            <font color="#0e71b8">Order By:</font> <span t-field="o.order_by"/>
+                            <font color="#0e71b8">Sortieren nach:</font> <span t-field="o.order_by"/>
                         </t>
 
                         <t t-if="o.date_invoice">
                             <br/>
-                            <font color="#0e71b8">Invoice date:</font> <span t-field="o.date_invoice"/>
+                            <font color="#0e71b8">Rechnungsdatum:</font> <span t-field="o.date_invoice"/>
                         </t>
                         <t t-if="o.date_invoice">
                             <br/>
-                            <font color="#0e71b8">Shipping date:</font> <span t-field="o.date_invoice"/>
+                            <font color="#0e71b8">Versanddatum:</font> <span t-field="o.date_invoice"/>
                         </t>
                         <t t-if="o.partner_id.ref">
                             <br/>
-                            <font color="#0e71b8">Customer ID:</font> <span t-field="o.partner_id.ref"/>
+                            <font color="#0e71b8">Kundennummer:</font> <span t-field="o.partner_id.ref"/>
                         </t>
                         <t t-if="o.name">
                         <br/>
-                        <font color="#0e71b8">Your Reference:</font> <span t-field="o.name"/>
+                        <font color="#0e71b8">Ihre Referenz:</font> <span t-field="o.name"/>
                         </t>
                         <t t-if="o.partner_id.vat">
                             <br/>
