@@ -51,7 +51,7 @@
 
                         <t t-if="o.origin">
                             <br/>
-                            <font color="#0e71b8">Order no:</font> <span t-field="o.origin"/>
+                            <font color="#0e71b8">Auftragsnummer:</font> <span t-field="o.origin"/>
                         </t>
                         <t t-if="o.order_date">
                             <br/>
@@ -86,13 +86,13 @@
                         <t t-if="o.user_id.name != 'Relaxound GmbH'">
                             <t t-if="o.user_id">
                                 <br/>
-                                <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
+                                <font color="#0e71b8">Kontakt:</font> <span t-field="o.user_id.name"/>
                             </t>
                         </t>
                         <t t-if="o.user_id.name == 'Relaxound GmbH'">
                             <t t-if="o.user_id">
                                 <br/>
-                                <font color="#0e71b8">Contact:</font> Rahel Heuser
+                                <font color="#0e71b8">Kontakt:</font> Rahel Heuser
                             </t>
                         </t>
                         <t>
@@ -101,7 +101,7 @@
                         </t>
                         <t>
                             <br/>
-                            <font color="#0e71b8">Phone:</font> +49(0) 30 7468 44 50
+                            <font color="#0e71b8">Telefonnummer:</font> +49(0) 30 7468 44 50
                         </t>
                         <t>
                             <br/>
@@ -125,7 +125,7 @@
                     <table style="line-height:1.5">
                         <tr t-if="o.partner_id.property_delivery_carrier_id">
                             <td class="text-left">
-                                Shipping method:
+                                Versandart:
                             </td>
                             <td class="text-left">
                                 <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
@@ -133,7 +133,7 @@
                         </tr>
                         <tr t-if="o.payment_method_id.name">
                             <td class="text-left">
-                                Payment method:
+                                Zahlungsmethode:
                             </td>
                             <td class="text-left">
                                 <span t-field="o.payment_method_id.name"/>
@@ -141,7 +141,7 @@
                         </tr>
                         <tr t-if="o.payment_term_id">
                             <td class="text-left">
-                                Payment term:
+                                Zahlungsbedingung:
                             </td>
                             <td class="text-left">
                                 <span t-field="o.payment_term_id.name"/>
@@ -149,7 +149,7 @@
                         </tr>
                         <tr>
                             <td class="text-left">
-                                Shipping address:
+                                Lieferadresse:
                             </td>
                             <td class="text-left" style="font-size:13px">
                                 <t t-if="o.partner_shipping_id.street">
@@ -193,7 +193,7 @@
                         </t>
                         <tr style="border: none">
                             <td class="col-xs-3 text-right">
-                                <span>Total</span>
+                                <span>Gesamt</span>
                             </td>
                             <td class="text-right col-xs-2">
                                 <strong>
@@ -204,7 +204,7 @@
                         </tr>
                         <tr style="border-bottom: 1px solid black">
                             <td class="text-right">
-                                <span>Shipping</span>
+                                <span>Versand</span>
                             </td>
                             <td class="text-right">
                                 <strong>
@@ -214,7 +214,7 @@
                             </td>
                         </tr>
                         <tr style="border: none">
-                            <td class="text-right">Untaxed Amount</td>
+                            <td class="text-right">Unversteuerter Betrag</td>
                             <td class="text-right">
                                 <span t-field="o.currency_id.symbol"/> 
                                 <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -222,7 +222,7 @@
                         </tr>
 
                         <tr style="border-bottom: 1px solid black">
-                            <td class="text-right">VAT 19%</td>
+                            <td class="text-right">Mehrwertsteuer 19%</td>
 
                             <td class="text-right">
                                 <span t-field="o.currency_id.symbol"/> 
@@ -231,7 +231,7 @@
                         </tr>
                         <tr style="border: none">
                             <td class="text-right">
-                                <strong>Total</strong>
+                                <strong>Gesamt</strong>
                             </td>
                             <td class="text-right">
                                 <strong>
@@ -246,7 +246,8 @@
                             <br/><br/>
                             <tr>
                                 <td>
-                                    <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
+                                    <i class="oe_form_field text-right oe_payment_label">
+Bezahlt am <t t-esc="payment_vals['date']"/></i>
                                 </td>
                                 <td class="text-right">
                                     <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
@@ -255,7 +256,7 @@
                         </t>
                         <t t-if="len(payments_vals) &gt; 0">
                             <tr class="border-black">
-                                <td><strong>Amount Due</strong></td>
+                                <td><strong>Offener Betrag</strong></td>
                                 <td class="text-right">
                                     <span t-field="o.residual"/>
                                 </td>
@@ -317,12 +318,12 @@
                         <thead>
                             <tr>
                                 <th class="text-center" style="width:11%; border-bottom: 2px solid black;">Position</th>
-                                <th class="text-center" style="width:25%; border-bottom: 2px solid black;">Article</th>
-                                <th class="text-center" style="width:15%; border-bottom: 2px solid black;">Colour</th>
-                                <th class="text-center" style="width:11%; border-bottom: 2px solid black;">Quantity</th>
-                                <th class="text-center" style="width:8%; border-bottom: 2px solid black;">Single Unit</th>
-                                <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Unit Price</th>
-                                <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Total</th>
+                                <th class="text-center" style="width:25%; border-bottom: 2px solid black;">Artikel</th>
+                                <th class="text-center" style="width:15%; border-bottom: 2px solid black;">Farbe</th>
+                                <th class="text-center" style="width:11%; border-bottom: 2px solid black;">Stück</th>
+                                <th class="text-center" style="width:8%; border-bottom: 2px solid black;">Einheit</th>
+                                <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Stückpreis</th>
+                                <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Gesamt</th>
 
                             </tr>
                         </thead>
@@ -377,7 +378,7 @@
                                 <tr style="line-height:0;">
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black"/>
-                                    <th class="text-center" style="border-top: 1px solid black">Total</th>
+                                    <th class="text-center" style="border-top: 1px solid black">Gesamt</th>
                                     <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
                                     <th class="text-center" style="border-top: 1px solid black"><t t-esc="single_total"/></th>
                                     <th class="text-right" style="border-top: 1px solid black"/>
@@ -407,11 +408,11 @@
                             <thead style="line-height:0.9">
                                 <tr>
                                     <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Position</th>
-                                    <th class="text-center" style="width:28%; border-bottom: 2px solid black;">Article</th>
-                                    <th class="text-center" style="width:15%; border-bottom: 2px solid black;">Colour</th>
-                                    <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Quantity</th>
-                                    <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Unit Price</th>
-                                    <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Total</th>
+                                    <th class="text-center" style="width:28%; border-bottom: 2px solid black;">Artikel</th>
+                                    <th class="text-center" style="width:15%; border-bottom: 2px solid black;">Farbe</th>
+                                    <th class="text-center" style="width:12%; border-bottom: 2px solid black;">Stück</th>
+                                    <th class="text-right" style="width:12%; border-bottom: 2px solid black;">Stückpreis</th>
+                                    <th class="text-right" style="width:11%; border-bottom: 2px solid black;">Gesamt</th>
 
                                 </tr>
                             </thead>
@@ -457,7 +458,7 @@
                                 <tr style="line-height:0;">
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black"/>
-                                    <th class="text-center" style="border-top: 1px solid black">Total</th>
+                                    <th class="text-center" style="border-top: 1px solid black">Gesamt</th>
                                     <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
                                     <th class="text-right" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
