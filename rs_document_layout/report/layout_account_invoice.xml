@@ -500,7 +500,7 @@ Bezahlt am <t t-esc="payment_vals['date']"/></i>
                     <t t-if="o.payment_method_id.name!='payment_term'">
                         <div class="col-xs-12" style="line-height:1">
     
-                            <span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von der Zwitscherbox.
+                            <span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von<br/> der Zwitscherbox.
                             </span>
                             <br/>
                             <span>
