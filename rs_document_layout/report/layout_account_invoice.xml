@@ -280,14 +280,14 @@ Bezahlt am <t t-esc="payment_vals['date']"/></i>
                     <div class="col-xs-6">
                         <div style="font-size:30px">
                             <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
-                                Invoice
+                                Rechnung
                             </span>
                             <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
-                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
-                            <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Entwurf Rechnung</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Stornierte Rechnung</span>
                             <span t-if="o.type == 'out_refund'">Refund</span>
-                            <span t-if="o.type == 'in_refund'">Vendor Refund</span>
-                            <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                            <span t-if="o.type == 'in_refund'">Lieferantengutschrift</span>
+                            <span t-if="o.type == 'in_invoice'">Lieferantenrechnung</span>
                         </div>
 
                     </div>
