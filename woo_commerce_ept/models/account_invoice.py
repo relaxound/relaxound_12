@@ -66,6 +66,7 @@ class account_invoice(models.Model):
 class sale_order(models.Model):
     _inherit="sale.order"
  
+    @api.multi
     def _prepare_invoice(self):    
         inv_id=super(sale_order,self)._prepare_invoice()
         if inv_id and self.woo_instance_id:            
