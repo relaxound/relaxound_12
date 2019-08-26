@@ -76,7 +76,8 @@ class sale_popup1(models.Model):
     _inherit = 'sale.order'
 
     @api.multi
-    def order_export(self, sale_ids):
+    def order_export(self):
+        sale_ids = self._context.get('active_ids', [])
         orders = self.env['sale.order'].search(
             [('id', 'in', sale_ids), ('imported_to_lido', '=', False), ('warehouse_id.name', '=', 'LIMAL')])
         if orders:
