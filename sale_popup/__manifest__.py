@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "purchase_popup",
+    'name': "sale_popup",
 
     'summary': """
         Show info message of retailer's order""",
@@ -12,7 +12,7 @@
     'website': "http://www.techspawn.com",
     'category': 'uncategorized',
     'version': '0.1',
-    'depends': ['base','purchase','sale'],
+    'depends': ['base','sale','sale_management'],
     'data':[
             # 'views/retailer_email.xml',
             # 'views/popup_button.xml'
