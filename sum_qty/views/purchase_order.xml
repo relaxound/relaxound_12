@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_purchase_sum_qty_form">
+            <field name="name">view.purchase.sum.qty.inherit</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                        <!-- Added total Qty in purchase view -->
+                <xpath expr="//tree/field[@name='product_qty']" position="attributes">
+                    <attribute name="sum">Total Qty</attribute>
+                </xpath>
+                <!-- <xpath expr="//field[@name='order_line']" position="after">
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="qty_delivered"/>
+                    </group>
+                </xpath> -->
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
