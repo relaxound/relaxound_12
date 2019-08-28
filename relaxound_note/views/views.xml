@@ -1,0 +1,15 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="order_form_inherit">
+        <field name="name">custom.sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="after">
+                <field name="is_note" invisible="1"/>
+                <p attrs="{'invisible': [('is_note', '=', False)]}" style="color:Blue"><b>Please Check Notes</b></p>
+            </field>
+        </field>
+    </record>
+  </data>
+</odoo>
