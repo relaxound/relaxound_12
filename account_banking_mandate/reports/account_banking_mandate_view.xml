@@ -35,7 +35,7 @@
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang': lang})"/>
                 
-                <div class="page" style="margin-right:2.5cm; margin-left:1.8cm; font-size: 12px;">
+                <div class="page" style="margin-right:2.5cm; margin-left:2.5cm; font-size: 12px;">
                     <div id="informations" class="row mt32 mb32" style="float: right;">
                         <div class="col-md-12" name="description">
                             <div class="pull-right">
