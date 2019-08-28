@@ -1,4 +1,4 @@
-from odoo import models,fields,api,_
+from odoo import models, fields, api, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import Warning
 import requests
@@ -442,7 +442,8 @@ class sale_order(models.Model):
                 'company_id':instance.company_id.id,
                 'payment_gateway_id':payment_gateway and payment_gateway.id or False,
                 'woo_trans_id':woo_trans_id,
-                'woo_customer_ip':woo_customer_ip,                
+                'woo_customer_ip':woo_customer_ip,
+                'payment_method_id': 2,                
             }   
             
             if workflow:
