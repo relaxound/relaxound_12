@@ -522,8 +522,6 @@ class sale_order(models.Model):
             return True
         woo_instance_id = ctx.get('woo_instance_id',False)
         if woo_instance_id:
-            import pdb
-            pdb.set_trace()
             instance=woo_instance_obj.search([('id','=',woo_instance_id),('state','=','confirmed')])
             if instance and instance.woo_version == 'old':
                 self.import_woo_orders(instance)
@@ -818,7 +816,6 @@ class sale_order(models.Model):
             import_order_ids=[]
             
             for order in order_ids:
-                # import pdb;pdb.set_trace()
                 tax_included  = order.get('prices_include_tax')
                 if self.search([('woo_instance_id','=',instance.id),('woo_order_id','=',order.get('id')),('woo_order_number','=',order.get('number'))]):
                     continue

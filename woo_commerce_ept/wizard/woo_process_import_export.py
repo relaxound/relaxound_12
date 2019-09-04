@@ -78,8 +78,6 @@ class woo_process_import_export(models.TransientModel):
         if self.sync_product_from_woo:
             self.sync_products()
         if self.is_import_orders:
-            # import pdb
-            # pdb.set_trace()
             # from multiprocessing import Process
             # k = Process(target=self.import_sale_orders, args=())
             # k.start()
