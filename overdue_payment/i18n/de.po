@@ -1,0 +1,293 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* overdue_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-05 07:15+0000\n"
+"PO-Revision-Date: 2019-09-05 07:15+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: overdue_payment
+#: model:mail.template,report_name:overdue_payment.email_template_edi_due116
+#: model:mail.template,report_name:overdue_payment.email_template_edi_overdue2
+msgid "${(object.name or '').replace('/','_')}"
+msgstr ""
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.mail_notification_paynow_ex
+msgid "&amp;nbsp;"
+msgstr ""
+
+#. module: overdue_payment
+#: model:mail.template,body_html:overdue_payment.email_template_edi_due116
+msgid "<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 13px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.name},</p>\n"
+"\n"
+"    <p>Our records indicate that some payments on your account are still due. Please find details below.\n"
+"If the amount has already been paid, please disregard this notice. Otherwise, please forward us the total amount stated below.\n"
+"If you have any queries regarding your account, Please contact us.</p>\n"
+"\n"
+"    <p>\n"
+"    Thank you in advance for your cooperation.\n"
+"    </p>\n"
+"    <p>\n"
+"    Best Regards,\n"
+"    </p>\n"
+"\n"
+"    </div>\n"
+"\n"
+"            "
+msgstr ""
+
+#. module: overdue_payment
+#: model:mail.template,body_html:overdue_payment.email_template_edi_overdue2
+msgid "<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 13px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.name},</p>\n"
+"    \n"
+"    <p>So far we have not been able to find payment for the attached invoice in our system. We therefore ask you to check your bookkeeping in this regard and to remit the amount due in a timely manner. You have already cleared the bill? Then we apologize and send you a quick feedback so we can find the problem and fix it. ,</p>\n"
+"\n"
+"    <p>Thank you and best regards from Berlin.</p>\n"
+"\n"
+"    <p>Please note that we have to charge a processing fee of 10 EUR if the discount deduction is not agreed or if the invoice amount is reduced.</p>\n"
+"\n"
+"\n"
+"\n"
+"    </div>\n"
+"\n"
+"            "
+msgstr ""
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.mail_notification_paynow_ex
+msgid "<strong style=\"font-size: 14px; color: #7E7A7D;\">Sent by</strong>"
+msgstr ""
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.mail_notification_paynow_ex
+msgid "<strong style=\"font-size: 14px; color: #7E7A7D;\">Using</strong>\n"
+"			                    <span style=\"font-size: 14px; font-weight: bold; color: #A4127F;\">Odoo</span>"
+msgstr ""
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+msgid "<strong>Balance :</strong>"
+msgstr "<strong>Saldo:</strong>"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+msgid "<strong>Sub-Total :</strong>"
+msgstr "<strong>Zwischensumme:</strong>"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "<strong>There are no due invoices for the customer.</strong>"
+msgstr ""
+
+#. module: overdue_payment
+#: model:ir.model,name:overdue_payment.model_account_banking_mandate
+msgid "A generic banking mandate"
+msgstr ""
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__over_credit
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__over_credit
+msgid "Allow Over Credit?"
+msgstr ""
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+msgid "Communication"
+msgstr "Kommunikation"
+
+#. module: overdue_payment
+#: code:addons/overdue_payment/models/partner.py:70
+#, python-format
+msgid "Compose Email"
+msgstr "E-Mail schreiben"
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__customer_credit
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__customer_credit
+msgid "Customer Credit"
+msgstr ""
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__property_payment_term_id
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr "Zahlungsbedingungen des Kunden"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "Customer ref:"
+msgstr "Kundenreferenz"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "Date"
+msgstr "Datum"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "Document: Customer account statement<br/>\n"
+"                    Date:"
+msgstr ""
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "Due"
+msgstr "Fällig"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "Due Date"
+msgstr "Fälligkeit"
+
+#. module: overdue_payment
+#: model:mail.template,subject:overdue_payment.email_template_edi_due116
+msgid "Due Payment : (Ref ${object.name or 'n/a' })"
+msgstr "Zahlungserinnerung : (Ref ${object.name or 'n/a' })"
+
+#. module: overdue_payment
+#: model:ir.actions.report,name:overdue_payment.action_report_print_overdue
+msgid "Due Payments"
+msgstr "Fällige Zahlungen"
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__property_account_position_id
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__property_account_position_id
+msgid "Fiscal Position"
+msgstr "Steuerzuordnung"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.view_overdue_payment_form
+msgid "Invoices"
+msgstr "Rechnungen"
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__customer_moves
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__customer_moves
+#: model_terms:ir.ui.view,arch_db:overdue_payment.view_overdue_payment_form
+msgid "Moves"
+msgstr "Lieferauftragspositionen"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+msgid "Open"
+msgstr "Offen"
+
+#. module: overdue_payment
+#: model:mail.template,subject:overdue_payment.email_template_edi_overdue2
+msgid "Overdue Payment : (Ref ${object.name or 'n/a' })"
+msgstr "Zahlungserinnerung : (Ref ${object.name or 'n/a' })"
+
+#. module: overdue_payment
+#: model:ir.actions.server,name:overdue_payment.ir_cron_send_overdue_ir_actions_server
+#: model:ir.cron,cron_name:overdue_payment.ir_cron_send_overdue
+#: model:ir.cron,name:overdue_payment.ir_cron_send_overdue
+msgid "Overdue Payment Send"
+msgstr ""
+
+#. module: overdue_payment
+#: model:ir.actions.report,name:overdue_payment.report_customeroverdue
+#: model_terms:ir.ui.view,arch_db:overdue_payment.view_overdue_payment_form
+msgid "Overdue Payments"
+msgstr "Fällige Zahlungen"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+msgid "Paid"
+msgstr "Bezahlt"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "Reference number"
+msgstr "Referenznummer"
+
+#. module: overdue_payment
+#: model:ir.model,name:overdue_payment.model_res_partner
+msgid "Res Partner last Invoice"
+msgstr ""
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.view_overdue_payment_form
+msgid "Send by Email"
+msgstr "Per E-Mail versenden"
+
+#. module: overdue_payment
+#: model:ir.model.fields,help:overdue_payment.field_res_partner__property_account_position_id
+#: model:ir.model.fields,help:overdue_payment.field_res_users__property_account_position_id
+msgid "The fiscal position determines the taxes/accounts used for this contact."
+msgstr ""
+
+#. module: overdue_payment
+#: model:ir.model.fields,help:overdue_payment.field_res_partner__property_supplier_payment_term_id
+#: model:ir.model.fields,help:overdue_payment.field_res_users__property_supplier_payment_term_id
+msgid "This payment term will be used instead of the default one for purchase orders and vendor bills"
+msgstr "Diese Zahlungsbedingung wird anstelle der Standardzahlungsbedingung für Bestellaufträge und Lieferantenrechnungen verwendet"
+
+#. module: overdue_payment
+#: model:ir.model.fields,help:overdue_payment.field_res_partner__property_payment_term_id
+#: model:ir.model.fields,help:overdue_payment.field_res_users__property_payment_term_id
+msgid "This payment term will be used instead of the default one for sales orders and customer invoices"
+msgstr "Diese Zahlungsbedinung wird anstelle der Standardzahlungsbedingung für Verkaufsaufträge und Kundenrechnungen verwendet"
+
+#. module: overdue_payment
+#: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
+msgid "Total"
+msgstr "Gesamt"
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__debit
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__debit
+msgid "Total Payable"
+msgstr "Summe Kreditoren"
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_account_banking_mandate__new_credit1
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__credit
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__credit
+msgid "Total Receivable"
+msgstr "Summe Debitoren"
+
+#. module: overdue_payment
+#: model:ir.model.fields,help:overdue_payment.field_res_partner__credit
+#: model:ir.model.fields,help:overdue_payment.field_res_users__credit
+msgid "Total amount this customer owes you."
+msgstr "Gesamtschulden dieses Kunden"
+
+#. module: overdue_payment
+#: model:ir.model.fields,help:overdue_payment.field_res_partner__debit
+#: model:ir.model.fields,help:overdue_payment.field_res_users__debit
+msgid "Total amount you have to pay to this vendor."
+msgstr "Gesamtbetrag der offenen Zahlungen an diesen Lieferant."
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__property_supplier_payment_term_id
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__property_supplier_payment_term_id
+msgid "Vendor Payment Terms"
+msgstr "Zahlungsbedingungen des Verkäufers"
+
+#. module: overdue_payment
+#: model:ir.model.fields,field_description:overdue_payment.field_res_partner__customer_invoices
+#: model:ir.model.fields,field_description:overdue_payment.field_res_users__customer_invoices
+msgid "invoice"
+msgstr "Rechnung"
+
