@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c-20161215\n"
+"Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 08:56+0000\n"
-"PO-Revision-Date: 2017-04-18 08:56+0000\n"
+"POT-Creation-Date: 2019-09-04 06:19+0000\n"
+"PO-Revision-Date: 2019-09-04 06:19+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,343 +16,585 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Contact:</font> Rahel Heuser"
+"                                <font color=\"#0e71b8\">Contact:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Kontakt:</font> Rahel Heuser"
+"                                <font color=\"#0e71b8\">Kontakt:</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Contact:</font>"
+"                                <font color=\"#0e71b8\">Contact:</font> Rahel Heuser"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Kontakt:</font>"
+"                                <font color=\"#0e71b8\">Kontakt:</font> Rahel Heuser"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Customer ID:</font>"
+"                            <font color=\"#0e71b8\">Kundennummer:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Kundennummer:</font>"
+"                            <font color=\"#0e71b8\">Kundennummer:</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">VAT no.:</font>"
+"                            <font color=\"#0e71b8\">E-Mail:</font> info@zwitscherbox.com"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">USt-IdNr.:</font>"
+"                            <font color=\"#0e71b8\">E-Mail:</font> info@zwitscherbox.com"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com"
+"                            <font color=\"#0e71b8\">Invoice date:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com"
+"                            <font color=\"#0e71b8\">Rechnungsdatum:</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">E-Mail:</font>"
+"                            <font color=\"#0e71b8\">Order By:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">E-Mail:</font>"
+"                            <font color=\"#0e71b8\">Sortieren nach:</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Invoice date:</font>"
+"                            <font color=\"#0e71b8\">Order Date:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Rechnungsdatum:</font>"
+"                            <font color=\"#0e71b8\">Auftragsdatum:</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Order no:</font>"
+"                            <font color=\"#0e71b8\">Order no:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Auftragsnummer :</font>"
+"                            <font color=\"#0e71b8\">Best.-Nr::</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "<font color="#0e71b8">Invoice no:</font>"
-msgstr "<font color="#0e71b8">Rechnungsnummer:</font>"
-
-#. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Phone:</font> +49(0) 30 7468 44 50"
+"                            <font color=\"#0e71b8\">Phone:</font> +49(0) 30 7468 44 50"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Telefonnummer:</font> +49(0) 30 7468 44 50"
+"                            <font color=\"#0e71b8\">Telefon:</font> +49(0) 30 7468 44 50"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Phone:</font>"
+"                            <font color=\"#0e71b8\">Shipping date:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Telefonnummer:</font>"
+"                            <font color=\"#0e71b8\">Versanddatum::</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color="#0e71b8">Shipping date:</font>"
+"                            <font color=\"#0e71b8\">VAT no.:</font>"
 msgstr "<br/>\n"
-"                            <font color="#0e71b8">Versanddatum:</font>"
+"                            <font color=\"#0e71b8\">USt-IdNr.:</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "<b>Invoice-No.</b>"
-msgstr "<b>Rechnung Nr.</b>"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "<br/>\n"
+"                        <font color=\"#0e71b8\">Your Reference:</font>"
+msgstr "<br/>\n"
+"                        <font color=\"#0e71b8\">Ihre Referenz:</font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-msgid "<span>Packing List</span>"
-msgstr "<span>Lieferschein</span>"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">CNr: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">CNr: </font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-msgid "<td>We will send the invoice via Email to : </td>"
-msgstr "<td>Die Rechnung erhalten Sie per Email an : </td>"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Date Ordered: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Bestelldatum: </font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "<span>Shipping</span>"
-msgstr "<span>Versand</span>"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">ETD: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">ETD: </font>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Expiration Date: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Haltbarkeitsdatum: </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Order Date: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Auftragsdatum:</font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Order-By: </font>"
+msgstr "\"<br/>\n"
+"                    <font color=\"#0e71b8\">Sortieren nach: </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Order-No: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Auftragsnummer : </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Payment Terms: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Zahlungsbedingungen: </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Angebotsdatum: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Angebotsdatum: </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Salesperson: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Verkäufer: </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Your Reference: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Ihre Referenz: </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "<font color=\"#0e71b8\">Invoice no:</font>"
+msgstr "<font color=\"#0e71b8\">Rechnungsnummer:</font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
+msgid "<span>CNr.</span>"
+msgstr "<span>CNr.</span>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Enjoy and relax!\n"
+"                        <br/>We would be happy about photos and stories of the Zwitscherbox.\n"
+"                                \n"
+"                    </span>\n"
+"                    <br/>\n"
+"                    <span>\n"
+"                        <b>\n"
+"                            <u>www.zwitscherbox.com</u>\n"
+"                        </b>\n"
+"                    </span>"
+msgstr "<span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von<br/>der Zwitscherbox.<br/><u>www.zwitscherbox.com</u></span>\n"
+""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.\n"
-"                                </span>\n"
-"                                <br/>\n"
-"                                <span>\n"
-"                                    <b>\n"
-"                                        <u>www.zwitscherbox.com</u>\n"
-"                                    </b>\n"
-"                                </span>"
+"                            </span>\n"
+"                            <br/>\n"
+"                            <span>\n"
+"                                <b>\n"
+"                                    <u>www.zwitscherbox.com</u>\n"
+"                                </b>\n"
+"                            </span>"
 msgstr "<span>Viel Spass und gute Entspannung!<br/>"
 "Wir freuen uns über Fotos und Geschichten von<br/>"
 "der Zwitscherbox.<br/>"
 "<u>www.zwitscherbox.com</u></span>\n"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
+msgid "<span>Packing List</span>"
+msgstr "<span>Lieferschein</span>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Pro-Forma Invoice </span>"
+msgstr "<span>Proforma-Rechnung </span>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Shipping</span>"
+msgstr "<span>Versanddatum:</span>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<span>Total</span>"
 msgstr "<span>Gesamt</span>"
 
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "<strong>Amount Due</strong>"
+msgstr "<strong>Fälliger Betrag</strong>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "<span>Please transfer the amount to the following bank account of our\n"
-"                                    payment service provider Novalnet\n"
-"                                    <br/>Account Owner: Novalnet AG,\n"
-"                                    <br/>IBAN: DE49100500000190348771,\n"
-"                                    <br/>BIC: BELADEBEXXX,\n"
-"                                    <br/>Bank: Berliner Sparkasse Berlin\n"
-"                                    <br/>Please use the intended purpose as indicated in the order confirmation email,\n"
-"                                    since only in this way your money can be allocated. Thank you!\n"
-"                                </span>"
-msgstr "<span>Überweisen Sie bitte den Betrag an die unten aufgeführte Bankverbindung unseres\n"
-"                                    Zahlungsdienstleisters Novalnet\n"
-"                                    <br/>Kontoinhaber: Novalnet AG,\n"
-"                                    <br/>IBAN: DE49100500000190348771,\n"
-"                                    <br/>BIC: BELADEBEXXX,\n"
-"                                    <br/>Bank: Berliner Sparkasse Berlin\n"
-"                                    <br/>Bitte verwenden Sie den Verwendungszweck wie in der Bestellbestätigungsemail\n"
-"                                    angegeben, da nur so Ihr Geldeingang zugeordnet werden kann. Vielen Dank!\n"
-"                                </span>"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Amount</strong>"
+msgstr "<strong>Betrag</strong>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Date Req.</strong>"
+msgstr "<strong>Anfragedatum</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_req_for_qut_document
+msgid "<strong>Description</strong>"
+msgstr "<strong>Beschreibung</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_req_for_qut_document
+msgid "<strong>Expected Date</strong>"
+msgstr "<strong>Geplantes Datum</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Order Date:</strong>"
+msgstr "<strong>Bestelldatum:</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Our Order Reference:</strong>"
+msgstr "<strong>Unsere Bestellreferenz:</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_req_for_qut_document
+msgid "<strong>Qty</strong>"
+msgstr "<strong>Menge</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_req_for_qut_document
+msgid "<strong>Shipping address:</strong><br/>"
+msgstr "<strong>Lieferadresse:</strong><br/>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Subtotal</strong>"
+msgstr "<strong>Zwischensumme</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Taxes</strong>"
+msgstr "<strong>Steuern</strong>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<strong>Total</strong>"
 msgstr "<strong>Gesamt</strong>"
 
 #. module: rs_document_layout
-#: model:ir.model,name:rs_document_layout.model_report_paperformat
-msgid "Allows customization of a report."
-msgstr "Ermöglicht die Anpassung eines Reports"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Unit Price</strong>"
+msgstr "<strong>Einzelpreis</strong>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Amount"
-msgstr "Stück"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "<strong>Your Order Reference:</strong>"
+msgstr "<strong>Ihre Bestellreferenz:</strong>"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model:ir.model,name:rs_document_layout.model_account_invoice
+msgid "Account Invoice Sum Qty"
+msgstr "Kontorechnungssumme Menge"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "Amtsgericht Charlottenburg"
+msgstr "Amtsgericht Charlottenburg"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Article"
 msgstr "Artikel"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "CNr."
-msgstr "KNr."
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "BIC HYVEDEMM488"
+msgstr "BIC HYVEDEMM488"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "Cancelled Invoice"
 msgstr "Stornierte Rechnung"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "Cancelled Purchase Order #"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Colour"
 msgstr "Farbe"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "Dennis N. Clasen, Philipp Störring"
+msgstr "Dennis N. Clasen, Philipp Störring"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "Draft Invoice"
 msgstr "Entwurf Rechnung"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "Geschäftsführer:"
+msgstr "Geschäftsführer:"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "HRB 181702 B"
+msgstr "HRB 181702 B"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "Handelsregisternummer:"
+msgstr "Handelsregisternummer:"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "HypoVereinsbank"
+msgstr "HypoVereinsbank"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "IBAN DE37 1002 0890 0026 6861 30"
+msgstr "IBAN DE37 1002 0890 0026 6861 30"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "Invoice"
 msgstr "Rechnung"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "Date"
-msgstr "Rechnungs- / Lieferdatum"
+#: model:ir.model,name:rs_document_layout.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Rechungsposition"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Line Price"
-msgstr "Gesamt"
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__journal_id
+msgid "Journal"
+msgstr "Journal"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Order"
 msgstr "Auftrag"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_by
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__order_by
+msgid "Order By"
+msgstr "Sortieren nach"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_date
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__order_date
 msgid "Order Date"
-msgstr "Auftragsdatum"
+msgstr "Bestelldatum"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
 msgid "Order-No."
-msgstr "Bestell-Nr."
+msgstr "Best.-Nr."
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "PRO-FORMA"
 msgstr "PRO-FORMA"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Payment term:"
-msgstr "Zahlungsbedingung:"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "Paid on"
+msgstr "Bezahlt am"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model:ir.model,name:rs_document_layout.model_report_paperformat
+msgid "Paper Format Config"
+msgstr "Papierformat Konfig"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Payment method:"
 msgstr "Zahlungsmethode:"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Price"
-msgstr "Preis"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Payment term:"
+msgstr "Zahlungsbedingung:"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "Position"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "Purchase Order #"
+msgstr "Bestellung #"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "Purchase Order Confirmation #"
+msgstr "Bestellbestätigung #"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Quotation"
 msgstr "Angebot"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "Refund"
-msgstr "Gutschrift"
+msgstr "Rückerstattung"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
-msgid "Steuernummer: 29/490/30659"
-msgstr "Steuernummer: 29/490/30659"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_req_for_qut_document
+msgid "Request for Quotation"
+msgstr "Angebotsanfrage"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
-msgid "Tel."
-msgstr "Tel."
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "Request for Quotation #"
+msgstr "Angebotsanfrage #"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
-msgid "USt-IdNr.:"
-msgstr "USt-IdNr.:"
+#: model:ir.model,name:rs_document_layout.model_sale_order
+msgid "Sale Order Is Sent"
+msgstr "Verkaufsauftrag wird gesendet"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "VAT 19%"
-msgstr "MwSt. 19%"
+#: model:ir.model,name:rs_document_layout.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Auftragsposition"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Untaxed Amount"
-msgstr "Betrag Netto"
-
-#. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "Vendor Bill"
-msgstr "Lieferantenrechnung"
-
-#. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "Vendor Refund"
-msgstr "Lieferantengutschrift"
-
-#. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "ZWITSCHERBOX"
-msgstr "ZWITSCHERBOX"
-
-#. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
-msgid "www.zwitscherbox.com"
-msgstr "www.zwitscherbox.com"
-
-#. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Shipping address:"
 msgstr "Lieferadresse:"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Shipping method:"
 msgstr "Versandart:"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "VAT:"
-msgstr "Ust.-ID:"
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice_line__single_unit
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order_line__single_unit
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Single Unit"
+msgstr "Einheit"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Quantity"
-msgstr "Stück"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "Steuernummer: 29/490/30659"
+msgstr "Steuernummer: 29/490/30659"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+#: model:ir.model,name:rs_document_layout.model_stock_picking
+msgid "Stock picking"
+msgstr "Aktienauswahl"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
+msgid "Taxes"
+msgstr "Steuern"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "Tel."
+msgstr "Tel."
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Total"
+msgstr "Gesamt"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "USt-IdNr.:"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Unit Price"
 msgstr "Stückpreis"
 
 #. module: rs_document_layout
-#: model:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Total"
-msgstr "Gesamt"
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Untaxed Amount"
+msgstr "Betrag Netto"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "VAT 19%"
+msgstr "MwSt. 19%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "Vendor Bill"
+msgstr "Lieferantenrechnung"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "Vendor Refund"
+msgstr "Lieferantengutschrift"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
+msgid "We will send the invoice via Email to :"
+msgstr "Die Rechnung erhalten Sie per Email an :"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "ZWITSCHERBOX"
+msgstr "ZWITSCHERBOX"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
+msgid "www.zwitscherbox.com"
+msgstr "www.zwitscherbox.com"
+
