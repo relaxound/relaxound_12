@@ -68,6 +68,17 @@ msgstr "<span class=\"mt0\">\n"
 verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.\n"
 "                            </span>"
 
+
+#. module: account_banking_mandate
+#: model_terms:ir.ui.view,arch_db:account_banking_mandate.report_invoice_document_sample
+msgid "Name and address of the payee:"
+msgstr "Name und Adresse des Zahlungsempfängers:"
+
+#. module: account_banking_mandate
+#: model_terms:ir.ui.view,arch_db:account_banking_mandate.report_invoice_document_sample
+msgid "Name and address of the account holder:"
+msgstr "Name und Adresse des Kontoinhabers:"
+
 #. module: account_banking_mandate
 #: model_terms:ir.ui.view,arch_db:account_banking_mandate.report_invoice_document_sample
 msgid "<strong>SEPA LASTSCHRIFTMANDAT</strong>"
