@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-10 14:52+0000\n"
-"PO-Revision-Date: 2016-10-10 14:52+0000\n"
+"POT-Creation-Date: 2019-09-05 07:13+0000\n"
+"PO-Revision-Date: 2019-09-05 07:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,57 +16,64 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_template_color_id
+#: model:ir.model.fields,field_description:product_color_field.field_product_product__color_id
+#: model:ir.model.fields,field_description:product_color_field.field_product_template__color_id
+#: model_terms:ir.ui.view,arch_db:product_color_field.product_color_form_view
 msgid "Color"
 msgstr "Farbe"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color_create_uid
+#: model:ir.model,name:product_color_field.model_product_color
+msgid "Color Module"
+msgstr ""
+
+#. module: product_color_field
+#: model:ir.model.fields,field_description:product_color_field.field_product_color__create_uid
 msgid "Created by"
-msgstr "Angelegt von"
+msgstr "Erstellt von"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color_create_date
+#: model:ir.model.fields,field_description:product_color_field.field_product_color__create_date
 msgid "Created on"
-msgstr "Angelegt am"
+msgstr "Erstellt am"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color_display_name
+#: model:ir.model.fields,field_description:product_color_field.field_product_color__display_name
 msgid "Display Name"
-msgstr "Angezeigter Name"
+msgstr "Anzeigename"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color_id
+#: model:ir.model.fields,field_description:product_color_field.field_product_color__id
 msgid "ID"
 msgstr "ID"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color___last_update
+#: model:ir.model.fields,field_description:product_color_field.field_product_color____last_update
 msgid "Last Modified on"
 msgstr "Zuletzt geändert am"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color_write_uid
+#: model:ir.model.fields,field_description:product_color_field.field_product_color__write_uid
 msgid "Last Updated by"
 msgstr "Zuletzt aktualisiert durch"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color_write_date
+#: model:ir.model.fields,field_description:product_color_field.field_product_color__write_date
 msgid "Last Updated on"
 msgstr "Zuletzt aktualisiert am"
 
 #. module: product_color_field
-#: model:ir.model.fields,field_description:product_color_field.field_product_color_name
+#: model:ir.model.fields,field_description:product_color_field.field_product_color__name
 msgid "Name"
 msgstr "Bezeichnung"
+
+#. module: product_color_field
+#: model:ir.model,name:product_color_field.model_product_product
+msgid "Product"
+msgstr "Produkt"
 
 #. module: product_color_field
 #: model:ir.model,name:product_color_field.model_product_template
 msgid "Product Template"
 msgstr "Produktvorlage"
-
-#. module: product_color_field
-#: model:ir.model,name:product_color_field.model_product_color
-msgid "product.color"
-msgstr "product.color"
 
