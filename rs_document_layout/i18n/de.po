@@ -244,7 +244,7 @@ msgstr "<span>Proforma-Rechnung </span>"
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<span>Shipping</span>"
-msgstr "<span>Versanddatum:</span>"
+msgstr "<span>Versand:</span>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
