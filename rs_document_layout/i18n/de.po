@@ -88,6 +88,13 @@ msgstr "<br/>\n"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
+"                            <font color=\"#0e71b8\">Customer ID:</font>"
+msgstr "<br/>\n"
+"                            <font color=\"#0e71b8\">Kundennummer:</font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">VAT no.:</font>"
 msgstr "<br/>\n"
 "                            <font color=\"#0e71b8\">USt-IdNr.:</font>"
