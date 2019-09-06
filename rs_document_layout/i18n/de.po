@@ -63,12 +63,6 @@ msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Order Date:</font>"
 msgstr "<br/>\n"
 "                            <font color=\"#0e71b8\">Auftragsdatum:</font>"
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.layout_sale_order
-msgid "<br/>\n"
-"                            <font color="#0e71b8">Quotation Date:</font>"
-msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Angebotsdatum:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -118,6 +112,13 @@ msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">Date Ordered: </font>"
 msgstr "<br/>\n"
 "                    <font color=\"#0e71b8\">Bestelldatum: </font>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<br/>\n"
+"                    <font color=\"#0e71b8\">Quotation Date: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Angebotsdatum: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
