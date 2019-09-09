@@ -145,8 +145,7 @@ msgstr "Datum"
 #: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
 msgid "Document: Customer account statement<br/>\n"
 "                    Date:"
-msgstr "
-Dokument: Kundenkontoauszug<br/>\n"
+msgstr "Dokument: Kundenkontoauszug<br/>\n"
 "                    Datum:"
 
 #. module: overdue_payment
