@@ -19,8 +19,8 @@
         <tr style="border-top: 1px solid black;">
             <th class="text-center"> </th>
             <th class="text-center"> </th>
-            <th class="text-right"><strong>Total :</strong></th>
-            <th class="text-center"><span t-esc="o.sum_qty()"/></th>
+            <!-- <th class="text-right"><strong>Total :</strong></th>
+            <th class="text-center"><span t-esc="o.sum_qty()"/></th> -->
             <th class="text-right"> </th>
             <th class="text-right"> </th>
         </tr>
