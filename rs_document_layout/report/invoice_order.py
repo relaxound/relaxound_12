@@ -6,6 +6,7 @@ class OrderLine(models.Model):
 
     single_unit=fields.Integer(string="Single Unit")
 
+    @api.depends('product_id','quantity')
     @api.onchange('product_id','quantity')
     def custom_qty(self):
         if self.product_id.name:

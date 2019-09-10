@@ -298,7 +298,7 @@
             <attribute name="style">display:none</attribute>
         </xpath>
         <xpath expr="//div/table[1]" position="replace">
-            <t t-set="i" t-value="1"/>
+            
             <t>
                 <t t-if="o.partner_id.is_retailer">
                     <table class="table table-condensed" style="table-layout: fixed; width: 82%; border: none; margin-left:54px; font-size: 13px; font-family:Arial; cellspacing:1" id="items">
@@ -327,8 +327,10 @@
                             </tr>
                         </thead>
                         <t t-set="single_total" t-value="0"/>
+                        <t t-set="i" t-value="1"/>
                         <tbody class="invoice_tbody" style="line-height:0.9">
                             <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                <t t-if="l.product_id.type != 'service'">
                                 <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                     <td class="text-center">
                                         <span t-esc="i"/>
@@ -370,7 +372,9 @@
                                         <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </td>
                                 </t>
-                                <t t-set="i" t-value="i+1"/>
+                                    <t t-set="i" t-value="i+1"/>
+                                </t>
+                                
                             </tr>
                             <!-- <tr style="border-bottom: 1px solid black"></tr> -->
                             <t t-if="o.partner_id.is_retailer">
@@ -378,7 +382,7 @@
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black">Total</th>
-                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids if line.product_id.type != 'service'))"/></th>
                                     <th class="text-center" style="border-top: 1px solid black"><t t-esc="single_total"/></th>
                                     <th class="text-right" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
@@ -416,11 +420,13 @@
                                 </tr>
                             </thead>
                             <t t-set="single_total" t-value="0"/>
+                            <t t-set="j" t-value="1"/>
                             <tbody class="invoice_tbody" style="line-height:0.9">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                    <t t-if="l.product_id.type != 'service'">
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
-                                            <span t-esc="i"/>
+                                            <span t-esc="j"/>
                                         </td>
                                         <td class="text-left">
                                             <span t-field="l.product_id.name"/>
@@ -451,14 +457,16 @@
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </t>
-                                    <t t-set="i" t-value="i+1"/>
+                                        <t t-set="j" t-value="j+1"/>
+                                    </t>
+                                    
                                 </tr>
 
                                 <tr style="line-height:0;">
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black">Total</th>
-                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids))"/></th>
+                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids if line.product_id.type != 'service'))"/></th>
                                     <th class="text-right" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
 
