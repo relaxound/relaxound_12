@@ -152,22 +152,22 @@
                                 Shipping address:
                             </td>
                             <td class="text-left" style="font-size:13px">
-                                <t t-if="o.partner_shipping_id.street">
-                                    <span t-field="o.partner_shipping_id.street"/>
+                                <t t-if="o.partner_id.street">
+                                    <span t-field="o.partner_id.street"/>
                                 </t>
-                                <t t-if="o.partner_shipping_id.street2">
+                                <t t-if="o.partner_id.street2">
                                     <br/>
-                                    <span t-field="o.partner_shipping_id.street2"/>
+                                    <span t-field="o.partner_id.street2"/>
                                 </t>
-                                <t t-if="o.partner_shipping_id.zip or o.partner_shipping_id.city">
+                                <t t-if="o.partner_id.zip or o.partner_id.city">
                                     <br/>
-                                    <span t-field="o.partner_shipping_id.zip"/>  
+                                    <span t-field="o.partner_id.zip"/>  
                                                 
-                                    <span t-field="o.partner_shipping_id.city"/>
+                                    <span t-field="o.partner_id.city"/>
                                 </t>
-                                <t t-if="o.partner_shipping_id.country_id">
+                                <t t-if="o.partner_id.country_id">
                                     <br/>
-                                    <span t-field="o.partner_shipping_id.country_id.name"/>
+                                    <span t-field="o.partner_id.country_id.name"/>
                                 </t>
                         </td>
                         </tr>
