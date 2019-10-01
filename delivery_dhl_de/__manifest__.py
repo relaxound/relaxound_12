@@ -13,8 +13,8 @@
     'depends': ['delivery_base', 'delivery',
                 'mail'],
     'data': [
-        'data/delivery_dhl_data.xml',
-        'views/delivery_dhl_view.xml',
+        # 'data/delivery_dhl_data.xml',
+        # 'views/delivery_dhl_view.xml',
         'stock/stock_picking_view.xml',
         'sale/sale_order_view.xml',
         'account/account_invoice_view.xml'
