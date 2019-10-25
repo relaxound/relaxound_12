@@ -69,7 +69,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Order no:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Best.-Nr::</font>"
+"                            <font color=\"#0e71b8\">Best.-Nr:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -83,7 +83,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Shipping date:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Versand-/Leistungsdatum :</font>"
+"                            <font color=\"#0e71b8\">Versand-/Leistungsdatum:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -146,7 +146,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">Order Date: </font>"
 msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">Auftragsdatum:</font>"
+"                    <font color=\"#0e71b8\">Auftragsdatum: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
@@ -160,7 +160,7 @@ msgstr "\"<br/>\n"
 msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">Order-No: </font>"
 msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">Auftragsnummer : </font>"
+"                    <font color=\"#0e71b8\">Auftragsnummer: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
@@ -244,7 +244,7 @@ msgstr "<span>Proforma-Rechnung </span>"
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<span>Shipping</span>"
-msgstr "<span>Versand:</span>"
+msgstr "<span>Versand</span>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -357,7 +357,7 @@ msgstr "Stornierte Rechnung"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
 msgid "Cancelled Purchase Order #"
-msgstr ""
+msgstr "Stornierte Bestellung #"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
@@ -598,8 +598,8 @@ msgstr "Lieferantengutschrift"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-msgid "We will send the invoice via Email to :"
-msgstr "Die Rechnung erhalten Sie per Email an :"
+msgid "We will send the invoice via Email to:"
+msgstr "Die Rechnung erhalten Sie per Email an:"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
