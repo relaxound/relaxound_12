@@ -21,3 +21,12 @@ msgstr ""
 msgid "→Fill in"
 msgstr "→füllen"
 
+#. module: fill_pack
+#: model:ir.model.fields,field_description:fill_pack.field_stock_picking__sale_description
+msgid "Note"
+msgstr "Notiz"
+
+#. module: fill_pack
+#: model:ir.model,name:fill_pack.model_stock_picking
+msgid "Stock picking"
+msgstr "Aktienauswahl"

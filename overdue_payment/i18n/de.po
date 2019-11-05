@@ -92,7 +92,11 @@ msgstr "<strong>Zwischensumme:</strong>"
 #: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
 #: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
 msgid "<strong>There are no due invoices for the customer.</strong>"
+<<<<<<< HEAD
 msgstr "Es gibt keine fälligen Rechnungen für den Kunden."
+=======
+msgstr ""
+>>>>>>> 7d4e057b19e37065c74f05a0d726c937cac2b3fa
 
 #. module: overdue_payment
 #: model:ir.model,name:overdue_payment.model_account_banking_mandate
@@ -145,8 +149,12 @@ msgstr "Datum"
 #: model_terms:ir.ui.view,arch_db:overdue_payment.report_due_document
 msgid "Document: Customer account statement<br/>\n"
 "                    Date:"
+<<<<<<< HEAD
 msgstr "Dokument: Kundenkontoauszug<br/>\n"
 "                    Datum:"
+=======
+msgstr ""
+>>>>>>> 7d4e057b19e37065c74f05a0d726c937cac2b3fa
 
 #. module: overdue_payment
 #: model_terms:ir.ui.view,arch_db:overdue_payment.report_customer_overdue_document
