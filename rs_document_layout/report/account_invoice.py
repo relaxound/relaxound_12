@@ -61,7 +61,7 @@ class ReportInvoiceWithPayment(models.AbstractModel):
                 continue
             
             if del_prod:
-                del_chrg = (float(del_prod.product_id.lst_price))
+                del_chrg = (float(del_prod[0].product_id.lst_price))
                 untx_amt = (float(invoice.amount_untaxed - del_chrg))
             else:
                 del_chrg = 0.00
