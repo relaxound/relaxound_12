@@ -43,3 +43,38 @@ class AccountInvoice(models.Model):
                 return shipping[0].street + ', ' + shipping[0].city + ', ' + shipping[0].country_id.name
         return False
 
+
+class ReportInvoiceWithPayment(models.AbstractModel):
+    _inherit = 'report.account.report_invoice_with_payments'
+
+    @api.model
+    def _get_report_values(self, docids, data=None):
+        ##### Added the functionality to print the value in report########
+        del_chrg = 0.00
+        untx_amt = 0.00
+        invoice = self.env['account.invoice'].browse(docids[0])
+        inv_lines = self.env['account.invoice.line'].search([('invoice_id','=',invoice.id)])
+        for line in inv_lines:
+            try:
+                del_prod = self.env['delivery.carrier'].search([('product_id','=',line.product_id.id)])
+            except AssertionError:
+                continue
+            
+            if del_prod:
+                del_chrg = (float(del_prod.product_id.lst_price))
+                untx_amt = (float(invoice.amount_untaxed - del_chrg))
+            else:
+                del_chrg = 0.00
+                untx_amt =  (float(invoice.amount_untaxed))
+        return {
+            'd_chrg': del_chrg,
+            'utx_amt': untx_amt,
+            'doc_ids': docids,
+            'doc_model': 'account.invoice',
+            'docs': self.env['account.invoice'].browse(docids),
+            'report_type': data.get('report_type') if data else '',
+        }
+
+
+
+
