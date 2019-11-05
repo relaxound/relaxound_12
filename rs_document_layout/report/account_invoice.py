@@ -59,10 +59,10 @@ class ReportInvoiceWithPayment(models.AbstractModel):
                 del_prod = self.env['delivery.carrier'].search([('product_id','=',line.product_id.id)])
             except AssertionError:
                 continue
-            
+           
             if del_prod:
-                del_chrg = (float(del_prod[0].product_id.lst_price))
-                untx_amt = (float(invoice.amount_untaxed - del_chrg))
+                del_chrg = line.price_subtotal
+                untx_amt = invoice.amount_untaxed - del_chrg
             else:
                 del_chrg = 0.00
                 untx_amt =  (float(invoice.amount_untaxed))
