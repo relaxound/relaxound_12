@@ -48,14 +48,16 @@ class ReportInvoiceWithPayment(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        ##### Added the functionality to print the value in report########
+        ##### Added the functionality to print the value in report#######
         del_chrg = 0.00
         untx_amt = 0.00
         invoice = self.env['account.invoice'].browse(docids[0])
         inv_lines = self.env['account.invoice.line'].search([('invoice_id','=',invoice.id)])
         for line in inv_lines:
+            
             try:
                 del_prod = self.env['delivery.carrier'].search([('product_id','=',line.product_id.id)])
+            
             except AssertionError:
                 continue
             
