@@ -53,7 +53,7 @@ class ReportInvoiceWithPayment(models.AbstractModel):
         invoice = self.env['account.invoice'].browse(docids[0])
         inv_lines = self.env['account.invoice.line'].search([('invoice_id','=',invoice.id)])
         for line in inv_lines:
-            
+
             try:
                 del_prod = self.env['delivery.carrier'].search([('product_id','=',line.product_id.id)])
                 if del_prod:
@@ -63,8 +63,6 @@ class ReportInvoiceWithPayment(models.AbstractModel):
         
             except AssertionError:
                 continue
-
-        
 
         return {
             'd_chrg': del_chrg,
