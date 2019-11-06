@@ -124,33 +124,25 @@
                     <br/>
                     <table style="line-height:1.5">
                         <tr t-if="o.partner_id.property_delivery_carrier_id">
-                            <td class="text-left">
-                                Shipping method:
-                            </td>
+                            <td class="text-left">Shipping method: </td>
                             <td class="text-left">
                                 <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
                             </td>
                         </tr>
                         <tr t-if="o.payment_method_id.name">
-                            <td class="text-left">
-                                Payment method:
-                            </td>
+                            <td class="text-left">Payment method: </td>
                             <td class="text-left">
                                 <span t-field="o.payment_method_id.name"/>
                             </td>
                         </tr>
                         <tr t-if="o.payment_term_id">
-                            <td class="text-left">
-                                Payment term:
-                            </td>
+                            <td class="text-left">Payment term: </td>
                             <td class="text-left">
                                 <span t-field="o.payment_term_id.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left">
-                                Shipping address:
-                            </td>
+                            <td class="text-left">Shipping address: </td>
                             <td class="text-left" style="font-size:13px">
                                 <t t-if="not o.partner_shipping_id">
                                     <t t-if="o.partner_id.street">
