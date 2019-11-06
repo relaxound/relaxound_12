@@ -197,24 +197,20 @@
                         </style>
 
                         <t t-set="delivery_cost" t-value="0"/>
-                        
-                        <!-- Privious logic to print the report -->
-                       <!--  <span t-esc="o.check_shipping_charges">
-                        </span>
- -->
-                        <!-- <t t-foreach="o.invoice_line_ids" t-as="l">
-                            <t t-if="l.sale_line_ids.is_delivery">
-                                <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
-                            </t>
-                        </t> -->
                         <tr style="border: none">
                             <td class="col-xs-3 text-right">
                                 <span>Total</span>
                             </td>
                             <td class="text-right col-xs-2">
                                 <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    <t t-if="utx_amt">
+                                        <span t-field="o.currency_id.symbol"/> 
+                                        <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </t>
+                                    <t t-if="not(utx_amt)">
+                                        <span t-field="o.currency_id.symbol"/> 
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </t>
                                     <!-- <span t-esc="utx_amt"/> -->
                                 </strong>
                             </td>
@@ -224,11 +220,17 @@
                                 <span>Shipping</span>
                             </td>
                             <td class="text-right">
+                                <t t-if="d_chrg">
                                 <strong>
                                     <span t-field="o.currency_id.symbol"/> 
                                     <!-- <span t-esc="d_chrg" /> -->
                                     <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>
                                 </strong>
+                                </t>
+                                <t t-if="not(d_chrg)">
+                                    <span t-field="o.currency_id.symbol"/> 
+                                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </t>
                             </td>
                         </tr>
 
