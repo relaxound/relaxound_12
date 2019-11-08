@@ -111,7 +111,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">CNr: </font>"
 msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">CNr: </font>"
+"                    <font color=\"#0e71b8\">Ihre Auftragsnummer: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
