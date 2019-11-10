@@ -212,7 +212,7 @@ msgid "<span>Enjoy and relax!\n"
 "                            <u>www.zwitscherbox.com</u>\n"
 "                        </b>\n"
 "                    </span>"
-msgstr "<span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von<br/>der Zwitscherbox.<br/><u>www.zwitscherbox.com</u></span>\n"
+msgstr "<span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von<br/>der Zwitscherbox.<br/><u>www.relaxound.com</u></span>\n"
 ""
 
 #. module: rs_document_layout
@@ -228,7 +228,7 @@ msgid "<span>Enjoy and relax!<br/>We would be happy about photos and stories of 
 msgstr "<span>Viel Spass und gute Entspannung!<br/>"
 "Wir freuen uns über Fotos und Geschichten von<br/>"
 "der Zwitscherbox.<br/>"
-"<u>www.zwitscherbox.com</u></span>\n"
+"<u>www.relaxound.com</u></span>\n"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
@@ -610,5 +610,5 @@ msgstr "ZWITSCHERBOX"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
 msgid "www.zwitscherbox.com"
-msgstr "www.zwitscherbox.com"
+msgstr "www.relaxound.com"
 
