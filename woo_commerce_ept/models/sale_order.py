@@ -56,7 +56,7 @@ class sale_order(models.Model):
         return [('id','in',order_ids)]
 
     @api.multi
-    def visibl_transaction_id(self):logger.info
+    def visibl_transaction_id(self):
         for order in self:
             if order.woo_instance_id.woo_version == "new":
                 order.visible_trans_id=True
