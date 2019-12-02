@@ -26,7 +26,9 @@ class AccountInvoice(models.Model):
             return 1
         _logger.debug("1 ---------------------> %s" % orders)
         current_date = fields.Datetime.now()
-        with open(os.path.join("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
+        with open(os.path.join("src/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
+        # with open(os.path.join("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
+
             shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;client_order_ref;item_line_number;item_name;item_description;item_quantity;item_price;\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
