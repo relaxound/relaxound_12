@@ -71,7 +71,8 @@ class AccountInvoice(models.Model):
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
         # print("date and time:",date_time)     
 
-        file = open("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date),'rb')
+        # file = open("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date),'rb')
+        file = open("src/SALE-ORDER/shipping_data_%s.csv" % (current_date),'rb')
         ftp.storbinary('STOR '+ftp.pwd()+'/shipping_data_%s.csv'%(date_time),file)
 
 class sale_popup1(models.Model):
