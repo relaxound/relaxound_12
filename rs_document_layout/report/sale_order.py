@@ -1,9 +1,11 @@
 from odoo import models, fields, api, _
+from odoo.addons import decimal_precision as dp
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
-
+    
+    price_tax = fields.Float(compute='_compute_amount',digits=dp.get_precision('Product Price'), string='Total Tax', readonly=True, store=True)
     single_unit=fields.Integer(string="Single Unit")
 
     @api.onchange('product_id','product_uom_qty')
