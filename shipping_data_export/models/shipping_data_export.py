@@ -27,6 +27,7 @@ class AccountInvoice(models.Model):
     def _export_shipping_data(self):
         ftp = FTP("62.214.48.227")
         ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
+        # ftp.cwd('ORDER')
         ftp.cwd('TEST')
         # print(ftp.pwd())
         orders = self.env['sale.order'].search([('imported_to_lido', '=', False), (
@@ -116,12 +117,14 @@ class StockPicking(models.Model):
 
     @api.model
     def _import_tracking_num(self):
+        # cwd="TRACKING"
         cwd="TEST"
         ftp = FTP("62.214.48.227")
         ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
         ftp.cwd('/'+cwd)
         filename = self._sort_data(cwd,ftp)
-        file_path='src/user/TRACKING-NUMBER/'+filename # server location # src/user/TRACKING-NUMBER/
+        # file_path='src/user/TRACKING-NUMBER/'+filename # server location # src/user/TRACKING-NUMBER/
+        file_path='src/TRACKING-NUMBER/'+filename # server location # src/user/TRACKING-NUMBER/
         localfile = open(file_path, 'wb')
         ftp.retrbinary('RETR '+ftp.pwd()+'/'+ filename, localfile.write, 1024)
         localfile.close()
@@ -134,7 +137,8 @@ class StockPicking(models.Model):
             file = open(file_path)
             # print ('file ===================>', file)
             for line in file.readlines()[1:]:
-                data = line.split(',',1)
+                # data = line.split(',',1) # if csv reader is , seperated
+                data = line.split(';',1)
                 # print("line, data --------------------->", line, data[0].replace('"', ''), data[1].replace('"', ''))
                 delivery = self.env['stock.picking'].search(
                     [('origin', '=',data[0].replace('"', '') )]) #
@@ -142,7 +146,8 @@ class StockPicking(models.Model):
                 if delivery:
                     delivery[0].write({'carrier_tracking_ref': data[1].replace('"', '')})
             file.close()
-            os.rename(file_path,'src/user/TRACKING-NUMBER/'+ new_name) ## server location # src/user/TRACKING-NUMBER/
+            # os.rename(file_path,'src/user/TRACKING-NUMBER/'+ new_name) ## server location # src/user/TRACKING-NUMBER/
+            os.rename(file_path,'src/TRACKING-NUMBER/'+ new_name) ## server location # src/user/TRACKING-NUMBER/
             ftp.rename(ftp.pwd()+"/"+filename, new_name)
         except Exception as e:
             _logger.warning('invalid custom view(s) for: %s', tools.ustr(e))
