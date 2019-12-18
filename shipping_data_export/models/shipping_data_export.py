@@ -131,7 +131,8 @@ class StockPicking(models.Model):
             file = open(file_path)
             # print ('file ===================>', file)
             for line in file.readlines()[1:]:
-                data = line.split(',',1)
+                data = line.split(',',1) # if csv reder id , sepetared
+                # data = line.split(';',1) 
                 # print("line, data --------------------->", line, data[0].replace('"', ''), data[1].replace('"', ''))
                 delivery = self.env['stock.picking'].search(
                     [('origin', '=',data[0].replace('"', '') )]) #

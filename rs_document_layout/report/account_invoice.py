@@ -43,12 +43,17 @@ class AccountInvoice(models.Model):
                 return shipping[0].street + ', ' + shipping[0].city + ', ' + shipping[0].country_id.name
         return False
 
+<<<<<<< HEAD
 
+
+=======
+>>>>>>> ccdde71a3a44cec8641f5421cb1dc8e6ad77e955
 class ReportInvoiceWithPayment(models.AbstractModel):
     _inherit = 'report.account.report_invoice_with_payments'
 
     @api.model
     def _get_report_values(self, docids, data=None):
+<<<<<<< HEAD
         ##### Added the functionality to print the value in report########
         del_chrg = 0.00
         untx_amt = 0.00
@@ -59,13 +64,32 @@ class ReportInvoiceWithPayment(models.AbstractModel):
                 del_prod = self.env['delivery.carrier'].search([('product_id','=',line.product_id.id)])
             except AssertionError:
                 continue
-           
+            
             if del_prod:
-                del_chrg = line.price_subtotal
-                untx_amt = invoice.amount_untaxed - del_chrg
+                del_chrg = (float(del_prod.product_id.lst_price))
+                untx_amt = (float(invoice.amount_untaxed - del_chrg))
             else:
                 del_chrg = 0.00
                 untx_amt =  (float(invoice.amount_untaxed))
+=======
+        del_chrg = 0
+        untx_amt = 0
+        invoice = self.env['account.invoice'].browse(docids[0])
+        inv_lines = self.env['account.invoice.line'].search([('invoice_id','=',invoice.id)])
+        
+        for line in inv_lines:
+            
+            try:
+                del_prod = self.env['delivery.carrier'].search([('product_id','=',line.product_id.id)])
+                if del_prod:
+                    del_chrg = line.price_subtotal
+                    untx_amt = invoice.amount_untaxed - del_chrg
+                    break
+            
+            except AssertionError:
+                continue
+            
+>>>>>>> ccdde71a3a44cec8641f5421cb1dc8e6ad77e955
         return {
             'd_chrg': del_chrg,
             'utx_amt': untx_amt,
@@ -73,8 +97,10 @@ class ReportInvoiceWithPayment(models.AbstractModel):
             'doc_model': 'account.invoice',
             'docs': self.env['account.invoice'].browse(docids),
             'report_type': data.get('report_type') if data else '',
+<<<<<<< HEAD
         }
 
 
-
-
+=======
+        }
+>>>>>>> ccdde71a3a44cec8641f5421cb1dc8e6ad77e955

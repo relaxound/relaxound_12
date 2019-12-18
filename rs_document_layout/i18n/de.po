@@ -18,100 +18,100 @@ msgstr ""
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                                <font color=\"#0e71b8\">Contact: </font>"
+"                                <font color=\"#0e71b8\">Contact:</font>"
 msgstr "<br/>\n"
-"                                <font color=\"#0e71b8\">Kontakt: </font>"
+"                                <font color=\"#0e71b8\">Kontakt:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                                <font color=\"#0e71b8\">Contact: </font> Rahel Heuser"
+"                                <font color=\"#0e71b8\">Contact:</font> Rahel Heuser"
 msgstr "<br/>\n"
-"                                <font color=\"#0e71b8\">Kontakt: </font> Rahel Heuser"
+"                                <font color=\"#0e71b8\">Kontakt:</font> Rahel Heuser"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Kundennummer: </font>"
+"                            <font color=\"#0e71b8\">Kundennummer:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Kundennummer: </font>"
+"                            <font color=\"#0e71b8\">Kundennummer:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">E-Mail: </font> info@zwitscherbox.com"
+"                            <font color=\"#0e71b8\">E-Mail:</font> info@zwitscherbox.com"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">E-Mail: </font> info@zwitscherbox.com"
+"                            <font color=\"#0e71b8\">E-Mail:</font> info@zwitscherbox.com"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Invoice date: </font>"
+"                            <font color=\"#0e71b8\">Invoice date:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Rechnungsdatum: </font>"
+"                            <font color=\"#0e71b8\">Rechnungsdatum:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Order By: </font>"
+"                            <font color=\"#0e71b8\">Order By:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Sortieren nach: </font>"
+"                            <font color=\"#0e71b8\">Sortieren nach:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Order Date: </font>"
+"                            <font color=\"#0e71b8\">Order Date:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Auftragsdatum: </font>"
+"                            <font color=\"#0e71b8\">Auftragsdatum:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Order no: </font>"
+"                            <font color=\"#0e71b8\">Order no:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Best.-Nr: </font>"
+"                            <font color=\"#0e71b8\">Best.-Nr:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Phone: </font> +49(0) 30 7468 44 50"
+"                            <font color=\"#0e71b8\">Phone:</font> +49(0) 30 7468 44 50"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Telefon: </font> +49(0) 30 7468 44 50"
+"                            <font color=\"#0e71b8\">Telefon:</font> +49(0) 30 7468 44 50"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Shipping date: </font>"
+"                            <font color=\"#0e71b8\">Shipping date:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Versand-/Leistungsdatum: </font>"
+"                            <font color=\"#0e71b8\">Versand-/Leistungsdatum:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Customer ID: </font>"
+"                            <font color=\"#0e71b8\">Customer ID:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Kundennummer: </font>"
+"                            <font color=\"#0e71b8\">Kundennummer:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">VAT no.: </font>"
+"                            <font color=\"#0e71b8\">VAT no.:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">USt-IdNr.: </font>"
+"                            <font color=\"#0e71b8\">USt-IdNr.:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                        <font color=\"#0e71b8\">Your Reference: </font>"
+"                        <font color=\"#0e71b8\">Your Reference:</font>"
 msgstr "<br/>\n"
-"                        <font color=\"#0e71b8\">Ihre Referenz: </font>"
+"                        <font color=\"#0e71b8\">Ihre Referenz:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">CNr: </font>"
 msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">CNr: </font>"
+"                    <font color=\"#0e71b8\">Ihre Auftragsnummer: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
@@ -192,8 +192,8 @@ msgstr "<br/>\n"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "<font color=\"#0e71b8\">Invoice no: </font>"
-msgstr "<font color=\"#0e71b8\">Rechnungsnummer: </font>"
+msgid "<font color=\"#0e71b8\">Invoice no:</font>"
+msgstr "<font color=\"#0e71b8\">Rechnungsnummer:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
@@ -212,7 +212,7 @@ msgid "<span>Enjoy and relax!\n"
 "                            <u>www.zwitscherbox.com</u>\n"
 "                        </b>\n"
 "                    </span>"
-msgstr "<span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von<br/>der Zwitscherbox.<br/><u>www.zwitscherbox.com</u></span>\n"
+msgstr "<span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von<br/>der Zwitscherbox.<br/><u>www.relaxound.com</u></span>\n"
 ""
 
 #. module: rs_document_layout
@@ -228,7 +228,7 @@ msgid "<span>Enjoy and relax!<br/>We would be happy about photos and stories of 
 msgstr "<span>Viel Spass und gute Entspannung!<br/>"
 "Wir freuen uns über Fotos und Geschichten von<br/>"
 "der Zwitscherbox.<br/>"
-"<u>www.zwitscherbox.com</u></span>\n"
+"<u>www.relaxound.com</u></span>\n"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
@@ -280,13 +280,13 @@ msgstr "<strong>Geplantes Datum</strong>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
-msgid "<strong>Order Date: </strong>"
-msgstr "<strong>Bestelldatum: </strong>"
+msgid "<strong>Order Date:</strong>"
+msgstr "<strong>Bestelldatum:</strong>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
-msgid "<strong>Our Order Reference: </strong>"
-msgstr "<strong>Unsere Bestellreferenz: </strong>"
+msgid "<strong>Our Order Reference:</strong>"
+msgstr "<strong>Unsere Bestellreferenz:</strong>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
@@ -297,8 +297,8 @@ msgstr "<strong>Menge</strong>"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_req_for_qut_document
-msgid "<strong>Shipping address: </strong><br/>"
-msgstr "<strong>Lieferadresse: </strong><br/>"
+msgid "<strong>Shipping address:</strong><br/>"
+msgstr "<strong>Lieferadresse:</strong><br/>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
@@ -324,8 +324,8 @@ msgstr "<strong>Einzelpreis</strong>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
-msgid "<strong>Your Order Reference: </strong>"
-msgstr "<strong>Ihre Bestellreferenz: </strong>"
+msgid "<strong>Your Order Reference:</strong>"
+msgstr "<strong>Ihre Bestellreferenz:</strong>"
 
 #. module: rs_document_layout
 #: model:ir.model,name:rs_document_layout.model_account_invoice
@@ -357,7 +357,7 @@ msgstr "Stornierte Rechnung"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
 msgid "Cancelled Purchase Order #"
-msgstr ""
+msgstr "Stornierte Bestellung #"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
@@ -456,14 +456,14 @@ msgstr "Papierformat Konfig"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Payment method: "
-msgstr "Zahlungsmethode: "
+msgid "Payment method:"
+msgstr "Zahlungsmethode:"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Payment term: "
-msgstr "Zahlungsbedingung: "
+msgid "Payment term:"
+msgstr "Zahlungsbedingung:"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -520,14 +520,14 @@ msgstr "Auftragsposition"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Shipping address: "
-msgstr "Lieferadresse: "
+msgid "Shipping address:"
+msgstr "Lieferadresse:"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Shipping method: "
-msgstr "Versandart: "
+msgid "Shipping method:"
+msgstr "Versandart:"
 
 #. module: rs_document_layout
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice_line__single_unit
@@ -610,5 +610,5 @@ msgstr "ZWITSCHERBOX"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
 msgid "www.zwitscherbox.com"
-msgstr "www.zwitscherbox.com"
+msgstr "www.relaxound.com"
 
