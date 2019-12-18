@@ -27,8 +27,6 @@ class AccountInvoice(models.Model):
         _logger.debug("1 ---------------------> %s" % orders)
         current_date = fields.Datetime.now()
         with open(os.path.join("src/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
-        # with open(os.path.join("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
-
             shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;item_line_number;item_name;item_description;item_quantity;item_price;\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
@@ -71,7 +69,6 @@ class AccountInvoice(models.Model):
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
         # print("date and time:",date_time)     
 
-        # file = open("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date),'rb')
         file = open("src/SALE-ORDER/shipping_data_%s.csv" % (current_date),'rb')
         ftp.storbinary('STOR '+ftp.pwd()+'/shipping_data_%s.csv'%(date_time),file)
 
