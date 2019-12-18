@@ -4,12 +4,7 @@
     <!-- Mail template are declared in a NOUPDATE block
          so users can freely customize/delete them -->
     <data noupdate="1">
-
-<<<<<<< HEAD
-        <record id="email_template_sample_test11" model="mail.template">
-=======
         <record id="email_template_sample_test10111112" model="mail.template">
->>>>>>> 4d8be179e7d112e0b44d05a627ebefae19ced3cc
             <field name="name">Sales Order: Send by email</field>
             <field name="model_id" ref="sale.model_sale_order"/>
             <field name="email_from">${object.user_id.email_formatted |safe}</field>
@@ -52,17 +47,10 @@
     <p>If you have any question, do not hesitate to contact us.</p>
     <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>
     <br/>
-<<<<<<< HEAD
     <br/>
     <center>
 
-    <a href="mailto:pallavikapase@techspawn.com?cc=${object.user_id.email or ''}" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">Email Us</a></center>
-=======
-    
-    <center>
-
     <a href="mailto:rawhoi@posteo.de?cc=${object.user_id.email or ''}&#38;subject=${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">Email Us</a></center>
->>>>>>> 4d8be179e7d112e0b44d05a627ebefae19ced3cc
     <br/><br/><br/>
 
     <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
