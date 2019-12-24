@@ -21,9 +21,6 @@ class SaleOrderLine(models.Model):
                 self.update({'single_unit':self.product_uom_qty})
 
 
-
-
-
     @api.multi
     def _prepare_invoice_line(self, qty):
         res=super(SaleOrderLine,self)._prepare_invoice_line(qty)
@@ -33,10 +30,8 @@ class SaleOrderLine(models.Model):
         return res
 
 
-
     @api.onchange('product_uom_qty', 'product_uom', 'route_id')
     def _onchange_product_id_check_availability(self):
-        # import pdb;pdb.set_trace()
         if not self.product_id or not self.product_uom_qty or not self.product_uom:
             self.product_packaging = False
             return {}
