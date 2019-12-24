@@ -27,9 +27,9 @@ class AccountInvoice(models.Model):
     def _export_shipping_data(self):
         ftp = FTP("62.214.48.227")
         ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
-        # ftp.cwd('ORDER')
-        ftp.cwd('TEST')
-        # print(ftp.pwd())
+        ftp.cwd('ORDER')
+        # ftp.cwd('TEST')
+        print(ftp.pwd())
         orders = self.env['sale.order'].search([('imported_to_lido', '=', False), (
             'invoice_status', 'in', ['invoiced','to invoice']), ('warehouse_id.name', '=', 'LIMAL')])
         if not orders:
