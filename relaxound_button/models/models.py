@@ -19,7 +19,7 @@ class sale_popup1(models.Model):
     def order_export(self):
         ftp = FTP("62.214.48.227")
         ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
-        ftp.cwd('ORDERS')
+        ftp.cwd('/ORDERS')
 
         
         try:
