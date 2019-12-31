@@ -17,8 +17,6 @@
     # for the full list
     'category': 'Uncategorized',
     'version': '12.0',
->>>>>>> f6c019c68bf076bcb45846a800f1700561d9ad97
-
     # any module necessary for this one to work correctly
     'depends': ['base','sale'],
 
