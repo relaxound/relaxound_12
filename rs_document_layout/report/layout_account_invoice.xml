@@ -203,11 +203,6 @@
                             </td>
                             <td class="text-right col-xs-2">
                                 <strong>
-<<<<<<< HEAD
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    <!-- <span t-esc="utx_amt"/> -->
-=======
                                     <t t-if="utx_amt">
                                         <span t-field="o.currency_id.symbol"/> 
                                         <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -216,7 +211,6 @@
                                         <span t-field="o.currency_id.symbol"/> 
                                         <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </t>
->>>>>>> ccdde71a3a44cec8641f5421cb1dc8e6ad77e955
                                 </strong>
                             </td>
                         </tr>
@@ -225,15 +219,6 @@
                                 <span>Shipping</span>
                             </td>
                             <td class="text-right">
-<<<<<<< HEAD
-                                <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <!-- <span t-esc="d_chrg" /> -->
-                                    <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </strong>
-                            </td>
-                        </tr>
-=======
                                 <t t-if="d_chrg">
                                 <strong>
                                     <span t-field="o.currency_id.symbol"/> 
@@ -250,9 +235,8 @@
                         <!-- change the logic in report printing -->
 
                         <!-- <t t-set="delivery_cost" t-value="0"/>
->>>>>>> ccdde71a3a44cec8641f5421cb1dc8e6ad77e955
 
-                        <!-- <t t-foreach="o.invoice_line_ids" t-as="l">
+                        <t t-foreach="o.invoice_line_ids" t-as="l">
                             <t t-if="l.sale_line_ids.is_delivery">
                                 <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
                             </t>

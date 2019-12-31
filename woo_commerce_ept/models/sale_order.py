@@ -769,19 +769,24 @@ class sale_order(models.Model):
     
     @api.model
     def import_new_woo_orders(self,instance=False):
-        logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******')
+        logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******1')
       
         instances=[]
         transaction_log_obj=self.env["woo.transaction.log"]
+        logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******2:-- %s'% transaction_log_obj)
         if not instance:
             instances=self.env['woo.instance.ept'].search([('order_auto_import','=',True),('state','=','confirmed')])
+            logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******3:-- %s'% instances)
         else:
             instances.append(instance)
+            logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******4:-- %s'% instances)
         for instance in instances:
-            wcapi = instance.connect_in_woo()             
+            wcapi = instance.connect_in_woo()
+            logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******5:-- %s'% wcapi)             
             order_ids = []
             for order_status in instance.import_order_status_ids:
                 response = wcapi.get('orders?status=%s&per_page=100'%(order_status.status))
+                logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******6:-- %s'% response)
                 if not isinstance(response,requests.models.Response):                
                     transaction_log_obj.create({'message': "Import Orders \nResponse is not in proper format :: %s"%(response),
                                                  'mismatch_details':True,
@@ -790,6 +795,7 @@ class sale_order(models.Model):
                                                 })
                     continue                                    
                 if response.status_code not in [200,201]:
+                    logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******7:-- %s'% response.status_code)
                     message = "Error in Import Orders %s"%(response.content)                        
                     transaction_log_obj.create(
                                         {'message':message,
@@ -800,6 +806,7 @@ class sale_order(models.Model):
                     continue
                 try:
                     order_ids = order_ids + response.json()
+                    logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******8:-- %s'% order_ids)
                 except Exception as e:
                     transaction_log_obj.create({'message':"Json Error : While import Orders from WooCommerce for instance %s. \n%s"%(instance.name,e),
                                  'mismatch_details':True,
@@ -808,14 +815,16 @@ class sale_order(models.Model):
                                 })
                     continue
                 total_pages = response.headers.get('x-wp-totalpages')
+                logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******9 :-- %s'% total_pages)
                 if int(total_pages) >=2:
                     list3=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
                     # for page in range(2,int(total_pages)+1):            
                     order_ids = order_ids + self.import_all_woo_orders(wcapi,instance,transaction_log_obj,order_status,list3[0])            
-            
+                    logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******10:-- %s'% order_ids)
             import_order_ids=[]
             
             for order in order_ids:
+                logger.info('inside import_new_woo_orders()  >>>>>>>>>>>>>>>>*******11:-- %s'% order)
                 tax_included  = order.get('prices_include_tax')
                 if self.search([('woo_instance_id','=',instance.id),('woo_order_id','=',order.get('id')),('woo_order_number','=',order.get('number'))]):
                     continue

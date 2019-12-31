@@ -18,6 +18,7 @@
             'data/invoice_sample_test.xml',
             'data/retailer_mail.xml',
             'data/mail_data.xml',
+	        'data/retailer_mail.xml',
             'data/invoice_template.xml',
             'data/invoice_template_sample.xml',
             # 'report/sale_order.xml',        

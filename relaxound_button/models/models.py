@@ -11,6 +11,7 @@ try:
 except ImportError:
     _logger.debug('Can not import openpyxl`.')
     
+
 class sale_popup1(models.Model):
     _inherit = 'sale.order'
 
@@ -18,18 +19,24 @@ class sale_popup1(models.Model):
     def order_export(self):
         ftp = FTP("62.214.48.227")
         ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
-        ftp.cwd('TEST')
-        sale_ids = self._context.get('active_ids', [])
-        # orders = self.env['sale.order'].search(
-        #     [('id', 'in', sale_ids), ('imported_to_lido', '=', False), ('warehouse_id.name', '=', 'LIMAL')])
+        ftp.cwd('/ORDERS')
+
         
-        orders = self.env['sale.order'].search([('id', 'in', sale_ids), ('imported_to_lido', '=', False), (
+        try:
+            sale_ids = self.id
+
+            orders = self.env['sale.order'].search([('id', '=', sale_ids), ('imported_to_lido', '=', False), (
+            'invoice_status', 'in', ['invoiced','to invoice']), ('warehouse_id.name', '=', 'LIMAL')])
+
+        except ValueError as e:
+            sale_ids = self._context.get('active_ids', [])
+            orders = self.env['sale.order'].search([('id', 'in', sale_ids), ('imported_to_lido', '=', False), (
             'invoice_status', 'in', ['invoiced','to invoice']), ('warehouse_id.name', '=', 'LIMAL')])
 
         _logger.debug("1 ---------------------> %s" % orders)
         current_date = fields.Datetime.now()
         # with open(os.path.join("/home/mansi/Desktop/Shipping/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
-        with open(os.path.join("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
+        with open(os.path.join("src/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
 
             shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;item_line_number;item_name;item_description;item_quantity;item_price;\n')
             for order in orders:
@@ -73,26 +80,6 @@ class sale_popup1(models.Model):
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
         # print("date and time:",date_time)     
 
-        file = open("src/user/SALE-ORDER/shipping_data_%s.csv" % (current_date),'rb')
+        file = open("src/SALE-ORDER/shipping_data_%s.csv" % (current_date),'rb')
         # file = open("/home/mansi/Desktop/Shipping/shipping_data_%s.csv" % (current_date),'rb')
         ftp.storbinary('STOR '+ftp.pwd()+'/shipping_data_%s.csv'%(date_time),file)
-
-# class sale_popup1(models.Model):
-#     _inherit = 'sale.order'
-
-#     @api.multi
-#     def order_export(self):
-#         sale_ids = self._context.get('active_ids', [])
-#         orders = self.env['sale.order'].search(
-#             [('id', 'in', sale_ids), ('imported_to_lido', '=', False), ('warehouse_id.name', '=', 'LIMAL')])
-#         if orders:
-#             self.env['account.invoice']._multi_export_shipping_data(orders)
-#         return True
-
-#     @api.multi
-#     def uni_order_export(self):
-#         orders = self.env['sale.order'].search(
-#             [('id', '=', self.id), ('imported_to_lido', '=', False), ('warehouse_id.name', '=', 'LIMAL')])
-#         if orders:
-#             self.env['account.invoice']._multi_export_shipping_data(orders)
-#         return True
