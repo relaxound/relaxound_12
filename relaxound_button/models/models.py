@@ -37,7 +37,6 @@ class sale_popup1(models.Model):
         current_date = fields.Datetime.now()
         # with open(os.path.join("/home/mansi/Desktop/Shipping/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
         with open(os.path.join("src/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
-
             shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;item_line_number;item_name;item_description;item_quantity;item_price;\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
@@ -73,8 +72,33 @@ class sale_popup1(models.Model):
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str,ship_data)).encode('utf-8'))
-                order.imported_to_lido = True
-                order.imported_date = current_date
+                else:
+                    for line in order.order_line:
+                        if line.product_id.type != 'service':
+                            if line.product_id:
+                                items = line.product_id
+                                bundle_price = str(line.price_subtotal)
+                                bundle_id = str(line.id)
+                                for item in items:
+                                    ship_data = data
+                                    ship_data = data + [bundle_id,str(item.code), item.name,
+                                                        str(line.product_uom_qty), bundle_price]
+                                    ship_data.append('\n')
+                                    shipping_data.write(
+                                        ';'.join(map(str, ship_data)).encode('utf-8'))
+                                    bundle_price = ''
+                                    bundle_id = ''
+                            else:
+                                ship_data = data
+                                ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
+                                    line.product_uom_qty), str(line.price_subtotal)]
+                                ship_data.append('\n')
+                                shipping_data.write(
+                                    ';'.join(map(str,ship_data)).encode('utf-8'))
+                    
+
+            order.imported_to_lido = True
+            order.imported_date = current_date
 
         shipping_data.close()
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
