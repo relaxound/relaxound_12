@@ -27,7 +27,7 @@ class AccountInvoice(models.Model):
     def _export_shipping_data(self):
         ftp = FTP("62.214.48.227")
         ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
-        ftp.cwd('ORDER')
+        ftp.cwd('/ORDER')
         # ftp.cwd('TEST')
         print(ftp.pwd())
         orders = self.env['sale.order'].search([('imported_to_lido', '=', False), (
@@ -117,8 +117,8 @@ class StockPicking(models.Model):
 
     @api.model
     def _import_tracking_num(self):
-        # cwd="TRACKING"
-        cwd="TEST"
+        cwd="/TRACKING"
+        # cwd="TEST"
         ftp = FTP("62.214.48.227")
         ftp.login('relaxound', 'qOIg7W1Cic1vSNU')
         ftp.cwd('/'+cwd)
