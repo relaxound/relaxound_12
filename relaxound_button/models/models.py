@@ -97,8 +97,8 @@ class sale_popup1(models.Model):
                                     ';'.join(map(str,ship_data)).encode('utf-8'))
                     
 
-            order.imported_to_lido = True
-            order.imported_date = current_date
+                order.imported_to_lido = True
+                order.imported_date = current_date
 
         shipping_data.close()
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
