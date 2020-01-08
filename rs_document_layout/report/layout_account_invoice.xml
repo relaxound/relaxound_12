@@ -83,7 +83,11 @@
                             <font color="#0e71b8">VAT no.:</font> <span t-field="o.partner_id.vat"/>
                         </t>
                         <br/>
-                        <t t-if="o.user_id.name != 'Relaxound GmbH'">
+                        <t t-if="o.user_id.name">
+                            <br/>
+                            <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
+                        </t>
+                        <!-- <t t-if="o.user_id.name != 'Relaxound GmbH'">
                             <t t-if="o.user_id">
                                 <br/>
                                 <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/>
@@ -94,10 +98,10 @@
                                 <br/>
                                 <font color="#0e71b8">Contact:</font> Rahel Heuser
                             </t>
-                        </t>
+                        </t> -->
                         <t>
                             <br/>
-                            <font color="#0e71b8">E-Mail:</font> info@zwitscherbox.com
+                            <font color="#0e71b8">E-Mail:</font> info@relaxound.com
                         </t>
                         <t>
                             <br/>
