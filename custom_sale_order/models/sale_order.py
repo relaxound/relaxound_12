@@ -29,7 +29,8 @@ class CustomSaleOrder(models.Model):
             if line.order_id.partner_id.country_id or line.order_id.partner_id.property_account_position_id.name:
                 
                 fiscal_position_name = line.order_id.partner_id.property_account_position_id.name
-                if line.order_id.partner_id.country_id.name=='Germany':
+                # if line.order_id.partner_id.country_id.name=='Germany':
+                if line.order_id.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
@@ -45,7 +46,8 @@ class CustomSaleOrder(models.Model):
                         if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
-                if line.order_id.partner_id.country_id.name!='Germany':
+                # if line.order_id.partner_id.country_id.name!='Germany':
+                if line.order_id.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']:  
                     if fiscal_position_name:
                         if line.order_id.partner_id.vat: # Scenario 3 ----->
                             if 'EU' in fiscal_position_name:
