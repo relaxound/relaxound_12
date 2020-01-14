@@ -6,7 +6,7 @@
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
                 <br/>
-                <div class="row" style="margin-left:0.1cm; margin-right:0.1cm;">
+                <div class="row" style="margin-left:0.1cm; margin-right:0.1cm; font-size: 14px; font-family:Arial;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
                             <strong>Shipping address:</strong><br/>
@@ -18,7 +18,7 @@
                                 </tr>
                             </t>
                         </div>
-                        <div style="width:50%; float: right; text-align:right">
+                        <div style="width:50%; float: right; text-align:left">
                             <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
                             <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
                         </div>
@@ -28,7 +28,7 @@
             </xpath>
             <xpath expr="//div[@class='page']" position="replace">
                 <br/>
-                <div class="page">
+                <div class="page" style="font-size: 14px; font-family:Arial;">
                     <div class="oe_structure"/>
 
                     <h2 t-if="o.state == 'draft'">Request for Quotation #<span t-field="o.name"/></h2>
