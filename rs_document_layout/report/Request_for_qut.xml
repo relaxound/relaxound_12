@@ -12,36 +12,10 @@
                             <strong>Shipping address:</strong><br/>
                             <t t-foreach="o.picking_type_id.warehouse_id.partner_id" t-as="child">
                                 <tr>
-                                    <div t-field="o.picking_type_id.warehouse_id.name">
+                                    <div t-field="o.picking_type_id.warehouse_id.name"/>
+                                    <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'>
                                     </div>
                                 </tr>
-                                <tr>
-                                    <t t-if="child.street">
-                                        <span t-field="child.street"/>
-                                    </t>
-                                    <t t-if="child.street2">
-                                        <br/>
-                                        <span t-field="child.street2"/>
-                                    </t>
-                                    <t t-if="child.city">
-                                        <br/>
-                                        <span t-field="child.city"/>
-                                    </t>
-                                    <t t-if="child.zip">
-                                        <br/>
-                                        <span t-field="child.zip"/>
-                                    </t>
-                                    <t t-if="child.state_id">
-                                        <br/>
-                                        <spam t-field="child.state_id"/>
-                                    </t>
-
-                                    <t t-if="child.country_id.name">
-                                        <br/>
-                                        <span t-field="child.country_id.name"/>
-                                    </t>
-                                </tr>
-                                <!-- </t> -->
                             </t>
                         </div>
                         <div style="width:50%; float: right; text-align:right">
