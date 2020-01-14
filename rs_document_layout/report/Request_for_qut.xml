@@ -1,114 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Purchase Order -->
+        <!-- Request for Order -->
         <template id="report_req_for_qut_document" inherit_id="purchase.report_purchasequotation_document">
-        <xpath expr="//t[@t-set='address']" position="replace">
-            <br/>
-            <br/>
-                <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
+            <xpath expr="//t[@t-set='address']" position="replace">
+                <br/>
+                <br/>
+                <div class="row" style="margin-left:0.1cm; margin-right:0.1cm;font-size: 14px; font-family:Arial;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
-                        <strong>Shipping address:</strong><br/>
-                        <t t-foreach="o.partner_id.child_ids" t-as="child">
-                        <t t-if="child.type=='delivery'"> 
-                            <tr>
-                                <t t-if="child.street">
-                                    <span t-field="child.street"/>
-                                </t>
-                                <t t-if="child.street2">
-                                    <br/>
-                                    <span t-field="child.street2"/>
-                                </t>
-                                <t t-if="child.city">
-                                    <br/>
-                                    <span t-field="child.city"/>
-                                </t>
-                                <t t-if="child.zip">
-                                 <br/>
-                                    <span t-field="child.zip"/>
-                                </t>
-                                <t t-if="child.state_id">
-                                    <br/>
-                                    <spam t-field="child.state_id"/>
-                                </t>
-                                
-                                <t t-if="child.country_id.name">
-                                    <br/>
-                                    <span t-field="child.country_id.name"/>
-                                </t>
-                            </tr>
-                        </t>
-                        </t>
+                            <strong>Shipping address:</strong><br/>
+                            <t t-foreach="o.picking_type_id.warehouse_id.partner_id" t-as="child">
+                                <tr>
+                                    <div t-field="o.picking_type_id.warehouse_id.name">   </div>
+                                    <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'>
+                                    </div>
+                                </tr>
+                            </t>
                         </div>
-                        <div style="width:50%; float: right; text-align:right">
+                        <div style="width:50%; float: right; text-align:left">
                             <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
                             <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></p>
                         </div>
 
                     </div>
                 </div>
-             </xpath> 
-        <xpath expr="//div[@class='page']" position="replace">
-            <br/>
+            </xpath>
+            <xpath expr="//div[@class='page']" position="replace">
+                <br/>
+                <div class="page" style="font-size: 14px; font-family:Arial;">
+                    <div class="oe_structure"/>
 
-        <div class="page">
-            <div class="oe_structure"/>
+                    <h2>Request for Quotation <span t-field="o.name"/></h2>
 
-            <h2>Request for Quotation <span t-field="o.name"/></h2>
+                    <table class="table table-condensed" id="items">
+                        <style>
+                            #items td{
+                            border:0;
+                            border-top:0;
+                            border:0;padding-top: .3em;
+                            padding-bottom: .3em;
+                            padding-left:0.2em;
+                            padding-right:0.2em;
+                            }
+                            #items th {
+                            border:0;
+                            border-top:0;
+                            padding-right:0.2em;
+                            padding-bottom: .3em;
+                            padding-left:0.2em;
+                            <!--padding-right:0.2em;-->
+                            }
+                        </style>
+                        <thead>
+                            <tr>
+                                <th style="border-bottom: 2px solid black;"><strong>Description</strong></th>
+                                <th class="text-center" style="border-bottom: 2px solid black; width:25%;"><strong>Expected Date</strong></th>
+                                <th class="text-right" style="border-bottom: 2px solid black; width:15%;"><strong>Qty</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.order_line" t-as="order_line">
+                                <td>
+                                    <span t-field="order_line.name"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="order_line.date_planned" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="order_line.product_qty"/>
+                                    <span t-field="order_line.product_uom" groups="uom.group_uom"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-            <table class="table table-condensed" id="items">
-                <style>
-                                    #items td{
-                                    border:0;
-                                    border-top:0;
-                                    border:0;padding-top: .3em;
-                                    padding-bottom: .3em;
-                                    padding-left:0.2em;
-                                    padding-right:0.2em;
-                                    }
-                                    #items th {
-                                    border:0; 
-                                    border-top:0;
-                                    padding-right:0.2em;
-                                    padding-bottom: .3em;
-                                    padding-left:0.2em;
-                                    <!--padding-right:0.2em;-->
-                                    }
-                </style>
-                <thead>
-                    <tr>
-                        <th style="border-bottom: 2px solid black;"><strong>Description</strong></th>
-                        <th class="text-center" style="border-bottom: 2px solid black; width:25%;"><strong>Expected Date</strong></th>
-                        <th class="text-right" style="border-bottom: 2px solid black; width:15%;"><strong>Qty</strong></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr t-foreach="o.order_line" t-as="order_line">
-                        <td>
-                            <span t-field="order_line.name"/>
-                        </td>
-                        <td class="text-center">
-                            <span t-field="order_line.date_planned" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
-                        </td>
-                        <td class="text-right">
-                            <span t-field="order_line.product_qty"/>
-                            <span t-field="order_line.product_uom" groups="uom.group_uom"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    <p t-field="o.notes"/>
 
-            <p t-field="o.notes"/>
-
-            <div class="oe_structure"/>
-        </div>
-    <!--</t>-->
-        </xpath>
-            
-        <xpath expr="//div[@class='page']" position="attributes">
-            <attribute name="style">margin-right:3cm; margin-left:1.4cm;font-size:13px;</attribute>
-        </xpath>
+                    <div class="oe_structure"/>
+                </div>
+            </xpath>
         </template>
     </data>
 </odoo>
