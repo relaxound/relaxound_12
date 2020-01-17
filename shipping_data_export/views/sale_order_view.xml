@@ -38,6 +38,7 @@
                     <field name="amount_untaxed"/>
                     <field name="amount_tax"/>
                     <field name="amount_total"/>
+                    <field name="invoice_status"/>
                     <field name="imported_to_lido"/>
                     <field name="imported_date"/>
                     <field name="warehouse_id"/>
