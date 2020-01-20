@@ -84,3 +84,19 @@ class Custominvoicefilter(models.Model):
     lang_new = fields.Selection('res.partner', string='Customer Lang', related='partner_id.lang')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
+
+
+
+class Customsaleorderreportfilter(models.Model):
+    _inherit = "sale.report"
+
+    category_id_new = fields.Many2many('res.partner', string='Customer Tag', related='partner_id.category_id')
+    zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
+
+
+
+class Custominvoicereportfilter(models.Model):
+    _inherit = "account.invoice.report"
+
+    category_id_new = fields.Many2many('res.partner', string='Customer Tag', related='partner_id.category_id')
+    zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
