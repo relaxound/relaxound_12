@@ -48,7 +48,7 @@ class sale_popup1(models.Model):
                         order.partner_shipping_id.email or '', order.partner_invoice_id.name or '', ' ', order.partner_invoice_id.street or '',
                         order.partner_invoice_id.street2 or '', order.partner_invoice_id.city or '', ' ', order.partner_invoice_id.zip or '',
                         order.partner_invoice_id.country_id and order.partner_invoice_id.country_id.name or '',order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET']
-                                if invoices:
+                if invoices:
                     for invoice in invoices:
                         for line in invoice.invoice_line_ids:
                             if line.product_id.type != 'service':
