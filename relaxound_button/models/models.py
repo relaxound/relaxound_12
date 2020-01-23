@@ -61,7 +61,7 @@ class sale_popup1(models.Model):
                                         ship_data = data
                                         ship_data = data + [bundle_id, str(item.item_id.default_code),
                                                             item.item_id.name,
-                                                            str(item.qty_uom), bundle_price]
+                                                            str(line.product_uom_qty * item.qty_uom), bundle_price]
                                         ship_data.append('\n')
                                         shipping_data.write(
                                             ';'.join(map(str, ship_data)).encode('utf-8'))
@@ -85,7 +85,7 @@ class sale_popup1(models.Model):
                                 for item in items:
                                     ship_data = data
                                     ship_data = data + [bundle_id, str(item.item_id.default_code),item.item_id.name,
-                                                        str(item.qty_uom), bundle_price]
+                                                        str(line.product_uom_qty * item.qty_uom), bundle_price]
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str, ship_data)).encode('utf-8'))
