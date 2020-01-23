@@ -69,8 +69,16 @@ class sale_popup1(models.Model):
                                         bundle_id = ''
                                 else:
                                     ship_data = data
-                                    ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
-                                        line.quantity), str(line.price_subtotal)]
+
+                                    if('\n' in line.name):
+                                        val=line.name
+                                        val = val.replace('\n','')
+                                        ship_data = data + [str(line.id), str(line.product_id.code), val, str(
+                                        line.product_uom_qty), str(line.price_subtotal)]
+                                    else:
+                                        ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
+                                        line.product_uom_qty), str(line.price_subtotal)]
+
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str,ship_data)).encode('utf-8'))
@@ -93,8 +101,16 @@ class sale_popup1(models.Model):
                                     bundle_id = ''
                             else:
                                 ship_data = data
-                                ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
-                                    line.product_uom_qty), str(line.price_subtotal)]
+
+                                if ('\n' in line.name):
+                                    val = line.name
+                                    val = val.replace('\n', '')
+                                    ship_data = data + [str(line.id), str(line.product_id.code), val, str(
+                                        line.product_uom_qty), str(line.price_subtotal)]
+                                else:
+                                    ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
+                                        line.product_uom_qty), str(line.price_subtotal)]
+
                                 ship_data.append('\n')
                                 shipping_data.write(
                                     ';'.join(map(str,ship_data)).encode('utf-8'))
