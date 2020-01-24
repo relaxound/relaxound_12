@@ -48,7 +48,7 @@ class sale_popup1(models.Model):
                         order.partner_shipping_id.email or '', order.partner_invoice_id.name or '', ' ', order.partner_invoice_id.street or '',
                         order.partner_invoice_id.street2 or '', order.partner_invoice_id.city or '', ' ', order.partner_invoice_id.zip or '',
                         order.partner_invoice_id.country_id and order.partner_invoice_id.country_id.name or '',order.name or '', invoices and str(invoices[0].date_invoice) or '', 'PACKET']
-                                if invoices:
+                if invoices:
                     for invoice in invoices:
                         for line in invoice.invoice_line_ids:
                             if line.product_id.type != 'service':
@@ -61,7 +61,7 @@ class sale_popup1(models.Model):
                                         ship_data = data
                                         ship_data = data + [bundle_id, str(item.item_id.default_code),
                                                             item.item_id.name,
-                                                            str(item.qty_uom), bundle_price]
+                                                            str(line.quantity * item.qty_uom), bundle_price]
                                         ship_data.append('\n')
                                         shipping_data.write(
                                             ';'.join(map(str, ship_data)).encode('utf-8'))
@@ -69,8 +69,16 @@ class sale_popup1(models.Model):
                                         bundle_id = ''
                                 else:
                                     ship_data = data
-                                    ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
+
+                                    if('\n' in line.name):
+                                        val=line.name
+                                        val = val.replace('\n','')
+                                        ship_data = data + [str(line.id), str(line.product_id.code), val, str(
                                         line.quantity), str(line.price_subtotal)]
+                                    else:
+                                        ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
+                                        line.quantity), str(line.price_subtotal)]
+
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str,ship_data)).encode('utf-8'))
@@ -85,7 +93,7 @@ class sale_popup1(models.Model):
                                 for item in items:
                                     ship_data = data
                                     ship_data = data + [bundle_id, str(item.item_id.default_code),item.item_id.name,
-                                                        str(item.qty_uom), bundle_price]
+                                                        str(line.product_uom_qty * item.qty_uom), bundle_price]
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str, ship_data)).encode('utf-8'))
@@ -93,15 +101,23 @@ class sale_popup1(models.Model):
                                     bundle_id = ''
                             else:
                                 ship_data = data
-                                ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
-                                    line.product_uom_qty), str(line.price_subtotal)]
+
+                                if ('\n' in line.name):
+                                    val = line.name
+                                    val = val.replace('\n', '')
+                                    ship_data = data + [str(line.id), str(line.product_id.code), val, str(
+                                        line.product_uom_qty), str(line.price_subtotal)]
+                                else:
+                                    ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
+                                        line.product_uom_qty), str(line.price_subtotal)]
+
                                 ship_data.append('\n')
                                 shipping_data.write(
                                     ';'.join(map(str,ship_data)).encode('utf-8'))
                     
 
-            order.imported_to_lido = True
-            order.imported_date = current_date
+                order.imported_to_lido = True
+                order.imported_date = current_date
 
         shipping_data.close()
         date_time = current_date.strftime("%m-%d-%Y %H.%M.%S")
