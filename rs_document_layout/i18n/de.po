@@ -55,7 +55,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Order By:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Sortieren nach:</font>"
+"                            <font color=\"#0e71b8\">Bestellt durch:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -425,7 +425,7 @@ msgstr "Auftrag"
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_by
 #: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__order_by
 msgid "Order By"
-msgstr "Sortieren nach"
+msgstr "Bestellt durch"
 
 #. module: rs_document_layout
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_date

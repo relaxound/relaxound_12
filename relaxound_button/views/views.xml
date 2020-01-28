@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <field name="state" position="before">
-                    <button name="uni_order_export" type="object" string="Export" class="oe_highlight"/> 
+                    <button name="order_export" type="object" string="Export" class="oe_highlight"/> 
                 </field>
             </field>
         </record>

@@ -29,7 +29,8 @@ class CustomSaleOrder(models.Model):
             if line.order_id.partner_id.country_id or line.order_id.partner_id.property_account_position_id.name:
                 
                 fiscal_position_name = line.order_id.partner_id.property_account_position_id.name
-                if line.order_id.partner_id.country_id.name=='Germany':
+                # if line.order_id.partner_id.country_id.name=='Germany':
+                if line.order_id.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
@@ -45,7 +46,8 @@ class CustomSaleOrder(models.Model):
                         if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
-                if line.order_id.partner_id.country_id.name!='Germany':
+                # if line.order_id.partner_id.country_id.name!='Germany':
+                if line.order_id.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']:  
                     if fiscal_position_name:
                         if line.order_id.partner_id.vat: # Scenario 3 ----->
                             if 'EU' in fiscal_position_name:
@@ -56,6 +58,20 @@ class CustomSaleOrder(models.Model):
                                 tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
                                 if tax_id not in self.tax_id:
                                     line.update({'tax_id':tax_id})
+
+
+class Customtax(models.Model):
+    _inherit = 'account.tax'
+
+
+    @api.model
+    def _fix_tax_included_price(self, price, prod_taxes, line_taxes):
+        """Subtract tax amount from price when corresponding "price included" taxes do not apply"""
+        # FIXME get currency in param?
+        incl_tax = prod_taxes.filtered(lambda tax: tax not in prod_taxes and tax.price_include)
+        if incl_tax:
+            return incl_tax.compute_all(price)['total_excluded']
+        return price
 
 
 
