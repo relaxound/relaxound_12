@@ -37,7 +37,7 @@
 
     <center>
 
-    <a href="mailto:rawhoi@posteo.de?cc=${object.user_id.email or ''}&#38;subject=${object.company_id.name} Order (Ref ${object.name or 'n/a' })" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">Email Us</a></center>
+    <a href="mailto:order@relaxound.com &#38;subject=${object.company_id.name} Order (Ref ${object.name or 'n/a' })" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">Email Us</a></center>
     <br/><br/><br/>
 
     <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
