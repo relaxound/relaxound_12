@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group[2]/field[@name='category_id']" position="after">
                     <field name="business_sec" widget="selection"/>
+                    <field name="agent_name"/>
                 </xpath>
             </field>
         </record>
