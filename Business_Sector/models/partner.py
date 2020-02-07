@@ -21,21 +21,23 @@ class BusinessSector(models.Model):
                 ('sec7', 'Misc'),
                 ('sec8', 'GPC'),
                 ('sec9', 'retail store'),], string='Business Sector:')
-        
+
         agent_name = fields.Char('Sale Agent')
 
         @api.onchange('zip')
         def onchange_zip(self):
                 if self.zip != None and self.zip != '':
-                        with open('src/zip_code.csv', 'r') as csv_file:
+                        with open('/src/user/zip_code.csv', 'r') as csv_file:
                                 csv_obj = csv.reader(csv_file)
                                 print("#### CSV OPENED #########")
                                 all_val = [i for i in csv_obj]
-                                for row in all_val:
-                                        if self.zip in row:
-                                                self.update({'agent_name': row[1]})
-                                # else:
-                                #         self.update({'agent_name': ''})
+                                val= [(i[0],i[1]) for i in all_val]
+                                for v in val:
+                                        if self.zip in v:
+                                                self.update({'agent_name': v[1]})
+                                                break
+                                        else:
+                                                self.update({'agent_name': None})
 
                 elif self.zip == '':
                         self.update({'agent_name': None})
