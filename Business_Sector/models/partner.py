@@ -3,14 +3,14 @@
 # See LICENSE file for full copyright and licensing details.
 
 from odoo import models, fields, api, _
-
+import csv
 
 class BusinessSector(models.Model):
 
         _inherit = 'res.partner'
 
         # Added one field Business sector with dropdown
-	agent_name = fields.Char('Sale Agent')
+	
         business_sec = fields.Selection([
                 ('sec1', 'Beauty / Wellness'),
                 ('sec2', 'Books'), 
@@ -21,12 +21,13 @@ class BusinessSector(models.Model):
                 ('sec7', 'Misc'),
                 ('sec8', 'GPC'),
                 ('sec9', 'retail store'),], string='Business Sector:')
-
+        
+        agent_name = fields.Char('Sale Agent')
 
         @api.onchange('zip')
         def onchange_zip(self):
                 if self.zip != None and self.zip != '':
-                        with open('/home/mansi/Desktop/zip_code.csv', 'r') as csv_file:
+                        with open('src/zip_code.csv', 'r') as csv_file:
                                 csv_obj = csv.reader(csv_file)
                                 print("#### CSV OPENED #########")
                                 all_val = [i for i in csv_obj]
