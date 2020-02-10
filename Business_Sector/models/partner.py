@@ -27,7 +27,7 @@ class BusinessSector(models.Model):
         @api.onchange('zip')
         def onchange_zip(self):
                 if self.zip != None and self.zip != '':
-                        with open('/src/user/zip_code.csv', 'r') as csv_file:
+                        with open('src/user/zip_code.csv', 'r') as csv_file:
                                 csv_obj = csv.reader(csv_file)
                                 print("#### CSV OPENED #########")
                                 all_val = [i for i in csv_obj]
