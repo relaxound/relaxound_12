@@ -73,3 +73,37 @@ class ReportInvoiceWithPayment(models.AbstractModel):
             'docs': self.env['account.invoice'].browse(docids),
             'report_type': data.get('report_type') if data else '',
         }
+
+
+class ReportJournal(models.AbstractModel):
+    _name = 'report.account.report_invoice'
+    _description = 'Report Invoice With Payment'
+
+
+    @api.model
+    def _get_report_values(self, docids, data=None):
+        del_chrg = 0
+        untx_amt = 0
+        invoice = self.env['account.invoice'].browse(docids[0])
+        inv_lines = self.env['account.invoice.line'].search([('invoice_id','=',invoice.id)])
+        
+        for line in inv_lines:
+            
+            try:
+                del_prod = self.env['delivery.carrier'].search([('product_id','=',line.product_id.id)])
+                if del_prod:
+                    del_chrg = line.price_subtotal
+                    untx_amt = invoice.amount_untaxed - del_chrg
+                    break
+            
+            except AssertionError:
+                continue
+            
+        return {
+            'd_chrg': del_chrg,
+            'utx_amt': untx_amt,
+            'doc_ids': docids,
+            'doc_model': 'account.invoice',
+            'docs': self.env['account.invoice'].browse(docids),
+            'report_type': data.get('report_type') if data else '',
+        }
