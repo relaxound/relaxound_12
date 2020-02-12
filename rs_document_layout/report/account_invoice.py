@@ -77,7 +77,7 @@ class ReportInvoiceWithPayment(models.AbstractModel):
 
 class ReportJournal(models.AbstractModel):
     _name = 'report.account.report_invoice'
-    _description = 'Report Invoice With Payment'
+    _description = 'Report Invoice Without Payment'
 
 
     @api.model
