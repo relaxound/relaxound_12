@@ -190,7 +190,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-6" style="line-height:0">
+                <div class="col-6" style="line-height:0" id="test">
                     <br/><br/><br/>
                     <table class="table table-condensed" id="summary" style="border: none; margin-left:15px;">
                         <style>
@@ -450,7 +450,7 @@
                 </t>
                 <t t-if="not(o.partner_id.is_retailer)">
                     <div style="line-height:0">
-                        <table class="table table-condensed" style="margin-top:10px; width: 82%; margin-left:54px; font-size: 13px; font-family:Arial;" id="items">
+                        <table class="table table-condensed" style="margin-top:10px; border: none; width: 82%; margin-left:54px; font-size: 13px; font-family:Arial;" id="items">
                             <style>
                                 #items td{
                                 border:0;
