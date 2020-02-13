@@ -19,7 +19,7 @@ class ResPartner(models.Model):
 			# 			self.update({'lang':item.code})
 
 		elif self.country_id.code == 'FR':
-			self.update({'lang': 'fr_CH'})
+			self.update({'lang': 'fr_FR'})
 
 		else:
 			self.update({'lang': 'en_US'})
