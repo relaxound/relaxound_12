@@ -32,17 +32,17 @@ class BusinessSector(models.Model):
                 for id in ids:
                     tag_name.append(id.name)
                 if self.zip != None and self.zip != '' and 'Händler' in tag_name:
-                    with open('/home/mansi/Desktop/zip_code.csv', 'r') as csv_file:
-                        csv_obj = csv.reader(csv_file)
-                        print("#### CSV OPENED #########")
-                        all_val = [i for i in csv_obj]
-                        val = [(i[0], i[1]) for i in all_val]
-                        for v in val:
-                            if self.zip in v:
-                                self.update({'agent_name': v[1]})
-                                break
-                            else:
-                                self.update({'agent_name': None})
+                        with open('src/user/zip_code.csv', 'r') as csv_file:
+                                csv_obj = csv.reader(csv_file)
+                                print("#### CSV OPENED #########")
+                                all_val = [i for i in csv_obj]
+                                val = [(i[0], i[1]) for i in all_val]
+                                for v in val:
+                                        if self.zip in v:
+                                                self.update({'agent_name': v[1]})
+                                                break
+                                        else:
+                                                self.update({'agent_name': None})
 
                 elif self.zip == '':
                         self.update({'agent_name': None})
