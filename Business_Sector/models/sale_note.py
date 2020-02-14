@@ -13,22 +13,22 @@ class defaultnote(models.Model):
 
         if self.partner_id.agent_name == 'Rossmanek':
 
-                self.update({'note': "Sie werden betreut durch die Handelsagentur Rossmanek Kontakt: Ole Roßmanek, Timms Hoff 7, 22941 Delingsdorf info@agentur-rossmanek.de"})
+                self.update({'note': "Sie werden betreut durch die Handelsagentur Rossmanek\nKontakt: Ole Roßmanek, Timms Hoff 7, 22941 Delingsdorf\n                  E-Mail: info@agentur-rossmanek.de"})
 
         elif self.partner_id.agent_name == 'Pforte':
-                self.update({'note': "Sie werden betreut durch die Agentur Pforte Kontakt: Agentur Pforte, Sibeliusstraße 3, 30989 Gehrden E-Mail: gunther.pforte@t-online.de"})
+                self.update({'note': "          Sie werden betreut durch die Agentur Pforte\nKontakt: Agentur Pforte, Sibeliusstraße 3, 30989 Gehrden\n                  E-Mail: gunther.pforte@t-online.de"})
 
         elif self.partner_id.agent_name == 'Senft':
-                self.update({'note': "Sie werden betreut durch die Handelsagentur Senft Kontakt: Christian Senft, Am Rheinberg 19, 55411 Bingen E-Mail: info@cs-handelsagentur.de"})
+                self.update({'note': "      Sie werden betreut durch die Handelsagentur Senft\nKontakt: Christian Senft, Am Rheinberg 19, 55411 Bingen\n                    E-Mail: info@cs-handelsagentur.de"})
 
         elif self.partner_id.agent_name == 'Wirtz':
-                self.update({'note': "Sie werden betreut durch die Agentur Wirtz Kontakt: Agentur Wirtz, Tannenweg 23, 41363 Jüchen agenturwirtz@t-online.de"})
+                self.update({'note': "          Sie werden betreut durch die Agentur Wirtz\nKontakt: Agentur Wirtz, Tannenweg 23, 41363 Jüchen\n                    E-Mail: agenturwirtz@t-online.de"})
 
         elif self.partner_id.agent_name == 'Kuhnle':
-                self.update({'note': "Sie werden betreut durch die Agentur Kuhnle Kontakt: Agentur Kuhnle, Bonwiedenweg 18, 73312 Türkheim s.kuhnle@t-online.de"})
+                self.update({'note': "              Sie werden betreut durch die Agentur Kuhnle\nKontakt: Agentur Kuhnle, Bonwiedenweg 18, 73312 Türkheim\n                         E-Mail: s.kuhnle@t-online.de"})
 
         elif self.partner_id.agent_name == 'Werner':
-                self.update({'note': "Sie werden betreut durch die Handelsagentur BUCH + RAUM Kontakt: Thomas Werner, Sonnhart 78, 83131 Nußdorf am Inn werner@buch-raum.de"})
+                self.update({'note': " Sie werden betreut durch die Handelsagentur BUCH + RAUM\nKontakt: Thomas Werner, Sonnhart 78, 83131 Nußdorf am Inn\n                        E-Mail: werner@buch-raum.de"})
 
         else:
                 self.update({'note' :"Bitte beachten Sie, dass wir bei nicht vereinbartem Skontoabzug oder Kürzung des Rechnungsbetrages eine Bearbeitungsgebühr von 10 EUR erheben müssen."})
