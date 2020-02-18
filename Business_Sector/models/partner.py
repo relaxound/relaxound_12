@@ -25,13 +25,13 @@ class BusinessSector(models.Model):
         agent_name = fields.Char('Sale Agent')
 
 
-        @api.onchange('zip', 'category_id')
+        @api.onchange('zip', 'category_id','country_id')
         def onchange_zip(self):
                 ids = self.category_id
                 tag_name = []
                 for id in ids:
                     tag_name.append(id.name)
-                if self.zip != None and self.zip != '' and 'Händler' in tag_name:
+                if self.zip != None and self.zip != '' and 'Händler' in tag_name and self.country_id.code=='DE':
                         with open('src/user/zip_code.csv', 'r') as csv_file:
                                 csv_obj = csv.reader(csv_file)
                                 print("#### CSV OPENED #########")
