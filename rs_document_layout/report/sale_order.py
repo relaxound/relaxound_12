@@ -61,3 +61,41 @@ class SaleOrderLine(models.Model):
             #         }
             #         return {'warning': warning_mess}
         return {}
+        
+
+class CustomSaleOrderfilter(models.Model):
+    _inherit = "sale.order"
+
+
+    category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
+    country_id_new = fields.Char(string='Customer Country', related='partner_id.country_id.name')
+    lang_new = fields.Selection('res.partner', string='Customer Lang', related='partner_id.lang')
+    zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
+    # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
+
+
+class Custominvoicefilter(models.Model):
+    _inherit = "account.invoice"
+
+
+    category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
+    country_id_new = fields.Char(string='Customer Country', related='partner_id.country_id.name')
+    lang_new = fields.Selection('res.partner', string='Customer Lang', related='partner_id.lang')
+    zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
+    is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
+
+
+
+class Customsaleorderreportfilter(models.Model):
+    _inherit = "sale.report"
+
+    category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
+    zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
+
+
+
+class Custominvoicereportfilter(models.Model):
+    _inherit = "account.invoice.report"
+
+    category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
+    zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
