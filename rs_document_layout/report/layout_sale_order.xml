@@ -155,7 +155,7 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px;line-height:1; margin-left:10px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <t t-if="l.product_id.type != 'service'">
+                                <!-- <t t-if="l.product_id.type != 'service'"> -->
                                 <t t-if="not l.is_delivery">
                                     <td class="text-left">
                                         <span t-field="l.product_id.name"/>
@@ -192,7 +192,7 @@
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                     </td>
-                                </t>
+                                <!-- </t> -->
                                 </t>
                             </tr>
                             <t t-if="doc.partner_id.is_retailer">
@@ -242,7 +242,7 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px; margin-bottom:0px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <t t-if="l.product_id.type != 'service'">
+                                <!-- <t t-if="l.product_id.type != 'service'"> -->
                                 <t t-if="not l.is_delivery">
                                     <!-- <td style="width: 10%"></td> -->
                                     <td class="text-left">
@@ -274,7 +274,7 @@
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                     </td>
-                                </t>
+                                <!-- </t> -->
                                 </t>
                             </tr>
                             <tr>
