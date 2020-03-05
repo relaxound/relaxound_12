@@ -384,7 +384,7 @@
                         <t t-set="i" t-value="1"/>
                         <tbody class="invoice_tbody" style="line-height:0.9">
                             <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                <t t-if="l.product_id.type != 'service'">
+                                <!-- <t t-if="l.product_id.type != 'service'"> -->
                                 <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                     <td class="text-center">
                                         <span t-esc="i"/>
@@ -427,7 +427,7 @@
                                     </td>
                                 </t>
                                     <t t-set="i" t-value="i+1"/>
-                                </t>
+                                <!-- </t> -->
                                 
                             </tr>
                             <!-- <tr style="border-bottom: 1px solid black"></tr> -->
@@ -477,7 +477,7 @@
                             <t t-set="j" t-value="1"/>
                             <tbody class="invoice_tbody" style="line-height:0.9">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                    <t t-if="l.product_id.type != 'service'">
+                                    <!-- <t t-if="l.product_id.type != 'service'"> -->
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
                                             <span t-esc="j"/>
@@ -512,7 +512,7 @@
                                         </td>
                                     </t>
                                         <t t-set="j" t-value="j+1"/>
-                                    </t>
+                                    <!-- </t> -->
                                     
                                 </tr>
 
