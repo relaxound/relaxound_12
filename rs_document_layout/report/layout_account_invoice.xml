@@ -438,7 +438,7 @@
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black">Total</th>
                                     <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids if line.product_id.type != 'service'))"/></th>
-                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="single_total"/></th>
+                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.single_unit for line in o.invoice_line_ids if line.product_id.type != 'service'))"/></th>
                                     <th class="text-right" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
 
