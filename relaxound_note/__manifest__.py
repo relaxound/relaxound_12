@@ -18,7 +18,7 @@
     'category': 'Uncategorized',
     'version': '12.0',
     # any module necessary for this one to work correctly
-    'depends': ['base','sale'],
+    'depends': ['base','sale','hr','hr_holidays'],
 
     # always loaded
     'data': [
