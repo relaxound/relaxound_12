@@ -204,7 +204,8 @@
                                         <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line if line.product_id.type != 'service'))"/>
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black;padding-left:0.1em;">
-                                        <t t-esc="single_total"/>
+                                        <t t-esc="int(sum(line.single_unit for line in doc.order_line if line.product_id.type != 'service'))"/>
+                                                <!-- <t t-esc="single_total"/> -->
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
