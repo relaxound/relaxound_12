@@ -8,13 +8,17 @@ class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     payment_method_id = fields.Many2one(comodel_name='payment.method2',string='Payment Method',required=True )
-
     payment_term_id = fields.Many2one('account.payment.term', string='Payment Term', oldname='payment_term',
                                       readonly=True, states={'draft': [('readonly', False)]},
                                       help="If you use payment terms, the due date will be computed automatically at the generation "
                                            "of accounting entries. If you keep the payment term and the due date empty, it means direct payment. "
-                                           "The payment term may compute several due dates, for example 50% now, 50% in one month.",
-                                      related='payment_method_id.payment_term_id')
+                                           "The payment term may compute several due dates, for example 50% now, 50% in one month.")
+    # payment_term_id = fields.Many2one('account.payment.term', string='Payment Term', oldname='payment_term',
+    #                                   readonly=True, states={'draft': [('readonly', False)]},
+    #                                   help="If you use payment terms, the due date will be computed automatically at the generation "
+    #                                        "of accounting entries. If you keep the payment term and the due date empty, it means direct payment. "
+    #                                        "The payment term may compute several due dates, for example 50% now, 50% in one month.",
+    #                                   related='payment_method_id.payment_term_id')
 
     @api.onchange('payment_term_id', 'date_invoice')
     def _onchange_payment_term_date_invoice(self):
