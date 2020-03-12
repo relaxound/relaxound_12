@@ -221,13 +221,14 @@ class SaleOrder(models.Model):
         }
         return debit_line, credit_line
 
-    @api.onchange('payment_method_id')
-    def onchange_payment_method_id_set_payment_term(self):
-        if not self.payment_method_id:
-            return
-        method = self.payment_method_id
-        if method.payment_term_id:
-            self.payment_term_id = method.payment_term_id.id
+    # Hide this functionality as per client requierment
+    # @api.onchange('payment_method_id')
+    # def onchange_payment_method_id_set_payment_term(self):
+    #     if not self.payment_method_id:
+    #         return
+    #     method = self.payment_method_id
+    #     if method.payment_term_id:
+    #         self.payment_term_id = method.payment_term_id.id
             
 #             values = {
 #                 'payment_term_id': method.payment_term_id.id or False,
