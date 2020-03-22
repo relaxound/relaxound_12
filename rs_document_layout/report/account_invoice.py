@@ -25,7 +25,7 @@ class InvoiceJournalField(models.Model):
                             self.update({'journal_id':temp.id})
 
                 else:
-                    self.update({'journal_id':'Tax Invoices'})
+                    self.update({'journal_id':2})
 
 
 
