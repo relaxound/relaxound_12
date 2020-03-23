@@ -72,6 +72,8 @@ class CustomSaleOrderfilter(models.Model):
     country_id_new = fields.Char(string='Customer Country', related='partner_id.country_id.name')
     lang_new = fields.Selection('res.partner', string='Customer Lang', related='partner_id.lang')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
+    city_new = fields.Char(string='Customer City', related='partner_id.city')
+    state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
 
 
@@ -84,6 +86,8 @@ class Custominvoicefilter(models.Model):
     lang_new = fields.Selection('res.partner', string='Customer Lang', related='partner_id.lang')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
+    city_new = fields.Char(string='Customer City', related='partner_id.city')
+    state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
 
 
 
@@ -94,7 +98,7 @@ class Customsaleorderreportfilter(models.Model):
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
-
+    
 
 class Custominvoicereportfilter(models.Model):
     _inherit = "account.invoice.report"
