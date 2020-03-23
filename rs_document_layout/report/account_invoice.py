@@ -24,8 +24,9 @@ class InvoiceJournalField(models.Model):
                         if temp.name=='Retail Invoices':
                             self.update({'journal_id':temp.id})
 
-                else:
-                    self.update({'journal_id':2})
+                # else:
+                #     if temp.name=='Vendor Bills':
+                #         self.update({'journal_id':temp.id})
 
 
 

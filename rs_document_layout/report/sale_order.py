@@ -92,7 +92,8 @@ class Customsaleorderreportfilter(models.Model):
 
     category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
-
+    city_new = fields.Char(string='Customer City', related='partner_id.city')
+    state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
 
 
 class Custominvoicereportfilter(models.Model):
@@ -100,3 +101,5 @@ class Custominvoicereportfilter(models.Model):
 
     category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
+    city_new = fields.Char(string='Customer City', related='partner_id.city')
+    state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
