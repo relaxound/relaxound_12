@@ -11,6 +11,7 @@
             </field>
         </field>
     </record>
+    
     <record id="access_main_hr_menu" model="res.groups">
         <field name="name">Show Employee and Leaves Menu</field>
     </record>
