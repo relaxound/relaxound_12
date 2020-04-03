@@ -98,7 +98,11 @@ class Customsaleorderreportfilter(models.Model):
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
-    
+    product_type = fields.Selection([
+        ('consu', 'Consumable'),
+        ('service', 'Service'),
+        ('product', 'Storable Product'),
+        ], string='Product type',readonly=True,default='consu',related='product_id.type')
 
 class Custominvoicereportfilter(models.Model):
     _inherit = "account.invoice.report"
