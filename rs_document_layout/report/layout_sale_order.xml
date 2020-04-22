@@ -155,7 +155,7 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px;line-height:1; margin-left:10px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <t t-if="l.product_id.type != 'service'">
+                                <!-- <t t-if="l.product_id.type != 'service'"> -->
                                 <t t-if="not l.is_delivery">
                                     <td class="text-left">
                                         <span t-field="l.product_id.name"/>
@@ -192,7 +192,7 @@
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                     </td>
-                                </t>
+                                <!-- </t> -->
                                 </t>
                             </tr>
                             <t t-if="doc.partner_id.is_retailer">
@@ -204,7 +204,8 @@
                                         <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line if line.product_id.type != 'service'))"/>
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black;padding-left:0.1em;">
-                                        <t t-esc="single_total"/>
+                                        <t t-esc="int(sum(line.single_unit for line in doc.order_line if line.product_id.type != 'service'))"/>
+                                                <!-- <t t-esc="single_total"/> -->
                                     </th>
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
@@ -242,7 +243,7 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px; margin-bottom:0px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <t t-if="l.product_id.type != 'service'">
+                                <!-- <t t-if="l.product_id.type != 'service'"> -->
                                 <t t-if="not l.is_delivery">
                                     <!-- <td style="width: 10%"></td> -->
                                     <td class="text-left">
@@ -275,7 +276,7 @@
                                         </t>
                                     </td>
                                 </t>
-                                </t>
+                                <!-- </t> -->
                             </tr>
                             <tr>
                                 <th class="text-center" style="border-top: 1px solid black"/>
@@ -321,25 +322,44 @@
                                     </td><td class="text-left"><span t-field="doc.payment_term_id"/></td></tr> -->
                     <tr>
                         <td class="text-left" style="font-size:13px">
-                                        Shipping address:
-                                    </td>
+                            Shipping address:
+                        </td>
                         <td class="text-left" style="font-size:13px">
-                            <t t-if="doc.partner_id.street">
-                                <span t-field="doc.partner_id.street"/>
+                            <t t-if="not doc.partner_shipping_id">
+                                <t t-if="doc.partner_id.street">
+                                    <span t-field="doc.partner_id.street"/>
+                                </t>
+                                <t t-if="doc.partner_id.street2">
+                                    <br/>
+                                    <span t-field="doc.partner_id.street2"/>
+                                </t>
+                                <t t-if="doc.partner_id.zip or doc.partner_id.city">
+                                    <br/>
+                                    <span t-field="doc.partner_id.zip"/>
+
+                                    <span t-field="doc.partner_id.city"/>
+                                </t>
+                                <t t-if="doc.partner_id.country_id">
+                                    <br/>
+                                    <span t-field="doc.partner_id.country_id.name"/>
+                                </t>
                             </t>
-                            <t t-if="doc.partner_id.street2">
-                                <br/>
-                                <span t-field="doc.partner_id.street2"/>
+                            <t t-if="doc.partner_shipping_id.street">
+                                <span t-field="doc.partner_shipping_id.street"/>
                             </t>
-                            <t t-if="doc.partner_id.zip or doc.partner_id.city">
+                            <t t-if="doc.partner_shipping_id.street2">
                                 <br/>
-                                <span t-field="doc.partner_id.zip"/>  
-                                            
-                                <span t-field="doc.partner_id.city"/>
+                                <span t-field="doc.partner_shipping_id.street2"/>
                             </t>
-                            <t t-if="doc.partner_id.country_id">
+                            <t t-if="doc.partner_shipping_id.zip or doc.partner_shipping_id.city">
                                 <br/>
-                                <span t-field="doc.partner_id.country_id.name"/>
+                                <span t-field="doc.partner_shipping_id.zip"/>
+
+                                <span t-field="doc.partner_shipping_id.city"/>
+                            </t>
+                            <t t-if="doc.partner_shipping_id.country_id">
+                                <br/>
+                                <span t-field="doc.partner_shipping_id.country_id.name"/>
                             </t>
                         </td>
                     </tr>

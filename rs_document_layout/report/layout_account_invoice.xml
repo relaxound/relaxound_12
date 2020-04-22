@@ -189,7 +189,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-6" style="line-height:0">
+                <div class="col-6" style="line-height:0" id="test">
                     <br/><br/><br/>
                     <table class="table table-condensed" id="summary" style="border: none; margin-left:15px;">
                         <style>
@@ -294,7 +294,7 @@
                                 </strong>
                             </td>
                         </tr>
-                        <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                        <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                         <t t-foreach="payments_vals" t-as="payment_vals">
                             <br/>
                             <br/><br/>
@@ -314,7 +314,7 @@
                                     <span t-field="o.residual"/>
                                 </td>
                             </tr>
-                        </t>
+                        </t> -->
                     </table>
                 </div>
 
@@ -384,7 +384,7 @@
                         <t t-set="i" t-value="1"/>
                         <tbody class="invoice_tbody" style="line-height:0.9">
                             <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                <t t-if="l.product_id.type != 'service'">
+                                <!-- <t t-if="l.product_id.type != 'service'"> -->
                                 <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                     <td class="text-center">
                                         <span t-esc="i"/>
@@ -427,7 +427,7 @@
                                     </td>
                                 </t>
                                     <t t-set="i" t-value="i+1"/>
-                                </t>
+                                <!-- </t> -->
                                 
                             </tr>
                             <!-- <tr style="border-bottom: 1px solid black"></tr> -->
@@ -437,7 +437,7 @@
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black">Total</th>
                                     <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.quantity for line in o.invoice_line_ids if line.product_id.type != 'service'))"/></th>
-                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="single_total"/></th>
+                                    <th class="text-center" style="border-top: 1px solid black"><t t-esc="int(sum(line.single_unit for line in o.invoice_line_ids if line.product_id.type != 'service'))"/></th>
                                     <th class="text-right" style="border-top: 1px solid black"/>
                                     <th class="text-right" style="border-top: 1px solid black"/>
 
@@ -477,7 +477,7 @@
                             <t t-set="j" t-value="1"/>
                             <tbody class="invoice_tbody" style="line-height:0.9">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                    <t t-if="l.product_id.type != 'service'">
+                                    <!-- <t t-if="l.product_id.type != 'service'"> -->
                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
                                         <td class="text-center">
                                             <span t-esc="j"/>
@@ -512,7 +512,7 @@
                                         </td>
                                     </t>
                                         <t t-set="j" t-value="j+1"/>
-                                    </t>
+                                    <!-- </t> -->
                                     
                                 </tr>
 
@@ -583,7 +583,29 @@
 
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
-
+        <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">
+            <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
+                <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                <t t-foreach="payments_vals" t-as="payment_vals">
+                    <tr>
+                        <td>
+                            <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-if="len(payments_vals) > 0">
+                    <tr class="border-black">
+                        <td><strong>Amount Due</strong></td>
+                        <td class="text-right">
+                             <span t-field="o.residual"/>
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+        </template>
         
     </data>
 </odoo>

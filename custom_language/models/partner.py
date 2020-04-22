@@ -12,12 +12,17 @@ class ResPartner(models.Model):
 	@api.onchange('country_id')
 	def onchange_country(self):
 		if self.country_id.code=='DE' or self.country_id.code=='AT' or self.country_id.code=='CH':
-			abc=self.env['res.lang'].search([])
-			for item in abc:
-				if item.code=='de_DE':
-					self.update({'lang':item.code})
+			self.update({'lang': 'de_DE'})
+			# abc=self.env['res.lang'].search([])
+			# for item in abc:
+			# 	if item.code=='de_DE':
+			# 			self.update({'lang':item.code})
+
+		elif self.country_id.code == 'FR':
+			self.update({'lang': 'fr_FR'})
+
 		else:
-			self.update({'lang':'en_US'})
+			self.update({'lang': 'en_US'})
 	
 
 
