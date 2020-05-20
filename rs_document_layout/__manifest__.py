@@ -18,6 +18,7 @@
             'report/res_partner.xml',
             "report/layout_purchase.xml",
             "report/Request_for_qut.xml",
+            "report/invoice_filter.xml",
     ],
     'demo_xml': [],
     'installable': True,
