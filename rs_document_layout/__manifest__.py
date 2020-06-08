@@ -9,7 +9,7 @@
     'sequence': 150,
     "init_xml": [],
     'data': [
-             "data/data.xml",
+            "data/data.xml",
             "report/inherited_layouts.xml",
             "report/layout_account_invoice.xml",
             "report/sample_account_invoice_layout.xml",
@@ -18,6 +18,8 @@
             'report/res_partner.xml',
             "report/layout_purchase.xml",
             "report/Request_for_qut.xml",
+            "report/invoice_filter.xml",
+
     ],
     'demo_xml': [],
     'installable': True,
