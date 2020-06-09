@@ -5,7 +5,7 @@
         <template id="report_purchase_document" inherit_id="purchase.report_purchaseorder_document">
             <xpath expr="//t[@t-set='address']" position="replace">
                 <br/>
-                <br/>
+                <!-- <br/> -->
                 <div class="row" style="margin-left:0.1cm; margin-right:0.1cm; font-size: 14px; font-family:Arial;">
                     <div style="width:100%;">
                         <div style="width:50%; float: left;">
