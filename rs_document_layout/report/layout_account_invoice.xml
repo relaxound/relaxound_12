@@ -4,7 +4,7 @@
     <data>
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
-                <br/><br/>
+                <br/>
                 <div class="row" style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                 <div style="width:100%;">
                     <div style="width:50%; float: left;">

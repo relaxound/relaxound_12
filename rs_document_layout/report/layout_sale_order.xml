@@ -5,9 +5,9 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
-        <br/>
+        <!-- <br/> -->
         <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
-        <div style="width:100%">
+        <div style="width:100%;">
             <div style="width:50%; float: left;">
                 <t t-if="doc.partner_id.parent_id">
                     <span t-field="doc.partner_id.parent_id.name"/>
@@ -275,6 +275,7 @@
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                     </td>
+                                <!-- </t> -->
                                 </t>
                                 <!-- </t> -->
                             </tr>
@@ -295,7 +296,7 @@
         </div>
     </xpath>
     <xpath expr="//div/div[@id='total']" position="replace">
-        <div id="total" class="row" style="font-size: 13px;">
+        <div id="total" class="row" style="font-size: 13px; padding-top: 10px;">
             <!-- <div class="row"> -->
             <div class="col-6">
                 <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
@@ -321,10 +322,10 @@
                                         Payment term:
                                     </td><td class="text-left"><span t-field="doc.payment_term_id"/></td></tr> -->
                     <tr>
-                        <td class="text-left" style="font-size:13px">
+                        <td class="text-left" style="font-size:13px;padding-top:10px;">
                             Shipping address:
                         </td>
-                        <td class="text-left" style="font-size:13px">
+                        <td class="text-left" style="font-size:13px;padding-top:10px;">
                             <t t-if="not doc.partner_shipping_id">
                                 <t t-if="doc.partner_id.street">
                                     <span t-field="doc.partner_id.street"/>
@@ -366,7 +367,7 @@
                 </table>
                 <!-- </div> -->
             </div>
-            <div class="col-6">
+            <div class="col-6" style="padding-top:10px;">
                 <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;"><div class="pull-right"> -->
                 <br/>
                 <table class="table table-condensed" id="summary" style="border: none; line-height:0;">
@@ -381,7 +382,7 @@
                         <t t-if="l.is_delivery">
                             <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/></t>
                     </t>
-                    <tr style="border: none">
+                    <tr style="border: none;">
                         <td class="col-xs-3 text-right">
                             <span>Total</span>
                         </td>
@@ -421,7 +422,7 @@
                             <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                         </td>
                     </tr>
-                    <tr style="border: none">
+                    <tr>
                         <td class="text-right">
                             <strong>Total</strong>
                         </td>
@@ -462,8 +463,7 @@
             <t t-if="doc.payment_method_id.name!='Rechnung'">
                 <div class="col-xs-12" style="margin-left:0.4cm;">
                     <span>Enjoy and relax!
-                        <br/>We would be happy about photos and stories of the Zwitscherbox.
-                                
+                        <br/>We would be happy about photos and stories of the Zwitscherbox.     
                     </span>
                     <br/>
                     <span>
