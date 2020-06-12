@@ -29,7 +29,7 @@ class CustomSaleOrder(models.Model):
             if not line.order_id.partner_id:
                 raise ValidationError("Please select the customer name!")
 
-            if start_date < line.order_id.order_date < end_date :
+            if start_date <= line.order_id.order_date <= end_date :
                 flag = True
             else:
                 flag = False
