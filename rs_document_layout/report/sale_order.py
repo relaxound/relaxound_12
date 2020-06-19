@@ -4,28 +4,48 @@ from odoo.addons import decimal_precision as dp
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
-    
+
+
     price_tax = fields.Float(compute='_compute_amount',digits=dp.get_precision('Product Price'), string='Total Tax', readonly=True, store=True)
     single_unit=fields.Integer(string="Single Unit")
+    name = fields.Char(string="Description")
 
     @api.onchange('product_id','product_uom_qty')
     def custom_quantity(self):
         if self.product_id.name:
-            if '20x' in self.product_id.name or '20X' in self.product_id.name:
-                self.update({'single_unit':self.product_uom_qty*20}) 
+            if ('20x' in self.product_id.name or '20X' in self.product_id.name) or ('20x' in self.product_id.default_code or '20X' in self.product_id.default_code):
+                self.product_id.default_code = self.product_id.default_code.replace('-20x', '')
+                product = self.env['product.product'].search([('default_code', '=', self.product_id.default_code)])
+                self.product_id.name = product.name
+                self.update({'single_unit':self.product_uom_qty*20})
 
-            elif '80x' in self.product_id.name or '80X' in self.product_id.name:
+            elif ('80x' in self.product_id.name or '80X' in self.product_id.name) or ('80x' in self.product_id.default_code or '80X' in self.product_id.default_code):
+                self.product_id.default_code = self.product_id.default_code.replace('-80x', '')
+                product = self.env['product.product'].search([('default_code', '=', self.product_id.default_code)])
+                self.product_id.name = product.name
                 self.update({'single_unit':self.product_uom_qty*80})
 
             else:
                 self.update({'single_unit':self.product_uom_qty})
 
+    @api.model
+    def _prepare_add_missing_fields(self, values):
+        """ Deduce missing required fields from the onchange """
+        res = {}
+        onchange_fields = ['name', 'price_unit', 'product_uom', 'tax_id']
+        if values.get('order_id') and values.get('product_id') and any(f not in values for f in onchange_fields):
+            with self.env.do_in_onchange():
+                line = self.new(values)
+                line.product_id_change()
+                for field in onchange_fields:
+                    if field not in values:
+                        res[field] = line._fields[field].convert_to_write(line[field], line)
+        return res
 
     @api.multi
     def _prepare_invoice_line(self, qty):
         res=super(SaleOrderLine,self)._prepare_invoice_line(qty)
         res.update({'single_unit':self.single_unit})
-        
 
         return res
 
@@ -61,7 +81,7 @@ class SaleOrderLine(models.Model):
             #         }
             #         return {'warning': warning_mess}
         return {}
-
+        
 
 
 class CustomSaleOrderfilter(models.Model):
@@ -102,7 +122,7 @@ class Customsaleorderreportfilter(models.Model):
         ('consu', 'Consumable'),
         ('service', 'Service'),
         ('product', 'Storable Product'),
-        ], string='Product type',readonly=True,default='consu',related='product_id.type')
+        ], string='Product Type',readonly=True,default='consu',related='product_id.type')
 
 class Custominvoicereportfilter(models.Model):
     _inherit = "account.invoice.report"

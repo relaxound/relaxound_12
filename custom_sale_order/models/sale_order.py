@@ -29,7 +29,7 @@ class CustomSaleOrder(models.Model):
             if not line.order_id.partner_id:
                 raise ValidationError("Please select the customer name!")
 
-            if start_date <= line.order_id.order_date <= end_date :
+            if line.order_id.order_date and start_date <= line.order_id.order_date <= end_date :
                 flag = True
             else:
                 flag = False
@@ -68,7 +68,7 @@ class CustomSaleOrder(models.Model):
                                     if tax_id not in self.tax_id:
                                         line.update({'tax_id':tax_id})
 
-            elif flag == False:
+            elif flag == False :
                 if line.order_id.partner_id.country_id or line.order_id.partner_id.property_account_position_id.name:
 
                     fiscal_position_name = line.order_id.partner_id.property_account_position_id.name
@@ -119,73 +119,73 @@ class Customtax(models.Model):
 
 
 
-	# @api.multi	
+    # @api.multi    
 
-	# @api.onchange('tax_id')
-	# def custom_tax(self):
-	# 	import pdb;pdb.set_trace()
-	# 	# if self.order_line:
-	# 	if self.order_id.partner_id.country_id or self.order_id.partner_id.property_account_position_id.name:
-	# 		if self.order_id.partner_id.country_id.name=='Germany':
-	# 			# taxx=self.env['account.tax'].search([])
-	# 			# for item in taxx:
-	# 			tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
-	# 			if tax_id not in self.tax_id:
-	# 				# if item.name=="19% Umsatzsteuer":
-	# 					# self.order_line.update({'tax_id':item and [(6,0,self.env['account.tax'].search([]))] })
-	# 					self.update({'tax_id':tax_id})
-	# 					# _compute_tax_id()
+    # @api.onchange('tax_id')
+    # def custom_tax(self):
+    #   import pdb;pdb.set_trace()
+    #   # if self.order_line:
+    #   if self.order_id.partner_id.country_id or self.order_id.partner_id.property_account_position_id.name:
+    #       if self.order_id.partner_id.country_id.name=='Germany':
+    #           # taxx=self.env['account.tax'].search([])
+    #           # for item in taxx:
+    #           tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
+    #           if tax_id not in self.tax_id:
+    #               # if item.name=="19% Umsatzsteuer":
+    #                   # self.order_line.update({'tax_id':item and [(6,0,self.env['account.tax'].search([]))] })
+    #                   self.update({'tax_id':tax_id})
+    #                   # _compute_tax_id()
 
-	# 			# elif self.order_id.partner_id.vat:
-	# 			# 	if self.order_id.partner_id.country_id and self.partner_id.property_account_position_id.name and self.partner_id.vat: 
-	# 			# 		if self.order_id.partner_id.country_id.name!='Germany' and 'EU' in self.partner_id.property_account_position_id.name and self.partner_id.vat:
-	# 			# 			self.update({'tax_id':None})
-
-
-	# 			# elif not self.order_id.partner_id.vat:
-	# 			# 	if self.order_id.partner_id.country_id and self.order_id.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
-	# 			# 		if self.order_id.partner_id.country_id.name!='Germany' and 'EU' in self.order_id.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
-	# 			# 			# taxx=self.env['account.tax'].search([])
-	# 			# 			# for item in taxx:
-	# 			# 			# 	if item.name=="19% Umsatzsteuer":
-	# 			# 			tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
-	# 			# 			if tax_id not in self.tax_id:
-	# 			# 					self.update({'tax_id':item})
+    #           # elif self.order_id.partner_id.vat:
+    #           #   if self.order_id.partner_id.country_id and self.partner_id.property_account_position_id.name and self.partner_id.vat: 
+    #           #       if self.order_id.partner_id.country_id.name!='Germany' and 'EU' in self.partner_id.property_account_position_id.name and self.partner_id.vat:
+    #           #           self.update({'tax_id':None})
 
 
-	# @api.multi
-	# def action_view_invoice(self):
-	# 	res=super(CustomSaleOrder,self).action_view_invoice()
-	# 	if self.partner_id.country_id or self.partner_id.property_account_position_id:
-	# 		if self.partner_id.country_id.name=='Germany':
-	# 			res1=self.env['account.invoice'].search([])
-	# 			for cust in res1:
-	# 				if cust.partner_id==self.partner_id:
-	# 					taxx=self.env['account.tax'].search([])
-	# 					for item in taxx:
-	# 						if item.name=="19% Umsatzsteuer":
-	# 							cust.invoice_line_ids.update({'invoice_line_tax_ids':item})
-
-	# 		elif self.partner_id.vat:
-	# 			if self.partner_id.country_id and self.partner_id.property_account_position_id.name and self.partner_id.vat and self.partner_id.is_retailer:
-	# 				if self.partner_id.country_id.name!='Germany' and 'EU' in self.partner_id.property_account_position_id.name and self.partner_id.vat and self.partner_id.is_retailer:
-	# 					res1=self.env['account.invoice'].search([])
-	# 					for cust in res1:
-	# 						if cust.partner_id==self.partner_id:
-	# 							cust.invoice_line_ids.update({'invoice_line_tax_ids':None})
+    #           # elif not self.order_id.partner_id.vat:
+    #           #   if self.order_id.partner_id.country_id and self.order_id.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
+    #           #       if self.order_id.partner_id.country_id.name!='Germany' and 'EU' in self.order_id.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
+    #           #           # taxx=self.env['account.tax'].search([])
+    #           #           # for item in taxx:
+    #           #           #   if item.name=="19% Umsatzsteuer":
+    #           #           tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
+    #           #           if tax_id not in self.tax_id:
+    #           #                   self.update({'tax_id':item})
 
 
-	# 		elif not self.partner_id.vat:
-	# 			if self.partner_id.country_id and self.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
-	# 				if self.partner_id.country_id.name!='Germany' and 'EU' in self.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
-	# 					res1=self.env['account.invoice'].search([])
-	# 					for cust in res1:
-	# 						if cust.partner_id==self.partner_id:
-	# 							taxx=self.env['account.tax'].search([])
-	# 							for item in taxx:
-	# 								if item.name=="19% Umsatzsteuer":
-	# 									cust.invoice_line_ids.update({'invoice_line_tax_ids':item})
+    # @api.multi
+    # def action_view_invoice(self):
+    #   res=super(CustomSaleOrder,self).action_view_invoice()
+    #   if self.partner_id.country_id or self.partner_id.property_account_position_id:
+    #       if self.partner_id.country_id.name=='Germany':
+    #           res1=self.env['account.invoice'].search([])
+    #           for cust in res1:
+    #               if cust.partner_id==self.partner_id:
+    #                   taxx=self.env['account.tax'].search([])
+    #                   for item in taxx:
+    #                       if item.name=="19% Umsatzsteuer":
+    #                           cust.invoice_line_ids.update({'invoice_line_tax_ids':item})
 
-	# 	return res
+    #       elif self.partner_id.vat:
+    #           if self.partner_id.country_id and self.partner_id.property_account_position_id.name and self.partner_id.vat and self.partner_id.is_retailer:
+    #               if self.partner_id.country_id.name!='Germany' and 'EU' in self.partner_id.property_account_position_id.name and self.partner_id.vat and self.partner_id.is_retailer:
+    #                   res1=self.env['account.invoice'].search([])
+    #                   for cust in res1:
+    #                       if cust.partner_id==self.partner_id:
+    #                           cust.invoice_line_ids.update({'invoice_line_tax_ids':None})
+
+
+    #       elif not self.partner_id.vat:
+    #           if self.partner_id.country_id and self.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
+    #               if self.partner_id.country_id.name!='Germany' and 'EU' in self.partner_id.property_account_position_id.name and self.partner_id.is_retailer:
+    #                   res1=self.env['account.invoice'].search([])
+    #                   for cust in res1:
+    #                       if cust.partner_id==self.partner_id:
+    #                           taxx=self.env['account.tax'].search([])
+    #                           for item in taxx:
+    #                               if item.name=="19% Umsatzsteuer":
+    #                                   cust.invoice_line_ids.update({'invoice_line_tax_ids':item})
+
+    #   return res
 
 
