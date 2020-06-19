@@ -23,7 +23,6 @@
 from datetime import datetime, timedelta
 #from openerp.osv import osv
 #from openerp import netsvc
-from custom.addons.relaxound_12.product_bundle.product import UserError
 from odoo import api,models
 from odoo.tools.translate import _
 from odoo.tools import float_compare, DEFAULT_SERVER_DATETIME_FORMAT
@@ -31,65 +30,63 @@ from odoo.tools import float_compare, DEFAULT_SERVER_DATETIME_FORMAT
 
 class sale_order_line(models.Model):
     _inherit="sale.order.line"
-
+    
     @api.multi
-    def _compute_qty_delivered(self):
+    def _get_delivered_qty(self):
         """Computes the delivered quantity on sale order lines, based on done stock moves related to its procurements
         """
-        for rec in self:
-            super(sale_order_line, self)._compute_qty_delivered()
-            if rec.product_id.bundle:
-                qty = 0
-                if len(rec.product_id.pitem_ids)>0:
-                    pitem_id=rec.product_id.pitem_ids[0]
+        self.ensure_one()
+        super(sale_order_line, self)._get_delivered_qty()
+        
+        if self.product_id.bundle:
+            
+            qty = 0
+             
+            if len(self.product_id.pitem_ids)>0:
+                pitem_id=self.product_id.pitem_ids[0]
+                qtyItem=0.0
+                for move in self.procurement_ids.mapped('move_ids').filtered(lambda r: r.state == 'done' and not r.scrapped):
+                    if move.location_dest_id.usage == "customer" and pitem_id.item_id.id==move.product_id.id:
+                        qtyItem += self.env['product.uom']._compute_qty_obj(move.product_uom, move.product_uom_qty, pitem_id.uom_id)/pitem_id.qty_uom
+                qty=qtyItem
+                for pitem_id in self.product_id.pitem_ids:                
                     qtyItem=0.0
-
-                    for move in rec.move_ids.filtered(lambda r: r.state == 'done' and not r.scrapped):
+                    for move in self.procurement_ids.mapped('move_ids').filtered(lambda r: r.state == 'done' and not r.scrapped):
                         if move.location_dest_id.usage == "customer" and pitem_id.item_id.id==move.product_id.id:
-                            qtyItem += rec.env['product.uom']._compute_qty_obj(move.product_uom, move.product_uom_qty, pitem_id.uom_id)/pitem_id.qty_uom
-                    qty=qtyItem
-                    for pitem_id in rec.product_id.pitem_ids:
-                        qtyItem=0.0
-                        for move in rec.move_ids.filtered(lambda r: r.state == 'done' and not r.scrapped):
-                            if move.location_dest_id.usage == "customer" and pitem_id.item_id.id==move.product_id.id:
-                                qtyItem += rec.env['product.uom']._compute_qty_obj(move.product_uom, move.product_uom_qty, pitem_id.uom_id)/pitem_id.qty_uom
-                        if qtyItem<qty:
-                            qty=qtyItem
+                            qtyItem += self.env['product.uom']._compute_qty_obj(move.product_uom, move.product_uom_qty, pitem_id.uom_id)/pitem_id.qty_uom
+                    if qtyItem<qty:
+                        qty=qtyItem
+            return qty              
 
-                return qty
-
-            qty=0.0
-
-            # for move in self.procurement_ids.move_ids.filtered(lambda r: r.state == 'done' and not r.scrapped):
-            for move in rec.move_ids.filtered(lambda r:r.state == 'done' and not r.scrapped):
-                #Note that we don't decrease quantity for customer returns on purpose: these are exeptions that must be treated manually. Indeed,
-                #modifying automatically the delivered quantity may trigger an automatic reinvoicing (refund) of the SO, which is definitively not wanted
-                if move.location_dest_id.usage == "customer":
-                    qty += rec.env['product.uom']._compute_qty_obj(move.product_uom, move.product_uom_qty, self.product_uom)
-
+        qty=0.0
+        
+        for move in self.procurement_ids.mapped('move_ids').filtered(lambda r: r.state == 'done' and not r.scrapped):
+            #Note that we don't decrease quantity for customer returns on purpose: these are exeptions that must be treated manually. Indeed,
+            #modifying automatically the delivered quantity may trigger an automatic reinvoicing (refund) of the SO, which is definitively not wanted
+            if move.location_dest_id.usage == "customer":
+                qty += self.env['product.uom']._compute_qty_obj(move.product_uom, move.product_uom_qty, self.product_uom)
         return qty
     
     @api.multi
     def _prepare_bundle_order_line_procurement(self, bundle_item,line, group_id=False):
-        # self.ensure_one()
-
-        for rec in self:
-            return {
-                'name': bundle_item.item_id.name,
-                'origin': rec.order_id.name,
-                'date_planned': datetime.strptime(str(rec.order_id.date_order), DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(days=rec.customer_lead),
-                'product_id': bundle_item.item_id.id,
-                'product_qty': bundle_item.qty_uom * line.product_uom_qty,
-                #'product_uom_qty': bundle_item.qty_uom * line.product_uom_qty,
-                'product_uom': bundle_item.uom_id.id,
-                'company_id': rec.order_id.company_id.id,
-                'group_id': group_id,
-                'sale_line_id': rec.id,
-                'location_id': rec.order_id.partner_shipping_id.property_stock_customer.id,
-                'route_ids': rec.route_id and [(4, rec.route_id.id)] or [],
-                'warehouse_id': rec.order_id.warehouse_id and rec.order_id.warehouse_id.id or False,
-                'partner_dest_id': rec.order_id.partner_shipping_id.id
-            }
+        self.ensure_one()
+         
+        return {
+            'name': bundle_item.item_id.name,
+            'origin': self.order_id.name,
+            'date_planned': datetime.strptime(self.order_id.date_order, DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(days=self.customer_lead),
+            'product_id': bundle_item.item_id.id,
+            'product_qty': bundle_item.qty_uom * line.product_uom_qty,
+            #'product_uom_qty': bundle_item.qty_uom * line.product_uom_qty,
+            'product_uom': bundle_item.uom_id.id,
+            'company_id': self.order_id.company_id.id,
+            'group_id': group_id,
+            'sale_line_id': self.id,
+            'location_id': self.order_id.partner_shipping_id.property_stock_customer.id,
+            'route_ids': self.route_id and [(4, self.route_id.id)] or [],
+            'warehouse_id': self.order_id.warehouse_id and self.order_id.warehouse_id.id or False,
+            'partner_dest_id': self.order_id.partner_shipping_id.id
+        }
 #     
 #     @api.onchange('product_id', 'product_uom_qty', 'product_uom', 'route_id')
 #     def _onchange_product_id_check_availability(self):
@@ -121,202 +118,62 @@ class sale_order_line(models.Model):
 #                             (self.product_uom_qty, self.product_uom.name, virtual_available, self.product_id.uom_id.name, self.product_id.qty_available, self.product_id.uom_id.name)
 #                     }
 #                     return {'warning': warning_mess}
-#         return {}
-
+#         return {}    
+         
     @api.multi
-    def _action_launch_stock_rule(self):
-        """
-        Launch procurement group run method with required/custom fields genrated by a
-        sale order line. procurement group will launch '_run_pull', '_run_buy' or '_run_manufacture'
-        depending on the sale order line product rule.
-        """
-
+    def _action_procurement_create(self):
         precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
-        errors = []
+        new_procs = self.env['procurement.order'] #Empty recordset
         for line in self:
-            if line.state != 'sale' or not line.product_id.type in ('consu','product'):
+            if line.state != 'sale' or not line.product_id._need_procurement():
                 continue
-            qty = line._get_qty_procurement()
-            if float_compare(qty, line.product_uom_qty, precision_digits=precision) >= 0:
-                continue
-
-            group_id = line.order_id.procurement_group_id
-            if not group_id:
-                group_id = self.env['procurement.group'].create({
-                    'name': line.order_id.name,
-                    'move_type': line.order_id.picking_policy,
-                    'sale_id': line.order_id.id,
-                    'partner_id': line.order_id.partner_shipping_id.id,
-                })
-                line.order_id.procurement_group_id = group_id
-            else:
-                # In case the procurement group is already created and the order was
-                # cancelled, we need to update certain values of the group.
-                updated_vals = {}
-                if group_id.partner_id != line.order_id.partner_shipping_id:
-                    updated_vals.update({'partner_id': line.order_id.partner_shipping_id.id})
-                if group_id.move_type != line.order_id.picking_policy:
-                    updated_vals.update({'move_type': line.order_id.picking_policy})
-                if updated_vals:
-                    group_id.write(updated_vals)
-
-            values = line._prepare_procurement_values(group_id=group_id)
-            product_qty = line.product_uom_qty - qty
-
-            procurement_uom = line.product_uom
-            quant_uom = line.product_id.uom_id
-            get_param = self.env['ir.config_parameter'].sudo().get_param
-            if procurement_uom.id != quant_uom.id and get_param('stock.propagate_uom') != '1':
-                product_qty = line.product_uom._compute_quantity(product_qty, quant_uom, rounding_method='HALF-UP')
-                procurement_uom = quant_uom
-            # try:
-            #     self.env['procurement.group'].run(line.product_id, product_qty, procurement_uom, line.order_id.partner_shipping_id.property_stock_customer, line.name, line.order_id.name, values)
-            # except UserError as error:
-            #     errors.append(error.name)
-
-        if errors:
-            raise UserError('\n'.join(errors))
-        return True
-
-    @api.model
-    def run(self, product_id, product_qty, product_uom, location_id, name, origin, values):
-        """ Method used in a procurement case. The purpose is to supply the
-        product passed as argument in the location also given as an argument.
-        In order to be able to find a suitable location that provide the product
-        it will search among stock.rule.
-        """
-
-        values.setdefault('company_id', self.env['res.company']._company_default_get('procurement.group'))
-        values.setdefault('priority', '1')
-        values.setdefault('date_planned', values['date_planned'])
-
-        rule = self._get_rule(product_id, location_id, values)
-        if not rule:
-            raise UserError(_('No procurement rule found in location "%s" for product "%s".\n Check routes configuration.') % (location_id.display_name, product_id.display_name))
-        action = 'pull' if rule.action == 'pull_push' else rule.action
-        if hasattr(rule, '_run_%s' % action):
-            getattr(rule, '_run_%s' % action)(product_id, product_qty, product_uom, location_id, name, origin, values)
-        return True
-
-    @api.multi
-    def _prepare_order_line_procurement(self, group_id=False):
-        # self.ensure_one()
-        for rec in self:
-            return {
-                'name': rec.name,
-                'origin': rec.order_id.name,
-                'product_id': rec.product_id,
-                'product_qty': rec.product_uom_qty,
-                'product_uom': rec.product_uom,
-                'company_id': rec.order_id.company_id,
-                'group_id': group_id,
-                'sale_line_id': rec.id,
-                'date_planned': datetime.strptime(str(rec.order_id.date_order), DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(days=rec.customer_lead),
-                'location_id': rec.order_id.partner_shipping_id.property_stock_customer,
-                'route_ids': rec.route_id,
-                'warehouse_id': rec.order_id.warehouse_id or False,
-                'partner_dest_id': rec.order_id.partner_shipping_id
-            }
-
-
-    @api.multi
-    def _prepare_procurement_values(self,group_id=False):
-        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
-        new_procs = self.env['procurement.group'] #Empty recordset
-
-        for line in self:
-            # if line.state != 'sale' or not line.product_id._need_procurement():
-            #above is  original statement
-            if line.state != 'sale' :
-                continue
+                         
             is_bundle=line.product_id.bundle
+             
             if is_bundle:
                 pitem_ids=filter(None, map(lambda x:x, line.product_id.pitem_ids))
-                pitem_counts = 0
+                 
                 for pitem_id in pitem_ids:
                     qty = 0.0
 #                     for proc in line.procurement_ids:
 #                         qty += proc.product_qty
 #                     if float_compare(qty, line.product_uom_qty, precision_digits=precision) >= 0:
 #                         return False
-
+              
                     if not line.order_id.procurement_group_id:
                         vals = line.order_id._prepare_procurement_group()
                         line.order_id.procurement_group_id = self.env["procurement.group"].create(vals)
-
-                    if pitem_counts == len(line.product_id.pitem_ids):
-                        return values
-                    else:
-                        vals = line._prepare_bundle_order_line_procurement(bundle_item=pitem_id, line=line, group_id=line.order_id.procurement_group_id.id)
-                        vals['product_id'] = pitem_id.item_id
-                        vals['product_uom'] = pitem_id.uom_id
-                        location_id = self.order_id.partner_shipping_id.property_stock_customer
-                        vals['name'] = pitem_id.item_id.name
-                        vals['origin'] = self.order_id.name
-                        vals['product_qty'] = pitem_id.qty_uom * line.product_uom_qty
-
-                        values = {
-                           'warehouse_id' : self.order_id.warehouse_id or False,
-                           'action': 'pull_push',
-                           'date_planned': vals['date_planned'],
-                           'group_id':group_id,
-                        }
-
-                        new_proc = self.env["procurement.group"].create(vals)
-                        new_procs += new_proc
-                        new_procs.run(vals['product_id'], vals['product_qty'], vals['product_uom'], location_id, vals['name'], vals['origin'], values)
-                        pitem_counts += 1
+              
+              
+                    vals = line._prepare_bundle_order_line_procurement(bundle_item=pitem_id, line=line, group_id=line.order_id.procurement_group_id.id)
+                    vals['product_qty'] = pitem_id.qty_uom * line.product_uom_qty - qty
+                    new_proc = self.env["procurement.order"].create(vals)
+                    new_procs += new_proc
+                 
             else:
                 qty = 0.0
-                for proc in line.move_ids:
+                for proc in line.procurement_ids:
                     qty += proc.product_qty
-
                 if float_compare(qty, line.product_uom_qty, precision_digits=precision) >= 0:
                     return False
-
+          
                 if not line.order_id.procurement_group_id:
                     vals = line.order_id._prepare_procurement_group()
                     line.order_id.procurement_group_id = self.env["procurement.group"].create(vals)
-
+          
                 vals = line._prepare_order_line_procurement(group_id=line.order_id.procurement_group_id.id)
-                location_id = self.order_id.partner_shipping_id.property_stock_customer
-
-                if ('20x' in vals['product_id'].name or '20X' in vals['product_id'].name) or ('20x' in vals['product_id'].default_code or '20X' in vals['product_id'].default_code):
-                    default_code = self.product_id.default_code.replace('-20x', '')
-                    product = self.env['product.product'].search([('default_code', '=', default_code)])
-                    vals['product_id'] = product
-                    vals['name'] = vals['product_id'].name
-                    vals['product_qty'] = line.product_uom_qty * 20
-
-                elif ('80x' in vals['product_id'].name or '80X' in vals['product_id']) or ('80x' in vals['product_id'].default_code or '80X' in vals['product_id'].default_code):
-                    default_code = vals['product_id'].default_code.replace('-80x', '')
-                    product = self.env['product.product'].search([('default_code', '=', default_code)])
-                    vals['product_id'] = product
-                    vals['name'] = vals['product_id'].name
-                    vals['product_qty'] = line.product_uom_qty * 80
-
-                else:
-                    vals['product_qty'] = line.product_uom_qty
-
-                values = {
-                    'warehouse_id': self.order_id.warehouse_id or False,
-                    'action': 'pull_push',
-                    'date_planned': vals['date_planned'],
-                    'group_id': group_id,
-                    'name' : vals['name'],
-                }
-
-                new_proc = self.env["procurement.group"].create(vals)
+                vals['product_qty'] = line.product_uom_qty - qty
+                new_proc = self.env["procurement.order"].create(vals)
                 new_procs += new_proc
-                new_procs.run(vals['product_id'], vals['product_qty'], vals['product_uom'], location_id, vals['name'], vals['origin'], values)
-
-        return values
-
+        new_procs.run()
+        return new_procs
+    
 
 class sale_order(models.Model):
     _inherit = "sale.order"
     #_name    = "sale.order"
-
+     
+     
     def _prepare_order_picking(self, cr, uid, order, context=None):
         pick_name = self.pool.get('ir.sequence').get(cr, uid, 'stock.picking.out')
         return {
@@ -355,7 +212,7 @@ class sale_order(models.Model):
         """
         move_obj = self.pool.get('stock.move')
         picking_obj = self.pool.get('stock.picking')
-        procurement_obj = self.pool.get('procurement.group')
+        procurement_obj = self.pool.get('procurement.order')
         proc_ids = []
          
         location_id = order.shop_id.warehouse_id.lot_stock_id.id
@@ -457,7 +314,7 @@ class sale_order(models.Model):
         if picking_id:
             wf_service.trg_validate(uid, 'stock.picking', picking_id, 'button_confirm', cr)
         for proc_id in proc_ids:
-            wf_service.trg_validate(uid, 'procurement.group', proc_id, 'button_confirm', cr)
+            wf_service.trg_validate(uid, 'procurement.order', proc_id, 'button_confirm', cr)
  
         val = {}
         if order.state == 'shipping_except':
