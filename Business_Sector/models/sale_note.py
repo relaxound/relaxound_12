@@ -30,5 +30,10 @@ class defaultnote(models.Model):
         elif self.partner_id.agent_name == 'Werner':
                 self.update({'note': "Sie werden betreut durch die Handelsagentur BUCH + RAUM\nKontakt: Thomas Werner, Sonnhart 78, 83131 Nußdorf am Inn\nE-Mail: werner@buch-raum.de"})
 
+        elif self.partner_id.agent_name == 'DEsignLICIOUS':
+                self.update({'note': "your contact person is Mirjam Swart\nPhone: 0031 6 36429052\nE-Mail: mirjam@designlicious.nl"})
+
+        elif self.partner_id.agent_name == 'The Living Connection':
+                self.update({'note': "your contact person is Thijs van de Laak and Anne Vendrig\nPhone: 0034 673 820 269\nE-Mail: anne@thelivingconnection.com"})
         else:
                 self.update({'note' :"Bitte beachten Sie, dass wir bei nicht vereinbartem Skontoabzug oder Kürzung des Rechnungsbetrages eine Bearbeitungsgebühr von 10 EUR erheben müssen."})
