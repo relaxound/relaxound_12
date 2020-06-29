@@ -28,7 +28,7 @@ class defaultnote(models.Model):
                 self.update({'note': "Sie werden betreut durch die Agentur Kuhnle\nKontakt: Agentur Kuhnle, Bonwiedenweg 18, 73312 Türkheim\nE-Mail: s.kuhnle@t-online.de"})
 
         elif self.partner_id.agent_name == 'Werner':
-                self.update({'note': "Sie werden betreut durch die Handelsagentur BUCH + RAUM\nKontakt: Thomas Werner, Sonnhart 78, 83131 Nußdorf am Inn\nE-Mail: werner@buch-raum.de"})
+                self.update({'note': "Sie werden betreut durch die Handelsagentur BUCH + RAUM\nKontakt: Thomas Werner, Tulpenweg 9, 83254 Breitbrunn am Chiemsee\nE-Mail: werner@buch-raum.de"})
 
         elif self.partner_id.agent_name == 'DEsignLICIOUS':
                 self.update({'note': "your contact person is Mirjam Swart\nPhone: 0031 6 36429052\nE-Mail: mirjam@designlicious.nl"})
