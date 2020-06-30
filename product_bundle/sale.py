@@ -23,7 +23,7 @@
 from datetime import datetime, timedelta
 #from openerp.osv import osv
 #from openerp import netsvc
-from custom.addons.relaxound_12.product_bundle.product import UserError
+# from custom.addons.relaxound_12.product_bundle.product import UserError changes
 from odoo import api,models
 from odoo.tools.translate import _
 from odoo.tools import float_compare, DEFAULT_SERVER_DATETIME_FORMAT
@@ -174,8 +174,8 @@ class sale_order_line(models.Model):
             # except UserError as error:
             #     errors.append(error.name)
 
-        if errors:
-            raise UserError('\n'.join(errors))
+        # if errors:changes
+        #     raise UserError('\n'.join(errors))
         return True
 
     @api.model
@@ -191,8 +191,8 @@ class sale_order_line(models.Model):
         values.setdefault('date_planned', values['date_planned'])
 
         rule = self._get_rule(product_id, location_id, values)
-        if not rule:
-            raise UserError(_('No procurement rule found in location "%s" for product "%s".\n Check routes configuration.') % (location_id.display_name, product_id.display_name))
+        # if not rule:changes
+        #     raise UserError(_('No procurement rule found in location "%s" for product "%s".\n Check routes configuration.') % (location_id.display_name, product_id.display_name))
         action = 'pull' if rule.action == 'pull_push' else rule.action
         if hasattr(rule, '_run_%s' % action):
             getattr(rule, '_run_%s' % action)(product_id, product_qty, product_uom, location_id, name, origin, values)
