@@ -4,7 +4,7 @@
     <data>
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
-                <br/>
+                <br/><br/>
                 <div class="row" style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                 <div style="width:100%;">
                     <div style="width:50%; float: left;">
@@ -96,9 +96,8 @@
                         <t t-if="o.user_id.name == 'Relaxound GmbH'">
                             <t t-if="o.user_id">
                                 <br/>
-                                <font color="#0e71b8">Contact:</font> <span t-field="o.user_id.name"/> -->
-                                <!-- <font color="#0e71b8">Contact:</font> Rahel Heuser -->
-                          <!--   </t>
+                                <font color="#0e71b8">Contact:</font> Rahel Heuser
+                            </t>
                         </t> -->
                         <t>
                             <br/>
@@ -134,12 +133,14 @@
                                 <span t-field="o.partner_id.property_delivery_carrier_id.name"/>
                             </td>
                         </tr>
+                        <!--changes-->
                         <tr t-if="o.payment_method_id.name">
                             <td class="text-left">Payment method: </td>
                             <td class="text-left">
                                 <span t-field="o.payment_method_id.name"/>
                             </td>
                         </tr>
+
                         <tr t-if="o.payment_term_id">
                             <td class="text-left">Payment term: </td>
                             <td class="text-left">
@@ -275,14 +276,21 @@
                                 <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
                             </td>
                         </tr>
-
                         <tr style="border-bottom: 1px solid black">
-                            <td class="text-right">VAT 19%</td>
-
+                            <t t-if=" o.order_date in [datetime.date (2020,7,1), datetime.date (2020,12,31)]">
+                            <td class="text-right">Vat 16%</td>
                             <td class="text-right">
-                                <span t-field="o.currency_id.symbol"/> 
+                                <span t-field="o.currency_id.symbol"/>
                                 <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                             </td>
+                            </t>
+                            <t t-if=" o.order_date not in [datetime.date (2020,7,1), datetime.date (2020,12,31)]">
+                                <td class="text-right">Vat 19%</td>
+                                <td class="text-right">
+                                    <span t-field="o.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </t>
                         </tr>
                         <tr style="border: none">
                             <td class="text-right">
@@ -450,7 +458,7 @@
                 </t>
                 <t t-if="not(o.partner_id.is_retailer)">
                     <div style="line-height:0">
-                        <table class="table table-condensed" style="margin-top:10px; border: none; width: 82%; margin-left:54px; font-size: 13px; font-family:Arial;" id="items">
+                        <table class="table table-condensed" style="margin-top:10px; width: 82%; margin-left:54px; font-size: 13px; font-family:Arial;" id="items">
                             <style>
                                 #items td{
                                 border:0;
@@ -559,19 +567,20 @@
 
                 </div><br/><br/>
                 <div style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
-                    <t t-if="o.payment_method_id.name!='payment_term'">
-                        <div class="col-xs-12" style="line-height:1">
-    
-                            <span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.
-                            </span>
-                            <br/>
-                            <span>
-                                <b>
-                                    <u>www.relaxound.com</u>
-                                </b>
-                            </span>
-                        </div>
-                    </t>
+                    <!-- chages-->
+<!--                    <t t-if="o.payment_method_id.name!='payment_term'">-->
+<!--                        <div class="col-xs-12" style="line-height:1">-->
+<!--    -->
+<!--                            <span>Enjoy and relax!<br/>We would be happy about photos and stories of the Zwitscherbox.-->
+<!--                            </span>-->
+<!--                            <br/>-->
+<!--                            <span>-->
+<!--                                <b>-->
+<!--                                    <u>www.relaxound.com</u>-->
+<!--                                </b>-->
+<!--                            </span>-->
+<!--                        </div>-->
+<!--                    </t>-->
 
                 </div>
             </xpath>
@@ -585,7 +594,6 @@
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
         <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">
-        <!-- <template id="report_invoice_document_with_payments" inherit_id="rs_document_layout.report_invoice_document" > -->
             <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
                 <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                 <t t-foreach="payments_vals" t-as="payment_vals">
