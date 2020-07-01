@@ -451,8 +451,15 @@
                                 <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                             </td>
                         </t>
-                        <t t-if=" doc.order_date not in [datetime.date (2020,7,1), datetime.date (2020,12,31)]">
+                        <t t-if="doc.order_date and  doc.order_date not in [datetime.date (2020,7,1), datetime.date (2020,12,31)]">
                             <td class="text-right">Vat 19%</td>
+                            <td class="text-right">
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </td>
+                        </t>
+                        <t t-if=" not doc.order_date ">
+                            <td class="text-right">Vat 16%</td>
                             <td class="text-right">
                                 <span t-field="doc.currency_id.symbol"/>
                                 <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
