@@ -37,9 +37,10 @@ class ResPartner(models.Model):
         ir_model_data = self.env['ir.model.data']
         try:
             if self.partner_id.agent_name:
-                template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_sample_test11')[1]
+            	template_id = ir_model_data.get_object_reference('custom_email_template', 'email_template_sample_test11')[1]
         except ValueError:
             template_id = False
+
         try:
             compose_form_id = ir_model_data.get_object_reference('mail', 'email_compose_message_wizard_form')[1]
         except ValueError:
