@@ -444,11 +444,56 @@
                     </tr>
 
                     <tr style="border-bottom: 1px solid black">
-                        <td class="text-right">Vat 16%</td>
-                        <td class="text-right">
-                            <span t-field="doc.currency_id.symbol"/>
-                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                        </td>
+                        <t t-if="doc.order_date">
+                            <t t-if="doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">
+                                <td class="text-right">Vat 16%</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </t>
+                            <t t-if="not doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">
+                                <td class="text-right">Vat 19%</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </t>
+                        </t>
+                        <t t-if="not doc.order_date">
+                            <t t-if="doc.confirmation_date">
+                                <t t-if="doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 16%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t>
+                                <t t-if="not doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 19%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t>
+                            </t>
+                            <t t-if="not doc.confirmation_date">
+                               <t t-if="doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 16%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t>
+                                <t t-if="not doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 19%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t> 
+                            </t>
+                        </t>
                     </tr>
 
                     <tr style="border: none">
