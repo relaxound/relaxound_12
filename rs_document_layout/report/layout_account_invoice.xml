@@ -277,21 +277,21 @@
                             </td>
                         </tr>
                         <tr style="border-bottom: 1px solid black">
-                            <t t-if=" o.order_date in [datetime.date (2020,7,1), datetime.date (2020,12,31)]">
-                            <td class="text-right">Vat 16%</td>
-                            <td class="text-right">
-                                <span t-field="o.currency_id.symbol"/>
-                                <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                            </td>
+                            <t t-if="(o.order_date &gt; datetime.date (2020,7,1) and o.order_date &lt; datetime.date (2020,12,31)) or (o.order_date == datetime.date (2020,7,1) or o.order_date == datetime.date (2020,12,31))">
+                                <td class="text-right">Vat 16%</td>
+                                <td class="text-right">
+                                    <span t-field="o.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
                             </t>
-                            <t t-if=" o.order_date and o.order_date not in [datetime.date (2020,7,1), datetime.date (2020,12,31)]">
+                             <t t-if="o.order_date &lt; datetime.date (2020,7,1) or o.order_date &gt; datetime.date (2020,12,31)">
                                 <td class="text-right">Vat 19%</td>
                                 <td class="text-right">
                                     <span t-field="o.currency_id.symbol"/>
                                     <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                                 </td>
                             </t>
-                            <t t-if=" not o.order_date ">
+                            <t t-if="not o.order_date ">
                                 <td class="text-right">Vat 16%</td>
                                 <td class="text-right">
                                     <span t-field="o.currency_id.symbol"/>
