@@ -21,7 +21,6 @@
 	    'data/retailer_mail.xml',
             'data/invoice_template.xml',
             'data/invoice_template_sample.xml',
-            'data/email_cc.xml',
             # 'report/sale_order.xml',        
              ],
     'installable': True,
