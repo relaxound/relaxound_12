@@ -5,10 +5,38 @@
         <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//t[2][@t-set='address']" position="replace">
         <br/>
-        <!-- <br/> -->
+        <br/>
         <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
-        <div style="width:100%;">
+        <div style="width:100%">
             <div style="width:50%; float: left;">
+                <t t-if='is_pro_forma'>
+                    <t t-if="doc.partner_invoice_id.parent_id">
+                    <span t-field="doc.partner_id.parent_id.name"/>
+                </t>
+                <t t-if="doc.partner_invoice_id.name">
+                    <br/>
+                    <span t-field="doc.partner_invoice_id.name"/>
+                </t>
+                <t t-if="doc.partner_invoice_id.street">
+                    <br/>
+                    <span t-field="doc.partner_invoice_id.street"/>
+                </t>
+                <t t-if="doc.partner_invoice_id.street2">
+                    <br/>
+                    <span t-field="doc.partner_invoice_id.street2"/>
+                </t>
+                <t t-if="doc.partner_invoice_id.zip or doc.partner_invoice_id.city">
+                    <br/>
+                    <span t-field="doc.partner_invoice_id.zip"/>
+    
+                    <span t-field="doc.partner_invoice_id.city"/>
+                </t>
+                <t t-if="doc.partner_invoice_id.country_id">
+                    <br/>
+                    <span t-field="doc.partner_invoice_id.country_id.name"/>
+                </t>
+            </t>
+            <t t-else=''>
                 <t t-if="doc.partner_id.parent_id">
                     <span t-field="doc.partner_id.parent_id.name"/>
                 </t>
@@ -34,6 +62,7 @@
                     <br/>
                     <span t-field="doc.partner_id.country_id.name"/>
                 </t>
+            </t>
             </div>
             <div style="width:50%; float:right; text-align:right;">
                 <t t-if="doc.partner_id.ref">
@@ -111,7 +140,7 @@
                         <span t-if="doc.state in ['draft','sent']">Quotation </span>
                     </t>
                     <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                        <span>Pro-Forma Invoice </span>
+                        <span>Pro-Forma Invoice</span>
                     </t>
                 </div>
             </h2>
@@ -275,7 +304,6 @@
                                             <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </t>
                                     </td>
-                                <!-- </t> -->
                                 </t>
                                 <!-- </t> -->
                             </tr>
@@ -296,7 +324,7 @@
         </div>
     </xpath>
     <xpath expr="//div/div[@id='total']" position="replace">
-        <div id="total" class="row" style="font-size: 13px; padding-top: 10px;">
+        <div id="total" class="row" style="font-size: 13px;">
             <!-- <div class="row"> -->
             <div class="col-6">
                 <!-- <div class="text-left" name="total" style="margin-left:94px;"> -->
@@ -322,10 +350,10 @@
                                         Payment term:
                                     </td><td class="text-left"><span t-field="doc.payment_term_id"/></td></tr> -->
                     <tr>
-                        <td class="text-left" style="font-size:13px;padding-top:10px;">
+                        <td class="text-left" style="font-size:13px">
                             Shipping address:
                         </td>
-                        <td class="text-left" style="font-size:13px;padding-top:10px;">
+                        <td class="text-left" style="font-size:13px">
                             <t t-if="not doc.partner_shipping_id">
                                 <t t-if="doc.partner_id.street">
                                     <span t-field="doc.partner_id.street"/>
@@ -367,7 +395,7 @@
                 </table>
                 <!-- </div> -->
             </div>
-            <div class="col-6" style="padding-top:10px;">
+            <div class="col-6">
                 <!--   <div class="text-right" name="total" style="margin-left:94px;margin-right:94px;"><div class="pull-right"> -->
                 <br/>
                 <table class="table table-condensed" id="summary" style="border: none; line-height:0;">
@@ -382,7 +410,7 @@
                         <t t-if="l.is_delivery">
                             <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/></t>
                     </t>
-                    <tr style="border: none;">
+                    <tr style="border: none">
                         <td class="col-xs-3 text-right">
                             <span>Total</span>
                         </td>
@@ -414,15 +442,61 @@
                             <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
                         </td>
                     </tr>
+
                     <tr style="border-bottom: 1px solid black">
-                        <td class="text-right">VAT 19%</td>
-                        <td class="text-right">
-                            <span t-field="doc.currency_id.symbol"/> 
-                            
-                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                        </td>
+                        <t t-if="doc.order_date">
+                            <t t-if="doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">
+                                <td class="text-right">Vat 16%</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </t>
+                            <t t-if="not doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">
+                                <td class="text-right">Vat 19%</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </t>
+                        </t>
+                        <t t-if="not doc.order_date">
+                            <t t-if="doc.confirmation_date">
+                                <t t-if="doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 16%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t>
+                                <t t-if="not doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 19%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t>
+                            </t>
+                            <t t-if="not doc.confirmation_date">
+                               <t t-if="doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 16%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t>
+                                <t t-if="not doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">
+                                    <td class="text-right">Vat 19%</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </t> 
+                            </t>
+                        </t>
                     </tr>
-                    <tr>
+
+                    <tr style="border: none">
                         <td class="text-right">
                             <strong>Total</strong>
                         </td>
@@ -463,7 +537,8 @@
             <t t-if="doc.payment_method_id.name!='Rechnung'">
                 <div class="col-xs-12" style="margin-left:0.4cm;">
                     <span>Enjoy and relax!
-                        <br/>We would be happy about photos and stories of the Zwitscherbox.     
+                        <br/>We would be happy about photos and stories of the Zwitscherbox.
+                                
                     </span>
                     <br/>
                     <span>
