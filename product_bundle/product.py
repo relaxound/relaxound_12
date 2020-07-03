@@ -117,7 +117,7 @@ class UserError(object):
 
 class product_product(models.Model):
     _inherit = "product.product"
-    #pitem_ids= fields.One2many('product.item', 'product_id', 'Item sets')
+    pitem_ids= fields.One2many('product.item', 'product_id', 'Item sets')
     #bundle=fields.Boolean('Bundle')
 
 
