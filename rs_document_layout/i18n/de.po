@@ -583,8 +583,14 @@ msgstr "Betrag Netto"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "VAT 19%"
+msgid "Vat 19%"
 msgstr "MwSt. 19%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Vat 16%"
+msgstr "MwSt. 16%"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
