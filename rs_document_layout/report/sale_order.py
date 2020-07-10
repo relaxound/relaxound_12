@@ -111,9 +111,10 @@ class Custominvoicefilter(models.Model):
 
 
 
-class Customsaleorderreportfilter(models.Model):
+class SaleReport(models.Model):
     _inherit = "sale.report"
 
+    single_unit=fields.Integer(string="Single Unit",store=True)
     category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
@@ -123,6 +124,15 @@ class Customsaleorderreportfilter(models.Model):
         ('service', 'Service'),
         ('product', 'Storable Product'),
         ], string='Product Type',readonly=True,default='consu',related='product_id.type')
+
+
+    def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
+        fields['single_unit'] = ', l.single_unit as single_unit'
+
+        groupby += ', l.single_unit'
+
+        return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
+
 
 class Custominvoicereportfilter(models.Model):
     _inherit = "account.invoice.report"
