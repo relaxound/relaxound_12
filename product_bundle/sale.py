@@ -221,8 +221,6 @@ class sale_order_line(models.Model):
 
     @api.multi
     def _prepare_procurement_values(self,group_id=False):
-
-
         precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
         new_procs = self.env['procurement.group'] #Empty recordset
 
@@ -235,87 +233,39 @@ class sale_order_line(models.Model):
             if is_bundle:
                 pitem_ids=filter(None, map(lambda x:x, line.product_id.pitem_ids))
                 pitem_counts = 0
-                if sum(pitem_ids) == 0:
+                for pitem_id in pitem_ids:
                     qty = 0.0
-                    for proc in line.move_ids:
-                        qty += proc.product_qty
-
-                    if float_compare(qty, line.product_uom_qty, precision_digits=precision) >= 0:
-                        return False
+#                     for proc in line.procurement_ids:
+#                         qty += proc.product_qty
+#                     if float_compare(qty, line.product_uom_qty, precision_digits=precision) >= 0:
+#                         return False
 
                     if not line.order_id.procurement_group_id:
                         vals = line.order_id._prepare_procurement_group()
                         line.order_id.procurement_group_id = self.env["procurement.group"].create(vals)
 
-                    vals = line._prepare_order_line_procurement(group_id=line.order_id.procurement_group_id.id)
-                    location_id = self.order_id.partner_shipping_id.property_stock_customer
-
-                    if ('20x' in vals['product_id'].name or '20X' in vals['product_id'].name) or (
-                            '20x' in vals['product_id'].default_code or '20X' in vals['product_id'].default_code):
-                        default_code = self.product_id.default_code.replace('-20x', '')
-                        product = self.env['product.product'].search([('default_code', '=', default_code)])
-                        vals['product_id'] = product
-                        vals['name'] = vals['product_id'].name
-                        vals['product_qty'] = line.product_uom_qty * 20
-
-                    elif ('80x' in vals['product_id'].name or '80X' in vals['product_id']) or (
-                            '80x' in vals['product_id'].default_code or '80X' in vals['product_id'].default_code):
-                        default_code = vals['product_id'].default_code.replace('-80x', '')
-                        product = self.env['product.product'].search([('default_code', '=', default_code)])
-                        vals['product_id'] = product
-                        vals['name'] = vals['product_id'].name
-                        vals['product_qty'] = line.product_uom_qty * 80
-
+                    if pitem_counts == len(line.product_id.pitem_ids):
+                        return values
                     else:
-                        vals['product_qty'] = line.product_uom_qty
+                        vals = line._prepare_bundle_order_line_procurement(bundle_item=pitem_id, line=line, group_id=line.order_id.procurement_group_id.id)
+                        vals['product_id'] = pitem_id.item_id
+                        vals['product_uom'] = pitem_id.uom_id
+                        location_id = self.order_id.partner_shipping_id.property_stock_customer
+                        vals['name'] = pitem_id.item_id.name
+                        vals['origin'] = self.order_id.name
+                        vals['product_qty'] = pitem_id.qty_uom * line.product_uom_qty
 
-                    values = {
-                        'warehouse_id': self.order_id.warehouse_id or False,
-                        'action': 'pull_push',
-                        'date_planned': vals['date_planned'],
-                        'group_id': group_id,
-                        'name': vals['name'],
-                    }
+                        values = {
+                           'warehouse_id' : self.order_id.warehouse_id or False,
+                           'action': 'pull_push',
+                           'date_planned': vals['date_planned'],
+                           'group_id':group_id,
+                        }
 
-                    new_proc = self.env["procurement.group"].create(vals)
-                    new_procs += new_proc
-                    new_procs.run(vals['product_id'], vals['product_qty'], vals['product_uom'], location_id,
-                                  vals['name'], vals['origin'], values)
-
-                else:
-                    for pitem_id in pitem_ids:
-                        qty = 0.0
-    #                     for proc in line.procurement_ids:
-    #                         qty += proc.product_qty
-    #                     if float_compare(qty, line.product_uom_qty, precision_digits=precision) >= 0:
-    #                         return False
-
-                        if not line.order_id.procurement_group_id:
-                            vals = line.order_id._prepare_procurement_group()
-                            line.order_id.procurement_group_id = self.env["procurement.group"].create(vals)
-
-                        if pitem_counts == len(line.product_id.pitem_ids):
-                            return values
-                        else:
-                            vals = line._prepare_bundle_order_line_procurement(bundle_item=pitem_id, line=line, group_id=line.order_id.procurement_group_id.id)
-                            vals['product_id'] = pitem_id.item_id
-                            vals['product_uom'] = pitem_id.uom_id
-                            location_id = self.order_id.partner_shipping_id.property_stock_customer
-                            vals['name'] = pitem_id.item_id.name
-                            vals['origin'] = self.order_id.name
-                            vals['product_qty'] = pitem_id.qty_uom * line.product_uom_qty
-
-                            values = {
-                               'warehouse_id' : self.order_id.warehouse_id or False,
-                               'action': 'pull_push',
-                               'date_planned': vals['date_planned'],
-                               'group_id':group_id,
-                            }
-
-                            new_proc = self.env["procurement.group"].create(vals)
-                            new_procs += new_proc
-                            new_procs.run(vals['product_id'], vals['product_qty'], vals['product_uom'], location_id, vals['name'], vals['origin'], values)
-                            pitem_counts += 1
+                        new_proc = self.env["procurement.group"].create(vals)
+                        new_procs += new_proc
+                        new_procs.run(vals['product_id'], vals['product_qty'], vals['product_uom'], location_id, vals['name'], vals['origin'], values)
+                        pitem_counts += 1
             else:
                 qty = 0.0
                 for proc in line.move_ids:
