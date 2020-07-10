@@ -124,7 +124,9 @@
                 </header>
                 <sheet string="Claims">
                     <group>
-                        <field name="name"/>
+                       <!--  <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="priority" widget="priority"/> -->
                         <field name="date"/>
                     </group>
                     <group colspan="4" col="4">
@@ -138,7 +140,7 @@
                             <page string="Claim Description">
                                 <group colspan="2" col="2">
                                     <separator colspan="2" string="Claim Reporter"/>
-                                    <field name="partner_id" string="Partner"
+                                    <field name="partner_id" string="Partnerfdsdfddsf"
                                         />
                                     <field name="partner_phone"/>
                                     <field name="email_from" widget="email"/>
