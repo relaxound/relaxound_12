@@ -42,7 +42,7 @@ class stockpicking(models.Model):
 	@api.model
 	def _import_inventory_(self): 
 		db="relaxound-relaxound-12-master-240358"  # main stage
-		username="rahelheuser@zwitscherbox.com"
+		username="rahelheuser@relaxound.com"
 		password="let/s1_smile"
 		url = "https://relaxound-relaxound-12.odoo.com" # main stage
 
