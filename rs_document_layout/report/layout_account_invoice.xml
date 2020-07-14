@@ -294,7 +294,7 @@
                                         </td>
                                     </t>
                                 </t>
-                                <t t-if="not d.invoice_line_tax_ids.name != none">
+                                <t t-if="not d.invoice_line_tax_ids">
                                     <td class="text-right">Vat 16%</td>
                                     <td class="text-right">
                                         <span t-field="o.currency_id.symbol"/>
