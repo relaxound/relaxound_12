@@ -95,6 +95,7 @@ class CustomSaleOrderfilter(models.Model):
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
+    client_order_ref = fields.Char(string='Customer Reference', copy=True)
 
 
 class Custominvoicefilter(models.Model):
