@@ -95,7 +95,15 @@ class CustomSaleOrderfilter(models.Model):
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
-    client_order_ref = fields.Char(string='Customer Reference', copy=True)
+
+    @api.model
+    def fields_get(self, fields=None):
+        fields_to_hide = ['order_date']
+        res = super(CustomSaleOrderfilter, self).fields_get()
+        for field in fields_to_hide:
+            res[field]['selectable'] = False
+
+        return res
 
 
 class Custominvoicefilter(models.Model):
