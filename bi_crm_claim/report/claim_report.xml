@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <data>
+
+        <template id="print_claim_report">
+            <t t-call="web.external_layout">
+                <br/>
+                <br/>
+                <br/>
+                <div class="row" style="margin-left:1.4cm; font-size: 13px;">
+                    <div style="width:100%">
+                        <div style="width:50%; float:left;">
+                            <t t-if="doc.partner_id">
+                                <br/>
+                                <span t-field="doc.partner_id"/>
+                            </t>
+                        </div>
+                        <div style="width:50%; float:left; text-align:right;">
+                            <t t-if="doc.date">
+                                <br/>
+                                <font color="#0e71b8">Claim Date: </font> <span t-field="doc.date"/>
+                            </t>
+                            <t t-if="doc.name">
+                                <br/>
+                                <font color="#0e71b8">Claim Subject: </font> <span t-field="doc.name"/>
+                            </t>
+                            <t t-if="doc.user_id">
+                                <br/>
+                                <font color="#0e71b8">Responsible: </font> <span t-field="doc.user_id"/>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+                <div class="page" style="margin-top:2.5cm">
+                    <h2>Claim:</h2>
+                <table class="table table-sm o_main_table">
+                    <thead>
+                            <tr>
+                                <t t-set="colspan" t-value="5"/>
+                                <th class="text-left">Reference</th>
+                                <th class="text-left">Description</th>
+                                <th class="text-left">Tag</th>
+                                <th class="text-left">Quantity</th>
+                                <th class="text-left">Action Type</th>
+                                <th class="text-left">Taxes</th>
+                                <th class="text-left">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 15px; margin-bottom:0px;">
+                            <tr t-foreach='doc.claim_order_line' t-as='line'>
+                                <td><t t-esc='line.reference.name'/></td>
+                                <td><t t-esc='line.product_id.product_tmpl_id.name'/></td>
+                                <td><t t-esc='line.tags.name'/></td>
+                                <td class="text-right"><t t-esc='line.claim_qty'/></td>
+                                <td><t t-esc='line.type_action'/></td>
+                                <td><t t-esc='line.tax_id.name'/></td>
+                                <td class="text-right"><t t-esc='line.subtotal'/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+<!--                    <div class="clearfix">-->
+<!--                        <div class="row" >-->
+<!--                            <table class="table table-sm">-->
+<!--                                <tr class="border-black o_subtotal" style="">-->
+<!--                                    <td><strong>Subtotal</strong></td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span t-field="doc.amount_untaxed"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr class="border-black o_total">-->
+<!--                                    <td><strong>Total</strong></td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span t-field="doc.amount_total"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+
+                <div id="total" class="row" style="font-size: 15px;">
+                    <div class="col-6">
+                        <br/>
+                        <table>
+                            <tr>
+                                <td class="text-left" style="font-size:14px">
+                                    <strong>Claim Description:</strong>
+                                </td>
+                                <td class="text-left" style="font-size:14px">
+                                    <t t-if="doc.description">
+                                        <span t-field="doc.description"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <br/>
+                        <table class="table table-condensed" id="summary" style="border: none; line-height:0;">
+                            <style>
+                                    table#summary td {
+                                padding-right:0.2em;
+                                    border:0
+                                    }
+                            </style>
+                            <t t-set="delivery_cost" t-value="0"/>
+                            <tr style="border: none">
+                                <td class="col-xs-3 text-right">
+                                    <span>Total</span>
+                                </td>
+                                <td class="text-right col-xs-2">
+                                    <strong>
+                                        <t t-if="utx_amt">
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </t>
+                                        <t t-if="not(utx_amt)">
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </t>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black">
+                                <td class="text-right">
+                                    <span>Shipping</span>
+                                </td>
+                                <td class="text-right">
+                                    <t t-if="d_chrg">
+                                    <strong>
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
+                                    </t>
+                                    <t t-if="not(d_chrg)">
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr style="border: none">
+                                <td class="text-right">Untaxed Amount</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border: none">
+                                <td class="text-right">Tax</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border: none">
+                                <td class="text-right">
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        <span t-field="doc.currency_id.symbol"/>
+
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--   </div></div> -->
+                    </div>
+                </div>
+
+            </t>
+        </template>
+
+        <template id="report_print_claim">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="bi_crm_claim.print_claim_report"/>
+                </t>
+            </t>
+        </template>
+        <report
+            id="print_loyality_card_id"
+            string="Claim report"
+            model="crm.claim"
+            report_type="qweb-pdf"
+            file="bi_crm_claim.report_print_claim"
+            name="bi_crm_claim.report_print_claim"
+            print_report_name="('Claim report for %s' % object.name)"
+        />
+    </data>
+    </odoo>

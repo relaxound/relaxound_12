@@ -17,7 +17,8 @@
         'views/crm_claim_menu.xml',
         'views/crm_claim_data.xml',
         'views/res_partner_view.xml',
-        'views/crm_claim_tag_view.xml'
+        'views/crm_claim_tag_view.xml',
+        'report/claim_report.xml',
     ],
     'installable': True,
     'application': True,
