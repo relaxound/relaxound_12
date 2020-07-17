@@ -45,10 +45,10 @@ class BusinessSector(models.Model):
                                         else:
                                                 self.update({'agent_name': None})
 
-                elif 'Händler' in tag_name and self.country_id.name in ['Netherlands','Belgium','Luxembourg']:
+                elif 'Händler' in tag_name and self.country_id.code in ['NL','BE','LU']:
                         self.update({'agent_name': 'DEsignLICIOUS'})
 
-                elif 'Händler' in tag_name and self.country_id.name == 'Spain':
+                elif 'Händler' in tag_name and self.country_id.code == 'ES':
                         self.update({'agent_name': 'The Living Connection'})
 
                 else:
