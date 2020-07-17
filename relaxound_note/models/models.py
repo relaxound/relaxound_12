@@ -9,7 +9,7 @@ class CustomSaleOrder(models.Model):
 
 	@api.onchange('partner_id')
 	def onchange_partner_id_credit_1(self):
-
-		if self.partner_id.comment:
-			self.is_note = True
+		for rec in self:
+			if rec.partner_id.comment:
+				rec.is_note = True
 
