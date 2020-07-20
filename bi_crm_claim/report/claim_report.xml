@@ -32,7 +32,7 @@
                                 <span t-field="doc.partner_id.country_id.name"/>
                             </t>
                         </div>
-                        <div style="width:50%; float:right;text-align:right;margin-right:-4cm;">
+                        <div style="width:50%; float:right;text-align:right;margin-right:-5cm;">
                             <t t-if="doc.date">
                                 <br/>
                                 <font color="#0e71b8">Claim Date: </font> <span t-field="doc.date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
