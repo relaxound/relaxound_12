@@ -83,7 +83,7 @@
                 <br/>
 
                 <div id="total" class="row" style="font-size: 15px;">
-                    <div class="col-6">
+                    <div class="col-6" style="width:50%;">
                         <br/>
                         <table>
                             <tr>
@@ -91,9 +91,11 @@
                                     <strong>Claim Description:</strong>
                                 </td>
                                 <td class="text-left" style="font-size:14px">
-                                    <t t-if="doc.description">
-                                        <span t-field="doc.description"/>
-                                    </t>
+                                    <div class="col-5" style="width:50%;">
+                                        <t t-if="doc.description">
+                                            <span t-field="doc.description"/>
+                                        </t>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
