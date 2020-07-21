@@ -305,7 +305,7 @@ msgstr "Lieferauftrag"
 #: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__description
 #: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #. module: bi_crm_claim
 #: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__email_from
