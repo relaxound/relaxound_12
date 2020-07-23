@@ -605,7 +605,7 @@
         <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">
             <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
                 <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
-                <t t-foreach="payments_vals" t-as="payment_vals">c
+                <t t-foreach="payments_vals" t-as="payment_vals">
                     <tr>
                         <td>
                             <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
