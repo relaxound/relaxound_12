@@ -283,14 +283,16 @@ class sale_order_line(models.Model):
 
                 if ('20x' in vals['product_id'].name or '20X' in vals['product_id'].name) or ('20x' in vals['product_id'].default_code or '20X' in vals['product_id'].default_code):
                     default_code = self.product_id.default_code.replace('-20x', '')
-                    product = self.env['product.product'].search([('default_code', '=', default_code)])
+                    product = self.env['product.product'].search(
+                        ['&', ('default_code', '=', default_code), ('sale_ok', '=', 'True')])
                     vals['product_id'] = product
                     vals['name'] = vals['product_id'].name
                     vals['product_qty'] = line.product_uom_qty * 20
 
                 elif ('80x' in vals['product_id'].name or '80X' in vals['product_id']) or ('80x' in vals['product_id'].default_code or '80X' in vals['product_id'].default_code):
                     default_code = vals['product_id'].default_code.replace('-80x', '')
-                    product = self.env['product.product'].search([('default_code', '=', default_code)])
+                    product = self.env['product.product'].search(
+                        ['&', ('default_code', '=', default_code), ('sale_ok', '=', 'True')])
                     vals['product_id'] = product
                     vals['name'] = vals['product_id'].name
                     vals['product_qty'] = line.product_uom_qty * 80

@@ -603,7 +603,7 @@
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
         <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">
-            <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
+           <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
                 <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                 <t t-foreach="payments_vals" t-as="payment_vals">
                     <tr>

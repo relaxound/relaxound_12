@@ -10,18 +10,20 @@ class SaleOrderLine(models.Model):
     single_unit=fields.Integer(string="Single Unit")
     name = fields.Char(string="Description")
 
+
     @api.onchange('product_id','product_uom_qty')
     def custom_quantity(self):
+
         if self.product_id.name:
-            if ('20x' in self.product_id.name or '20X' in self.product_id.name) or ('20x' in self.product_id.default_code or '20X' in self.product_id.default_code):
+            if ('20x' in self.product_id.name or '20X' in self.product_id.name) or ('20x' in self.product_id.default_code or '20X' in self.product_id.default_code) :
                 self.product_id.default_code = self.product_id.default_code.replace('-20x', '')
-                product = self.env['product.product'].search([('default_code', '=', self.product_id.default_code)])
+                product = self.env['product.product'].search(['&',('default_code', '=', self.product_id.default_code),('sale_ok', '=', 'True')] )
                 self.product_id.name = product.name
                 self.update({'single_unit':self.product_uom_qty*20})
 
             elif ('80x' in self.product_id.name or '80X' in self.product_id.name) or ('80x' in self.product_id.default_code or '80X' in self.product_id.default_code):
                 self.product_id.default_code = self.product_id.default_code.replace('-80x', '')
-                product = self.env['product.product'].search([('default_code', '=', self.product_id.default_code)])
+                product = self.env['product.product'].search(['&',('default_code', '=', self.product_id.default_code),('sale_ok', '=', 'True')] )
                 self.product_id.name = product.name
                 self.update({'single_unit':self.product_uom_qty*80})
 
@@ -97,7 +99,6 @@ class CustomSaleOrderfilter(models.Model):
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
     client_order_ref = fields.Char(string='Customer Reference', copy=True)
 
-
     @api.model
     def fields_get(self, fields=None):
         fields_to_hide = ['order_date']
@@ -106,6 +107,7 @@ class CustomSaleOrderfilter(models.Model):
             res[field]['selectable'] = False
 
         return res
+
 
 class Custominvoicefilter(models.Model):
     _inherit = "account.invoice"
