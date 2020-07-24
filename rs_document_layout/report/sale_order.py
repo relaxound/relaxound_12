@@ -10,7 +10,7 @@ class SaleOrderLine(models.Model):
     single_unit=fields.Integer(string="Single Unit")
     name = fields.Char(string="Description")
 
-
+    # bundle product single unit
     @api.onchange('product_id','product_uom_qty')
     def custom_quantity(self):
 
