@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_chatter_box_custom_chatter_box,custom_chatter_box.custom_chatter_box,model_custom_chatter_box_custom_chatter_box,,1,0,0,0
