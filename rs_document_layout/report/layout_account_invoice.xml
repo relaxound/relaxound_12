@@ -134,12 +134,12 @@
                             </td>
                         </tr>
                         <!--changes-->
-                        <tr t-if="o.payment_method_id.name">
-                            <td class="text-left">Payment method: </td>
-                            <td class="text-left">
-                                <span t-field="o.payment_method_id.name"/>
-                            </td>
-                        </tr>
+<!--                        <tr t-if="o.payment_method_id.name">-->
+<!--                            <td class="text-left">Payment method: </td>-->
+<!--                            <td class="text-left">-->
+<!--                                <span t-field="o.payment_method_id.name"/>-->
+<!--                            </td>-->
+<!--                        </tr>-->
 
                         <tr t-if="o.payment_term_id">
                             <td class="text-left">Payment term: </td>
@@ -201,46 +201,46 @@
                             padding-right:0.2em;
                             }
                         </style>
-
-                        <t t-set="delivery_cost" t-value="0"/>
-                        <tr style="border: none">
-                            <td class="col-xs-3 text-right">
-                                <span>Total</span>
-                            </td>
-                            <td class="text-right col-xs-2">
-                                <strong>
-                                    <t t-if="utx_amt">
-                                        <span t-field="o.currency_id.symbol"/> 
-                                        <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </t>
-                                    <t t-if="not(utx_amt)">
-                                        <span t-field="o.currency_id.symbol"/> 
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </t>
-                                </strong>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid black">
-                            <td class="text-right">
-                                <span>Shipping</span>
-                            </td>
-                            <td class="text-right">
-                                <t t-if="d_chrg">
-                                <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </strong>
-                                </t>
-                                <t t-if="not(d_chrg)">
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </t>
-                            </td>
-                        </tr>
+                        <!--changes by yogita-->
+<!--                        <t t-set="delivery_cost" t-value="0"/>-->
+<!--                        <tr style="border: none">-->
+<!--                            <td class="col-xs-3 text-right">-->
+<!--                                <span>Total</span>-->
+<!--                            </td>-->
+<!--                            <td class="text-right col-xs-2">-->
+<!--                                <strong>-->
+<!--                                    <t t-if="utx_amt">-->
+<!--                                        <span t-field="o.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="not(utx_amt)">-->
+<!--                                        <span t-field="o.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </t>-->
+<!--                                </strong>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr style="border-bottom: 1px solid black">-->
+<!--                            <td class="text-right">-->
+<!--                                <span>Shipping</span>-->
+<!--                            </td>-->
+<!--                            <td class="text-right">-->
+<!--                                <t t-if="d_chrg">-->
+<!--                                <strong>-->
+<!--                                    <span t-field="o.currency_id.symbol"/>-->
+<!--                                    <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                </strong>-->
+<!--                                </t>-->
+<!--                                <t t-if="not(d_chrg)">-->
+<!--                                    <span t-field="o.currency_id.symbol"/>-->
+<!--                                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                </t>-->
+<!--                            </td>-->
+<!--                        </tr>-->
 
                         <!-- change the logic in report printing -->
 
-                        <!-- <t t-set="delivery_cost" t-value="0"/>
+                         <t t-set="delivery_cost" t-value="0"/>
 
                         <t t-foreach="o.invoice_line_ids" t-as="l">
                             <t t-if="l.sale_line_ids.is_delivery">
@@ -253,7 +253,7 @@
                             </td>
                             <td class="text-right col-xs-2">
                                 <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
+                                    <span t-field="o.currency_id.symbol"/>
                                     <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
                                 </strong>
                             </td>
@@ -264,11 +264,11 @@
                             </td>
                             <td class="text-right">
                                 <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
+                                    <span t-field="o.currency_id.symbol"/>
                                     <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
                                 </strong>
                             </td>
-                        </tr> -->
+                        </tr>
                         <tr style="border: none">
                             <td class="text-right">Untaxed Amount</td>
                             <td class="text-right">
@@ -605,7 +605,7 @@
         <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">
             <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
                 <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
-                <t t-foreach="payments_vals" t-as="payment_vals">
+                <t t-foreach="payments_vals" t-as="payment_vals">c
                     <tr>
                         <td>
                             <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
