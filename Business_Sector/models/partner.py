@@ -51,5 +51,8 @@ class BusinessSector(models.Model):
                 elif 'Händler' in tag_name and self.country_id.code == 'ES':
                         self.update({'agent_name': 'The Living Connection'})
 
+                elif 'Händler' in tag_name and self.country_id.code == 'AT':
+                        self.update({'agent_name': 'Handelsagentur Schur GbR'})
+
                 else:
                         self.update({'agent_name': None})
