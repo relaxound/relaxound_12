@@ -9,34 +9,6 @@
         <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
         <div style="width:100%">
             <div style="width:50%; float: left;">
-                <t t-if='is_pro_forma'>
-                    <t t-if="doc.partner_invoice_id.parent_id">
-                    <span t-field="doc.partner_id.parent_id.name"/>
-                </t>
-                <t t-if="doc.partner_invoice_id.name">
-                    <br/>
-                    <span t-field="doc.partner_invoice_id.name"/>
-                </t>
-                <t t-if="doc.partner_invoice_id.street">
-                    <br/>
-                    <span t-field="doc.partner_invoice_id.street"/>
-                </t>
-                <t t-if="doc.partner_invoice_id.street2">
-                    <br/>
-                    <span t-field="doc.partner_invoice_id.street2"/>
-                </t>
-                <t t-if="doc.partner_invoice_id.zip or doc.partner_invoice_id.city">
-                    <br/>
-                    <span t-field="doc.partner_invoice_id.zip"/>
-    
-                    <span t-field="doc.partner_invoice_id.city"/>
-                </t>
-                <t t-if="doc.partner_invoice_id.country_id">
-                    <br/>
-                    <span t-field="doc.partner_invoice_id.country_id.name"/>
-                </t>
-            </t>
-            <t t-else=''>
                 <t t-if="doc.partner_id.parent_id">
                     <span t-field="doc.partner_id.parent_id.name"/>
                 </t>
@@ -55,14 +27,68 @@
                 <t t-if="doc.partner_id.zip or doc.partner_id.city">
                     <br/>
                     <span t-field="doc.partner_id.zip"/>
-    
+
                     <span t-field="doc.partner_id.city"/>
                 </t>
                 <t t-if="doc.partner_id.country_id">
                     <br/>
                     <span t-field="doc.partner_id.country_id.name"/>
                 </t>
-            </t>
+            <!--Change code logic-->
+<!--                <t t-if='is_pro_forma'>-->
+<!--                    <t t-if="doc.partner_invoice_id.parent_id">-->
+<!--                    <span t-field="doc.partner_id.parent_id.name"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_invoice_id.name">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_invoice_id.name"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_invoice_id.street">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_invoice_id.street"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_invoice_id.street2">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_invoice_id.street2"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_invoice_id.zip or doc.partner_invoice_id.city">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_invoice_id.zip"/>-->
+
+<!--                        <span t-field="doc.partner_invoice_id.city"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_invoice_id.country_id">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_invoice_id.country_id.name"/>-->
+<!--                    </t>-->
+<!--                </t>-->
+<!--                <t t-else=''>-->
+<!--                    <t t-if="doc.partner_id.parent_id">-->
+<!--                        <span t-field="doc.partner_id.parent_id.name"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_id.name">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_id.name"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_id.street">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_id.street"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_id.street2">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_id.street2"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_id.zip or doc.partner_id.city">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_id.zip"/>-->
+
+<!--                        <span t-field="doc.partner_id.city"/>-->
+<!--                    </t>-->
+<!--                    <t t-if="doc.partner_id.country_id">-->
+<!--                        <br/>-->
+<!--                        <span t-field="doc.partner_id.country_id.name"/>-->
+<!--                    </t>-->
+<!--                </t>-->
             </div>
             <div style="width:50%; float:right; text-align:right;">
                 <t t-if="doc.partner_id.ref">

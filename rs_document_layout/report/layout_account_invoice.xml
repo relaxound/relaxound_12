@@ -201,138 +201,152 @@
                             padding-right:0.2em;
                             }
                         </style>
+                        <!-- change the logic in report printing -->
+<!--                        <t t-set="delivery_cost" t-value="0"/>-->
+<!--                            <t t-foreach="o.invoice_line_ids" t-as="l">-->
+<!--                                <t t-if="l.sale_line_ids.is_delivery">-->
+<!--                                    <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>-->
+<!--                                </t>-->
+<!--                            </t>-->
+<!--                            <tr style="border: none">-->
+<!--                                <td class="col-xs-3 text-right">-->
+<!--                                    <span>Total</span>-->
+<!--                                </td>-->
+<!--                                <td class="text-right col-xs-2">-->
+<!--                                    <strong>-->
+<!--                                        <t t-if="utx_amt">-->
+<!--                                            <span t-field="o.currency_id.symbol"/>-->
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                        </t>-->
+<!--                                        <t t-if="not(utx_amt)">-->
+<!--                                            <span t-field="o.currency_id.symbol"/>-->
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                        </t>-->
+<!--                                    </strong>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-bottom: 1px solid black">-->
+<!--                                <td class="text-right">-->
+<!--                                    <span>Shipping</span>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                    <t t-if="d_chrg">-->
+<!--                                    <strong>-->
+<!--                                        <span t-field="o.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </strong>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="not(d_chrg)">-->
+<!--                                        <span t-field="o.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </t>-->
+<!--                                </td>-->
+<!--                            </tr>-->
 
                         <t t-set="delivery_cost" t-value="0"/>
-                        <tr style="border: none">
-                            <td class="col-xs-3 text-right">
-                                <span>Total</span>
-                            </td>
-                            <td class="text-right col-xs-2">
-                                <strong>
-                                    <t t-if="utx_amt">
-                                        <span t-field="o.currency_id.symbol"/> 
-                                        <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </t>
-                                    <t t-if="not(utx_amt)">
-                                        <span t-field="o.currency_id.symbol"/> 
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </t>
-                                </strong>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid black">
-                            <td class="text-right">
-                                <span>Shipping</span>
-                            </td>
-                            <td class="text-right">
-                                <t t-if="d_chrg">
-                                <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </strong>
+                            <t t-foreach="o.invoice_line_ids" t-as="l">
+                                <t t-if="l.product_id.type == 'service' ">
+                                    <t t-set="delivery_cost" t-value="l.product_id.lst_price"/>
                                 </t>
-                                <t t-if="not(d_chrg)">
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </t>
-                            </td>
-                        </tr>
-
-                        <!-- change the logic in report printing -->
-
-                        <!-- <t t-set="delivery_cost" t-value="0"/>
-
-                        <t t-foreach="o.invoice_line_ids" t-as="l">
-                            <t t-if="l.sale_line_ids.is_delivery">
-                                <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>
+                                <!-- change the logic in report printing -->
+<!--                                <t t-if="l.sale_line_ids.is_delivery and o.date_invoice &lt; datetime.date (2020,1,1) ">-->
+<!--                                    <t t-set="delivery_cost" t-value="l.product_id.lst_price"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="len(o.invoice_line_ids) == 1 and o.date_invoice &lt; datetime.date (2020,1,1)">-->
+<!--                                    <t t-set="delivery_cost" t-value="0"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="l.sale_line_ids.is_delivery and o.date_invoice &gt;= datetime.date (2020,1,1)">-->
+<!--                                    <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>-->
+<!--                                </t>-->
                             </t>
-                        </t>
-                        <tr style="border: none">
-                            <td class="col-xs-3 text-right">
-                                <span>Total</span>
-                            </td>
-                            <td class="text-right col-xs-2">
-                                <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </strong>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid black">
-                            <td class="text-right">
-                                <span>Shipping</span>
-                            </td>
-                            <td class="text-right">
-                                <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </strong>
-                            </td>
-                        </tr> -->
-                        <tr style="border: none">
-                            <td class="text-right">Untaxed Amount</td>
-                            <td class="text-right">
-                                <span t-field="o.currency_id.symbol"/> 
-                                <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid black">
-                            <t t-foreach="o.invoice_line_ids[0]" t-as="d">
-                                <t t-if="d.invoice_line_tax_ids.name == '16% abgesenkte MwSt' or d.invoice_line_tax_ids.name == '16% Corona Tax' or d.invoice_line_tax_ids.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
-                                    <td class="text-right">Vat 16%</td>
-                                    <td class="text-right">
-                                        <span t-field="o.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t>
-                                <t t-if="d.invoice_line_tax_ids.name == '19% Umsatzsteuer' or d.invoice_line_tax_ids.name == 'MwSt._(19.0 % included T)_Relaxound GmbH' or d.invoice_line_tax_ids.name == '19 % Umsatzsteuer EU Lieferung'">
-                                    <td class="text-right">Vat 19%</td>
-                                    <td class="text-right">
-                                        <span t-field="o.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t>
-                                <t t-if="not d.invoice_line_tax_ids">
-                                    <td class="text-right">Vat 16%</td>
-                                    <td class="text-right">
-                                        <span t-field="o.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t>
-                            </t>
-                        </tr>
-                        <tr style="border: none">
-                            <td class="text-right">
-                                <strong>Total</strong>
-                            </td>
-                            <td class="text-right">
-                                <strong>
-                                    <span t-field="o.currency_id.symbol"/> 
-                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </strong>
-                            </td>
-                        </tr>
-                        <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
-                        <t t-foreach="payments_vals" t-as="payment_vals">
-                            <br/>
-                            <br/><br/>
-                            <tr>
-                                <td>
-                                    <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
+                            <tr style="border: none">
+                                <td class="col-xs-3 text-right">
+                                    <span>Total</span>
                                 </td>
-                                <td class="text-right">
-                                    <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                <td class="text-right col-xs-2">
+                                    <strong>
+                                        <span t-field="o.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
                                 </td>
                             </tr>
-                        </t>
-                        <t t-if="len(payments_vals) &gt; 0">
-                            <tr class="border-black">
-                                <td><strong>Amount Due</strong></td>
+                            <tr style="border-bottom: 1px solid black">
                                 <td class="text-right">
-                                    <span t-field="o.residual"/>
+                                    <span>Shipping</span>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        <span t-field="o.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
                                 </td>
                             </tr>
-                        </t> -->
+
+
+                            <tr style="border: none">
+                                <td class="text-right">Untaxed Amount</td>
+                                <td class="text-right">
+                                    <span t-field="o.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black">
+                                <t t-foreach="o.invoice_line_ids[0]" t-as="d">
+                                    <t t-if="d.invoice_line_tax_ids.name == '16% abgesenkte MwSt' or d.invoice_line_tax_ids.name == '16% Corona Tax' or d.invoice_line_tax_ids.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
+                                        <td class="text-right">Vat 16%</td>
+                                        <td class="text-right">
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </td>
+                                    </t>
+                                    <t t-if="d.invoice_line_tax_ids.name == '19% Umsatzsteuer' or d.invoice_line_tax_ids.name == 'MwSt._(19.0 % included T)_Relaxound GmbH' or d.invoice_line_tax_ids.name == '19 % Umsatzsteuer EU Lieferung'">
+                                        <td class="text-right">Vat 19%</td>
+                                        <td class="text-right">
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </td>
+                                    </t>
+                                    <t t-if="not d.invoice_line_tax_ids">
+                                        <td class="text-right">Vat 16%</td>
+                                        <td class="text-right">
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </td>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr style="border: none">
+                                <td class="text-right">
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        <span t-field="o.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                            <t t-foreach="payments_vals" t-as="payment_vals">
+                                <br/>
+                                <br/><br/>
+                                <tr>
+                                    <td>
+                                        <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']"/></i>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="len(payments_vals) &gt; 0">
+                                <tr class="border-black">
+                                    <td><strong>Amount Due</strong></td>
+                                    <td class="text-right">
+                                        <span t-field="o.residual"/>
+                                    </td>
+                                </tr>
+                            </t> -->
                     </table>
                 </div>
 
@@ -603,7 +617,7 @@
             <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
         </template>
         <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">
-           <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
+            <xpath expr="//div[@id='total']/div[@id='test']/table[@id='summary']" position="inside">
                 <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                 <t t-foreach="payments_vals" t-as="payment_vals">
                     <tr>
