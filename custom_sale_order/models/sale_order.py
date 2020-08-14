@@ -22,30 +22,25 @@ class CustomSaleOrder(models.Model):
             # line.tax_id = fpos.map_tax(taxes, line.product_id, line.order_id.partner_shipping_id) if fpos else taxes
             # ----------------------------------------------------------------------------------------------
 
-            # 1. Scenario 1: Customer having country as Germany and Fiscal Position Contains EU --------> will get 19% tax.
-            # 2. Scenario 2: Customer having country as Germany and  Fiscal Position Contains Other value or null ---------------->will get 19% tax.
-            # 3. Scenario 3: customer is a retailer outside of Germany and within EU it needs a VAT ---------------->will get 0% tax.
-            # 4. Scenario 4: customer is a retailer outside of Germany and within EU it needs a VAT is missing  --------->will get 19% tax.
+            # 1. Scenario 1: Customer having country as Germany and Fiscal Position Contains EU -------->
+            # 2. Scenario 2: Customer having country as Germany and  Fiscal Position Contains Other value or null ---------------->
+            # 3. Scenario 3: customer is a retailer outside of Germany and within EU it needs a VAT ---------------->
+            # 4. Scenario 4: customer is a retailer outside of Germany and within EU it needs a VAT is missing  --------->
 
             if not line.order_id.partner_id:
                 raise ValidationError("Please select the customer name!")
 
 
-            if (not line.order_id.order_date and start_date <= date.today() <= end_date) or (line.order_id.order_date and start_date <= line.order_id.order_date <= end_date):
-                flag = True
-            else:
-                flag = False
+            # if (not line.order_id.order_date and start_date <= date.today() <= end_date) or (line.order_id.order_date and start_date <= line.order_id.order_date <= end_date):
+            #     flag = True
+            # else:
+            #     flag = False
 
-            if flag == True :
-
-
-                if line.order_id.partner_id.country_id or line.order_id.partner_id.property_account_position_id.name:
-
-                    fiscal_position_name = line.order_id.partner_id.property_account_position_id.name
-                    # change code #
-                    # if line.order_id.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
+            if line.order_id.partner_id.country_id or line.order_id.partner_id.property_account_position_id.name:
+                fiscal_position_name = line.order_id.partner_id.property_account_position_id.name
+                # change code #
+                if line.order_id.partner_id.country_id.name == 'Germany':
                     if fiscal_position_name:
-
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")])
                             if tax_id not in self.tax_id:
@@ -55,63 +50,47 @@ class CustomSaleOrder(models.Model):
                             tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")])
                             if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
+
                     else: # Scenario 2 ---->
                         tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")])
                         if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
-                    # change code
-                    # if line.order_id.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']:
-                    #     if fiscal_position_name:
-                    #         if line.order_id.partner_id.vat: # Scenario 3 ----->
-                    #             if 'EU' in fiscal_position_name:
-                    #                 line.update({'tax_id':None})
-                    #
-                    #         else:  # Scenario 4 ------>
-                    #             if 'EU' in fiscal_position_name:
-                    #                 tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")])
-                    #                 if tax_id not in self.tax_id:
-                    #                     line.update({'tax_id':tax_id})
 
-            elif flag == False :
-                if line.order_id.partner_id.country_id or line.order_id.partner_id.property_account_position_id.name:
-
-                    fiscal_position_name = line.order_id.partner_id.property_account_position_id.name
-                    #change code #
-                    # if line.order_id.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
+                elif line.order_id.partner_id.country_id.name in ['Belgium','Bulgaria','Denmark','Estonia','Finnland','France','Greece','United Kingdom','Netherlands','Italy','Ireland','Crotia','Latvia','Lithunia','Luxembourg','Malta','Austria','Poland','Portugal','Romania','Sweden','Slovakia','Slovenia','Spain','Czech Republic','Hungary','Cypress']:
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
-                            tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
+                            tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG) ")])
                             if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
 
                         if 'EU' not in fiscal_position_name: # Scenario 2 ---->
-                            tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
+                            tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG) ")])
                             if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
                     else: # Scenario 2 ---->
-                        tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
+                        tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG) ")])
                         if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
-                    # change code #
-                    # if line.order_id.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']:
-                    # if fiscal_position_name:
-                    #     if line.order_id.partner_id.vat: # Scenario 3 ----->
-                    #         if 'EU' in fiscal_position_name:
-                    #             line.update({'tax_id':None})
-                    #
-                    #     else:  # Scenario 4 ------>
-                    #         if 'EU' in fiscal_position_name:
-                    #             tax_id=self.env['account.tax'].search([('name','=',"19% Umsatzsteuer")])
-                    #             if tax_id not in self.tax_id:
-                    #                 line.update({'tax_id':tax_id})
+                else:
+                    if fiscal_position_name:
+                        if 'EU' in fiscal_position_name: # Scenario 1 ---->
+                            tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")])
+                            if tax_id not in self.tax_id:
+                                line.update({'tax_id':tax_id})
 
-
+                        if 'EU' not in fiscal_position_name: # Scenario 2 ---->
+                            tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")])
+                            if tax_id not in self.tax_id:
+                                line.update({'tax_id':tax_id})
+                    else: # Scenario 2 ---->
+                        tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")])
+                        if tax_id not in self.tax_id:
+                            line.update({'tax_id':tax_id})
 
 class Customtax(models.Model):
     _inherit = 'account.tax'
-
 
     @api.model
     def _fix_tax_included_price(self, price, prod_taxes, line_taxes):
