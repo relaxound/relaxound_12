@@ -24,14 +24,12 @@ class BusinessSector(models.Model):
 
         agent_name = fields.Char('Sales Agent')
 
-
-        @api.onchange('zip', 'category_id','country_id')
+        @api.onchange('zip','country_id','category_id')
         def onchange_zip(self):
                 ids = self.category_id
                 tag_name = []
                 for id in ids:
                     tag_name.append(id.name)
-
                 if self.zip != None and self.zip != '' and 'Händler' in tag_name and self.country_id.code=='DE':
                         with open('src/user/zip_code.csv', 'r') as csv_file:
                                 csv_obj = csv.reader(csv_file)
@@ -51,8 +49,11 @@ class BusinessSector(models.Model):
                 elif 'Händler' in tag_name and self.country_id.code == 'ES':
                         self.update({'agent_name': 'The Living Connection'})
 
-                elif 'Händler' in tag_name and self.country_id.code == 'AT':
+                elif self.country_id.code == 'AT' :
+                        tag_name = self.env['res.partner.category'].search([('name','=',"Handelsagentur Wolfgang Schur GbR")])
+                        self.update({'category_id' : tag_name})
                         self.update({'agent_name': 'Handelsagentur Schur GbR'})
 
                 else:
                         self.update({'agent_name': None})
+
