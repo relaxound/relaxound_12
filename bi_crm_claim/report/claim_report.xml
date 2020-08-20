@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <data>
+
+        <template id="print_claim_report">
+            <t t-call="web.external_layout">
+                <br/>
+                <br/>
+                <div class="row" style="margin-left:1.4cm; margin-right:3cm; font-size: 13px;">
+                    <div style="width:100%">
+                        <div style="width:50%; float:left;">
+                            <t t-if="doc.partner_id.name">
+                                <br/>
+                                <span t-field="doc.partner_id.name"/>
+                            </t>
+                            <t t-if="doc.partner_id.street">
+                                <br/>
+                                <span t-field="doc.partner_id.street"/>
+                            </t>
+                            <t t-if="doc.partner_id.street2">
+                                <br/>
+                                <span t-field="doc.partner_id.street2"/>
+                            </t>
+                            <t t-if="doc.partner_id.zip or doc.partner_id.city">
+                                <br/>
+                                <span t-field="doc.partner_id.zip"/>
+
+                                <span t-field="doc.partner_id.city"/>
+                            </t>
+                            <t t-if="doc.partner_id.country_id">
+                                <br/>
+                                <span t-field="doc.partner_id.country_id.name"/>
+                            </t>
+                        </div>
+                        <div style="width:50%; float:right;text-align:right;margin-right:-4cm;">
+                            <t t-if="doc.date">
+                                <br/>
+                                <font color="#0e71b8">Claim Date: </font> <span t-field="doc.date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                            </t>
+                            <t t-if="doc.name">
+                                <br/>
+                                <font color="#0e71b8">Claim Subject: </font> <span t-field="doc.name"/>
+                            </t>
+
+                            <t t-if="doc.user_id">
+                                <br/>
+                                <font color="#0e71b8">Responsible: </font> <span t-field="doc.user_id"/>
+                            </t>
+                            <t>
+                                <br/>
+                            </t>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <br/>
+                <br/>
+                <br/>
+
+                <div class="row" style="margin-left:1.4cm;margin-right:3cm; font-size: 13px;">
+                    <div class="page" style="width:100%">
+                        <h2>
+                            <div class="col-xs-4" style="margin-left:8.5cm">Claim Report</div>
+                        </h2>
+                        <br/>
+                        <br/>
+                        <table class="table table-condensed" style="table-layout:fixed;width:100%;border-collapse: collapse;" id="items">
+
+                            <style>
+                                #items td{
+                                border:0; padding-top: .3em;
+                                padding-bottom: .3em;
+                                padding-left:0.2em;
+                                padding-right:0.2em;
+                                }
+                                #items th {
+                                border-top:0;
+                                padding-right:0.2em
+                                }
+                            </style>
+
+
+                            <thead style="font-size: 13px;">
+                                <tr style="line-height:1">
+                                    <t t-set="colspan" t-value="5"/>
+                                    <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Reference</th>
+                                    <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Description</th>
+                                    <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Tag</th>
+                                    <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Quantity</th>
+                                    <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Action Type</th>
+                                    <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Taxes</th>
+                                    <th class="text-right" style="width:24%;border-bottom: 2px solid black;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size: 13px;line-height:1; margin-left:10px;">
+                                <tr t-foreach='doc.claim_order_line' t-as='line'>
+                                    <td class="text-left"><t t-esc='line.reference.name'/></td>
+                                    <td class="text-center"><t t-esc='line.product_id.product_tmpl_id.name'/></td>
+                                    <td class="text-center"><t t-esc='line.tags.name'/></td>
+                                    <td class="text-right"><t t-esc='line.claim_qty'/></td>
+                                    <td class="text-center"><t t-esc='line.type_action'/></td>
+                                    <td class="text-center"><t t-esc='line.tax_id.name'/></td>
+                                    <td class="text-right"><t t-esc='line.subtotal'/></td>
+                                </tr>
+                                <tr >
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+                                    <th class="text-center" style="border-top: 1px solid black; padding-left:0.1em;">Total</th>
+                                    <th class="text-right" style="border-top: 1px solid black;  padding-left:0.1em;">
+<!--                                         <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/> -->
+                                        <t t-esc="int(sum(line.claim_qty for line in doc.claim_order_line if line.product_id.type != 'service'))"/>
+                                    </th>
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+                                    <th class="text-right" style="border-top: 1px solid black"/>
+                                    <th class="text-right" style="border-top: 1px solid black"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+
+                <div id="total" class="row" style="margin-left:1.4cm; font-size: 13px;margin-right:2.5cm;">
+                    <div style="width:100%">
+                        <div style="width:50%; float:left;">
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class="text-left" style="font-size:13px">
+                                        <strong>Claim Description:</strong>
+                                    </td>
+                                    <td class="text-left" style="font-size:13px">
+                                        <div class="col-3" style="width:50%;">
+                                            <t t-if="doc.description">
+                                                <span t-field="doc.description"/>
+                                            </t>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:50%; float:right;text-align:right;">
+                            <br/>
+                            <table class="table table-condensed" id="summary" style="border: none; line-height:0;">
+                                <style>
+                                        table#summary td {
+                                    padding-right:0.2em;
+                                        border:0
+                                        }
+                                </style>
+                                <t t-set="delivery_cost" t-value="0"/>
+                                <tr style="border: none">
+                                    <td class="col-xs-3 text-right">
+                                        <span>Total</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <t t-if="utx_amt">
+                                                <span t-field="doc.currency_id.symbol"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(utx_amt))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="not(utx_amt)">
+                                                <span t-field="doc.currency_id.symbol"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid black">
+                                    <td class="text-right">
+                                        <span>Shipping</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-if="d_chrg">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(d_chrg))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                        </t>
+                                        <t t-if="not(d_chrg)">
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr style="border: none">
+                                    <td class="text-right">Untaxed Amount</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </tr>
+
+                                <tr style="border: none">
+                                    <td class="text-right">Taxes</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.currency_id.symbol"/>
+
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </td>
+                                </tr>
+
+                                <tr style="border-top: 1px solid black">
+                                    <td class="text-right">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </table>
+                    </div>
+                    </div>
+                </div>
+
+            </t>
+        </template>
+
+        <template id="report_print_claim">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="bi_crm_claim.print_claim_report" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <report
+            id="print_loyality_card_id"
+            string="Claim report"
+            model="crm.claim"
+            report_type="qweb-pdf"
+            file="bi_crm_claim.report_print_claim"
+            name="bi_crm_claim.report_print_claim"
+            print_report_name="('Claim report for %s' % object.name)"
+        />
+    </data>
+    </odoo>

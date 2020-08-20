@@ -24,8 +24,7 @@ class BusinessSector(models.Model):
 
         agent_name = fields.Char('Sales Agent')
 
-
-        @api.onchange('zip', 'category_id','country_id')
+        @api.onchange('zip','country_id','category_id')
         def onchange_zip(self):
                 ids = self.category_id
                 tag_name = []
@@ -44,18 +43,17 @@ class BusinessSector(models.Model):
                                         else:
                                                 self.update({'agent_name': None})
 
-
                 elif 'Händler' in tag_name and self.country_id.code in ['NL','BE','LU']:
                         self.update({'agent_name': 'DEsignLICIOUS'})
 
-                # elif 'Händler' in tag_name and self.country_id.name == 'Spain':
                 elif 'Händler' in tag_name and self.country_id.code == 'ES':
                         self.update({'agent_name': 'The Living Connection'})
 
-
-                # elif self.zip == '':
-                #         self.update({'agent_name': None})
-
+                elif self.country_id.code == 'AT' :
+                        tag_name = self.env['res.partner.category'].search([('name','=',"Handelsagentur Wolfgang Schur GbR")])
+                        self.update({'category_id' : tag_name})
+                        self.update({'agent_name': 'Handelsagentur Schur GbR'})
 
                 else:
                         self.update({'agent_name': None})
+

@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from itertools import groupby
+
 from datetime import datetime, timedelta
+from functools import partial
+from itertools import groupby
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
-from odoo.tools import float_is_zero, float_compare, DEFAULT_SERVER_DATETIME_FORMAT
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools.misc import formatLang
-from odoo.tools import html2plaintext
-import odoo.addons.decimal_precision as dp
+from odoo.osv import expression
+from odoo.tools import float_is_zero, float_compare
+
+
+from odoo.addons import decimal_precision as dp
+
+from werkzeug.urls import url_encode
+
 
 class crm_claim_stage(models.Model):
     _name = "crm.claim.stage"
@@ -27,7 +34,19 @@ class crm_claim_stage(models.Model):
     _defaults = {
         'sequence': lambda *args: 1
     }                        
-    
+class crm_claim_tags(models.Model):
+    _name = "crm.claim.tag"
+    _description = "Claim Tages"
+    _rec_name = 'name'
+    _order = "sequence"
+
+    name = fields.Char('Tag Name', required=True, translate=True)
+    sequence = fields.Integer('Sequence', help="Used to order stages. Lower is better.",default=lambda *args: 1)
+    description=fields.Text('Reason')
+
+    _defaults = {
+        'sequence': lambda *args: 1
+    }         
 
 class crm_claim(models.Model):
     _name = "crm.claim"
@@ -40,6 +59,20 @@ class crm_claim(models.Model):
         """ Gives default stage_id """
         team_id = self.env['crm.team'].sudo()._get_default_team_id()
         return self._stage_find(team_id=team_id.id, domain=[('sequence', '=', '1')])
+
+    @api.depends('claim_order_line.subtotal')
+    def calculation_amount_all(self):
+        # import pdb;pdb.set_trace()
+        for order in self:
+            amount_untaxed = amount_tax = 0.0
+            for line in order.claim_order_line:
+                amount_untaxed += line.subtotal
+                amount_tax += line.tax_amount
+            order.update({
+                'amount_untaxed': amount_untaxed,
+                'amount_tax': amount_tax,
+                'amount_total': amount_untaxed + amount_tax,
+            })
 
     id = fields.Integer('ID', readonly=True)
     name = fields.Char('Claim Subject', required=True)
@@ -62,13 +95,13 @@ class crm_claim(models.Model):
                         index=True, help="Responsible sales team."\
                                 " Define Responsible user and Email account for"\
                                 " mail gateway.")#,default=lambda self: self.env['crm.team']._get_default_team_id()
+    currency_id = fields.Many2one("res.currency", related='partner_id.currency_id', string="Currency", readonly=True, required=True)
     company_id = fields.Many2one('res.company', 'Company',default=lambda self: self.env['res.company']._company_default_get('crm.case'))
     partner_id = fields.Many2one('res.partner', 'Partner')
     email_cc = fields.Text('Watchers Emails', size=252, help="These email addresses will be added to the CC field of all inbound and outbound emails for this record before being sent. Separate multiple email addresses with a comma")
     email_from = fields.Char('Email', size=128, help="Destination email for email gateway.")
     partner_phone = fields.Char('Phone')
-    stage_id = fields.Many2one ('crm.claim.stage', 'Stage', track_visibility='onchange',
-                domain="['|', ('team_ids', '=', team_id), ('case_default', '=', True)]")    #,default=lambda self:self.env['crm.claim']._get_default_stage_id()
+    stage_id = fields.Many2one ('crm.claim.stage', 'Stage', track_visibility='onchange')    #domain="['|', ('team_ids', '=', team_id), ('case_default', '=', True)]",default=lambda self:self.env['crm.claim']._get_default_stage_id()
     cause = fields.Text('Root Cause')
     ref = fields.Reference(selection=[('res.partner', 'Partner'), ('product.product', 'Product'), ('account.invoice', 'Invoice'),
         ('sale.order', 'Sales Order'),
@@ -77,9 +110,13 @@ class crm_claim(models.Model):
         ('stock.picking', 'Delivery Order'),
         ('project.project', 'Project'),
         ('project.task', 'Project task')], string="Reference")
-
+    claim_order_line = fields.One2many('claim.order.line', 'claim_order_id', string='Order Lines', states={'cancel': [('readonly', True)], 'done': [('readonly', True)]}, copy=True, auto_join=True)
+    amount_untaxed = fields.Monetary(string='Untaxed Amount', store=True, readonly=True, compute='calculation_amount_all', track_visibility='onchange', track_sequence=5)
+    amount_tax = fields.Monetary(string='Taxes', store=True, readonly=True, compute='calculation_amount_all')
+    amount_total = fields.Monetary(string='Total', store=True, readonly=True, compute='calculation_amount_all', track_visibility='always', track_sequence=6)
+   
     @api.multi
-    @api.onchange('partner_id')
+    @api.onchange('partner_id') 
     def onchange_partner_id(self, email=False):
         if not self.partner_id:
             return {'value': {'email_from': False, 'partner_phone': False}}
@@ -111,6 +148,66 @@ class crm_claim(models.Model):
             defaults['priority'] = msg.get('priority')
         defaults.update(custom_values)
         return super(crm_claim, self).message_new(msg, custom_values=defaults)
+
+class crm_claim_line(models.Model):
+    _name='claim.order.line'
+    _description = 'Claim Order Line'
+    _order = 'claim_order_id,id'
+
+    @api.multi
+    def get_product_ids(self):
+        # import pdb;pdb.set_trace()
+        product_ids={}
+        for order_lines in self.reference.order_line:
+            product_ids[order_lines.product_id.id]=order_lines.product_id.id
+        product_ids=product_ids.keys()
+        return product_ids
+
+    @api.multi
+    def auto_fill_data(self):
+        orders=self.env['sale.order.line'].search([('product_id','=',self.product_id.id),('order_id','=',self.reference.id)])
+        vals={'claim_qty':orders.product_uom_qty,
+               'tax_id' :orders.tax_id,
+               'single_unit':1,
+               'subtotal':orders.price_subtotal,
+               'tax_amount':orders.price_tax
+                }
+        print("&"*20)
+        print(orders)
+        print(vals)
+        self.update(vals)
+
+    @api.multi
+    def product_existance_checking(self,exist_product):
+        if self.product_id.id not in exist_product:
+            raise UserError(_('Product is not exist in Selected SO!!!'))
+        self.auto_fill_data()
+        return True
+    
+    @api.onchange('reference','product_id',)
+    def get_values(self):
+        # import pdb;pdb.set_trace()
+        for lines in self:
+            if(lines.product_id):
+                products=lines.get_product_ids()
+                lines.product_existance_checking(products)
+
+        
+
+    claim_order_id = fields.Many2one('crm.claim', string='Order Reference', required=True, ondelete='cascade', index=True, copy=False)       
+    product_id = fields.Many2one('product.product', string='Product',readonly=False,change_default=True, ondelete='restrict')
+    stage_id = fields.Text(string='State',default='1')
+    currency_id = fields.Many2one(related='claim_order_id.currency_id', depends=['claim_order_id'], store=True, string='Currency', readonly=True)
+    company_id = fields.Many2one(related='claim_order_id.company_id', string='Company', store=True, readonly=True)
+    claim_qty=fields.Float(string='Claimed Qty',readonly=False)
+    single_unit=fields.Float(string='Single Unit', required=True)
+    tags=fields.Many2one('crm.claim.tag',string='Tags', required=True)
+    type_action = fields.Selection([('correction','Corrective Action'),('prevention','Preventive Action')], 'Action Type')
+    reference=fields.Many2one('sale.order',string='Order Reference', required=True, ondelete='cascade', index=True, copy=False)
+    subtotal=fields.Monetary(string='Subtotal',store=True)
+    tax_amount = fields.Float(string='Total Tax',store=True)
+    tax_id = fields.Many2many('account.tax', string='Taxes',readonly=False)
+
 
 class res_partner(models.Model):
     _inherit = 'res.partner'

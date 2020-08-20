@@ -35,5 +35,10 @@ class defaultnote(models.Model):
 
         elif self.partner_id.agent_name == 'The Living Connection':
                 self.update({'note': "your contact person is Thijs van de Laak and Anne Vendrig\nPhone: 0034 673 820 269\nE-Mail: anne@thelivingconnection.com"})
+
+        elif self.partner_id.agent_name == 'Handelsagentur Schur GbR':
+                self.update({'note': "Sie werden betreut durch die Handelsagentur Schur GbR\nKontakt: Wolfgang Schur, Johann-Ziegler-Str. 14c, 85221 Dachau\nE-Mail: info@ha-schur.com"})
+
         else:
                 self.update({'note' :"Bitte beachten Sie, dass wir bei nicht vereinbartem Skontoabzug oder Kürzung des Rechnungsbetrages eine Bearbeitungsgebühr von 10 EUR erheben müssen."})
+

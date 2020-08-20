@@ -1,0 +1,805 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* bi_crm_claim
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-20 07:41+0000\n"
+"PO-Revision-Date: 2020-07-20 07:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_res_partner__claim_count
+#: model:ir.model.fields,field_description:bi_crm_claim.field_res_users__claim_count
+msgid "# Claims"
+msgstr "# Ansprüche"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "<br/>\n"
+"                                <font color=\"#0e71b8\">Claim Date: </font>"
+msgstr "<br/>\n"
+"                                <font color=\"#0e71b8\">Anspruchsdatum: </font>"
+
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "<br/>\n"
+"                                <font color=\"#0e71b8\">Claim Subject: </font>"
+msgstr "<br/>\n"
+"                                <font color=\"#0e71b8\">Anspruch Betreff: </font>"
+
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "<br/>\n"
+"                                <font color=\"#0e71b8\">Responsible: </font>"
+msgstr "<br/>\n"
+"                                <font color=\"#0e71b8\">Verantwortlich: </font>"
+
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "<span>Shipping</span>"
+msgstr "<span>Versand</span>"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "<span>Total</span>"
+msgstr "<span>Gesamt</span>"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "<strong>Claim Description:</strong>"
+msgstr "<strong>Anspruchsbeschreibung:</strong>"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "<strong>Total</strong>"
+msgstr "<strong>Gesamt</strong>"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_needaction
+msgid "Action Needed"
+msgstr "Handlungsbedarf"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__type_action
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__type_action
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Action Type"
+msgstr "Aktionstyp"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__active
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+msgid "Add a product"
+msgstr "Fügen Sie ein Produkt hinzu"
+
+#. module: bi_crm_claim
+#: model:ir.ui.menu,name:bi_crm_claim.menu_aftersale
+msgid "After-Sale"
+msgstr "Nachverkauf"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Amount"
+msgstr "Menge"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_attachment_count
+msgid "Attachment Count"
+msgstr "Anzahl der Anhänge"
+
+#. module: bi_crm_claim
+#: model:ir.ui.menu,name:bi_crm_claim.menu_crm_case_claim-act
+msgid "Categories"
+msgstr "Kategorien"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__categ_id
+msgid "Category"
+msgstr "Kategorie"
+
+#. module: bi_crm_claim
+#: model:ir.model,name:bi_crm_claim.model_crm_claim_category
+msgid "Category of claim"
+msgstr "Anspruchskategorie"
+
+#. module: bi_crm_claim
+#: model:ir.model,name:bi_crm_claim.model_crm_claim
+#: model:ir.ui.menu,name:bi_crm_claim.menu_config_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.view_claim_res_partner_info_form
+msgid "Claim"
+msgstr "Anspruch"
+
+#. module: bi_crm_claim
+#: model:ir.actions.act_window,name:bi_crm_claim.crm_claim_categ_action
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_claim_category_tree
+msgid "Claim Categories"
+msgstr "Anspruchskategorien"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__date
+msgid "Claim Date"
+msgstr "Anspruchsdatum"
+
+#. module: bi_crm_claim
+#: model:ir.model,name:bi_crm_claim.model_claim_order_line
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+msgid "Claim Order Line"
+msgstr "Bestellposition beanspruchen"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+msgid "Claim Order Lines"
+msgstr "Bestellpositionen beanspruchen"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Claim Report"
+msgstr "Anspruchsbericht"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_claim_stage_form
+msgid "Claim Stage"
+msgstr "Anspruchsphase"
+
+#. module: bi_crm_claim
+#: model:ir.actions.act_window,name:bi_crm_claim.crm_claim_stage_act
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_claim_stage_tree
+msgid "Claim Stages"
+msgstr "Stufen beanspruchen"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__name
+msgid "Claim Subject"
+msgstr "Anspruch Betreff"
+
+#. module: bi_crm_claim
+#: model:ir.model,name:bi_crm_claim.model_crm_claim_tag
+msgid "Claim Tages"
+msgstr "Anspruch Tages"
+
+#. module: bi_crm_claim
+#: model:ir.actions.act_window,name:bi_crm_claim.crm_claim_tag_act
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_claim_tags_tree
+msgid "Claim Tags"
+msgstr "Tags beanspruchen"
+
+#. module: bi_crm_claim
+#: model:ir.actions.report,name:bi_crm_claim.print_loyality_card_id
+msgid "Claim report"
+msgstr "Anspruchsbericht"
+
+#. module: bi_crm_claim
+#: model:ir.model,name:bi_crm_claim.model_crm_claim_stage
+msgid "Claim stages"
+msgstr "Anspruchsstufen"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_claim_category_form
+msgid "Claim tags"
+msgstr "Anspruchs-Tags"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+msgid "Claim/Action Description"
+msgstr "Anspruch / Aktion Beschreibung"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__claim_qty
+msgid "Claimed Qty"
+msgstr "Behauptete Menge"
+
+#. module: bi_crm_claim
+#: model:ir.actions.act_window,name:bi_crm_claim.crm_claim_view_act1
+#: model:ir.ui.menu,name:bi_crm_claim.menu_crm_case_claims
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_calendar_view1
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_tree_view1
+msgid "Claims"
+msgstr "Ansprüche"
+
+#. module: bi_crm_claim
+#: model_terms:ir.actions.act_window,help:bi_crm_claim.crm_claim_categ_action
+msgid "Click to create a claim category."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model_terms:ir.actions.act_window,help:bi_crm_claim.crm_claim_stage_act
+#: model_terms:ir.actions.act_window,help:bi_crm_claim.crm_claim_tag_act
+msgid "Click to setup a new stage in the processing of the claims."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__date_closed
+msgid "Closed"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__case_default
+msgid "Common to All Teams"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__company_id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__company_id
+msgid "Company"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model,name:bi_crm_claim.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:utm.campaign,name:bi_crm_claim.claim_source1
+msgid "Corrective"
+msgstr "Korrektur"
+
+#. module: bi_crm_claim
+#: selection:claim.order.line,type_action:0
+#: selection:crm.claim,type_action:0
+msgid "Corrective Action"
+msgstr "Korrekturmaßnahme"
+
+#. module: bi_crm_claim
+#: model_terms:ir.actions.act_window,help:bi_crm_claim.crm_claim_categ_action
+msgid "Create claim categories to better manage and classify your\n"
+"                claims. Some example of claims can be: preventive action,\n"
+"                corrective action."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__create_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__create_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__create_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__create_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__create_date
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__create_date
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__create_date
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__create_date
+msgid "Creation Date"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__currency_id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__date_deadline
+msgid "Deadline"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+msgid "Delivery Order"
+msgstr "Lieferauftrag"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__description
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__email_from
+msgid "Destination email for email gateway."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__display_name
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__display_name
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__display_name
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__display_name
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__email_from
+msgid "Email"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:crm.claim.category,name:bi_crm_claim.categ_claim1
+msgid "Factual Claims"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,priority:0
+msgid "High"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__id
+msgid "ID"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__message_unread
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim_stage__case_default
+msgid "If you check this field, this stage will be proposed by default on each sales team. It will not assign this stage to existing teams."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:crm.claim.stage,name:bi_crm_claim.stage_claim5
+msgid "In Progress"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+msgid "Invoice"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line____last_update
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim____last_update
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category____last_update
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage____last_update
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__write_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__write_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__write_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__write_uid
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__write_date
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__write_date
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__write_date
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim_stage__team_ids
+msgid "Link between stages and sales teams. When set, this limitate the current stage to the selected sales teams."
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,priority:0
+msgid "Low"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__name
+msgid "Name"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:crm.claim.stage,name:bi_crm_claim.stage_claim1
+msgid "New"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__action_next
+msgid "Next Action"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__date_action_next
+msgid "Next Action Date"
+msgstr ""
+
+#. module: bi_crm_claim
+#: code:addons/bi_crm_claim/models/crm_claim.py:141
+#, python-format
+msgid "No Subject"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,priority:0
+msgid "Normal"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_has_error_counter
+msgid "Number of error"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__claim_order_line
+msgid "Order Lines"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__claim_order_id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__reference
+msgid "Order Reference"
+msgstr "Bestellnummer"
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__partner_id
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+msgid "Partner"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__partner_phone
+msgid "Phone"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:crm.claim.category,name:bi_crm_claim.categ_claim3
+msgid "Policy Claims"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:utm.campaign,name:bi_crm_claim.claim_source2
+msgid "Preventive"
+msgstr "Vorbeugend"
+
+#. module: bi_crm_claim
+#: selection:claim.order.line,type_action:0
+#: selection:crm.claim,type_action:0
+msgid "Preventive Action"
+msgstr "Präventivmaßnahmen"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__priority
+msgid "Priority"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__product_id
+msgid "Product"
+msgstr ""
+
+#. module: bi_crm_claim
+#: code:addons/bi_crm_claim/models/crm_claim.py:183
+#, python-format
+msgid "Product is not exist in Selected SO!!!"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+msgid "Project"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+msgid "Project task"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+msgid "Purchase Order"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__description
+msgid "Reason"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model_terms:ir.actions.act_window,help:bi_crm_claim.crm_claim_view_act1
+msgid "Record and track your customers' claims. Claims may be linked to a sales order or a lot.You can send emails with attachments and keep the full history for a claim (emails sent, intervention type and so on).Claims may automatically be linked to an email address using the mail gateway module."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__ref
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Reference"
+msgstr "Referenz"
+
+#. module: bi_crm_claim
+#: model:crm.claim.stage,name:bi_crm_claim.stage_claim3
+msgid "Rejected"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__resolution
+msgid "Resolution"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__user_id
+msgid "Responsible"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__team_id
+msgid "Responsible sales team. Define Responsible user and Email account for mail gateway."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__cause
+msgid "Root Cause"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+msgid "Sales Order"
+msgstr "Kundenauftrag"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__team_id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_category__team_id
+msgid "Sales Team"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__sequence
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: bi_crm_claim
+#: selection:crm.claim,ref:0
+msgid "Serial Number"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.ui.menu,name:bi_crm_claim.menu_services
+msgid "Services"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:crm.claim.stage,name:bi_crm_claim.stage_claim2
+msgid "Settled"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__single_unit
+msgid "Single Unit"
+msgstr "Einheit"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__stage_id
+msgid "Stage"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__name
+msgid "Stage Name"
+msgstr "Künstlername"
+
+#. module: bi_crm_claim
+#: model:ir.ui.menu,name:bi_crm_claim.menu_claim_stage_view
+msgid "Stages"
+msgstr "Stufen"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__stage_id
+msgid "State"
+msgstr "Zustand"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__subtotal
+msgid "Subtotal"
+msgstr "Zwischensumme"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Tag"
+msgstr "Etikett"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_tag__name
+msgid "Tag Name"
+msgstr "Verlinke den Namen"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__tags
+#: model:ir.ui.menu,name:bi_crm_claim.crm_claim_tag_id
+msgid "Tags"
+msgstr "Stichworte"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__tax_id
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__amount_tax
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Taxes"
+msgstr "Steuern"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim_stage__team_ids
+msgid "Teams"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__email_cc
+msgid "These email addresses will be added to the CC field of all inbound and outbound emails for this record before being sent. Separate multiple email addresses with a comma"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__amount_total
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_form_view1
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Total"
+msgstr "Gesamt"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_claim_order_line__tax_amount
+msgid "Total Tax"
+msgstr "Gesamtsteuer"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__user_fault
+msgid "Trouble Responsible"
+msgstr "Ärger verantwortlich"
+
+#. module: bi_crm_claim
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.crm_case_claims_tree_view1
+msgid "Type"
+msgstr "Art"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Zähler für ungelesene Nachrichten"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__amount_untaxed
+#: model_terms:ir.ui.view,arch_db:bi_crm_claim.print_claim_report
+msgid "Untaxed Amount"
+msgstr "Unversteuerter Betrag"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__write_date
+msgid "Update Date"
+msgstr "Aktualisierungsdatum"
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim_stage__sequence
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim_tag__sequence
+msgid "Used to order stages. Lower is better."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_claim_order_line__currency_id
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__currency_id
+msgid "Utility field to express amount currency"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:crm.claim.category,name:bi_crm_claim.categ_claim2
+msgid "Value Claims"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__email_cc
+msgid "Watchers Emails"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,field_description:bi_crm_claim.field_crm_claim__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model:ir.model.fields,help:bi_crm_claim.field_crm_claim__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: bi_crm_claim
+#: model_terms:ir.actions.act_window,help:bi_crm_claim.crm_claim_stage_act
+msgid "You can create claim stages to categorize the status of every\n"
+"                claim entered in the system. The stages define all the steps\n"
+"                required for the resolution of a claim."
+msgstr ""
+
+#. module: bi_crm_claim
+#: model_terms:ir.actions.act_window,help:bi_crm_claim.crm_claim_tag_act
+msgid "You can create claim tagsss to tags the status of every\n"
+"                claim entered in the system. The stages define all the steps\n"
+"                required for the resolution of a claim."
+msgstr ""
+
