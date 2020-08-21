@@ -49,9 +49,10 @@ class BusinessSector(models.Model):
                 elif 'Händler' in tag_name and self.country_id.code == 'ES':
                         self.update({'agent_name': 'The Living Connection'})
 
-                elif self.country_id.code == 'AT' :
-                        tag_name = self.env['res.partner.category'].search([('name','=',"Handelsagentur Wolfgang Schur GbR")])
-                        self.update({'category_id' : tag_name})
+                elif 'Händler' in tag_name and self.country_id.code == 'AT' :
+                        # Change code logic
+                        # tag_name = self.env['res.partner.category'].search([('name','=',"Handelsagentur Wolfgang Schur GbR")])
+                        # self.update({'category_id' : tag_name})
                         self.update({'agent_name': 'Handelsagentur Schur GbR'})
 
                 else:
