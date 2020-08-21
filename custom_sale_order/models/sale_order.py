@@ -35,11 +35,10 @@ class CustomSaleOrder(models.Model):
             #     flag = True
             # else:
             #     flag = False
-
             if line.order_id.partner_id.country_id or line.order_id.partner_id.property_account_position_id.name:
                 fiscal_position_name = line.order_id.partner_id.property_account_position_id.name
-                # change code #
-                if line.order_id.partner_id.country_id.name == 'Germany':
+                # change code ['Germany','Deutschland','Allemagne']#
+                if line.order_id.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")])
@@ -50,14 +49,13 @@ class CustomSaleOrder(models.Model):
                             tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")])
                             if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
-
                     else: # Scenario 2 ---->
                         tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")])
                         if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
 
-                elif line.order_id.partner_id.country_id.name in ['Belgium','Bulgaria','Denmark','Estonia','Finnland','France','Greece','United Kingdom','Netherlands','Italy','Ireland','Crotia','Latvia','Lithunia','Luxembourg','Malta','Austria','Poland','Portugal','Romania','Sweden','Slovakia','Slovenia','Spain','Czech Republic','Hungary','Cypress']:
+                elif line.order_id.partner_id.country_id.name in ['Belgium','Bulgaria','Denmark','Estonia','Finnland','France','Greece','United Kingdom','Netherlands','Italy','Ireland','Crotia','Latvia','Lithunia','Luxembourg','Malta','Austria','Poland','Portugal','Romania','Sweden','Slovakia','Slovenia','Spain','Czech Republic','Hungary','Cypress'] or line.order_id.partner_id.country_id.name in ['Belgien','Bulgarien','Dänemark','Estland','Finnland','Frankreich','Griechenland','Vereinigtes Königreich','Niederlande','Italien','Irland','Crotia','Lettland','Lithunien','Luxemburg','Malta','Österreich','Polen','Portugal','Rumänien','Schweden','Slowakei','Slowenien','Spanien','Tschechien Republik ','Ungarn','Zypresse','Lithunia','Tschechische Republik'] or line.order_id.partner_id.country_id.name in ['Belgique','Bulgarie','Danemark','Estonie','Finlande','France','Grèce','Royaume-Uni','Pays-Bas','Italie','Irlande','Crotie',' Lettonie','Lithunie','Luxembourg','Malte','Autriche','Pologne','Portugal','Roumanie','Suède','Slovaquie','Slovénie','Espagne','République tchèque','Hongrie','Cyprès']:
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG) ")])
@@ -89,6 +87,46 @@ class CustomSaleOrder(models.Model):
                         if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
+    @api.multi
+    def _prepare_invoice_line(self, qty):
+        """
+        Prepare the dict of values to create the new invoice line for a sales order line.
+
+        :param qty: float quantity to invoice
+        """
+        self.ensure_one()
+        res = {}
+        account_id_name = self.tax_id.name
+        # product = self.product_id.with_context(force_company=self.company_id.id)
+        # account = product.property_account_income_id or product.categ_id.property_account_income_categ_id
+
+        # if not account and self.product_id:
+        #     raise UserError(_('Please define income account for this product: "%s" (id:%d) - or for its category: "%s".') %
+        #         (self.product_id.name, self.product_id.id, self.product_id.categ_id.name))
+        #
+        # fpos = self.order_id.fiscal_position_id or self.order_id.partner_id.property_account_position_id
+        # if fpos and account:
+        #     account = fpos.map_account(account)
+        account_invoice_line_obj=self.env['account.invoice.tax'].search([('name','=',account_id_name)],limit=1)
+
+        res = {
+            'name': self.name,
+            'sequence': self.sequence,
+            'origin': self.order_id.name,
+            'account_id': account_invoice_line_obj.account_id.id,
+            'price_unit': self.price_unit,
+            'quantity': qty,
+            'discount': self.discount,
+            'uom_id': self.product_uom.id,
+            'product_id': self.product_id.id or False,
+            'invoice_line_tax_ids': [(6, 0, self.tax_id.ids)],
+            'account_analytic_id': self.order_id.analytic_account_id.id,
+            'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
+            'display_type': self.display_type,
+        }
+        return res
+
+
 class Customtax(models.Model):
     _inherit = 'account.tax'
 
@@ -102,8 +140,7 @@ class Customtax(models.Model):
         return price
 
 
-
-	# @api.multi	
+    # @api.multi
 
 	# @api.onchange('tax_id')
 	# def custom_tax(self):
