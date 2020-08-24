@@ -34,7 +34,6 @@
             </field>
         </record>
 
-
         <record id="view_order_product_pivot_inherit" model="ir.ui.view">
              <field name="name">sale.report.pivot</field>
              <field name="model">sale.report</field>
@@ -45,6 +44,7 @@
                  </pivot>
              </field>
         </record>
+
 
         <record id="invoice_order_inherit" model="ir.ui.view">
             <field name="name">account_inherit</field>
@@ -68,6 +68,17 @@
             <field name="arch" type="xml">
                 <xpath expr="field[@name='origin']" position="after">
                     <field name="payment_method_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_supplier_tree_inherit" model="ir.ui.view">
+            <field name="name">account_invoice_supplier_tree</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="field[@name='vendor_display_name']" position="after">
+                    <field name="create_date"/>
                 </xpath>
             </field>
         </record>
