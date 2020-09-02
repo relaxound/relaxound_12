@@ -31,13 +31,13 @@ class defaultnote(models.Model):
                 self.update({'note': "Sie werden betreut durch die Handelsagentur BUCH + RAUM\nKontakt: Thomas Werner, Tulpenweg 9, 83254 Breitbrunn am Chiemsee\nE-Mail: werner@buch-raum.de"})
 
         elif self.partner_id.agent_name == 'DEsignLICIOUS':
-                self.update({'note': "your contact person is Mirjam Swart\nPhone: 0031 6 36429052\nE-Mail: mirjam@designlicious.nl"})
+                self.update({'note': "For any concerns you are welcome to contact your sales agency DEsignLICIOUS\nContact: Mirjam Swart\nE-Mail: mirjam@designlicious.nl\nPhone: (+31) 6 36429052"})
 
         elif self.partner_id.agent_name == 'The Living Connection':
-                self.update({'note': "your contact person is Thijs van de Laak and Anne Vendrig\nPhone: 0034 673 820 269\nE-Mail: anne@thelivingconnection.com"})
+                self.update({'note': "For any concerns you are welcome to contact your sales agency\nThe Living Connection\nContact: Thijs & Anne van de Laak\nE-Mail: anne@thelivingconnection.com\nPhone: 0034 673 820 269"})
 
         elif self.partner_id.agent_name == 'Handelsagentur Schur GbR':
-                self.update({'note': "Sie werden betreut durch die Handelsagentur Schur GbR\nKontakt: Wolfgang Schur, Johann-Ziegler-Str. 14c, 85221 Dachau\nE-Mail: info@ha-schur.com"})
+                self.update({'note': "Ihr persönlicher Ansprechpartner: Handelsagentur Schur GbR\nKontakt: Wolfgang Schur, Johann-Ziegler-Str. 14c, 85221 Dachau\nTel. 08131 333 26 37\nE-Mail: info@ha-schur.com"})
 
         else:
                 self.update({'note' :"Bitte beachten Sie, dass wir bei nicht vereinbartem Skontoabzug oder Kürzung des Rechnungsbetrages eine Bearbeitungsgebühr von 10 EUR erheben müssen."})
