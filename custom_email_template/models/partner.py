@@ -10,7 +10,6 @@ class ResPartner(models.Model):
 
     @api.multi
     def action_quotation_send(self):
-
         if self.partner_id.agent_name == 'Rossmanek':
             emailcc = 'info@agentur-rossmanek.de'
 
@@ -34,6 +33,10 @@ class ResPartner(models.Model):
 
         elif self.partner_id.agent_name == 'The Living Connection':
             emailcc = 'anne@thelivingconnection.com'
+
+        elif self.partner_id.agent_name == 'Handelsagentur Schur GbR':
+            emailcc = 'info@ha-schur.com'
+
 
         else:
             emailcc = ''
