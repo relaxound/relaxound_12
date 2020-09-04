@@ -10,6 +10,9 @@
                 <xpath expr="//tree/field[@name='quantity']" position="attributes">
                     <attribute name="sum">Invoiced Qty</attribute>
                 </xpath>
+                <xpath expr="//tree/field[@name='single_unit']" position="attributes">
+                    <attribute name="sum">Single Unit</attribute>
+                </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']" position="after">
                     <group class="oe_subtotal_footer oe_right">
                         <field name="qty_delivered"/>
