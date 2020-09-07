@@ -13,7 +13,10 @@ class SaleOrderLine(models.Model):
     # bundle product single unit
     @api.onchange('product_id','product_uom_qty')
     def custom_quantity(self):
-        if self.product_id.name and self.product_id.default_code:
+        if self.product_id.type == 'service':
+            self.update({'single_unit':0})
+
+        elif self.product_id.name and self.product_id.default_code:
             if ('20x' in self.product_id.name or '20X' in self.product_id.name) or ('20x' in self.product_id.default_code or '20X' in self.product_id.default_code) :
                 self.product_id.default_code = self.product_id.default_code.replace('-20x', '')
                 product = self.env['product.product'].search(['&',('default_code', '=', self.product_id.default_code),('sale_ok', '=', 'True')] )
