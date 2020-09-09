@@ -293,6 +293,7 @@ class AccountInvoiceLine(models.Model):
 
             self.account_id = fpos.map_account(invoice_line_tax_ids.account_id)
 
+
             # if fpos:
             #     self.account_id = fpos.map_account(self.account_id)
 
@@ -302,8 +303,12 @@ class AccountInvoiceLine(models.Model):
                 self_lang = self.with_context(lang=part.lang)
 
             product = self_lang.product_id
-            account = self.invoice_line_tax_ids.account_id
-            # account = self.get_invoice_line_account(type, product, fpos, company)
+
+            if self.partner_id.supplier:
+                account = self.get_invoice_line_account(type, product, fpos, company)
+            else:
+                account = self.invoice_line_tax_ids.account_id
+
             if account:
                 self.account_id = account.id
             self._set_taxes()
@@ -355,7 +360,7 @@ class AccountInvoiceLine(models.Model):
                             invoice_line_tax_ids = self.env['account.tax'].search(
                                 ['|', ('name', '=', "16% Corona Tax"), ('name', '=', "16% abgesenkte MwSt")])
                             if invoice_line_tax_ids not in self.invoice_line_tax_ids:
-                                line.update({'tax_id': invoice_line_tax_ids})
+                                line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
                     else:  # Scenario 2 ---->
                         invoice_line_tax_ids = self.env['account.tax'].search(
                             ['|', ('name', '=', "16% Corona Tax"), ('name', '=', "16% abgesenkte MwSt")])
@@ -432,19 +437,6 @@ class AccountInvoiceLine(models.Model):
         else:
             self.price_unit = fix_price(self.product_id.lst_price, invoice_line_tax_ids, fp_taxes)
             self._set_currency()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     # @api.multi
