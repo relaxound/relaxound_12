@@ -15,9 +15,6 @@ class CustomSaleOrder(models.Model):
         start_date = date(2020,7,1)
         end_date = date(2020,12,31)
 
-        import pdb;
-        pdb.set_trace()
-
         for line in self:
             # ---------------------- base code ---------------------------------
             # fpos = line.order_id.fiscal_position_id or line.order_id.partner_id.property_account_position_id
@@ -306,11 +303,11 @@ class AccountInvoiceLine(models.Model):
                 self_lang = self.with_context(lang=part.lang)
 
             product = self_lang.product_id
-
-            if self.partner_id.supplier:
-                account = self.get_invoice_line_account(type, product, fpos, company)
-            else:
-                account = self.invoice_line_tax_ids.account_id
+            # Change logic of code
+            # if self.partner_id.supplier:
+            #     account = self.get_invoice_line_account(type, product, fpos, company)
+            # else:
+            account = self.invoice_line_tax_ids.account_id
 
             if account:
                 self.account_id = account.id
