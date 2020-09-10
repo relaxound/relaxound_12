@@ -257,18 +257,18 @@ class AccountInvoiceLine(models.Model):
                         if fiscal_position_name:
                             if 'EU' in fiscal_position_name:  # Scenario 1 ---->
                                 invoice_line_tax_ids = self.env['account.tax'].search(
-                                    [('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG) ")])
+                                    [('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)")])
                                 if invoice_line_tax_ids not in self.invoice_line_tax_ids:
                                     line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
 
                             if 'EU' not in fiscal_position_name:  # Scenario 2 ---->
                                 invoice_line_tax_ids = self.env['account.tax'].search(
-                                    [('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG) ")])
+                                    [('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)")])
                                 if invoice_line_tax_ids not in self.invoice_line_tax_ids:
                                     line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
                         else:  # Scenario 2 ---->
                             invoice_line_tax_ids = self.env['account.tax'].search(
-                                [('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG) ")])
+                                [('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)")])
                             if invoice_line_tax_ids not in self.invoice_line_tax_ids:
                                 line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
 
