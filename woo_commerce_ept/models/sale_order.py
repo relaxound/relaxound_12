@@ -483,6 +483,8 @@ class sale_order(models.Model):
         else:
             name = woo_order_number
 
+        team_id = partner.team_id = self.env['crm.team'].search([('name','=','Endkunden')],limit=1)
+
         ordervals = {
             'name': name,
             'partner_invoice_id': invoice_address.ids[0],
@@ -498,7 +500,9 @@ class sale_order(models.Model):
             'woo_order_id': result.get('id'),
             'woo_order_number': woo_order_number,
             'woo_instance_id': instance.id,
-            'team_id': instance.section_id and instance.section_id.id or False,
+            'team_id':team_id and team_id.id or False,
+            # Change Team ID code logic
+            # 'team_id': instance.section_id and instance.section_id.id or False,
             'company_id': instance.company_id.id,
             'payment_gateway_id': payment_gateway and payment_gateway.id or False,
             'woo_trans_id': woo_trans_id,
