@@ -10,6 +10,13 @@
                 <xpath expr="//tree/field[@name='product_uom_qty']" position="attributes">
                     <attribute name="sum">Ordered Qty</attribute>
                 </xpath>
+                <xpath expr="//tree/field[@name='single_unit']" position="attributes">
+                    <!--change code logic -->
+<!--                        <t t-foreach="doc.order_line" t-as="line">-->
+<!--                            <t t-esc="int(sum(single_unit for line in doc.order_line if line.product_id.type != 'service'))"/>-->
+<!--                        </t>-->
+                    <attribute name="sum">Single Unit</attribute>
+                </xpath>
                 <xpath expr="//tree/field[@name='qty_delivered']" position="attributes">
                     <attribute name="sum">Delivered Qty</attribute>
                 </xpath>

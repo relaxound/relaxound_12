@@ -10,7 +10,10 @@ class OrderLine(models.Model):
     @api.onchange('product_id','quantity')
     def custom_qty(self):
         if self.product_id.name:
-            if '20x' in self.product_id.name or '20X' in self.product_id.name:
+            if self.product_id.type == 'service':
+                self.update({'single_unit': 0})
+
+            elif '20x' in self.product_id.name or '20X' in self.product_id.name:
                 self.update({'single_unit':self.quantity*20}) 
 
             elif '80x' in self.product_id.name or '80X' in self.product_id.name:
@@ -18,3 +21,4 @@ class OrderLine(models.Model):
 
             else:
                 self.update({'single_unit':self.quantity})
+

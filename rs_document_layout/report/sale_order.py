@@ -1,6 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
-
+from dateutil.relativedelta import relativedelta
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -10,11 +10,13 @@ class SaleOrderLine(models.Model):
     single_unit=fields.Integer(string="Single Unit")
     name = fields.Char(string="Description")
 
-
+    # bundle product single unit
     @api.onchange('product_id','product_uom_qty')
     def custom_quantity(self):
+        if self.product_id.type == 'service':
+            self.update({'single_unit':0})
 
-        if self.product_id.name:
+        elif self.product_id.name and self.product_id.default_code:
             if ('20x' in self.product_id.name or '20X' in self.product_id.name) or ('20x' in self.product_id.default_code or '20X' in self.product_id.default_code) :
                 self.product_id.default_code = self.product_id.default_code.replace('-20x', '')
                 product = self.env['product.product'].search(['&',('default_code', '=', self.product_id.default_code),('sale_ok', '=', 'True')] )
@@ -48,7 +50,6 @@ class SaleOrderLine(models.Model):
     def _prepare_invoice_line(self, qty):
         res=super(SaleOrderLine,self)._prepare_invoice_line(qty)
         res.update({'single_unit':self.single_unit})
-
         return res
 
 
@@ -120,6 +121,16 @@ class Custominvoicefilter(models.Model):
     is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
+
+    # Pricelist
+    # date_due = fields.Date(string='Due Date', readonly=True,compute='_compute_duedate')
+    #
+    # @api.multi
+    # def _compute_duedate(self):
+    #     # import pdb;
+    #     # pdb.set_trace()
+    #     for rec in self:
+    #         rec.date_due = rec.date_invoice + relativedelta(days=14)
 
 
 
