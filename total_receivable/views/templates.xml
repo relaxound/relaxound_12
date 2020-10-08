@@ -6,7 +6,9 @@
             <field name="inherit_id" ref="sale.view_quotation_tree"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-                    <field name="new_credit"/>
+                    <!--Change total recievable code logic-->
+                    <!-- <field name="new_credit"/>-->
+                    <field name="new_overdue"/>
                 </field>
             </field>
         </record>
