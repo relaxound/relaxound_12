@@ -306,11 +306,19 @@
                                             <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </t>
-                                    <t t-if="not d.invoice_line_tax_ids">
-                                        <td class="text-right">Vat 16%</td>
+<!--                                    <t t-if="not d.invoice_line_tax_ids">-->
+<!--                                        <td class="text-right">Vat 16%</td>-->
+<!--                                        <td class="text-right">-->
+<!--                                            <span t-field="o.currency_id.symbol"/>-->
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                        </td>-->
+<!--                                    </t>-->
+                                    <!-- Print Vat 0% tax code -->
+                                    <t t-if="o.amount_tax == 0.00">
+                                        <td class="text-right">Vat 0%</td>
                                         <td class="text-right">
                                             <span t-field="o.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </t>
                                 </t>
@@ -326,6 +334,18 @@
                                     </strong>
                                 </td>
                             </tr>
+
+                            <!--Code for Reverse charge for 0% tax-->
+                            <tr style="border: none">
+                                <td></td>
+                                <td class="text-right">
+                                    <t t-if="o.amount_tax == 0.00">
+                                        <span><i>REVERSE CHARGE</i></span>
+                                        <br/>
+                                    </t>
+                                </td>
+                            </tr>
+
                             <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
                                 <br/>
@@ -349,7 +369,6 @@
                             </t> -->
                     </table>
                 </div>
-
             </div>
             <!--</div>-->
         </xpath>
@@ -581,12 +600,12 @@
                 <!--</div>-->
                 <br/><br/><br/>
                 <div style=" margin-right:3cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
-                    <!--<t t-if="o.partner_id.company_type=='person'">-->
+                <!--<t t-if="o.partner_id.company_type=='person'">-->
+                <br/>
+                <div class="col-xs-12">
+                    <span t-field="o.comment"/>
                     <br/>
-                    <div class="col-xs-12">
-                        <span t-field="o.comment"/>
-                        <br/>
-                    </div>
+                </div>
 
                 </div><br/><br/>
                 <div style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
