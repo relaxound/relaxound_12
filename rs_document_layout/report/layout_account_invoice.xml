@@ -334,6 +334,18 @@
                                     </strong>
                                 </td>
                             </tr>
+
+                            <!--Code for Reverse charge for 0% tax-->
+                            <tr style="border: none">
+                                <td></td>
+                                <td class="text-right">
+                                    <t t-if="o.amount_tax == 0.00">
+                                        <span><i>REVERSE CHARGE</i></span>
+                                        <br/>
+                                    </t>
+                                </td>
+                            </tr>
+
                             <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
                                 <br/>
@@ -357,7 +369,6 @@
                             </t> -->
                     </table>
                 </div>
-
             </div>
             <!--</div>-->
         </xpath>
@@ -588,15 +599,6 @@
                 <!--</div>-->
                 <!--</div>-->
                 <br/><br/><br/>
-                <div style=" margin-right:1.5cm; margin-left:20.5cm; font-size: 15px; font-family:Arial;">
-                    <br/>
-                    <t t-if="o.amount_tax == 0.00">
-                        <div class="col-xs-12">
-                            <span><strong>REVERSE CHARGE</strong></span>
-                            <br/>
-                        </div>
-                    </t>
-                </div><br/><br/>
                 <div style=" margin-right:3cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                 <!--<t t-if="o.partner_id.company_type=='person'">-->
                 <br/>
