@@ -28,12 +28,13 @@ class sale_order(models.Model):
     
     @api.multi
     def action_confirm(self):
-        result=super(sale_order,self).action_confirm()
-        for line in self.order_line:
-            for move in line.move_ids:
-                move.producturl = line.producturl
-        for picking in self.picking_ids:
-            picking.global_channel_id=self.global_channel_id.id
+        for rec in self:
+            result=super(sale_order,rec).action_confirm()
+            for line in rec.order_line:
+                for move in line.move_ids:
+                    move.producturl = line.producturl
+            for picking in rec.picking_ids:
+                picking.global_channel_id=rec.global_channel_id.id
                 
         return result
 
