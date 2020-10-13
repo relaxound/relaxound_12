@@ -6,7 +6,7 @@ from openerp import models, fields, api
 class CustomSaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    new_overdue = fields.Monetary(compute='_partner_id_overdue', string='Total Overdue', readonly=False)
+    new_overdue = fields.Float(compute='_partner_id_overdue', string='Total Overdue',store=True,readonly=False)
 
     @api.depends('partner_id')
     def _partner_id_overdue(self):
