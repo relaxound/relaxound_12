@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="set_tag_wizard_form_view">
+        <field name="name">sale.model_sale_order</field>
+        <field name="model">sale.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Set tags">
+                <group>
+                    <field name="tag_ids"/>
+                </group>
+                <footer>
+                    <button name="Add" type="object" string="Set Tags" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="set_tag_wizard_form_view"
+                name="Set Tags"
+                src_model="sale.order"
+                res_model="sale.wizard"
+                view_mode="form"
+                key2="client_action_multi"/>
+
+</odoo>
