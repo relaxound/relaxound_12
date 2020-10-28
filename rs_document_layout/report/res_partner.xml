@@ -83,17 +83,6 @@
             </field>
         </record>
 
-        <!-- Adding set tag in action. -->
-<!--        <record id="model_sale_order_action_tag_ids_order" model="ir.actions.server">-->
-<!--            <field name="name">Set Tags</field>-->
-<!--            <field name="model_id" ref="sale.model_sale_order"/>-->
-<!--            <field name="binding_model_id" ref="sale.model_sale_order"/>-->
-<!--            <field name="state">code</field>-->
-<!--            <field name="code">-->
-<!--                if records:-->
-<!--                    tag_ids = records.set_tag_ids()-->
-<!--            </field>-->
-<!--        </record>-->
 
         <!--  Confirm sales orders.  -->
         <record id="model_sale_order_action_confirm_order" model="ir.actions.server">
@@ -107,5 +96,18 @@
             </field>
         </record>
 
+        <record id="account_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_id']" position="after">
+                    <field name="origin1"/>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page[2]/group/group[2]/field[@name='origin']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
