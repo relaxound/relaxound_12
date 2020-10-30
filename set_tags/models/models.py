@@ -23,9 +23,23 @@ class ContactWizard(models.TransientModel):
 
     @api.multi
     def Add(self):
-
         active_ids = self._context.get('active_ids')
-        contacts = self.env['res.partner'].browse(active_ids)
+        res_partners = self.env['res.partner'].browse(active_ids)
 
-        for cont in contacts:
-            cont.category_id = self.category_id
+        for res in res_partners:
+            if res.category_id:
+                old_list = []
+                for old_category in res.category_id:
+                    old_list.append(old_category.id)
+            if self.category_id:
+                new_list = []
+                for new_category in self.category_id:
+                    new_list.append(new_category.id)
+
+            if not res.category_id:
+                old_list = []
+
+            final_lst = old_list + new_list
+
+            res.category_id = [(6, 0, final_lst)]
+
