@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="ir.ui.view" id="set_tag_res_partner_view">
-        <field name="name">res.partner</field>
+        <field name="name">res.partner.form</field>
         <field name="model">partner.wizard</field>
         <field name="arch" type="xml">
             <form string="Add Set tags">
