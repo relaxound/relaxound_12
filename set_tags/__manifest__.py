@@ -18,10 +18,12 @@
     'category': 'Uncategorized',
     'version': '12.0',
     # any module necessary for this one to work correctly
-    'depends': ['sale','account'],
+    'depends': ['sale','account','contacts'],
 
     # always loaded
     'data': [
             'wizard/set_tag_wizard.xml',
+            'wizard/set_tag_res_partner.xml',
+
     ],
 }
