@@ -1,6 +1,8 @@
 from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
 from dateutil.relativedelta import relativedelta
+from datetime import datetime , timedelta
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -99,6 +101,10 @@ class CustomSaleOrderfilter(models.Model):
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
     client_order_ref = fields.Char(string='Customer Reference', copy=True)
+    # partner_invoice_id = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
+    # partner_shipping_id = fields.Many2one('res.partner',compute='_partner_shipping_address_change')
+
+
 
     @api.model
     def fields_get(self, fields=None):
@@ -106,8 +112,47 @@ class CustomSaleOrderfilter(models.Model):
         res = super(CustomSaleOrderfilter, self).fields_get()
         for field in fields_to_hide:
             res[field]['selectable'] = False
-
         return res
+
+
+    @api.depends('order_date')
+    def _get_date_order(self):
+        order_date = (self.order_date + timedelta(days=14)).strftime('%d-%m-%Y')
+        return order_date
+
+    # @api.onchange('partner_id')
+    # def _partner_invoice_address_change(self):
+    #     # import pdb;
+    #     # pdb.set_trace()
+    #     partner_id = self.partner_id
+    #     for child in self.partner_id.child_ids:
+    #         if child.type == 'contact':
+    #             self.partner_invoice_id = partner_id
+    #             return self.partner_invoice_id
+    #         else:
+    #             pass
+
+
+
+
+    # @api.onchange('partner_id')
+    # def _partner_shipping_address_change(self):
+    #     for child in self.partner_id.child_ids:
+    #         if child.type == 'contact':
+    #             self.partner_shipping_id = self.partner_id
+
+
+    # Change invoice and delivery address by contact
+    # addr = self.partner_id.address_get(['delivery', 'invoice'])
+    # invoice_add_id = self.env['res.partner'].browse(addr['invoice'])
+    # return self.partner_id
+
+
+    # self.partner_invoice_id = {self.partner_id.name or '', self.partner_id.street or '',
+    #         self.partner_id.street2 or '', self.partner_id.zip or '',self.partner_id.city or '',
+    #         self.partner_id.country_id and self.partner_id.country_id.name or ''}
+    # return self.partner_invoice_id
+    # return self.partner_id.name or ''+ ',' +self.partner_id.street or '' + ',' +self.partner_id.street2 or ''+ ',' + self.partner_id.zip or ''+ ',' + self.partner_id.city or ''+ ',' + self.partner_id.country_id or ''+ ',' + self.partner_id.country_id.name or ''
 
 
 class Custominvoicefilter(models.Model):
@@ -121,23 +166,21 @@ class Custominvoicefilter(models.Model):
     is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
+    origin1 = fields.Many2one('sale.order',compute="_get_source_document_value",string='Source Document')
 
-    # Pricelist
-    # date_due = fields.Date(string='Due Date', readonly=True,compute='_compute_duedate')
-    #
-    # @api.multi
-    # def _compute_duedate(self):
-    #     # import pdb;
-    #     # pdb.set_trace()
-    #     for rec in self:
-    #         rec.date_due = rec.date_invoice + relativedelta(days=14)
-
+    @api.model
+    def _get_source_document_value(self):
+        for line in self:
+            sol = self.env['sale.order'].search([('name', '=', line.origin)])
+            if sol:
+                for i in sol:
+                    line.update({'origin1': i.id})
 
 
 class SaleReport(models.Model):
     _inherit = "sale.report"
 
-    single_unit=fields.Integer(string="Single Unit",store=True)
+    single_unit = fields.Integer(string="Single Unit",store=True)
     category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
@@ -164,3 +207,13 @@ class Custominvoicereportfilter(models.Model):
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
+
+class PricelistItem(models.Model):
+    _inherit = "product.pricelist.item"
+
+    min_quantity = fields.Integer(
+        'Min. total net (EUR)', default=0,
+        help="For the rule to apply, bought/sold quantity must be greater "
+             "than or equal to the minimum quantity specified in this field.\n"
+             "Expressed in the default unit of measure of the product.")
+
