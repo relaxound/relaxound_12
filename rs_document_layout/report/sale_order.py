@@ -104,8 +104,6 @@ class CustomSaleOrderfilter(models.Model):
     # partner_invoice_id = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
     # partner_shipping_id = fields.Many2one('res.partner',compute='_partner_shipping_address_change')
 
-
-
     @api.model
     def fields_get(self, fields=None):
         fields_to_hide = ['order_date']
@@ -120,39 +118,29 @@ class CustomSaleOrderfilter(models.Model):
         order_date = (self.order_date + timedelta(days=14)).strftime('%d-%m-%Y')
         return order_date
 
-    # @api.onchange('partner_id')
+    # @api.onchange('partner_invoice_id')
     # def _partner_invoice_address_change(self):
-    #     # import pdb;
-    #     # pdb.set_trace()
-    #     partner_id = self.partner_id
     #     for child in self.partner_id.child_ids:
     #         if child.type == 'contact':
-    #             self.partner_invoice_id = partner_id
-    #             return self.partner_invoice_id
-    #         else:
-    #             pass
-
-
-
-
-    # @api.onchange('partner_id')
+    #             self.partner_invoice_id = self.partner_id
+    #         elif child.type == 'invoice':
+    #             addr = self.partner_id.address_get(['invoice'])
+    #             self.partner_invoice_id = addr and addr.get('invoice')
+    #
+    #
+    # @api.onchange('partner_shipping_id')
     # def _partner_shipping_address_change(self):
     #     for child in self.partner_id.child_ids:
     #         if child.type == 'contact':
     #             self.partner_shipping_id = self.partner_id
-
+    #         elif child.type == 'delivery':
+    #             addr = self.partner_id.address_get(['delivery'])
+    #             self.partner_shipping_id = addr and addr.get('delivery')
 
     # Change invoice and delivery address by contact
     # addr = self.partner_id.address_get(['delivery', 'invoice'])
     # invoice_add_id = self.env['res.partner'].browse(addr['invoice'])
     # return self.partner_id
-
-
-    # self.partner_invoice_id = {self.partner_id.name or '', self.partner_id.street or '',
-    #         self.partner_id.street2 or '', self.partner_id.zip or '',self.partner_id.city or '',
-    #         self.partner_id.country_id and self.partner_id.country_id.name or ''}
-    # return self.partner_invoice_id
-    # return self.partner_id.name or ''+ ',' +self.partner_id.street or '' + ',' +self.partner_id.street2 or ''+ ',' + self.partner_id.zip or ''+ ',' + self.partner_id.city or ''+ ',' + self.partner_id.country_id or ''+ ',' + self.partner_id.country_id.name or ''
 
 
 class Custominvoicefilter(models.Model):
@@ -170,6 +158,7 @@ class Custominvoicefilter(models.Model):
 
     @api.model
     def _get_source_document_value(self):
+
         for line in self:
             sol = self.env['sale.order'].search([('name', '=', line.origin)])
             if sol:
