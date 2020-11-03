@@ -245,9 +245,12 @@
 
                         <t t-set="delivery_cost" t-value="0"/>
                             <t t-foreach="o.invoice_line_ids" t-as="l">
-                                <t t-if="l.product_id.type == 'service' ">
-                                    <t t-set="delivery_cost" t-value="l.product_id.lst_price"/>
+                                <t t-if="l.product_id.type == 'service'">
+                                    <!-- Change code logic -->
+<!--                                    <t t-set="delivery_cost" t-value="l.product_id.lst_price"/>-->
+                                    <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
                                 </t>
+
                                 <!-- change the logic in report printing -->
 <!--                                <t t-if="l.sale_line_ids.is_delivery and o.date_invoice &lt; datetime.date (2020,1,1) ">-->
 <!--                                    <t t-set="delivery_cost" t-value="l.product_id.lst_price"/>-->

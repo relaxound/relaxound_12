@@ -430,12 +430,16 @@
                                     padding-right:0.2em;
                                         border:0
                                         }
-                                    </style>
+                    </style>
                     <t t-set="delivery_cost" t-value="0"/>
-                    <t t-foreach="doc.order_line" t-as="l">
-                        <t t-if="l.is_delivery">
-                            <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/></t>
-                    </t>
+                        <t t-foreach="doc.order_line" t-as="l">
+                                <!--    Change code logic for delivery cost    -->
+    <!--                        <t t-if="l.is_delivery">-->
+                            <t t-if="l.product_id.type == 'service'">
+                                <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
+                            </t>
+                        </t>
+
                     <tr style="border: none">
                         <td class="col-xs-3 text-right">
                             <span>Total</span>
