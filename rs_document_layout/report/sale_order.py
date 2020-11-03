@@ -120,26 +120,32 @@ class CustomSaleOrderfilter(models.Model):
 
     @api.onchange('partner_invoice_id')
     def _partner_invoice_address_change(self):
-        for child in self.partner_id.child_ids:
-            if child.type == 'contact':
-                self.partner_invoice_id = self.partner_id
-            elif child.type == 'invoice' or child.type == 'delivery':
-                addr = self.partner_id.address_get(['invoice','delivery'])
-                self.partner_invoice_id = addr and addr.get('invoice')
-            else:
-                pass
-
+        if self.partner_id.child_ids:
+            for child in self.partner_id.child_ids:
+                if child.type == 'contact':
+                    self.partner_invoice_id = self.partner_id
+                elif child.type == 'invoice' or child.type == 'delivery':
+                    addr = self.partner_id.address_get(['invoice','delivery'])
+                    self.partner_invoice_id = addr and addr.get('invoice')
+                else:
+                    pass
+        else:
+            self.partner_invoice_id = self.partner_id
 
     @api.onchange('partner_shipping_id')
     def _partner_shipping_address_change(self):
-        for child in self.partner_id.child_ids:
-            if child.type == 'contact':
-                self.partner_shipping_id = self.partner_id
-            elif child.type == 'invoice' or child.type == 'delivery':
-                addr = self.partner_id.address_get(['invoice','delivery'])
-                self.partner_shipping_id = addr and addr.get('delivery')
-            else:
-                pass
+        if self.partner_id.child_ids:
+            for child in self.partner_id.child_ids:
+                if child.type == 'contact':
+                    self.partner_shipping_id = self.partner_id
+                elif child.type == 'invoice' or child.type == 'delivery':
+                    addr = self.partner_id.address_get(['invoice','delivery'])
+                    self.partner_shipping_id = addr and addr.get('delivery')
+                else:
+                    pass
+        else:
+            self.partner_shipping_id = self.partner_id
+
 
 class Custominvoicefilter(models.Model):
     _inherit = "account.invoice"
