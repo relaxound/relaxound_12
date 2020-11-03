@@ -101,8 +101,8 @@ class CustomSaleOrderfilter(models.Model):
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
     client_order_ref = fields.Char(string='Customer Reference', copy=True)
-    # partner_invoice_id = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
-    # partner_shipping_id = fields.Many2one('res.partner',compute='_partner_shipping_address_change')
+    partner_invoice_id = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
+    partner_shipping_id = fields.Many2one('res.partner',compute='_partner_shipping_address_change')
 
     @api.model
     def fields_get(self, fields=None):
@@ -118,30 +118,28 @@ class CustomSaleOrderfilter(models.Model):
         order_date = (self.order_date + timedelta(days=14)).strftime('%d-%m-%Y')
         return order_date
 
-    # @api.onchange('partner_invoice_id')
-    # def _partner_invoice_address_change(self):
-    #     for child in self.partner_id.child_ids:
-    #         if child.type == 'contact':
-    #             self.partner_invoice_id = self.partner_id
-    #         elif child.type == 'invoice':
-    #             addr = self.partner_id.address_get(['invoice'])
-    #             self.partner_invoice_id = addr and addr.get('invoice')
-    #
-    #
-    # @api.onchange('partner_shipping_id')
-    # def _partner_shipping_address_change(self):
-    #     for child in self.partner_id.child_ids:
-    #         if child.type == 'contact':
-    #             self.partner_shipping_id = self.partner_id
-    #         elif child.type == 'delivery':
-    #             addr = self.partner_id.address_get(['delivery'])
-    #             self.partner_shipping_id = addr and addr.get('delivery')
+    @api.onchange('partner_invoice_id')
+    def _partner_invoice_address_change(self):
+        for child in self.partner_id.child_ids:
+            if child.type == 'contact':
+                self.partner_invoice_id = self.partner_id
+            elif child.type == 'invoice' or child.type == 'delivery':
+                addr = self.partner_id.address_get(['invoice','delivery'])
+                self.partner_invoice_id = addr and addr.get('invoice')
+            else:
+                pass
 
-    # Change invoice and delivery address by contact
-    # addr = self.partner_id.address_get(['delivery', 'invoice'])
-    # invoice_add_id = self.env['res.partner'].browse(addr['invoice'])
-    # return self.partner_id
 
+    @api.onchange('partner_shipping_id')
+    def _partner_shipping_address_change(self):
+        for child in self.partner_id.child_ids:
+            if child.type == 'contact':
+                self.partner_shipping_id = self.partner_id
+            elif child.type == 'invoice' or child.type == 'delivery':
+                addr = self.partner_id.address_get(['invoice','delivery'])
+                self.partner_shipping_id = addr and addr.get('delivery')
+            else:
+                pass
 
 class Custominvoicefilter(models.Model):
     _inherit = "account.invoice"
