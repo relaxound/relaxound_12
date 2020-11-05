@@ -438,50 +438,50 @@
                         <t t-set="i" t-value="1"/>
                         <tbody class="invoice_tbody" style="line-height:0.9">
                             <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                <!-- <t t-if="l.product_id.type != 'service'"> -->
-                                <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
-                                    <td class="text-center">
-                                        <span t-esc="i"/>
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-field="l.product_id.name"/><br/>
-                                        <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
-                                    </td>
-                                    <td class="text-center" style="white-space:nowrap">
-                                        <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
-                                    </td>
-                                    <td class="text-center" style="white-space:nowrap">
-                                        <span t-field="l.quantity"/>
-
-                                    </td>
-                                    <t t-if="o.partner_id.is_retailer">
+                                 <t t-if="l.product_id.type != 'service'">
+                                     <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
+                                        <td class="text-center">
+                                            <span t-esc="i"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="l.product_id.name"/><br/>
+                                            <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
+                                        </td>
                                         <td class="text-center" style="white-space:nowrap">
-                                            <!-- <span t-field="l.name"/> -->
-                                            <!-- <t t-if="p.name like '%20x%'"> -->
-                                            <span t-esc="l.single_unit"/>
-                                            <t t-set="single_total" t-value="single_total+l.single_unit"/>
-                                            
+                                            <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                        </td>
+                                        <td class="text-center" style="white-space:nowrap">
+                                            <span t-field="l.quantity"/>
+
+                                        </td>
+                                        <t t-if="o.partner_id.is_retailer">
+                                            <td class="text-center" style="white-space:nowrap">
+                                                <!-- <span t-field="l.name"/> -->
+                                                <!-- <t t-if="p.name like '%20x%'"> -->
+                                                <span t-esc="l.single_unit"/>
+                                                <t t-set="single_total" t-value="single_total+l.single_unit"/>
+
+                                            </td>
+                                        </t>
+                                        <td class="text-right" style="white-space:nowrap">
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <t t-if="l.quantity == 0">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="l.quantity &gt; 0">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+
+                                            <!--<span t-field="l.price_unit"/>-->
+                                        </td>
+
+                                        <td class="text-right" style="white-space:nowrap">
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </t>
-                                    <td class="text-right" style="white-space:nowrap">
-                                        <span t-field="o.currency_id.symbol"/> 
-                                        <t t-if="l.quantity == 0">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                        <t t-if="l.quantity &gt; 0">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-
-                                        <!--<span t-field="l.price_unit"/>-->
-                                    </td>
-
-                                    <td class="text-right" style="white-space:nowrap">
-                                        <span t-field="o.currency_id.symbol"/> 
-                                        <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t>
-                                    <t t-set="i" t-value="i+1"/>
-                                <!-- </t> -->
+                                        <t t-set="i" t-value="i+1"/>
+                                 </t>
                                 
                             </tr>
                             <!-- <tr style="border-bottom: 1px solid black"></tr> -->
@@ -531,42 +531,42 @@
                             <t t-set="j" t-value="1"/>
                             <tbody class="invoice_tbody" style="line-height:0.9">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                    <!-- <t t-if="l.product_id.type != 'service'"> -->
-                                    <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
-                                        <td class="text-center">
-                                            <span t-esc="j"/>
-                                        </td>
-                                        <td class="text-left">
-                                            <span t-field="l.product_id.name"/>
-                                            <br/>
-                                            <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
-                                        </td>
-                                        <td class="text-center" style="white-space:nowrap">
-                                            <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
-                                        </td>
-                                        <td class="text-center" style="white-space:nowrap">
-                                            <span t-field="l.quantity"/>
+                                     <t t-if="l.product_id.type != 'service'">
+                                        <t t-if="not l.sale_line_ids.is_delivery"> <!-- remove delivery cost -->
+                                            <td class="text-center">
+                                                <span t-esc="j"/>
+                                            </td>
+                                            <td class="text-left">
+                                                <span t-field="l.product_id.name"/>
+                                                <br/>
+                                                <font style="font-size:10px"><span t-field="l.product_id.default_code"/> / <span t-field="l.product_id.barcode"/></font>
+                                            </td>
+                                            <td class="text-center" style="white-space:nowrap">
+                                                <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                            </td>
+                                            <td class="text-center" style="white-space:nowrap">
+                                                <span t-field="l.quantity"/>
 
-                                        </td>
-                                        <td class="text-right" style="white-space:nowrap">
-                                            <span t-field="o.currency_id.symbol"/> 
-                                            <t t-if="l.quantity == 0">
-                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                            </t>
-                                            <t t-if="l.quantity &gt; 0">
-                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                            </t>
+                                            </td>
+                                            <td class="text-right" style="white-space:nowrap">
+                                                <span t-field="o.currency_id.symbol"/>
+                                                <t t-if="l.quantity == 0">
+                                                    <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                                </t>
+                                                <t t-if="l.quantity &gt; 0">
+                                                    <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                                </t>
 
-                                            <!--<span t-field="l.price_unit"/>-->
-                                        </td>
+                                                <!--<span t-field="l.price_unit"/>-->
+                                            </td>
 
-                                        <td class="text-right" style="white-space:nowrap">
-                                            <span t-field="o.currency_id.symbol"/> 
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </td>
-                                    </t>
-                                        <t t-set="j" t-value="j+1"/>
-                                    <!-- </t> -->
+                                            <td class="text-right" style="white-space:nowrap">
+                                                <span t-field="o.currency_id.symbol"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </td>
+                                        </t>
+                                            <t t-set="j" t-value="j+1"/>
+                                     </t>
                                     
                                 </tr>
 

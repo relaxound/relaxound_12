@@ -210,44 +210,44 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px;line-height:1; margin-left:10px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <!-- <t t-if="l.product_id.type != 'service'"> -->
-                                <t t-if="not l.is_delivery">
-                                    <td class="text-left">
-                                        <span t-field="l.product_id.name"/>
-                                    </td>
-                                    <td class="text-center">
-                                        <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
-                                    </td>
-                                    <td class="text-center">
-                                        <span t-field="l.product_uom_qty"/>
-                                    </td>
-                                    <t t-if="doc.partner_id.is_retailer">
-                                        <td class="text-center" style="white-space:nowrap; width: 1%">
-                                            <span t-esc="l.single_unit"/>
-                                            <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                <t t-if="l.product_id.type != 'service'">
+                                    <t t-if="not l.is_delivery">
+                                        <td class="text-left">
+                                            <span t-field="l.product_id.name"/>
                                         </td>
-                                    </t>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> 
-                                                
-                                        <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        <td class="text-center">
+                                            <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="l.product_uom_qty"/>
+                                        </td>
+                                        <t t-if="doc.partner_id.is_retailer">
+                                            <td class="text-center" style="white-space:nowrap; width: 1%">
+                                                <span t-esc="l.single_unit"/>
+                                                <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                            </td>
                                         </t>
-                                        <t t-if="doc.partner_id.company_type=='company'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> 
-                                                
-                                        <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                        <t t-if="doc.partner_id.company_type=='company'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                    </td>
-                                <!-- </t> -->
+                                        <td class="text-right">
+                                            <span t-field="doc.currency_id.symbol"/>
+
+                                            <t t-if="doc.partner_id.company_type=='person'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="doc.partner_id.company_type=='company'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.currency_id.symbol"/>
+
+                                            <t t-if="doc.partner_id.company_type=='person'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="doc.partner_id.company_type=='company'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                        </td>
+                                     </t>
                                 </t>
                             </tr>
                             <t t-if="doc.partner_id.is_retailer">
@@ -298,8 +298,8 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px; margin-bottom:0px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <!-- <t t-if="l.product_id.type != 'service'"> -->
-                                <t t-if="not l.is_delivery">
+                                <t t-if="l.product_id.type != 'service'">
+                                    <t t-if="not l.is_delivery">
                                     <!-- <td style="width: 10%"></td> -->
                                     <td class="text-left">
                                         <span t-field="l.product_id.name"/>
@@ -331,7 +331,7 @@
                                         </t>
                                     </td>
                                 </t>
-                                <!-- </t> -->
+                                 </t>
                             </tr>
                             <tr>
                                 <th class="text-center" style="border-top: 1px solid black"/>
