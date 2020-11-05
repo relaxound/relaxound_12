@@ -210,44 +210,44 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px;line-height:1; margin-left:10px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <!-- <t t-if="l.product_id.type != 'service'"> -->
-                                <t t-if="not l.is_delivery">
-                                    <td class="text-left">
-                                        <span t-field="l.product_id.name"/>
-                                    </td>
-                                    <td class="text-center">
-                                        <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
-                                    </td>
-                                    <td class="text-center">
-                                        <span t-field="l.product_uom_qty"/>
-                                    </td>
-                                    <t t-if="doc.partner_id.is_retailer">
-                                        <td class="text-center" style="white-space:nowrap; width: 1%">
-                                            <span t-esc="l.single_unit"/>
-                                            <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                <t t-if="l.product_id.type != 'service'">
+                                    <t t-if="not l.is_delivery">
+                                        <td class="text-left">
+                                            <span t-field="l.product_id.name"/>
                                         </td>
-                                    </t>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> 
-                                                
-                                        <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        <td class="text-center">
+                                            <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="l.product_uom_qty"/>
+                                        </td>
+                                        <t t-if="doc.partner_id.is_retailer">
+                                            <td class="text-center" style="white-space:nowrap; width: 1%">
+                                                <span t-esc="l.single_unit"/>
+                                                <t t-set="single_total" t-value="single_total+l.single_unit"/>
+                                            </td>
                                         </t>
-                                        <t t-if="doc.partner_id.company_type=='company'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> 
-                                                
-                                        <t t-if="doc.partner_id.company_type=='person'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                        <t t-if="doc.partner_id.company_type=='company'">
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </t>
-                                    </td>
-                                <!-- </t> -->
+                                        <td class="text-right">
+                                            <span t-field="doc.currency_id.symbol"/>
+
+                                            <t t-if="doc.partner_id.company_type=='person'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_unit))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="doc.partner_id.company_type=='company'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_reduce))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.currency_id.symbol"/>
+
+                                            <t t-if="doc.partner_id.company_type=='person'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                            <t t-if="doc.partner_id.company_type=='company'">
+                                                <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </t>
+                                        </td>
+                                     </t>
                                 </t>
                             </tr>
                             <t t-if="doc.partner_id.is_retailer">
@@ -298,8 +298,8 @@
                         <t t-set="single_total" t-value="0"/>
                         <tbody class="invoice_tbody" style="font-size: 13px; margin-bottom:0px;">
                             <tr t-foreach="doc.order_line" t-as="l">
-                                <!-- <t t-if="l.product_id.type != 'service'"> -->
-                                <t t-if="not l.is_delivery">
+                                <t t-if="l.product_id.type != 'service'">
+                                    <t t-if="not l.is_delivery">
                                     <!-- <td style="width: 10%"></td> -->
                                     <td class="text-left">
                                         <span t-field="l.product_id.name"/>
@@ -331,7 +331,7 @@
                                         </t>
                                     </td>
                                 </t>
-                                <!-- </t> -->
+                                 </t>
                             </tr>
                             <tr>
                                 <th class="text-center" style="border-top: 1px solid black"/>
@@ -430,12 +430,16 @@
                                     padding-right:0.2em;
                                         border:0
                                         }
-                                    </style>
+                    </style>
                     <t t-set="delivery_cost" t-value="0"/>
-                    <t t-foreach="doc.order_line" t-as="l">
-                        <t t-if="l.is_delivery">
-                            <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/></t>
-                    </t>
+                        <t t-foreach="doc.order_line" t-as="l">
+                                <!--    Change code logic for delivery cost    -->
+    <!--                        <t t-if="l.is_delivery">-->
+                            <t t-if="l.product_id.type == 'service'">
+                                <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
+                            </t>
+                        </t>
+
                     <tr style="border: none">
                         <td class="col-xs-3 text-right">
                             <span>Total</span>
@@ -468,59 +472,93 @@
                             <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
                         </td>
                     </tr>
-
-                    <tr style="border-bottom: 1px solid black">
-                        <t t-if="doc.order_date">
-                            <t t-if="doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">
+                     <tr style="border-bottom: 1px solid black">
+                        <t t-foreach="doc.order_line[0]" t-as="d">
+                            <t t-if="d.tax_id.name == '16% abgesenkte MwSt' or d.tax_id.name == '16% Corona Tax' or d.tax_id.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
                                 <td class="text-right">Vat 16%</td>
                                 <td class="text-right">
                                     <span t-field="doc.currency_id.symbol"/>
                                     <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                                 </td>
                             </t>
-                            <t t-if="not doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">
+                            <t t-if="d.tax_id.name == '19% Umsatzsteuer' or d.tax_id.name == 'MwSt._(19.0 % included T)_Relaxound GmbH' or d.tax_id.name == '19 % Umsatzsteuer EU Lieferung'">
                                 <td class="text-right">Vat 19%</td>
                                 <td class="text-right">
                                     <span t-field="doc.currency_id.symbol"/>
                                     <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                                 </td>
                             </t>
-                        </t>
-                        <t t-if="not doc.order_date">
-                            <t t-if="doc.confirmation_date">
-                                <t t-if="doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">
-                                    <td class="text-right">Vat 16%</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t>
-                                <t t-if="not doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">
-                                    <td class="text-right">Vat 19%</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t>
+                            <t t-if="not d.tax_id and doc.amount_tax != 0.00">
+                                <td class="text-right">Vat 16%</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
                             </t>
-                            <t t-if="not doc.confirmation_date">
-                               <t t-if="doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">
-                                    <td class="text-right">Vat 16%</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t>
-                                <t t-if="not doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">
-                                    <td class="text-right">Vat 19%</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </t> 
+                            <t t-if="doc.amount_tax == 0.00">
+                                <td class="text-right">Vat 0%</td>
+                                <td class="text-right">
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
                             </t>
                         </t>
-                    </tr>
+                     </tr>
+
+                        <!-- Change code logic-->
+<!--                    <tr style="border-bottom: 1px solid black">-->
+<!--                        <t t-if="doc.order_date">-->
+<!--                            <t t-if="doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">-->
+<!--                                <td class="text-right">Vat 16%</td>-->
+<!--                                <td class="text-right">-->
+<!--                                    <span t-field="doc.currency_id.symbol"/>-->
+<!--                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                </td>-->
+<!--                            </t>-->
+<!--                            <t t-if="not doc.order_date &gt;= datetime.date (2020,7,1) and doc.order_date &lt;= datetime.date (2020,12,31)">-->
+<!--                                <td class="text-right">Vat 19%</td>-->
+<!--                                <td class="text-right">-->
+<!--                                    <span t-field="doc.currency_id.symbol"/>-->
+<!--                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                </td>-->
+<!--                            </t>-->
+<!--                            -->
+<!--                        </t>-->
+<!--                        <t t-if="not doc.order_date">-->
+<!--                            <t t-if="doc.confirmation_date">-->
+<!--                                <t t-if="doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">-->
+<!--                                    <td class="text-right">Vat 16%</td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span t-field="doc.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                                <t t-if="not doc.confirmation_date &gt;= datetime.datetime (2020,7,1) and doc.confirmation_date &lt;= datetime.datetime (2020,12,31)">-->
+<!--                                    <td class="text-right">Vat 19%</td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span t-field="doc.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </t>-->
+<!--                            <t t-if="not doc.confirmation_date">-->
+<!--                               <t t-if="doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">-->
+<!--                                    <td class="text-right">Vat 16%</td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span t-field="doc.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                                <t t-if="not doc.date_order &gt;= datetime.datetime (2020,7,1) and doc.date_order &lt;= datetime.datetime (2020,12,31)">-->
+<!--                                    <td class="text-right">Vat 19%</td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span t-field="doc.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </td>-->
+<!--                                </t> -->
+<!--                            </t>-->
+<!--                        </t>-->
+<!--                    </tr>-->
 
                     <tr style="border: none">
                         <td class="text-right">
