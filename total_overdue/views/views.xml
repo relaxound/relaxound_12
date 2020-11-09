@@ -1,4 +1,5 @@
-<openerp>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
     <data>
         <record model="ir.ui.view" id="view_quotation_tree_custom">
             <field name="name">Sale Order Tree</field>
@@ -6,11 +7,9 @@
             <field name="inherit_id" ref="sale.view_quotation_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="field[@name='partner_id']" position="after">
-                    <!--Change total recievable code logic-->
-                    <!-- <field name="new_credit"/>-->
                     <field name="new_overdue"/>
                 </xpath>
             </field>
         </record>
     </data>
-</openerp>
+</odoo>
