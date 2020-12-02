@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, api, fields
+from datetime import datetime , timedelta
 
 class InvoiceJournalField(models.Model):
     _inherit = 'account.invoice'
-
 
     journal_id = fields.Many2one('account.journal', string="Journal", required=True)
     @api.onchange('partner_id')
@@ -47,6 +47,12 @@ class AccountInvoice(models.Model):
                 return shipping[0].street + ', ' + shipping[0].city + ', ' + shipping[0].country_id.name
         return False
 
+    @api.depends('date_invoice')
+    def _get_date_invoice(self):
+        date_invoice = (self.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y')
+        return date_invoice
+
+
 class ReportInvoiceWithPayment(models.AbstractModel):
     _inherit = 'report.account.report_invoice_with_payments'
 
@@ -82,7 +88,6 @@ class ReportInvoiceWithPayment(models.AbstractModel):
 class ReportJournal(models.AbstractModel):
     _name = 'report.account.report_invoice'
     _description = 'Report Invoice Without Payment'
-
 
     @api.model
     def _get_report_values(self, docids, data=None):
