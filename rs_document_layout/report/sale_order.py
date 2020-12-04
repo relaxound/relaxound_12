@@ -176,7 +176,6 @@ class SaleReport(models.Model):
     _inherit = "sale.report"
 
     single_unit = fields.Integer(string="Single Unit",store=True)
-    tag_ids = fields.Many2many('crm.lead.tag',string='Tags')
     category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
