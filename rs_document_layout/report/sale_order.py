@@ -186,11 +186,12 @@ class SaleReport(models.Model):
         ('product', 'Storable Product'),
         ], string='Product Type',readonly=True,default='consu',related='product_id.type')
 
+    tag_ids = fields.Char(string='Tags',readonly=True,related='order_id.tag_ids.name')
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         fields['single_unit'] = ', l.single_unit as single_unit'
-
         groupby += ', l.single_unit'
+
 
         return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
 
