@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_backend" name="hr assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/pos_multi_user_session/static/src/scss/pos_dashboard.scss"/>
+            <script type="text/javascript" src="/pos_multi_user_session/static/src/js/tours/pos_restaurant.js"></script>
+        </xpath>
+    </template>
+
+</odoo>
