@@ -1,6 +1,6 @@
 <openerp>
     <data>
-        <!--        &lt;!&ndash; Adding set tag in action. &ndash;&gt;--->
+<!--        &lt;!&ndash;        &lt;!&ndash; Adding set tag in action. &ndash;&gt;-&#45;&#45;-->
 <!--        <record id="model_sale_order_action_tag_ids_order" model="ir.actions.server">-->
 <!--            <field name="name">Set Tag(ZB:Offen)</field>-->
 <!--            <field name="model_id" ref="sale.model_sale_order"/>-->

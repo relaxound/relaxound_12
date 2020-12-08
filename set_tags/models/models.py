@@ -12,8 +12,28 @@ class Wizard(models.TransientModel):
         active_ids = self._context.get('active_ids')
         orders = self.env['sale.order'].browse(active_ids)
 
-        for order in orders:
-            order.tag_ids = self.tag_ids
+        # for order in orders:
+        #     order.tag_ids = self.tag_ids
+
+        for id in orders:
+            if id.tag_ids:
+                old_list = []
+                for old_tag_ids in id.tag_ids:
+                    old_list.append(old_tag_ids.id)
+            if self.tag_ids:
+                new_list = []
+                for new_tag_ids in self.tag_ids:
+                    new_list.append(new_tag_ids.id)
+
+            if not id.tag_ids:
+                old_list = []
+
+            final_lst = old_list + new_list
+
+            id.tag_ids = [(6, 0, final_lst)]
+
+
+
 
 class ContactWizard(models.TransientModel):
     _name = 'partner.wizard'
