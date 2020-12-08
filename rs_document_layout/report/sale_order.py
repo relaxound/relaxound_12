@@ -187,6 +187,8 @@ class SaleReport(models.Model):
         ], string='Product Type',readonly=True,default='consu',related='product_id.type')
 
     tag_ids = fields.Char(string='Tags',readonly=True,related='order_id.tag_ids.name')
+    carrier_id = fields.Char(string='Delivery Method',readonly=True,related='order_id.carrier_id.name')
+
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         fields['single_unit'] = ', l.single_unit as single_unit'

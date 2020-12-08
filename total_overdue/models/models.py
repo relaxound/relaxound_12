@@ -15,7 +15,7 @@ OPERATORS = {
 class CustomSaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    new_overdue = fields.Monetary(compute='_partner_id_overdue',string='Total Overdue',search='_total_overdue_search')
+    new_overdue = fields.Monetary(compute='_partner_id_overdue',string='Total Overdue',search='_total_overdue_search',store=True)
 
     @api.multi
     @api.depends('partner_id')
