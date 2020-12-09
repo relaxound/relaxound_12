@@ -43,8 +43,9 @@
                         <strong t-else="" class="o_thread_author">
                             <t t-esc="message.getDisplayedAuthor()"/>
                         </strong>
-
-                        - <small class="o_mail_timestamp" t-att-title="message.getDate().format(dateFormat)"><t t-esc="message.getTimeElapsed()"/></small>
+                        <!-- Change code logic -->
+                        - <small class="o_mail_timestamp" t-att-title="message.getDate().format(dateFormat)"><t t-esc="message.getDate().format(dateFormat)"/></small>
+<!--                        - <small class="o_mail_timestamp" t-att-title="message.getDate().format(dateFormat)"><t t-esc="message.getTimeElapsed()"/></small>-->
                         <t t-if="message.isLinkedToDocumentThread() and options.displayDocumentLinks">
                             on <a t-att-href="message.getURL()" t-att-data-oe-model="message.getDocumentModel()" t-att-data-oe-id="message.getDocumentID()" class="o_document_link"><t t-esc="message.getDocumentName()"/></a>
                         </t>
