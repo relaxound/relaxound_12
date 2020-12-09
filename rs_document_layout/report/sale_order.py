@@ -101,10 +101,8 @@ class CustomSaleOrderfilter(models.Model):
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
     client_order_ref = fields.Char(string='Customer Reference', copy=True)
-    # partner_invoice_id = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
-    # partner_shipping_id = fields.Many2one('res.partner',compute='_partner_shipping_address_change')
-
-
+    partner_invoice_id = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
+    partner_shipping_id = fields.Many2one('res.partner',compute='_partner_shipping_address_change')
 
     @api.model
     def fields_get(self, fields=None):
@@ -120,39 +118,35 @@ class CustomSaleOrderfilter(models.Model):
         order_date = (self.order_date + timedelta(days=14)).strftime('%d-%m-%Y')
         return order_date
 
-    # @api.onchange('partner_id')
-    # def _partner_invoice_address_change(self):
-    #     # import pdb;
-    #     # pdb.set_trace()
-    #     partner_id = self.partner_id
-    #     for child in self.partner_id.child_ids:
-    #         if child.type == 'contact':
-    #             self.partner_invoice_id = partner_id
-    #             return self.partner_invoice_id
-    #         else:
-    #             pass
+    @api.onchange('partner_invoice_id')
+    def _partner_invoice_address_change(self):
+        for rec in self:
+            if rec.partner_id.child_ids:
+                for child in rec.partner_id.child_ids:
+                    if child.type == 'contact':
+                        rec.partner_invoice_id = rec.partner_id
+                    elif child.type == 'invoice' or child.type == 'delivery':
+                        addr = rec.partner_id.address_get(['invoice','delivery'])
+                        rec.partner_invoice_id = addr and addr.get('invoice')
+                    else:
+                        pass
+            else:
+                rec.partner_invoice_id = rec.partner_id
 
-
-
-
-    # @api.onchange('partner_id')
-    # def _partner_shipping_address_change(self):
-    #     for child in self.partner_id.child_ids:
-    #         if child.type == 'contact':
-    #             self.partner_shipping_id = self.partner_id
-
-
-    # Change invoice and delivery address by contact
-    # addr = self.partner_id.address_get(['delivery', 'invoice'])
-    # invoice_add_id = self.env['res.partner'].browse(addr['invoice'])
-    # return self.partner_id
-
-
-    # self.partner_invoice_id = {self.partner_id.name or '', self.partner_id.street or '',
-    #         self.partner_id.street2 or '', self.partner_id.zip or '',self.partner_id.city or '',
-    #         self.partner_id.country_id and self.partner_id.country_id.name or ''}
-    # return self.partner_invoice_id
-    # return self.partner_id.name or ''+ ',' +self.partner_id.street or '' + ',' +self.partner_id.street2 or ''+ ',' + self.partner_id.zip or ''+ ',' + self.partner_id.city or ''+ ',' + self.partner_id.country_id or ''+ ',' + self.partner_id.country_id.name or ''
+    @api.onchange('partner_shipping_id')
+    def _partner_shipping_address_change(self):
+        for rec in self:
+            if rec.partner_id.child_ids:
+                for child in rec.partner_id.child_ids:
+                    if child.type == 'contact':
+                        rec.partner_shipping_id = rec.partner_id
+                    elif child.type == 'invoice' or child.type == 'delivery':
+                        addr = rec.partner_id.address_get(['invoice','delivery'])
+                        rec.partner_shipping_id = addr and addr.get('delivery')
+                    else:
+                        pass
+            else:
+                rec.partner_shipping_id = rec.partner_id
 
 
 class Custominvoicefilter(models.Model):
@@ -170,6 +164,7 @@ class Custominvoicefilter(models.Model):
 
     @api.model
     def _get_source_document_value(self):
+
         for line in self:
             sol = self.env['sale.order'].search([('name', '=', line.origin)])
             if sol:
@@ -191,11 +186,14 @@ class SaleReport(models.Model):
         ('product', 'Storable Product'),
         ], string='Product Type',readonly=True,default='consu',related='product_id.type')
 
+    tag_ids = fields.Char(string='Tags',readonly=True,related='order_id.tag_ids.name')
+    carrier_id = fields.Char(string='Delivery Method',readonly=True,related='order_id.carrier_id.name')
+
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         fields['single_unit'] = ', l.single_unit as single_unit'
-
         groupby += ', l.single_unit'
+
 
         return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
 
