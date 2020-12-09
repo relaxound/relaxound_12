@@ -101,7 +101,7 @@ class CustomSaleOrderfilter(models.Model):
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
     # is_retailer_new = fields.Boolean('Retailer', related='partner_id.is_retailer')
     client_order_ref = fields.Char(string='Customer Reference', copy=True)
-    # partner_invoice_id_new = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
+    # partner_invoice_id = fields.Many2one('res.partner',compute='_partner_invoice_address_change')
     # partner_shipping_id_new = fields.Many2one('res.partner',compute='_partner_shipping_address_change')
 
     @api.model
@@ -118,21 +118,105 @@ class CustomSaleOrderfilter(models.Model):
         order_date = (self.order_date + timedelta(days=14)).strftime('%d-%m-%Y')
         return order_date
 
-    # @api.onchange('partner_invoice_id')
+    @api.multi
+    @api.onchange('partner_id')
+    def onchange_partner_id(self):
+        """
+        Update the following fields when the partner is changed:
+        - Pricelist
+        - Payment terms
+        - Invoice address
+        - Delivery address
+        """
+        for rec in self:
+            addr = rec.partner_id.address_get(['invoice', 'delivery'])
+            if not rec.partner_id:
+                rec.update({
+                    'partner_invoice_id': False,
+                    'partner_shipping_id': False,
+                    'payment_term_id': False,
+                    'fiscal_position_id': False,
+                })
+                return
+
+            if rec.partner_id.child_ids:
+                for child in rec.partner_id.child_ids[0]:
+                    if child.type == 'contact':
+                        values = {
+                            'pricelist_id': rec.partner_id.property_product_pricelist and rec.partner_id.property_product_pricelist.id or False,
+                            'payment_term_id': rec.partner_id.property_payment_term_id and rec.partner_id.property_payment_term_id.id or False,
+                            'partner_invoice_id': rec.partner_id.id,
+                            'partner_shipping_id': rec.partner_id.id,
+                            'user_id': rec.partner_id.user_id.id or rec.partner_id.commercial_partner_id.user_id.id or rec.env.uid
+                        }
+                    elif child.type == 'invoice' or child.type == 'delivery':
+                        values = {
+                            'pricelist_id': rec.partner_id.property_product_pricelist and rec.partner_id.property_product_pricelist.id or False,
+                            'payment_term_id': rec.partner_id.property_payment_term_id and rec.partner_id.property_payment_term_id.id or False,
+                            'partner_invoice_id': addr['contact'] and addr.get('invoice'),
+                            'partner_shipping_id': addr['contact'] and addr.get('delivery'),
+                            'user_id': rec.partner_id.user_id.id or rec.partner_id.commercial_partner_id.user_id.id or rec.env.uid
+                        }
+                    elif child.type == 'other' or child.type == 'private':
+                        values = {
+                            'pricelist_id': rec.partner_id.property_product_pricelist and rec.partner_id.property_product_pricelist.id or False,
+                            'payment_term_id': rec.partner_id.property_payment_term_id and rec.partner_id.property_payment_term_id.id or False,
+                            'partner_invoice_id': rec.partner_id.id,
+                            'partner_shipping_id': rec.partner_id.id,
+                            'user_id': rec.partner_id.user_id.id or rec.partner_id.commercial_partner_id.user_id.id or rec.env.uid
+                        }
+                    else:
+                        values = {
+                                'pricelist_id': rec.partner_id.property_product_pricelist and rec.partner_id.property_product_pricelist.id or False,
+                                'payment_term_id': rec.partner_id.property_payment_term_id and rec.partner_id.property_payment_term_id.id or False,
+                                'partner_invoice_id': rec.partner_id.id,
+                                'partner_shipping_id': rec.partner_id.id,
+                                'user_id': rec.partner_id.user_id.id or rec.partner_id.commercial_partner_id.user_id.id or rec.env.uid
+                            }
+
+            else:
+                values = {
+                    'pricelist_id': rec.partner_id.property_product_pricelist and rec.partner_id.property_product_pricelist.id or False,
+                    'payment_term_id': rec.partner_id.property_payment_term_id and rec.partner_id.property_payment_term_id.id or False,
+                    'partner_invoice_id': addr['invoice'],
+                    'partner_shipping_id': addr['delivery'],
+                    'user_id': rec.partner_id.user_id.id or rec.partner_id.commercial_partner_id.user_id.id or rec.env.uid
+                }
+
+            # Change code logic
+            # addr = rec.partner_id.address_get(['delivery', 'invoice'])
+            # values = {
+            #     'pricelist_id': rec.partner_id.property_product_pricelist and rec.partner_id.property_product_pricelist.id or False,
+            #     'payment_term_id': rec.partner_id.property_payment_term_id and rec.partner_id.property_payment_term_id.id or False,
+            #     'partner_invoice_id': addr['invoice'],
+            #     'partner_shipping_id': addr['delivery'],
+            #     'user_id': rec.partner_id.user_id.id or rec.partner_id.commercial_partner_id.user_id.id or rec.env.uid
+            # }
+
+            if rec.env['ir.config_parameter'].sudo().get_param(
+                    'sale.use_sale_note') and rec.env.user.company_id.sale_note:
+                values['note'] = rec.with_context(lang=rec.partner_id.lang).env.user.company_id.sale_note
+
+            if rec.partner_id.team_id:
+                values['team_id'] = rec.partner_id.team_id.id
+            rec.update(values)
+
+    # @api.multi
+    # @api.onchange('partner_id')
     # def _partner_invoice_address_change(self):
     #     for rec in self:
     #         if rec.partner_id.child_ids:
     #             for child in rec.partner_id.child_ids:
     #                 if child.type == 'contact':
-    #                     rec.partner_invoice_id_new = rec.partner_id
+    #                     rec.update({'partner_invoice_id':rec.partner_id})
     #                 elif child.type == 'invoice' or child.type == 'delivery':
     #                     addr = rec.partner_id.address_get(['invoice','delivery'])
-    #                     rec.partner_invoice_id_new = addr and addr.get('invoice')
+    #                     rec.update({'partner_invoice_id':addr and addr.get('invoice')})
     #                 else:
-    #                     rec.partner_invoice_id_new = rec.partner_id
+    #                     rec.update({'partner_invoice_id':rec.partner_id})
     #         else:
-    #             rec.partner_invoice_id_new = rec.partner_id
-    #
+    #             rec.update({'partner_invoice_id': rec.partner_id})
+
     # @api.onchange('partner_shipping_id')
     # def _partner_shipping_address_change(self):
     #     for rec in self:
