@@ -128,8 +128,8 @@ class CustomSaleOrderfilter(models.Model):
                     elif child.type == 'invoice' or child.type == 'delivery':
                         addr = rec.partner_id.address_get(['invoice','delivery'])
                         rec.partner_invoice_id = addr and addr.get('invoice')
-                    else:
-                        pass
+                    elif child.type == 'other' or child.type == 'private':
+                        rec.partner_invoice_id = rec.partner_id
             else:
                 rec.partner_invoice_id = rec.partner_id
 
@@ -143,8 +143,8 @@ class CustomSaleOrderfilter(models.Model):
                     elif child.type == 'invoice' or child.type == 'delivery':
                         addr = rec.partner_id.address_get(['invoice','delivery'])
                         rec.partner_shipping_id = addr and addr.get('delivery')
-                    else:
-                        pass
+                    elif child.type == 'other' or child.type == 'private':
+                        rec.partner_shipping_id = rec.partner_id
             else:
                 rec.partner_shipping_id = rec.partner_id
 
@@ -189,11 +189,9 @@ class SaleReport(models.Model):
     tag_ids = fields.Char(string='Tags',readonly=True,related='order_id.tag_ids.name')
     carrier_id = fields.Char(string='Delivery Method',readonly=True,related='order_id.carrier_id.name')
 
-
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         fields['single_unit'] = ', l.single_unit as single_unit'
         groupby += ', l.single_unit'
-
 
         return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
 
