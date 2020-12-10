@@ -201,6 +201,28 @@ class CustomSaleOrderfilter(models.Model):
                 values['team_id'] = rec.partner_id.team_id.id
             rec.update(values)
 
+
+    @api.onchange('partner_shipping_id')
+    def _onchange_partner_shipping_id(self):
+        pass
+        # res = {}
+        # pickings = self.picking_ids.filtered(
+        #     lambda p: p.state not in ['done', 'cancel'] and p.partner_id != self.partner_shipping_id
+        # )
+        # if pickings:
+        #     res['warning'] = {
+        #         'title': _('Warning!'),
+        #         'message': _(
+        #             'Do not forget to change the partner on the following delivery orders: %s'
+        #         ) % (','.join(pickings.mapped('name')))
+        #     }
+        # return res
+
+
+
+
+
+
     # @api.multi
     # @api.onchange('partner_id')
     # def _partner_invoice_address_change(self):
