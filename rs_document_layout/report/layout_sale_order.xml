@@ -372,9 +372,14 @@
                             <span t-field="doc.payment_method_id.name"/>
                         </td>
                     </tr>
-                    <!-- <tr t-if="doc.payment_term_id"><td class="text-left" style="font-size:15px">
-                                        Payment term:
-                                    </td><td class="text-left"><span t-field="doc.payment_term_id"/></td></tr> -->
+                    <tr t-if="doc.payment_term_id"><td class="text-left" style="font-size:13px">
+                                    Payment term:
+                                </td>
+                    <td class="text-left">
+                        <span t-field="doc.payment_term_id"/>
+                    </td>
+                    </tr>
+
                     <tr>
                         <td class="text-left" style="font-size:13px">
                             Shipping address:
