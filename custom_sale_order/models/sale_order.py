@@ -32,7 +32,6 @@ class CustomSaleOrder(models.Model):
             if not line.order_id.partner_id:
                 raise ValidationError("Please select the customer name!")
 
-
             # if (not line.order_id.order_date and start_date <= date.today() <= end_date) or (line.order_id.order_date and start_date <= line.order_id.order_date <= end_date):
             #     flag = True
             # else:
@@ -44,16 +43,16 @@ class CustomSaleOrder(models.Model):
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")],limit=1)
-                            if tax_id not in line.tax_id:
+                            if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
 
                         if 'EU' not in fiscal_position_name: # Scenario 2 ---->
                             tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")],limit=1)
-                            if tax_id not in line.tax_id:
+                            if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
                     else: # Scenario 2 ---->
                         tax_id = self.env['account.tax'].search(['|',('name', '=', "16% Corona Tax") , ('name', '=', "16% abgesenkte MwSt")],limit=1)
-                        if tax_id not in line.tax_id:
+                        if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
 
@@ -61,33 +60,33 @@ class CustomSaleOrder(models.Model):
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)")],limit=1)
-                            if tax_id not in line.tax_id:
+                            if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
 
                         if 'EU' not in fiscal_position_name: # Scenario 2 ---->
                             tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)")],limit=1)
-                            if tax_id not in line.tax_id:
+                            if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
                     else: # Scenario 2 ---->
                         tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)")],limit=1)
-                        if tax_id not in line.tax_id:
+                        if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
                 else:
                     if fiscal_position_name:
                         if 'EU' in fiscal_position_name: # Scenario 1 ---->
                             tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")],limit=1)
-                            if tax_id not in line.tax_id:
+                            if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
 
                         if 'EU' not in fiscal_position_name: # Scenario 2 ---->
                             tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")],limit=1)
-                            if tax_id not in line.tax_id:
+                            if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
                     else: # Scenario 2 ---->
                         tax_id=self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")],limit=1)
                         # Change code logic
-                        if tax_id not in line.tax_id:
+                        if tax_id not in self.tax_id:
                             line.update({'tax_id':tax_id})
 
     @api.multi
