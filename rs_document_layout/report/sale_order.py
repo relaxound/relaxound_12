@@ -1,7 +1,7 @@
 from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
 from dateutil.relativedelta import relativedelta
-from datetime import datetime , timedelta
+from datetime import datetime , timedelta ,date
 
 
 class SaleOrderLine(models.Model):
@@ -113,8 +113,14 @@ class CustomSaleOrderfilter(models.Model):
 
     @api.depends('order_date')
     def _get_date_order(self):
-        order_date = (self.order_date + timedelta(days=14)).strftime('%d-%m-%Y')
-        return order_date
+        for rec in self:
+
+            if rec.date_order:
+                order_date = (rec.date_order + timedelta(days=14)).strftime('%d-%m-%Y')
+                return order_date
+            else:
+                order_date = (date.today() + timedelta(days=14)).strftime('%d-%m-%Y')
+                return order_date
 
     @api.multi
     @api.onchange('partner_shipping_id', 'partner_id')

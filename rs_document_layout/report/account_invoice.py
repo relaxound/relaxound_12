@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, api, fields
-from datetime import datetime , timedelta
+from datetime import datetime , timedelta,date
 
 class InvoiceJournalField(models.Model):
     _inherit = 'account.invoice'
@@ -49,8 +49,13 @@ class AccountInvoice(models.Model):
 
     @api.depends('date_invoice')
     def _get_date_invoice(self):
-        date_invoice = (self.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y')
-        return date_invoice
+        for rec in self:
+            if rec.date_invoice:
+                date_invoice = (rec.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y')
+                return date_invoice
+            else:
+                date_invoice = (date.today() + timedelta(days=14)).strftime('%d-%m-%Y')
+                return date_invoice
 
 
 class ReportInvoiceWithPayment(models.AbstractModel):
