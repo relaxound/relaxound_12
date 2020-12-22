@@ -425,8 +425,8 @@
                     </tr>
 
                     <!--   Note for 2% discount pricelist-->
-                        <t t-if="doc.order_date">
-                            <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.order_date &gt;= datetime.date (2021,1,1) and not doc.partner_id.is_retailer">
+                        <t t-if="doc.pricelist_id.name == 'New Pricing Model for 2021'">
+                            <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -436,7 +436,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.order_date &gt;= datetime.date (2021,1,1) and not doc.partner_id.is_retailer">
+                            <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -446,7 +446,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1500 and doc.order_date &gt;= datetime.date (2021,1,1) and not doc.partner_id.is_retailer">
+                            <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -457,7 +457,7 @@
                                 </tr>
                             </t>
 
-                            <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.order_date &gt;= datetime.date (2021,1,1) and doc.partner_id.is_retailer">
+                            <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -467,7 +467,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.order_date &gt;= datetime.date (2021,1,1) and doc.partner_id.is_retailer">
+                            <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -477,7 +477,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1500 and doc.order_date &gt;= datetime.date (2021,1,1) and doc.partner_id.is_retailer">
+                            <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -488,7 +488,7 @@
                                 </tr>
                             </t>
 
-                            <t t-if="doc.amount_untaxed &lt; 500  and doc.order_date &gt;= datetime.date (2021,1,1) and not doc.partner_id.is_retailer">
+                            <t t-if="doc.amount_untaxed &lt; 500  and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -498,7 +498,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="doc.amount_untaxed &lt;500 and doc.order_date &gt;= datetime.date (2021,1,1) and doc.partner_id.is_retailer">
+                            <t t-if="doc.amount_untaxed &lt;500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
                                 <tr>
                                     <td class="text-left">Note: </td>
                                     <td class="text-left" style="font-size:13px">
@@ -545,8 +545,8 @@
 
 
             <!--        Pricelist discount code adding       -->
-                    <t t-if="doc.order_date">
-                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.order_date &gt;= datetime.date (2021,1,1) ">
+                    <t t-if="doc.pricelist_id.name == 'New Pricing Model for 2021'">
+                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 5%</span>
@@ -571,7 +571,7 @@
                             </tr>
                         </t>
 
-                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.order_date &gt;= datetime.date (2021,1,1)">
+                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 7%</span>
@@ -596,7 +596,7 @@
                                 </td>
                             </tr>
                         </t>
-                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.order_date &gt;= datetime.date (2021,1,1)">
+                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 10%</span>
@@ -622,7 +622,7 @@
                             </tr>
                         </t>
                     </t>
-                    <t t-if="doc.order_date and doc.amount_untaxed &gt;= 250 and doc.order_date &gt;= datetime.date (2021,1,1)">
+                    <t t-if="doc.amount_untaxed &gt;= 250 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
                         <tr style="border: none">
                             <td class="text-right">
                                 <span>Shipping</span>
@@ -635,7 +635,7 @@
                             </td>
                         </tr>
                     </t>
-                    <t t-if="(not doc.order_date or doc.order_date &lt; datetime.date(2021,1,1)) or (doc.order_date &gt; datetime.date(2021,1,1) and doc.amount_untaxed &lt;= 250)">
+                    <t t-if="(doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.amount_untaxed &lt;= 250) or (doc.pricelist_id.name != 'New Pricing Model for 2021')">
                         <tr style="border: none">
                             <td class="text-right">
                                 <span>Shipping</span>
@@ -759,8 +759,8 @@
 <!--                    </tr>-->
 
 
-                    <t t-if="doc.order_date">
-                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.order_date &gt;= datetime.date (2021,1,1)">
+                    <t t-if="doc.pricelist_id.name == 'New Pricing Model for 2021'">
+                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Total</span>
@@ -799,7 +799,7 @@
                             </t>
                         </t>
 
-                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.order_date &gt;= datetime.date (2021,1,1)">
+                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Total</span>
@@ -838,7 +838,7 @@
                             </t>
 
                         </t>
-                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.order_date &gt;= datetime.date (2021,1,1)">
+                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Total</span>
@@ -878,7 +878,7 @@
                             </t>
 
                         </t>
-                        <t t-if="doc.amount_untaxed &lt;= 500 and doc.order_date &gt;= datetime.date (2021,1,1) and not doc.partner_id.is_retailer">
+                        <t t-if="doc.amount_untaxed &lt;= 500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Total</span>
@@ -892,7 +892,7 @@
                             </tr>
                         </t>
                         <!--new price list for retailer-->
-                        <t t-if="doc.amount_untaxed &lt;= 500 and doc.order_date &gt;= datetime.date (2021,1,1) and doc.partner_id.is_retailer">
+                        <t t-if="doc.amount_untaxed &lt;= 500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
                             <tr style="border-bottom: 1px solid black">
                                 <td class="col-xs-3 text-right">
                                     <span>Special Discount 10%</span>
@@ -917,7 +917,7 @@
                             </tr>
                         </t>
                     </t>
-                    <t t-if="not doc.order_date or doc.order_date &lt;= datetime.date (2021,1,1)">
+                    <t t-if="not doc.pricelist_id.name == 'New Pricing Model for 2021'">
                         <tr style="border: none">
                             <td class="col-xs-3 text-right">
                                 <span>Total</span>
