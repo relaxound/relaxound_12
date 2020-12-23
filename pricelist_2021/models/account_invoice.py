@@ -128,8 +128,8 @@ class CustomInvoiceOrderform(models.Model):
     def _set_description(self):
         for rec in self:
             if rec.date_invoice and rec.origin1.pricelist_id.name == 'New Pricing Model for 2021':
-                rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y')) + " " + str(rec.discount_2)
+                rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y'))
             elif rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' and not rec.date_invoice:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y')) + " " + str(rec.discount_2)
+                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))
             else:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y')) + " " + str(rec.discount_2)
+                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))

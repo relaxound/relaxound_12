@@ -126,9 +126,9 @@ class CustomSaleOrderform(models.Model):
     def _set_description(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021' and rec.date_order:
-                rec.set_desription ='2% discount - payment by ' + str((rec.date_order + timedelta(days=14)).strftime('%d-%m-%Y')) + " " + str(rec.discount_2)
+                rec.set_desription ='2% discount - payment by ' + str((rec.date_order + timedelta(days=14)).strftime('%d-%m-%Y'))
             elif rec.pricelist_id.name == 'New Pricing Model for 2021' and not rec.date_order:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y')) + " " + str(rec.discount_2)
+                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))
             else:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y')) + " " + str(rec.discount_2)
+                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))
 
