@@ -45,6 +45,7 @@
                         <label for="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
                     </div>
                     <field name="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
+                    <field name="discount_2" attrs="{'invisible':[('hide', '=', False)]}" widget="monetary"/>
                     <div class="oe_clear"/>
                 </xpath>
             </field>
@@ -107,7 +108,8 @@
                     <div class="oe_subtotal_footer_separator oe_left">
                         <label for="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
                     </div>
-                    <field name="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
+                    <field name="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>&#160;&#160;
+                    <field name="discount_2" attrs="{'invisible':[('hide', '=', False)]}" widget="monetary"/>
                     <div class="oe_clear"/>
                 </xpath>
             </field>
