@@ -23,15 +23,14 @@ class CustomInvoiceOrderform(models.Model):
     def _compute_hide(self):
         # simple logic, but you can do much more here
         for rec in self:
-
+            # datetime.strptime('1/1/2021', "%m/%d/%y")
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
                 rec.hide = True
             else:
                 rec.hide = False
 
-
-
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _compute_discount(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
@@ -48,6 +47,7 @@ class CustomInvoiceOrderform(models.Model):
                     rec.discount = 0
 
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _compute_total_new(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
@@ -64,6 +64,7 @@ class CustomInvoiceOrderform(models.Model):
                     rec.total_new = rec.amount_untaxed
 
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _compute_shipping_amount(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
@@ -79,6 +80,7 @@ class CustomInvoiceOrderform(models.Model):
 
 
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _compute_untaxed_amount(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
@@ -95,6 +97,7 @@ class CustomInvoiceOrderform(models.Model):
                     rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax
 
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _compute_spl_discount(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021'or rec.date_invoice >= date(2021,1,1):
@@ -104,6 +107,7 @@ class CustomInvoiceOrderform(models.Model):
                     rec.spl_discount = 0
 
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _compute_total(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
@@ -113,12 +117,14 @@ class CustomInvoiceOrderform(models.Model):
 
 
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _compute_discount_2(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
                 rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
 
     @api.multi
+    @api.onchange('partner_id','invoice_line_ids')
     def _set_description(self):
         for rec in self:
             if rec.date_invoice and rec.origin1.pricelist_id.name == 'New Pricing Model for 2021':

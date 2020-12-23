@@ -27,9 +27,8 @@ class CustomSaleOrderform(models.Model):
             else:
                 rec.hide = False
 
-
-
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _compute_discount(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
@@ -46,6 +45,7 @@ class CustomSaleOrderform(models.Model):
                     rec.discount = 0
 
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _compute_total_new(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
@@ -62,6 +62,7 @@ class CustomSaleOrderform(models.Model):
                     rec.total_new = rec.amount_untaxed
 
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _compute_shipping_amount(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
@@ -77,6 +78,7 @@ class CustomSaleOrderform(models.Model):
 
 
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _compute_untaxed_amount(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
@@ -93,6 +95,7 @@ class CustomSaleOrderform(models.Model):
                     rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax
 
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _compute_spl_discount(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
@@ -102,6 +105,7 @@ class CustomSaleOrderform(models.Model):
                     rec.spl_discount = 0
 
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _compute_total(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
@@ -111,12 +115,14 @@ class CustomSaleOrderform(models.Model):
 
 
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _compute_discount_2(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
                 rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
 
     @api.multi
+    @api.onchange('partner_id','order_line')
     def _set_description(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021' and rec.date_order:
