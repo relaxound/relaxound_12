@@ -117,14 +117,14 @@ class CustomInvoiceOrderform(models.Model):
 
 
     @api.multi
-    @api.onchange('partner_id','invoice_line_ids')
+    @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _compute_discount_2(self):
         for rec in self:
             if rec.origin1.pricelist_id.name == 'New Pricing Model for 2021' or rec.date_invoice >= date(2021,1,1):
                 rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
 
     @api.multi
-    @api.onchange('partner_id','invoice_line_ids')
+    @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _set_description(self):
         for rec in self:
             if rec.date_invoice and rec.origin1.pricelist_id.name == 'New Pricing Model for 2021':

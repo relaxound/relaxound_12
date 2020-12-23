@@ -115,14 +115,14 @@ class CustomSaleOrderform(models.Model):
 
 
     @api.multi
-    @api.onchange('partner_id','order_line')
+    @api.onchange('partner_id','order_line','amount_total_new')
     def _compute_discount_2(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021':
                 rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
 
     @api.multi
-    @api.onchange('partner_id','order_line')
+    @api.onchange('partner_id','order_line','amount_total_new')
     def _set_description(self):
         for rec in self:
             if rec.pricelist_id.name == 'New Pricing Model for 2021' and rec.date_order:
