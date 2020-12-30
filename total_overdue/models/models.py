@@ -14,7 +14,6 @@ OPERATORS = {
 
 class CustomSaleOrder(models.Model):
     _inherit = 'sale.order'
-
     new_overdue = fields.Monetary(compute='_partner_id_overdue',string='Total Overdue',search='_total_overdue_search')
 
     @api.multi
@@ -34,15 +33,12 @@ class CustomSaleOrder(models.Model):
             '=': py_operator.eq,
             '!=': py_operator.ne
         }
-
         for order in self.with_context(prefetch_fields=False).search([]):
             if OPERATORS[operator](order['new_overdue'], value):
                 ids.append(order.id)
         return [('id', 'in', ids)]
 
-    # _columns = {
-    #     'new_overdue': fields2.Monetary(compute='_partner_id_overdue', multi='new_overdue',string='Total Overdue',fnct_search='_total_overdue_search')
-    # }
+
 
     # Change total receivable code column logic
     # new_credit = fields.Monetary(compute='_partner_id_credit', string='Total Receivable', readonly=False)
