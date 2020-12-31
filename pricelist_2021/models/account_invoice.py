@@ -15,10 +15,22 @@ class CustomInvoiceOrderform(models.Model):
     amount_total_new = fields.Float('Total',compute='_compute_total')
     discount_2 = fields.Float(compute='_compute_discount_2')
     set_desription = fields.Char('Note',compute='_set_description')
-
+    today_date = fields.Date('Today Date',compute='_get_today_date')
+    # super_spl_discount = fields.Boolean('Super Special Discount')
 
     hide = fields.Boolean(string='Hide', compute="_compute_hide")
+    hide_spl_discount = fields.Boolean(string='Hide discount' ,compute='_compute_hide_discount')
 
+    def _compute_hide_discount(self):
+        for rec in self:
+            if rec.partner_id.is_retailer and rec.origin1.super_spl_discount and (rec.origin1.pricelist_id.name and (rec.origin1.pricelist_id.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1))))):
+                rec.hide_spl_discount = True
+            else:
+                rec.hide_spl_discount = False
+
+    def _get_today_date(self):
+        for rec in self:
+            rec.today_date = date.today().strftime('%Y-%m-%d')
 
     def _compute_hide(self):
         # simple logic, but you can do much more here
@@ -102,7 +114,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_spl_discount(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.super_spl_discount) and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1))))):
                 if rec.partner_id.is_retailer and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.spl_discount = (5 * (rec.amount_untaxed)) / 100
                     # rec.spl_discount = (10*rec.untaxed_amount_new)/100

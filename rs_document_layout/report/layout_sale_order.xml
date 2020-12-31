@@ -520,7 +520,7 @@
                         </t>
                     </t>
 
-                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.super_spl_discount" >
                         <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <!-- New pricelist special discount 10%   -->
                             <t t-if="doc.partner_id.is_retailer">

@@ -155,6 +155,7 @@ class CustomSaleOrderfilter(models.Model):
                 for child in rec.partner_id.child_ids:
                     subcontact_type.append(child.type)
 
+
                 addr = rec.partner_id.address_get(['invoice', 'delivery', 'contact'])
                 if 'invoice' in subcontact_type or 'delivery' in subcontact_type:
                     values = {
