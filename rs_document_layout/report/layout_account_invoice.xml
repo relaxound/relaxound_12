@@ -255,7 +255,7 @@
 <!--                                </td>-->
 <!--                            </tr>-->
 
-                        <t t-set="delivery_cost" t-value="0"/>
+                            <t t-set="delivery_cost" t-value="0"/>
                             <t t-foreach="o.invoice_line_ids" t-as="l">
                                 <!--    Change code logic for delivery cost    -->
         <!--                    <t t-if="l.is_delivery">-->
@@ -287,7 +287,7 @@
 
                             <!--        Pricelist discount code adding       -->
                             <t t-if="o.payment_term_id.name == '30 days after receipt of invoice'">
-                                <t t-if="o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999 and o.discount">
+                                <t t-if="o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999">
                                     <tr style="border: none">
                                         <td class="col-xs-3 text-right">
                                             <span>Discount 5%</span>
@@ -301,7 +301,7 @@
                                     </tr>
                                 </t>
 
-                                <t t-if="o.amount_untaxed &gt;= 1000 and o.amount_untaxed &lt;= 1499 and o.discount">
+                                <t t-if="o.amount_untaxed &gt;= 1000 and o.amount_untaxed &lt;= 1499">
                                     <tr style="border: none">
                                         <td class="col-xs-3 text-right">
                                             <span>Discount 7%</span>
@@ -315,7 +315,7 @@
                                     </tr>
 
                                 </t>
-                                <t t-if="o.amount_untaxed &gt;= 1500 and o.discount">
+                                <t t-if="o.amount_untaxed &gt;= 1500">
                                     <tr style="border: none">
                                         <td class="col-xs-3 text-right">
                                             <span>Discount 10%</span>
@@ -331,7 +331,7 @@
                             </t>
 
                         <!-- New pricelist special discount 10%   -->
-                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' and o.partner_id.is_retailer and o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999 and o.spl_discount">
+                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' and o.partner_id.is_retailer and o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999">
                                 <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Special Discount 5%</span>
@@ -344,7 +344,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' and o.partner_id.is_retailer and o.amount_untaxed &gt;= 1000 and o.amount_untaxed &lt; 1499 and o.spl_discount">
+                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' and o.partner_id.is_retailer and o.amount_untaxed &gt;= 1000 and o.amount_untaxed &lt; 1499">
                                 <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Special Discount 3%</span>
@@ -357,7 +357,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' and o.partner_id.is_retailer and o.amount_untaxed &lt; 500 and o.spl_discount">
+                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' and o.partner_id.is_retailer and o.amount_untaxed &lt; 500">
                                 <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Special Discount 10%</span>
@@ -371,7 +371,7 @@
                                 </tr>
                             </t>
 
-                            <t t-if="o.date_invoice and o.amount_untaxed &gt;= 250 and o.discount">
+                            <t t-if="o.date_invoice and o.amount_untaxed &gt;= 250">
                                 <tr style="border: none">
                                     <td class="text-right">
                                         <span>Shipping</span>
