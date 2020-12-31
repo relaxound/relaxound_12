@@ -5,10 +5,15 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_information']/group/group[@name='sales_person']/field[@name='require_payment']" position="after">
+                    <field name="super_spl_discount" attrs="{'invisible':[('hide', '=', False)]}"/>
+                </xpath>
+
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_tax']" position="before">
                     <field name="hide" invisible="1"/>
+                    <field name="hide_spl_discount" invisible="1"/>
                     <field name="discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                    <field name="spl_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="spl_discount" attrs="{'invisible':[('hide_spl_discount', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 <!--                    <div class="oe_subtotal_footer_separator oe_inline">-->
 <!--                        <label for="total_new" />-->
 <!--                    </div>-->
@@ -59,10 +64,15 @@
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_form" />
             <field name="arch" type="xml">
+<!--                <xpath expr="//page[@name='other_information']/group/group[@name='sales_person']/field[@name='require_payment']" position="after">-->
+<!--                    <field name="super_spl_discount" attrs="{'invisible':[('hide', '=', False)]}"/>-->
+<!--                </xpath>-->
+
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_untaxed']" position="after">
                     <field name="hide" invisible="1"/>
+                    <field name="hide_spl_discount" invisible="1"/>
                     <field name="discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                    <field name="spl_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="spl_discount" attrs="{'invisible':[('hide_spl_discount', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 
 <!--                    <div class="oe_subtotal_footer_separator oe_inline">-->
 <!--                        <label for="total_new" />-->

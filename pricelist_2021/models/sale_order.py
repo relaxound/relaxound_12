@@ -15,8 +15,20 @@ class CustomSaleOrderform(models.Model):
     amount_total_new = fields.Float('Total',compute='_compute_total')
     discount_2 = fields.Float(compute='_compute_discount_2')
     set_desription = fields.Char('Note',compute='_set_description')
+    super_spl_discount = fields.Boolean('Super Special Discount')
 
     hide = fields.Boolean(string='Hide', compute="_compute_hide")
+    hide_spl_discount = fields.Boolean(string='Hide discount' ,compute='_compute_hide_discount')
+
+    @api.depends('super_spl_discount','pricelist_id')
+    def _compute_hide_discount(self):
+        for rec in self:
+            if rec.partner_id.is_retailer and rec.super_spl_discount and rec.pricelist_id.name == 'Preismodell 2021':
+                rec.hide_spl_discount = True
+            else:
+                rec.hide_spl_discount = False
+
+
 
     @api.depends('pricelist_id')
     def _compute_hide(self):
@@ -98,7 +110,7 @@ class CustomSaleOrderform(models.Model):
     @api.onchange('partner_id','order_line')
     def _compute_spl_discount(self):
         for rec in self:
-            if rec.pricelist_id.name == 'Preismodell 2021':
+            if rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
                 if rec.partner_id.is_retailer and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.spl_discount = (5 * (rec.amount_untaxed)) / 100
                     # rec.spl_discount = (10*rec.untaxed_amount_new)/100
