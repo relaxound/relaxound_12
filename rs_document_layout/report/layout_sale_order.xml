@@ -200,7 +200,9 @@
                             <tr style="line-height:1">
                                 <th class="text-center" style="width:24%;border-bottom: 2px solid black;">Article</th>
                                 <th class="text-center" style="width:15%; border-bottom: 2px solid black;">Colour</th>
-                                <th class="text-center" style="width:15%;border-bottom: 2px solid black;">Quantity</th>
+                                <th class="text-center" style="width:15%;border-bottom: 2px solid black;"></th>
+                                <!--     Remove quantity column from report      -->
+<!--                                <th class="text-center" style="width:15%;border-bottom: 2px solid black;">Quantity</th>-->
                                 <th class="text-center" style="width:15%;border-bottom: 2px solid black;">Single Unit</th>
                                 <th class="text-right" style="width:15%;border-bottom: 2px solid black;">Unit Price</th>
                                 <th class="text-right" style="width:15%;border-bottom: 2px solid black;">Total</th>
@@ -218,9 +220,11 @@
                                     <td class="text-center">
                                         <span t-if="l.product_id.product_tmpl_id.color_id" t-field="l.product_id.product_tmpl_id.color_id.name"/>
                                     </td>
-                                    <td class="text-center">
-                                        <span t-field="l.product_uom_qty"/>
-                                    </td>
+                                    <td class="text-center"></td>
+                                    <!--     Remove quantity column from report      -->
+<!--                                    <td class="text-center">-->
+<!--                                        <span t-field="l.product_uom_qty"/>-->
+<!--                                    </td>-->
                                     <t t-if="doc.partner_id.is_retailer">
                                         <td class="text-center" style="white-space:nowrap; width: 1%">
                                             <span t-esc="l.single_unit"/>
@@ -254,10 +258,12 @@
                                 <tr>
                                     <th class="text-center" style="border-top: 1px solid black"/>
                                     <th class="text-center" style="border-top: 1px solid black; padding-left:0.1em;">Total</th>
-                                    <th class="text-center" style="border-top: 1px solid black;  padding-left:0.1em;">
-<!--                                         <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/> -->
-                                        <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line if line.product_id.type != 'service'))"/>
-                                    </th>
+                                    <th class="text-center" style="border-top: 1px solid black"/>
+<!--                                 Remove order quantity total-->
+<!--                                    <th class="text-center" style="border-top: 1px solid black;  padding-left:0.1em;">-->
+<!--&lt;!&ndash;                                         <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line))"/> &ndash;&gt;-->
+<!--                                        <t t-esc="int(sum(line.product_uom_qty for line in doc.order_line if line.product_id.type != 'service'))"/>-->
+<!--                                    </th>-->
                                     <th class="text-center" style="border-top: 1px solid black;padding-left:0.1em;">
                                         <t t-esc="int(sum(line.single_unit for line in doc.order_line if line.product_id.type != 'service'))"/>
                                                 <!-- <t t-esc="single_total"/> -->
@@ -425,89 +431,15 @@
                     </tr>
 
                     <!--   Note for 2% discount pricelist-->
-                        <t t-if="doc.pricelist_id.name == 'New Pricing Model for 2021'">
-                            <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)- 2*((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)- 2*((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)- 2*((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </tr>
-                            </t>
-
-                            <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(((((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)/100))- 2*((((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)/100))/100))).replace(',','x').replace('.',',').replace('x','.') "/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(((((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)/100))- 2*((((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)/100))/100))).replace(',','x').replace('.',',').replace('x','.') "/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(((((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)/100))- 2*((((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)/100))/100))).replace(',','x').replace('.',',').replace('x','.') "/>
-                                    </td>
-                                </tr>
-                            </t>
-
-                            <t t-if="doc.amount_untaxed &lt; 500  and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_total - (2*doc.amount_total)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </tr>
-                            </t>
-                            <t t-if="doc.amount_untaxed &lt;500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
-                                <tr>
-                                    <td class="text-left">Note: </td>
-                                    <td class="text-left" style="font-size:13px">
-                                        <span>2% discount - payment by </span>
-                                        <span t-esc="doc._get_date_order()"/>
-                                        <span t-esc="('{0:,.2f}'.format(float((doc.amount_total - ((10*doc.amount_total)/100)) - (2*(doc.amount_total - ((10*doc.amount_total)/100))/100)))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </td>
-                                </tr>
-                            </t>
+                        <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+                            <tr>
+                                <td class="text-left">Note: </td>
+                                <td class="text-left" style="font-size:13px">
+                                    <span>2% discount - payment by </span>
+                                    <span t-esc="doc._get_date_order()"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </td>
+                            </tr>
                         </t>
 
                 </table>
@@ -525,11 +457,12 @@
                                     </style>
                     <t t-set="delivery_cost" t-value="0"/>
                     <t t-foreach="doc.order_line" t-as="l">
-                        <t t-if="l.is_delivery">
-                            <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/></t>
+                        <!--    Change code logic for delivery cost    -->
+<!--                        <t t-if="l.is_delivery">-->
+                        <t t-if="l.product_id.type == 'service'">
+                            <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
+                        </t>
                     </t>
-
-
                     <tr style="border-bottom: 1px solid black">
                         <td class="col-xs-3 text-right">
                             <span>Total</span>
@@ -537,7 +470,6 @@
                         <td class="text-right col-xs-2">
                             <strong>
                                 <span t-field="doc.currency_id.symbol"/>
-
                                 <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
                             </strong>
                         </td>
@@ -545,8 +477,8 @@
 
 
             <!--        Pricelist discount code adding       -->
-                    <t t-if="doc.pricelist_id.name == 'New Pricing Model for 2021'">
-                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
+                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 5%</span>
@@ -558,20 +490,9 @@
                                     </strong>
                                 </td>
                             </tr>
-                            <tr style="border-bottom: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - ((5*doc.amount_untaxed)/100)))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
                         </t>
 
-                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
+                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 7%</span>
@@ -583,20 +504,8 @@
                                     </strong>
                                 </td>
                             </tr>
-
-                            <tr style="border-bottom: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - ((7*doc.amount_untaxed)/100)))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
                         </t>
-                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
+                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 10%</span>
@@ -608,21 +517,65 @@
                                     </strong>
                                 </td>
                             </tr>
+                        </t>
+                    </t>
 
-                            <tr style="border-bottom: 1px solid black">
+                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'Preismodell 2021'">
+                            <!-- New pricelist special discount 10%   -->
+                            <t t-if="doc.partner_id.is_retailer">
+                                <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
-                                        <span>Total</span>
+                                        <span>Special Discount 5%</span>
                                     </td>
                                     <td class="text-right col-xs-2">
                                         <strong>
                                             <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - ((10*doc.amount_untaxed)/100)))).replace(',','x').replace('.',',').replace('x','.')"/>
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(10*((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+                                            <span t-esc="('{0:,.2f}'.format(float(-doc.spl_discount))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </strong>
                                     </td>
-                            </tr>
+                                </tr>
+                            </t>
+                        </t>
+
+                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'Preismodell 2021'">
+                            <!-- New pricelist special discount 10%   -->
+                            <t t-if="doc.partner_id.is_retailer">
+                                <tr style="border-bottom: 1px solid black">
+                                    <td class="col-xs-3 text-right">
+                                        <span>Special Discount 3%</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(10*((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+                                                <span t-esc="('{0:,.2f}'.format(float(-doc.spl_discount))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </t>
+                        <t t-if="doc.amount_untaxed &lt; 500 and doc.pricelist_id.name == 'Preismodell 2021'">
+                            <!-- New pricelist special discount 10%   -->
+                            <t t-if="doc.partner_id.is_retailer">
+                                <tr style="border-bottom: 1px solid black">
+                                    <td class="col-xs-3 text-right">
+                                        <span>Special Discount 10%</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(10*((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+                                                <span t-esc="('{0:,.2f}'.format(float(-doc.spl_discount))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </t>
                         </t>
                     </t>
-                    <t t-if="doc.amount_untaxed &gt;= 250 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
+                    <t t-if="doc.amount_untaxed &gt;= 250 and doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
                         <tr style="border: none">
                             <td class="text-right">
                                 <span>Shipping</span>
@@ -635,7 +588,7 @@
                             </td>
                         </tr>
                     </t>
-                    <t t-if="(doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.amount_untaxed &lt;= 250) or (doc.pricelist_id.name != 'New Pricing Model for 2021')">
+                    <t t-if="(doc.pricelist_id.name == 'Preismodell 2021' and doc.amount_untaxed &lt;= 250) or (doc.pricelist_id.name != 'Preismodell 2021') or (doc.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne'])">
                         <tr style="border: none">
                             <td class="text-right">
                                 <span>Shipping</span>
@@ -661,31 +614,39 @@
                      <tr style="border-bottom: 1px solid black">
                         <t t-foreach="doc.order_line[0]" t-as="d">
                             <t t-if="d.tax_id.name == '16% abgesenkte MwSt' or d.tax_id.name == '16% Corona Tax' or d.tax_id.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
-                                <td class="text-right">Vat 16%</td>
+                                <td class="text-right"><span>Vat 16%</span></td>
                                 <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    <strong>
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
                                 </td>
                             </t>
                             <t t-if="d.tax_id.name == '19% Umsatzsteuer' or d.tax_id.name == 'MwSt._(19.0 % included T)_Relaxound GmbH' or d.tax_id.name == '19 % Umsatzsteuer EU Lieferung'">
-                                <td class="text-right">Vat 19%</td>
+                                <td class="text-right"><span>Vat 19%</span></td>
                                 <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    <strong>
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
                                 </td>
                             </t>
                             <t t-if="not d.tax_id and doc.amount_tax != 0.00">
-                                <td class="text-right">Vat 16%</td>
+                                <td class="text-right"><span>Vat 16%</span></td>
                                 <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    <strong>
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
                                 </td>
                             </t>
                             <t t-if="doc.amount_tax == 0.00">
-                                <td class="text-right">Vat 0%</td>
+                                <td class="text-right"><span>Vat 0%</span></td>
                                 <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    <strong>
+                                        <span t-field="doc.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
                                 </td>
                             </t>
                         </t>
@@ -757,167 +718,21 @@
 <!--                            </strong>-->
 <!--                        </td>-->
 <!--                    </tr>-->
-
-
-                    <t t-if="doc.pricelist_id.name == 'New Pricing Model for 2021'">
-                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
-                            <tr style="border: none">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <!-- New pricelist special discount 10%   -->
-                            <t t-if="doc.partner_id.is_retailer">
-                                <tr style="border-bottom: 1px solid black">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Special Discount 10%</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(10*((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                                <tr style="border: none">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Total</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((5*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
-                        </t>
-
-                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
-                            <tr style="border: none">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <!-- New pricelist special discount 10%   -->
-                            <t t-if="doc.partner_id.is_retailer">
-                                <tr style="border-bottom: 1px solid black">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Special Discount 10%</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(10*((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                                <tr style="border: none">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Total</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((7*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
-
-                        </t>
-                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'New Pricing Model for 2021'">
-                            <tr style="border: none">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-
-                            <!-- New pricelist special discount 10%   -->
-                            <t t-if="doc.partner_id.is_retailer">
-                                <tr style="border-bottom: 1px solid black">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Special Discount 10%</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(10*((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                                <tr style="border: none">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Total</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)) - (10*((doc.amount_untaxed - ((10*doc.amount_untaxed)/100)) + doc.amount_tax)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
-
-                        </t>
-                        <t t-if="doc.amount_untaxed &lt;= 500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and not doc.partner_id.is_retailer">
-                            <tr style="border: none">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                        </t>
-                        <!--new price list for retailer-->
-                        <t t-if="doc.amount_untaxed &lt;= 500 and doc.pricelist_id.name == 'New Pricing Model for 2021' and doc.partner_id.is_retailer">
-                            <tr style="border-bottom: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Special Discount 10%</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float((10*doc.amount_total)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr style="border: none">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_total - ((10*doc.amount_total)/100)))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                        </t>
+                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+                        <tr style="border: none">
+                            <td class="col-xs-3 text-right">
+                                <span>Total</span>
+                            </td>
+                            <td class="text-right col-xs-2">
+                                <strong>
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="('{0:,.2f}'.format(float(doc.amount_total_new))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                </strong>
+                            </td>
+                        </tr>
                     </t>
-                    <t t-if="not doc.pricelist_id.name == 'New Pricing Model for 2021'">
+
+                    <t t-if="not doc.pricelist_id.name == 'Preismodell 2021'">
                         <tr style="border: none">
                             <td class="col-xs-3 text-right">
                                 <span>Total</span>
