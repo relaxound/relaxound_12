@@ -260,7 +260,7 @@
                                 <!--    Change code logic for delivery cost    -->
         <!--                    <t t-if="l.is_delivery">-->
                                 <t t-if="l.product_id.type == 'service'">
-                                    <t t-set="delivery_cost" t-value="l.product_id.lst_price"/>
+                                    <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
                                 </t>
                                 <!-- change the logic in report printing -->
 <!--                                <t t-if="l.sale_line_ids.is_delivery and o.date_invoice &lt; datetime.date (2020,1,1) ">-->
@@ -481,6 +481,16 @@
                                     </td>
                                 </tr>
                             </t>
+                            <!--Code for Reverse charge for 0% tax-->
+                            <tr style="border: none">
+                                <td></td>
+                                <td class="text-right">
+                                    <t t-if="o.amount_tax == 0.00">
+                                        <span><i>REVERSE CHARGE</i></span>
+                                        <br/>
+                                    </t>
+                                </td>
+                            </tr>
                             <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
                                 <br/>
@@ -743,10 +753,14 @@
                 <div style="margin-left:15cm; font-size: 15px; font-family:Arial;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
-                    <div class="col-xs-12">
-                        <span><strong>REVERSE CHARGE</strong></span>
-                        <br/>
-                    </div>
+<!--                    Changes reverse charge logic                     -->
+<!--                    <div class="col-xs-12">-->
+<!--                        <t t-if="o.amount_tax == 0.00">-->
+<!--                            <span><strong>REVERSE CHARGE</strong></span>-->
+<!--                            <br/>-->
+<!--                        </t><br/>-->
+<!--                    </div>-->
+
                 </div><br/><br/>
                 <div style=" margin-right:3cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
