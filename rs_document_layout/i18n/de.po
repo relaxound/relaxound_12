@@ -55,7 +55,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Order By:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Bestellt durch:</font>"
+"                            <font color=\"#0e71b8\">Sortieren nach:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -425,7 +425,7 @@ msgstr "Auftrag"
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_by
 #: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__order_by
 msgid "Order By"
-msgstr "Bestellt durch"
+msgstr "Sortieren nach"
 
 #. module: rs_document_layout
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_date
@@ -586,11 +586,57 @@ msgstr "Betrag Netto"
 msgid "Vat 19%"
 msgstr "MwSt. 19%"
 
+
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Vat 16%"
 msgstr "MwSt. 16%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Vat 0%"
+msgstr "MwSt. 0%"
+
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Discount 10%"
+msgstr "Rabatt 10%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Discount 7%"
+msgstr "Rabatt 7%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Discount 3%"
+msgstr "Rabatt 3%"
+
+
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Special Discount 10%"
+msgstr "Sonderrabatt 10%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Special Discount 5%"
+msgstr "Sonderrabatt 5%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Special Discount 3%"
+msgstr "Sonderrabatt 3%"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
