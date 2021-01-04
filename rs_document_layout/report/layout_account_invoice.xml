@@ -190,7 +190,7 @@
                         </tr>
 
                         <!--   Note for 2% discount pricelist-->
-                        <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum'">
+                        <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
                             <tr>
                                 <td class="text-left">Note: </td>
                                 <td class="text-left" style="font-size:13px">
@@ -286,7 +286,7 @@
                             </tr>
 
                             <!--        Pricelist discount code adding       -->
-                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum'">
+                            <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
                                 <t t-if="o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999">
                                     <tr style="border: none">
                                         <td class="col-xs-3 text-right">
@@ -331,7 +331,7 @@
                             </t>
 
                         <!-- New pricelist special discount 10%   -->
-                            <t t-if="o.origin1.super_spl_discount and (o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum') and o.partner_id.is_retailer and o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999">
+                            <t t-if="o.origin1.super_spl_discount and (o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021') and o.partner_id.is_retailer and o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999">
                                 <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Special Discount 5%</span>
@@ -344,7 +344,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="(o.origin1.super_spl_discount) and (o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum') and o.partner_id.is_retailer and o.amount_untaxed &gt;= 1000 and o.amount_untaxed &lt; 1499">
+                            <t t-if="(o.origin1.super_spl_discount) and (o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021') and o.partner_id.is_retailer and o.amount_untaxed &gt;= 1000 and o.amount_untaxed &lt; 1499">
                                 <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Special Discount 3%</span>
@@ -357,7 +357,7 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="(o.origin1.super_spl_discount) and (o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum') and o.partner_id.is_retailer and o.amount_untaxed &lt; 500">
+                            <t t-if="(o.origin1.super_spl_discount) and (o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021') and o.partner_id.is_retailer and o.amount_untaxed &lt; 500">
                                 <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Special Discount 10%</span>
@@ -453,7 +453,7 @@
 <!--                            </tr>-->
 
 
-                            <t t-if="o.amount_total_new">
+                            <t t-if="o.amount_total_new or o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
                                 <tr style="border: none">
                                     <td class="col-xs-3 text-right">
                                         <span>Total</span>
