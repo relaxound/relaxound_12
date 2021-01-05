@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-04 06:19+0000\n"
-"PO-Revision-Date: 2019-09-04 06:19+0000\n"
+"POT-Creation-Date: 2021-01-04 16:42+0000\n"
+"PO-Revision-Date: 2021-01-04 16:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,30 +18,22 @@ msgstr ""
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                                <font color=\"#0e71b8\">Contact:</font>"
+"                            <font color=\"#0e71b8\">Contact:</font>"
 msgstr "<br/>\n"
 "                                <font color=\"#0e71b8\">Kontakt:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                                <font color=\"#0e71b8\">Contact:</font> Rahel Heuser"
-msgstr "<br/>\n"
-"                                <font color=\"#0e71b8\">Kontakt:</font> Rahel Heuser"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">Kundennummer:</font>"
+"                            <font color=\"#0e71b8\">Customer ID:</font>"
 msgstr "<br/>\n"
 "                            <font color=\"#0e71b8\">Kundennummer:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "<br/>\n"
-"                            <font color=\"#0e71b8\">E-Mail:</font> info@zwitscherbox.com"
-msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">E-Mail:</font> info@zwitscherbox.com"
+"                            <font color=\"#0e71b8\">E-Mail:</font> info@relaxound.com"
+msgstr ""
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -55,7 +47,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Order By:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Sortieren nach:</font>"
+"                            <font color=\"#0e71b8\">Bestellt durch:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -69,7 +61,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Order no:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Best.-Nr:</font>"
+"                            <font color=\"#0e71b8\">Best.-Nr: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -83,7 +75,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Shipping date:</font>"
 msgstr "<br/>\n"
-"                            <font color=\"#0e71b8\">Versand-/Leistungsdatum:</font>"
+"                            <font color=\"#0e71b8\">Versand:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -91,6 +83,8 @@ msgid "<br/>\n"
 "                            <font color=\"#0e71b8\">Customer ID:</font>"
 msgstr "<br/>\n"
 "                            <font color=\"#0e71b8\">Kundennummer:</font>"
+
+
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -111,7 +105,7 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">CNr: </font>"
 msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">Ihre Auftragsnummer: </font>"
+"                    <font color=\"#0e71b8\">Ihre Kundennummer: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
@@ -122,17 +116,8 @@ msgstr "<br/>\n"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "<br/>\n"
-"                    <font color=\"#0e71b8\">Quotation Date: </font>"
-msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">Angebotsdatum: </font>"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "<br/>\n"
-"                    <font color=\"#0e71b8\">ETD: </font>"
-msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">ETD: </font>"
+msgid "<font color=\"#0e71b8\">ETD: </font>"
+msgstr "<font color=\"#0e71b8\">ETD: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
@@ -146,14 +131,14 @@ msgstr "<br/>\n"
 msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">Order Date: </font>"
 msgstr "<br/>\n"
-"                    <font color=\"#0e71b8\">Auftragsdatum: </font>"
+"                    <font color=\"#0e71b8\">Auftragsdatum:</font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<br/>\n"
 "                    <font color=\"#0e71b8\">Order-By: </font>"
-msgstr "\"<br/>\n"
-"                    <font color=\"#0e71b8\">Sortieren nach: </font>"
+msgstr "<br/>\n"
+"                    <font color=\"#0e71b8\">Bestellt durch: </font>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
@@ -172,7 +157,7 @@ msgstr "<br/>\n"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<br/>\n"
-"                    <font color=\"#0e71b8\">Angebotsdatum: </font>"
+"                    <font color=\"#0e71b8\">Quotation Date: </font>"
 msgstr "<br/>\n"
 "                    <font color=\"#0e71b8\">Angebotsdatum: </font>"
 
@@ -196,24 +181,54 @@ msgid "<font color=\"#0e71b8\">Invoice no:</font>"
 msgstr "<font color=\"#0e71b8\">Rechnungsnummer:</font>"
 
 #. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "2% discount - payment by"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+msgid "REVERSE CHARGE"
+msgstr ""
+
+#. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-msgid "<span>CNr.</span>"
-msgstr "<span>CNr.</span>"
+msgid "CNr."
+msgstr "CNr."
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Discount 10%"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Discount 5%"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Discount 7%"
+msgstr ""
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<span>Enjoy and relax!\n"
 "                        <br/>We would be happy about photos and stories of the Zwitscherbox.\n"
-"                                \n"
+"\n"
 "                    </span>\n"
 "                    <br/>\n"
 "                    <span>\n"
 "                        <b>\n"
-"                            <u>www.zwitscherbox.com</u>\n"
+"                            <u>www.relaxound.com</u>\n"
 "                        </b>\n"
 "                    </span>"
 msgstr "<span>Viel Spass und gute Entspannung!<br/>Wir freuen uns über Fotos und Geschichten von<br/>der Zwitscherbox.<br/><u>www.relaxound.com</u></span>\n"
 ""
+
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -237,14 +252,32 @@ msgstr "<span>Lieferschein</span>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "<span>Pro-Forma Invoice </span>"
+msgid "<span>Pro-Forma Invoice</span>"
 msgstr "<span>Proforma-Rechnung </span>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<span>Shipping</span>"
-msgstr "<span>Versand</span>"
+msgstr "<span>Versanddatum:</span>"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Special Discount 10%</span>"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Special Discount 3%</span>"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Special Discount 5%</span>"
+msgstr ""
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -254,6 +287,24 @@ msgstr "<span>Gesamt</span>"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Vat 0%</span>"
+msgstr "MwSt. 0%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Vat 16%</span>"
+msgstr "MwSt. 16%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>Vat 19%</span>"
+msgstr "MwSt. 19%"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document_with_payments
 msgid "<strong>Amount Due</strong>"
 msgstr "<strong>Fälliger Betrag</strong>"
 
@@ -311,9 +362,7 @@ msgid "<strong>Taxes</strong>"
 msgstr "<strong>Steuern</strong>"
 
 #. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "<strong>Total</strong>"
 msgstr "<strong>Gesamt</strong>"
 
@@ -328,9 +377,37 @@ msgid "<strong>Your Order Reference:</strong>"
 msgstr "<strong>Ihre Bestellreferenz:</strong>"
 
 #. module: rs_document_layout
+#: model:ir.model.fields,help:rs_document_layout.field_sale_report__product_type
+msgid "A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
+"A consumable product is a product for which stock is not managed.\n"
+"A service is a non-material product you provide."
+msgstr "Ein lagerfähiges Produkt ist ein Produkt, für das Sie den Lagerbestand verwalten. Die Inventar App muss installiert sein.\n"
+"Ein Verbrauchsartikel ist ein Produkt, für das der Lagerbestand nicht verwaltet wird.\n"
+"Eine Dienstleistung ist ein von Ihnen bereitgestelltes immaterielles Produkt."
+
+#. module: rs_document_layout
 #: model:ir.model,name:rs_document_layout.model_account_invoice
 msgid "Account Invoice Sum Qty"
 msgstr "Kontorechnungssumme Menge"
+
+#. module: rs_document_layout
+#: model:ir.model,name:rs_document_layout.model_report_account_report_invoice_with_payments
+msgid "Account report with payment lines"
+msgstr "Kontobericht mit Zahlungszeilen"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,help:rs_document_layout.field_account_invoice__state_new
+#: model:ir.model.fields,help:rs_document_layout.field_account_invoice_report__state_new
+#: model:ir.model.fields,help:rs_document_layout.field_sale_order__state_new
+#: model:ir.model.fields,help:rs_document_layout.field_sale_report__state_new
+msgid "Administrative divisions of a country. E.g. Fed. State, Departement, Canton"
+msgstr "Verwaltungseinheiten eines Landes. Z.B. in Bundesstaaten, Länder, Regionen"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,help:rs_document_layout.field_account_invoice__lang_new
+#: model:ir.model.fields,help:rs_document_layout.field_sale_order__lang_new
+msgid "All the emails and documents sent to this contact will be translated in this language."
+msgstr "Alle E-Mails und Dokumente, die an diesen Kontakt gesendet werden, werden in diese Sprache übersetzt."
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
@@ -357,7 +434,7 @@ msgstr "Stornierte Rechnung"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
 msgid "Cancelled Purchase Order #"
-msgstr "Stornierte Bestellung #"
+msgstr "Stornierte Bestellungen #"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
@@ -367,14 +444,95 @@ msgid "Colour"
 msgstr "Farbe"
 
 #. module: rs_document_layout
+#: model:ir.actions.server,name:rs_document_layout.model_sale_order_action_confirm_order
+msgid "Confirm Sales Orders"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.view_account_invoice_filter_inherit
+msgid "Current Month"
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__city_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice_report__city_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__city_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__city_new
+msgid "Customer City"
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__country_id_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__country_id_new
+msgid "Customer Country"
+msgstr "Kundenland"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__state_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice_report__state_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__state_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__state_new
+msgid "Customer Federal State"
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__lang_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__lang_new
+msgid "Customer Lang"
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__client_order_ref
+msgid "Customer Reference"
+msgstr "Kundenreferenz"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__category_id_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice_report__category_id_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__category_id_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__category_id_new
+msgid "Customer Tag"
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__zip_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice_report__zip_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__zip_new
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__zip_new
+msgid "Customer Zip"
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__carrier_id
+msgid "Delivery Method"
+msgstr "Auslieferungsmethode"
+
+#. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
-msgid "Dennis N. Clasen, Philipp Störring"
-msgstr "Dennis N. Clasen, Philipp Störring"
+msgid "Dennis Clasen, Philipp Störring"
+msgstr "Dennis Clasen, Philipp Störring"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order_line__name
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_report_account_report_invoice__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "Draft Invoice"
 msgstr "Entwurf Rechnung"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,help:rs_document_layout.field_product_pricelist_item__min_quantity
+msgid "For the rule to apply, bought/sold quantity must be greater than or equal to the minimum quantity specified in this field.\n"
+"Expressed in the default unit of measure of the product."
+msgstr "Damit diese Regel zutrifft, muss die gekaufte/verkaufte Menge größer oder gleich der hier angegebenen Menge sein.\n"
+"Angegeben in der Vorgabe Maßeinheit des Produkts."
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
@@ -402,6 +560,11 @@ msgid "IBAN DE37 1002 0890 0026 6861 30"
 msgstr "IBAN DE37 1002 0890 0026 6861 30"
 
 #. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_report_account_report_invoice__id
+msgid "ID"
+msgstr "ID"
+
+#. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "Invoice"
 msgstr "Rechnung"
@@ -412,9 +575,30 @@ msgid "Invoice Line"
 msgstr "Rechungsposition"
 
 #. module: rs_document_layout
+#: model:ir.model,name:rs_document_layout.model_account_invoice_report
+msgid "Invoices Statistics"
+msgstr "Statistik Rechnungen"
+
+#. module: rs_document_layout
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__journal_id
 msgid "Journal"
 msgstr "Journal"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_report_account_report_invoice____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_product_pricelist_item__min_quantity
+msgid "Min. total net (EUR)"
+msgstr ""
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "Note:"
+msgstr ""
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
@@ -425,7 +609,7 @@ msgstr "Auftrag"
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_by
 #: model:ir.model.fields,field_description:rs_document_layout.field_sale_order__order_by
 msgid "Order By"
-msgstr "Sortieren nach"
+msgstr "Bestellt durch"
 
 #. module: rs_document_layout
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__order_date
@@ -441,17 +625,17 @@ msgstr "Best.-Nr."
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 msgid "PRO-FORMA"
-msgstr "PRO-FORMA"
+msgstr ""
 
 #. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document_with_payments
 msgid "Paid on"
 msgstr "Bezahlt am"
 
 #. module: rs_document_layout
 #: model:ir.model,name:rs_document_layout.model_report_paperformat
 msgid "Paper Format Config"
-msgstr "Papierformat Konfig"
+msgstr ""
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -471,9 +655,24 @@ msgid "Position"
 msgstr ""
 
 #. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.view_account_invoice_filter_inherit
+msgid "Prev Month"
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model,name:rs_document_layout.model_product_pricelist_item
+msgid "Pricelist Item"
+msgstr "Preisliste Einzelposition"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__product_type
+msgid "Product Type"
+msgstr "Produktart"
+
+#. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
 msgid "Purchase Order #"
-msgstr "Bestellung #"
+msgstr "Bestellnummer #"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
@@ -498,6 +697,11 @@ msgid "Refund"
 msgstr "Rückerstattung"
 
 #. module: rs_document_layout
+#: model:ir.model,name:rs_document_layout.model_report_account_report_invoice
+msgid "Report Invoice Without Payment"
+msgstr ""
+
+#. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_req_for_qut_document
 msgid "Request for Quotation"
 msgstr "Angebotsanfrage"
@@ -508,9 +712,24 @@ msgid "Request for Quotation #"
 msgstr "Angebotsanfrage #"
 
 #. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__is_retailer_new
+msgid "Retailer"
+msgstr ""
+
+#. module: rs_document_layout
 #: model:ir.model,name:rs_document_layout.model_sale_order
 msgid "Sale Order Is Sent"
 msgstr "Verkaufsauftrag wird gesendet"
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.view_order_product_pivot_inherit
+msgid "Sales Analysis"
+msgstr "Statistik Verkaufsaufträge"
+
+#. module: rs_document_layout
+#: model:ir.model,name:rs_document_layout.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Verkaufsanalysebericht"
 
 #. module: rs_document_layout
 #: model:ir.model,name:rs_document_layout.model_sale_order_line
@@ -532,20 +751,26 @@ msgstr "Versandart:"
 #. module: rs_document_layout
 #: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice_line__single_unit
 #: model:ir.model.fields,field_description:rs_document_layout.field_sale_order_line__single_unit
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__single_unit
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Single Unit"
 msgstr "Einheit"
 
 #. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
-msgid "Steuernummer: 29/490/30659"
-msgstr "Steuernummer: 29/490/30659"
+#: model:ir.model.fields,field_description:rs_document_layout.field_account_invoice__origin1
+msgid "Source Document"
+msgstr "Referenzbeleg"
 
 #. module: rs_document_layout
 #: model:ir.model,name:rs_document_layout.model_stock_picking
 msgid "Stock picking"
 msgstr "Aktienauswahl"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_report__tag_ids
+msgid "Tags"
+msgstr "Stichwörter"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_purchase_document
@@ -555,13 +780,24 @@ msgstr "Steuern"
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
 msgid "Tel."
-msgstr "Tel."
+msgstr ""
+
+#. module: rs_document_layout
+#: model:ir.model.fields,help:rs_document_layout.field_account_invoice__country_id_new
+#: model:ir.model.fields,help:rs_document_layout.field_sale_order__country_id_new
+msgid "The full name of the country."
+msgstr "Komplette Bezeichnung des Landes."
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Total"
 msgstr "Gesamt"
+
+#. module: rs_document_layout
+#: model:ir.model.fields,field_description:rs_document_layout.field_sale_order_line__price_tax
+msgid "Total Tax"
+msgstr "Gesamtsteuer"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
@@ -572,71 +808,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
 msgid "Unit Price"
-msgstr "Stückpreis"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Untaxed Amount"
-msgstr "Betrag Netto"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Vat 19%"
-msgstr "MwSt. 19%"
-
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Vat 16%"
-msgstr "MwSt. 16%"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Vat 0%"
-msgstr "MwSt. 0%"
-
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Discount 10%"
-msgstr "Rabatt 10%"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Discount 7%"
-msgstr "Rabatt 7%"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Discount 3%"
-msgstr "Rabatt 3%"
-
-
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Special Discount 10%"
-msgstr "Sonderrabatt 10%"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Special Discount 5%"
-msgstr "Sonderrabatt 5%"
-
-#. module: rs_document_layout
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
-#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
-msgid "Special Discount 3%"
-msgstr "Sonderrabatt 3%"
+msgstr "Preis pro ME"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
@@ -650,8 +822,8 @@ msgstr "Lieferantengutschrift"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
-msgid "We will send the invoice via Email to:"
-msgstr "Die Rechnung erhalten Sie per Email an:"
+msgid "We will send the invoice via Email to :"
+msgstr "Die Rechnung erhalten Sie per Email an :"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_delivery_document
@@ -661,6 +833,6 @@ msgstr "ZWITSCHERBOX"
 
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.external_layout_footer
-msgid "www.zwitscherbox.com"
+msgid "www.relaxound.com"
 msgstr "www.relaxound.com"
 
