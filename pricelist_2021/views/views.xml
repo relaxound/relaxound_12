@@ -22,7 +22,7 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_tax']" position="replace">
-                    <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_tax_new" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 <!--                    <div class="oe_subtotal_footer_separator oe_inline">-->
 <!--                        <label for="untaxed_amount_new" />-->
 <!--                    </div>-->
@@ -82,7 +82,7 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_tax']" position="replace">
-                    <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_tax_new" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 <!--                    <div class="oe_subtotal_footer_separator oe_inline">-->
 <!--                        <label for="untaxed_amount_new" />-->
 <!--                    </div>-->
@@ -124,6 +124,9 @@
                     <field name="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
                     <field name="discount_2" attrs="{'invisible':[('hide', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
                     <div class="oe_clear"/>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='comment']" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </xpath>
             </field>
         </record>

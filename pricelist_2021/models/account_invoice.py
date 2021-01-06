@@ -12,6 +12,7 @@ class CustomInvoiceOrderform(models.Model):
     spl_discount = fields.Float('Special Discount',compute='_compute_spl_discount')
     untaxed_amount_new = fields.Float('Total',compute='_compute_untaxed_amount')
     amount_total_new = fields.Float('Total',compute='_compute_total')
+    amount_tax_new = fields.Float('Tax',compute='_compute_tax_new')
     discount_2 = fields.Float(compute='_compute_discount_2')
     set_desription = fields.Char('Note',compute='_set_description')
     today_date = fields.Date('Today Date',compute='_get_today_date')
@@ -91,6 +92,17 @@ class CustomInvoiceOrderform(models.Model):
                 else:
                     rec.shipping_amount_new = delivery_cost
 
+    @api.multi
+    @api.onchange('partner_id', 'invoice_line_ids')
+    def _compute_tax_new(self):
+        for rec in self:
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+                if rec.invoice_line_ids.invoice_line_tax_ids.name == "16% Corona Tax" or rec.invoice_line_ids.invoice_line_tax_ids.name == "16% abgesenkte MwSt":
+                    rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                elif rec.invoice_line_ids.invoice_line_tax_ids.name == "19% Umsatzsteuer" or rec.invoice_line_ids.invoice_line_tax_ids.name == "19 % Umsatzsteuer EU Lieferung" or rec.invoice_line_ids.invoice_line_tax_ids.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
+                    rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                elif rec.invoice_line_ids.invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or rec.invoice_line_ids.invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                    rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
 
     @api.multi
     @api.onchange('partner_id','invoice_line_ids')
@@ -98,16 +110,16 @@ class CustomInvoiceOrderform(models.Model):
         for rec in self:
             if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
                 if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
-                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax
+                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax_new
 
                 elif rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
-                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax
+                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax_new
 
                 elif rec.amount_untaxed >=1500:
-                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax
+                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax_new
 
                 elif rec.amount_untaxed < 500:
-                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax
+                    rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax_new
 
     @api.multi
     @api.onchange('partner_id','invoice_line_ids')
