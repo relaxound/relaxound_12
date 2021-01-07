@@ -175,9 +175,18 @@ class CustomSaleOrderform(models.Model):
     def _set_description(self):
         for rec in self:
             if rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
-                rec.set_desription ='2% discount - payment by ' + str((rec.date_order + timedelta(days=14)).strftime('%d-%m-%Y'))
+                rec.set_desription ='2% discount - payment by ' + str((rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y'))
             elif rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))
+                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
             else:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))
+                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
+    @api.depends('order_date')
+    def _get_date_order(self):
+        for rec in self:
+            if rec.date_order:
+                order_date = (rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y')
+                return order_date
+            else:
+                order_date = (date.today() + timedelta(days=14)).strftime('%d.%m.%Y')
+                return order_date

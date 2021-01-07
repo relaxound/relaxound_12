@@ -47,16 +47,6 @@ class AccountInvoice(models.Model):
                 return shipping[0].street + ', ' + shipping[0].city + ', ' + shipping[0].country_id.name
         return False
 
-    @api.depends('date_invoice')
-    def _get_date_invoice(self):
-        for rec in self:
-            if rec.date_invoice:
-                date_invoice = (rec.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y')
-                return date_invoice
-            else:
-                date_invoice = (date.today() + timedelta(days=14)).strftime('%d-%m-%Y')
-                return date_invoice
-
 
 class ReportInvoiceWithPayment(models.AbstractModel):
     _inherit = 'report.account.report_invoice_with_payments'
