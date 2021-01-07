@@ -793,6 +793,7 @@
                 <td class="text-left" style="font-size:13px">
                     <span>2% discount - payment by </span>
                     <span t-esc="doc._get_date_order()"/>
+                    <span>€</span>
                     <span t-esc="('{0:,.2f}'.format(float(doc.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
                 </td>
             </tr>

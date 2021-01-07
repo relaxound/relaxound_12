@@ -12,7 +12,7 @@ class CustomSaleOrderform(models.Model):
     shipping_amount_new = fields.Float('Shipping',compute='_compute_shipping_amount')
     spl_discount = fields.Float('Special Discount',compute='_compute_spl_discount')
     untaxed_amount_new = fields.Float('Total',compute='_compute_untaxed_amount')
-    untaxed_total = fields.Float('Untaxed Total Amount',compute='_compute_total_untaxed')
+    untaxed_total = fields.Float('Amount After Discount',compute='_compute_total_untaxed')
     amount_total_new = fields.Float('Total',compute='_compute_total')
     amount_tax_new = fields.Float('Taxes',compute='_compute_tax_new')
     discount_2 = fields.Float(compute='_compute_discount_2')
