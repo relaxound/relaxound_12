@@ -189,17 +189,17 @@
                         </td>
                         </tr>
 
-                        <!--   Note for 2% discount pricelist-->
-                        <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
-                            <tr>
-                                <td class="text-left">Note: </td>
-                                <td class="text-left" style="font-size:13px">
-                                    <span>2% discount - payment by </span>
-                                    <span t-esc="o._get_date_invoice()"/>
-                                    <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                </td>
-                            </tr>
-                        </t>
+<!--                        &lt;!&ndash;   Note for 2% discount pricelist&ndash;&gt;-->
+<!--                        <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">-->
+<!--                            <tr>-->
+<!--                                <td class="text-left">Note: </td>-->
+<!--                                <td class="text-left" style="font-size:13px">-->
+<!--                                    <span>2% discount - payment by </span>-->
+<!--                                    <span t-esc="o._get_date_invoice()"/>-->
+<!--                                    <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
 
                     </table>
                 </div>
@@ -559,6 +559,19 @@
                     </table>
                 </div>
 
+                <!--   Note for 2% discount pricelist-->
+                    <t t-if="o.payment_term_id.name == '30 days after receipt of invoice' or o.payment_term_id.name == '30 Tage nach Rechnungsdatum' or o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
+                        <tr>
+                            <td class="text-left">Note: </td>
+                            <td class="text-left" style="font-size:13px">
+                                <span> 2% discount - payment by </span>
+                                <span t-esc="o._get_date_invoice()"/>
+                                <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </td>
+                        </tr>
+                    </t>
+
+
             </div>
             <!--</div>-->
         </xpath>
@@ -806,14 +819,18 @@
 <!--                    </div>-->
 
                 </div><br/><br/>
-                <div style=" margin-right:3cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
-                    <!--<t t-if="o.partner_id.company_type=='person'">-->
-                    <br/>
-                    <div class="col-xs-12">
-                        <span t-field="o.comment"/>
-                        <br/>
-                    </div>
-                </div><br/><br/>
+
+<!--                Remove note from invoice report                -->
+<!--                <div style=" margin-right:3cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">-->
+<!--                    &lt;!&ndash;<t t-if="o.partner_id.company_type=='person'">&ndash;&gt;-->
+<!--                    <br/>-->
+<!--                    <div class="col-xs-12">-->
+<!--                        <span t-field="o.comment"/>-->
+<!--                        <br/>-->
+<!--                    </div>-->
+<!--                </div><br/><br/>-->
+
+
                 <div style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
                     <!-- chages-->
 <!--                    <t t-if="o.payment_method_id.name!='payment_term'">-->
@@ -834,6 +851,7 @@
             </xpath>
 
             <!--<xpath expr="//div[@t-if='o.tax_line_ids']" position="replace"/>-->
+
 
             <xpath expr="//p[@t-if='o.comment']" position="replace"/>
 

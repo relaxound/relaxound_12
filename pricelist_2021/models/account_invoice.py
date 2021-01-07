@@ -11,8 +11,9 @@ class CustomInvoiceOrderform(models.Model):
     shipping_amount_new = fields.Float('Shipping',compute='_compute_shipping_amount')
     spl_discount = fields.Float('Special Discount',compute='_compute_spl_discount')
     untaxed_amount_new = fields.Float('Total',compute='_compute_untaxed_amount')
+    untaxed_total = fields.Float('Untaxed Total Amount',compute='_compute_total_untaxed')
     amount_total_new = fields.Float('Total',compute='_compute_total')
-    amount_tax_new = fields.Float('Tax',compute='_compute_tax_new')
+    amount_tax_new = fields.Float('Taxes',compute='_compute_tax_new')
     discount_2 = fields.Float(compute='_compute_discount_2')
     set_desription = fields.Char('Note',compute='_set_description')
     today_date = fields.Date('Today Date',compute='_get_today_date')
@@ -106,6 +107,23 @@ class CustomInvoiceOrderform(models.Model):
                         rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
 
     @api.multi
+    @api.onchange('partner_id', 'order_line')
+    def _compute_total_untaxed(self):
+        for rec in self:
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+                if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+                    rec.untaxed_total = rec.amount_untaxed - rec.discount - rec.spl_discount
+
+                elif rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+                    rec.untaxed_total = rec.amount_untaxed - rec.discount - rec.spl_discount
+
+                elif rec.amount_untaxed >= 1500:
+                    rec.untaxed_total = rec.amount_untaxed - rec.discount - rec.spl_discount
+
+                elif rec.amount_untaxed < 500:
+                    rec.untaxed_total = rec.amount_untaxed - rec.discount - rec.spl_discount
+
+    @api.multi
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_untaxed_amount(self):
         for rec in self:
@@ -159,7 +177,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _set_description(self):
         for rec in self:
-            if rec.payment_term_id.name == '30 days after receipt of invoice':
+            if rec.payment_term_id.name == '30 days after receipt of invoice' and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021':
                 if rec.date_invoice and rec.origin1.pricelist_id.name == 'Preismodell 2021':
                     rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y'))
                 elif rec.origin1.pricelist_id.name == 'Preismodell 2021' and not rec.date_invoice and date.today() >= date(2021,1,1) or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
