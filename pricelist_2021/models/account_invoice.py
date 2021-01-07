@@ -24,7 +24,7 @@ class CustomInvoiceOrderform(models.Model):
 
     def _compute_hide_discount(self):
         for rec in self:
-            if rec.partner_id.is_retailer and rec.origin1.super_spl_discount and (rec.origin1.pricelist_id.name and (rec.origin1.pricelist_id.name == 'Preismodell 2021' or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1))))):
+            if rec.partner_id.is_retailer and rec.origin1.super_spl_discount and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 rec.hide_spl_discount = True
             else:
                 rec.hide_spl_discount = False
@@ -37,7 +37,7 @@ class CustomInvoiceOrderform(models.Model):
         # simple logic, but you can do much more here
         for rec in self:
             # datetime.strptime('1/1/2021', "%m/%d/%y")
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 rec.hide = True
             else:
                 rec.hide = False
@@ -46,7 +46,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_discount(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') :
                 if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.discount = (5 * (rec.amount_untaxed)) / 100
 
@@ -65,7 +65,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_total_new(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.total_new = rec.amount_untaxed - ((5 * rec.amount_untaxed) / 100)
 
@@ -82,7 +82,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_shipping_amount(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 # Compute delivery cost
                 delivery_cost = 0
                 for line in rec.invoice_line_ids:
@@ -94,10 +94,10 @@ class CustomInvoiceOrderform(models.Model):
                     rec.shipping_amount_new = delivery_cost
 
     @api.multi
-    @api.onchange('partner_id', 'invoice_line_ids')
+    @api.onchange('invoice_line_ids')
     def _compute_tax_new(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 for o_line in rec:
                     if o_line.invoice_line_ids[0].invoice_line_tax_ids[0].name == "16% Corona Tax" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "16% abgesenkte MwSt":
                         rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
@@ -110,7 +110,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id', 'order_line')
     def _compute_total_untaxed(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.untaxed_total = rec.amount_untaxed - rec.discount - rec.spl_discount
 
@@ -127,7 +127,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_untaxed_amount(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax_new
 
@@ -144,7 +144,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_spl_discount(self):
         for rec in self:
-            if (rec.origin1.super_spl_discount) and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1))))):
+            if (rec.origin1.super_spl_discount) and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                 if rec.partner_id.is_retailer and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.spl_discount = (5 * (rec.amount_untaxed)) / 100
                     # rec.spl_discount = (10*rec.untaxed_amount_new)/100
@@ -159,7 +159,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_total(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 rec.amount_total_new = rec.untaxed_amount_new - rec.spl_discount - rec.shipping_amount_new
             else:
                 rec.amount_total_new = rec.untaxed_amount_new - rec.spl_discount - rec.shipping_amount_new
@@ -169,7 +169,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _compute_discount_2(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') or ((rec.payment_term_id.name == '30 days after receipt of invoice') and ((rec.date_invoice and rec.date_invoice >= date(2021,1,1)) or (not rec.date_invoice and date.today() >= date(2021,1,1)))):
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
 
 
@@ -177,14 +177,13 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _set_description(self):
         for rec in self:
-            if rec.payment_term_id.name == '30 days after receipt of invoice' and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021':
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 if rec.date_invoice and rec.origin1.pricelist_id.name == 'Preismodell 2021':
                     rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
                 elif rec.origin1.pricelist_id.name == 'Preismodell 2021' and not rec.date_invoice and date.today() >= date(2021,1,1) or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                     rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
-                else:
-                    rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
-
+                elif (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name != 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name != 'Preismodell 2021'):
+                    pass
 
     @api.depends('date_invoice')
     def _get_date_invoice(self):

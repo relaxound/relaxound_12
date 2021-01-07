@@ -106,7 +106,7 @@ class CustomSaleOrderform(models.Model):
                     rec.spl_discount = 0
 
     @api.multi
-    @api.onchange('partner_id','order_line')
+    @api.onchange('order_line')
     def _compute_tax_new(self):
         for rec in self:
             if rec.pricelist_id.name == 'Preismodell 2021':

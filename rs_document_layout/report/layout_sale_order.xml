@@ -815,10 +815,10 @@
             <!--<br/>-->
 
 <!--        Remove note from sale order report     -->
-<!--            <div style="margin-right:0.5cm;">-->
-<!--                <p t-field="doc.note"/>-->
-<!--                <br/>-->
-<!--            </div>-->
+            <div style="margin-right:0.5cm;">
+                <p t-field="doc.note"/>
+                <br/>
+            </div>
 
 
         <!--</div>   -->
