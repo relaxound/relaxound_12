@@ -110,17 +110,6 @@ class CustomSaleOrderfilter(models.Model):
             res[field]['selectable'] = False
         return res
 
-
-    @api.depends('order_date')
-    def _get_date_order(self):
-        for rec in self:
-            if rec.date_order:
-                order_date = (rec.date_order + timedelta(days=14)).strftime('%d-%m-%Y')
-                return order_date
-            else:
-                order_date = (date.today() + timedelta(days=14)).strftime('%d-%m-%Y')
-                return order_date
-
     @api.multi
     @api.onchange('partner_shipping_id', 'partner_id')
     def onchange_partner_shipping_id(self):

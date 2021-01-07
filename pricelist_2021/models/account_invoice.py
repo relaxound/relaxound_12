@@ -179,8 +179,19 @@ class CustomInvoiceOrderform(models.Model):
         for rec in self:
             if rec.payment_term_id.name == '30 days after receipt of invoice' and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021':
                 if rec.date_invoice and rec.origin1.pricelist_id.name == 'Preismodell 2021':
-                    rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d-%m-%Y'))
+                    rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
                 elif rec.origin1.pricelist_id.name == 'Preismodell 2021' and not rec.date_invoice and date.today() >= date(2021,1,1) or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
-                    rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))
+                    rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
                 else:
-                    rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d-%m-%Y'))
+                    rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+
+
+    @api.depends('date_invoice')
+    def _get_date_invoice(self):
+        for rec in self:
+            if rec.date_invoice:
+                date_invoice = (rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y')
+                return date_invoice
+            else:
+                date_invoice = (date.today() + timedelta(days=14)).strftime('%d.%m.%Y')
+                return date_invoice
