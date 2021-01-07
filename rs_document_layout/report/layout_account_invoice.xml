@@ -823,14 +823,14 @@
                 </div><br/><br/>
 
 <!--                Remove note from invoice report                -->
-<!--                <div style=" margin-right:3cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">-->
-<!--                    &lt;!&ndash;<t t-if="o.partner_id.company_type=='person'">&ndash;&gt;-->
-<!--                    <br/>-->
-<!--                    <div class="col-xs-12">-->
-<!--                        <span t-field="o.comment"/>-->
-<!--                        <br/>-->
-<!--                    </div>-->
-<!--                </div><br/><br/>-->
+                <div style=" margin-right:3cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">
+                    <!--<t t-if="o.partner_id.company_type=='person'">-->
+                    <br/>
+                    <div class="col-xs-12">
+                        <span t-field="o.comment"/>
+                        <br/>
+                    </div>
+                </div><br/><br/>
 
 
                 <div style=" margin-right:2.5cm; margin-left:1.5cm; font-size: 13px; font-family:Arial;">

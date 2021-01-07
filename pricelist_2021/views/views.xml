@@ -55,9 +55,6 @@
                     <field name="discount_2" attrs="{'invisible':[('hide', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
                     <div class="oe_clear"/>
                 </xpath>
-                <xpath expr="//form/sheet/notebook/page/field[@name='note']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
             </field>
         </record>
 
@@ -132,25 +129,9 @@
                     <field name="discount_2" attrs="{'invisible':[('hide', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
                     <div class="oe_clear"/>
                 </xpath>
-                <xpath expr="//form/sheet/notebook/page/field[@name='comment']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
+
             </field>
         </record>
-
-<!--        <record model="ir.ui.view" id="view_quotation_tree_custom">-->
-<!--            <field name="name">Sale Order Tree</field>-->
-<!--            <field name="model">sale.order</field>-->
-<!--            <field name="inherit_id" ref="sale.view_order_tree"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="field[@name='amount_total']" position="before">-->
-<!--                    <field name="amount_total_new" attrs="{'invisible':[('hide', '=', False)]}"/>-->
-<!--                </xpath>-->
-<!--&lt;!&ndash;                <xpath expr="field[@name='amount_total']" position="replace">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <field name="amount_total"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
-<!--            </field>-->
-<!--        </record>-->
 
 
     </data>
