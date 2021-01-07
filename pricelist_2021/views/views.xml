@@ -22,7 +22,8 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_tax']" position="replace">
-                    <field name="amount_tax_new" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_tax_new" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_tax" attrs="{'invisible':[('hide', '=', True)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 <!--                    <div class="oe_subtotal_footer_separator oe_inline">-->
 <!--                        <label for="untaxed_amount_new" />-->
 <!--                    </div>-->
@@ -86,7 +87,9 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_tax']" position="replace">
-                    <field name="amount_tax_new" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_tax_new" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_tax" attrs="{'invisible':[('hide', '=', True)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+
 <!--                    <div class="oe_subtotal_footer_separator oe_inline">-->
 <!--                        <label for="untaxed_amount_new" />-->
 <!--                    </div>-->
@@ -135,17 +138,17 @@
             </field>
         </record>
 
-<!--        <record model="ir.ui.view" id="view_quotation_tree_custom1">-->
+<!--        <record model="ir.ui.view" id="view_quotation_tree_custom">-->
 <!--            <field name="name">Sale Order Tree</field>-->
 <!--            <field name="model">sale.order</field>-->
 <!--            <field name="inherit_id" ref="sale.view_order_tree"/>-->
 <!--            <field name="arch" type="xml">-->
 <!--                <xpath expr="field[@name='amount_total']" position="before">-->
-<!--                    <field name="amount_total_new"/>-->
+<!--                    <field name="amount_total_new" attrs="{'invisible':[('hide', '=', False)]}"/>-->
 <!--                </xpath>-->
-<!--                <xpath expr="//field[@name='amount_total']" position="attributes">-->
-<!--                    <attribute name="invisible">1</attribute>-->
-<!--                </xpath>-->
+<!--&lt;!&ndash;                <xpath expr="field[@name='amount_total']" position="replace">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="amount_total"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
 <!--            </field>-->
 <!--        </record>-->
 
