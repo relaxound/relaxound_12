@@ -175,7 +175,7 @@ class CustomSaleOrderform(models.Model):
     @api.onchange('partner_id','order_line','amount_total_new')
     def _set_description(self):
         for rec in self:
-            if rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
+            if rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order and rec.partner_id.is_retailer:
                 rec.set_desription ='2% discount - payment by ' + str((rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y'))
             elif rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
                 rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
@@ -192,5 +192,62 @@ class CustomSaleOrderform(models.Model):
                 order_date = (date.today() + timedelta(days=14)).strftime('%d.%m.%Y')
                 return order_date
 
+    @api.depends('order_line.price_total')
+    def _amount_all(self):
+        """
+        Compute the total amounts of the SO.
+        """
+        for order in self:
+            if order.pricelist_id.name == 'Preismodell 2021':
+                amount_untaxed = 0.0
+                for line in order.order_line:
+                    amount_untaxed += line.price_subtotal
 
-    
+                if amount_untaxed >= 500 and amount_untaxed < 1000:
+                    discount = (5 * (amount_untaxed)) / 100
+
+                elif amount_untaxed >= 1000 and amount_untaxed < 1500:
+                    discount = (7 * (amount_untaxed)) / 100
+
+                elif amount_untaxed >= 1500:
+                    discount = (10 * (amount_untaxed)) / 100
+
+                elif amount_untaxed < 500:
+                    discount = 0
+
+                if order.super_spl_discount:
+                    if order.partner_id.is_retailer and amount_untaxed >= 500 and amount_untaxed < 1000:
+                        spl_discount = (5 * (amount_untaxed)) / 100
+                    elif order.partner_id.is_retailer and amount_untaxed >= 1000 and amount_untaxed < 1500:
+                        spl_discount = (3 * (amount_untaxed)) / 100
+                    elif order.partner_id.is_retailer and amount_untaxed < 500:
+                        spl_discount = (10 * (amount_untaxed)) / 100
+                    else:
+                        spl_discount = 0
+                else:
+                    spl_discount = 0
+
+                for line in order.order_line:
+                    if line.tax_id.name == "16% Corona Tax" or line.tax_id.name == "16% abgesenkte MwSt" or line.tax_id.name == "MwSt._(16.0 % included T)_Relaxound GmbH":
+                        amount_tax = (16 * (amount_untaxed - discount - spl_discount)) / 100
+                    elif line.tax_id.name == "19% Umsatzsteuer" or line.tax_id.name == "19 % Umsatzsteuer EU Lieferung" or line.tax_id.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
+                        amount_tax = (19 * (amount_untaxed - discount - spl_discount)) / 100
+                    elif line.tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or \
+                        line.tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                        amount_tax = (0 * (amount_untaxed - discount - spl_discount)) / 100
+
+                    order.update({
+                        'amount_untaxed': amount_untaxed,
+                        'amount_tax': amount_tax,
+                        'amount_total': amount_untaxed + amount_tax - discount - spl_discount,
+                    })
+            else:
+                amount_untaxed = amount_tax = 0.0
+                for line in order.order_line:
+                    amount_untaxed += line.price_subtotal
+                    amount_tax += line.price_tax
+                order.update({
+                    'amount_untaxed': amount_untaxed,
+                    'amount_tax': amount_tax,
+                    'amount_total': amount_untaxed + amount_tax,
+                })

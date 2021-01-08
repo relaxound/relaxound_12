@@ -22,6 +22,7 @@ class CustomInvoiceOrderform(models.Model):
     hide = fields.Boolean(string='Hide', compute="_compute_hide")
     hide_spl_discount = fields.Boolean(string='Hide discount' ,compute='_compute_hide_discount')
 
+    @api.onchange('origin1.super_spl_discount','partner_id.property_product_pricelist')
     def _compute_hide_discount(self):
         for rec in self:
             if rec.partner_id.is_retailer and rec.origin1.super_spl_discount and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
@@ -33,6 +34,7 @@ class CustomInvoiceOrderform(models.Model):
         for rec in self:
             rec.today_date = date.today().strftime('%Y-%m-%d')
 
+    @api.depends('partner_id.property_product_pricelist')
     def _compute_hide(self):
         # simple logic, but you can do much more here
         for rec in self:
@@ -102,13 +104,13 @@ class CustomInvoiceOrderform(models.Model):
                     if o_line.invoice_line_ids:
                         if o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "16% Corona Tax" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "16% abgesenkte MwSt":
                             rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                            break
+
                         elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19% Umsatzsteuer" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19 % Umsatzsteuer EU Lieferung" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
                             rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                            break
+
                         elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
                             rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                            break
+
 
     @api.multi
     @api.onchange('partner_id', 'invoice_line_ids')
@@ -181,10 +183,10 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _set_description(self):
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+            if rec.partner_id.is_retailer and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                 if rec.date_invoice and rec.origin1.pricelist_id.name == 'Preismodell 2021':
                     rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
-                elif rec.origin1.pricelist_id.name == 'Preismodell 2021' and not rec.date_invoice and date.today() >= date(2021,1,1) or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+                elif rec.partner_id.is_retailer and (rec.origin1.pricelist_id.name == 'Preismodell 2021' or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and not rec.date_invoice and date.today() >= date(2021,1,1) :
                     rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
                 elif (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name != 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name != 'Preismodell 2021'):
                     pass
@@ -198,3 +200,86 @@ class CustomInvoiceOrderform(models.Model):
             else:
                 date_invoice = (date.today() + timedelta(days=14)).strftime('%d.%m.%Y')
                 return date_invoice
+
+
+    @api.one
+    @api.depends('invoice_line_ids.price_subtotal', 'tax_line_ids.amount', 'tax_line_ids.amount_rounding',
+                 'currency_id', 'company_id', 'date_invoice', 'type')
+    def _compute_amount(self):
+        round_curr = self.currency_id.round
+        if (self.origin1.pricelist_id.name and self.origin1.pricelist_id.name == 'Preismodell 2021') or (
+                self.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+            self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
+            # self.amount_tax = sum(round_curr(line.amount_total) for line in self.tax_line_ids)
+            # self.amount_total = self.amount_untaxed + self.amount_tax
+
+            if self.amount_untaxed >= 500 and self.amount_untaxed < 1000:
+                discount = (5 * (self.amount_untaxed)) / 100
+
+            elif self.amount_untaxed >= 1000 and self.amount_untaxed < 1500:
+                discount = (7 * (self.amount_untaxed)) / 100
+
+            elif self.amount_untaxed >= 1500:
+                discount = (10 * (self.amount_untaxed)) / 100
+
+            elif self.amount_untaxed < 500:
+                discount = 0
+
+            if self.origin1.super_spl_discount:
+                if self.partner_id.is_retailer and self.amount_untaxed >= 500 and self.amount_untaxed < 1000:
+                    spl_discount = (5 * (self.amount_untaxed)) / 100
+                elif self.partner_id.is_retailer and self.amount_untaxed >= 1000 and self.amount_untaxed < 1500:
+                    spl_discount = (3 * (self.amount_untaxed)) / 100
+                elif self.partner_id.is_retailer and self.amount_untaxed < 500:
+                    spl_discount = (10 * (self.amount_untaxed)) / 100
+                else:
+                    spl_discount = 0
+            else:
+                spl_discount = 0
+
+            for line in self.invoice_line_ids:
+                if line.invoice_line_tax_ids.name == "16% Corona Tax" or \
+                        line.invoice_line_tax_ids.name == "16% abgesenkte MwSt":
+                    self.amount_tax = (16 * (self.amount_untaxed - discount - spl_discount)) / 100
+
+                elif line.invoice_line_tax_ids.name == "19% Umsatzsteuer" or \
+                        line.invoice_line_tax_ids.name == "19 % Umsatzsteuer EU Lieferung" or \
+                        line.invoice_line_tax_ids.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
+                    self.amount_tax = (19 * (self.amount_untaxed - discount - spl_discount)) / 100
+
+                elif line.invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or \
+                        line.invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                    self.amount_tax = (0 * (self.amount_untaxed - discount - spl_discount)) / 100
+
+                self.amount_total = self.amount_untaxed + self.amount_tax - discount - spl_discount
+            amount_total_company_signed = self.amount_total
+            amount_untaxed_signed = self.amount_untaxed
+            if self.currency_id and self.company_id and self.currency_id != self.company_id.currency_id:
+                currency_id = self.currency_id
+                amount_total_company_signed = currency_id._convert(self.amount_total, self.company_id.currency_id,
+                                                                   self.company_id,
+                                                                   self.date_invoice or fields.Date.today())
+                amount_untaxed_signed = currency_id._convert(self.amount_untaxed, self.company_id.currency_id,
+                                                             self.company_id, self.date_invoice or fields.Date.today())
+            sign = self.type in ['in_refund', 'out_refund'] and -1 or 1
+            self.amount_total_company_signed = amount_total_company_signed * sign
+            self.amount_total_signed = self.amount_total * sign
+            self.amount_untaxed_signed = amount_untaxed_signed * sign
+        else:
+            self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
+            self.amount_tax = sum(round_curr(line.amount_total) for line in self.tax_line_ids)
+            self.amount_total = self.amount_untaxed + self.amount_tax
+
+            amount_total_company_signed = self.amount_total
+            amount_untaxed_signed = self.amount_untaxed
+            if self.currency_id and self.company_id and self.currency_id != self.company_id.currency_id:
+                currency_id = self.currency_id
+                amount_total_company_signed = currency_id._convert(self.amount_total, self.company_id.currency_id,
+                                                                   self.company_id,
+                                                                   self.date_invoice or fields.Date.today())
+                amount_untaxed_signed = currency_id._convert(self.amount_untaxed, self.company_id.currency_id,
+                                                             self.company_id, self.date_invoice or fields.Date.today())
+            sign = self.type in ['in_refund', 'out_refund'] and -1 or 1
+            self.amount_total_company_signed = amount_total_company_signed * sign
+            self.amount_total_signed = self.amount_total * sign
+            self.amount_untaxed_signed = amount_untaxed_signed * sign

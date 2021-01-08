@@ -386,91 +386,61 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-if="not o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
-                                <tr style="border-bottom: 1px solid black">
-                                    <t t-foreach="o.invoice_line_ids[0]" t-as="d">
-                                        <t t-if="d.invoice_line_tax_ids.name == '16% abgesenkte MwSt' or d.invoice_line_tax_ids.name == '16% Corona Tax' or d.invoice_line_tax_ids.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
-                                            <td class="text-right"><span>Vat 16%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                        <t t-if="d.invoice_line_tax_ids.name == '19% Umsatzsteuer' or d.invoice_line_tax_ids.name == 'MwSt._(19.0 % included T)_Relaxound GmbH' or d.invoice_line_tax_ids.name == '19 % Umsatzsteuer EU Lieferung'">
-                                            <td class="text-right"><span>Vat 19%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                        <t t-if="not d.invoice_line_tax_ids and o.amount_tax != 0.00">
-                                            <td class="text-right"><span>Vat 16%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                        <t t-if="o.amount_tax == 0.00">
-                                            <td class="text-right"><span>Vat 0%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                    </t>
-                                </tr>
-                            </t>
                             <t t-if="o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
-                                <tr style="border-bottom: 1px solid black">
-                                    <t t-foreach="o.invoice_line_ids[0]" t-as="d">
-                                        <t t-if="d.invoice_line_tax_ids.name == '16% abgesenkte MwSt' or d.invoice_line_tax_ids.name == '16% Corona Tax' or d.invoice_line_tax_ids.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
-                                            <td class="text-right"><span>Vat 16%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax_new))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                        <t t-if="d.invoice_line_tax_ids.name == '19% Umsatzsteuer' or d.invoice_line_tax_ids.name == 'MwSt._(19.0 % included T)_Relaxound GmbH' or d.invoice_line_tax_ids.name == '19 % Umsatzsteuer EU Lieferung'">
-                                            <td class="text-right"><span>Vat 19%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax_new))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                        <t t-if="not d.invoice_line_tax_ids and o.amount_tax_new != 0.00">
-                                            <td class="text-right"><span>Vat 16%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(o.amount_tax_new))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                        <t t-if="o.amount_tax_new == 0.00">
-                                            <td class="text-right"><span>Vat 0%</span></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.currency_id.symbol"/>
-                                                    <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                                </strong>
-                                            </td>
-                                        </t>
-                                    </t>
+                                <tr style="border-top: 1px solid black">
+                                    <td class="col-xs-3 text-right">
+                                        <span>Amount After Discount</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
                                 </tr>
                             </t>
 
+
+                            <tr style="border-bottom: 1px solid black">
+                                <t t-foreach="o.invoice_line_ids[0]" t-as="d">
+                                    <t t-if="d.invoice_line_tax_ids.name == '16% abgesenkte MwSt' or d.invoice_line_tax_ids.name == '16% Corona Tax' or d.invoice_line_tax_ids.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
+                                        <td class="text-right"><span>Vat 16%</span></td>
+                                        <td class="text-right">
+                                            <strong>
+                                                <span t-field="o.currency_id.symbol"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </strong>
+                                        </td>
+                                    </t>
+                                    <t t-if="d.invoice_line_tax_ids.name == '19% Umsatzsteuer' or d.invoice_line_tax_ids.name == 'MwSt._(19.0 % included T)_Relaxound GmbH' or d.invoice_line_tax_ids.name == '19 % Umsatzsteuer EU Lieferung'">
+                                        <td class="text-right"><span>Vat 19%</span></td>
+                                        <td class="text-right">
+                                            <strong>
+                                                <span t-field="o.currency_id.symbol"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </strong>
+                                        </td>
+                                    </t>
+                                    <t t-if="not d.invoice_line_tax_ids and o.amount_tax != 0.00">
+                                        <td class="text-right"><span>Vat 16%</span></td>
+                                        <td class="text-right">
+                                            <strong>
+                                                <span t-field="o.currency_id.symbol"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(o.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </strong>
+                                        </td>
+                                    </t>
+                                    <t t-if="o.amount_tax == 0.00">
+                                        <td class="text-right"><span>Vat 0%</span></td>
+                                        <td class="text-right">
+                                            <strong>
+                                                <span t-field="o.currency_id.symbol"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            </strong>
+                                        </td>
+                                    </t>
+                                </t>
+                            </tr>
 
                         <!-- Change the code logic according to  pricelist -->
 <!--                            <tr style="border: none">-->
@@ -484,35 +454,17 @@
 <!--                                    </strong>-->
 <!--                                </td>-->
 <!--                            </tr>-->
-
-                            <t t-if="o.amount_total_new or o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
-                                <tr style="border: none">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Total</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_total_new))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
-
-
-                            <t t-if="not o.amount_total_new">
-                                <tr style="border: none">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Total</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
+                            <tr style="border: none">
+                                <td class="col-xs-3 text-right">
+                                    <span>Total</span>
+                                </td>
+                                <td class="text-right col-xs-2">
+                                    <strong>
+                                        <span t-field="o.currency_id.symbol"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                    </strong>
+                                </td>
+                            </tr>
                             <!--Code for Reverse charge for 0% tax-->
                             <tr style="border: none">
                                 <td></td>
