@@ -99,13 +99,16 @@ class CustomInvoiceOrderform(models.Model):
         for rec in self:
             if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 for o_line in rec:
-                    if o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "16% Corona Tax" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "16% abgesenkte MwSt":
-                        rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                    elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19% Umsatzsteuer" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19 % Umsatzsteuer EU Lieferung" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
-                        rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                    elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
-                        rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-
+                    if o_line.invoice_line_ids:
+                        if o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "16% Corona Tax" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "16% abgesenkte MwSt":
+                            rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                            break
+                        elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19% Umsatzsteuer" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19 % Umsatzsteuer EU Lieferung" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
+                            rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                            break
+                        elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                            rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                            break
 
     @api.multi
     @api.onchange('partner_id', 'invoice_line_ids')

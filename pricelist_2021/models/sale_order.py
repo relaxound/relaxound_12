@@ -111,12 +111,13 @@ class CustomSaleOrderform(models.Model):
         for rec in self:
             if rec.pricelist_id.name == 'Preismodell 2021':
                 for o_line in rec:
-                    if o_line.order_line[0].tax_id.name == "16% Corona Tax" or o_line.order_line[0].tax_id.name == "16% abgesenkte MwSt":
-                        rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                    elif o_line.order_line[0].tax_id.name == "19% Umsatzsteuer" or o_line.order_line[0].tax_id.name == "19 % Umsatzsteuer EU Lieferung" or o_line.order_line[0].tax_id.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
-                        rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                    elif o_line.order_line[0].tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.order_line[0].tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
-                        rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                    if o_line.order_line:
+                        if o_line.order_line[0].tax_id.name == "16% Corona Tax" or o_line.order_line[0].tax_id.name == "16% abgesenkte MwSt":
+                            rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                        elif o_line.order_line[0].tax_id.name == "19% Umsatzsteuer" or o_line.order_line[0].tax_id.name == "19 % Umsatzsteuer EU Lieferung" or o_line.order_line[0].tax_id.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
+                            rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                        elif o_line.order_line[0].tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.order_line[0].tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                            rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
 
     @api.multi
     @api.onchange('partner_id','order_line')
@@ -190,3 +191,6 @@ class CustomSaleOrderform(models.Model):
             else:
                 order_date = (date.today() + timedelta(days=14)).strftime('%d.%m.%Y')
                 return order_date
+
+
+    
