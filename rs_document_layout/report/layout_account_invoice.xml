@@ -507,7 +507,7 @@
                 <div class="col-12" style="line-height:1">
 
                 <!--   Note for 2% discount pricelist-->
-                    <t t-if="o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
+                    <t t-if="o.partner_id.property_product_pricelist.name == 'Preismodell 2021' and o.partner_id.is_retailer">
                         <tr>
                             <td class="text-left">Note: </td>
                             <td class="text-left" style="font-size:13px">

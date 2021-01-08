@@ -729,7 +729,7 @@
 
     <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
         <!--   Note for 2% discount pricelist-->
-        <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer">
             <tr>
                 <td class="text-left">Note: </td>
                 <td class="text-left" style="font-size:13px">
