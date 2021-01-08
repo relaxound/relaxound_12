@@ -590,6 +590,7 @@
                             </td>
                         </tr>
                     </t>
+                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
                         <tr style="border-top: 1px solid black">
                                 <td class="col-xs-3 text-right">
                                     <span>Amount After Discount</span>
@@ -600,7 +601,8 @@
                                         <span t-esc="('{0:,.2f}'.format(float(doc.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </strong>
                                 </td>
-                            </tr>
+                        </tr>
+                    </t>
                          <tr style="border-bottom: 1px solid black">
                             <t t-foreach="doc.order_line[0]" t-as="d">
                                 <t t-if="d.tax_id.name == '16% abgesenkte MwSt' or d.tax_id.name == '16% Corona Tax' or d.tax_id.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">

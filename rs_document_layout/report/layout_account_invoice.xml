@@ -386,18 +386,19 @@
                                     </td>
                                 </tr>
                             </t>
-
-                            <tr style="border-top: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Amount After Discount</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="o.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
+                            <t t-if="o.partner_id.property_product_pricelist.name == 'Preismodell 2021'">
+                                <tr style="border-top: 1px solid black">
+                                    <td class="col-xs-3 text-right">
+                                        <span>Amount After Discount</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </t>
 
 
                             <tr style="border-bottom: 1px solid black">
