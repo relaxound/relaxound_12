@@ -21,6 +21,23 @@ class CustomInvoiceOrderform(models.Model):
 
     hide = fields.Boolean(string='Hide', compute="_compute_hide")
     hide_spl_discount = fields.Boolean(string='Hide discount' ,compute='_compute_hide_discount')
+    hide_2_discount = fields.Boolean(string='Hide 2% discount' ,compute='_compute_hide_2_discount')
+
+
+    def _get_today_date(self):
+        for rec in self:
+            rec.today_date = date.today().strftime('%Y-%m-%d')
+
+    @api.depends('partner_id.property_product_pricelist')
+    def _compute_hide_2_discount(self):
+        # simple logic, but you can do much more here
+        for rec in self:
+            # datetime.strptime('1/1/2021', "%m/%d/%y")
+            if rec.partner_id.is_retailer and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+                rec.hide_2_discount = True
+            else:
+                rec.hide_2_discount = False
+
 
     @api.onchange('origin1.super_spl_discount','partner_id.property_product_pricelist')
     def _compute_hide_discount(self):
@@ -30,9 +47,6 @@ class CustomInvoiceOrderform(models.Model):
             else:
                 rec.hide_spl_discount = False
 
-    def _get_today_date(self):
-        for rec in self:
-            rec.today_date = date.today().strftime('%Y-%m-%d')
 
     @api.depends('partner_id.property_product_pricelist')
     def _compute_hide(self):

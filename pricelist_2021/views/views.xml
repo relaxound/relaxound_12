@@ -39,16 +39,17 @@
 
                 <!--   Added new payment terms and conditions here             -->
                 <xpath expr="//form/sheet/notebook/page/field[@name='note']" position="before">
+                    <field name="hide_2_discount" invisible="1"/>
                     <div class="oe_subtotal_footer_separator oe_left">
-                        <label for="payment_term_id" attrs="{'invisible':[('hide', '=', False)]}"/>
+                        <label for="payment_term_id" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     </div>
-                    <field name="payment_term_id" attrs="{'invisible':[('hide', '=', False)]}"/>
+                    <field name="payment_term_id" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     <br></br>
                     <div class="oe_subtotal_footer_separator oe_left">
-                        <label for="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
+                        <label for="set_desription" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     </div>
-                    <field name="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
-                    <field name="discount_2" attrs="{'invisible':[('hide', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
+                    <field name="set_desription" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
+                    <field name="discount_2" attrs="{'invisible':[('hide_2_discount', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
                     <div class="oe_clear"/>
                 </xpath>
             </field>
@@ -100,6 +101,7 @@
 
                 <!--   Added new payment terms and conditions here             -->
                 <xpath expr="//form/sheet/notebook/page/field[@name='comment']" position="before">
+                    <field name="hide_2_discount" invisible="1"/>
                     <!--      Changes in code logic.    -->
 <!--                    <div class="oe_subtotal_footer oe_left">-->
 <!--                        <label for="carrier_id" />-->
@@ -112,15 +114,15 @@
 <!--&lt;!&ndash;                    <field name="payment_method_id"/>&ndash;&gt;-->
 <!--                    <br></br>-->
                     <div class="oe_subtotal_footer_separator oe_left">
-                        <label for="payment_term_id" attrs="{'invisible':[('hide', '=', False)]}"/>
+                        <label for="payment_term_id" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     </div>
-                    <field name="payment_term_id" attrs="{'invisible':[('hide', '=', False)]}"/>
+                    <field name="payment_term_id" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     <br></br>
                     <div class="oe_subtotal_footer_separator oe_left">
-                        <label for="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
+                        <label for="set_desription" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     </div>
-                    <field name="set_desription" attrs="{'invisible':[('hide', '=', False)]}"/>
-                    <field name="discount_2" attrs="{'invisible':[('hide', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
+                    <field name="set_desription" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
+                    <field name="discount_2" attrs="{'invisible':[('hide_2_discount', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
                     <div class="oe_clear"/>
                 </xpath>
 

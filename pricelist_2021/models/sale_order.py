@@ -21,6 +21,17 @@ class CustomSaleOrderform(models.Model):
 
     hide = fields.Boolean(string='Hide', compute="_compute_hide")
     hide_spl_discount = fields.Boolean(string='Hide discount' ,compute='_compute_hide_discount')
+    hide_2_discount = fields.Boolean(string='Hide 2% discount' ,compute='_compute_hide_2_discount')
+
+    @api.depends('pricelist_id')
+    def _compute_hide_2_discount(self):
+        # simple logic, but you can do much more here
+        for rec in self:
+            # datetime.strptime('1/1/2021', "%m/%d/%y")
+            if rec.partner_id.is_retailer and rec.pricelist_id.name == 'Preismodell 2021':
+                rec.hide_2_discount = True
+            else:
+                rec.hide_2_discount = False
 
     @api.depends('super_spl_discount','pricelist_id')
     def _compute_hide_discount(self):
