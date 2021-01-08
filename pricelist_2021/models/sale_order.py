@@ -111,12 +111,13 @@ class CustomSaleOrderform(models.Model):
         for rec in self:
             if rec.pricelist_id.name == 'Preismodell 2021':
                 for o_line in rec:
-                    if o_line.order_line[0].tax_id.name == "16% Corona Tax" or o_line.order_line[0].tax_id.name == "16% abgesenkte MwSt":
-                        rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                    elif o_line.order_line[0].tax_id.name == "19% Umsatzsteuer" or o_line.order_line[0].tax_id.name == "19 % Umsatzsteuer EU Lieferung" or o_line.order_line[0].tax_id.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
-                        rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
-                    elif o_line.order_line[0].tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.order_line[0].tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
-                        rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                    if o_line.order_line:
+                        if o_line.order_line[0].tax_id.name == "16% Corona Tax" or o_line.order_line[0].tax_id.name == "16% abgesenkte MwSt":
+                            rec.amount_tax_new = (16 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                        elif o_line.order_line[0].tax_id.name == "19% Umsatzsteuer" or o_line.order_line[0].tax_id.name == "19 % Umsatzsteuer EU Lieferung" or o_line.order_line[0].tax_id.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
+                            rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
+                        elif o_line.order_line[0].tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.order_line[0].tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                            rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
 
     @api.multi
     @api.onchange('partner_id','order_line')
@@ -190,3 +191,41 @@ class CustomSaleOrderform(models.Model):
             else:
                 order_date = (date.today() + timedelta(days=14)).strftime('%d.%m.%Y')
                 return order_date
+
+
+    @api.depends('order_line.price_total')
+    def _amount_all(self):
+        """
+        Compute the total amounts of the SO.
+        """
+        for order in self:
+            # import pdb;
+            # pdb.set_trace()
+            if order.pricelist_id.name != 'Preismodell 2021':
+                amount_untaxed = amount_tax = 0.0
+                for line in order.order_line:
+                    amount_untaxed += line.price_subtotal
+                    amount_tax += line.price_tax
+                order.update({
+                    'amount_untaxed': amount_untaxed,
+                    'amount_tax': amount_tax,
+                    'amount_total': amount_untaxed + amount_tax,
+                })
+            else:
+                amount_untaxed = amount_tax = 0.0
+                for line in order.order_line:
+                    amount_untaxed += line.price_subtotal
+                    # amount_tax += line.price_tax
+                    if line.tax_id.name == "16% Corona Tax" or line.tax_id.name == "16% abgesenkte MwSt" or line.tax_id.name == "MwSt._(16.0 % included T)_Relaxound GmbH":
+                        amount_tax = (16 * (order.amount_untaxed - order.discount - order.spl_discount)) / 100
+                    elif line.tax_id.name == "19% Umsatzsteuer" or line.tax_id.name == "19 % Umsatzsteuer EU Lieferung" or line.tax_id.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
+                        amount_tax= (19 * (order.amount_untaxed - order.discount - order.spl_discount)) / 100
+                    elif line.tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or \
+                            line.tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                        amount_tax = (0 * (order.amount_untaxed - order.discount - order.spl_discount)) / 100
+
+                order.update({
+                    'amount_untaxed': amount_untaxed,
+                    'amount_tax': amount_tax,
+                    'amount_total': amount_untaxed + amount_tax,
+                })
