@@ -202,14 +202,14 @@ class CustomSaleOrderform(models.Model):
     @api.onchange('partner_id','order_line','amount_total')
     def _set_description(self):
         for rec in self:
-            if rec.partner_id.is_retailer and rec.partner_id.lang in  ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
+            if rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
                 rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y'))
             elif rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
                 rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
-            elif rec.partner_id.is_retailer and rec.partner_id.lang == 'en_US' and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
+            elif rec.partner_id.is_retailer and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
                 rec.set_desription ='2% discount - payment by ' + str((rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y'))
-            elif rec.partner_id.is_retailer and rec.partner_id.lang == 'en_US' and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
+            elif rec.partner_id.is_retailer and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
                 rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
             elif rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
