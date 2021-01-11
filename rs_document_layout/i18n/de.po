@@ -303,6 +303,14 @@ msgstr "MwSt. 16%"
 msgid "<span>Vat 19%</span>"
 msgstr "MwSt. 19%"
 
+
+#. module: rs_document_layout
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:rs_document_layout.report_saleorder_document
+msgid "<span>2% discount - payment by </span>"
+msgstr "2% Skonto bei Zahlungseingang bis"
+
+
 #. module: rs_document_layout
 #: model_terms:ir.ui.view,arch_db:rs_document_layout.report_invoice_document_with_payments
 msgid "<strong>Amount Due</strong>"
