@@ -212,9 +212,9 @@ class CustomInvoiceOrderform(models.Model):
         for rec in self:
             if rec.partner_id.is_retailer and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                 if rec.date_invoice and rec.partner_id.lang in ['de_CH','de_DE'] and rec.origin1.pricelist_id.name == 'Preismodell 2021':
-                    rec.set_desription ='2% Skonto bei Zahlungseingang bis' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
+                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
                 elif rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH','de_DE'] and (rec.origin1.pricelist_id.name == 'Preismodell 2021' or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and not rec.date_invoice and date.today() >= date(2021,1,1) :
-                    rec.set_desription ='2% Skonto bei Zahlungseingang bis' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
                 elif rec.date_invoice and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.origin1.pricelist_id.name == 'Preismodell 2021':
                     rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
