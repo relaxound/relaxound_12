@@ -41,7 +41,7 @@ class defaultnote(models.Model):
             self.update({'note': "Ihr persönlicher Ansprechpartner: Handelsagentur Schur GbR\nKontakt: Wolfgang Schur, Johann-Ziegler-Str. 14c, 85221 Dachau\nTel. 08131 333 26 37\nE-Mail: info@ha-schur.com"})
 
         elif self.partner_id.agent_name == 'Agence made IN':
-            self.update({'note':"your contact person is Jean-Yves Guillou and Charlotte Lagardère\nPhone: 0036 09 73 39 60\nE-Mail: contact@agencemadein.com\n"})
+            self.update({'note':"Your contact person is Jean-Yves Guillou and Charlotte Lagardère\nPhone: 0036 09 73 39 60\nE-Mail: contact@agencemadein.com\n"})
 
         else:
             pass
