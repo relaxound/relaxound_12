@@ -55,6 +55,9 @@ class BusinessSector(models.Model):
                         # self.update({'category_id' : tag_name})
                         self.update({'agent_name': 'Handelsagentur Schur GbR'})
 
+                elif 'Händler' in tag_name and self.country_id.code == 'FR':
+                        self.update({'agent_name': 'Agence made IN'})
+
                 else:
                         self.update({'agent_name': None})
 

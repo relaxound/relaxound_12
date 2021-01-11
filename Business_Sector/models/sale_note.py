@@ -10,6 +10,9 @@ class defaultnote(models.Model):
 
     @api.onchange('partner_id')
     def onchange_partner_id_sale_agent(self):
+
+        # import pdb;
+        # pdb.set_trace()
         if self.partner_id.agent_name == 'Rossmanek':
             self.update({'note': "Ihr persönlicher Ansprechpartner: Handelsagentur Rossmanek\nKontakt: Ole Roßmanek, Timms Hoff 7, 22941 Delingsdorf\nTel. 04532 28 26 331\nE-Mail: info@agentur-rossmanek.de"})
 
@@ -36,6 +39,9 @@ class defaultnote(models.Model):
 
         elif self.partner_id.agent_name == 'Handelsagentur Schur GbR':
             self.update({'note': "Ihr persönlicher Ansprechpartner: Handelsagentur Schur GbR\nKontakt: Wolfgang Schur, Johann-Ziegler-Str. 14c, 85221 Dachau\nTel. 08131 333 26 37\nE-Mail: info@ha-schur.com"})
+
+        elif self.partner_id.agent_name == 'Agence made IN':
+            self.update({'note':"your contact person is Jean-Yves Guillou and Charlotte Lagardère\nPhone: 0036 09 73 39 60\nE-Mail: contact@agencemadein.com\n"})
 
         else:
             pass
