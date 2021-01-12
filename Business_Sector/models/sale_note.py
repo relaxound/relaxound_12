@@ -43,8 +43,10 @@ class defaultnote(models.Model):
         elif self.partner_id.agent_name == 'Agence made IN':
             self.update({'note':"Your contact person is Jean-Yves Guillou and Charlotte Lagardère\nPhone: 0036 09 73 39 60\nE-Mail: contact@agencemadein.com\n"})
 
+        # Added empty notes instead of below one
         else:
-            pass
+            self.update({'note':""})
+
         # Remove extra text from sale/invoice template
         # else:
         #         self.update({'note' :"Bitte beachten Sie, dass wir bei nicht vereinbartem Skontoabzug oder Kürzung des Rechnungsbetrages eine Bearbeitungsgebühr von 10 EUR erheben müssen."})
