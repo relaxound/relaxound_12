@@ -16,12 +16,25 @@ class CustomInvoiceOrderform(models.Model):
     amount_tax_new = fields.Float('Taxes',compute='_compute_tax_new')
     discount_2 = fields.Float(compute='_compute_discount_2')
     set_desription = fields.Char('Note',compute='_set_description')
+    set_desription1 = fields.Text('Note',compute='_set_description')
+
     today_date = fields.Date('Today Date',compute='_get_today_date')
     # super_spl_discount = fields.Boolean('Super Special Discount')
 
     hide = fields.Boolean(string='Hide', compute="_compute_hide")
     hide_spl_discount = fields.Boolean(string='Hide discount' ,compute='_compute_hide_discount')
     hide_2_discount = fields.Boolean(string='Hide 2% discount' ,compute='_compute_hide_2_discount')
+    hide_france_note = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
+
+    @api.depends('partner_id.property_product_pricelist')
+    def _compute_hide_france_desc(self):
+        # simple logic, but you can do much more here
+        for rec in self:
+            # datetime.strptime('1/1/2021', "%m/%d/%y")
+            if rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+                rec.hide_france_note = True
+            else:
+                rec.hide_france_note = False
 
 
     def _get_today_date(self):
@@ -33,7 +46,7 @@ class CustomInvoiceOrderform(models.Model):
         # simple logic, but you can do much more here
         for rec in self:
             # datetime.strptime('1/1/2021', "%m/%d/%y")
-            if rec.partner_id.is_retailer and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+            if rec.partner_id.is_retailer and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                 rec.hide_2_discount = True
             else:
                 rec.hide_2_discount = False
@@ -197,13 +210,29 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _set_description(self):
         for rec in self:
-            if rec.partner_id.is_retailer and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
-                if rec.date_invoice and rec.origin1.pricelist_id.name == 'Preismodell 2021':
+            if rec.partner_id.is_retailer and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+                if rec.date_invoice and rec.partner_id.lang in ['de_CH','de_DE'] and rec.origin1.pricelist_id.name == 'Preismodell 2021':
+                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
+                elif rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH','de_DE'] and (rec.origin1.pricelist_id.name == 'Preismodell 2021' or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and not rec.date_invoice and date.today() >= date(2021,1,1) :
+                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+
+                elif rec.date_invoice and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.origin1.pricelist_id.name == 'Preismodell 2021':
                     rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
-                elif rec.partner_id.is_retailer and (rec.origin1.pricelist_id.name == 'Preismodell 2021' or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and not rec.date_invoice and date.today() >= date(2021,1,1) :
+                elif rec.partner_id.is_retailer and rec.partner_id.lang not in ['de_CH','de_DE'] and (rec.origin1.pricelist_id.name == 'Preismodell 2021' or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and not rec.date_invoice and date.today() >= date(2021,1,1) :
                     rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
                 elif (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name != 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name != 'Preismodell 2021'):
                     pass
+
+            elif rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+                if rec.date_invoice and rec.origin1.pricelist_id.name == 'Preismodell 2021':
+                    rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+                elif rec.partner_id.is_retailer and (rec.origin1.pricelist_id.name == 'Preismodell 2021' or rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and not rec.date_invoice and date.today() >= date(2021, 1, 1):
+                    rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+                elif (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name != 'Preismodell 2021') or (rec.partner_id.property_product_pricelist.name != 'Preismodell 2021'):
+                    pass
+            else:
+                pass
+
 
     @api.depends('date_invoice')
     def _get_date_invoice(self):

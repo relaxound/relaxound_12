@@ -507,17 +507,30 @@
                 <div class="col-12" style="line-height:1">
 
                 <!--   Note for 2% discount pricelist-->
-                    <t t-if="o.partner_id.property_product_pricelist.name == 'Preismodell 2021' and o.partner_id.is_retailer">
+                    <t t-if="o.partner_id.property_product_pricelist.name == 'Preismodell 2021' and o.partner_id.is_retailer and o.partner_id.country_id.name != 'France'">
                         <tr>
                             <td class="text-left">Note: </td>
                             <td class="text-left" style="font-size:13px">
-                                <span> 2% discount - payment by </span>
+                                <span>2% discount - payment by</span>
                                 <span t-esc="o._get_date_invoice()"/>
                                 <span>€</span>
                                 <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
                             </td>
                         </tr>
                     </t>
+
+                    <t t-if="o.partner_id.property_product_pricelist.name == 'Preismodell 2021' and o.partner_id.is_retailer and o.partner_id.country_id.name == 'France'">
+                        <tr>
+<!--                            <td class="text-left">Note: </td>-->
+                            <td class="text-left" style="font-size:13px">
+                                <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % et la valeur de votrecommende est réduit à</span>
+<!--                                <span t-esc="o._get_date_invoice()"/>-->
+                                <span>€</span>
+                                <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </td>
+                        </tr>
+                    </t>
+
 
                     <!-- <br/> -->
                 </div>

@@ -2,6 +2,8 @@ from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
 from dateutil.relativedelta import relativedelta
 from datetime import datetime , timedelta,date
+# Import os Module
+import os
 
 
 class CustomSaleOrderform(models.Model):
@@ -17,18 +19,33 @@ class CustomSaleOrderform(models.Model):
     amount_tax_new = fields.Float('Taxes',compute='_compute_tax_new')
     discount_2 = fields.Float(compute='_compute_discount_2')
     set_desription = fields.Char('Note',compute='_set_description')
+    set_desription1 = fields.Text('Note',compute='_set_description')
+
     super_spl_discount = fields.Boolean('Super Special Discount')
 
     hide = fields.Boolean(string='Hide', compute="_compute_hide")
     hide_spl_discount = fields.Boolean(string='Hide discount' ,compute='_compute_hide_discount')
     hide_2_discount = fields.Boolean(string='Hide 2% discount' ,compute='_compute_hide_2_discount')
+    hide_france_note = fields.Boolean(string='Hide france desc' ,compute='_compute_hide_france_desc')
+
+    @api.depends('pricelist_id')
+    def _compute_hide_france_desc(self):
+        # simple logic, but you can do much more here
+        for rec in self:
+            # datetime.strptime('1/1/2021', "%m/%d/%y")
+            if rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021':
+                rec.hide_france_note = True
+            else:
+                rec.hide_france_note = False
+
+
 
     @api.depends('pricelist_id')
     def _compute_hide_2_discount(self):
         # simple logic, but you can do much more here
         for rec in self:
             # datetime.strptime('1/1/2021', "%m/%d/%y")
-            if rec.partner_id.is_retailer and rec.pricelist_id.name == 'Preismodell 2021':
+            if rec.partner_id.is_retailer and rec.pricelist_id.name == 'Preismodell 2021' and rec.partner_id.country_id.name != 'France':
                 rec.hide_2_discount = True
             else:
                 rec.hide_2_discount = False
@@ -40,7 +57,6 @@ class CustomSaleOrderform(models.Model):
                 rec.hide_spl_discount = True
             else:
                 rec.hide_spl_discount = False
-
 
 
     @api.depends('pricelist_id')
@@ -183,15 +199,25 @@ class CustomSaleOrderform(models.Model):
                 rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
 
     @api.multi
-    @api.onchange('partner_id','order_line','amount_total_new')
+    @api.onchange('partner_id','order_line','amount_total')
     def _set_description(self):
         for rec in self:
-            if rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order and rec.partner_id.is_retailer:
+            if rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
+                rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y'))
+            elif rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
+                rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+
+            elif rec.partner_id.is_retailer and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
                 rec.set_desription ='2% discount - payment by ' + str((rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y'))
-            elif rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
+            elif rec.partner_id.is_retailer and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
                 rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+
+            elif rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
+                rec.set_desription1 ='ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+            elif rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order :
+                rec.set_desription1 ='ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % et la valeur de votre commende est réduit à '
             else:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+                pass
 
     @api.depends('order_date')
     def _get_date_order(self):
@@ -210,7 +236,7 @@ class CustomSaleOrderform(models.Model):
         """
         for order in self:
             if order.pricelist_id.name == 'Preismodell 2021':
-                amount_untaxed = 0.0
+                amount_untaxed = amount_tax = 0.0
                 for line in order.order_line:
                     amount_untaxed += line.price_subtotal
 
@@ -247,11 +273,11 @@ class CustomSaleOrderform(models.Model):
                         line.tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
                         amount_tax = (0 * (amount_untaxed - discount - spl_discount)) / 100
 
-                    order.update({
-                        'amount_untaxed': amount_untaxed,
-                        'amount_tax': amount_tax,
-                        'amount_total': amount_untaxed + amount_tax - discount - spl_discount,
-                    })
+                order.update({
+                    'amount_untaxed': amount_untaxed,
+                    'amount_tax': amount_tax,
+                    'amount_total': amount_untaxed + amount_tax - discount - spl_discount,
+                })
             else:
                 amount_untaxed = amount_tax = 0.0
                 for line in order.order_line:

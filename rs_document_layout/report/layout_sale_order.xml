@@ -729,17 +729,30 @@
 
     <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
         <!--   Note for 2% discount pricelist-->
-        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer">
+        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name != 'France'">
             <tr>
                 <td class="text-left">Note: </td>
                 <td class="text-left" style="font-size:13px">
-                    <span>2% discount - payment by </span>
+                    <span>2% discount - payment by</span>
                     <span t-esc="doc._get_date_order()"/>
                     <span>€</span>
                     <span t-esc="('{0:,.2f}'.format(float(doc.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
                 </td>
             </tr>
         </t>
+
+        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name == 'France'">
+            <tr>
+<!--                <td class="text-left">Note: </td>-->
+                <td class="text-left" style="font-size:13px">
+                    <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % et la valeur de votrecommende est réduit à</span>
+<!--                    <span t-esc="doc._get_date_order()"/>-->
+                    <span>€</span>
+                    <span t-esc="('{0:,.2f}'.format(float(doc.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
+                </td>
+            </tr>
+        </t>
+
 
         <div class="text-right" t-if="doc.payment_method_id" style="font-size: 13px">
             <!-- <div class="col-auto mw-100 mb-2 pull-right"> -->
