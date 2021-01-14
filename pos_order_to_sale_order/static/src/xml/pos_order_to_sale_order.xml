@@ -2,10 +2,12 @@
 <template>
 
     <t t-name="CreateSaleOrderButtonWidget">
-        <span class="control-button order-split" t-att-style='widget.is_visible() ? "display: block;" : "display: none;"'>
-            <i class="fa fa-download"></i>Create Sale Order
+<!--        <span class="control-button order-split" t-att-style='widget.is_visible() ? "display: block;" : "display: none;"'>-->
+        <span class="control-button order-split">
+            <i class="fa fa-download"></i>Create/View Sale Order
         </span>
     </t>
+
 
      <t t-name="CreateSaleOrderScreenWidget">
         <div class="screen">
@@ -22,16 +24,23 @@
                         <div class="button paymentmethod"
                                 id="button-create-draft-order" action="draft">
                             Create Draft Sale Order
-                        </div><div class="button paymentmethod"
+                        </div>
+                        <div class="button paymentmethod"
                                 id="button-create-confirmed-order" action="confirmed">
                             Create Confirmed Sale Order
-                        </div><div class="button paymentmethod"
+                        </div>
+                        <div class="button paymentmethod"
                                 id="button-create-delivered-order" action="delivered">
                             Create Delivered Sale Order
+                        </div>
+                        <div class="button viewsaleordermethod" id="button-view-sale-order">
+                            <i class="fa fa-download"></i>View Sale Order
                         </div>
                     </div>
                 </div>
             </div>
         </div>
      </t>
+
+
 </template>

@@ -18,7 +18,7 @@
     'category': '"Point Of Sale"',
     'version': '12.0',
     # any module necessary for this one to work correctly
-    'depends': ['point_of_sale'],
+    'depends': ['point_of_sale','sale','account'],
 
     # always loaded
     "data": [

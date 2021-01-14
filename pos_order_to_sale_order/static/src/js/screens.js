@@ -80,15 +80,26 @@ odoo.define('pos_order_to_sale_order.screens', function (require) {
             if (!this.pos.config.iface_create_delivered_sale_order) {
                 this.$('#button-create-delivered-order').addClass('oe_hidden');
             }
+            //View sale order code
+            if(!this.pos.config.iface_view_pos_order){
+                this.$('#button-view-sale-order').addClass('oe_hidden');
+            }
 
            this.$('.paymentmethod').click(function(event){
                 self.click_sale_order_button(event.currentTarget.attributes.action.nodeValue);
             });
+
+            //View sale order button
+            this.$('.viewsaleordermethod').click(function(event){
+                window.open("/web?#action=1066&model=sale.order&view_type=list&menu_id=726");
+            })
+
         },
+
 
         click_sale_order_button: function(action) {
             var self = this;
-            this.gui.show_popup('confirm', {
+            this.gui.show_popup('confirm',{
                 'title': _t(
                     'Create Sale Order and discard the current' +
                     ' PoS Order?'),
@@ -104,11 +115,13 @@ odoo.define('pos_order_to_sale_order.screens', function (require) {
                         args: [self.pos.get('selectedOrder').export_as_JSON(), action],
                     }).then(function (result) {
                         self.hook_create_sale_order_success(result);
+
                     }).fail(function (error, event) {
                         self.hook_create_sale_order_error(error, event);
                     });
                 },
             });
+
         },
 
         /**

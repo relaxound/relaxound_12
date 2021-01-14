@@ -36,6 +36,16 @@
                             <label for="iface_create_delivered_sale_order"/>
                         </div>
                     </div>
+                    <!--View sale orders-->
+<!--                    <div class="col-12 col-lg-6 o_setting_box">-->
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="iface_view_pos_order"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <label for="iface_view_pos_order"/>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
                 </div>
             </xpath>
         </field>

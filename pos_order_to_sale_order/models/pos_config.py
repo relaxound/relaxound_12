@@ -31,11 +31,14 @@ class PosConfig(models.Model):
         " the according picking will be marked as delivered. Only invoices"
         " process will be possible.",
     )
+    # View sale order
+    iface_view_pos_order = fields.Boolean(string="View POS Sale Orders",default=True,help="View pos sale orders.")
 
     @api.depends(
         "iface_create_draft_sale_order",
         "iface_create_confirmed_sale_order",
         "iface_create_delivered_sale_order",
+        "iface_view_pos_order"
     )
     def _compute_iface_create_sale_order(self):
         for config in self:
@@ -43,4 +46,6 @@ class PosConfig(models.Model):
                 config.iface_create_draft_sale_order,
                 config.iface_create_confirmed_sale_order,
                 config.iface_create_delivered_sale_order,
+                config.iface_view_pos_order,
             ])
+

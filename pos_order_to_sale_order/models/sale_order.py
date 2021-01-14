@@ -1,5 +1,5 @@
 
-from odoo import _, api, models
+from odoo import _, api, models, fields
 
 
 class SaleOrder(models.Model):
@@ -53,6 +53,7 @@ class SaleOrder(models.Model):
                     "picking_ids.move_ids_without_package"):
                 move.quantity_done = move.product_uom_qty
             sale_order.mapped("picking_ids").button_validate()
+
 
         return {
             "sale_order_id": sale_order.id,
