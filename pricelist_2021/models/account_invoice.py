@@ -31,11 +31,10 @@ class CustomInvoiceOrderform(models.Model):
 
     @api.depends('partner_id.property_product_pricelist')
     def date_invoice_compute(self):
-        intial_date = date(2021, 1, 1)
         for rec in self:
-            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
-                    rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and (intial_date >= date.today() or rec.date_invoice >= date.today()):
-                rec.date_invoice_compute = True
+            if ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+                    rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and ((rec.date_invoice and rec.date_invoice >= date(2021, 1, 1)) or (not rec.date_invoice and date.today() >= date(2021, 1, 1))):
+                    rec.date_invoice_compute = True
             else:
                 rec.date_invoice_compute = False
 

@@ -30,9 +30,8 @@ class CustomSaleOrderform(models.Model):
 
     @api.depends('pricelist_id')
     def date_order_compute(self):
-        intial_date = date(2021, 1, 1)
         for rec in self:
-            if rec.pricelist_id.name == 'Preismodell 2021' and (intial_date >= date.today() or rec.date_order >= date.today()):
+            if rec.pricelist_id.name == 'Preismodell 2021' and ((rec.date_order and rec.date_order >= date(2021, 1, 1)) or (not rec.date_order and date.today() >= date(2021, 1, 1))):
                 rec.date_order_compute = True
             else:
                 rec.date_order_compute = False
