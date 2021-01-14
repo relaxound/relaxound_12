@@ -26,6 +26,22 @@ class CustomInvoiceOrderform(models.Model):
     hide_2_discount = fields.Boolean(string='Hide 2% discount' ,compute='_compute_hide_2_discount')
     hide_france_note = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
 
+    date_invoice_compute = fields.Boolean(string='Date of the order',
+                                  compute='date_invoice_compute')
+
+    @api.depends('partner_id.property_product_pricelist')
+    def date_invoice_compute(self):
+        intial_date = date(2021, 1, 1)
+        for rec in self:
+            if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+                    rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') and (intial_date >= date.today() or rec.date_invoice >= date.today()):
+                rec.date_invoice_compute = True
+            else:
+                rec.date_invoice_compute = False
+
+
+
+
     @api.depends('partner_id.property_product_pricelist')
     def _compute_hide_france_desc(self):
         # simple logic, but you can do much more here
@@ -246,7 +262,7 @@ class CustomInvoiceOrderform(models.Model):
 
 
     @api.one
-    @api.depends('invoice_line_ids.price_subtotal', 'tax_line_ids.amount', 'tax_line_ids.amount_rounding',
+    @api.depends('tax_line_ids.amount', 'tax_line_ids.amount_rounding',
                  'currency_id', 'company_id', 'date_invoice', 'type')
     def _compute_amount(self):
         round_curr = self.currency_id.round

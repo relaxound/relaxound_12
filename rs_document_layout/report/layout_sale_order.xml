@@ -466,7 +466,7 @@
 
 
             <!--        Pricelist discount code adding       -->
-                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+                    <t t-if="doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021'">
                         <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
@@ -481,7 +481,7 @@
                             </tr>
                         </t>
 
-                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'Preismodell 2021'">
+                        <t t-if="doc.date_order_compute and doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 7%</span>
@@ -494,7 +494,7 @@
                                 </td>
                             </tr>
                         </t>
-                        <t t-if="doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'Preismodell 2021'">
+                        <t t-if="doc.date_order_compute and doc.amount_untaxed &gt;= 1500 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <tr style="border: none">
                                 <td class="col-xs-3 text-right">
                                     <span>Discount 10%</span>
@@ -509,8 +509,8 @@
                         </t>
                     </t>
 
-                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.super_spl_discount" >
-                        <t t-if="doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'Preismodell 2021'">
+                    <t t-if="doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021' and doc.super_spl_discount" >
+                        <t t-if="doc.date_order_compute and doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <!-- New pricelist special discount 10%   -->
                             <t t-if="doc.partner_id.is_retailer">
                                 <tr style="border-bottom: 1px solid black">
@@ -528,7 +528,7 @@
                             </t>
                         </t>
 
-                        <t t-if="doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'Preismodell 2021'">
+                        <t t-if="doc.date_order_compute and doc.amount_untaxed &gt;= 1000 and doc.amount_untaxed &lt;= 1499 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <!-- New pricelist special discount 10%   -->
                             <t t-if="doc.partner_id.is_retailer">
                                 <tr style="border-bottom: 1px solid black">
@@ -546,7 +546,7 @@
                             </t>
 
                         </t>
-                        <t t-if="doc.amount_untaxed &lt; 500 and doc.pricelist_id.name == 'Preismodell 2021'">
+                        <t t-if="doc.date_order_compute and doc.amount_untaxed &lt; 500 and doc.pricelist_id.name == 'Preismodell 2021'">
                             <!-- New pricelist special discount 10%   -->
                             <t t-if="doc.partner_id.is_retailer">
                                 <tr style="border-bottom: 1px solid black">
@@ -564,7 +564,7 @@
                             </t>
                         </t>
                     </t>
-                    <t t-if="doc.amount_untaxed &gt;= 250 and doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
+                    <t t-if="doc.date_order_compute and  doc.amount_untaxed &gt;= 250 and doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
                         <tr style="border: none">
                             <td class="text-right">
                                 <span>Shipping</span>
@@ -577,7 +577,7 @@
                             </td>
                         </tr>
                     </t>
-                    <t t-if="(doc.pricelist_id.name == 'Preismodell 2021' and doc.amount_untaxed &lt;= 250) or (doc.pricelist_id.name != 'Preismodell 2021') or (doc.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne'])">
+                    <t t-if="(doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021' and doc.amount_untaxed &lt;= 250) or (doc.pricelist_id.name != 'Preismodell 2021') or (doc.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne'])">
                         <tr style="border: none">
                             <td class="text-right">
                                 <span>Shipping</span>
@@ -590,7 +590,7 @@
                             </td>
                         </tr>
                     </t>
-                    <t t-if="doc.pricelist_id.name == 'Preismodell 2021'">
+                    <t t-if="doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021'">
                         <tr style="border-top: 1px solid black">
                                 <td class="col-xs-3 text-right">
                                     <span>Amount After Discount</span>
@@ -729,7 +729,7 @@
 
     <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace">
         <!--   Note for 2% discount pricelist-->
-        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name != 'France'">
+        <t t-if="doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name != 'France'">
             <tr>
                 <td class="text-left">Note: </td>
                 <td class="text-left" style="font-size:13px">
@@ -741,7 +741,7 @@
             </tr>
         </t>
 
-        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name == 'France'">
+        <t t-if="doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name == 'France'">
             <tr>
 <!--                <td class="text-left">Note: </td>-->
                 <td class="text-left" style="font-size:13px">
