@@ -26,10 +26,10 @@ class CustomSaleOrderform(models.Model):
     hide_france_note = fields.Boolean(string='Hide france desc' ,compute='_compute_hide_france_desc')
 
     date_order_compute = fields.Boolean(string='Date of the order',
-                                  compute='date_order_compute')
+                                  compute='_date_order_compute')
 
     @api.depends('pricelist_id')
-    def date_order_compute(self):
+    def _date_order_compute(self):
         for rec in self:
             if rec.pricelist_id.name == 'Preismodell 2021' and ((rec.date_order and rec.date_order >= date(2021, 1, 1)) or (not rec.date_order and date.today() >= date(2021, 1, 1))):
                 rec.date_order_compute = True
