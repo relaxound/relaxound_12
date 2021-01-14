@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.point_of_sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="95"/>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('app_settings_block')]" position="inside">
+<!--                <div class="app_settings_block" data-string="Point of sale" string="Point of Sale" data-key="point_of_sale" groups="point_of_sale.group_pos_manager">-->
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="group_sale_delivery_address"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_sale_delivery_address"/>
+                                <div class="text-muted">
+                                    Set specific billing and shipping addresses
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                </div>-->
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_pos_configuration" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'point_of_sale'}</field>
+    </record>
+
+<!--    <menuitem id="menu_pos_global_settings"-->
+<!--        name="Settings"-->
+<!--        parent="menu_point_config_product"-->
+<!--        sequence="0"-->
+<!--        action="action_pos_configuration"-->
+<!--        groups="point_of_sale.group_system"/>-->
+
+
+</odoo>

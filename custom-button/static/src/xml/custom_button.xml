@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" inherit_id="point_of_sale.template">
+<!--<templates id="template" xml:space="preserve">-->
+
+    <t t-extend="ActionpadWidget">
+        <t t-jquery="button[class='button pay']" t-operation="replace">
+                <button t-attf-class='button set-customer-invoice #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
+<!--                <button t-attf-class='button set-customer-invoice'>-->
+                    <i class='fa fa-user' role="img" aria-label="Customer" title="Customer"/>
+                        <t t-if="widget.pos.get_client()">
+                            <t t-esc="widget.pos.get_client().name"/>
+                        </t>
+                        <t t-if="!widget.pos.get_client()">
+                            Invoice Address
+                        </t>
+                </button>
+
+                <button t-attf-class='button set-customer-shipping #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }'>
+                    <i class='fa fa-user' role="img" aria-label="Customer" title="Customer"/>
+                    <t t-if="widget.pos.get_client()">
+                        <t t-esc="widget.pos.get_client().name" />
+                    </t>
+                    <t t-if="!widget.pos.get_client()">
+                        Shipping Address
+                    </t>
+                </button>
+                <button class='control-button pay'>
+                    <div class='pay-circle'>
+                        <i class='fa fa-chevron-right' role="img" aria-label="Pay" title="Pay"/>
+                        Payment
+                    </div>
+                </button>
+        </t>
+
+            <!--Pay button change code-->
+<!--        <t t-jquery="button[class='button pay']" t-operation="replace">-->
+<!--            <button class='control-button pay'>-->
+<!--                <i class='fa fa-chevron-right' role="img" aria-label="Pay" title="Pay"/>-->
+<!--                Payment-->
+<!--            </button>-->
+<!--        </t>-->
+
+
+    </t>
+
+
+<!--    <t t-name="InvoiceAddress">-->
+<!--        <div class="actionpad">-->
+<!--            <span t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >-->
+<!--                <i class='fa fa-user' role="img" aria-label="Customer" title="Customer"/>-->
+<!--                <t t-if="widget.pos.get_client()">-->
+<!--                    <t t-esc="widget.pos.get_client().name" />-->
+<!--                </t>-->
+<!--                <t t-if="!widget.pos.get_client()">-->
+<!--                    Invoice Address-->
+<!--                </t>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </t>-->
+
+<!--    <t t-name="ShippingAddress">-->
+<!--        <div class="actionpad">-->
+<!--            <span t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >-->
+<!--                <i class='fa fa-user' role="img" aria-label="Customer" title="Customer"/>-->
+<!--                <t t-if="widget.pos.get_client()">-->
+<!--                    <t t-esc="widget.pos.get_client().name" />-->
+<!--                </t>-->
+<!--                <t t-if="!widget.pos.get_client()">-->
+<!--                    Shipping Address-->
+<!--                </t>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </t>-->
+
+
+<!--    <t t-name="ClientListScreenWidget">-->
+<!--        <div class="clientlist-screen screen">-->
+<!--            <div class="screen-content">-->
+<!--                <section class="top-content">-->
+<!--                    <span class='button back'>-->
+<!--                        <i class='fa fa-angle-double-left'></i>-->
+<!--                        Cancel-->
+<!--                    </span>-->
+<!--                    <span class='searchbox'>-->
+<!--                        <input placeholder='Search Customers' />-->
+<!--                        <span class='search-clear'></span>-->
+<!--                    </span>-->
+<!--                    <span class='searchbox'></span>-->
+<!--                    <span class='button new-customer' role="img" aria-label="Add a customer" title="Add a customer">-->
+<!--                        <i class='fa fa-user'></i>-->
+<!--                        <i class='fa fa-plus'></i>-->
+<!--                    </span>-->
+<!--                    <span class='button next oe_hidden highlight'>-->
+<!--                        Select Customer-->
+<!--                        <i class='fa fa-angle-double-right'></i>-->
+<!--                    </span>-->
+<!--                </section>-->
+<!--                <section class="full-content">-->
+<!--                    <div class='window'>-->
+<!--                        <section class='subwindow collapsed'>-->
+<!--                            <div class='subwindow-container collapsed'>-->
+<!--                                <div class='subwindow-container-fix client-details-contents'>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </section>-->
+<!--                        <section class='subwindow'>-->
+<!--                            <div class='subwindow-container'>-->
+<!--                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>-->
+<!--                                    <table class='client-list'>-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th>Name</th>-->
+<!--                                                <th>Address</th>-->
+<!--                                                <th>Phone</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody class='client-list-contents'>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </section>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </t>-->
+
+
+
+</templates>

@@ -1,0 +1,9 @@
+<templates id="template" xml:space="preserve">
+    <t t-extend="Orderline">
+        <t t-jquery=".price" t-operation="before">
+            <button class="remove-line-button">
+                <i class="fa fa-trash-o"/>
+            </button>
+        </t>
+    </t>
+</templates>
