@@ -39,8 +39,6 @@ class CustomInvoiceOrderform(models.Model):
                 rec.date_invoice_compute = False
 
 
-
-
     @api.depends('partner_id.property_product_pricelist')
     def _compute_hide_france_desc(self):
         # simple logic, but you can do much more here
@@ -150,7 +148,7 @@ class CustomInvoiceOrderform(models.Model):
                         elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19% Umsatzsteuer" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "19 % Umsatzsteuer EU Lieferung" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
                             rec.amount_tax_new = (19 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
 
-                        elif o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                        elif not o_line.invoice_line_ids[0].invoice_line_tax_ids or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or o_line.invoice_line_ids[0].invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
                             rec.amount_tax_new = (0 * (rec.amount_untaxed - rec.discount - rec.spl_discount)) / 100
 
 
@@ -305,7 +303,7 @@ class CustomInvoiceOrderform(models.Model):
                         line.invoice_line_tax_ids.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
                     self.amount_tax = (19 * (self.amount_untaxed - discount - spl_discount)) / 100
 
-                elif line.invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or \
+                elif not line.invoice_line_tax_ids or line.invoice_line_tax_ids.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or \
                         line.invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
                     self.amount_tax = (0 * (self.amount_untaxed - discount - spl_discount)) / 100
 
