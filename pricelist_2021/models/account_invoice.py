@@ -266,9 +266,6 @@ class CustomInvoiceOrderform(models.Model):
         if self.date_invoice_compute and (self.origin1.pricelist_id.name and self.origin1.pricelist_id.name == 'Preismodell 2021') or (
                 self.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
             self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
-            # self.amount_tax = sum(round_curr(line.amount_total) for line in self.tax_line_ids)
-            # self.amount_total = self.amount_untaxed + self.amount_tax
-
             if self.amount_untaxed >= 500 and self.amount_untaxed < 1000:
                 discount = (5 * (self.amount_untaxed)) / 100
 
@@ -293,6 +290,7 @@ class CustomInvoiceOrderform(models.Model):
             else:
                 spl_discount = 0
 
+
             for line in self.invoice_line_ids:
                 if line.invoice_line_tax_ids.name == "16% Corona Tax" or \
                         line.invoice_line_tax_ids.name == "16% abgesenkte MwSt":
@@ -307,7 +305,8 @@ class CustomInvoiceOrderform(models.Model):
                         line.invoice_line_tax_ids.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
                     self.amount_tax = (0 * (self.amount_untaxed - discount - spl_discount)) / 100
 
-                self.amount_total = self.amount_untaxed + self.amount_tax - discount - spl_discount
+                # self.amount_total = self.amount_untaxed + self.amount_tax - discount - spl_discount
+                self.amount_total = self.untaxed_total + self.amount_tax
             amount_total_company_signed = self.amount_total
             amount_untaxed_signed = self.amount_untaxed
             if self.currency_id and self.company_id and self.currency_id != self.company_id.currency_id:

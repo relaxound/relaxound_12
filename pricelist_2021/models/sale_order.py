@@ -205,7 +205,7 @@ class CustomSaleOrderform(models.Model):
     def _compute_discount_2(self):
         for rec in self:
             if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
-                rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
+                rec.discount_2 = rec.amount_total_new - ((2*rec.amount_total_new)/100)
 
     @api.multi
     @api.onchange('partner_id','order_line','amount_total')
@@ -284,7 +284,8 @@ class CustomSaleOrderform(models.Model):
                 order.update({
                     'amount_untaxed': amount_untaxed,
                     'amount_tax': amount_tax,
-                    'amount_total': amount_untaxed + amount_tax - discount - spl_discount,
+                    'amount_total': self.untaxed_total + amount_tax,
+                    # 'amount_total': amount_untaxed - discount - spl_discount + amount_tax,
                 })
             else:
                 amount_untaxed = amount_tax = 0.0
