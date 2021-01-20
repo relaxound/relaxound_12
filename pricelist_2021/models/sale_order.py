@@ -284,8 +284,7 @@ class CustomSaleOrderform(models.Model):
                 order.update({
                     'amount_untaxed': amount_untaxed,
                     'amount_tax': amount_tax,
-                    'amount_total': self.untaxed_total + amount_tax,
-                    # 'amount_total': amount_untaxed - discount - spl_discount + amount_tax,
+                    'amount_total': (amount_untaxed - discount - spl_discount) + amount_tax,
                 })
             else:
                 amount_untaxed = amount_tax = 0.0
