@@ -277,8 +277,7 @@ class CustomSaleOrderform(models.Model):
                         amount_tax = (16 * (amount_untaxed - discount - spl_discount)) / 100
                     elif line.tax_id.name == "19% Umsatzsteuer" or line.tax_id.name == "19 % Umsatzsteuer EU Lieferung" or line.tax_id.name == "MwSt._(19.0 % included T)_Relaxound GmbH":
                         amount_tax = (19 * (amount_untaxed - discount - spl_discount)) / 100
-                    elif not line.tax_id or line.tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or \
-                        line.tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
+                    elif not line.tax_id or line.tax_id.name == "Steuerfreie innergem. Lieferung (§4 Abs. 1b UStG)" or line.tax_id.name == "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)":
                         amount_tax = (0 * (amount_untaxed - discount - spl_discount)) / 100
 
                 order.update({
