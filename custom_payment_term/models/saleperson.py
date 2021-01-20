@@ -12,7 +12,7 @@ class AccountInvoice(models.Model):
 		if not self.partner_id.property_payment_term_id:
 			res=self.env['account.payment.term'].search([])
 			for item in res:
-				if item.name=='14 days after receipt of invoice':
+				if item.name in ['30 days after receipt of invoice','30 Tage nach Rechnungsdatum']:
 					self.update({'payment_term_id':item.id})
 
 
