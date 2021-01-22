@@ -124,16 +124,19 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_shipping_amount(self):
         for rec in self:
+            # Compute delivery cost
+            delivery_cost = 0
+            for line in rec.invoice_line_ids:
+                if line.product_id.type == 'service':
+                    delivery_cost = delivery_cost + line.price_subtotal
+
             if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
-                # Compute delivery cost
-                delivery_cost = 0
-                for line in rec.invoice_line_ids:
-                    if line.product_id.type == 'service':
-                        delivery_cost = delivery_cost + line.price_subtotal
-                if rec.amount_untaxed >= 250 and rec.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
+                if (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 250 and rec.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
                     rec.shipping_amount_new = 0
                 else:
                     rec.shipping_amount_new = delivery_cost
+            else:
+                rec.shipping_amount_new = delivery_cost
 
     @api.multi
     @api.onchange('invoice_line_ids')
@@ -191,12 +194,12 @@ class CustomInvoiceOrderform(models.Model):
     def _compute_spl_discount(self):
         for rec in self:
             if (rec.date_invoice_compute) and (rec.origin1.super_spl_discount) and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
-                if rec.partner_id.is_retailer and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+                if (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                     rec.spl_discount = (5 * (rec.amount_untaxed)) / 100
                     # rec.spl_discount = (10*rec.untaxed_amount_new)/100
-                elif rec.partner_id.is_retailer and rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+                elif (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
                     rec.spl_discount = (3 * (rec.amount_untaxed)) / 100
-                elif rec.partner_id.is_retailer and rec.amount_untaxed < 500:
+                elif (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed < 500:
                     rec.spl_discount = (10 * (rec.amount_untaxed)) /100
                 else:
                     rec.spl_discount = 0
