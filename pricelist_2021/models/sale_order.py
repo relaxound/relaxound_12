@@ -115,16 +115,18 @@ class CustomSaleOrderform(models.Model):
     @api.onchange('partner_id','order_line')
     def _compute_shipping_amount(self):
         for rec in self:
+            # Compute delivery cost
+            delivery_cost = 0
+            for line in rec.order_line:
+                if line.product_id.type == 'service':
+                    delivery_cost = delivery_cost + line.price_subtotal
             if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
-                # Compute delivery cost
-                delivery_cost = 0
-                for line in rec.order_line:
-                    if line.product_id.type == 'service':
-                        delivery_cost = delivery_cost + line.price_subtotal
                 if rec.amount_untaxed >= 250 and rec.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']:
                     rec.shipping_amount_new = 0
                 else:
                     rec.shipping_amount_new = delivery_cost
+            else:
+                rec.shipping_amount_new = delivery_cost
 
     @api.multi
     @api.onchange('partner_id', 'order_line')
