@@ -1,0 +1,126 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* pricelist_2021
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-11 14:10+0000\n"
+"PO-Revision-Date: 2021-01-11 14:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pricelist_2021
+#: model:ir.model,name:pricelist_2021.model_account_invoice
+msgid "Account Invoice Sum Qty"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__untaxed_total
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__untaxed_total
+msgid "Amount After Discount"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__discount
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__discount
+msgid "Discount"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__discount_2
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__discount_2
+msgid "Discount 2"
+msgstr ""
+
+
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__discount_2
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__discount_2
+msgid "2% discount - payment by "
+msgstr "2% Skonto bei Zahlungseingang bis"
+
+
+
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__hide
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__hide
+msgid "Hide"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__hide_2_discount
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__hide_2_discount
+msgid "Hide 2% discount"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__hide_spl_discount
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__hide_spl_discount
+msgid "Hide discount"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__hide_france_note
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__hide_france_note
+msgid "Hide france desc"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__set_desription
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__set_desription1
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__set_desription
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__set_desription1
+msgid "Note"
+msgstr "Notiz"
+
+#. module: pricelist_2021
+#: model:ir.model,name:pricelist_2021.model_sale_order
+msgid "Sale Order Is Sent"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__shipping_amount_new
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__shipping_amount_new
+msgid "Shipping"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__spl_discount
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__spl_discount
+msgid "Special Discount"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__super_spl_discount
+msgid "Super Special Discount"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__amount_tax_new
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__amount_tax_new
+msgid "Taxes"
+msgstr "Steuern"
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__today_date
+msgid "Today Date"
+msgstr ""
+
+#. module: pricelist_2021
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__amount_total_new
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__total_new
+#: model:ir.model.fields,field_description:pricelist_2021.field_account_invoice__untaxed_amount_new
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__amount_total_new
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__total_new
+#: model:ir.model.fields,field_description:pricelist_2021.field_sale_order__untaxed_amount_new
+msgid "Total"
+msgstr ""
+

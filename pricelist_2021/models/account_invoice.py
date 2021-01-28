@@ -33,7 +33,7 @@ class CustomInvoiceOrderform(models.Model):
     def _date_invoice_compute(self):
         for rec in self:
             if ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and
-                    rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and ((rec.date_invoice and rec.date_invoice >= date(2021, 1, 1)) or (not rec.date_invoice and date.today() >= date(2021, 1, 1))):
+                    rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and ((rec.date_invoice and rec.date_invoice >= date(2021, 1, 1)) or (not rec.date_invoice and date.today() >= date(2021, 1, 1))) and (rec.state and rec.state != 'paid'):
                 rec.date_invoice_compute = True
             else:
                 rec.date_invoice_compute = False

@@ -246,10 +246,11 @@ class CustomSaleOrderform(models.Model):
         Compute the total amounts of the SO.
         """
         for order in self:
-            if order.date_order_compute and order.pricelist_id.name == 'Preismodell 2021':
+            if order.pricelist_id.name == 'Preismodell 2021':
                 amount_untaxed = amount_tax = 0.0
                 for line in order.order_line:
                     amount_untaxed += line.price_subtotal
+
                 if amount_untaxed >= 500 and amount_untaxed < 1000:
                     discount = (5 * (amount_untaxed)) / 100
 
