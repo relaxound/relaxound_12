@@ -833,13 +833,13 @@
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <!--     Add if condition for remove extra text from template invoice      -->
-                    <t t-if="o.partner_id.agent_name or o.partner_id.agent_name in ['Rossmanek','Pforte','Senft','Wirtz','Kuhnle','Werner','DEsignLICIOUS','The Living Connection','Handelsagentur Schur GbR','Agence made IN']">
+                    <!-- <t t-if="o.partner_id.agent_name or o.partner_id.agent_name in ['Rossmanek','Pforte','Senft','Wirtz','Kuhnle','Werner','DEsignLICIOUS','The Living Connection','Handelsagentur Schur GbR','Agence made IN']"> -->
 <!--                    <t t-if="o.partner_id.agent_name">-->
                         <div class="col-xs-12">
                             <span t-field="o.comment"/>
                             <br/>
                         </div>
-                    </t>
+                    <!-- </t> -->
                 </div><br/><br/>
 
 
