@@ -37,6 +37,8 @@ class ResPartner(models.Model):
         elif self.partner_id.agent_name == 'Handelsagentur Schur GbR':
             emailcc = 'info@ha-schur.com'
 
+        elif self.partner_id.agent_name == 'Agence made IN':
+            emailcc= 'contact@agencemadein.com'
 
         else:
             emailcc = ''
