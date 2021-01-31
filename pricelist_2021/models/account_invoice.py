@@ -219,7 +219,10 @@ class CustomInvoiceOrderform(models.Model):
     def _compute_discount_2(self):
         for rec in self:
             if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
-                rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
+                if rec.residual:
+                    rec.discount_2 = rec.residual - 2 * rec.residual / 100
+                else:
+                    rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
 
 
     @api.multi
