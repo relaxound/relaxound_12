@@ -27,6 +27,13 @@
                     <field name="amount_untaxed"/>
                     <field name="amount_tax"/>
                 </xpath>
+                <xpath expr="field[@name='payment_method_id']" position="after">
+                    <field name="state"/>
+                    <field name="category_id_sale" widget="many2many_tags"/>
+                </xpath>
+                 <xpath expr="field[@name='partner_id']" position="after">
+                    <field name="new_overdue"/>
+                </xpath>
             </field>
         </record>
         <record id="view_quotation_tree_imported_to_lido" model="ir.ui.view">
@@ -40,7 +47,7 @@
                     <field name="amount_total"/>
                     <field name="invoice_status"/>
                     <field name="imported_to_lido"/>
-                    <field name="imported_date"/>
+<!--                    <field name="imported_date"/>-->
                     <field name="warehouse_id"/>
                 </xpath>
             </field>
