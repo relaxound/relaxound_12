@@ -2,6 +2,7 @@ from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
 from dateutil.relativedelta import relativedelta
 from datetime import datetime , timedelta,date
+from odoo.tools import email_re, email_split, email_escape_char, float_is_zero, float_compare
 
 class CustomInvoiceOrderform(models.Model):
     _inherit = "account.invoice"
@@ -32,7 +33,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.depends('partner_id.property_product_pricelist')
     def _date_invoice_compute(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and
                         rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and ((rec.date_invoice and rec.date_invoice >= date(2021, 1, 1)) or (not rec.date_invoice and date.today() >= date(2021, 1, 1))):
                     rec.date_invoice_compute = True
@@ -44,8 +45,8 @@ class CustomInvoiceOrderform(models.Model):
     def _compute_hide_france_desc(self):
         # simple logic, but you can do much more here
         for rec in self:
-            if self.type != 'out_refund':
-                # datetime.strptime('1/1/2021', "%m/%d/%y")
+            if rec.type != 'out_refund':
+            # datetime.strptime('1/1/2021', "%m/%d/%y")
                 if rec.date_invoice_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                     rec.hide_france_note = True
                 else:
@@ -60,7 +61,7 @@ class CustomInvoiceOrderform(models.Model):
     def _compute_hide_2_discount(self):
         # simple logic, but you can do much more here
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 # datetime.strptime('1/1/2021', "%m/%d/%y")
                 if rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                     rec.hide_2_discount = True
@@ -71,7 +72,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('origin1.super_spl_discount','partner_id.property_product_pricelist')
     def _compute_hide_discount(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if rec.date_invoice_compute and rec.partner_id.is_retailer and rec.origin1.super_spl_discount and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                     rec.hide_spl_discount = True
                 else:
@@ -82,7 +83,7 @@ class CustomInvoiceOrderform(models.Model):
     def _compute_hide(self):
         # simple logic, but you can do much more here
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 # datetime.strptime('1/1/2021', "%m/%d/%y")
                 if rec.date_invoice_compute and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                     rec.hide = True
@@ -93,7 +94,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_discount(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021') :
                     if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                         rec.discount = (5 * (rec.amount_untaxed)) / 100
@@ -113,7 +114,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_total_new(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                     if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                         rec.total_new = rec.amount_untaxed - ((5 * rec.amount_untaxed) / 100)
@@ -131,7 +132,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_shipping_amount(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 # Compute delivery cost
                 delivery_cost = 0
                 for line in rec.invoice_line_ids:
@@ -150,7 +151,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('invoice_line_ids')
     def _compute_tax_new(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                     for o_line in rec:
                         if o_line.invoice_line_ids:
@@ -168,7 +169,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id', 'invoice_line_ids')
     def _compute_total_untaxed(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                     if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                         rec.untaxed_total = rec.amount_untaxed - rec.discount - rec.spl_discount
@@ -186,7 +187,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_untaxed_amount(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                     if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                         rec.untaxed_amount_new = rec.total_new+rec.shipping_amount_new+rec.amount_tax_new
@@ -204,7 +205,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_spl_discount(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute) and (rec.origin1.super_spl_discount) and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
                     if (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
                         rec.spl_discount = (5 * (rec.amount_untaxed)) / 100
@@ -220,7 +221,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids')
     def _compute_total(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                     rec.amount_total_new = rec.untaxed_amount_new - rec.spl_discount - rec.shipping_amount_new
                 else:
@@ -231,7 +232,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.onchange('partner_id','invoice_line_ids','amount_total_new')
     def _compute_discount_2(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                     if rec.residual:
                         rec.discount_2 = rec.residual - 2 * rec.residual / 100
@@ -268,7 +269,7 @@ class CustomInvoiceOrderform(models.Model):
     @api.depends('date_invoice')
     def _get_date_invoice(self):
         for rec in self:
-            if self.type != 'out_refund':
+            if rec.type != 'out_refund':
                 if rec.date_invoice:
                     date_invoice = (rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y')
                     return date_invoice
@@ -284,9 +285,7 @@ class CustomInvoiceOrderform(models.Model):
         round_curr = self.currency_id.round
         if self.date_invoice_compute and (self.origin1.pricelist_id.name and self.origin1.pricelist_id.name == 'Preismodell 2021') or (not self.origin1 and
                 self.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
-
             if self.type != 'out_refund':
-
                 self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
                 if self.amount_untaxed >= 500 and self.amount_untaxed < 1000:
                     discount = (5 * (self.amount_untaxed)) / 100
@@ -342,6 +341,7 @@ class CustomInvoiceOrderform(models.Model):
                 self.amount_total_company_signed = amount_total_company_signed * sign
                 self.amount_total_signed = self.amount_total * sign
                 self.amount_untaxed_signed = amount_untaxed_signed * sign
+
             else:
                 self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
                 self.amount_tax = sum(round_curr(line.amount_total) for line in self.tax_line_ids)
@@ -355,11 +355,15 @@ class CustomInvoiceOrderform(models.Model):
                                                                        self.company_id,
                                                                        self.date_invoice or fields.Date.today())
                     amount_untaxed_signed = currency_id._convert(self.amount_untaxed, self.company_id.currency_id,
-                                                                 self.company_id, self.date_invoice or fields.Date.today())
+                                                                 self.company_id,
+                                                                 self.date_invoice or fields.Date.today())
                 sign = self.type in ['in_refund', 'out_refund'] and -1 or 1
                 self.amount_total_company_signed = amount_total_company_signed * sign
                 self.amount_total_signed = self.amount_total * sign
                 self.amount_untaxed_signed = amount_untaxed_signed * sign
+
+
+
         else:
             self.amount_untaxed = sum(line.price_subtotal for line in self.invoice_line_ids)
             self.amount_tax = sum(round_curr(line.amount_total) for line in self.tax_line_ids)
@@ -378,3 +382,63 @@ class CustomInvoiceOrderform(models.Model):
             self.amount_total_company_signed = amount_total_company_signed * sign
             self.amount_total_signed = self.amount_total * sign
             self.amount_untaxed_signed = amount_untaxed_signed * sign
+
+    @api.one
+    @api.depends(
+        'state', 'currency_id', 'invoice_line_ids.price_subtotal',
+        'move_id.line_ids.amount_residual',
+        'move_id.line_ids.currency_id')
+    def _compute_residual(self):
+        if self.date_invoice_compute and (self.origin1.pricelist_id.name and self.origin1.pricelist_id.name == 'Preismodell 2021') or (not self.origin1 and
+                self.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+            residual = 0.0
+            residual_company_signed = 0.0
+            sign = self.type in ['in_refund', 'out_refund'] and -1 or 1
+            if self.state != 'draft':
+                residual = self.amount_total
+            elif self.move_id.amount:
+                residual = 0.0
+
+
+            # for line in self._get_aml_for_amount_residual():
+            #     residual_company_signed += line.amount_residual
+            #     if line.currency_id == self.currency_id:
+            #         residual += line.amount_residual_currency if line.currency_id else line.amount_residual
+            #     else:
+            #         if line.currency_id:
+            #             residual += line.currency_id._convert(line.amount_residual_currency, self.currency_id,
+            #                                                   line.company_id, line.date or fields.Date.today())
+            #         else:
+            #             residual += line.company_id.currency_id._convert(line.amount_residual, self.currency_id,
+            #                                                              line.company_id,
+            #                                                              line.date or fields.Date.today())
+
+            self.residual_company_signed = abs(residual_company_signed) * sign
+            self.residual_signed = abs(residual) * sign
+            self.residual = abs(residual)
+            digits_rounding_precision = self.currency_id.rounding
+            if float_is_zero(self.residual, precision_rounding=digits_rounding_precision):
+                self.reconciled = True
+            else:
+                self.reconciled = False
+        else:
+            residual = 0.0
+            residual_company_signed = 0.0
+            sign = self.type in ['in_refund', 'out_refund'] and -1 or 1
+            for line in self._get_aml_for_amount_residual():
+                residual_company_signed += line.amount_residual
+                if line.currency_id == self.currency_id:
+                    residual += line.amount_residual_currency if line.currency_id else line.amount_residual
+                else:
+                    if line.currency_id:
+                        residual += line.currency_id._convert(line.amount_residual_currency, self.currency_id, line.company_id, line.date or fields.Date.today())
+                    else:
+                        residual += line.company_id.currency_id._convert(line.amount_residual, self.currency_id, line.company_id, line.date or fields.Date.today())
+            self.residual_company_signed = abs(residual_company_signed) * sign
+            self.residual_signed = abs(residual) * sign
+            self.residual = abs(residual)
+            digits_rounding_precision = self.currency_id.rounding
+            if float_is_zero(self.residual, precision_rounding=digits_rounding_precision):
+                self.reconciled = True
+            else:
+                self.reconciled = False
