@@ -548,7 +548,7 @@
                 <div class="col-12" style="line-height:1">
 
                 <!--   Note for 2% discount pricelist-->
-                    <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name != 'France'">
+                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name != 'France'">
                         <tr>
                             <td class="text-left">Note: </td>
                             <td class="text-left" style="font-size:13px">
@@ -560,7 +560,7 @@
                         </tr>
                     </t>
 
-                    <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France'">
+                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France'">
                         <tr>
 <!--                            <td class="text-left">Note: </td>-->
                             <td class="text-left" style="font-size:13px">

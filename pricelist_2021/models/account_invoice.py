@@ -221,30 +221,33 @@ class CustomInvoiceOrderform(models.Model):
             if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
                 if rec.residual:
                     rec.discount_2 = rec.residual - 2 * rec.residual / 100
+                elif not rec.residual and rec.state in ['draft','open']:
+                    rec.discount_2 = rec.amount_total_new - 2 * rec.amount_total_new / 100
                 else:
-                    rec.discount_2 = rec.amount_total_new - 2*rec.amount_total_new/100
+                    rec.discount_2 = 0.0
 
 
     @api.multi
     @api.onchange('partner_id','invoice_line_ids','amount_total')
     def _set_description(self):
         for rec in self:
-            if rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
-                rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
-            elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
-                rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+            if rec.type != 'out_refund':
+                if rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
+                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
+                elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
+                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
-            elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
-                rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
-            elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
-                rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+                elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
+                    rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
+                elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
+                    rec.set_desription ='2% discount - payment by ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
-            elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
-                rec.set_desription1 ='ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
-            elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice :
-                rec.set_desription1 ='ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % et la valeur de votre commende est réduit à '
-            else:
-                pass
+                elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
+                    rec.set_desription1 ='ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+                elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice :
+                    rec.set_desription1 ='ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % et la valeur de votre commende est réduit à '
+                else:
+                    pass
 
 
 
