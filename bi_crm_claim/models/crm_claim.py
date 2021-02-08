@@ -196,6 +196,7 @@ class crm_claim_line(models.Model):
             print(vals)
             self.update(vals)
         else:
+            product_price = 0
 
             for i in self.claim_order_id.partner_id.property_product_pricelist.item_ids:
                 if i.categ_id == self.product_id.categ_id:
