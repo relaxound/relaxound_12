@@ -279,7 +279,8 @@ class SaleReport(models.Model):
     _inherit = "sale.report"
 
     single_unit = fields.Integer(string="Single Unit",store=True)
-    category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
+    category_id_new = fields.Many2many(string='Customer Tag', related='partner_id.category_id',readonly=True)
+    #category_id_new = fields.Char(string='Customer Tag', related='partner_id.category_id.name')
     zip_new = fields.Char(string='Customer Zip', related='partner_id.zip')
     city_new = fields.Char(string='Customer City', related='partner_id.city')
     state_new = fields.Char(string='Customer Federal State', related='partner_id.state_id.name')
