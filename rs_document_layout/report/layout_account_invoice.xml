@@ -564,7 +564,7 @@
                         <tr>
 <!--                            <td class="text-left">Note: </td>-->
                             <td class="text-left" style="font-size:13px">
-                                <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % et la valeur de votrecommende est réduit à</span>
+                                <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % etla valeur de votre commande est réduite à</span>
 <!--                                <span t-esc="o._get_date_invoice()"/>-->
                                 <span>€</span>
                                 <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
