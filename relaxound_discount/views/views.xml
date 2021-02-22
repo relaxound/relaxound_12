@@ -18,7 +18,7 @@
                     <attribute name="invisible">1</attribute>
                 </xpath>
 
-                <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_untaxed']" position="before">
+                <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_untaxed']" position="replace">
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
 
@@ -40,8 +40,8 @@
 
                 </xpath>
 
-                <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_untaxed']" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_tax']" position="before">
+                    <field name="amount_untaxed"  widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </xpath>
 
                 <!--   Added new payment terms and conditions here             -->
@@ -90,7 +90,7 @@
                 </xpath>
 
 
-                <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_untaxed']" position="before">
+                <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_untaxed']" position="replace">
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
 
@@ -112,8 +112,8 @@
 
                 </xpath>
 
-                <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_untaxed']" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_tax']" position="before">
+                    <field name="amount_untaxed" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </xpath>
 
                 <!--   Added new payment terms and conditions here             -->
