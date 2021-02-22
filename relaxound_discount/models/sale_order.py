@@ -3,18 +3,6 @@
 from odoo import models, fields, api
 from datetime import datetime , timedelta,date
 
-# class relaxound_discount(models.Model):
-#     _name = 'relaxound_discount.relaxound_discount'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
-
 class SaleOrderDiscount(models.Model):
 	"""docstring for SaleOrderDiscount"""
 	_inherit  = "sale.order"

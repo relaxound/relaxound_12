@@ -262,17 +262,19 @@
 <!--                                    <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>-->
 <!--                                </t>-->
                             </t>
+
                             <tr style="border-bottom: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Total</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="o.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
+                                    <td class="col-xs-3 text-right">
+                                        <span>Total</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
                             </tr>
+
 
                             <!--        Pricelist discount code adding       -->
                             <t t-if="o.date_invoice_compute">
@@ -284,7 +286,7 @@
                                         <td class="text-right col-xs-2">
                                             <strong>
                                                 <span t-field="o.currency_id.symbol"/>
-                                                <span t-esc="('{0:,.2f}'.format(float(-(5*o.amount_untaxed)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(-(o.discount1)))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </strong>
                                         </td>
                                     </tr>
@@ -298,7 +300,7 @@
                                         <td class="text-right col-xs-2">
                                             <strong>
                                                 <span t-field="o.currency_id.symbol"/>
-                                                <span t-esc="('{0:,.2f}'.format(float(-(7*o.amount_untaxed)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(-(o.discount1)))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </strong>
                                         </td>
                                     </tr>
@@ -312,12 +314,14 @@
                                         <td class="text-right col-xs-2">
                                             <strong>
                                                 <span t-field="o.currency_id.symbol"/>
-                                                <span t-esc="('{0:,.2f}'.format(float(-(10*o.amount_untaxed)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                                <span t-esc="('{0:,.2f}'.format(float(-(o.discount1)))).replace(',','x').replace('.',',').replace('x','.')"/>
                                             </strong>
                                         </td>
                                     </tr>
                                 </t>
                             </t>
+
+
 
                         <!-- New pricelist special discount 10%   -->
                             <t t-if="o.date_invoice_compute and o.origin1.super_spl_discount and o.partner_id.is_retailer and o.amount_untaxed &gt;= 500 and o.amount_untaxed &lt;= 999">
@@ -367,52 +371,50 @@
                                 <td class="text-right">
                                     <strong>
                                         <span t-field="o.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(o.shipping_amount_new))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </strong>
                                 </td>
                             </tr>
 
-                            <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.amount_untaxed &gt; 250 and o.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
-                                <tr style="border-top: 1px solid black">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Amount After Discount</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
-
-                            <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.amount_untaxed &lt; 250 and o.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
-                                <tr style="border-top: 1px solid black">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Amount After Discount</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
-
-                            <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']">
-                                <tr style="border-top: 1px solid black">
-                                    <td class="col-xs-3 text-right">
-                                        <span>Amount After Discount</span>
-                                    </td>
-                                    <td class="text-right col-xs-2">
-                                        <strong>
-                                            <span t-field="o.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </t>
+<!--                            <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.amount_untaxed &gt; 250 and o.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
+<!--                                <tr style="border-top: 1px solid black">-->
+<!--                                    <td class="col-xs-3 text-right">-->
+<!--                                        <span>Amount After Discount</span>-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right col-xs-2">-->
+<!--                                        <strong>-->
+<!--                                            <span t-field="o.currency_id.symbol"/>-->
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                        </strong>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+<!--                            <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.amount_untaxed &lt; 250 and o.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
+<!--                                <tr style="border-top: 1px solid black">-->
+<!--                                    <td class="col-xs-3 text-right">-->
+<!--                                        <span>Amount After Discount</span>-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right col-xs-2">-->
+<!--                                        <strong>-->
+<!--                                            <span t-field="o.currency_id.symbol"/>-->
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                        </strong>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+<!--                            <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']">-->
+<!--                                <tr style="border-top: 1px solid black">-->
+<!--                                    <td class="col-xs-3 text-right">-->
+<!--                                        <span>Amount After Discount</span>-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right col-xs-2">-->
+<!--                                        <strong>-->
+<!--                                            <span t-field="o.currency_id.symbol"/>-->
+<!--                                            <span t-esc="('{0:,.2f}'.format(float(o.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                        </strong>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
 
                             <t t-if="o.invoice_line_ids">
                                 <tr style="border-bottom: 1px solid black">
@@ -833,13 +835,13 @@
                     <!--<t t-if="o.partner_id.company_type=='person'">-->
                     <br/>
                     <!--     Add if condition for remove extra text from template invoice      -->
-                   <!--  <t t-if="o.partner_id.agent_name or o.partner_id.agent_name in ['Rossmanek','Pforte','Senft','Wirtz','Kuhnle','Werner','DEsignLICIOUS','The Living Connection','Handelsagentur Schur GbR','Agence made IN']"> -->
+<!--                    <t t-if="o.partner_id.agent_name or o.partner_id.agent_name in ['Rossmanek','Pforte','Senft','Wirtz','Kuhnle','Werner','DEsignLICIOUS','The Living Connection','Handelsagentur Schur GbR','Agence made IN']">-->
 <!--                    <t t-if="o.partner_id.agent_name">-->
                         <div class="col-xs-12">
                             <span t-field="o.comment"/>
                             <br/>
                         </div>
-                    <!-- </t> -->
+<!--                    </t>-->
                 </div><br/><br/>
 
 
@@ -885,7 +887,7 @@
                         </td>
                     </tr>
                 </t>
-                <t t-if="len(payments_vals) > 0">
+                <t t-if="len(payments_vals)">
                     <tr class="border-black">
                         <td><strong>Amount Due</strong></td>
                         <td class="text-right">

@@ -452,6 +452,7 @@
                             <t t-set="delivery_cost" t-value="delivery_cost + l.price_subtotal"/>
                         </t>
                     </t>
+
                     <tr style="border-bottom: 1px solid black">
                         <td class="col-xs-3 text-right">
                             <span>Total</span>
@@ -475,7 +476,7 @@
                                 <td class="text-right col-xs-2">
                                     <strong>
                                         <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(-(5*doc.amount_untaxed)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(-(doc.discount1)))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </strong>
                                 </td>
                             </tr>
@@ -489,7 +490,7 @@
                                 <td class="text-right col-xs-2">
                                     <strong>
                                         <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(-(7*doc.amount_untaxed)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(-(doc.discount1)))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </strong>
                                 </td>
                             </tr>
@@ -502,12 +503,14 @@
                                 <td class="text-right col-xs-2">
                                     <strong>
                                         <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(-(10*doc.amount_untaxed)/100))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(-(doc.discount1)))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </strong>
                                 </td>
                             </tr>
                         </t>
                     </t>
+
+
 
                     <t t-if="doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021' and doc.super_spl_discount" >
                         <t t-if="doc.date_order_compute and doc.amount_untaxed &gt;= 500 and doc.amount_untaxed &lt;= 999 and doc.pricelist_id.name == 'Preismodell 2021'">
@@ -606,46 +609,45 @@
 <!--                        </t>-->
 
 
-                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_untaxed &gt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
-                            <tr style="border-top: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Amount After Discount</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.untaxed_total - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                        </t>
-                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_untaxed &lt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
-                            <tr style="border-top: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Amount After Discount</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                        </t>
-
-                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']">
-                            <tr style="border-top: 1px solid black">
-                                <td class="col-xs-3 text-right">
-                                    <span>Amount After Discount</span>
-                                </td>
-                                <td class="text-right col-xs-2">
-                                    <strong>
-                                        <span t-field="doc.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(doc.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>
-                                    </strong>
-                                </td>
-                            </tr>
-                        </t>
+<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_untaxed &gt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
+<!--                            <tr style="border-top: 1px solid black">-->
+<!--                                <td class="col-xs-3 text-right">-->
+<!--                                    <span>Amount After Discount</span>-->
+<!--                                </td>-->
+<!--                                <td class="text-right col-xs-2">-->
+<!--                                    <strong>-->
+<!--                                        <span t-field="doc.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.untaxed_total - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </strong>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_untaxed &lt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
+<!--                            <tr style="border-top: 1px solid black">-->
+<!--                                <td class="col-xs-3 text-right">-->
+<!--                                    <span>Amount After Discount</span>-->
+<!--                                </td>-->
+<!--                                <td class="text-right col-xs-2">-->
+<!--                                    <strong>-->
+<!--                                        <span t-field="doc.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </strong>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']">-->
+<!--                            <tr style="border-top: 1px solid black">-->
+<!--                                <td class="col-xs-3 text-right">-->
+<!--                                    <span>Amount After Discount</span>-->
+<!--                                </td>-->
+<!--                                <td class="text-right col-xs-2">-->
+<!--                                    <strong>-->
+<!--                                        <span t-field="doc.currency_id.symbol"/>-->
+<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.untaxed_total))).replace(',','x').replace('.',',').replace('x','.')"/>-->
+<!--                                    </strong>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
 
                          <tr style="border-bottom: 1px solid black">
                             <t t-foreach="doc.order_line[0]" t-as="d">
@@ -789,9 +791,7 @@
             <tr>
 <!--                <td class="text-left">Note: </td>-->
                 <td class="text-left" style="font-size:13px">
-
                     <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % etla valeur de votre commande est réduite à</span>
-                    
 <!--                    <span t-esc="doc._get_date_order()"/>-->
                     <span>€</span>
                     <span t-esc="('{0:,.2f}'.format(float(doc.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
