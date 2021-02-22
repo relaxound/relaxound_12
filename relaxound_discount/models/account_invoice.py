@@ -1,0 +1,420 @@
+from odoo import models, fields, api
+from datetime import datetime , timedelta,date
+
+class InvoiceOrderDiscount(models.Model):
+	"""docstring for SaleOrderDiscount"""
+	_inherit  = "account.invoice"
+
+	is_custom_relax_discount = 	fields.Boolean(default=False, string='Realxond Discount')
+
+	percentage = fields.Char(compute='_compute_percentage', select=False, invisible="1")
+	discount1 = fields.Float(compute='_compute_discount_line')
+	discount_2 = fields.Float(compute='_compute_discount_2')
+	spl_discount = fields.Float(compute='_compute_spl_discount')
+	spl_percentage = fields.Char(compute='_compute_spl_percentage', select=False, invisible="1")
+	amount_before_discount = fields.Float('Untaxed Amount',compute='_compute_discount_line')
+	amount_after_discount = fields.Float(compute='_compute_discount_line')
+	set_desription = fields.Char('Note', compute='_set_description')
+	set_desription1 = fields.Text('Note', compute='_set_description')
+
+	super_spl_discount = fields.Boolean('Super Special Discount')
+	hide = fields.Boolean(string='Hide', compute="_compute_hide")
+	hide_spl_discount = fields.Boolean(string='Hide discount', compute='_compute_hide_discount')
+	hide_2_discount = fields.Boolean(string='Hide 2% discount', compute='_compute_hide_2_discount')
+	hide_france_note = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
+
+	date_invoice_compute = fields.Boolean(string='Date of the order',
+										  compute='_date_invoice_compute')
+
+	@api.depends('partner_id.property_product_pricelist')
+	def _date_invoice_compute(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and
+						rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and (
+						(rec.date_invoice and rec.date_invoice >= date(2021, 1, 1)) or (
+						not rec.date_invoice and date.today() >= date(2021, 1, 1))):
+					rec.date_invoice_compute = True
+				else:
+					rec.date_invoice_compute = False
+
+	@api.depends('partner_id.property_product_pricelist')
+	def _compute_hide_france_desc(self):
+		# simple logic, but you can do much more here
+		for rec in self:
+			if rec.type != 'out_refund':
+				# datetime.strptime('1/1/2021', "%m/%d/%y")
+				if rec.date_invoice_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+					rec.hide_france_note = True
+				else:
+					rec.hide_france_note = False
+
+	def _get_today_date(self):
+		for rec in self:
+			rec.today_date = date.today().strftime('%Y-%m-%d')
+
+	@api.depends('partner_id.property_product_pricelist')
+	def _compute_hide_2_discount(self):
+		# simple logic, but you can do much more here
+		for rec in self:
+			if rec.type != 'out_refund':
+				# datetime.strptime('1/1/2021', "%m/%d/%y")
+				if rec.date_invoice_compute and (
+						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name != 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+					rec.hide_2_discount = True
+				else:
+					rec.hide_2_discount = False
+
+	@api.onchange('origin1.super_spl_discount', 'partner_id.property_product_pricelist')
+	def _compute_hide_discount(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if rec.date_invoice_compute and rec.partner_id.is_retailer and rec.origin1.super_spl_discount and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+					rec.hide_spl_discount = True
+				else:
+					rec.hide_spl_discount = False
+
+	@api.depends('partner_id.property_product_pricelist')
+	def _compute_hide(self):
+		# simple logic, but you can do much more here
+		for rec in self:
+			if rec.type != 'out_refund':
+				# datetime.strptime('1/1/2021', "%m/%d/%y")
+				if rec.date_invoice_compute and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+					rec.hide = True
+				else:
+					rec.hide = False
+
+	@api.multi
+	@api.onchange('partner_id', 'invoice_line_ids')
+	def _compute_discount_line(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+					amount_untaxed = 0.0
+					for line in self.invoice_line_ids:
+						amount_untaxed += line.quantity * line.price_unit
+					if amount_untaxed >= 500 and amount_untaxed < 1000:
+						rec.discount1 = (5 * (amount_untaxed)) / 100
+						rec.amount_before_discount = amount_untaxed
+						if rec.origin1.super_spl_discount:
+							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((5 * (amount_untaxed)) / 100)
+						else:
+							rec.amount_after_discount = amount_untaxed - rec.discount1
+
+
+					elif amount_untaxed >= 1000 and amount_untaxed < 1500:
+						rec.discount1 = (7 * (amount_untaxed)) / 100
+						rec.amount_before_discount = amount_untaxed
+						if rec.origin1.super_spl_discount:
+							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((3 * (amount_untaxed)) / 100)
+						else:
+							rec.amount_after_discount = amount_untaxed - rec.discount1
+
+					elif amount_untaxed >= 1500:
+						rec.discount1 = (10 * (amount_untaxed)) / 100
+						rec.amount_before_discount = amount_untaxed
+						if rec.origin1.super_spl_discount:
+							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((0 * (amount_untaxed)) / 100)
+						else:
+							rec.amount_after_discount = amount_untaxed - rec.discount1
+
+					elif amount_untaxed < 500:
+						rec.discount1 = 0
+						rec.amount_before_discount = amount_untaxed
+						if rec.origin1.super_spl_discount:
+							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						else:
+							rec.amount_after_discount = amount_untaxed - rec.discount1
+
+
+	@api.multi
+	@api.onchange('partner_id', 'invoice_line_ids')
+	def _compute_spl_discount(self):
+		for rec in self:
+			if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+					not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+				amount_untaxed = 0.0
+				for line in self.invoice_line_ids:
+					amount_untaxed += line.quantity * line.price_unit
+				if amount_untaxed >= 500 and amount_untaxed < 1000:
+					rec.spl_discount = (5 * (amount_untaxed)) / 100
+
+				elif amount_untaxed >= 1000 and amount_untaxed < 1500:
+					rec.spl_discount = (3 * (amount_untaxed)) / 100
+
+				elif amount_untaxed >= 1500:
+					rec.spl_discount = (0 * (amount_untaxed)) / 100
+
+				elif amount_untaxed < 500:
+					rec.spl_discount = (0 * (amount_untaxed)) / 100
+
+	@api.multi
+	def _compute_spl_percentage(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if (rec.date_invoice_compute) and (rec.origin1.super_spl_discount) and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+					if (
+							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+						rec.spl_percentage = '5%:'
+						rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
+					elif (
+							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+						rec.spl_percentage = '3%:'
+						rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
+					elif (
+							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed < 500 and rec.amount_untaxed > 0:
+						rec.spl_percentage = '10%:'
+						rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
+					else:
+						rec.spl_percentage = '0%:'
+						rec.spl_percentage = "Discount {}".format(rec.spl_percentage)
+
+	@api.multi
+	@api.onchange('partner_id', 'invoice_line_ids')
+	def _compute_percentage(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if (
+						rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+
+					if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+						rec.percentage = '5%:'
+						rec.percentage = "Discount {}".format(rec.percentage)
+					elif rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+						rec.percentage = '7%:'
+						rec.percentage = "Discount {}".format(rec.percentage)
+					elif rec.amount_untaxed >= 1500:
+						rec.percentage = '10%:'
+						rec.percentage = "Discount {}".format(rec.percentage)
+					else:
+						rec.percentage = '0%:'
+						rec.percentage = "Discount {}".format(rec.percentage)
+
+	@api.multi
+	@api.onchange('partner_id', 'invoice_line_ids', 'amount_total_new')
+	def _compute_discount_2(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
+					rec.discount_2 = rec.amount_total - ((2 * rec.amount_total) / 100)
+
+	@api.multi
+	@api.onchange('partner_id', 'invoice_line_ids', 'amount_total')
+	def _set_description(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if rec.date_invoice_compute and (
+						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in [
+					'de_CH', 'de_DE'] and rec.partner_id.country_id.name != 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
+					rec.set_desription = '2% Skonto bei Zahlungseingang bis ' + str(
+						(rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
+				elif rec.date_invoice_compute and (
+						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in [
+					'de_CH', 'de_DE'] and rec.partner_id.country_id.name != 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
+					rec.set_desription = '2% Skonto bei Zahlungseingang bis ' + str(
+						(date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+
+				elif rec.date_invoice_compute and (
+						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang not in [
+					'de_CH', 'de_DE'] and rec.partner_id.country_id.name != 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
+					rec.set_desription = '2% discount - payment by ' + str(
+						(rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
+				elif rec.date_invoice_compute and (
+						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang not in [
+					'de_CH', 'de_DE'] and rec.partner_id.country_id.name != 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
+					rec.set_desription = '2% discount - payment by ' + str(
+						(date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+
+				elif rec.date_invoice_compute and (
+						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
+					rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+				elif rec.date_invoice_compute and (
+						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
+					rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % et la valeur de votre commende est réduit à '
+				else:
+					pass
+
+	@api.depends('date_invoice')
+	def _get_date_invoice(self):
+		for rec in self:
+			if rec.type != 'out_refund':
+				if rec.date_invoice:
+					date_invoice = (rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y')
+					return date_invoice
+				else:
+					date_invoice = (date.today() + timedelta(days=14)).strftime('%d.%m.%Y')
+					return date_invoice
+
+	@api.model_create_multi
+	def create(self, vals_list):
+		# import pdb;pdb.set_trace()
+		if 'Preismodell 2021' == self.env['res.partner'].search(
+				[('id', '=', vals_list[0].get('partner_id'))]).property_product_pricelist.name:
+
+			TOTAL = 0.0
+			DISCOUNT = 0.0
+
+			if vals_list[0].get('invoice_line_ids'):
+				for order in vals_list[0].get('invoice_line_ids'):
+					TOTAL = TOTAL + (order[2].get('quantity') * order[2].get('price_unit'))
+
+				if TOTAL >= 500.00 and TOTAL < 1000.00:
+					DISCOUNT = 5
+
+				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
+
+					DISCOUNT = 7
+
+				elif TOTAL >= 1500.00:
+
+					DISCOUNT = 10
+
+				for order in vals_list[0].get('invoice_line_ids'):
+					order[2]['discount'] = DISCOUNT
+
+				if vals_list[0].get('is_custom_relax_discount'):
+					vals_list[0]['is_custom_relax_discount'] = True
+
+		elif 'Preismodell 2021' == self.env['product.pricelist'].search(
+				[('id', '=', vals_list[0].get('pricelist_id'))]).name:
+
+			TOTAL = 0.0
+			DISCOUNT = 0.0
+
+			if vals_list[0].get('invoice_line_ids'):
+				for order in vals_list[0].get('invoice_line_ids'):
+					TOTAL = TOTAL + (order[2].get('quantity') * order[2].get('price_unit'))
+
+				if TOTAL >= 500.00 and TOTAL < 1000.00:
+					DISCOUNT = 5
+				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
+					DISCOUNT = 7
+				elif TOTAL >= 1500.00:
+					DISCOUNT = 10
+				for order in vals_list[0].get('invoice_line_ids'):
+					order[2]['discount'] = DISCOUNT
+
+				if vals_list[0].get('is_custom_relax_discount'):
+					vals_list[0]['is_custom_relax_discount'] = True
+
+		return super(InvoiceOrderDiscount, self).create(vals_list)
+
+	@api.multi
+	def write(self, vals):
+
+		if self.date_invoice_compute:
+
+			PRICELIST = False
+			TOTAL = 0.0
+			DISCOUNT = 0.0
+
+			if vals.get('pricelist_id') or vals.get('partner_id'):
+				if vals.get('pricelist_id'):
+					if 'Preismodell 2021' == self.env['product.pricelist'].search(
+							[('id', '=', vals.get('pricelist_id'))]).name:
+						PRICELIST = True
+					elif not vals.get('partner_id'):
+						if 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+							PRICELIST = True
+
+				if not PRICELIST and vals.get('partner_id'):
+					if 'Preismodell 2021' == self.env['res.partner'].search(
+							[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
+						PRICELIST = True
+					elif not vals.get('pricelist_id'):
+						if 'Preismodell 2021' == self.pricelist_id.name:
+							PRICELIST = True
+
+			elif not PRICELIST and 'Preismodell 2021' == self.origin1.pricelist_id.name or 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+				PRICELIST = True
+
+			if vals.get('invoice_line_ids') and vals.get('partner_id'):
+				print('$$$$ AND $$$$$$$')
+
+			elif vals.get('invoice_line_ids'):
+				print('$$ OL $$')
+			elif vals.get('partner_id'):
+				print('$$ partner $$')
+
+			invoice_order = super(InvoiceOrderDiscount, self).write(vals)
+
+			if not PRICELIST and self.is_custom_relax_discount:
+				# vals_list = list()
+				# vals = dict()
+				for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
+					# vals_list.append([1, order.id, {'discount' : DISCOUNT}])
+					order.discount = DISCOUNT
+			# vals.update({'order_line' : vals_list})
+			# print('VALS', vals)
+			# self.write(vals)
+			elif PRICELIST:
+				# vals_list = list()
+				# vals = dict()
+				for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
+					TOTAL = TOTAL + (order.quantity * order.price_unit)
+
+				if TOTAL >= 500.00 and TOTAL < 1000.00:
+					if self.origin1.super_spl_discount:
+						DISCOUNT = 10
+					else:
+						DISCOUNT = 5
+				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
+					if self.origin1.super_spl_discount:
+						DISCOUNT = 10
+					else:
+						DISCOUNT = 7
+				elif TOTAL >= 1500.00:
+					if self.origin1.super_spl_discount:
+						DISCOUNT = 10
+					else:
+						DISCOUNT = 10
+
+				for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
+					# vals_list.append([1, order.id, {'discount' : DISCOUNT}])
+					order.discount = DISCOUNT
+			# vals.update({'order_line' : vals_list})
+			# print('VALS', vals)
+			# self.write(vals)
+
+			# return super(SaleOrderDiscount, self).write(vals)
+			return invoice_order
+
+
+class OrderAccountLine(models.Model):
+	_inherit = 'account.invoice.line'
+
+	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
+
+	@api.onchange('quantity', 'price_unit')
+	def _compute_subtotal_price(self):
+		for line in self:
+			line.subtotal = line.quantity * line.price_unit
+
+
