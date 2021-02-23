@@ -8,6 +8,9 @@
                 <field name="state" position="before">
                     <button name="order_export" type="object" string="Export" class="oe_highlight"/> 
                 </field>
+                <xpath expr="//field[@name='payment_method_id']" position="after">
+                    <field name="return_lable"/>
+                </xpath>
             </field>
         </record>
 

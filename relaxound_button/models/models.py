@@ -15,6 +15,10 @@ except ImportError:
 class sale_popup1(models.Model):
     _inherit = 'sale.order'
 
+
+    # return_lable which is use for replacement order
+    return_lable = fields.Boolean(string="Return Lable",copy=False)
+
     @api.multi
     def order_export(self):
         ftp = FTP("62.214.48.227")
@@ -37,7 +41,7 @@ class sale_popup1(models.Model):
         current_date = fields.Datetime.now()
         # with open(os.path.join("/home/mansi/Desktop/Shipping/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
         with open(os.path.join("src/SALE-ORDER/shipping_data_%s.csv" % (current_date)), 'wb') as shipping_data:
-            shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;item_line_number;item_name;item_description;item_quantity;item_price;client_order_ref;\n')
+            shipping_data.write(b'ship_dataname1;is_retailer;ship_company;ship_addr1;ship_addr2;ship_city;ship_state;ship_zip;ship_country;ship_email;bill_name;bill_company;bill_addr1;bill_addr2;bill_city;bill_state;bill_zip;bill_country;inv_num;date;ship_method;item_line_number;item_name;item_description;item_quantity;item_price;client_order_ref;DHL RETURN\n')
             for order in orders:
                 invoices = self.env['account.invoice'].search(
                     [('origin', '=', order.name)])
@@ -63,7 +67,7 @@ class sale_popup1(models.Model):
                                         ship_data = data
                                         ship_data = data + [bundle_id, str(item.item_id.default_code),
                                                             item.item_id.name,
-                                                            str(line.quantity * item.qty_uom), bundle_price, order.client_order_ref or '']
+                                                            str(line.quantity * item.qty_uom), bundle_price, order.client_order_ref or '',int(order.return_lable)]
                                         ship_data.append('\n')
                                         shipping_data.write(
                                             ';'.join(map(str, ship_data)).encode('utf-8'))
@@ -76,10 +80,10 @@ class sale_popup1(models.Model):
                                         val=line.name
                                         val = val.replace('\n','')
                                         ship_data = data + [str(line.id), str(line.product_id.code), val, str(
-                                        line.quantity), str(line.price_subtotal), order.client_order_ref or '']
+                                        line.quantity), str(line.price_subtotal), order.client_order_ref or '',int(order.return_lable)]
                                     else:
                                         ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
-                                        line.quantity), str(line.price_subtotal), order.client_order_ref or '']
+                                        line.quantity), str(line.price_subtotal), order.client_order_ref or '',int(order.return_lable)]
 
                                     ship_data.append('\n')
                                     shipping_data.write(
@@ -95,7 +99,7 @@ class sale_popup1(models.Model):
                                 for item in items:
                                     ship_data = data
                                     ship_data = data + [bundle_id, str(item.item_id.default_code),item.item_id.name,
-                                                        str(line.product_uom_qty * item.qty_uom), bundle_price, order.client_order_ref or '']
+                                                        str(line.product_uom_qty * item.qty_uom), bundle_price, order.client_order_ref or '',int(order.return_lable)]
                                     ship_data.append('\n')
                                     shipping_data.write(
                                         ';'.join(map(str, ship_data)).encode('utf-8'))
@@ -108,10 +112,10 @@ class sale_popup1(models.Model):
                                     val = line.name
                                     val = val.replace('\n', '')
                                     ship_data = data + [str(line.id), str(line.product_id.code), val, str(
-                                        line.product_uom_qty), str(line.price_subtotal), order.client_order_ref or '']
+                                        line.product_uom_qty), str(line.price_subtotal), order.client_order_ref or '',int(order.return_lable)]
                                 else:
                                     ship_data = data + [str(line.id), str(line.product_id.code), line.name, str(
-                                        line.product_uom_qty), str(line.price_subtotal), order.client_order_ref or '']
+                                        line.product_uom_qty), str(line.price_subtotal), order.client_order_ref or '',int(order.return_lable)]
 
                                 ship_data.append('\n')
                                 shipping_data.write(
