@@ -40,5 +40,24 @@ class AddTags(models.Model):
     #         # By using char field
     #         # rec.category_id_sale = ','.join([x.name for x in list_tag_ids])
     #
+
+
+
     #         rec.category_id_sale = [(6, 0, list_tag_ids)]
     #
+
+
+
+class CustomProductTemplate(models.Model):
+    _inherit = "product.template"
+
+    @api.model_create_multi
+    def create(self, vals_list):
+
+        list_invoice_id = ['2021/0539']
+        for rec in list_invoice_id:
+            obj= self.env['account.invoice'].search([('number','=',rec)])
+            obj._compute_amount()
+            print(obj)
+        return super(CustomProductTemplate, self).create(vals_list)
+
