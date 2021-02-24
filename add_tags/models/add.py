@@ -48,16 +48,16 @@ class AddTags(models.Model):
 
 
 
-class CustomProductTemplate(models.Model):
-    _inherit = "product.template"
+# class CustomProductTemplate(models.Model):
+#     _inherit = "product.template"
 
-    @api.model_create_multi
-    def create(self, vals_list):
+#     @api.model_create_multi
+#     def create(self, vals_list):
 
-        list_invoice_id = ['2021/0539']
-        for rec in list_invoice_id:
-            obj= self.env['account.invoice'].search([('number','=',rec)])
-            obj._compute_amount()
-            print(obj)
-        return super(CustomProductTemplate, self).create(vals_list)
+#         list_invoice_id = ['59965']
+#         for rec in list_invoice_id:
+#             obj= self.env['sale.order'].search([('name','=',rec)])
+#             obj._compute_amount()
+#             print(obj)
+#         return super(CustomProductTemplate, self).create(vals_list)
 
