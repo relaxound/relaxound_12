@@ -27,13 +27,13 @@
                     <label for="" class="oe_inline" attrs="{'invisible':[('hide', '=', False)]}"/>
                     <div>
                         <b><field name="percentage"  class="oe_inline" attrs="{'invisible':[('hide', '=', False)]}" style="margin-left:-105px;"/></b>
-                    <field name="discount1"  attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' style="margin-right:-105px;"/>
+                    <field name="discount1"  attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}" style="margin-right:0px"/>
                     </div>
 
                     <label for="" class="oe_inline" attrs="{'invisible':[('hide_spl_discount', '=', False)]}"/>
                     <div>
                         <b><field name="spl_percentage"  class="oe_inline" attrs="{'invisible':[('hide_spl_discount', '=', False)]}" style="margin-left:-150px;"/></b>
-                    <field name="spl_discount"  attrs="{'invisible':[('hide_spl_discount', '=', False)]}" widget='monetary' style="margin-right:0px;"/>
+                    <field name="spl_discount"  attrs="{'invisible':[('hide_spl_discount', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}" style="margin-right:0px;"/>
                     </div>
 
                     <field name="amount_after_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
@@ -44,7 +44,7 @@
                     <field name="amount_untaxed"  widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </xpath>
 
-                <!--   Added new payment terms and conditions here             -->
+                <!--   Added new payment terms and conditions here    -->
                 <xpath expr="//form/sheet/notebook/page/field[@name='note']" position="before">
                     <field name="hide_2_discount" invisible="1"/>
                     <field name="hide_france_note" invisible="1"/>
@@ -113,7 +113,7 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_tax']" position="before">
-                    <field name="amount_untaxed" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </xpath>
 
                 <!--   Added new payment terms and conditions here             -->
