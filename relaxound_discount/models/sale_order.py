@@ -20,6 +20,7 @@ class SaleOrderDiscount(models.Model):
 	set_desription1 = fields.Text('Note', compute='_set_description')
 
 	super_spl_discount = fields.Boolean('Super Special Discount')
+	hide_amount_untaxed = fields.Boolean(compute='_compute_hide_amount_untaxed')
 	hide = fields.Boolean(string='Hide', compute="_compute_hide")
 	hide_spl_discount = fields.Boolean(string='Hide discount', compute='_compute_hide_discount')
 	hide_2_discount = fields.Boolean(string='Hide 2% discount', compute='_compute_hide_2_discount')
@@ -73,6 +74,15 @@ class SaleOrderDiscount(models.Model):
 				rec.hide = True
 			else:
 				rec.hide = False
+
+	@api.depends('pricelist_id')
+	def _compute_hide_amount_untaxed(self):
+		# simple logic, but you can do much more here
+		for rec in self:
+			if rec.pricelist_id.name != 'Preismodell 2021':
+				rec.hide_amount_untaxed = True
+			else:
+				rec.hide_amount_untaxed = False
 
 
 	def get_delivery_price(self):

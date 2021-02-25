@@ -18,6 +18,7 @@ class InvoiceOrderDiscount(models.Model):
 	set_desription1 = fields.Text('Note', compute='_set_description')
 
 	super_spl_discount = fields.Boolean('Super Special Discount')
+	hide_amount_untaxed = fields.Boolean(compute='_compute_hide_amount_untaxed')
 	hide = fields.Boolean(string='Hide', compute="_compute_hide")
 	hide_spl_discount = fields.Boolean(string='Hide discount', compute='_compute_hide_discount')
 	hide_2_discount = fields.Boolean(string='Hide 2% discount', compute='_compute_hide_2_discount')
@@ -93,6 +94,18 @@ class InvoiceOrderDiscount(models.Model):
 					rec.hide = True
 				else:
 					rec.hide = False
+
+
+	@api.depends('partner_id.property_product_pricelist')
+	def _compute_hide_amount_untaxed(self):
+		# simple logic, but you can do much more here
+		for rec in self:
+			if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name != 'Preismodell 2021') or (
+					not rec.origin1 and rec.partner_id.property_product_pricelist.name != 'Preismodell 2021'):
+				rec.hide_amount_untaxed = True
+			else:
+				rec.hide_amount_untaxed = False
+
 
 	@api.multi
 	@api.onchange('partner_id', 'invoice_line_ids')

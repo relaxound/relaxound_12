@@ -21,6 +21,8 @@
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_untaxed']" position="replace">
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
+                    <field name="hide_amount_untaxed" invisible="1"/>
+
 
                     <field name="amount_before_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 
@@ -41,7 +43,7 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_tax']" position="before">
-                    <field name="amount_untaxed"  widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_untaxed"  attrs="{'invisible':[('hide_amount_untaxed','=',False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </xpath>
 
                 <!--   Added new payment terms and conditions here    -->
@@ -93,6 +95,8 @@
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_untaxed']" position="replace">
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
+                    <field name="hide_amount_untaxed" invisible="1"/>
+
 
                     <field name="amount_before_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 
@@ -113,7 +117,7 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_tax']" position="before">
-                    <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_untaxed" attrs="{'invisible':[('hide_amount_untaxed','=',False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </xpath>
 
                 <!--   Added new payment terms and conditions here             -->
