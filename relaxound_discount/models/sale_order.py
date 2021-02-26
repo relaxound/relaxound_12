@@ -322,83 +322,82 @@ class SaleOrderDiscount(models.Model):
 
 	@api.multi
 	def write(self, vals):
-		if self.date_order_compute:
-			PRICELIST = False
-			TOTAL = 0.0
-			DISCOUNT = 0.0
+		PRICELIST = False
+		TOTAL = 0.0
+		DISCOUNT = 0.0
 
-			if vals.get('pricelist_id') or vals.get('partner_id'):
-				if vals.get('pricelist_id'):
-					if 'Preismodell 2021' == self.env['product.pricelist'].search([('id','=',vals.get('pricelist_id'))]).name:
-						PRICELIST =True
-					elif not vals.get('partner_id'):
-						if 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
-							PRICELIST = True
-
-				if not PRICELIST and vals.get('partner_id'):
-					if 'Preismodell 2021' == self.env['res.partner'].search([('id','=',vals.get('partner_id'))]).property_product_pricelist.name:
+		if vals.get('pricelist_id') or vals.get('partner_id'):
+			if vals.get('pricelist_id'):
+				if 'Preismodell 2021' == self.env['product.pricelist'].search([('id','=',vals.get('pricelist_id'))]).name:
+					PRICELIST =True
+				elif not vals.get('partner_id'):
+					if 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
 						PRICELIST = True
-					elif not vals.get('pricelist_id'):
-						if 'Preismodell 2021' == self.pricelist_id.name:
-							PRICELIST = True
 
-			elif not PRICELIST and 'Preismodell 2021' == self.pricelist_id.name or 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
-				PRICELIST = True
+			if not PRICELIST and vals.get('partner_id'):
+				if 'Preismodell 2021' == self.env['res.partner'].search([('id','=',vals.get('partner_id'))]).property_product_pricelist.name:
+					PRICELIST = True
+				elif not vals.get('pricelist_id'):
+					if 'Preismodell 2021' == self.pricelist_id.name:
+						PRICELIST = True
 
-			if vals.get('order_line') and vals.get('partner_id'):
-				print('$$$$ AND $$$$$$$')
+		elif not PRICELIST and 'Preismodell 2021' == self.pricelist_id.name or 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+			PRICELIST = True
 
-			elif vals.get('order_line'):
-				print('$$ OL $$')
-			elif vals.get('partner_id'):
-				print('$$ partner $$')
+		if vals.get('order_line') and vals.get('partner_id'):
+			print('$$$$ AND $$$$$$$')
 
-			# import pdb;pdb.set_trace()
+		elif vals.get('order_line'):
+			print('$$ OL $$')
+		elif vals.get('partner_id'):
+			print('$$ partner $$')
 
-			sale_order = super(SaleOrderDiscount, self).write(vals)
+		# import pdb;pdb.set_trace()
 
-			print('SALE_ORDER : ', sale_order)
+		sale_order = super(SaleOrderDiscount, self).write(vals)
 
-			if not PRICELIST and self.is_custom_relax_discount:
-				# vals_list = list()
-				# vals = dict()
-				for order in self.env['sale.order.line'].search([('order_id','=', self.id)]):
-					# vals_list.append([1, order.id, {'discount' : DISCOUNT}])
-					order.discount = DISCOUNT
-				# vals.update({'order_line' : vals_list})
-				# print('VALS', vals)
-				# self.write(vals)
-			elif PRICELIST:
-				# vals_list = list()
-				# vals = dict()
-				for order in self.env['sale.order.line'].search([('order_id','=', self.id)]):
-					TOTAL = TOTAL + (order.product_uom_qty * order.price_unit)
+		print('SALE_ORDER : ', sale_order)
 
-				if TOTAL >= 500.00 and TOTAL < 1000.00:
-					if self.super_spl_discount:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 5
-				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
-					if self.super_spl_discount:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 7
-				elif TOTAL >= 1500.00:
-					if self.super_spl_discount:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 10
+		if not PRICELIST and self.is_custom_relax_discount:
+			# vals_list = list()
+			# vals = dict()
+			for order in self.env['sale.order.line'].search([('order_id','=', self.id)]):
+				# vals_list.append([1, order.id, {'discount' : DISCOUNT}])
+				order.discount = DISCOUNT
+			# vals.update({'order_line' : vals_list})
+			# print('VALS', vals)
+			# self.write(vals)
+		elif PRICELIST:
+			# vals_list = list()
+			# vals = dict()
+			for order in self.env['sale.order.line'].search([('order_id','=', self.id)]):
+				TOTAL = TOTAL + (order.product_uom_qty * order.price_unit)
 
-				for order in self.env['sale.order.line'].search([('order_id','=', self.id)]):
-					# vals_list.append([1, order.id, {'discount' : DISCOUNT}])
-					order.discount = DISCOUNT
-				# vals.update({'order_line' : vals_list})
-				# print('VALS', vals)
-				# self.write(vals)
+			if TOTAL >= 500.00 and TOTAL < 1000.00:
+				if self.super_spl_discount:
+					DISCOUNT = 10
+				else:
+					DISCOUNT = 5
+			elif TOTAL >= 1000.00 and TOTAL < 1500.00:
+				if self.super_spl_discount:
+					DISCOUNT = 10
+				else:
+					DISCOUNT = 7
+			elif TOTAL >= 1500.00:
+				if self.super_spl_discount:
+					DISCOUNT = 10
+				else:
+					DISCOUNT = 10
 
-			# return super(SaleOrderDiscount, self).write(vals)
-			return sale_order
+			for order in self.env['sale.order.line'].search([('order_id','=', self.id)]):
+				# vals_list.append([1, order.id, {'discount' : DISCOUNT}])
+				order.discount = DISCOUNT
+			# vals.update({'order_line' : vals_list})
+			# print('VALS', vals)
+			# self.write(vals)
+
+		# return super(SaleOrderDiscount, self).write(vals)
+		return sale_order
 
 
 
