@@ -1,4 +1,3 @@
-
 <odoo>
     <data>
         <record id="sale_order_inherit" model="ir.ui.view">
@@ -10,9 +9,17 @@
                     <field name="super_spl_discount" attrs="{'invisible':[('hide', '=', False)]}"/>
                 </xpath>
 
-                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="before">
-                    <field name="subtotal"/>
+                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='tax_id']" position="before">
+                    <field name="unit_price"/>
                 </xpath>
+
+                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="before">
+                   <field name="subtotal"/>
+               </xpath>
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -22,7 +29,6 @@
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
                     <field name="hide_amount_untaxed" invisible="1"/>
-
 
                     <field name="amount_before_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 
@@ -43,7 +49,7 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_tax']" position="before">
-                    <field name="amount_untaxed"  attrs="{'invisible':[('hide_amount_untaxed','=',False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_untaxed" attrs="{'invisible':[('hide_amount_untaxed','=',False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 </xpath>
 
                 <!--   Added new payment terms and conditions here    -->
@@ -83,6 +89,14 @@
             <field name="inherit_id" ref="account.invoice_form" />
             <field name="arch" type="xml">
 
+                <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="before">
+                    <field name="unit_price"/>
+                </xpath>
+
+                <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
                 <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="before">
                     <field name="subtotal"/>
                 </xpath>
@@ -96,7 +110,6 @@
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
                     <field name="hide_amount_untaxed" invisible="1"/>
-
 
                     <field name="amount_before_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 

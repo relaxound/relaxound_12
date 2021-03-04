@@ -3,6 +3,18 @@
 from odoo import models, fields, api
 from datetime import datetime , timedelta,date
 
+# class relaxound_discount(models.Model):
+#     _name = 'relaxound_discount.relaxound_discount'
+
+#     name = fields.Char()
+#     value = fields.Integer()
+#     value2 = fields.Float(compute="_value_pc", store=True)
+#     description = fields.Text()
+#
+#     @api.depends('value')
+#     def _value_pc(self):
+#         self.value2 = float(self.value) / 100
+
 class SaleOrderDiscount(models.Model):
 	"""docstring for SaleOrderDiscount"""
 	_inherit  = "sale.order"
@@ -84,7 +96,6 @@ class SaleOrderDiscount(models.Model):
 			else:
 				rec.hide_amount_untaxed = False
 
-
 	def get_delivery_price(self):
 		for order in self.filtered(lambda o: o.state in ('draft', 'sent') and len(o.order_line) > 0):
 			# We do not want to recompute the shipping price of an already validated/done SO
@@ -114,6 +125,7 @@ class SaleOrderDiscount(models.Model):
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
 				amount_untaxed = 0.0
 				for line in self.order_line:
+					# if 'included' not in line.tax_id.name:
 					amount_untaxed += line.product_uom_qty * line.price_unit
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.discount1 = (5 * (amount_untaxed)) / 100
@@ -154,6 +166,7 @@ class SaleOrderDiscount(models.Model):
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
 				amount_untaxed = 0.0
 				for line in self.order_line:
+					# if 'included' not in line.tax_id.name:
 					amount_untaxed += line.product_uom_qty * line.price_unit
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_discount = (5 * (amount_untaxed)) / 100
@@ -249,9 +262,6 @@ class SaleOrderDiscount(models.Model):
 					rec.percentage = '0%:'
 					rec.percentage = "Discount {}".format(rec.percentage)
 
-
-
-
 	@api.model_create_multi
 	def create(self, vals_list):
 		if 'Preismodell 2021' == self.env['res.partner'].search(
@@ -317,6 +327,8 @@ class SaleOrderDiscount(models.Model):
 
 				if vals_list[0].get('is_custom_relax_discount'):
 					vals_list[0]['is_custom_relax_discount'] = True
+		else:
+			pass
 
 		return super(SaleOrderDiscount, self).create(vals_list)
 
@@ -406,9 +418,20 @@ class OrderSaleLine(models.Model):
 	_inherit = "sale.order.line"
 
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
+	unit_price = fields.Float(String='Unit Price',compute='_compute_unit_price')
 
-	@api.onchange('product_uom_qty','price_unit')
+	@api.multi
+	@api.onchange('tax_id')
+	def _compute_unit_price(self):
+		for line in self:
+			if line.order_id.pricelist_id.name == 'Public pricelist private customer' and line.tax_id.name == 'MwSt._(19.0 % included T)_Relaxound GmbH':
+				line.unit_price = line.price_subtotal / line.product_uom_qty
+			else:
+				line.unit_price = line.price_unit
+
+	@api.multi
+	@api.onchange('price_unit')
 	def _compute_subtotal_price(self):
 		for line in self:
-			line.subtotal = line.product_uom_qty * line.price_unit
+			line.subtotal = line.product_uom_qty * line.unit_price
 
