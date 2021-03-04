@@ -436,7 +436,6 @@ class OrderAccountLine(models.Model):
 	@api.onchange('invoice_line_tax_ids')
 	def _compute_unit_price(self):
 		for line in self:
-			import pdb;pdb.set_trace()
 			if (line.invoice_id.origin1.pricelist_id.name and line.invoice_id.origin1.pricelist_id.name == 'Public pricelist private customer') or (
 						not line.invoice_id.origin1.id and line.invoice_id.partner_id.property_product_pricelist.name == 'Public pricelist private customer'):
 				line.unit_price = line.price_subtotal / line.quantity
