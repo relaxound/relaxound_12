@@ -26,7 +26,7 @@ class defaultnote(models.Model):
             self.update({'note': "Ihr persönlicher Ansprechpartner: Agentur Wirtz\nKontakt: Agentur Wirtz, Tannenweg 23, 41363 Jüchen\nTel. 02165 87 27 50\nE-Mail: agenturwirtz@t-online.de "})
 
         elif self.partner_id.agent_name == 'Kuhnle':
-            self.update({'note': "Ihr persönlicher Ansprechpartner: Agentur Kuhnle\nKontakt: Agentur Kuhnle, Bonwiedenweg 18, 73312 Türkheim\nTel. 07331 951110\nE-Mail: s.kuhnle@t-online.de "})
+            self.update({'note': "Ihr persönlicher Ansprechpartner: Handelsagentur Kuhnle\nKontakt: Handelsagentur Kuhnle, An der Schießmauer 6, 89231 Neu-Ulm\nTel. 07331 951110\nE-Mail: s.kuhnle@t-online.de"})
 
         elif self.partner_id.agent_name == 'Werner':
             self.update({'note': "Ihr persönlicher Ansprechpartner: Handelsagentur BUCH + RAUM\nKontakt: Thomas Werner, Tulpenweg 9, 83254 Breitbrunn am Chiemsee\nTel. 0172 7238676\nE-Mail: werner@buch-raum.de"})
@@ -71,7 +71,7 @@ class defaultnote(models.Model):
             self.update({'comment': "Ihr persönlicher Ansprechpartner: Agentur Wirtz\nKontakt: Agentur Wirtz, Tannenweg 23, 41363 Jüchen\nTel. 02165 87 27 50\nE-Mail: agenturwirtz@t-online.de "})
 
         elif self.partner_id.agent_name == 'Kuhnle':
-            self.update({'comment': "Ihr persönlicher Ansprechpartner: Agentur Kuhnle\nKontakt: Agentur Kuhnle, Bonwiedenweg 18, 73312 Türkheim\nTel. 07331 951110\nE-Mail: s.kuhnle@t-online.de "})
+            self.update({'comment': "Ihr persönlicher Ansprechpartner: Handelsagentur Kuhnle\nKontakt: Handelsagentur Kuhnle, An der Schießmauer 6, 89231 Neu-Ulm\nTel. 07331 951110\nE-Mail: s.kuhnle@t-online.de"})
 
         elif self.partner_id.agent_name == 'Werner':
             self.update({'comment': "Ihr persönlicher Ansprechpartner: Handelsagentur BUCH + RAUM\nKontakt: Thomas Werner, Tulpenweg 9, 83254 Breitbrunn am Chiemsee\nTel. 0172 7238676\nE-Mail: werner@buch-raum.de"})
