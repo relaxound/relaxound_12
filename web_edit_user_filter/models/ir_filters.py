@@ -16,8 +16,6 @@ class IrFilters(models.Model):
         ids = map(lambda f: f['id'], res)
         # Browse filters that are in res
         filters = self.browse(ids)
-        import pdb;
-        pdb.set_trace()
         for i, res_filter in enumerate(res):
             # Add the field 'facet' to the result
             res[i]['facet'] = filters.filtered(
