@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="order_form_inherit12">
+            <field name="name">custom.sale.order.form.inherit12</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <button name="%(web_edit_user_filter.edit_filter_wizard_form_view)d" type="action" string="Edit" class="oe_highlight"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
