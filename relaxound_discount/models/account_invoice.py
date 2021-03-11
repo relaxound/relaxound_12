@@ -413,7 +413,7 @@ class OrderAccountLine(models.Model):
 			else:
 				line.unit_price = line.price_unit
 
-	@api.onchange('price_unit')
+	@api.onchange('invoice_line_tax_ids','unit_price')
 	def _compute_subtotal_price(self):
 		for line in self:
 			line.subtotal = line.quantity * line.unit_price

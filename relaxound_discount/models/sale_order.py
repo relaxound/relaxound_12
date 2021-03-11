@@ -430,7 +430,7 @@ class OrderSaleLine(models.Model):
 				line.unit_price = line.price_unit
 
 	@api.multi
-	@api.onchange('price_unit')
+	@api.onchange('tax_id','unit_price')
 	def _compute_subtotal_price(self):
 		for line in self:
 			line.subtotal = line.product_uom_qty * line.unit_price
