@@ -398,10 +398,10 @@ class InvoiceOrderDiscount(models.Model):
 		return invoice_order
 
 
-# class OrderAccountLine(models.Model):
-# 	_inherit = 'account.invoice.line'
+class OrderAccountLine(models.Model):
+	_inherit = 'account.invoice.line'
 
-# 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
+	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 # 	unit_price = fields.Float(String='Unit Price', compute='_compute_unit_price')
 
 # 	@api.onchange('invoice_line_tax_ids')
@@ -413,9 +413,9 @@ class InvoiceOrderDiscount(models.Model):
 # 			else:
 # 				line.unit_price = line.price_unit
 
-# 	@api.onchange('invoice_line_tax_ids','unit_price')
-# 	def _compute_subtotal_price(self):
-# 		for line in self:
-# 			line.subtotal = line.quantity * line.unit_price
+	@api.onchange('invoice_line_tax_ids','price_unit')
+	def _compute_subtotal_price(self):
+		for line in self:
+			line.subtotal = line.quantity * line.price_unit
 
 

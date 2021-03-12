@@ -414,10 +414,10 @@ class SaleOrderDiscount(models.Model):
 
 
 # Changes are adding for hiding subtotal w/o discount and adding subtotal with discount
-# class OrderSaleLine(models.Model):
-# 	_inherit = "sale.order.line"
+class OrderSaleLine(models.Model):
+	_inherit = "sale.order.line"
 
-# 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
+	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 # 	unit_price = fields.Float(String='Unit Price',compute='_compute_unit_price')
 
 # 	@api.multi
@@ -429,9 +429,9 @@ class SaleOrderDiscount(models.Model):
 # 			else:
 # 				line.unit_price = line.price_unit
 
-# 	@api.multi
-# 	@api.onchange('tax_id','unit_price')
-# 	def _compute_subtotal_price(self):
-# 		for line in self:
-# 			line.subtotal = line.product_uom_qty * line.unit_price
+	@api.multi
+	@api.onchange('tax_id','price_unit')
+	def _compute_subtotal_price(self):
+		for line in self:
+			line.subtotal = line.product_uom_qty * line.price_unit
 

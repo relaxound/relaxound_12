@@ -15,7 +15,7 @@
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
                     <attribute name="invisible">1</attribute>
-                </xpath>
+                </xpath> -->
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="before">
                    <field name="subtotal"/>
@@ -23,7 +23,7 @@
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
                     <attribute name="invisible">1</attribute>
-                </xpath> -->
+                </xpath> 
 
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_untaxed']" position="replace">
                     <field name="hide" invisible="1"/>
@@ -95,7 +95,7 @@
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="attributes">
                     <attribute name="invisible">1</attribute>
-                </xpath>
+                </xpath> -->
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="before">
                     <field name="subtotal"/>
@@ -103,7 +103,7 @@
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="attributes">
                     <attribute name="invisible">1</attribute>
-                </xpath> -->
+                </xpath> 
 
 
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_untaxed']" position="replace">
