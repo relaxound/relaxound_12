@@ -341,7 +341,7 @@ class InvoiceOrderDiscount(models.Model):
 		PRICELIST = False
 		TOTAL = 0.0
 		DISCOUNT = 0.0
-		import pdb;pdb.set_trace()
+
 
 		if vals.get('pricelist_id') or vals.get('partner_id'):
 			if vals.get('pricelist_id'):
