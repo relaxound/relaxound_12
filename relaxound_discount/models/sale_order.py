@@ -414,24 +414,24 @@ class SaleOrderDiscount(models.Model):
 
 
 # Changes are adding for hiding subtotal w/o discount and adding subtotal with discount
-class OrderSaleLine(models.Model):
-	_inherit = "sale.order.line"
+# class OrderSaleLine(models.Model):
+# 	_inherit = "sale.order.line"
 
-	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
-	unit_price = fields.Float(String='Unit Price',compute='_compute_unit_price')
+# 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
+# 	unit_price = fields.Float(String='Unit Price',compute='_compute_unit_price')
 
-	@api.multi
-	@api.onchange('tax_id')
-	def _compute_unit_price(self):
-		for line in self:
-			if line.order_id.pricelist_id.name == 'Public pricelist private customer' and line.tax_id.name == 'MwSt._(19.0 % included T)_Relaxound GmbH':
-				line.unit_price = line.price_subtotal / line.product_uom_qty
-			else:
-				line.unit_price = line.price_unit
+# 	@api.multi
+# 	@api.onchange('tax_id')
+# 	def _compute_unit_price(self):
+# 		for line in self:
+# 			if line.order_id.pricelist_id.name == 'Public pricelist private customer' and line.tax_id.name == 'MwSt._(19.0 % included T)_Relaxound GmbH':
+# 				line.unit_price = line.price_subtotal / line.product_uom_qty
+# 			else:
+# 				line.unit_price = line.price_unit
 
-	@api.multi
-	@api.onchange('tax_id','unit_price')
-	def _compute_subtotal_price(self):
-		for line in self:
-			line.subtotal = line.product_uom_qty * line.unit_price
+# 	@api.multi
+# 	@api.onchange('tax_id','unit_price')
+# 	def _compute_subtotal_price(self):
+# 		for line in self:
+# 			line.subtotal = line.product_uom_qty * line.unit_price
 

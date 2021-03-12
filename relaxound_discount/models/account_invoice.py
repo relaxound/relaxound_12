@@ -398,24 +398,24 @@ class InvoiceOrderDiscount(models.Model):
 		return invoice_order
 
 
-class OrderAccountLine(models.Model):
-	_inherit = 'account.invoice.line'
+# class OrderAccountLine(models.Model):
+# 	_inherit = 'account.invoice.line'
 
-	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
-	unit_price = fields.Float(String='Unit Price', compute='_compute_unit_price')
+# 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
+# 	unit_price = fields.Float(String='Unit Price', compute='_compute_unit_price')
 
-	@api.onchange('invoice_line_tax_ids')
-	def _compute_unit_price(self):
-		for line in self:
-			if (line.invoice_id.origin1.pricelist_id.name and line.invoice_id.origin1.pricelist_id.name == 'Public pricelist private customer') or (
-						not line.invoice_id.origin1.id and line.invoice_id.partner_id.property_product_pricelist.name == 'Public pricelist private customer'):
-				line.unit_price = line.price_subtotal / line.quantity
-			else:
-				line.unit_price = line.price_unit
+# 	@api.onchange('invoice_line_tax_ids')
+# 	def _compute_unit_price(self):
+# 		for line in self:
+# 			if (line.invoice_id.origin1.pricelist_id.name and line.invoice_id.origin1.pricelist_id.name == 'Public pricelist private customer') or (
+# 						not line.invoice_id.origin1.id and line.invoice_id.partner_id.property_product_pricelist.name == 'Public pricelist private customer'):
+# 				line.unit_price = line.price_subtotal / line.quantity
+# 			else:
+# 				line.unit_price = line.price_unit
 
-	@api.onchange('invoice_line_tax_ids','unit_price')
-	def _compute_subtotal_price(self):
-		for line in self:
-			line.subtotal = line.quantity * line.unit_price
+# 	@api.onchange('invoice_line_tax_ids','unit_price')
+# 	def _compute_subtotal_price(self):
+# 		for line in self:
+# 			line.subtotal = line.quantity * line.unit_price
 
 

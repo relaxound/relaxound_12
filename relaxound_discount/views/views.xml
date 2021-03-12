@@ -9,7 +9,7 @@
                     <field name="super_spl_discount" attrs="{'invisible':[('hide', '=', False)]}"/>
                 </xpath>
 
-                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='tax_id']" position="before">
+                <!-- <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='tax_id']" position="before">
                     <field name="unit_price"/>
                 </xpath>
 
@@ -23,7 +23,7 @@
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
                     <attribute name="invisible">1</attribute>
-                </xpath>
+                </xpath> -->
 
                 <xpath expr="//form/sheet/notebook/page/group[@name='sale_total']/field[@name='amount_untaxed']" position="replace">
                     <field name="hide" invisible="1"/>
@@ -89,7 +89,7 @@
             <field name="inherit_id" ref="account.invoice_form" />
             <field name="arch" type="xml">
 
-                <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="before">
+                <!-- <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="before">
                     <field name="unit_price"/>
                 </xpath>
 
@@ -103,7 +103,7 @@
 
                 <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="attributes">
                     <attribute name="invisible">1</attribute>
-                </xpath>
+                </xpath> -->
 
 
                 <xpath expr="//form/sheet/notebook/page/group/field[@name='amount_untaxed']" position="replace">
