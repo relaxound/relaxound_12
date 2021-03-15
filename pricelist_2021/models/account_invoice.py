@@ -248,9 +248,9 @@ class CustomInvoiceOrderform(models.Model):
         for rec in self:
             if rec.type != 'out_refund':
                 if rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
-                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
+                    rec.set_desription ='2% Skonto bei SEPA-Einzug oder Zahlungseingang bis ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
                 elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
-                    rec.set_desription ='2% Skonto bei Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
+                    rec.set_desription ='2% Skonto bei SEPA-Einzug oder Zahlungseingang bis ' + str((date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
                 elif rec.date_invoice_compute and (rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.lang not in ['de_CH','de_DE'] and rec.partner_id.country_id.name != 'France' and ((rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
                     rec.set_desription ='2% discount - payment by ' + str((rec.date_invoice + timedelta(days=14)).strftime('%d.%m.%Y'))
