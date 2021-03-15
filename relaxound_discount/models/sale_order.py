@@ -82,7 +82,7 @@ class SaleOrderDiscount(models.Model):
 	def _compute_hide(self):
 		# simple logic, but you can do much more here
 		for rec in self:
-			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
+			if rec.pricelist_id.name == 'Preismodell 2021':
 				rec.hide = True
 			else:
 				rec.hide = False
@@ -126,7 +126,7 @@ class SaleOrderDiscount(models.Model):
 				amount_untaxed = 0.0
 				for line in self.order_line:
 					# if 'included' not in line.tax_id.name:
-					amount_untaxed += line.product_uom_qty * line.price_unit
+					amount_untaxed += line.price_subtotal - line.discount
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.discount1 = (5 * (amount_untaxed)) / 100
 					rec.amount_before_discount = amount_untaxed
@@ -166,8 +166,7 @@ class SaleOrderDiscount(models.Model):
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
 				amount_untaxed = 0.0
 				for line in self.order_line:
-					# if 'included' not in line.tax_id.name:
-					amount_untaxed += line.product_uom_qty * line.price_unit
+					amount_untaxed += line.price_subtotal - line.discount
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_discount = (5 * (amount_untaxed)) / 100
 
@@ -418,20 +417,9 @@ class OrderSaleLine(models.Model):
 	_inherit = "sale.order.line"
 
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
-# 	unit_price = fields.Float(String='Unit Price',compute='_compute_unit_price')
-
-# 	@api.multi
-# 	@api.onchange('tax_id')
-# 	def _compute_unit_price(self):
-# 		for line in self:
-# 			if line.order_id.pricelist_id.name == 'Public pricelist private customer' and line.tax_id.name == 'MwSt._(19.0 % included T)_Relaxound GmbH':
-# 				line.unit_price = line.price_subtotal / line.product_uom_qty
-# 			else:
-# 				line.unit_price = line.price_unit
 
 	@api.multi
 	@api.onchange('tax_id','price_unit')
 	def _compute_subtotal_price(self):
 		for line in self:
-			line.subtotal = line.product_uom_qty * line.price_unit
-
+			line.subtotal = line.price_subtotal - line.discount

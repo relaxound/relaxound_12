@@ -9,14 +9,6 @@
                     <field name="super_spl_discount" attrs="{'invisible':[('hide', '=', False)]}"/>
                 </xpath>
 
-                <!-- <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='tax_id']" position="before">
-                    <field name="unit_price"/>
-                </xpath>
-
-                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath> -->
-
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="before">
                    <field name="subtotal"/>
                </xpath>

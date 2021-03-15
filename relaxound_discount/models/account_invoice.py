@@ -113,8 +113,7 @@ class InvoiceOrderDiscount(models.Model):
 						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 					amount_untaxed = 0.0
 					for line in self.invoice_line_ids:
-						# if line.invoice_line_tax_ids.name and 'included' not in line.invoice_line_tax_ids.name:
-						amount_untaxed += line.quantity * line.price_unit
+						amount_untaxed += line.price_subtotal - line.discount
 					if amount_untaxed >= 500 and amount_untaxed < 1000:
 						rec.discount1 = (5 * (amount_untaxed)) / 100
 						rec.amount_before_discount = amount_untaxed
@@ -157,8 +156,7 @@ class InvoiceOrderDiscount(models.Model):
 					not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 				amount_untaxed = 0.0
 				for line in self.invoice_line_ids:
-					# if line.invoice_line_tax_ids and 'included' not in line.invoice_line_tax_ids.name:
-					amount_untaxed += line.quantity * line.price_unit
+					amount_untaxed += line.price_subtotal - line.discount
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_discount = (5 * (amount_untaxed)) / 100
 
@@ -402,20 +400,9 @@ class OrderAccountLine(models.Model):
 	_inherit = 'account.invoice.line'
 
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
-# 	unit_price = fields.Float(String='Unit Price', compute='_compute_unit_price')
 
-# 	@api.onchange('invoice_line_tax_ids')
-# 	def _compute_unit_price(self):
-# 		for line in self:
-# 			if (line.invoice_id.origin1.pricelist_id.name and line.invoice_id.origin1.pricelist_id.name == 'Public pricelist private customer') or (
-# 						not line.invoice_id.origin1.id and line.invoice_id.partner_id.property_product_pricelist.name == 'Public pricelist private customer'):
-# 				line.unit_price = line.price_subtotal / line.quantity
-# 			else:
-# 				line.unit_price = line.price_unit
-
-	@api.onchange('invoice_line_tax_ids','price_unit')
+	@api.onchange('price_unit','invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		for line in self:
-			line.subtotal = line.quantity * line.price_unit
-
+			line.subtotal = line.price_subtotal - line.discount
 
