@@ -113,7 +113,7 @@ class InvoiceOrderDiscount(models.Model):
 						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 					amount_untaxed = 0.0
 					for line in self.invoice_line_ids:
-						amount_untaxed += line.price_subtotal - line.discount
+						amount_untaxed += line.price_subtotal + line.discount
 					if amount_untaxed >= 500 and amount_untaxed < 1000:
 						rec.discount1 = (5 * (amount_untaxed)) / 100
 						rec.amount_before_discount = amount_untaxed
@@ -156,7 +156,7 @@ class InvoiceOrderDiscount(models.Model):
 					not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 				amount_untaxed = 0.0
 				for line in self.invoice_line_ids:
-					amount_untaxed += line.price_subtotal - line.discount
+					amount_untaxed += line.price_subtotal + line.discount
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_discount = (5 * (amount_untaxed)) / 100
 
@@ -404,5 +404,5 @@ class OrderAccountLine(models.Model):
 	@api.onchange('price_unit','invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		for line in self:
-			line.subtotal = line.price_subtotal - line.discount
+			line.subtotal = line.price_subtotal + line.discount
 
