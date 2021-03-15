@@ -210,11 +210,11 @@ class SaleOrderDiscount(models.Model):
 		for rec in self:
 			if rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH',
 																								 'de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
-				rec.set_desription = '2% Skonto bei SEPA-Einzug oder Zahlungseingang bis' + str(
+				rec.set_desription = '2% Skonto bei SEPA-Einzug oder Zahlungseingang bis ' + str(
 					(rec.date_order + timedelta(days=14)).strftime('%d.%m.%Y'))
 			elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.lang in ['de_CH',
 																								   'de_DE'] and rec.partner_id.country_id.name != 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
-				rec.set_desription = '2% Skonto bei SEPA-Einzug oder Zahlungseingang bis' + str(
+				rec.set_desription = '2% Skonto bei SEPA-Einzug oder Zahlungseingang bis ' + str(
 					(date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
 			elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.lang not in ['de_CH',
