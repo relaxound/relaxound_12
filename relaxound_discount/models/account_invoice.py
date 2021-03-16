@@ -405,6 +405,7 @@ class OrderAccountLine(models.Model):
 	@api.onchange('price_unit','invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
+		# Adding condition for order line subtotal calculation
 		for line in self:
 			if line[0].invoice_line_tax_ids.name and 'include' not in line[0].invoice_line_tax_ids.name:
 				line.subtotal = line.price_unit * line.quantity
