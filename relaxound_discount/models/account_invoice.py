@@ -401,9 +401,22 @@ class OrderAccountLine(models.Model):
 
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
+	@api.multi
 	@api.onchange('price_unit','invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
+		# import pdb;pdb.set_trace()
 		for line in self:
-			if 'include' not in line.tax_id.name:
+			if line[0].invoice_line_tax_ids.name and 'include' not in line[0].invoice_line_tax_ids.name:
 				line.subtotal = line.price_unit * line.quantity
+			else:
+				if line[0].invoice_line_tax_ids.name and 'include' in line[0].invoice_line_tax_ids.name:
+					if line.invoice_id.amount_untaxed >= 500 and line.invoice_id.amount_untaxed < 1000:
+						line.subtotal = (line.price_unit * line.quantity) - ((19*(line.price_unit * line.quantity))/100)
+
+					if line.invoice_id.amount_untaxed >= 1000 and line.invoice_id.amount_untaxed < 1500:
+						line.subtotal = (line.price_unit * line.quantity) - ((19*(line.price_unit * line.quantity))/100)
+
+					if line.invoice_id.amount_untaxed >= 1500:
+						line.subtotal = (line.price_unit * line.quantity) - ((19*(line.price_unit * line.quantity))/100)
+
 
