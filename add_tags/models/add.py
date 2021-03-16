@@ -3,7 +3,8 @@ from odoo import models,api,fields
 class AddTags(models.Model):
     _inherit = 'sale.order'
 
-    category_id_sale = fields.Many2many('crm.lead.tag', related='tag_ids', string="Tags")
+    tag_ids = fields.Many2many('crm.lead.tag', 'sale_order_tag_rel', 'order_id', 'tag_id',string='Tags')
+
 
     # category_id_sale = fields.Many2many('crm.lead.tag',string="Tags",readonly=True,compute='_add_tags')
 
