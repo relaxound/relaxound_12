@@ -428,10 +428,10 @@ class OrderSaleLine(models.Model):
 			else:
 				if line[0].tax_id.name and 'include' in line[0].tax_id.name:
 					if line.order_id.amount_untaxed >= 500 and line.order_id.amount_untaxed < 1000:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((19*(line.price_unit * line.product_uom_qty))/100)
+						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
 
 					if line.order_id.amount_untaxed >= 1000 and line.order_id.amount_untaxed < 1500:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((19*(line.price_unit * line.product_uom_qty))/100)
+						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
 
 					if line.order_id.amount_untaxed >= 1500:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((19*(line.price_unit * line.product_uom_qty))/100)
+						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)

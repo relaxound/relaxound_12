@@ -412,12 +412,12 @@ class OrderAccountLine(models.Model):
 			else:
 				if line[0].invoice_line_tax_ids.name and 'include' in line[0].invoice_line_tax_ids.name:
 					if line.invoice_id.amount_untaxed >= 500 and line.invoice_id.amount_untaxed < 1000:
-						line.subtotal = (line.price_unit * line.quantity) - ((19*(line.price_unit * line.quantity))/100)
+						line.subtotal = (line.price_unit * line.quantity) - ((line[0].invoice_line_tax_ids.amount*(line.price_unit * line.quantity))/100)
 
 					if line.invoice_id.amount_untaxed >= 1000 and line.invoice_id.amount_untaxed < 1500:
-						line.subtotal = (line.price_unit * line.quantity) - ((19*(line.price_unit * line.quantity))/100)
+						line.subtotal = (line.price_unit * line.quantity) - ((line[0].invoice_line_tax_ids.amount*(line.price_unit * line.quantity))/100)
 
 					if line.invoice_id.amount_untaxed >= 1500:
-						line.subtotal = (line.price_unit * line.quantity) - ((19*(line.price_unit * line.quantity))/100)
+						line.subtotal = (line.price_unit * line.quantity) - ((line[0].invoice_line_tax_ids.amount*(line.price_unit * line.quantity))/100)
 
 
