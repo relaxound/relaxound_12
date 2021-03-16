@@ -423,5 +423,16 @@ class OrderSaleLine(models.Model):
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
 		for line in self:
-			if 'include' not in line.tax_id.name:
+			if line[0].tax_id.name and 'include' not in line[0].tax_id.name:
 				line.subtotal = line.price_unit * line.product_uom_qty
+			else:
+				if line[0].tax_id.name and 'include' in line[0].tax_id.name:
+					if self.order_id.amount_untaxed >= 500 and self.order_id.amount_untaxed < 1000:
+						line.subtotal = line.price_subtotal + ((5*line.price_subtotal)/100)
+
+					if self.order_id.amount_untaxed >= 1000 and self.order_id.amount_untaxed < 1500:
+						line.subtotal = line.price_subtotal + ((7*line.price_subtotal)/100)
+
+					if self.order_id.amount_untaxed >= 1500:
+						line.subtotal = line.price_subtotal + ((10*line.price_subtotal)/100)
+
