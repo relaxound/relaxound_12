@@ -184,13 +184,16 @@ class SaleOrderDiscount(models.Model):
 	def _compute_spl_percentage(self):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
-				if rec.partner_id.is_retailer and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+				amount_untaxed = 0.0
+				for line in self.order_line:
+					amount_untaxed += line.subtotal
+				if rec.partner_id.is_retailer and amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_percentage = '5%:'
 					rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
-				elif rec.partner_id.is_retailer and rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+				elif rec.partner_id.is_retailer and amount_untaxed >= 1000 and amount_untaxed < 1500:
 					rec.spl_percentage = '3%:'
 					rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
-				elif rec.partner_id.is_retailer and rec.amount_untaxed < 500 and rec.amount_untaxed > 0:
+				elif rec.partner_id.is_retailer and amount_untaxed < 500 and amount_untaxed > 0:
 					rec.spl_percentage = '10%:'
 					rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
 				else:
@@ -248,13 +251,16 @@ class SaleOrderDiscount(models.Model):
 	def _compute_percentage(self):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
-				if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+				amount_untaxed = 0.0
+				for line in self.order_line:
+					amount_untaxed += line.subtotal
+				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.percentage = '5%:'
 					rec.percentage = "Discount {}".format(rec.percentage)
-				elif rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+				elif amount_untaxed >= 1000 and amount_untaxed < 1500:
 					rec.percentage = '7%:'
 					rec.percentage = "Discount {}".format(rec.percentage)
-				elif rec.amount_untaxed >= 1500:
+				elif amount_untaxed >= 1500:
 					rec.percentage = '10%:'
 					rec.percentage = "Discount {}".format(rec.percentage)
 				else:

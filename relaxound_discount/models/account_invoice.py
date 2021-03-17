@@ -176,16 +176,19 @@ class InvoiceOrderDiscount(models.Model):
 				if (rec.date_invoice_compute) and (rec.origin1.super_spl_discount) and (
 						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+					amount_untaxed = 0.0
+					for line in self.invoice_line_ids:
+						amount_untaxed += line.subtotal
 					if (
-							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and amount_untaxed >= 500 and amount_untaxed < 1000:
 						rec.spl_percentage = '5%:'
 						rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
 					elif (
-							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and amount_untaxed >= 1000 and amount_untaxed < 1500:
 						rec.spl_percentage = '3%:'
 						rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
 					elif (
-							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.amount_untaxed < 500 and rec.amount_untaxed > 0:
+							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and amount_untaxed < 500 and amount_untaxed > 0:
 						rec.spl_percentage = '10%:'
 						rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
 					else:
@@ -200,14 +203,16 @@ class InvoiceOrderDiscount(models.Model):
 				if (
 						rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
-
-					if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+					amount_untaxed = 0.0
+					for line in self.invoice_line_ids:
+						amount_untaxed += line.subtotal
+					if amount_untaxed >= 500 and amount_untaxed < 1000:
 						rec.percentage = '5%:'
 						rec.percentage = "Discount {}".format(rec.percentage)
-					elif rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+					elif amount_untaxed >= 1000 and amount_untaxed < 1500:
 						rec.percentage = '7%:'
 						rec.percentage = "Discount {}".format(rec.percentage)
-					elif rec.amount_untaxed >= 1500:
+					elif amount_untaxed >= 1500:
 						rec.percentage = '10%:'
 						rec.percentage = "Discount {}".format(rec.percentage)
 					else:
