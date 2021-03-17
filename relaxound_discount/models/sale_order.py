@@ -425,7 +425,7 @@ class OrderSaleLine(models.Model):
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
 	@api.multi
-	@api.onchange('tax_id','price_unit')
+	@api.onchange('tax_id','product_uom_qty')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
 		for line in self:

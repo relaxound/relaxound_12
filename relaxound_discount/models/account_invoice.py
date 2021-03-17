@@ -407,7 +407,7 @@ class OrderAccountLine(models.Model):
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
 	@api.multi
-	@api.onchange('price_unit','invoice_line_tax_ids')
+	@api.onchange('quantity','invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
 		# Adding condition for order line subtotal calculation
