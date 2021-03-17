@@ -609,7 +609,7 @@
                         </t>
 
 
-                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_before_discount &gt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
+                        <!-- <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_before_discount &gt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
                             <tr style="border-top: 1px solid black">
                                 <td class="col-xs-3 text-right">
                                     <span>Amount After Discount</span>
@@ -647,7 +647,7 @@
                                     </strong>
                                 </td>
                             </tr>
-                        </t>
+                        </t> -->
 
                          <tr style="border-bottom: 1px solid black">
                             <t t-foreach="doc.order_line[0]" t-as="d">
