@@ -131,7 +131,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = (5 * (amount_untaxed)) / 100
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((5 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((5 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -139,7 +141,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = (7 * (amount_untaxed)) / 100
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((3 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((3 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -147,7 +151,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = (10 * (amount_untaxed)) / 100
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -155,7 +161,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = 0
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -424,20 +432,24 @@ class OrderSaleLine(models.Model):
 
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
+
 	@api.multi
-	@api.onchange('tax_id','product_uom_qty')
+	@api.onchange('product_uom_qty','tax_id')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
 		for line in self:
-			if line[0].tax_id.name and 'include' not in line[0].tax_id.name:
-				line.subtotal = line.price_unit * line.product_uom_qty
+			if line.order_id.pricelist_id.name != 'Preismodell 2021':
+				line.subtotal = line.price_subtotal
 			else:
-				if line[0].tax_id.name and 'include' in line[0].tax_id.name:
-					if line.order_id.amount_untaxed >= 500 and line.order_id.amount_untaxed < 1000:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
+				if line[0].tax_id.name and 'include' not in line[0].tax_id.name:
+					line.subtotal = line.price_unit * line.product_uom_qty
+				else:
+					if line[0].tax_id.name and 'include' in line[0].tax_id.name:
+						if line.order_id.amount_untaxed >= 500 and line.order_id.amount_untaxed < 1000:
+							line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
 
-					if line.order_id.amount_untaxed >= 1000 and line.order_id.amount_untaxed < 1500:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
+						if line.order_id.amount_untaxed >= 1000 and line.order_id.amount_untaxed < 1500:
+							line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
 
-					if line.order_id.amount_untaxed >= 1500:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
+						if line.order_id.amount_untaxed >= 1500:
+							line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)

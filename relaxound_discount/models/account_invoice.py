@@ -118,7 +118,8 @@ class InvoiceOrderDiscount(models.Model):
 						rec.discount1 = (5 * (amount_untaxed)) / 100
 						rec.amount_before_discount = amount_untaxed
 						if rec.origin1.super_spl_discount:
-							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((5 * (amount_untaxed)) / 100)
+							# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((5 * (amount_untaxed)) / 100)
+							rec.amount_after_discount = rec.amount_untaxed
 						else:
 							rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -127,7 +128,8 @@ class InvoiceOrderDiscount(models.Model):
 						rec.discount1 = (7 * (amount_untaxed)) / 100
 						rec.amount_before_discount = amount_untaxed
 						if rec.origin1.super_spl_discount:
-							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((3 * (amount_untaxed)) / 100)
+							# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((3 * (amount_untaxed)) / 100)
+							rec.amount_after_discount = rec.amount_untaxed
 						else:
 							rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -135,7 +137,8 @@ class InvoiceOrderDiscount(models.Model):
 						rec.discount1 = (10 * (amount_untaxed)) / 100
 						rec.amount_before_discount = amount_untaxed
 						if rec.origin1.super_spl_discount:
-							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((0 * (amount_untaxed)) / 100)
+							# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((0 * (amount_untaxed)) / 100)
+							rec.amount_after_discount = rec.amount_untaxed
 						else:
 							rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -143,7 +146,8 @@ class InvoiceOrderDiscount(models.Model):
 						rec.discount1 = 0
 						rec.amount_before_discount = amount_untaxed
 						if rec.origin1.super_spl_discount:
-							rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+							# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+							rec.amount_after_discount = rec.amount_untaxed
 						else:
 							rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -289,6 +293,7 @@ class InvoiceOrderDiscount(models.Model):
 
 	@api.model
 	def create(self, vals):
+		import pdb;pdb.set_trace()
 		if 'Preismodell 2021' == self.env['res.partner'].search(
 				[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
 
