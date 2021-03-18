@@ -293,7 +293,7 @@ class InvoiceOrderDiscount(models.Model):
 
 	@api.model
 	def create(self, vals):
-		import pdb;pdb.set_trace()
+		# import pdb;pdb.set_trace()
 		if 'Preismodell 2021' == self.env['res.partner'].search(
 				[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
 
