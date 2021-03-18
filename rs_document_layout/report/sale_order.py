@@ -22,13 +22,13 @@ class SaleOrderLine(models.Model):
             if ('20x' in self.product_id.name or '20X' in self.product_id.name) or ('20x' in self.product_id.default_code or '20X' in self.product_id.default_code) :
                 self.product_id.default_code = self.product_id.default_code.replace('-20x', '')
                 product = self.env['product.product'].search(['&',('default_code', '=', self.product_id.default_code),('sale_ok', '=', 'True')] )
-                self.product_id.name = product.name
+                # self.product_id.name = product.name
                 self.update({'single_unit':self.product_uom_qty*20})
 
             elif ('80x' in self.product_id.name or '80X' in self.product_id.name) or ('80x' in self.product_id.default_code or '80X' in self.product_id.default_code):
                 self.product_id.default_code = self.product_id.default_code.replace('-80x', '')
                 product = self.env['product.product'].search(['&',('default_code', '=', self.product_id.default_code),('sale_ok', '=', 'True')] )
-                self.product_id.name = product.name
+                # self.product_id.name = product.name
                 self.update({'single_unit':self.product_uom_qty*80})
 
             else:
