@@ -29,7 +29,8 @@
                 </xpath>
                 <xpath expr="field[@name='payment_method_id']" position="after">
                     <field name="state"/>
-                    <field name="category_id_sale" widget="many2many_tags"/>
+                    <!-- Add sale order tags in sale.order.tree -->
+                    <field name="tag_ids" widget="many2many_tags"/>
                 </xpath>
                  <xpath expr="field[@name='partner_id']" position="after">
                     <field name="new_overdue"/>
