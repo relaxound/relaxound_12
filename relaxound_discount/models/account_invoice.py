@@ -412,22 +412,26 @@ class OrderAccountLine(models.Model):
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
 	@api.multi
-	@api.onchange('quantity','invoice_line_tax_ids')
+	@api.onchange('quantity', 'invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
-		# import pdb;pdb.set_trace()
-		# Adding condition for order line subtotal calculation
 		for line in self:
-			if line[0].invoice_line_tax_ids.name and 'include' not in line[0].invoice_line_tax_ids.name:
-				line.subtotal = line.price_unit * line.quantity
+			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or (line.invoice_id.origin1 and line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021'):
+				line.subtotal = line.price_subtotal
 			else:
-				if line[0].invoice_line_tax_ids.name and 'include' in line[0].invoice_line_tax_ids.name:
-					if line.invoice_id.amount_untaxed >= 500 and line.invoice_id.amount_untaxed < 1000:
-						line.subtotal = (line.price_unit * line.quantity) - ((line[0].invoice_line_tax_ids.amount*(line.price_unit * line.quantity))/100)
+				if line[0].invoice_line_tax_ids.name and 'include' not in line[0].invoice_line_tax_ids.name:
+					line.subtotal = line.price_unit * line.quantity
+				else:
+					if line[0].invoice_line_tax_ids.name and 'include' in line[0].invoice_line_tax_ids.name:
+						if line.invoice_id.amount_untaxed >= 500 and line.invoice_id.amount_untaxed < 1000:
+							line.subtotal = (line.price_unit * line.quantity) - (
+										(line[0].invoice_line_tax_ids.amount * (line.price_unit * line.quantity)) / 100)
 
-					if line.invoice_id.amount_untaxed >= 1000 and line.invoice_id.amount_untaxed < 1500:
-						line.subtotal = (line.price_unit * line.quantity) - ((line[0].invoice_line_tax_ids.amount*(line.price_unit * line.quantity))/100)
+						if line.invoice_id.amount_untaxed >= 1000 and line.invoice_id.amount_untaxed < 1500:
+							line.subtotal = (line.price_unit * line.quantity) - (
+										(line[0].invoice_line_tax_ids.amount * (line.price_unit * line.quantity)) / 100)
 
-					if line.invoice_id.amount_untaxed >= 1500:
-						line.subtotal = (line.price_unit * line.quantity) - ((line[0].invoice_line_tax_ids.amount*(line.price_unit * line.quantity))/100)
+						if line.invoice_id.amount_untaxed >= 1500:
+							line.subtotal = (line.price_unit * line.quantity) - (
+										(line[0].invoice_line_tax_ids.amount * (line.price_unit * line.quantity)) / 100)
 
 
