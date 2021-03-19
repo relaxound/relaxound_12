@@ -9,7 +9,7 @@ class InvoiceOrderDiscount(models.Model):
 
 	percentage = fields.Char(compute='_compute_percentage', select=False, invisible="1")
 	discount1 = fields.Float(compute='_compute_discount_line')
-	discount_2 = fields.Float(compute='_compute_discount_2')
+	discount_2 = fields.Float(string='Amount After 2% Discount',compute='_compute_discount_2')
 	spl_discount = fields.Float(compute='_compute_spl_discount')
 	spl_percentage = fields.Char(compute='_compute_spl_percentage', select=False, invisible="1")
 	amount_before_discount = fields.Float('Untaxed Amount',compute='_compute_discount_line')
