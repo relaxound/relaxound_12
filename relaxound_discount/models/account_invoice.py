@@ -403,7 +403,7 @@ class InvoiceOrderDiscount(models.Model):
 				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
 					order.discount = DISCOUNT
 
-		return invoice_order
+			return invoice_order
 
 
 
