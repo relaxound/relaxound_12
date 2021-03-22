@@ -124,7 +124,7 @@ class SaleOrderDiscount(models.Model):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
 				amount_untaxed = 0.0
-				for line in self.order_line:
+				for line in rec.order_line:
 					# if 'included' not in line.tax_id.name:
 					amount_untaxed += line.subtotal
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
@@ -173,7 +173,7 @@ class SaleOrderDiscount(models.Model):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
 				amount_untaxed = 0.0
-				for line in self.order_line:
+				for line in rec.order_line:
 					amount_untaxed += line.subtotal
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_discount = (5 * (amount_untaxed)) / 100
@@ -193,7 +193,7 @@ class SaleOrderDiscount(models.Model):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
 				amount_untaxed = 0.0
-				for line in self.order_line:
+				for line in rec.order_line:
 					amount_untaxed += line.subtotal
 				if rec.partner_id.is_retailer and amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_percentage = '5%:'
@@ -260,7 +260,7 @@ class SaleOrderDiscount(models.Model):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
 				amount_untaxed = 0.0
-				for line in self.order_line:
+				for line in rec.order_line:
 					amount_untaxed += line.subtotal
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.percentage = '5%:'
@@ -433,7 +433,7 @@ class OrderSaleLine(models.Model):
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
 
-	@api.multi
+	# @api.multi
 	@api.onchange('product_uom_qty','tax_id')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()

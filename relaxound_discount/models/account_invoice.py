@@ -112,7 +112,7 @@ class InvoiceOrderDiscount(models.Model):
 				if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 					amount_untaxed = 0.0
-					for line in self.invoice_line_ids:
+					for line in rec.invoice_line_ids:
 						amount_untaxed += line.subtotal
 					if amount_untaxed >= 500 and amount_untaxed < 1000:
 						rec.discount1 = (5 * (amount_untaxed)) / 100
@@ -159,7 +159,7 @@ class InvoiceOrderDiscount(models.Model):
 			if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 					not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 				amount_untaxed = 0.0
-				for line in self.invoice_line_ids:
+				for line in rec.invoice_line_ids:
 					amount_untaxed += line.subtotal
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_discount = (5 * (amount_untaxed)) / 100
@@ -181,7 +181,7 @@ class InvoiceOrderDiscount(models.Model):
 						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
 					amount_untaxed = 0.0
-					for line in self.invoice_line_ids:
+					for line in rec.invoice_line_ids:
 						amount_untaxed += line.subtotal
 					if (
 							rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and amount_untaxed >= 500 and amount_untaxed < 1000:
@@ -208,7 +208,7 @@ class InvoiceOrderDiscount(models.Model):
 						rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 					amount_untaxed = 0.0
-					for line in self.invoice_line_ids:
+					for line in rec.invoice_line_ids:
 						amount_untaxed += line.subtotal
 					if amount_untaxed >= 500 and amount_untaxed < 1000:
 						rec.percentage = '5%:'
@@ -293,7 +293,6 @@ class InvoiceOrderDiscount(models.Model):
 
 	@api.model
 	def create(self, vals):
-		# import pdb;pdb.set_trace()
 		if 'Preismodell 2021' == self.env['res.partner'].search(
 				[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
 
@@ -403,8 +402,7 @@ class InvoiceOrderDiscount(models.Model):
 				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
 					order.discount = DISCOUNT
 
-			return invoice_order
-
+				return invoice_order
 
 
 class OrderAccountLine(models.Model):
@@ -416,7 +414,7 @@ class OrderAccountLine(models.Model):
 	@api.onchange('quantity', 'invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		for line in self:
-			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or (line.invoice_id.origin1 and line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021'):
+			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021':
 				line.subtotal = line.price_subtotal
 			else:
 				if line[0].invoice_line_tax_ids.name and 'include' not in line[0].invoice_line_tax_ids.name:
@@ -434,5 +432,4 @@ class OrderAccountLine(models.Model):
 						if line.invoice_id.amount_untaxed >= 1500:
 							line.subtotal = (line.price_unit * line.quantity) - (
 										(line[0].invoice_line_tax_ids.amount * (line.price_unit * line.quantity)) / 100)
-
 
