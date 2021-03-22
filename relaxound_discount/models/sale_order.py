@@ -23,7 +23,7 @@ class SaleOrderDiscount(models.Model):
 
 	percentage = fields.Char(compute='_compute_percentage', select=False, invisible="1")
 	discount1 = fields.Float(compute='_compute_discount_line')
-	discount_2 = fields.Float(compute='_compute_discount_2')
+	discount_2 = fields.Float(string='Amount After 2% Discount',compute='_compute_discount_2')
 	spl_discount = fields.Float(compute='_compute_spl_discount')
 	spl_percentage = fields.Char(compute='_compute_spl_percentage', select=False, invisible="1")
 	amount_before_discount = fields.Float('Untaxed Amount',compute='_compute_discount_line')
@@ -131,7 +131,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = (5 * (amount_untaxed)) / 100
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((5 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((5 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -139,7 +141,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = (7 * (amount_untaxed)) / 100
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((3 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((3 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -147,7 +151,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = (10 * (amount_untaxed)) / 100
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -155,7 +161,9 @@ class SaleOrderDiscount(models.Model):
 					rec.discount1 = 0
 					rec.amount_before_discount = amount_untaxed
 					if rec.super_spl_discount:
-						rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						# rec.amount_after_discount = amount_untaxed - rec.discount1 - ((10 * (amount_untaxed)) / 100)
+						rec.amount_after_discount = rec.amount_untaxed
+
 					else:
 						rec.amount_after_discount = amount_untaxed - rec.discount1
 
@@ -184,13 +192,16 @@ class SaleOrderDiscount(models.Model):
 	def _compute_spl_percentage(self):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
-				if rec.partner_id.is_retailer and rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+				amount_untaxed = 0.0
+				for line in self.order_line:
+					amount_untaxed += line.subtotal
+				if rec.partner_id.is_retailer and amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_percentage = '5%:'
 					rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
-				elif rec.partner_id.is_retailer and rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+				elif rec.partner_id.is_retailer and amount_untaxed >= 1000 and amount_untaxed < 1500:
 					rec.spl_percentage = '3%:'
 					rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
-				elif rec.partner_id.is_retailer and rec.amount_untaxed < 500 and rec.amount_untaxed > 0:
+				elif rec.partner_id.is_retailer and amount_untaxed < 500 and amount_untaxed > 0:
 					rec.spl_percentage = '10%:'
 					rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
 				else:
@@ -248,13 +259,16 @@ class SaleOrderDiscount(models.Model):
 	def _compute_percentage(self):
 		for rec in self:
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021':
-				if rec.amount_untaxed >= 500 and rec.amount_untaxed < 1000:
+				amount_untaxed = 0.0
+				for line in self.order_line:
+					amount_untaxed += line.subtotal
+				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.percentage = '5%:'
 					rec.percentage = "Discount {}".format(rec.percentage)
-				elif rec.amount_untaxed >= 1000 and rec.amount_untaxed < 1500:
+				elif amount_untaxed >= 1000 and amount_untaxed < 1500:
 					rec.percentage = '7%:'
 					rec.percentage = "Discount {}".format(rec.percentage)
-				elif rec.amount_untaxed >= 1500:
+				elif amount_untaxed >= 1500:
 					rec.percentage = '10%:'
 					rec.percentage = "Discount {}".format(rec.percentage)
 				else:
@@ -418,20 +432,24 @@ class OrderSaleLine(models.Model):
 
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
+
 	@api.multi
-	@api.onchange('tax_id','price_unit')
+	@api.onchange('product_uom_qty','tax_id')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
 		for line in self:
-			if line[0].tax_id.name and 'include' not in line[0].tax_id.name:
-				line.subtotal = line.price_unit * line.product_uom_qty
+			if line.order_id.pricelist_id.name != 'Preismodell 2021':
+				line.subtotal = line.price_subtotal
 			else:
-				if line[0].tax_id.name and 'include' in line[0].tax_id.name:
-					if line.order_id.amount_untaxed >= 500 and line.order_id.amount_untaxed < 1000:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
+				if line[0].tax_id.name and 'include' not in line[0].tax_id.name:
+					line.subtotal = line.price_unit * line.product_uom_qty
+				else:
+					if line[0].tax_id.name and 'include' in line[0].tax_id.name:
+						if line.order_id.amount_untaxed >= 500 and line.order_id.amount_untaxed < 1000:
+							line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
 
-					if line.order_id.amount_untaxed >= 1000 and line.order_id.amount_untaxed < 1500:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
+						if line.order_id.amount_untaxed >= 1000 and line.order_id.amount_untaxed < 1500:
+							line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
 
-					if line.order_id.amount_untaxed >= 1500:
-						line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
+						if line.order_id.amount_untaxed >= 1500:
+							line.subtotal = (line.price_unit * line.product_uom_qty) - ((line[0].tax_id.amount*(line.price_unit * line.product_uom_qty))/100)
