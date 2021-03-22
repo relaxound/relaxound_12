@@ -68,6 +68,7 @@
             <field name="arch" type="xml">
                 <xpath expr="field[@name='origin']" position="after">
                     <field name="payment_method_id"/>
+                    <field name="discount_2"/>
                 </xpath>
             </field>
         </record>
