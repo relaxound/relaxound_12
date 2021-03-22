@@ -350,60 +350,60 @@ class InvoiceOrderDiscount(models.Model):
 		TOTAL = 0.0
 		DISCOUNT = 0.0
 
-
-		if vals.get('pricelist_id') or vals.get('partner_id'):
-			if vals.get('pricelist_id'):
-				if 'Preismodell 2021' == self.env['product.pricelist'].search(
-						[('id', '=', vals.get('pricelist_id'))]).name:
-					PRICELIST = True
-				elif not vals.get('partner_id'):
-					if 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+		for rec in self:
+			if vals.get('pricelist_id') or vals.get('partner_id'):
+				if vals.get('pricelist_id'):
+					if 'Preismodell 2021' == rec.env['product.pricelist'].search(
+							[('id', '=', vals.get('pricelist_id'))]).name:
 						PRICELIST = True
+					elif not vals.get('partner_id'):
+						if 'Preismodell 2021' == rec.partner_id.property_product_pricelist.name:
+							PRICELIST = True
 
-			if not PRICELIST and vals.get('partner_id'):
-				if 'Preismodell 2021' == self.env['res.partner'].search(
-						[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
-					PRICELIST = True
-				elif not vals.get('pricelist_id'):
-					if 'Preismodell 2021' == self.pricelist_id.name:
+				if not PRICELIST and vals.get('partner_id'):
+					if 'Preismodell 2021' == rec.env['res.partner'].search(
+							[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
 						PRICELIST = True
+					elif not vals.get('pricelist_id'):
+						if 'Preismodell 2021' == rec.pricelist_id.name:
+							PRICELIST = True
 
-		elif not PRICELIST and 'Preismodell 2021' == self.origin1.pricelist_id.name or 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
-			PRICELIST = True
+			elif not PRICELIST and 'Preismodell 2021' == rec.origin1.pricelist_id.name or 'Preismodell 2021' == rec.partner_id.property_product_pricelist.name:
+				PRICELIST = True
 
 
-		invoice_order = super(InvoiceOrderDiscount, self).write(vals)
+			invoice_order = super(InvoiceOrderDiscount, rec).write(vals)
 
-		if not PRICELIST and self.is_custom_relax_discount:
+			if not PRICELIST and rec.is_custom_relax_discount:
 
-			for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
-				order.discount = DISCOUNT
+				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
+					order.discount = DISCOUNT
 
-		elif PRICELIST:
+			elif PRICELIST:
 
-			for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
-				TOTAL = TOTAL + (order.quantity * order.price_unit)
+				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
+					TOTAL = TOTAL + (order.quantity * order.price_unit)
 
-			if TOTAL >= 500.00 and TOTAL < 1000.00:
-				if self.origin1.super_spl_discount:
-					DISCOUNT = 10
-				else:
-					DISCOUNT = 5
-			elif TOTAL >= 1000.00 and TOTAL < 1500.00:
-				if self.origin1.super_spl_discount:
-					DISCOUNT = 10
-				else:
-					DISCOUNT = 7
-			elif TOTAL >= 1500.00:
-				if self.origin1.super_spl_discount:
-					DISCOUNT = 10
-				else:
-					DISCOUNT = 10
+				if TOTAL >= 500.00 and TOTAL < 1000.00:
+					if rec.origin1.super_spl_discount:
+						DISCOUNT = 10
+					else:
+						DISCOUNT = 5
+				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
+					if rec.origin1.super_spl_discount:
+						DISCOUNT = 10
+					else:
+						DISCOUNT = 7
+				elif TOTAL >= 1500.00:
+					if rec.origin1.super_spl_discount:
+						DISCOUNT = 10
+					else:
+						DISCOUNT = 10
 
-			for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
-				order.discount = DISCOUNT
+				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
+					order.discount = DISCOUNT
 
-		return invoice_order
+				return invoice_order
 
 
 class OrderAccountLine(models.Model):
