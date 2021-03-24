@@ -263,7 +263,10 @@
 <!--                                </t>-->
                             </t>
 
-                            <tr style="border-bottom: 1px solid black">
+                            <t t-if="o.date_invoice_compute and (
+						(o.origin1.pricelist_id.name and o.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not o.origin1 and o.partner_id.property_product_pricelist.name == 'Preismodell 2021'))">
+                                <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Total</span>
                                     </td>
@@ -273,7 +276,24 @@
                                             <span t-esc="('{0:,.2f}'.format(float(o.amount_before_discount - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </strong>
                                     </td>
-                            </tr>
+                                </tr>
+                            </t>
+
+                            <t t-if="not o.date_invoice_compute and not (
+						(o.origin1.pricelist_id.name and o.origin1.pricelist_id.name != 'Preismodell 2021') or (
+						not o.origin1 and o.partner_id.property_product_pricelist.name != 'Preismodell 2021')) ">
+                                <tr style="border-bottom: 1px solid black">
+                                    <td class="col-xs-3 text-right">
+                                        <span>Total</span>
+                                    </td>
+                                    <td class="text-right col-xs-2">
+                                        <strong>
+                                            <span t-field="o.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(o.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </t>
 
 
                             <!--        Pricelist discount code adding       -->
@@ -509,16 +529,20 @@
 
 
                             <!--Code for Reverse charge for 0% tax-->
-                            <!--Code for Reverse charge for 0% tax-->
-                            <tr style="border: none">
-                                <td></td>
-                                <td class="text-right">
-                                    <t t-if="o.amount_tax == 0.00">
-                                        <span><i>REVERSE CHARGE</i></span>
-                                        <br/>
-                                    </t>
-                                </td>
-                            </tr>
+<!--                            <div class="text-right" style=" margin-right:0px;">-->
+<!--&lt;!&ndash;                                <table>&ndash;&gt;-->
+<!--                                <tr style="border: none">-->
+<!--&lt;!&ndash;                                        <td></td>&ndash;&gt;-->
+<!--                                        <td class="text-right">-->
+<!--                                            <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">-->
+<!--&lt;!&ndash;                                                <i><span t-esc="o.reverse_charg_note"/></i>&ndash;&gt;-->
+<!--                                                <br/>-->
+<!--                                            </t>-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--&lt;!&ndash;                                </table>&ndash;&gt;-->
+<!--                            </div>-->
+
                             <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
                                 <br/>
@@ -706,7 +730,7 @@
 
                                     <td class="text-right" style="white-space:nowrap">
                                         <span t-field="o.currency_id.symbol"/>
-                                        <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        <span t-esc="('{0:,.2f}'.format(float(l.subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                     </td>
                                 </t>
                                     <t t-set="i" t-value="i+1"/>
