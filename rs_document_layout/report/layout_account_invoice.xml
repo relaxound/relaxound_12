@@ -509,15 +509,20 @@
 
 
                             <!--Code for Reverse charge for 0% tax-->
-                            <tr style="border: none">
-                                <td></td>
-                                <td class="text-right">
-                                    <t t-if="o.amount_tax == 0.00">
-                                        <span><i>REVERSE CHARGE</i></span>
-                                        <br/>
-                                    </t>
-                                </td>
-                            </tr>
+                            <div class="text-right" style=" margin-right:0px;">
+<!--                                <table>-->
+                                <tr style="border: none">
+<!--                                        <td></td>-->
+                                        <td class="text-right">
+                                            <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">
+                                                <i><span t-esc="o.reverse_charg_note"/></i>
+                                                <br/>
+                                            </t>
+                                        </td>
+                                </tr>
+<!--                                </table>-->
+                            </div>
+
                             <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
                                 <br/>
@@ -540,10 +545,25 @@
                                 </tr>
                             </t> -->
                     </table>
-
                 </div>
 
+<!--                <div class="text-right" style=" margin-right:0px;">-->
+<!--                    <table>-->
+<!--                    <tr style="border: none">-->
+<!--                            <td></td>-->
+<!--                            <td class="text-right">-->
+<!--                                <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">-->
+<!--                                    <i><span t-esc="o.reverse_charg_note"/></i>-->
+<!--                                    <br/>-->
+<!--                                </t>-->
+<!--                            </td>-->
+<!--                    </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+
+
             </div>
+
             <!--</div>-->
 
             <div id="total" class="row" style=" margin-right:2.5cm; margin-left:38px;  font-size: 13px; font-family:Arial;">
