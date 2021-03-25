@@ -528,20 +528,6 @@
 <!--                            </tr>-->
 
 
-                            <!--Code for Reverse charge for 0% tax-->
-<!--                            <div class="text-right" style=" margin-right:0px;">-->
-<!--&lt;!&ndash;                                <table>&ndash;&gt;-->
-<!--                                <tr style="border: none">-->
-<!--&lt;!&ndash;                                        <td></td>&ndash;&gt;-->
-<!--                                        <td class="text-right">-->
-<!--                                            <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">-->
-<!--&lt;!&ndash;                                                <i><span t-esc="o.reverse_charg_note"/></i>&ndash;&gt;-->
-<!--                                                <br/>-->
-<!--                                            </t>-->
-<!--                                        </td>-->
-<!--                                </tr>-->
-<!--&lt;!&ndash;                                </table>&ndash;&gt;-->
-<!--                            </div>-->
 
                             <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
@@ -567,31 +553,19 @@
                     </table>
                 </div>
 
-<!--                <div class="text-right" style=" margin-right:0px;">-->
-<!--                    <table>-->
-<!--                    <tr style="border: none">-->
-<!--                            <td></td>-->
-<!--                            <td class="text-right">-->
-<!--                                <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">-->
-<!--                                    <i><span t-esc="o.reverse_charg_note"/></i>-->
-<!--                                    <br/>-->
-<!--                                </t>-->
-<!--                            </td>-->
-<!--                    </tr>-->
-<!--                    </table>-->
-<!--                </div>-->
-
-
             </div>
 
             <!--</div>-->
 
+
+
             <div id="total" class="row" style=" margin-right:2.5cm; margin-left:38px;  font-size: 13px; font-family:Arial;">
-                <div class="col-12" style="line-height:1">
+                <div class="col-6" style="line-height:1">
 
                 <!--   Note for 2% discount pricelist-->
                     <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name != 'France'">
                         <tr>
+                            <br/><br/><br/><br/>
                             <td class="text-left">Note: </td>
                             <td class="text-left" style="font-size:13px">
                                 <span>2% discount - payment by</span>
@@ -605,6 +579,8 @@
                     <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France'">
                         <tr>
 <!--                            <td class="text-left">Note: </td>-->
+                            <br/><br/><br/><br/>
+
                             <td class="text-left" style="font-size:13px">
                                 <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % etla valeur de votre commande est réduite à</span>
 <!--                                <span t-esc="o._get_date_invoice()"/>-->
@@ -617,6 +593,16 @@
 
                     <!-- <br/> -->
                 </div>
+                 <!--Code for Reverse charge for 0% tax-->
+                <div class="col-6" style="line-height:1">
+
+                        <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">
+                            <i><span t-esc="o.reverse_charg_note"/></i>
+                            <br/>
+                        </t>
+
+                </div>
+
             </div>
 
 

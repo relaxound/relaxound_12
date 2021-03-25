@@ -4,3 +4,5 @@
 
 from . import partner
 from . import sale_note
+from . import account_invoice
+
