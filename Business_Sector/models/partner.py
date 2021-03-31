@@ -46,8 +46,9 @@ class BusinessSector(models.Model):
                 elif 'Händler' in tag_name and self.country_id.code in ['NL','BE','LU']:
                         self.update({'agent_name': 'DEsignLICIOUS'})
 
-                elif 'Händler' in tag_name and self.country_id.code == 'ES':
-                        self.update({'agent_name': 'The Living Connection'})
+                # As per client requirement we have comment The Living Connection
+                # elif 'Händler' in tag_name and self.country_id.code == 'ES':
+                #         self.update({'agent_name': 'The Living Connection'})
 
                 elif 'Händler' in tag_name and self.country_id.code == 'AT' :
                         # Change code logic
@@ -57,6 +58,9 @@ class BusinessSector(models.Model):
 
                 elif 'Händler' in tag_name and self.country_id.code == 'FR':
                         self.update({'agent_name': 'Agence made IN'})
+
+                elif 'Händler' in tag_name and self.country_id.code in ['DK', 'SE']:
+                        self.update({'agent_name': 'BY-Holm'})
 
                 else:
                         self.update({'agent_name': None})

@@ -40,6 +40,9 @@ class ResPartner(models.Model):
         elif self.partner_id.agent_name == 'Agence made IN':
             emailcc= 'contact@agencemadein.com'
 
+        elif self.partner_id.agent_name == 'BY-Holm':
+            emailcc= 'hanne@by-holm.dk'
+
         else:
             emailcc = ''
 
