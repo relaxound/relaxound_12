@@ -428,8 +428,8 @@ class OrderAccountLine(models.Model):
 			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021':
 				line.subtotal = line.price_subtotal
 			
-			elif line.invoice_id.partner_id.property_product_pricelist.name == 'Preismodell 2021' or line.invoice_id.origin1.pricelist_id.name == 'Preismodell 2021' and not line[0].invoice_line_tax_ids:
-				line.subtotal = line.price_unit * line.quantity
+			elif not line[0].invoice_line_tax_ids.name:
+				line.subtotal = line.price_unit * line.product_uom_qty
 
 			else:
 				if line[0].invoice_line_tax_ids.name and 'include' not in line[0].invoice_line_tax_ids.name:
