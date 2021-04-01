@@ -565,7 +565,6 @@
                 <!--   Note for 2% discount pricelist-->
                     <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name != 'France'">
                         <tr>
-                            <br/><br/><br/><br/>
                             <td class="text-left">Note: </td>
                             <td class="text-left" style="font-size:13px">
                                 <span>2% discount - payment by</span>
@@ -576,13 +575,11 @@
                         </tr>
                     </t>
 
-                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France'">
+                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France' and o.payment_method_id.name =='Sepa'">
                         <tr>
-<!--                            <td class="text-left">Note: </td>-->
-                            <br/><br/><br/><br/>
-
+                            <td class="text-left">Note: </td>
                             <td class="text-left" style="font-size:13px">
-                                <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % etla valeur de votre commande est réduite à</span>
+                                <span>Règlement par prélèvement automatique à 30 jours net date de facture</span>
 <!--                                <span t-esc="o._get_date_invoice()"/>-->
                                 <span>€</span>
                                 <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -590,6 +587,17 @@
                         </tr>
                     </t>
 
+                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France' and o.payment_method_id.name =='Proforma'">
+                        <tr>
+                            <td class="text-left">Note: </td>
+                            <td class="text-left" style="font-size:13px">
+                                <span>Règlement d’avance par virement bancaire avec 2% d’escompte</span>
+<!--                                <span t-esc="o._get_date_invoice()"/>-->
+                                <span>€</span>
+                                <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </td>
+                        </tr>
+                    </t>
 
                     <!-- <br/> -->
                 </div>
@@ -597,8 +605,7 @@
                 <div class="col-6" style="line-height:1">
 
                         <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">
-                            <i><span t-esc="o.reverse_charg_note"/></i>
-                            <br/>
+                            <span t-esc="o.reverse_charg_note"/>
                         </t>
 
                 </div>

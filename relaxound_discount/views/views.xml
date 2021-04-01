@@ -67,7 +67,7 @@
 <!--                        <label for="set_desription1" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>-->
 <!--                    </div>-->
                     <field name="set_desription1" class="oe_inline" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>
-                    <field name="discount_2" class="oe_inline" attrs="{'invisible':[('hide_france_note', '=', False)]}" widget="monetary" style="margin-left:-200px;"/>
+                    <field name="discount_2" class="oe_inline" attrs="{'invisible':[('hide_france_note', '=', False)]}" widget="monetary" style="margin-left:-70px;"/>
                     <div class="oe_clear"/>
                 </xpath>
             </field>
@@ -149,7 +149,7 @@
 <!--                        <label for="set_desription1" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>-->
 <!--                    </div>-->
                     <field name="set_desription1" class="oe_inline" attrs="{'invisible':['|',('hide_france_note', '=', False),('type','=','out_refund')]}"/>
-                    <field name="discount_2" class="oe_inline" attrs="{'invisible':['|',('hide_france_note', '=', False),('type','=','out_refund')]}" widget="monetary" style="margin-left:-200px;"/>
+                    <field name="discount_2" class="oe_inline" attrs="{'invisible':['|',('hide_france_note', '=', False),('type','=','out_refund')]}" widget="monetary" style="margin-left:-70px;"/>
                     <div class="oe_clear"/>
                 </xpath>
 

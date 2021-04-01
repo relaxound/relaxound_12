@@ -29,7 +29,7 @@ class SaleOrderDiscount(models.Model):
 	amount_before_discount = fields.Float('Untaxed Amount',compute='_compute_discount_line')
 	amount_after_discount = fields.Float(compute='_compute_discount_line')
 	set_desription = fields.Char('Note', compute='_set_description')
-	set_desription1 = fields.Text('Note', compute='_set_description')
+	set_desription1 = fields.Text('Note: ', compute='_set_description')
 
 	super_spl_discount = fields.Boolean('Super Special Discount')
 	hide_amount_untaxed = fields.Boolean(compute='_compute_hide_amount_untaxed')
@@ -55,7 +55,7 @@ class SaleOrderDiscount(models.Model):
 		# simple logic, but you can do much more here
 		for rec in self:
 			# datetime.strptime('1/1/2021', "%m/%d/%y")
-			if rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021':
+			if rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.payment_method_id.name in ['Sepa','Proforma']:
 				rec.hide_france_note = True
 			else:
 				rec.hide_france_note = False
@@ -174,7 +174,7 @@ class SaleOrderDiscount(models.Model):
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
 				amount_untaxed = 0.0
 				for line in rec.order_line:
-					amount_untaxed += line.subtotal
+					amount_untaxed += rec.subtotal
 				if amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_discount = (5 * (amount_untaxed)) / 100
 
@@ -194,7 +194,7 @@ class SaleOrderDiscount(models.Model):
 			if rec.date_order_compute and rec.pricelist_id.name == 'Preismodell 2021' and rec.super_spl_discount:
 				amount_untaxed = 0.0
 				for line in rec.order_line:
-					amount_untaxed += line.subtotal
+					amount_untaxed += rec.subtotal
 				if rec.partner_id.is_retailer and amount_untaxed >= 500 and amount_untaxed < 1000:
 					rec.spl_percentage = '5%:'
 					rec.spl_percentage = "Special Discount {}".format(rec.spl_percentage)
@@ -237,10 +237,15 @@ class SaleOrderDiscount(models.Model):
 				rec.set_desription = '2% discount - payment by ' + str(
 					(date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
-			elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
-				rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.\nEn cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commande est réduite à '
-			elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
-				rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.\nEn cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commande est réduite à '
+			elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.payment_method_id.name =='Sepa':
+				rec.set_desription1 = 'Règlement par prélèvement automatique à 30 jours net date de facture'
+			elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.payment_method_id.name == 'Proforma':
+				rec.set_desription1 = 'Règlement d’avance par virement bancaire avec 2% d’escompte'
+
+			# elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.date_order:
+			# 	rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.\nEn cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commande est réduite à '
+			# elif rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and not rec.date_order:
+			# 	rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.\nEn cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commande est réduite à '
 			else:
 				pass
 
@@ -292,6 +297,7 @@ class SaleOrderDiscount(models.Model):
 						DISCOUNT = 10
 					else:
 						DISCOUNT = 5
+
 				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
 					if vals_list[0]['super_spl_discount']:
 						DISCOUNT = 10
@@ -347,10 +353,11 @@ class SaleOrderDiscount(models.Model):
 
 	@api.multi
 	def write(self, vals):
+		# import pdb;pdb.set_trace()
 		PRICELIST = False
 		TOTAL = 0.0
 		DISCOUNT = 0.0
-
+		# import pdb;pdb.set_trace()
 		if vals.get('pricelist_id') or vals.get('partner_id'):
 			if vals.get('pricelist_id'):
 				if 'Preismodell 2021' == self.env['product.pricelist'].search([('id','=',vals.get('pricelist_id'))]).name:
@@ -433,8 +440,8 @@ class OrderSaleLine(models.Model):
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
 
-	# @api.multi
-	@api.onchange('product_uom_qty','tax_id')
+	@api.multi
+	# @api.onchange('product_uom_qty','tax_id')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
 		for line in self:

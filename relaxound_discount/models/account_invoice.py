@@ -15,7 +15,7 @@ class InvoiceOrderDiscount(models.Model):
 	amount_before_discount = fields.Float('Untaxed Amount',compute='_compute_discount_line')
 	amount_after_discount = fields.Float(compute='_compute_discount_line')
 	set_desription = fields.Char('Note', compute='_set_description')
-	set_desription1 = fields.Text('Note', compute='_set_description')
+	set_desription1 = fields.Text('Note: ', compute='_set_description')
 
 	super_spl_discount = fields.Boolean('Super Special Discount')
 	hide_amount_untaxed = fields.Boolean(compute='_compute_hide_amount_untaxed')
@@ -45,7 +45,7 @@ class InvoiceOrderDiscount(models.Model):
 				# datetime.strptime('1/1/2021', "%m/%d/%y")
 				if rec.date_invoice_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and (
 						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
-						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')):
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.payment_method_id.name in ['Sepa','Proforma']:
 					rec.hide_france_note = True
 				else:
 					rec.hide_france_note = False
@@ -56,7 +56,6 @@ class InvoiceOrderDiscount(models.Model):
 
 	@api.depends('partner_id.property_product_pricelist')
 	def _compute_hide_2_discount(self):
-		# simple logic, but you can do much more here
 		for rec in self:
 			if rec.type != 'out_refund':
 				# datetime.strptime('1/1/2021', "%m/%d/%y")
@@ -81,7 +80,6 @@ class InvoiceOrderDiscount(models.Model):
 
 	@api.depends('partner_id.property_product_pricelist')
 	def _compute_hide(self):
-		# simple logic, but you can do much more here
 		for rec in self:
 			if rec.type != 'out_refund':
 				# datetime.strptime('1/1/2021', "%m/%d/%y")
@@ -94,7 +92,6 @@ class InvoiceOrderDiscount(models.Model):
 
 	@api.depends('partner_id.property_product_pricelist')
 	def _compute_hide_amount_untaxed(self):
-		# simple logic, but you can do much more here
 		for rec in self:
 			if (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name != 'Preismodell 2021') or (
 					not rec.origin1 and rec.partner_id.property_product_pricelist.name != 'Preismodell 2021'):
@@ -227,7 +224,7 @@ class InvoiceOrderDiscount(models.Model):
 	@api.onchange('partner_id', 'invoice_line_ids', 'amount_total_new')
 	def _compute_discount_2(self):
 		for rec in self:
-			if rec.type != 'out_refund' and rec.hide_2_discount != False:
+			if rec.type != 'out_refund':
 				if (rec.date_invoice_compute and rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 						not rec.origin1 and rec.date_invoice_compute and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021'):
 					rec.discount_2 = rec.amount_total - ((2 * rec.amount_total) / 100)
@@ -267,16 +264,30 @@ class InvoiceOrderDiscount(models.Model):
 					rec.set_desription = '2% discount - payment by ' + str(
 						(date.today() + timedelta(days=14)).strftime('%d.%m.%Y'))
 
+
 				elif rec.date_invoice_compute and (
 						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
 						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
-						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
-					rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.payment_method_id.name == 'Sepa':
+					rec.set_desription1 = 'Règlement par prélèvement automatique à 30 jours net date de facture'
 				elif rec.date_invoice_compute and (
 						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
-						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
-						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
-					rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % et la valeur de votre commende est réduit à '
+							 (rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+							not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.payment_method_id.name == 'Proforma':
+					rec.set_desription1 = 'Règlement d’avance par virement bancaire avec 2% d’escompte'
+
+
+
+				# elif rec.date_invoice_compute and (
+				# 		rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
+				# 		(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+				# 		not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
+				# 	rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+				# elif rec.date_invoice_compute and (
+				# 		rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
+				# 		(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+				# 		not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and not rec.date_invoice:
+				# 	rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % et la valeur de votre commende est réduit à '
 				else:
 					pass
 
@@ -349,60 +360,60 @@ class InvoiceOrderDiscount(models.Model):
 		TOTAL = 0.0
 		DISCOUNT = 0.0
 
-		for rec in self:
-			if vals.get('pricelist_id') or vals.get('partner_id'):
-				if vals.get('pricelist_id'):
-					if 'Preismodell 2021' == rec.env['product.pricelist'].search(
-							[('id', '=', vals.get('pricelist_id'))]).name:
+		# for rec in self:
+		if vals.get('pricelist_id') or vals.get('partner_id'):
+			if vals.get('pricelist_id'):
+				if 'Preismodell 2021' == self.env['product.pricelist'].search(
+						[('id', '=', vals.get('pricelist_id'))]).name:
+					PRICELIST = True
+				elif not vals.get('partner_id'):
+					if 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
 						PRICELIST = True
-					elif not vals.get('partner_id'):
-						if 'Preismodell 2021' == rec.partner_id.property_product_pricelist.name:
-							PRICELIST = True
 
-				if not PRICELIST and vals.get('partner_id'):
-					if 'Preismodell 2021' == rec.env['res.partner'].search(
-							[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
+			if not PRICELIST and vals.get('partner_id'):
+				if 'Preismodell 2021' == self.env['res.partner'].search(
+						[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
+					PRICELIST = True
+				elif not vals.get('pricelist_id'):
+					if 'Preismodell 2021' == self.pricelist_id.name:
 						PRICELIST = True
-					elif not vals.get('pricelist_id'):
-						if 'Preismodell 2021' == rec.pricelist_id.name:
-							PRICELIST = True
 
-			elif not PRICELIST and 'Preismodell 2021' == rec.origin1.pricelist_id.name or 'Preismodell 2021' == rec.partner_id.property_product_pricelist.name:
-				PRICELIST = True
+		elif not PRICELIST and 'Preismodell 2021' == self.origin1.pricelist_id.name or 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+			PRICELIST = True
 
 
-			invoice_order = super(InvoiceOrderDiscount, rec).write(vals)
+		invoice_order = super(InvoiceOrderDiscount, self).write(vals)
 
-			if not PRICELIST and rec.is_custom_relax_discount:
+		if not PRICELIST and self.is_custom_relax_discount:
 
-				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
-					order.discount = DISCOUNT
+			for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
+				order.discount = DISCOUNT
 
-			elif PRICELIST:
+		elif PRICELIST:
 
-				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
-					TOTAL = TOTAL + (order.quantity * order.price_unit)
+			for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
+				TOTAL = TOTAL + (order.quantity * order.price_unit)
 
-				if TOTAL >= 500.00 and TOTAL < 1000.00:
-					if rec.origin1.super_spl_discount:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 5
-				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
-					if rec.origin1.super_spl_discount:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 7
-				elif TOTAL >= 1500.00:
-					if rec.origin1.super_spl_discount:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 10
+			if TOTAL >= 500.00 and TOTAL < 1000.00:
+				if self.origin1.super_spl_discount:
+					DISCOUNT = 10
+				else:
+					DISCOUNT = 5
+			elif TOTAL >= 1000.00 and TOTAL < 1500.00:
+				if self.origin1.super_spl_discount:
+					DISCOUNT = 10
+				else:
+					DISCOUNT = 7
+			elif TOTAL >= 1500.00:
+				if self.origin1.super_spl_discount:
+					DISCOUNT = 10
+				else:
+					DISCOUNT = 10
 
-				for order in rec.env['account.invoice.line'].search([('invoice_id', '=', rec.id)]):
-					order.discount = DISCOUNT
+			for order in self.env['account.invoice.line'].search([('invoice_id', '=', self.id)]):
+				order.discount = DISCOUNT
 
-				return invoice_order
+			return invoice_order
 
 
 class OrderAccountLine(models.Model):
@@ -411,7 +422,7 @@ class OrderAccountLine(models.Model):
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
 	@api.multi
-	@api.onchange('quantity', 'invoice_line_tax_ids')
+	# @api.onchange('quantity', 'invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		for line in self:
 			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021':
