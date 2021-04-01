@@ -447,6 +447,11 @@ class OrderSaleLine(models.Model):
 		for line in self:
 			if line.order_id.pricelist_id.name != 'Preismodell 2021':
 				line.subtotal = line.price_subtotal
+
+			elif not line[0].tax_id.name:
+				line.subtotal = line.price_unit * line.product_uom_qty
+
+			
 			else:
 				if line[0].tax_id.name and 'include' not in line[0].tax_id.name:
 					line.subtotal = line.price_unit * line.product_uom_qty
