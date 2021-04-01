@@ -422,7 +422,7 @@ class OrderAccountLine(models.Model):
 	subtotal = fields.Float(String='Subtotal',compute='_compute_subtotal_price')
 
 	@api.multi
-	# @api.onchange('quantity', 'invoice_line_tax_ids')
+	@api.onchange('quantity', 'invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		for line in self:
 			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021':

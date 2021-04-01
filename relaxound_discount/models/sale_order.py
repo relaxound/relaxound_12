@@ -441,7 +441,7 @@ class OrderSaleLine(models.Model):
 
 
 	@api.multi
-	# @api.onchange('product_uom_qty','tax_id')
+	@api.onchange('product_uom_qty','tax_id')
 	def _compute_subtotal_price(self):
 		# import pdb;pdb.set_trace()
 		for line in self:
