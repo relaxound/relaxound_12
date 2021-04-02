@@ -429,7 +429,7 @@ class OrderAccountLine(models.Model):
 				line.subtotal = line.price_subtotal
 			
 			elif not line[0].invoice_line_tax_ids.name:
-				line.subtotal = line.price_unit * line.product_uom_qty
+				line.subtotal = line.price_unit * line.quantity
 
 			else:
 				if line[0].invoice_line_tax_ids.name and 'include' not in line[0].invoice_line_tax_ids.name:
