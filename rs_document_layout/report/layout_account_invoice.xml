@@ -602,10 +602,12 @@
                     <!-- <br/> -->
                 </div>
                  <!--Code for Reverse charge for 0% tax-->
-                <div class="col-6" style="line-height:1">
+                <div  class="col-6 text-right" style="line-height:1">
 
                         <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">
-                            <span t-esc="o.reverse_charg_note"/>
+                            <span t-esc="o.reverse_charg_note_german"/>
+                            <br></br>
+                            <span t-esc="o.reverse_charg_note_france"/>
                         </t>
 
                 </div>
