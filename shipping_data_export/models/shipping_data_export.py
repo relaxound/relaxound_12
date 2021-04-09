@@ -19,6 +19,7 @@ class SaleOrder(models.Model):
 
     imported_to_lido = fields.Boolean('Imported to Lido', copy=False)
     imported_date = fields.Datetime('Imported Date', copy=False)
+    delivery_company_address = fields.Boolean(string="Delivery to Company Address")
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"

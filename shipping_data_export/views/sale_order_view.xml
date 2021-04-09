@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/notebook/page[@name='other_information']/group/group[2]/field[@name='client_order_ref']" position="after">
                     <field name="imported_to_lido"/>
+                    <field name="delivery_company_address"/>
                 </xpath>
             </field>
         </record>
