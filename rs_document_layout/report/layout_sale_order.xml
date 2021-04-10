@@ -34,61 +34,7 @@
                     <br/>
                     <span t-field="doc.partner_id.country_id.name"/>
                 </t>
-            <!--Change code logic-->
-<!--                <t t-if='is_pro_forma'>-->
-<!--                    <t t-if="doc.partner_invoice_id.parent_id">-->
-<!--                    <span t-field="doc.partner_id.parent_id.name"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_invoice_id.name">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_invoice_id.name"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_invoice_id.street">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_invoice_id.street"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_invoice_id.street2">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_invoice_id.street2"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_invoice_id.zip or doc.partner_invoice_id.city">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_invoice_id.zip"/>-->
-
-<!--                        <span t-field="doc.partner_invoice_id.city"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_invoice_id.country_id">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_invoice_id.country_id.name"/>-->
-<!--                    </t>-->
-<!--                </t>-->
-<!--                <t t-else=''>-->
-<!--                    <t t-if="doc.partner_id.parent_id">-->
-<!--                        <span t-field="doc.partner_id.parent_id.name"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_id.name">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_id.name"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_id.street">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_id.street"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_id.street2">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_id.street2"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_id.zip or doc.partner_id.city">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_id.zip"/>-->
-
-<!--                        <span t-field="doc.partner_id.city"/>-->
-<!--                    </t>-->
-<!--                    <t t-if="doc.partner_id.country_id">-->
-<!--                        <br/>-->
-<!--                        <span t-field="doc.partner_id.country_id.name"/>-->
-<!--                    </t>-->
-<!--                </t>-->
+           
             </div>
             <div style="width:50%; float:right; text-align:right;">
                 <t t-if="doc.partner_id.ref">
@@ -617,52 +563,11 @@
                                     <td class="text-right col-xs-2">
                                         <strong>
                                             <span t-field="doc.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_after_discount))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </strong>
                                     </td>
                             </tr>
                         </t>
-
-
-<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_before_discount &gt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
-<!--                            <tr style="border-top: 1px solid black">-->
-<!--                                <td class="col-xs-3 text-right">-->
-<!--                                    <span>Amount After Discount</span>-->
-<!--                                </td>-->
-<!--                                <td class="text-right col-xs-2">-->
-<!--                                    <strong>-->
-<!--                                        <span t-field="doc.currency_id.symbol"/>-->
-<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>-->
-<!--                                    </strong>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </t>-->
-<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_before_discount &lt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
-<!--                            <tr style="border-top: 1px solid black">-->
-<!--                                <td class="col-xs-3 text-right">-->
-<!--                                    <span>Amount After Discount</span>-->
-<!--                                </td>-->
-<!--                                <td class="text-right col-xs-2">-->
-<!--                                    <strong>-->
-<!--                                        <span t-field="doc.currency_id.symbol"/>-->
-<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>-->
-<!--                                    </strong>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </t>-->
-<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']">-->
-<!--                            <tr style="border-top: 1px solid black">-->
-<!--                                <td class="col-xs-3 text-right">-->
-<!--                                    <span>Amount After Discount</span>-->
-<!--                                </td>-->
-<!--                                <td class="text-right col-xs-2">-->
-<!--                                    <strong>-->
-<!--                                        <span t-field="doc.currency_id.symbol"/>-->
-<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>-->
-<!--                                    </strong>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </t>-->
 
                          <tr style="border-bottom: 1px solid black">
                             <t t-foreach="doc.order_line[0]" t-as="d">

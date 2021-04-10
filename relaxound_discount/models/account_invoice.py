@@ -363,22 +363,22 @@ class InvoiceOrderDiscount(models.Model):
 		# for rec in self:
 		if vals.get('pricelist_id') or vals.get('partner_id'):
 			if vals.get('pricelist_id'):
-				if 'Preismodell 2021' == self.env['product.pricelist'].search(
-						[('id', '=', vals.get('pricelist_id'))]).name:
+				if (self.origin1 and 'Preismodell 2021' == self.origin1.pricelist_id.name) or (not self.origin1 and 'Preismodell 2021' == self.env['product.pricelist'].search(
+						[('id', '=', vals.get('pricelist_id'))]).name):
 					PRICELIST = True
 				elif not vals.get('partner_id'):
-					if 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+					if (self.origin1 and 'Preismodell 2021' == self.origin1.pricelist_id.name) or (not self.origin1 and 'Preismodell 2021' == self.partner_id.property_product_pricelist.name):
 						PRICELIST = True
-
+      
 			if not PRICELIST and vals.get('partner_id'):
-				if 'Preismodell 2021' == self.env['res.partner'].search(
-						[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name:
+				if (self.origin1 and 'Preismodell 2021' == self.origin1.pricelist_id.name) or (not self.origin1 and 'Preismodell 2021' == self.env['res.partner'].search(
+						[('id', '=', vals.get('partner_id'))]).property_product_pricelist.name):
 					PRICELIST = True
 				elif not vals.get('pricelist_id'):
-					if 'Preismodell 2021' == self.pricelist_id.name:
+					if (self.origin1 and 'Preismodell 2021' == self.origin1.pricelist_id.name) or (not self.origin1 and 'Preismodell 2021' == self.pricelist_id.name):
 						PRICELIST = True
 
-		elif not PRICELIST and 'Preismodell 2021' == self.origin1.pricelist_id.name or 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+		elif not PRICELIST and (self.origin1 and 'Preismodell 2021' == self.origin1.pricelist_id.name) or (not self.origin1 and 'Preismodell 2021' == self.partner_id.property_product_pricelist.name):
 			PRICELIST = True
 
 
@@ -427,7 +427,7 @@ class OrderAccountLine(models.Model):
 		for line in self:
 			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021':
 				line.subtotal = line.price_subtotal
-			
+
 			elif not line[0].invoice_line_tax_ids.name:
 				line.subtotal = line.price_unit * line.quantity
 
