@@ -13,7 +13,7 @@ class InvoiceOrderDiscount(models.Model):
 	spl_discount = fields.Float(compute='_compute_spl_discount')
 	spl_percentage = fields.Char(compute='_compute_spl_percentage', select=False, invisible="1")
 	amount_before_discount = fields.Float('Untaxed Amount',compute='_compute_discount_line')
-	amount_after_discount = fields.Float(compute='_compute_discount_line',store=True)
+	amount_after_discount = fields.Float(compute='_compute_discount_line')
 	set_desription = fields.Char('Note', compute='_set_description')
 	set_desription1 = fields.Text('Note: ', compute='_set_description')
 
