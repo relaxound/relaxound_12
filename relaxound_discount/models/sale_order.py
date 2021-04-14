@@ -282,40 +282,41 @@ class SaleOrderDiscount(models.Model):
 
 	@api.model_create_multi
 	def create(self, vals_list):
-		if 'Preismodell 2021' == self.env['res.partner'].search(
-				[('id', '=', vals_list[0].get('partner_id'))]).property_product_pricelist.name:
+		# Change code logic for discount displayed to non pricelist2021 model
+		# if 'Preismodell 2021' == self.env['res.partner'].search(
+		# 		[('id', '=', vals_list[0].get('partner_id'))]).property_product_pricelist.name:
 
-			TOTAL = 0.0
-			DISCOUNT = 0.0
+		# 	TOTAL = 0.0
+		# 	DISCOUNT = 0.0
 
-			if vals_list[0].get('order_line'):
-				for order in vals_list[0].get('order_line'):
-					TOTAL = TOTAL + (order[2].get('product_uom_qty') * order[2].get('price_unit'))
+		# 	if vals_list[0].get('order_line'):
+		# 		for order in vals_list[0].get('order_line'):
+		# 			TOTAL = TOTAL + (order[2].get('product_uom_qty') * order[2].get('price_unit'))
 
-				if TOTAL >= 500.00 and TOTAL < 1000.00:
-					if vals_list[0]['super_spl_discount']:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 5
+		# 		if TOTAL >= 500.00 and TOTAL < 1000.00:
+		# 			if vals_list[0]['super_spl_discount']:
+		# 				DISCOUNT = 10
+		# 			else:
+		# 				DISCOUNT = 5
 
-				elif TOTAL >= 1000.00 and TOTAL < 1500.00:
-					if vals_list[0]['super_spl_discount']:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 7
-				elif TOTAL >= 1500.00:
-					if vals_list[0]['super_spl_discount']:
-						DISCOUNT = 10
-					else:
-						DISCOUNT = 10
+		# 		elif TOTAL >= 1000.00 and TOTAL < 1500.00:
+		# 			if vals_list[0]['super_spl_discount']:
+		# 				DISCOUNT = 10
+		# 			else:
+		# 				DISCOUNT = 7
+		# 		elif TOTAL >= 1500.00:
+		# 			if vals_list[0]['super_spl_discount']:
+		# 				DISCOUNT = 10
+		# 			else:
+		# 				DISCOUNT = 10
 
-				for order in vals_list[0].get('order_line'):
-					order[2]['discount'] = DISCOUNT
+		# 		for order in vals_list[0].get('order_line'):
+		# 			order[2]['discount'] = DISCOUNT
 
-				if vals_list[0].get('is_custom_relax_discount'):
-					vals_list[0]['is_custom_relax_discount'] = True
+		# 		if vals_list[0].get('is_custom_relax_discount'):
+		# 			vals_list[0]['is_custom_relax_discount'] = True
 
-		elif 'Preismodell 2021' == self.env['product.pricelist'].search(
+		if 'Preismodell 2021' == self.env['product.pricelist'].search(
 				[('id', '=', vals_list[0].get('pricelist_id'))]).name:
 
 			TOTAL = 0.0
@@ -353,7 +354,6 @@ class SaleOrderDiscount(models.Model):
 
 	@api.multi
 	def write(self, vals):
-		# import pdb;pdb.set_trace()
 		PRICELIST = False
 		TOTAL = 0.0
 		DISCOUNT = 0.0
@@ -373,7 +373,7 @@ class SaleOrderDiscount(models.Model):
 					if 'Preismodell 2021' == self.pricelist_id.name:
 						PRICELIST = True
 
-		elif not PRICELIST and 'Preismodell 2021' == self.pricelist_id.name or 'Preismodell 2021' == self.partner_id.property_product_pricelist.name:
+		elif not PRICELIST and 'Preismodell 2021' == self.pricelist_id.name:
 			PRICELIST = True
 
 		if vals.get('order_line') and vals.get('partner_id'):
