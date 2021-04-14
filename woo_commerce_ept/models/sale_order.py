@@ -483,7 +483,16 @@ class sale_order(models.Model):
         else:
             name = woo_order_number
 
+        # Change logic as per client requirement for defualt team id in sale order
         team_id = partner.team_id = self.env['crm.team'].search([('name','=','Endkunden')],limit=1)
+
+        # Change logic as per client requirement for 'paypal' payment method
+        if result.get('payment_method_title') == 'PayPal':
+            payment_term = self.env['payment.method2'].search([('name','=','PayPal')],limit=1).payment_term_id.id
+
+        else:
+            payment_term = payment_term or instance.payment_term_id.id or False
+
 
         ordervals = {
             'name': name,
@@ -495,7 +504,7 @@ class sale_order(models.Model):
             'state': 'draft',
             'pricelist_id': pricelist_id or instance.pricelist_id.id or False,
             'fiscal_position_id': fiscal_position and fiscal_position.id or False,
-            'payment_term_id': payment_term or instance.payment_term_id.id or False,
+            'payment_term_id': payment_term,
             'note': note,
             'woo_order_id': result.get('id'),
             'woo_order_number': woo_order_number,
