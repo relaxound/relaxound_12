@@ -18,6 +18,8 @@
     'data': [
         'views/res_config.xml',
         'wizard/wizard.xml',
+        'data/mail_data.xml',
+        'report/sale_report.xml',
     ],
 
 }
