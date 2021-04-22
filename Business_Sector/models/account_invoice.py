@@ -10,78 +10,79 @@ class InvoiceJournalField(models.Model):
 
     @api.multi
     def _set_reverse_charge(self):
-        if self.partner_id.country_id.name == 'Belgium':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : " livraison intracommunautaire exonérée TVA"})
+	#Reverse charge note condition applied on tax
+        for account_id in self:
+            if account_id.partner_id.country_id.name == 'Belgium':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : " livraison intracommunautaire exonérée TVA"})
 
-        elif self.partner_id.country_id.name == 'Bulgaria':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  Neoblagaema vatreshnoobshtnostna dostavka"})
+            elif account_id.partner_id.country_id.name == 'Bulgaria':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  Neoblagaema vatreshnoobshtnostna dostavka"})
 
-        elif self.partner_id.country_id.name == 'Denmark':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  momsfri EU levering"})
+            elif account_id.partner_id.country_id.name == 'Denmark':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  momsfri EU levering"})
 
-        elif self.partner_id.country_id.name == 'Estonia':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  käibemaksuvaba ühendusesisene kättetoimetamine"})
+            elif account_id.partner_id.country_id.name == 'Estonia':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  käibemaksuvaba ühendusesisene kättetoimetamine"})
 
-        elif self.partner_id.country_id.name == 'Finland':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  veroton yhteisömyynti"})
+            elif account_id.partner_id.country_id.name == 'Finland':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  veroton yhteisömyynti"})
 
-        elif self.partner_id.country_id.name == 'France':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /"  , 'reverse_charg_note_france' : "livraison intracommunautaire exonérée TVA"})
+            elif account_id.partner_id.country_id.name == 'France':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /"  , 'reverse_charg_note_france' : "livraison intracommunautaire exonérée TVA"})
 
-        elif self.partner_id.country_id.name == 'Greece':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity delivery"})
+            elif account_id.partner_id.country_id.name == 'Greece':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity delivery"})
 
-        elif self.partner_id.country_id.name == 'Ireland':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity despatch"})
+            elif account_id.partner_id.country_id.name == 'Ireland':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity despatch"})
 
-        elif self.partner_id.country_id.name == 'Italy':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  cessioni intracomunitarie esenti"})
+            elif account_id.partner_id.country_id.name == 'Italy':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  cessioni intracomunitarie esenti"})
 
-        elif self.partner_id.country_id.name == 'Latvia':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : " Ar 0% apliekamas precu piegades ES ietvaros, PVN likuma 28. pants*)"})
+            elif account_id.partner_id.country_id.name == 'Latvia':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : " Ar 0% apliekamas precu piegades ES ietvaros, PVN likuma 28. pants*)"})
 
-        elif self.partner_id.country_id.name == 'Lithuania':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  pridétinés vertés mokesciu neapmokestinamas tiekimas Europos Sajungos viduje"})
+            elif account_id.partner_id.country_id.name == 'Lithuania':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  pridétinés vertés mokesciu neapmokestinamas tiekimas Europos Sajungos viduje"})
 
-        elif self.partner_id.country_id.name == 'Luxembourg':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  livraison intracommunautaire exonérée TVA."})
+            elif account_id.partner_id.country_id.name == 'Luxembourg':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  livraison intracommunautaire exonérée TVA."})
 
-        elif self.partner_id.country_id.name == 'Malta':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity delivery"})
+            elif account_id.partner_id.country_id.name == 'Malta':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity delivery"})
 
-        elif self.partner_id.country_id.name == 'Netherlands':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  intracommunautaire levering"})
+            elif account_id.partner_id.country_id.name == 'Netherlands':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  intracommunautaire levering"})
 
-        elif self.partner_id.country_id.name == 'Austria':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  steuerfreie innergemeinschaftliche Lieferung"})
+            elif account_id.partner_id.country_id.name == 'Austria':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  steuerfreie innergemeinschaftliche Lieferung"})
 
-        elif self.partner_id.country_id.name == 'Poland':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  wewnatrzwspólnotowa dostawa towarów opodatkowana wg. stawki podatku 0% (Art.42 Ust. 0 pod. od tow.il usl.*)"})
+            elif account_id.partner_id.country_id.name == 'Poland':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  wewnatrzwspólnotowa dostawa towarów opodatkowana wg. stawki podatku 0% (Art.42 Ust. 0 pod. od tow.il usl.*)"})
 
-        elif self.partner_id.country_id.name == 'Portugal':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  fornecimento inter-comunitário isento de IVA"})
+            elif account_id.partner_id.country_id.name == 'Portugal':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  fornecimento inter-comunitário isento de IVA"})
 
-        elif self.partner_id.country_id.name == 'Romania':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  Livrare intracomunitara scutita de TVA."})
+            elif account_id.partner_id.country_id.name == 'Romania':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  Livrare intracomunitara scutita de TVA."})
 
-        elif self.partner_id.country_id.name == 'Sweden':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  skattefri gemenskapsintern leverans"})
+            elif account_id.partner_id.country_id.name == 'Sweden':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  skattefri gemenskapsintern leverans"})
 
-        elif self.partner_id.country_id.name == 'Slovakia':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  od dane oslobodené intrakomunitárne dodávky"})
+            elif account_id.partner_id.country_id.name == 'Slovakia':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  od dane oslobodené intrakomunitárne dodávky"})
 
-        elif self.partner_id.country_id.name == 'Slovenia':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  oproscena dobava znotraj skupnosti"})
+            elif account_id.partner_id.country_id.name == 'Slovenia':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  oproscena dobava znotraj skupnosti"})
 
-        elif self.partner_id.country_id.name == 'Spain':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  entrega intracomunitaria libre de impuesto"})
+            elif account_id.partner_id.country_id.name == 'Spain':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  entrega intracomunitaria libre de impuesto"})
 
-        elif self.partner_id.country_id.name == 'Czech Republic':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  dodání zbozí do jiného clenského státu, osvobozené od DPH"})
+            elif account_id.partner_id.country_id.name == 'Czech Republic':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  dodání zbozí do jiného clenského státu, osvobozené od DPH"})
 
-        elif self.partner_id.country_id.name == 'Hungary':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  forgalmiadó-mentes, Közösségenbelülrol történo áruszállítás"})
+            elif account_id.partner_id.country_id.name == 'Hungary':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  forgalmiadó-mentes, Közösségenbelülrol történo áruszállítás"})
 
-        elif self.partner_id.country_id.name == 'Cyprus':
-            self.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity delivery"})
-
+            elif account_id.partner_id.country_id.name == 'Cyprus':
+                account_id.update({'reverse_charg_note_german': "steuerfreie innergemeinschaftliche Lieferung gem. § 4 Nr. 1b UStG /", 'reverse_charg_note_france' : "  tax free intracommunity delivery"})
