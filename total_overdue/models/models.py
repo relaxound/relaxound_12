@@ -15,13 +15,14 @@ OPERATORS = {
 class CustomSaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    new_overdue = fields.Monetary(compute='_partner_id_overdue',string='Total Overdue',search='_total_overdue_search')
+    new_overdue = fields.Monetary(compute='_partner_id_overdue',index=True,string='Total Overdue',search='_total_overdue_search',store=True)
 
     @api.multi
-    @api.depends('partner_id')
+    # @api.depends('partner_id')
     def _partner_id_overdue(self):
         for rec in self:
-            if rec.partner_id:
+            rec.new_overdue = 0
+            if rec.partner_id.total_overdue > 0:
                 rec.new_overdue = rec.partner_id.total_overdue
 
     def _total_overdue_search(self,operator, value):
