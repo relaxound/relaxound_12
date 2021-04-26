@@ -3,7 +3,7 @@
 
 from odoo import models, fields, api, _
 
-
+#model used for sum the orderline values
 class SaleOrder(models.Model):
     _inherit = "sale.order"
     _description = "Sale Order Is Sent"
