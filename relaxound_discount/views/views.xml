@@ -120,7 +120,6 @@
                     <field name="hide_france_note_sepa" invisible="1"/>
                     <field name="hide_france_note_proforma" invisible="1"/>
 
-
                     <field name="amount_before_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 
                     <label for="" class="oe_inline" attrs="{'invisible':[('hide', '=', False)]}" options="{'currency_field': 'currency_id'}"/>
