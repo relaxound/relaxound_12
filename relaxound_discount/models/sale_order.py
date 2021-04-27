@@ -40,6 +40,7 @@ class SaleOrderDiscount(models.Model):
 	hide_france_note_sepa = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
 	hide_france_note_proforma = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
 
+
 	date_order_compute = fields.Boolean(string='Date of the order',
 										compute='_date_order_compute')
 
@@ -52,7 +53,7 @@ class SaleOrderDiscount(models.Model):
 			else:
 				rec.date_order_compute = False
 
-		@api.depends('pricelist_id')
+	@api.depends('pricelist_id')
 	def _compute_hide_france_desc(self):
 		# simple logic, but you can do much more here
 		for rec in self:

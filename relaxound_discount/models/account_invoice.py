@@ -23,6 +23,7 @@ class InvoiceOrderDiscount(models.Model):
 	hide_spl_discount = fields.Boolean(string='Hide discount', compute='_compute_hide_discount')
 	hide_2_discount = fields.Boolean(string='Hide 2% discount', compute='_compute_hide_2_discount')
 	hide_france_note = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
+
 	hide_france_note_sepa = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
 	hide_france_note_proforma = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
 
