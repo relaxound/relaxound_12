@@ -65,7 +65,7 @@ class SaleOrderDiscount(models.Model):
 			if rec.date_order_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and rec.pricelist_id.name == 'Preismodell 2021' and rec.payment_method_id.name in ['Proforma']:
 				rec.hide_france_note_proforma = True
 			else:
-		rec.hide_france_note_proforma = False
+				rec.hide_france_note_proforma = False
 
 	@api.depends('pricelist_id')
 	def _compute_hide_2_discount(self):
