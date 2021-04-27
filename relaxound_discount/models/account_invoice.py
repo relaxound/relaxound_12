@@ -23,6 +23,8 @@ class InvoiceOrderDiscount(models.Model):
 	hide_spl_discount = fields.Boolean(string='Hide discount', compute='_compute_hide_discount')
 	hide_2_discount = fields.Boolean(string='Hide 2% discount', compute='_compute_hide_2_discount')
 	hide_france_note = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
+	hide_france_note_sepa = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
+	hide_france_note_proforma = fields.Boolean(string='Hide france desc', compute='_compute_hide_france_desc')
 
 	date_invoice_compute = fields.Boolean(string='Date of the order',
 										  compute='_date_invoice_compute')
@@ -45,10 +47,16 @@ class InvoiceOrderDiscount(models.Model):
 				# datetime.strptime('1/1/2021', "%m/%d/%y")
 				if rec.date_invoice_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and (
 						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
-						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.payment_method_id.name in ['Sepa','Proforma']:
-					rec.hide_france_note = True
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.payment_method_id.name in ['Sepa']:
+					rec.hide_france_note_sepa = True
 				else:
-					rec.hide_france_note = False
+					rec.hide_france_note_sepa = False
+				if rec.date_invoice_compute and rec.partner_id.is_retailer and rec.partner_id.country_id.name == 'France' and (
+						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
+						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.payment_method_id.name in ['Proforma']:
+					rec.hide_france_note_proforma = True
+				else:
+					rec.hide_france_note_proforma = False
 
 	def _get_today_date(self):
 		for rec in self:

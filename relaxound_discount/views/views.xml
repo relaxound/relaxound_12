@@ -21,6 +21,9 @@
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
                     <field name="hide_amount_untaxed" invisible="1"/>
+                    <field name="hide_france_note_sepa" invisible="1"/>
+                    <field name="hide_france_note_proforma" invisible="1"/>
+
 
                     <field name="amount_before_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 
@@ -59,15 +62,27 @@
                     <field name="set_desription" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     <field name="discount_2" attrs="{'invisible':[('hide_2_discount', '=', False)]}" widget="monetary" style="margin-left:5px;"/>
                     <div class="oe_subtotal_footer_separator oe_left">
-                        <label for="payment_term_id" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>
+                        <label for="payment_term_id" attrs="{'invisible':[('hide_france_note_sepa', '=', False)]}"/>
                     </div>
-                    <field name="payment_term_id" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>
+                    <div class="oe_subtotal_footer_separator oe_left">
+                        <label for="payment_term_id" attrs="{'invisible':[('hide_france_note_proforma', '=', False)]}"/>
+                    </div>
+                    <field name="payment_term_id" attrs="{'invisible':[('hide_france_note_sepa', '=', False)]}"/>
+                    <field name="payment_term_id" attrs="{'invisible':[('hide_france_note_proforma', '=', False)]}"/>
+
                     <br></br>
-<!--                    <div class="oe_subtotal_footer_separator oe_left">-->
-<!--                        <label for="set_desription1" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>-->
-<!--                    </div>-->
-                    <field name="set_desription1" class="oe_inline" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>
-                    <field name="discount_2" class="oe_inline" attrs="{'invisible':[('hide_france_note', '=', False)]}" widget="monetary" style="margin-left:-70px;"/>
+                    <div class="oe_subtotal_footer_separator oe_left">
+                        <label for="set_desription1" attrs="{'invisible':[('hide_france_note_sepa', '=', False)]}"/>
+                    </div>
+                    <div class="oe_subtotal_footer_separator oe_left">
+                        <label for="set_desription1" attrs="{'invisible':[('hide_france_note_proforma', '=', False)]}"/>
+                    </div>
+                    <field name="set_desription1" class="oe_inline" attrs="{'invisible':[('hide_france_note_sepa', '=', False)]}"/>
+                    <field name="set_desription1" class="oe_inline" attrs="{'invisible':[('hide_france_note_proforma', '=', False)]}"/>
+
+                    <field name="discount_2" class="oe_inline" attrs="{'invisible':[('hide_france_note_sepa', '=', False)]}" widget="monetary" style="margin-left:-70px;"/>
+                    <field name="discount_2" class="oe_inline" attrs="{'invisible':[('hide_france_note_proforma', '=', False)]}" widget="monetary" style="margin-left:-110px;"/>
+
                     <div class="oe_clear"/>
                 </xpath>
             </field>
@@ -102,6 +117,9 @@
                     <field name="hide" invisible="1"/>
                     <field name="hide_spl_discount" invisible="1"/>
                     <field name="hide_amount_untaxed" invisible="1"/>
+                    <field name="hide_france_note_sepa" invisible="1"/>
+                    <field name="hide_france_note_proforma" invisible="1"/>
+
 
                     <field name="amount_before_discount" attrs="{'invisible':[('hide', '=', False)]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 
@@ -141,16 +159,28 @@
                     <field name="set_desription" attrs="{'invisible':[('hide_2_discount', '=', False)]}"/>
                     <field name="discount_2" attrs="{'invisible':['|',('hide_2_discount', '=', False),('type','=','out_refund')]}" widget="monetary" style="margin-left:5px;"/>
                     <div class="oe_subtotal_footer_separator oe_left">
-                        <label for="payment_term_id" attrs="{'invisible':['|',('hide_france_note', '=', False),('type','=','out_refund')]}"/>
+                        <label for="payment_term_id" attrs="{'invisible':['|',('hide_france_note_sepa', '=', False),('type','=','out_refund')]}"/>
                     </div>
-                    <field name="payment_term_id" attrs="{'invisible':['|',('hide_france_note', '=', False),('type','=','out_refund')]}"/>
+                    <div class="oe_subtotal_footer_separator oe_left">
+                        <label for="payment_term_id" attrs="{'invisible':['|',('hide_france_note_proforma', '=', False),('type','=','out_refund')]}"/>
+                    </div>
+                    <field name="payment_term_id" attrs="{'invisible':['|',('hide_france_note_sepa', '=', False),('type','=','out_refund')]}"/>
+                    <field name="payment_term_id" attrs="{'invisible':['|',('hide_france_note_proforma', '=', False),('type','=','out_refund')]}"/>
+
                     <br></br>
-<!--                    <div class="oe_subtotal_footer_separator oe_left">-->
-<!--                        <label for="set_desription1" attrs="{'invisible':[('hide_france_note', '=', False)]}"/>-->
-<!--                    </div>-->
-                    <field name="set_desription1" class="oe_inline" attrs="{'invisible':['|',('hide_france_note', '=', False),('type','=','out_refund')]}"/>
-                    <field name="discount_2" class="oe_inline" attrs="{'invisible':['|',('hide_france_note', '=', False),('type','=','out_refund')]}" widget="monetary" style="margin-left:-70px;"/>
-                    <div class="oe_clear"/>
+                    <div class="oe_subtotal_footer_separator oe_left">
+                        <label for="set_desription1"  attrs="{'invisible':[('hide_france_note_sepa', '=', False)]}"/>
+                    </div>
+                    <div class="oe_subtotal_footer_separator oe_left">
+                        <label for="set_desription1"  attrs="{'invisible':[('hide_france_note_proforma', '=', False)]}"/>
+                    </div>
+                    <div class="oe_subtotal_footer_separator">
+                        <field name="set_desription1" class="oe_inline" attrs="{'invisible':['|',('hide_france_note_sepa', '=', False),('type','=','out_refund')]}"/>
+                        <field name="set_desription1" class="oe_inline" attrs="{'invisible':['|',('hide_france_note_proforma', '=', False),('type','=','out_refund')]}"/>
+
+                        <field name="discount_2" class="oe_inline" attrs="{'invisible':['|',('hide_france_note_sepa', '=', False),('type','=','out_refund')]}" widget="monetary" style="margin-left:-70px;"/>
+                        <field name="discount_2" class="oe_inline" attrs="{'invisible':['|',('hide_france_note_proforma', '=', False),('type','=','out_refund')]}" widget="monetary" style="margin-left:-110px;"/>
+                    </div>
                 </xpath>
 
             </field>
