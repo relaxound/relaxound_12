@@ -334,6 +334,8 @@
 
                     <tr>
                         <td class="text-left" style="font-size:13px; vertical-align: top;">
+                            Shipping address:
+                        </td>
                         <td class="text-left" style="font-size:13px">
                             <t t-if="not doc.partner_shipping_id">
                             		<t t-if="doc.partner_id.parent_id.name">	
