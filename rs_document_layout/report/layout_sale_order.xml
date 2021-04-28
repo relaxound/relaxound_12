@@ -333,11 +333,16 @@
                     </tr>
 
                     <tr>
-                        <td class="text-left" style="font-size:13px">
-                            Shipping address:
-                        </td>
+                        <td class="text-left" style="font-size:13px; vertical-align: top;">
                         <td class="text-left" style="font-size:13px">
                             <t t-if="not doc.partner_shipping_id">
+                            		<t t-if="doc.partner_id.parent_id.name">	
+	                                    <span t-field="doc.partner_id.parent_id.name"/>	
+	                                </t>	
+	                                <t t-if="doc.partner_id.name">	
+	                                    <span t-field="doc.partner_id.name"/>	
+	                                </t>	
+	                                <br/>
                                 <t t-if="doc.partner_id.street">
                                     <span t-field="doc.partner_id.street"/>
                                 </t>
@@ -356,6 +361,13 @@
                                     <span t-field="doc.partner_id.country_id.name"/>
                                 </t>
                             </t>
+                             <t t-if="doc.partner_shipping_id.parent_id.name">	
+	                                    <span t-field="doc.partner_shipping_id.parent_id.name"/>	
+	                            </t>	
+	                            <t t-if="doc.partner_shipping_id.name">	
+	                                    <span t-field="doc.partner_shipping_id.name"/>	
+	                            </t>	
+	                            <br/>
                             <t t-if="doc.partner_shipping_id.street">
                                 <span t-field="doc.partner_shipping_id.street"/>
                             </t>
