@@ -4,6 +4,7 @@
 from odoo import models, fields, api, _
 
 #Trial statement
+# trial second
 class SaleOrder(models.Model):
     _inherit = "sale.order"
     _description = "Sale Order Is Sent"
