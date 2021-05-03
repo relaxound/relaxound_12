@@ -333,11 +333,18 @@
                     </tr>
 
                     <tr>
-                        <td class="text-left" style="font-size:13px">
+                        <td class="text-left" style="font-size:13px; vertical-align: top;">
                             Shipping address:
                         </td>
                         <td class="text-left" style="font-size:13px">
                             <t t-if="not doc.partner_shipping_id">
+                                <t t-if="doc.partner_id.parent_id.name">
+                                    <span t-field="doc.partner_id.parent_id.name"/>
+                                </t>
+                                <t t-if="doc.partner_id.name">
+                                    <span t-field="doc.partner_id.name"/>
+                                </t>
+                                <br/>
                                 <t t-if="doc.partner_id.street">
                                     <span t-field="doc.partner_id.street"/>
                                 </t>
@@ -356,6 +363,13 @@
                                     <span t-field="doc.partner_id.country_id.name"/>
                                 </t>
                             </t>
+                            <t t-if="doc.partner_shipping_id.parent_id.name">
+                                    <span t-field="doc.partner_shipping_id.parent_id.name"/>
+                            </t>
+                            <t t-if="doc.partner_shipping_id.name">
+                                    <span t-field="doc.partner_shipping_id.name"/>
+                            </t>
+                            <br/>
                             <t t-if="doc.partner_shipping_id.street">
                                 <span t-field="doc.partner_shipping_id.street"/>
                             </t>
@@ -569,47 +583,6 @@
                             </tr>
                         </t>
 
-
-<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_before_discount &gt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
-<!--                            <tr style="border-top: 1px solid black">-->
-<!--                                <td class="col-xs-3 text-right">-->
-<!--                                    <span>Amount After Discount</span>-->
-<!--                                </td>-->
-<!--                                <td class="text-right col-xs-2">-->
-<!--                                    <strong>-->
-<!--                                        <span t-field="doc.currency_id.symbol"/>-->
-<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed - delivery_cost))).replace(',','x').replace('.',',').replace('x','.')"/>-->
-<!--                                    </strong>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </t>-->
-<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.amount_before_discount &lt; 250 and doc.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">-->
-<!--                            <tr style="border-top: 1px solid black">-->
-<!--                                <td class="col-xs-3 text-right">-->
-<!--                                    <span>Amount After Discount</span>-->
-<!--                                </td>-->
-<!--                                <td class="text-right col-xs-2">-->
-<!--                                    <strong>-->
-<!--                                        <span t-field="doc.currency_id.symbol"/>-->
-<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>-->
-<!--                                    </strong>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </t>-->
-<!--                        <t t-if="doc.date_order_compute and doc.partner_id.is_retailer and doc.partner_id.country_id.name not in ['Germany','Deutschland','Allemagne']">-->
-<!--                            <tr style="border-top: 1px solid black">-->
-<!--                                <td class="col-xs-3 text-right">-->
-<!--                                    <span>Amount After Discount</span>-->
-<!--                                </td>-->
-<!--                                <td class="text-right col-xs-2">-->
-<!--                                    <strong>-->
-<!--                                        <span t-field="doc.currency_id.symbol"/>-->
-<!--                                        <span t-esc="('{0:,.2f}'.format(float(doc.amount_untaxed))).replace(',','x').replace('.',',').replace('x','.')"/>-->
-<!--                                    </strong>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </t>-->
-
                          <tr style="border-bottom: 1px solid black">
                             <t t-foreach="doc.order_line[0]" t-as="d">
                                 <t t-if="d.tax_id.name == '16% abgesenkte MwSt' or d.tax_id.name == '16% Corona Tax' or d.tax_id.name == 'MwSt._(16.0 % included T)_Relaxound GmbH'">
@@ -748,11 +721,23 @@
             </tr>
         </t>
 
-        <t t-if="doc.date_order_compute and doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name == 'France'">
+        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name == 'France' and doc.payment_method_id.name =='Sepa'">
             <tr>
-<!--                <td class="text-left">Note: </td>-->
+                <td class="text-left">Note: </td>
                 <td class="text-left" style="font-size:13px">
-                    <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % etla valeur de votre commande est réduite à</span>
+                    <span>Règlement par prélèvement automatique à 30 jours net date de facture</span>
+<!--                    <span t-esc="doc._get_date_order()"/>-->
+                    <span>€</span>
+                    <span t-esc="('{0:,.2f}'.format(float(doc.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
+                </td>
+            </tr>
+        </t>
+
+        <t t-if="doc.pricelist_id.name == 'Preismodell 2021' and doc.partner_id.is_retailer and doc.partner_id.country_id.name == 'France' and doc.payment_method_id.name =='Proforma'">
+            <tr>
+                <td class="text-left">Note: </td>
+                <td class="text-left" style="font-size:13px">
+                    <span>Règlement d’avance par virement bancaire avec 2% d’escompte</span>
 <!--                    <span t-esc="doc._get_date_order()"/>-->
                     <span>€</span>
                     <span t-esc="('{0:,.2f}'.format(float(doc.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>

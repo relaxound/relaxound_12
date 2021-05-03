@@ -147,9 +147,16 @@
                         </tr>
 
                         <tr>
-                            <td class="text-left">Shipping address: </td>
+                            <td style="vertical-align: top" class="text-left">Shipping address: </td>
                             <td class="text-left" style="font-size:13px">
                                 <t t-if="not o.partner_shipping_id">
+                                    <t t-if="o.partner_id.parent_id.name">
+                                        <span t-field="o.partner_id.parent_id.name"/>
+                                    </t>
+                                    <t t-if="o.partner_id.name">
+                                        <span t-field="o.partner_id.name"/>
+                                    </t>
+                                    <br/>
                                     <t t-if="o.partner_id.street">
                                         <span t-field="o.partner_id.street"/>
                                     </t>
@@ -168,7 +175,13 @@
                                         <span t-field="o.partner_id.country_id.name"/>
                                     </t>
                                 </t>
-
+                                <t t-if="o.partner_shipping_id.parent_id.name">
+                                    <span t-field="o.partner_shipping_id.parent_id.name"/>
+                                </t>
+                                <t t-if="o.partner_shipping_id.name">
+                                    <span t-field="o.partner_shipping_id.name"/>
+                                </t>
+                                <br/>
                                <t t-if="o.partner_shipping_id.street">
                                     <span t-field="o.partner_shipping_id.street"/>
                                 </t>
@@ -211,16 +224,7 @@
                                 <t t-if="l.product_id.type == 'service'">
                                     <t t-set="delivery_cost" t-value="delivery_cost + l.subtotal"/>
                                 </t>
-                                <!-- change the logic in report printing -->
-<!--                                <t t-if="l.sale_line_ids.is_delivery and o.date_invoice &lt; datetime.date (2020,1,1) ">-->
-<!--                                    <t t-set="delivery_cost" t-value="l.product_id.lst_price"/>-->
-<!--                                </t>-->
-<!--                                <t t-if="len(o.invoice_line_ids) == 1 and o.date_invoice &lt; datetime.date (2020,1,1)">-->
-<!--                                    <t t-set="delivery_cost" t-value="0"/>-->
-<!--                                </t>-->
-<!--                                <t t-if="l.sale_line_ids.is_delivery and o.date_invoice &gt;= datetime.date (2020,1,1)">-->
-<!--                                    <t t-set="delivery_cost" t-value="delivery_cost + (l.price_subtotal/l.quantity)"/>-->
-<!--                                </t>-->
+
                             </t>
 
                             <t t-if="o.date_invoice_compute and (
@@ -239,8 +243,8 @@
                                 </tr>
                             </t>
 
-                            <t t-if="(o.origin1.pricelist_id.name and o.origin1.pricelist_id.name != 'Preismodell 2021') or (
-						not o.origin1 and o.partner_id.property_product_pricelist.name != 'Preismodell 2021') ">
+                            <t t-if="(o.origin1 and o.origin1.pricelist_id.name != 'Preismodell 2021') or (
+						      not o.origin1 and o.partner_id.property_product_pricelist.name != 'Preismodell 2021') ">
                                 <tr style="border-bottom: 1px solid black">
                                     <td class="col-xs-3 text-right">
                                         <span>Total</span>
@@ -327,6 +331,7 @@
                                             <span t-esc="('{0:,.2f}'.format(float(-o.spl_discount))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </strong>
                                     </td>
+
                                 </tr>
                             </t>
                             <t t-if="o.date_invoice_compute and o.origin1.super_spl_discount and o.partner_id.is_retailer and o.amount_before_discount &lt; 500">
@@ -354,7 +359,7 @@
                                     </strong>
                                 </td>
                             </tr>
-                            <!-- Change code logic for wrong calculation -->
+<!-- change code logic for wrong calculation -->
                             <!-- <t t-if="o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.amount_before_discount &gt; 250 and o.partner_id.country_id.name in ['Germany','Deutschland','Allemagne']">
                                 <tr style="border-top: 1px solid black">
                                     <td class="col-xs-3 text-right">
@@ -393,11 +398,10 @@
                                         </strong>
                                     </td>
                                 </tr>
-                            </t> -->
+                            </t>
+ -->
 
-
-
-                        <t t-if="o.date_invoice_compute and (
+                            <t t-if="o.date_invoice_compute and (
                                 (o.origin1.pricelist_id.name and o.origin1.pricelist_id.name == 'Preismodell 2021') or (
                                 not o.origin1 and o.partner_id.property_product_pricelist.name == 'Preismodell 2021'))">
                                 <tr style="border-top: 1px solid black">
@@ -412,8 +416,6 @@
                                     </td>
                                 </tr>
                             </t>
-
-
 
                             <t t-if="o.invoice_line_ids">
                                 <tr style="border-bottom: 1px solid black">
@@ -507,20 +509,6 @@
 <!--                            </tr>-->
 
 
-                            <!--Code for Reverse charge for 0% tax-->
-<!--                            <div class="text-right" style=" margin-right:0px;">-->
-<!--&lt;!&ndash;                                <table>&ndash;&gt;-->
-<!--                                <tr style="border: none">-->
-<!--&lt;!&ndash;                                        <td></td>&ndash;&gt;-->
-<!--                                        <td class="text-right">-->
-<!--                                            <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">-->
-<!--&lt;!&ndash;                                                <i><span t-esc="o.reverse_charg_note"/></i>&ndash;&gt;-->
-<!--                                                <br/>-->
-<!--                                            </t>-->
-<!--                                        </td>-->
-<!--                                </tr>-->
-<!--&lt;!&ndash;                                </table>&ndash;&gt;-->
-<!--                            </div>-->
 
                             <!-- <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
@@ -546,24 +534,11 @@
                     </table>
                 </div>
 
-<!--                <div class="text-right" style=" margin-right:0px;">-->
-<!--                    <table>-->
-<!--                    <tr style="border: none">-->
-<!--                            <td></td>-->
-<!--                            <td class="text-right">-->
-<!--                                <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">-->
-<!--                                    <i><span t-esc="o.reverse_charg_note"/></i>-->
-<!--                                    <br/>-->
-<!--                                </t>-->
-<!--                            </td>-->
-<!--                    </tr>-->
-<!--                    </table>-->
-<!--                </div>-->
-
-
             </div>
 
             <!--</div>-->
+
+
 
             <div id="total" class="row" style=" margin-right:2.5cm; margin-left:38px;  font-size: 13px; font-family:Arial;">
                 <div class="col-6" style="line-height:1">
@@ -581,11 +556,11 @@
                         </tr>
                     </t>
 
-                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France'">
+                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France' and o.payment_method_id.name =='Sepa'">
                         <tr>
-<!--                            <td class="text-left">Note: </td>-->
+                            <td class="text-left">Note: </td>
                             <td class="text-left" style="font-size:13px">
-                                <span>ESCOMPTE DE 2 %<br/>Vous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/ SEPA.<br/>En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire <br/>de 2 % etla valeur de votre commande est réduite à</span>
+                                <span>Règlement par prélèvement automatique à 30 jours net date de facture</span>
 <!--                                <span t-esc="o._get_date_invoice()"/>-->
                                 <span>€</span>
                                 <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
@@ -593,11 +568,21 @@
                         </tr>
                     </t>
 
+                    <t t-if="(o.type != 'out_refund') and o.date_invoice_compute and (o.partner_id.is_retailer or o.origin1.partner_id.is_retailer) and o.partner_id.country_id.name == 'France' and o.payment_method_id.name =='Proforma'">
+                        <tr>
+                            <td class="text-left">Note: </td>
+                            <td class="text-left" style="font-size:13px">
+                                <span>Règlement d’avance par virement bancaire avec 2% d’escompte</span>
+<!--                                <span t-esc="o._get_date_invoice()"/>-->
+                                <span>€</span>
+                                <span t-esc="('{0:,.2f}'.format(float(o.discount_2))).replace(',','x').replace('.',',').replace('x','.')"/>
+                            </td>
+                        </tr>
+                    </t>
 
                     <!-- <br/> -->
                 </div>
-
-                <!--Code for Reverse charge for 0% tax-->
+                 <!--Code for Reverse charge for 0% tax-->
                 <div  class="col-6 text-right" style="line-height:1">
 
                         <t t-if="o.amount_tax == 0.00 and o.partner_id.is_retailer">
@@ -607,6 +592,7 @@
                         </t>
 
                 </div>
+
 
 
             </div>
