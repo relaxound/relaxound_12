@@ -29,6 +29,8 @@ class InvoiceOrderDiscount(models.Model):
 
 	date_invoice_compute = fields.Boolean(string='Date of the order',
 										  compute='_date_invoice_compute')
+	
+	pricelist_id = fields.Many2one('product.pricelist', string='Pricelist')
 
 	@api.depends('partner_id.property_product_pricelist')
 	def _date_invoice_compute(self):
