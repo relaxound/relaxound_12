@@ -1,0 +1,20 @@
+
+
+<odoo>
+    <data>
+
+        <record id="invoice_correct" model="ir.ui.view">
+            <field name="name">account.invoice.correct</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/field[@name='state']" position="before">
+                    <button name="invoice_correct" type="object" string="INVOICE CORRECT" class="oe_highlight"/>
+                </xpath>
+            </field>
+       </record>
+    </data>
+</odoo>
+
+
+
