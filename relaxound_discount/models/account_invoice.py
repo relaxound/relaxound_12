@@ -273,7 +273,7 @@ class InvoiceOrderDiscount(models.Model):
 						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
 						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
 						not rec.origin1 and rec.partner_id.property_product_pricelist.name == 'Preismodell 2021')) and rec.date_invoice:
-					rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % etla valeur de votre commende est réduit à '
+					rec.set_desription1 = 'ESCOMPTE DE 2 %\nVous pouvez payer dans un délai de 30 jours nets par prélèvement bancaire/SEPA.\n En cas de paiement anticipé, vous bénéficiez d’une réduction supplémentaire de\n 2 % et la valeur de votre commende est réduit à '
 				elif rec.date_invoice_compute and (
 						rec.partner_id.is_retailer or rec.origin1.partner_id.is_retailer) and rec.partner_id.country_id.name == 'France' and (
 						(rec.origin1.pricelist_id.name and rec.origin1.pricelist_id.name == 'Preismodell 2021') or (
