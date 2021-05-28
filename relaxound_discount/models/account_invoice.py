@@ -436,7 +436,7 @@ class OrderAccountLine(models.Model):
 	@api.onchange('quantity', 'invoice_line_tax_ids')
 	def _compute_subtotal_price(self):
 		for line in self:
-			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' or line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021':
+			if line.invoice_id.partner_id.property_product_pricelist.name != 'Preismodell 2021' and line.invoice_id.origin1.pricelist_id.name != 'Preismodell 2021':
 				line.subtotal = line.price_subtotal
 
 			elif not line[0].invoice_line_tax_ids.name:
