@@ -528,10 +528,10 @@ class AccountInvoiceLine(models.Model):
 
 
 
-                if self.invoice_id.origin.name[0] == '0' or self.invoice_id.origin.name[0] == '1' or self.invoice_id.origin.name[0] == '2' or \
-                        self.invoice_id.origin.name[0] == '3' or self.invoice_id.origin.name[0] == '4' or self.invoice_id.origin.name[0] == '5' or \
-                        self.invoice_id.origin.name[0] == '6' or self.invoice_id.origin.name[0] == '7' or self.invoice_id.origin.name[0] == '8' or \
-                        self.invoice_id.origin.name[0] == '9':
+                if self.invoice_id.origin1.name[0] == '0' or self.invoice_id.origin1.name[0] == '1' or self.invoice_id.origin1.name[0] == '2' or \
+                        self.invoice_id.origin1.name[0] == '3' or self.invoice_id.origin1.name[0] == '4' or self.invoice_id.origin1.name[0] == '5' or \
+                        self.invoice_id.origin1.name[0] == '6' or self.invoice_id.origin1.name[0] == '7' or self.invoice_id.origin1.name[0] == '8' or \
+                        self.invoice_id.origin1.name[0] == '9':
 
                     if line.invoice_id.partner_id.country_id.name == 'Austria':
                         invoice_line_tax_ids = self.env['account.tax'].search(
@@ -869,10 +869,10 @@ class AccountInvoiceLine(models.Model):
 
 
             #new tax rule
-            if self.invoice_id.origin.name[0] == '0' or self.invoice_id.origin.name[0] == '1' or self.invoice_id.origin.name[0] == '2' or \
-                    self.invoice_id.origin.name[0] == '3' or self.invoice_id.origin.name[0] == '4' or self.invoice_id.origin.name[0] == '5' or \
-                    self.invoice_id.origin.name[0] == '6' or self.invoice_id.origin.name[0] == '7' or self.invoice_id.origin.name[0] == '8' or \
-                    self.invoice_id.origin.name[0] == '9':
+            if self.invoice_id.origin1.name[0] == '0' or self.invoice_id.origin1.name[0] == '1' or self.invoice_id.origin1.name[0] == '2' or \
+                    self.invoice_id.origin1.name[0] == '3' or self.invoice_id.origin1.name[0] == '4' or self.invoice_id.origin1.name[0] == '5' or \
+                    self.invoice_id.origin1.name[0] == '6' or self.invoice_id.origin1.name[0] == '7' or self.invoice_id.origin1.name[0] == '8' or \
+                    self.invoice_id.origin1.name[0] == '9':
 
                 if line.invoice_id.partner_id.country_id.name == 'Austria':
                     invoice_line_tax_ids = self.env['account.tax'].search(
