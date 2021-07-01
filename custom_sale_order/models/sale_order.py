@@ -5,7 +5,7 @@ from odoo.tools import email_re, email_split, email_escape_char, float_is_zero, 
     pycompat, date_utils
 
 
-# Need to check this code for tax
+#  Need to check this code for tax
 class CustomSaleOrder(models.Model):
     _inherit = 'sale.order.line'
 
