@@ -887,7 +887,7 @@
 
                                         <td class="text-right" style="white-space:nowrap">
                                             <span t-field="o.currency_id.symbol"/>
-                                            <span t-esc="('{0:,.2f}'.format(float(l.price_subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(l.subtotal))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </td>
                                     </t>
                                         <t t-set="j" t-value="j+1"/>
