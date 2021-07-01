@@ -108,6 +108,139 @@ class CustomSaleOrder(models.Model):
                             if tax_id not in self.tax_id:
                                 line.update({'tax_id':tax_id})
 
+            if self.order_id.partner_id.customer == True and self.order_id.partner_id.is_retailer == False and self.order_id.partner_id.supplier == False and self.order_id.partner_id.property_product_pricelist.name == "Public Pricelist":
+                if line.order_id.partner_id.country_id.name == 'Austria':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Belgium':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Bulgaria':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Cyprus':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "19%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Czechia':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Germany':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "19%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Denmark':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "25%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Estonia':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Greece':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "24%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Spain':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Finland':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "24%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'France':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Croatia':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "25%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Hungary':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "27%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Ireland':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "23%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Italy':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "22%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Lithuania':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Luxembourg':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "17%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Latvia':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Malta':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "18%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Netherlands':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})
+
+                if line.order_id.partner_id.country_id.name == 'Poland':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "23%")], limit=1)
+                    if tax_id not in self.tax_id:
+                        line.update({'tax_id': tax_id})    
+
     @api.multi
     def _prepare_invoice_line(self, qty):
         """
@@ -335,6 +468,140 @@ class AccountInvoiceLine(models.Model):
                             if invoice_line_tax_ids not in self.invoice_line_tax_ids:
                                 line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
 
+                if self.invoice_id.partner_id.customer == True and self.invoice_id.partner_id.is_retailer == False and self.invoice_id.partner_id.supplier == False and self.invoice_id.partner_id.property_product_pricelist.name == "Public Pricelist":
+                    if line.invoice_id.partner_id.country_id.name == 'Austria':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "20%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Belgium':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "21%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Bulgaria':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "20%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Cyprus':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "19%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Czechia':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "21%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Germany':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "19%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Denmark':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "25%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Estonia':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "20%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Greece':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "24%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Spain':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "21%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Finland':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "24%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'France':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "20%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Croatia':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "25%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Hungary':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "27%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Ireland':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "23%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Italy':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "22%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Lithuania':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "21%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Luxembourg':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "17%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            print("Here Here======")
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Latvia':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "21%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Malta':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "18%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Netherlands':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "21%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                    if line.invoice_id.partner_id.country_id.name == 'Poland':
+                        invoice_line_tax_ids = self.env['account.tax'].search(
+                            [('name', '=', "23%")], limit=1)
+                        if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                            line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
             self.account_id = fpos.map_account(invoice_line_tax_ids.account_id)
 
 
@@ -501,6 +768,139 @@ class AccountInvoiceLine(models.Model):
                         invoice_line_tax_ids = self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")],limit=1)
                         if invoice_line_tax_ids not in self.invoice_line_tax_ids:
                             line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+            if self.invoice_id.partner_id.customer == True and self.invoice_id.partner_id.is_retailer == False and self.invoice_id.partner_id.supplier == False and self.invoice_id.partner_id.property_product_pricelist.name == "Public Pricelist":
+                if line.invoice_id.partner_id.country_id.name == 'Austria':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Belgium':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Bulgaria':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Cyprus':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "19%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Czechia':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Germany':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "19%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Denmark':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "25%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Estonia':
+                    tax_id = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if tax_id not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Greece':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "24%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Spain':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Finland':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "24%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'France':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "20%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Croatia':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "25%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Hungary':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "27%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Ireland':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "23%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Italy':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "22%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Lithuania':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Luxembourg':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "17%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Latvia':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Malta':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "18%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Netherlands':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "21%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+
+                if line.invoice_id.partner_id.country_id.name == 'Poland':
+                    invoice_line_tax_ids = self.env['account.tax'].search(
+                        [('name', '=', "23%")], limit=1)
+                    if invoice_line_tax_ids not in self.invoice_line_tax_ids:
+                        line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
 
         self.invoice_line_tax_ids = fp_taxes = self.invoice_id.fiscal_position_id.map_tax(invoice_line_tax_ids, self.product_id, self.invoice_id.partner_id)
 

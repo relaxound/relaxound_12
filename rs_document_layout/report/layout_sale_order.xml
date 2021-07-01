@@ -12,8 +12,11 @@
                 <t t-if="doc.partner_id.parent_id">
                     <span t-field="doc.partner_id.parent_id.name"/>
                 </t>
+                <t t-if="doc.partner_id.country_id.code"/>
                 <t t-if="doc.partner_id.name">
                     <br/>
+                    <span t-field="doc.partner_id.country_id.code"/>
+                    <span>-</span>
                     <span t-field="doc.partner_id.name"/>
                 </t>
                 <t t-if="doc.partner_id.street">
@@ -659,6 +662,96 @@
                                         <strong>
                                             <span t-field="doc.currency_id.symbol"/>
                                             <span t-esc="('{0:,.2f}'.format(float(0))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '17%'">
+                                    <td class="text-right"><span>Vat 17%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '18%'">
+                                    <td class="text-right"><span>Vat 18%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '19%'">
+                                    <td class="text-right"><span>Vat 19%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '20%'">
+                                    <td class="text-right"><span>Vat 20%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '21%'">
+                                    <td class="text-right"><span>Vat 21%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '22%'">
+                                    <td class="text-right"><span>Vat 22%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '23%'">
+                                    <td class="text-right"><span>Vat 23%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '24%'">
+                                    <td class="text-right"><span>Vat 24%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '25%'">
+                                    <td class="text-right"><span>Vat 25%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
+                                        </strong>
+                                    </td>
+                                </t>
+                                <t t-if="d.tax_id.name == '27%'">
+                                    <td class="text-right"><span>Vat 27%</span></td>
+                                    <td class="text-right">
+                                        <strong>
+                                            <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="('{0:,.2f}'.format(float(doc.amount_tax))).replace(',','x').replace('.',',').replace('x','.')"/>
                                         </strong>
                                     </td>
                                 </t>
