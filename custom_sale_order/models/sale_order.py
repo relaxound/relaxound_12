@@ -768,6 +768,8 @@ class AccountInvoiceLine(models.Model):
                         invoice_line_tax_ids = self.env['account.tax'].search([('name', '=', "Steuerfreie Ausfuhr (§4 Nr. 1a UStG)")],limit=1)
                         if invoice_line_tax_ids not in self.invoice_line_tax_ids:
                             line.update({'invoice_line_tax_ids': invoice_line_tax_ids})
+                            
+            # add new taxes
 
             if self.invoice_id.partner_id.customer == True and self.invoice_id.partner_id.is_retailer == False and self.invoice_id.partner_id.supplier == False and self.invoice_id.partner_id.property_product_pricelist.name == "Public Pricelist":
                 if line.invoice_id.partner_id.country_id.name == 'Austria':
