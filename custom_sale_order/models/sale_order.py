@@ -137,11 +137,11 @@ class CustomSaleOrder(models.Model):
                                     if tax_id not in self.tax_id:
                                         line.update({'tax_id': tax_id})
             #new tax rules
-            if self.order_id.name[0] == '0' or self.order_id.name[0] == '1' or self.order_id.name[0] == '2' or \
-                    self.order_id.name[0] == '3' or self.order_id.name[0] == '4' or self.order_id.name[0] == '5' or \
-                    self.order_id.name[0] == '6' or self.order_id.name[0] == '7' or self.order_id.name[0] == '8' or \
-                    self.order_id.name[0] == '9':
-
+            # if self.order_id.name[0] == '0' or self.order_id.name[0] == '1' or self.order_id.name[0] == '2' or \
+            #         self.order_id.name[0] == '3' or self.order_id.name[0] == '4' or self.order_id.name[0] == '5' or \
+            #         self.order_id.name[0] == '6' or self.order_id.name[0] == '7' or self.order_id.name[0] == '8' or \
+            #         self.order_id.name[0] == '9':
+            if self.order_id.partner_id.customer == True and self.order_id.partner_id.is_retailer == False and self.order_id.partner_id.supplier == False and self.order_id.partner_id.property_product_pricelist.name == "Public Pricelist":
                 if line.order_id.partner_id.country_id.name == 'Austria':
                     tax_id = self.env['account.tax'].search(
                         [('name', '=', "20%")], limit=1)
@@ -528,11 +528,11 @@ class AccountInvoiceLine(models.Model):
 
 
 
-                if self.invoice_id.origin1.name[0] == '0' or self.invoice_id.origin1.name[0] == '1' or self.invoice_id.origin1.name[0] == '2' or \
-                        self.invoice_id.origin1.name[0] == '3' or self.invoice_id.origin1.name[0] == '4' or self.invoice_id.origin1.name[0] == '5' or \
-                        self.invoice_id.origin1.name[0] == '6' or self.invoice_id.origin1.name[0] == '7' or self.invoice_id.origin1.name[0] == '8' or \
-                        self.invoice_id.origin1.name[0] == '9':
-
+                # if self.invoice_id.origin1.name[0] == '0' or self.invoice_id.origin1.name[0] == '1' or self.invoice_id.origin1.name[0] == '2' or \
+                #         self.invoice_id.origin1.name[0] == '3' or self.invoice_id.origin1.name[0] == '4' or self.invoice_id.origin1.name[0] == '5' or \
+                #         self.invoice_id.origin1.name[0] == '6' or self.invoice_id.origin1.name[0] == '7' or self.invoice_id.origin1.name[0] == '8' or \
+                #         self.invoice_id.origin1.name[0] == '9':
+                if self.invoice_id.partner_id.customer == True and self.invoice_id.partner_id.is_retailer == False and self.invoice_id.partner_id.supplier == False and self.invoice_id.partner_id.property_product_pricelist.name == "Public Pricelist":
                     if line.invoice_id.partner_id.country_id.name == 'Austria':
                         invoice_line_tax_ids = self.env['account.tax'].search(
                             [('name', '=', "20%")], limit=1)
@@ -869,11 +869,11 @@ class AccountInvoiceLine(models.Model):
 
 
             #new tax rule
-            if self.invoice_id.origin1.name[0] == '0' or self.invoice_id.origin1.name[0] == '1' or self.invoice_id.origin1.name[0] == '2' or \
-                    self.invoice_id.origin1.name[0] == '3' or self.invoice_id.origin1.name[0] == '4' or self.invoice_id.origin1.name[0] == '5' or \
-                    self.invoice_id.origin1.name[0] == '6' or self.invoice_id.origin1.name[0] == '7' or self.invoice_id.origin1.name[0] == '8' or \
-                    self.invoice_id.origin1.name[0] == '9':
-
+            # if self.invoice_id.origin1.name[0] == '0' or self.invoice_id.origin1.name[0] == '1' or self.invoice_id.origin1.name[0] == '2' or \
+            #         self.invoice_id.origin1.name[0] == '3' or self.invoice_id.origin1.name[0] == '4' or self.invoice_id.origin1.name[0] == '5' or \
+            #         self.invoice_id.origin1.name[0] == '6' or self.invoice_id.origin1.name[0] == '7' or self.invoice_id.origin1.name[0] == '8' or \
+            #         self.invoice_id.origin1.name[0] == '9':
+            if self.invoice_id.partner_id.customer == True and self.invoice_id.partner_id.is_retailer == False and self.invoice_id.partner_id.supplier == False and self.invoice_id.partner_id.property_product_pricelist.name == "Public Pricelist":
                 if line.invoice_id.partner_id.country_id.name == 'Austria':
                     invoice_line_tax_ids = self.env['account.tax'].search(
                         [('name', '=', "20%")], limit=1)
