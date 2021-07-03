@@ -13,6 +13,16 @@
                 </xpath>
             </field>
        </record>
+       <record id="new_pricelist" model="ir.ui.view">
+            <field name="name">new.pricelist</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='by_postal']" position="after">
+                    <button name="new_pricelist" type="object" string="New Pricelist" class="oe_highlight"/>
+                </xpath>
+            </field>
+       </record>
     </data>
 </odoo>
 
