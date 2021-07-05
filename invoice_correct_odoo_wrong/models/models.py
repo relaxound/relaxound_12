@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class CustomInvoiceCorrect(models.Model):
     _inherit = "account.invoice"
@@ -16,12 +17,13 @@ class CustomInvoiceCorrect(models.Model):
 class UpdateNewPricelist(models.Model):
     _inherit = 'res.partner'
 
-    @api.multi
     def new_pricelist(self):
         all_customers = self.env['res.partner'].search([])
-        print("all customer=========== ",all_customers)
+        error_msg1 = _('all customer====== (%s)') % (all_customers)
+        _logger.info(error_msg1)
         for i in all_customers:
             if i.customer == True and i.supplier == False and i.is_retailer == False and i.property_product_pricelist.name == "Public Pricelist":
-                print("customer========",i)
-                i.property_product_pricelist = self.env['product.pricelist'].search([('id','=','824')])
-                print("property_product_pricelist=====",i.property_product_pricelist)
+                change_pricelist =self.env['product.pricelist'].search([('name','=','01072021 Public Pricelist')])
+                i.property_product_pricelist = change_pricelist
+                error_msg = _('property_product_pricelist====== (%s)') % (i.property_product_pricelist)
+                _logger.info(error_msg)
