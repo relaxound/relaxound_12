@@ -23,7 +23,7 @@ class UpdateNewPricelist(models.Model):
         _logger.info(error_msg1)
         for i in all_customers:
             if i.customer == True and i.supplier == False and i.is_retailer == False and i.property_product_pricelist.name == "Public Pricelist":
-                change_pricelist =self.env['product.pricelist'].search([('name','=','01072021 Public Pricelist')])
+                change_pricelist =self.env['product.pricelist'].search([('id','=',824)]).id
                 i.property_product_pricelist = change_pricelist
-                error_msg = _('property_product_pricelist====== (%s)') % (i.property_product_pricelist)
+                error_msg = _('property_product_pricelist====== (%s)') % (i.property_product_pricelist.name)
                 _logger.info(error_msg)
