@@ -18,7 +18,7 @@ class UpdateNewPricelist(models.Model):
     _inherit = 'res.partner'
 
     def new_pricelist(self):
-        all_customers = self.env['res.partner'].search([])
+        all_customers = self.env['res.partner'].search([('id','=',476721)])
         error_msg1 = _('all customer====== (%s)') % (all_customers)
         _logger.info(error_msg1)
         for i in all_customers:
