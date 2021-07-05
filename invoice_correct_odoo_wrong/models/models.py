@@ -18,12 +18,17 @@ class UpdateNewPricelist(models.Model):
     _inherit = 'res.partner'
 
     def new_pricelist(self):
-        all_customers = self.env['res.partner'].search([('id','=',476721)])
+        all_customers = self.env['res.partner'].search([])
         error_msg1 = _('all customer====== (%s)') % (all_customers)
         _logger.info(error_msg1)
         for i in all_customers:
-            if i.customer == True and i.supplier == False and i.is_retailer == False and i.property_product_pricelist.name == "Public Pricelist":
-                change_pricelist =self.env['product.pricelist'].search([('id','=',824)]).id
-                i.property_product_pricelist = change_pricelist
-                error_msg = _('property_product_pricelist====== (%s)') % (i.property_product_pricelist.name)
-                _logger.info(error_msg)
+            try:
+                if i.customer == True and i.supplier == False and i.is_retailer == False and i.property_product_pricelist.name == "Public Pricelist":
+                    change_pricelist =self.env['product.pricelist'].search([('id','=',824)]).id
+                    i.property_product_pricelist = change_pricelist
+                    error_msg = _('property_product_pricelist====== (%s)') % (i.property_product_pricelist.name)
+                    _logger.info(error_msg)
+            except Exception:
+                error_msg2 = _('INVALID ID====== (%s)') % (i)
+                _logger.info(error_msg2)
+                pass
