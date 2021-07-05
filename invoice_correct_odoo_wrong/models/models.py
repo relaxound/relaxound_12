@@ -18,15 +18,10 @@ class UpdateNewPricelist(models.Model):
 
     @api.multi
     def new_pricelist(self):
-        # if self.name == '1943':
-        #     self.property_product_pricelist = self.env['product.pricelist'].search([('id', '=', '722')])
-        #     print("New pricelist=================>", self.property_product_pricelist.name)
-        # for i in self:
-        #     if i.customer == True and i.supplier == False and i.is_retailer == False and i.property_product_pricelist.name == "Public Pricelist":
-        #         i.property_product_pricelist = self.env['product.pricelist'].search([('id','=','722')])
-        #         print("New pricelist=================>",i.property_product_pricelist.name)
-        # all_customers =[]
         all_customers = self.env['res.partner'].search([])
+        print("all customer=========== ",all_customers)
         for i in all_customers:
             if i.customer == True and i.supplier == False and i.is_retailer == False and i.property_product_pricelist.name == "Public Pricelist":
+                print("customer========",i)
                 i.property_product_pricelist = self.env['product.pricelist'].search([('id','=','824')])
+                print("property_product_pricelist=====",i.property_product_pricelist)
